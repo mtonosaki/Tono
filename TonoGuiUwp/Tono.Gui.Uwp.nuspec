@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
   <metadata>
     <id>Tono.Gui.Uwp</id>
-    <version>1.0.0</version>
+    <version>1.0.0.1</version>
     <authors>Manabu Tonosaki</authors>
     <owners>Manabu Tonosaki</owners>
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
@@ -13,6 +13,7 @@
     <releaseNotes>first release version</releaseNotes>
     <copyright>(c) 2019 Manabu Tonosaki</copyright>
     <tags>Tono, Gui, UWP</tags>
+    <repository type="git" url="https://github.com/mtonosaki/Tono.git" />
     <dependencies>
       <group targetFramework="uap">
         <dependency id="Tono.Gui" version="1.0.0" exclude="Build,Analyzers" />

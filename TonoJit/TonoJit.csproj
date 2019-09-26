@@ -12,11 +12,13 @@
     <Copyright>(c) 2019 Manabu Tonosaki</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageIconUrl>https://aqtono.com/tomarika/tono/tonojiticon.png</PackageIconUrl>
-    <Version>0.1.0</Version>
-    <AssemblyVersion>0.1.0.0</AssemblyVersion>
+    <Version>0.1.0.1</Version>
+    <AssemblyVersion>0.1.0.1</AssemblyVersion>
     <PackageTags>Tono, Gui, Jit</PackageTags>
     <PackageReleaseNotes>on kaizen process</PackageReleaseNotes>
-    <FileVersion>0.1.0.0</FileVersion>
+    <FileVersion>0.1.0.1</FileVersion>
+    <RepositoryUrl>https://github.com/mtonosaki/Tono.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
   </PropertyGroup>
 
   <ItemGroup>
