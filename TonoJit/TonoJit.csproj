@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>Tono.Jit</RootNamespace>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <PackageId>Tono.Jit</PackageId>
+    <Authors>Manabu Tonosaki</Authors>
+    <Product>Tools Of New Operation Jit Flow Model</Product>
+    <Description>Just-In-Time flow model of Tools Of New Operation</Description>
+    <Copyright>(c) 2019 Manabu Tonosaki</Copyright>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageIconUrl>https://aqtono.com/tomarika/tono/tonojiticon.png</PackageIconUrl>
+    <Version>0.1.0</Version>
+    <AssemblyVersion>0.1.0.0</AssemblyVersion>
+    <PackageTags>Tono, Gui, Jit</PackageTags>
+    <PackageReleaseNotes>on kaizen process</PackageReleaseNotes>
+    <FileVersion>0.1.0.0</FileVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Tono.Core" Version="1.0.0" />
+  </ItemGroup>
+
+</Project>

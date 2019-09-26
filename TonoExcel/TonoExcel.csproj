@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <PackageId>Tono.Excel</PackageId>
+    <Authors>Manabu Tonosaki</Authors>
+    <Product>Tools Of New Operation Excel Utility</Product>
+    <Description>Excel support with ClosedXML of Tools Of New Operation</Description>
+    <Copyright>(c) 2019 Manabu Tonosaki</Copyright>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl />
+    <PackageIconUrl>https://aqtono.com/tomarika/tono/tonoexcelicon.png</PackageIconUrl>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <RootNamespace>Tono.Excel</RootNamespace>
+    <Version>1.0.0</Version>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <FileVersion>1.0.0.0</FileVersion>
+    <PackageTags>Tono, Gui, Excel</PackageTags>
+    <PackageReleaseNotes>first release version</PackageReleaseNotes>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ClosedXML" Version="0.94.2" />
+    <PackageReference Include="Tono.Core" Version="1.0.0" />
+  </ItemGroup>
+
+</Project>

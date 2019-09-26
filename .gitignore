@@ -3,3 +3,15 @@
 ################################################################################
 
 /.vs
+/TonoExcel/bin
+/TonoExcel/obj
+/Tono/obj
+/Tono/bin
+/TonoGui/obj
+/TonoGui/bin
+/TonoGuiUwp/obj
+/TonoGuiUwp/bin
+/TonoJit/obj
+/TonoJit/bin
+/TonoLogic/obj
+/TonoLogic/bin

@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>Tono.Gui</RootNamespace>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <Authors>Manabu Tonosaki</Authors>
+    <Product>Tools Of New Operation GUI Core library</Product>
+    <Description>GUI MVFP architecure of Tools Of New Operation</Description>
+    <Copyright>(c) 2019 Manabu Tonosaki</Copyright>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageIconUrl>https://aqtono.com/tomarika/tono/tonoguiicon.png</PackageIconUrl>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <FileVersion>1.0.0.0</FileVersion>
+    <Version>1.0.0</Version>
+    <PackageId>Tono.Gui</PackageId>
+    <PackageTags>Tono, Gui</PackageTags>
+    <PackageReleaseNotes>first release version</PackageReleaseNotes>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Numerics.Vectors" Version="4.5.0" />
+    <PackageReference Include="Tono.Core" Version="1.0.0" />
+  </ItemGroup>
+
+</Project>

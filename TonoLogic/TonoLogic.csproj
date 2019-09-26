@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>Tono.Logic</RootNamespace>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <PackageId>Tono.Logic</PackageId>
+    <Authors>Manabu Tonosaki</Authors>
+    <Product>Tools Of New Operation logic library</Product>
+    <Description>Solvers and Helpers.</Description>
+    <Copyright>(c) 2019 Manabu Tonosaki</Copyright>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageIconUrl>https://aqtono.com/tomarika/tono/tonologicicon.png</PackageIconUrl>
+    <PackageReleaseNotes>first release version</PackageReleaseNotes>
+    <Version>1.0.0</Version>
+    <PackageTags>Tono, Gui, Logic</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Tono.Core" Version="1.0.0" />
+  </ItemGroup>
+
+</Project>
