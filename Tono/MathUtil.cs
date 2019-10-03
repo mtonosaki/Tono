@@ -105,6 +105,16 @@ namespace Tono
             return Rand() * Math.Abs(end - start) + Math.Min(start, end);
         }
 
+        /// <summary>
+        /// make integer random value between "start" and "end"
+        /// </summary>
+        /// <param name="start"></param>
+        /// <param name="end"></param>
+        /// <returns></returns>
+        public static int Rand(int start, int end)
+        {
+            return _rand.Next(start, end);
+        }
 
         /// <summary>
         /// check a-b ＜ nonzero

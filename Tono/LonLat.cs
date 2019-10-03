@@ -122,61 +122,61 @@ namespace Tono
         }
 
 
-        [DebuggerHidden]
+        
         public static Longitude operator +(Longitude v1, Angle v2)
         {
             return new Longitude { Lon = v1.Lon + v2 };
         }
 
-        [DebuggerHidden]
+        
         public static Longitude operator -(Longitude v1, Angle v2)
         {
             return new Longitude { Lon = v1.Lon - v2 };
         }
 
-        [DebuggerHidden]
+        
         public static Longitude operator +(Longitude v1, Longitude v2)
         {
             return new Longitude { Lon = v1.Lon + v2.Lon };
         }
 
-        [DebuggerHidden]
+        
         public static Longitude operator -(Longitude v1, Longitude v2)
         {
             return new Longitude { Lon = v1.Lon - v2.Lon };
         }
 
-        [DebuggerHidden]
+        
         public static Longitude operator *(Longitude v1, double v2)
         {
             return new Longitude { Lon = v1.Lon * v2 };
         }
 
-        [DebuggerHidden]
+        
         public static Longitude operator /(Longitude v1, double v2)
         {
             return new Longitude { Lon = v1.Lon / v2 };
         }
 
-        [DebuggerHidden]
+        
         public static bool operator <(Longitude v1, Longitude v2)
         {
             return v1.Lon.Rad < v2.Lon.Rad;
         }
 
-        [DebuggerHidden]
+        
         public static bool operator <=(Longitude v1, Longitude v2)
         {
             return v1.Lon.Rad <= v2.Lon.Rad;
         }
 
-        [DebuggerHidden]
+        
         public static bool operator >(Longitude v1, Longitude v2)
         {
             return v1.Lon.Rad > v2.Lon.Rad;
         }
 
-        [DebuggerHidden]
+        
         public static bool operator >=(Longitude v1, Longitude v2)
         {
             return v1.Lon.Rad >= v2.Lon.Rad;
@@ -283,61 +283,61 @@ namespace Tono
         }
 
 
-        [DebuggerHidden]
+        
         public static Latitude operator +(Latitude v1, Angle v2)
         {
             return new Latitude { Lat = v1.Lat + v2 };
         }
 
-        [DebuggerHidden]
+        
         public static Latitude operator -(Latitude v1, Angle v2)
         {
             return new Latitude { Lat = v1.Lat - v2 };
         }
 
-        [DebuggerHidden]
+        
         public static Latitude operator +(Latitude v1, Latitude v2)
         {
             return new Latitude { Lat = v1.Lat + v2.Lat };
         }
 
-        [DebuggerHidden]
+        
         public static Latitude operator -(Latitude v1, Latitude v2)
         {
             return new Latitude { Lat = v1.Lat - v2.Lat };
         }
 
-        [DebuggerHidden]
+        
         public static Latitude operator *(Latitude v1, double v2)
         {
             return new Latitude { Lat = v1.Lat * v2 };
         }
 
-        [DebuggerHidden]
+        
         public static Latitude operator /(Latitude v1, double v2)
         {
             return new Latitude { Lat = v1.Lat / v2 };
         }
 
-        [DebuggerHidden]
+        
         public static bool operator <(Latitude v1, Latitude v2)
         {
             return v1.Lat.Rad < v2.Lat.Rad;
         }
 
-        [DebuggerHidden]
+        
         public static bool operator <=(Latitude v1, Latitude v2)
         {
             return v1.Lat.Rad <= v2.Lat.Rad;
         }
 
-        [DebuggerHidden]
+        
         public static bool operator >(Latitude v1, Latitude v2)
         {
             return v1.Lat.Rad > v2.Lat.Rad;
         }
 
-        [DebuggerHidden]
+        
         public static bool operator >=(Latitude v1, Latitude v2)
         {
             return v1.Lat.Rad >= v2.Lat.Rad;
@@ -356,7 +356,7 @@ namespace Tono
         {
             return $"{Datum} Lon={Lon.Deg}";
         }
-        [DebuggerHidden]
+        
         public static LongitudeTky operator +(LongitudeTky v1, Angle v2)
         {
             return new LongitudeTky { Lon = v1.Lon + v2 };
@@ -406,7 +406,7 @@ namespace Tono
             return $"{Datum} Lat={Lat.Deg}";
         }
 
-        [DebuggerHidden]
+        
         public static LatitudeTky operator +(LatitudeTky v1, Angle v2)
         {
             return new LatitudeTky { Lat = v1.Lat + v2 };

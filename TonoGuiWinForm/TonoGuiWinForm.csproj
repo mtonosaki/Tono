@@ -1,0 +1,467 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="14.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Release</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{BD216EDB-CA1B-4100-A2C0-DF74682C8C3F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Tono.GuiWinForm</RootNamespace>
+    <AssemblyName>TonoGuiWinForm</AssemblyName>
+    <ApplicationIcon>tonowinform.ico</ApplicationIcon>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>2.0</OldToolsVersion>
+    <TargetFrameworkProfile />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <DocumentationFile>bin\Debug\TonoGuiWinForm.xml</DocumentationFile>
+    <Prefer32Bit>false</Prefer32Bit>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <LangVersion>latest</LangVersion>
+    <NoWarn>IDE1006</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <DocumentationFile>bin\Release\TonoGuiWinForm.xml</DocumentationFile>
+    <Prefer32Bit>false</Prefer32Bit>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'OpDemo%40Azure|AnyCPU'">
+    <OutputPath>bin\OpDemo%40Azure\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <DocumentationFile>bin\Release\tzGui.xml</DocumentationFile>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Tono, Version=1.0.2.2, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Tono.Core.1.0.2\lib\netstandard2.0\Tono.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="TCheckBoxDx.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="TColumnHeader.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="TListViewSubItem.cs" />
+    <Compile Include="TLogGroupPanelControlVersion.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TLogGroupPanelControlVersion.Designer.cs">
+      <DependentUpon>TLogGroupPanelControlVersion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TListViewFree.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TListViewFree.Designer.cs">
+      <DependentUpon>TListViewFree.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TPane.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="TTextBoxTimeMask.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="TUpDownTime.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TVersionList.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TVersionList.designer.cs">
+      <DependentUpon>TVersionList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataHotBase.cs" />
+    <Compile Include="PartsCollectionDoubleBuffer.cs" />
+    <Compile Include="DataLinkBase.cs" />
+    <Compile Include="PartsCollectionBase.cs" />
+    <Compile Include="PartsCollection.cs" />
+    <Compile Include="DBSchemaAttribute.cs" />
+    <Compile Include="PartsIllusionProjector.cs" />
+    <Compile Include="PartsPositionManager.cs" />
+    <Compile Include="CodeConverterRowCol.cs" />
+    <Compile Include="PartsBase.cs" />
+    <Compile Include="PartsCircle.cs" />
+    <Compile Include="PartsColumnTime.cs" />
+    <Compile Include="PartsDummy.cs" />
+    <Compile Include="PartsImage.cs" />
+    <Compile Include="PartsLine.cs" />
+    <Compile Include="PartsRectangle.cs" />
+    <Compile Include="PartsTextBase.cs" />
+    <Compile Include="PartsTooltip.cs" />
+    <Compile Include="FeatureApplicationQuit.cs" />
+    <Compile Include="FeatureAutoEdgeScroll.cs" />
+    <Compile Include="FeatureBase.cs" />
+    <Compile Include="FeatureChangeLanguage.cs" />
+    <Compile Include="FeatureClickEventBridge.cs" />
+    <Compile Include="FeatureControlBridgeBase.cs" />
+    <Compile Include="FeatureCursorProviderKey.cs" />
+    <Compile Include="FeatureCursorProviderOnParts.cs" />
+    <Compile Include="FeatureDragScroll.cs" />
+    <Compile Include="FeatureDragZoom.cs" />
+    <Compile Include="FeatureDummy.cs" />
+    <Compile Include="FeatureFeatureTimeKeeper.cs" />
+    <Compile Include="FeatureFontChange.cs" />
+    <Compile Include="FeatureGanttColPane.cs" />
+    <Compile Include="FeatureGanttRowPane.cs" />
+    <Compile Include="FeatureGanttRowSnap.cs" />
+    <Compile Include="FeatureHorzNormalize.cs" />
+    <Compile Include="FeatureKeyZoom.cs" />
+    <Compile Include="FeatureLogClear.cs" />
+    <Compile Include="FeatureLogGroupPanel.cs" />
+    <Compile Include="FeatureLogGroupPanel.LOG.cs" />
+    <Compile Include="FeatureLogOpenAsText.cs" />
+    <Compile Include="FeatureMenuZoom.cs" />
+    <Compile Include="FeatureMousePosLabel.cs" />
+    <Compile Include="FeatureMoveSelectedParts.cs" />
+    <Compile Include="FeaturePaneSync.cs" />
+    <Compile Include="FeaturePartsCrossMove.cs" />
+    <Compile Include="FeaturePartsSelect.cs" />
+    <Compile Include="FeaturePartsSelectOnRect.cs" />
+    <Compile Include="FeatureRowColIndicator.cs" />
+    <Compile Include="FeatureScrollBarHorz.cs" />
+    <Compile Include="FeatureScrollBarVert.cs" />
+    <Compile Include="FeatureSizeSelectedParts.cs" />
+    <Compile Include="FeatureSwitch.cs" />
+    <Compile Include="FeatureSwitchList.cs" />
+    <Compile Include="FeatureTextInput.cs" />
+    <Compile Include="FeatureThreadBase.cs" />
+    <Compile Include="FeatureToolTip.cs" />
+    <Compile Include="FeatureWheelScroll.cs" />
+    <Compile Include="FeatureWheelScrollXYRev.cs" />
+    <Compile Include="FeatureWheelZoom.cs" />
+    <Compile Include="DataLinkManager.cs" />
+    <Compile Include="TGuiView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="TGuiView.Designer.cs">
+      <DependentUpon>TGuiView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FinalizeManager.cs" />
+    <Compile Include="PersistManager.cs" />
+    <Compile Include="DataSharingManager.cs" />
+    <Compile Include="GuiTimerDotnetIntervalVersiion.cs" />
+    <Compile Include="GuiTimerDotnetVersion.cs" />
+    <Compile Include="GuiTimerThreadVersion.cs" />
+    <Compile Include="TokenTray.cs" />
+    <Compile Include="FeatureGroupBase.cs" />
+    <Compile Include="FeatureGroupChild.cs" />
+    <Compile Include="FeatureGroupRoot.cs" />
+    <Compile Include="TKeyEnabler.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TMenuListener.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="TMenuListener2.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="FormFeatureSwitchList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormFeatureTimeKeeper.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormFeatureTimeKeeper.Designer.cs">
+      <DependentUpon>FormFeatureTimeKeeper.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormFileSelector.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormMessageBoxLight.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormMessageBoxLight.Designer.cs">
+      <DependentUpon>FormMessageBoxLight.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormProgressBar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="IAllTokenCompletedListener.cs" />
+    <Compile Include="IAutoRemovable.cs" />
+    <Compile Include="IControlUI.cs" />
+    <Compile Include="IDragDropListener.cs" />
+    <Compile Include="IFeatureEventListener.cs" />
+    <Compile Include="IKeyListener.cs" />
+    <Compile Include="ILonLat.cs" />
+    <Compile Include="IMouseListener.cs" />
+    <Compile Include="IPartsAddListener.cs" />
+    <Compile Include="IPartsFriendship.cs" />
+    <Compile Include="IPartsIllusionable.cs" />
+    <Compile Include="IPartsRemoveListener.cs" />
+    <Compile Include="IPartsSelectable.cs" />
+    <Compile Include="IPartsVisiblable.cs" />
+    <Compile Include="IPartsVisible.cs" />
+    <Compile Include="IReadonlyable.cs" />
+    <Compile Include="IRecorder.cs" />
+    <Compile Include="IRichPane.cs" />
+    <Compile Include="IRichPaneSync.cs" />
+    <Compile Include="IScrollListener.cs" />
+    <Compile Include="ISpace.cs" />
+    <Compile Include="ITextCommand.cs" />
+    <Compile Include="ITime.cs" />
+    <Compile Include="ITimeSpan.cs" />
+    <Compile Include="ITokenListener.cs" />
+    <Compile Include="IZoomListener.cs" />
+    <Compile Include="NoTestAttribute.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="CommandBase.cs" />
+    <Compile Include="CommandException.cs" />
+    <Compile Include="TableCollection.cs" />
+    <Compile Include="CommandOperand1.cs" />
+    <Compile Include="TokenGeneral.cs" />
+    <Compile Include="RecordBase.cs" />
+    <Compile Include="ValueCouple.cs" />
+    <Compile Include="Dictionary3d.cs" />
+    <Compile Include="CodePos.cs" />
+    <Compile Include="CodeRect.cs" />
+    <Compile Include="ColorUtil.cs" />
+    <Compile Include="ConfigRegister.cs" />
+    <Compile Include="Const.cs" />
+    <Compile Include="CoupleObject.cs" />
+    <Compile Include="CpuClockCounter.cs" />
+    <Compile Include="CsvParser.cs" />
+    <Compile Include="DeviceRecord.cs" />
+    <Compile Include="Dictionary2d.cs" />
+    <Compile Include="DragState.cs" />
+    <Compile Include="FeatureLoader1.cs" />
+    <Compile Include="FeatureLoader2.cs" />
+    <Compile Include="FeatureLoaderBase.cs" />
+    <Compile Include="FileUtil.cs" />
+    <Compile Include="FileTypeRegister.cs" />
+    <Compile Include="FormShapePersister.cs" />
+    <Compile Include="FreeDrawLayer.cs" />
+    <Compile Include="FtpClient.cs" />
+    <Compile Include="KeyState.cs" />
+    <Compile Include="KeyValueCache.cs" />
+    <Compile Include="ListDummy.cs" />
+    <Compile Include="LogUtil.cs" />
+    <Compile Include="LonLat.cs" />
+    <Compile Include="Mes.cs" />
+    <Compile Include="MouseState.cs" />
+    <Compile Include="LayoutPos.cs" />
+    <Compile Include="LayoutRect.cs" />
+    <Compile Include="Rect.cs" />
+    <Compile Include="RichPaneBinder.cs" />
+    <Compile Include="RichPaneCustomGraphicsBinder.cs" />
+    <Compile Include="ScreenPos.cs" />
+    <Compile Include="ScreenRect.cs" />
+    <Compile Include="SerializerEx.cs" />
+    <Compile Include="ComparerUtil.cs" />
+    <Compile Include="StopWatch.cs" />
+    <Compile Include="StringListener.cs" />
+    <Compile Include="StringWorld.cs" />
+    <Compile Include="StringMatch.cs" />
+    <Compile Include="StringNumber.cs" />
+    <Compile Include="StringNumberExcel.cs" />
+    <Compile Include="StringVariableFormat.cs" />
+    <Compile Include="ThreadUtil.cs" />
+    <Compile Include="DateTimeEx.cs" />
+    <Compile Include="TimeKeeper.cs" />
+    <Compile Include="TimeSpanEx.cs" />
+    <Compile Include="TodoManager.cs" />
+    <Compile Include="Validator.cs" />
+    <Compile Include="RangeXx.cs" />
+    <Compile Include="XyBase.cs" />
+    <Compile Include="RangeYy.cs" />
+    <Compile Include="ControlSnapshot.cs" />
+    <Compile Include="TToolStripButtonListener2.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="FeatureMoveSelectedPartsTop.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="TGuiView.resx">
+      <DependentUpon>TGuiView.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TLogGroupPanelControlVersion.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>TLogGroupPanelControlVersion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TListViewFree.resx">
+      <DependentUpon>TListViewFree.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TPane.resx">
+      <DependentUpon>TPane.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TTextBoxTimeMask.resx">
+      <DependentUpon>TTextBoxTimeMask.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TUpDownTime.resx">
+      <DependentUpon>TUpDownTime.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TVersionList.resx">
+      <DependentUpon>TVersionList.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TKeyEnabler.resx">
+      <DependentUpon>TKeyEnabler.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TMenuListener.resx">
+      <DependentUpon>TMenuListener.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormFeatureSwitchList.resx">
+      <DependentUpon>FormFeatureSwitchList.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormFeatureTimeKeeper.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FormFeatureTimeKeeper.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormFileSelector.resx">
+      <DependentUpon>FormFileSelector.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormMessageBoxLight.resx">
+      <DependentUpon>FormMessageBoxLight.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormProgressBar.resx">
+      <DependentUpon>FormProgressBar.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <SubType>Designer</SubType>
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="tonowinform.ico" />
+    <Content Include="使い方.txt" />
+    <None Include="%40Doc\Feature Architecture.pptx" />
+    <None Include="%40Doc\Parts Architecture..pptx" />
+    <None Include="%40Doc\uLeastSquareNPolynominal.xlsx" />
+    <None Include="packages.config" />
+    <None Include="Resources\lp_Dev_off.png" />
+    <None Include="Resources\lp_Dev_on.png" />
+    <None Include="Resources\lp_Err_off.png" />
+    <None Include="Resources\lp_Err_on.png" />
+    <None Include="Resources\lp_Inf_off.png" />
+    <None Include="Resources\lp_Inf_on.png" />
+    <None Include="Resources\lp_War_off.png" />
+    <None Include="Resources\lp_War_on.png" />
+    <None Include="Resources\OK.png" />
+    <None Include="Resources\li_hint.png" />
+    <None Include="Resources\Cancel.png" />
+    <None Include="Resources\Apply.png" />
+    <None Include="Resources\toNotepad.png" />
+    <None Include="Resources\li_todo.png" />
+    <None Include="Resources\filteroff.png" />
+    <None Include="Resources\Eraser.png" />
+    <None Include="Resources\Groupkey1.png" />
+    <None Include="Resources\Groupkey0.png" />
+    <None Include="Resources\GroupedRecord.png" />
+    <None Include="Resources\filterSelect.png" />
+    <None Include="Resources\filterAllOFF.png" />
+    <None Include="Resources\filterNegativeSelect.png" />
+    <None Include="Resources\FilterFuzzy.png" />
+    <None Include="Resources\BG_Yellow.png" />
+    <None Include="Resources\BG_Green.png" />
+    <None Include="Resources\MenuGra_Green1.png" />
+    <None Include="Resources\MenuGra_Yellow.png" />
+    <None Include="Resources\summary_ave.png" />
+    <None Include="Resources\summary_max.png" />
+    <None Include="Resources\summary_min.png" />
+    <None Include="Resources\summary_n.png" />
+    <None Include="Resources\symmary_sum.png" />
+    <None Include="Resources\mesWarning16.png" />
+    <None Include="Resources\lp_Note.png" />
+    <None Include="Resources\li_Note.png" />
+    <None Include="Resources\Pen.png" />
+    <Content Include="HtmlBulder.base.htm">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Compile Include="PartsCollectionMotion.cs" />
+    <Compile Include="HtmlBulder.cs" />
+    <Compile Include="WaitCursor.cs" />
+    <None Include="Tono.GuiWinForm.nuspec" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>cd $(ProjectDir)
+nuget pack $(ProjectFileName)
+move *.nupkg $(TargetDir)</PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

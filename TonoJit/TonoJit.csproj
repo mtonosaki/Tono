@@ -12,17 +12,17 @@
     <Copyright>(c) 2019 Manabu Tonosaki</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageIconUrl>https://aqtono.com/tomarika/tono/tonojiticon.png</PackageIconUrl>
-    <Version>0.1.0.1</Version>
-    <AssemblyVersion>0.1.0.1</AssemblyVersion>
+    <Version>0.1.2</Version>
+    <AssemblyVersion>0.1.2.2</AssemblyVersion>
     <PackageTags>Tono, Gui, Jit</PackageTags>
-    <PackageReleaseNotes>on kaizen process</PackageReleaseNotes>
-    <FileVersion>0.1.0.1</FileVersion>
+    <PackageReleaseNotes>on kaizen process / .NET Framework 4.7.2 Support</PackageReleaseNotes>
+    <FileVersion>0.1.2.2</FileVersion>
     <RepositoryUrl>https://github.com/mtonosaki/Tono.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Tono.Core" Version="1.0.0" />
+    <PackageReference Include="Tono.Core" Version="1.0.2" />
   </ItemGroup>
 
 </Project>

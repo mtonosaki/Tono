@@ -19,7 +19,11 @@ namespace Tono.Gui
         /// Auto cast to float
         /// </summary>
         /// <param name="val"></param>
-        public static implicit operator float(ScreenX val) { return val.Sx; }
+        public static implicit operator float(ScreenX val) => val.Sx;
+
+        public static explicit operator int(ScreenX val) => (int)val.Sx;
+
+        public static explicit operator short(ScreenX val) => (short)val.Sx;
 
         public override bool Equals(object obj)
         {
@@ -47,32 +51,13 @@ namespace Tono.Gui
         /// cast from layout to screen
         /// </summary>
         /// <param name="pos"></param>
-        [DebuggerHidden]
+
         public static explicit operator ScreenX(LayoutX pos) { return ScreenX.From(pos.Lx); }
 
-        /// <summary>
-        /// v1 is less than v2
-        /// </summary>
-        /// <param name="v1"></param>
-        /// <param name="v2"></param>
-        /// <returns></returns>
-        [DebuggerHidden]
-        public static bool operator <(ScreenX v1, ScreenX v2)
-        {
-            return v1.Sx < v2.Sx;
-        }
-
-        /// <summary>
-        /// v1 is greater than v2
-        /// </summary>
-        /// <param name="v1"></param>
-        /// <param name="v2"></param>
-        /// <returns></returns>
-        [DebuggerHidden]
-        public static bool operator >(ScreenX v1, ScreenX v2)
-        {
-            return v1.Sx > v2.Sx;
-        }
+        public static bool operator <(ScreenX v1, ScreenX v2) => v1.Sx < v2.Sx;
+        public static bool operator >(ScreenX v1, ScreenX v2) => v1.Sx > v2.Sx;
+        public static bool operator <=(ScreenX v1, ScreenX v2) => v1.Sx <= v2.Sx;
+        public static bool operator >=(ScreenX v1, ScreenX v2) => v1.Sx >= v2.Sx;
 
         /// <summary>
         /// v1 + v2
@@ -80,7 +65,7 @@ namespace Tono.Gui
         /// <param name="v1"></param>
         /// <param name="v2"></param>
         /// <returns></returns>
-        [DebuggerHidden]
+
         public static ScreenX operator +(ScreenX v1, ScreenX v2)
         {
             return new ScreenX { Sx = v1.Sx + v2.Sx };
@@ -92,7 +77,7 @@ namespace Tono.Gui
         /// <param name="v1"></param>
         /// <param name="v2"></param>
         /// <returns></returns>
-        [DebuggerHidden]
+
         public static ScreenX operator -(ScreenX v1, ScreenX v2)
         {
             return new ScreenX { Sx = v1.Sx - v2.Sx };
@@ -104,7 +89,7 @@ namespace Tono.Gui
         /// <param name="v1"></param>
         /// <param name="v2"></param>
         /// <returns></returns>
-        [DebuggerHidden]
+
         public static ScreenX operator *(ScreenX v1, float v2)
         {
             return new ScreenX { Sx = v1.Sx * v2 };
@@ -116,7 +101,7 @@ namespace Tono.Gui
         /// <param name="v1"></param>
         /// <param name="v2"></param>
         /// <returns></returns>
-        [DebuggerHidden]
+
         public static ScreenX operator *(ScreenX v1, double v2)
         {
             return new ScreenX { Sx = (float)(v1.Sx * v2) };
@@ -128,7 +113,7 @@ namespace Tono.Gui
         /// <param name="v1"></param>
         /// <param name="v2"></param>
         /// <returns></returns>
-        [DebuggerHidden]
+
         public static ScreenX operator /(ScreenX v1, float v2)
         {
             return new ScreenX { Sx = v1.Sx / v2 };
@@ -140,7 +125,7 @@ namespace Tono.Gui
         /// <param name="v1"></param>
         /// <param name="v2"></param>
         /// <returns></returns>
-        [DebuggerHidden]
+
         public static ScreenX operator /(ScreenX v1, double v2)
         {
             return new ScreenX { Sx = (float)(v1.Sx / v2) };
@@ -223,6 +208,16 @@ namespace Tono.Gui
         {
             return Compare.Normal(Sx, other.Sx);
         }
+
+        public static bool operator ==(ScreenX left, ScreenX right)
+        {
+            return left.Equals(right);
+        }
+
+        public static bool operator !=(ScreenX left, ScreenX right)
+        {
+            return !(left == right);
+        }
     }
 
     /// <summary>
@@ -241,6 +236,10 @@ namespace Tono.Gui
         /// </summary>
         /// <param name="val"></param>
         public static implicit operator float(ScreenY val) { return val.Sy; }
+
+        public static explicit operator int(ScreenY val) => (int)val.Sy;
+
+        public static explicit operator short(ScreenY val) => (short)val.Sy;
 
         public override bool Equals(object obj)
         {
@@ -268,7 +267,7 @@ namespace Tono.Gui
         /// cast support to LayoutY
         /// </summary>
         /// <param name="pos"></param>
-        [DebuggerHidden]
+
         public static explicit operator ScreenY(LayoutY pos)
         {
             return ScreenY.From(pos.Ly);
@@ -280,7 +279,7 @@ namespace Tono.Gui
         /// <param name="v1"></param>
         /// <param name="v2"></param>
         /// <returns></returns>
-        [DebuggerHidden]
+
         public static bool operator <(ScreenY v1, ScreenY v2)
         {
             return v1.Sy < v2.Sy;
@@ -292,7 +291,7 @@ namespace Tono.Gui
         /// <param name="v1"></param>
         /// <param name="v2"></param>
         /// <returns></returns>
-        [DebuggerHidden]
+
         public static bool operator >(ScreenY v1, ScreenY v2)
         {
             return v1.Sy > v2.Sy;
@@ -304,7 +303,7 @@ namespace Tono.Gui
         /// <param name="v1"></param>
         /// <param name="v2"></param>
         /// <returns></returns>
-        [DebuggerHidden]
+
         public static ScreenY operator +(ScreenY v1, ScreenY v2)
         {
             return new ScreenY { Sy = v1.Sy + v2.Sy };
@@ -316,7 +315,7 @@ namespace Tono.Gui
         /// <param name="v1"></param>
         /// <param name="v2"></param>
         /// <returns></returns>
-        [DebuggerHidden]
+
         public static ScreenY operator -(ScreenY v1, ScreenY v2)
         {
             return new ScreenY { Sy = v1.Sy - v2.Sy };
@@ -328,7 +327,7 @@ namespace Tono.Gui
         /// <param name="v1"></param>
         /// <param name="v2"></param>
         /// <returns></returns>
-        [DebuggerHidden]
+
         public static ScreenY operator *(ScreenY v1, float v2)
         {
             return new ScreenY { Sy = v1.Sy * v2 };
@@ -340,7 +339,7 @@ namespace Tono.Gui
         /// <param name="v1"></param>
         /// <param name="v2"></param>
         /// <returns></returns>
-        [DebuggerHidden]
+
         public static ScreenY operator *(ScreenY v1, double v2)
         {
             return new ScreenY { Sy = (float)(v1.Sy * v2) };
@@ -352,7 +351,7 @@ namespace Tono.Gui
         /// <param name="v1"></param>
         /// <param name="v2"></param>
         /// <returns></returns>
-        [DebuggerHidden]
+
         public static ScreenY operator /(ScreenY v1, float v2)
         {
             return new ScreenY { Sy = v1.Sy / v2 };
@@ -364,7 +363,7 @@ namespace Tono.Gui
         /// <param name="v1"></param>
         /// <param name="v2"></param>
         /// <returns></returns>
-        [DebuggerHidden]
+
         public static ScreenY operator /(ScreenY v1, double v2)
         {
             return new ScreenY { Sy = (float)(v1.Sy / v2) };
@@ -429,6 +428,24 @@ namespace Tono.Gui
         public ScreenX X { get; set; }
         public ScreenY Y { get; set; }
 
+        public void SetX(ScreenX x) { X = x; }
+        public void SetX(double x) { X = ScreenX.From(x); }
+        public void SetY(ScreenY y) { Y = y; }
+        public void SetY(double y) { Y = ScreenY.From(y); }
+
+        /// <summary>
+        /// instance type change to ScreenSize
+        /// </summary>
+        /// <returns></returns>
+        public ScreenSize ToSize()
+        {
+            return new ScreenSize
+            {
+                Width = X,
+                Height = Y,
+            };
+        }
+
         /// <summary>
         /// auto cast to Vestor2 for a lot of Graphics functions
         /// </summary>
@@ -440,6 +457,26 @@ namespace Tono.Gui
                 X = pos.X,
                 Y = pos.Y,
             };
+        }
+
+        /// <summary>
+        /// check instance position is in betweeb tar
+        /// </summary>
+        /// <param name="tar"></param>
+        /// <returns></returns>
+        public bool IsIn((ScreenX L, ScreenX R) tar)
+        {
+            return X >= tar.L && X < tar.R;
+        }
+
+        /// <summary>
+        /// check instance position is in betweeb tar
+        /// </summary>
+        /// <param name="tar"></param>
+        /// <returns></returns>
+        public bool IsIn((ScreenY L, ScreenY R) tar)
+        {
+            return Y >= tar.L && Y < tar.R;
         }
 
         /// <summary>
@@ -608,7 +645,7 @@ namespace Tono.Gui
         /// <param name="v1"></param>
         /// <param name="v2"></param>
         /// <returns></returns>
-        [DebuggerHidden]
+
         public static ScreenPos operator +(ScreenPos v1, ScreenPos v2)
         {
             return new ScreenPos { X = v1.X + v2.X, Y = v1.Y + v2.Y, };
@@ -620,7 +657,7 @@ namespace Tono.Gui
         /// <param name="v1"></param>
         /// <param name="v2"></param>
         /// <returns></returns>
-        [DebuggerHidden]
+
         public static ScreenPos operator +(ScreenPos v1, ScreenSize v2)
         {
             return new ScreenPos { X = v1.X + v2.Width, Y = v1.Y + v2.Height, };
@@ -632,7 +669,7 @@ namespace Tono.Gui
         /// <param name="v1"></param>
         /// <param name="v2"></param>
         /// <returns></returns>
-        [DebuggerHidden]
+
         public static ScreenPos operator +(ScreenPos v1, ScreenX v2)
         {
             return new ScreenPos { X = v1.X + v2, Y = v1.Y, };
@@ -644,7 +681,7 @@ namespace Tono.Gui
         /// <param name="v1"></param>
         /// <param name="v2"></param>
         /// <returns></returns>
-        [DebuggerHidden]
+
         public static ScreenPos operator +(ScreenPos v1, ScreenY v2)
         {
             return new ScreenPos { X = v1.X, Y = v1.Y + v2, };
@@ -656,7 +693,7 @@ namespace Tono.Gui
         /// <param name="v1"></param>
         /// <param name="v2"></param>
         /// <returns></returns>
-        [DebuggerHidden]
+
         public static ScreenPos operator -(ScreenPos v1, ScreenSize v2)
         {
             return new ScreenPos { X = v1.X - v2.Width, Y = v1.Y - v2.Height, };
@@ -668,7 +705,7 @@ namespace Tono.Gui
         /// <param name="v1"></param>
         /// <param name="v2"></param>
         /// <returns></returns>
-        [DebuggerHidden]
+
         public static ScreenPos operator -(ScreenPos v1, ScreenX v2)
         {
             return new ScreenPos { X = v1.X - v2, Y = v1.Y, };
@@ -680,7 +717,7 @@ namespace Tono.Gui
         /// <param name="v1"></param>
         /// <param name="v2"></param>
         /// <returns></returns>
-        [DebuggerHidden]
+
         public static ScreenPos operator -(ScreenPos v1, ScreenY v2)
         {
             return new ScreenPos { X = v1.X, Y = v1.Y - v2, };
@@ -692,7 +729,7 @@ namespace Tono.Gui
         /// <param name="v1"></param>
         /// <param name="v2"></param>
         /// <returns></returns>
-        [DebuggerHidden]
+
         public static ScreenSize operator -(ScreenPos v1, ScreenPos v2)
         {
             return new ScreenSize { Width = v1.X - v2.X, Height = v1.Y - v2.Y };
@@ -704,7 +741,7 @@ namespace Tono.Gui
         /// <param name="v1"></param>
         /// <param name="v2"></param>
         /// <returns></returns>
-        [DebuggerHidden]
+
         public static ScreenPos operator *(ScreenPos v1, double v2)
         {
             return new ScreenPos { X = v1.X * v2, Y = v1.Y * v2, };
@@ -716,7 +753,7 @@ namespace Tono.Gui
         /// <param name="v1"></param>
         /// <param name="v2"></param>
         /// <returns></returns>
-        [DebuggerHidden]
+
         public static ScreenPos operator *(ScreenPos v1, ScreenY v2)
         {
             return new ScreenPos { X = v1.X, Y = v1.Y * v2.Sy, };
@@ -728,7 +765,7 @@ namespace Tono.Gui
         /// <param name="v1"></param>
         /// <param name="v2"></param>
         /// <returns></returns>
-        [DebuggerHidden]
+
         public static ScreenPos operator *(ScreenPos v1, ScreenX v2)
         {
             return new ScreenPos { X = v1.X * v2.Sx, Y = v1.Y, };
@@ -740,7 +777,7 @@ namespace Tono.Gui
         /// <param name="v1"></param>
         /// <param name="v2"></param>
         /// <returns></returns>
-        [DebuggerHidden]
+
         public static ScreenPos operator *(ScreenPos v1, ScreenPos v2)
         {
             return new ScreenPos { X = v1.X * v2.X, Y = v1.Y * v2.Y, };
@@ -752,7 +789,7 @@ namespace Tono.Gui
         /// <param name="v1"></param>
         /// <param name="v2"></param>
         /// <returns></returns>
-        [DebuggerHidden]
+
         public static ScreenPos operator /(ScreenPos v1, ScreenPos v2)
         {
             return new ScreenPos { X = v1.X / v2.X, Y = v1.Y / v2.Y, };
@@ -764,7 +801,7 @@ namespace Tono.Gui
         /// <param name="v1"></param>
         /// <param name="v2"></param>
         /// <returns></returns>
-        [DebuggerHidden]
+
         public static ScreenPos operator /(ScreenPos v1, double v2)
         {
             return new ScreenPos { X = v1.X / v2, Y = v1.Y / v2, };
@@ -774,7 +811,7 @@ namespace Tono.Gui
         /// auto cast instance to tuple of double type
         /// </summary>
         /// <param name="v1"></param>
-        [DebuggerHidden]
+
         public static implicit operator (double X, double Y)(ScreenPos v1)
         {
             return (v1.X.Sx, v1.Y.Sy);
@@ -802,7 +839,7 @@ namespace Tono.Gui
 
                 return rect.LC;
             }
-            if (dest.X > rect.RB.X)
+            if (dest.X > rect.R)
             {
                 if (dest.Y < rect.LT.Y)
                 {
@@ -828,6 +865,28 @@ namespace Tono.Gui
 
             return dest;
         }
+
+        /// <summary>
+        /// left equal to right
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <returns></returns>
+        public static bool operator ==(ScreenPos left, ScreenPos right)
+        {
+            return left.Equals(right);
+        }
+
+        /// <summary>
+        /// left not equal to right
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <returns></returns>
+        public static bool operator !=(ScreenPos left, ScreenPos right)
+        {
+            return !(left == right);
+        }
     }
 
     /// <summary>
@@ -842,6 +901,15 @@ namespace Tono.Gui
         /// diagonal length of Width-Height
         /// </summary>
         public double Length => GeoEu.Length((Width.Sx, Height.Sy));
+
+        public ScreenPos ToPos()
+        {
+            return new ScreenPos
+            {
+                X = Width,
+                Y = Height,
+            };
+        }
 
         /// <summary>
         /// Convert to touple
@@ -858,7 +926,7 @@ namespace Tono.Gui
         /// <param name="x"></param>
         /// <param name="y"></param>
         /// <returns></returns>
-        [DebuggerHidden]
+
         public static ScreenSize From(float w, float h)
         {
             return new ScreenSize
@@ -874,7 +942,7 @@ namespace Tono.Gui
         /// <param name="w"></param>
         /// <param name="h"></param>
         /// <returns></returns>
-        [DebuggerHidden]
+
         public static ScreenSize From(double w, double h)
         {
             return new ScreenSize
@@ -884,7 +952,7 @@ namespace Tono.Gui
             };
         }
 
-        [DebuggerHidden]
+
         public override string ToString()
         {
             return $"S(W={Width.Sx},H={Height.Sy})";
@@ -915,7 +983,7 @@ namespace Tono.Gui
         /// <param name="v1"></param>
         /// <param name="v2"></param>
         /// <returns></returns>
-        [DebuggerHidden]
+
         public static ScreenSize operator *(ScreenSize v1, float v2)
         {
             return new ScreenSize { Width = v1.Width * v2, Height = v1.Height * v2 };
@@ -927,7 +995,7 @@ namespace Tono.Gui
         /// <param name="v1"></param>
         /// <param name="v2"></param>
         /// <returns></returns>
-        [DebuggerHidden]
+
         public static ScreenSize operator *(ScreenSize v1, double v2)
         {
             return new ScreenSize { Width = v1.Width * v2, Height = v1.Height * v2 };
@@ -939,7 +1007,7 @@ namespace Tono.Gui
         /// <param name="v1"></param>
         /// <param name="v2"></param>
         /// <returns></returns>
-        [DebuggerHidden]
+
         public static ScreenSize operator *(ScreenSize v1, (double X, double Y) v2)
         {
             return new ScreenSize { Width = v1.Width * v2.X, Height = v1.Height * v2.Y };
@@ -951,7 +1019,7 @@ namespace Tono.Gui
         /// <param name="v1"></param>
         /// <param name="v2"></param>
         /// <returns></returns>
-        [DebuggerHidden]
+
         public static ScreenSize operator /(ScreenSize v1, float v2)
         {
             return new ScreenSize { Width = v1.Width / v2, Height = v1.Height / v2 };
@@ -963,7 +1031,7 @@ namespace Tono.Gui
         /// <param name="v1"></param>
         /// <param name="v2"></param>
         /// <returns></returns>
-        [DebuggerHidden]
+
         public static ScreenSize operator /(ScreenSize v1, double v2)
         {
             return new ScreenSize { Width = v1.Width / v2, Height = v1.Height / v2 };
@@ -975,7 +1043,7 @@ namespace Tono.Gui
         /// <param name="v1"></param>
         /// <param name="v2"></param>
         /// <returns></returns>
-        [DebuggerHidden]
+
         public static ScreenSize operator /(ScreenSize v1, ScreenPos v2)
         {
             return new ScreenSize { Width = v1.Width / v2.X, Height = v1.Height / v2.Y };
@@ -985,10 +1053,32 @@ namespace Tono.Gui
         /// cast support to ScreenPos
         /// </summary>
         /// <param name="size"></param>
-        [DebuggerHidden]
+
         public static explicit operator ScreenPos(ScreenSize size)
         {
             return ScreenPos.From(size.Width.Sx, size.Height.Sy);
+        }
+
+        /// <summary>
+        /// left is equal to right
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <returns></returns>
+        public static bool operator ==(ScreenSize left, ScreenSize right)
+        {
+            return left.Equals(right);
+        }
+
+        /// <summary>
+        /// left is not equal to right
+        /// </summary>
+        /// <param name="left"></param>
+        /// <param name="right"></param>
+        /// <returns></returns>
+        public static bool operator !=(ScreenSize left, ScreenSize right)
+        {
+            return !(left == right);
         }
     }
 
@@ -1012,6 +1102,16 @@ namespace Tono.Gui
         /// Left-Bottom (only refference)
         /// </summary>
         public ScreenPos LB => ScreenPos.From(LT.X, RB.Y);
+
+        /// <summary>
+        /// horizontal span
+        /// </summary>
+        public (ScreenX L, ScreenX R) LR => (L, R);
+
+        /// <summary>
+        /// vertical span
+        /// </summary>
+        public (ScreenY T, ScreenY B) TB => (T, B);
 
         /// <summary>
         /// Left (only refference)
@@ -1061,6 +1161,19 @@ namespace Tono.Gui
         }
 
         /// <summary>
+        /// increment RB x and y
+        /// </summary>
+        /// <returns></returns>
+        public ScreenRect GetRBPlus1()
+        {
+            return new ScreenRect
+            {
+                LT = LT,
+                RB = ScreenPos.From(R.Sx + 1, B.Sy + 1),
+            };
+        }
+
+        /// <summary>
         /// normalize instance value from negative to positive rectangle
         /// </summary>
         /// <returns></returns>
@@ -1102,6 +1215,32 @@ namespace Tono.Gui
             return LT.X <= pos.X && RB.X >= pos.X && LT.Y <= pos.Y && RB.Y >= pos.Y;
         }
 
+
+        /// <summary>
+        /// check anogher rectangle is in this rectangle
+        /// </summary>
+        /// <param name="tar"></param>
+        /// <returns></returns>
+        public bool IsIn(ScreenRect tar)
+        {
+            if (tar != null)
+            {
+                if (LT.X <= tar.RB.X && RB.X >= tar.LT.X && LT.Y <= tar.RB.Y && RB.Y >= tar.LT.Y)
+                {
+                    return true;
+                }
+                if (LT.X >= tar.LT.X && RB.X <= tar.RB.X && LT.Y >= tar.LT.Y && RB.Y <= tar.RB.Y)
+                {
+                    return true;
+                }
+                if (tar.LT.X >= LT.X && tar.RB.X <= RB.X && tar.LT.Y >= LT.Y && tar.RB.Y <= RB.Y)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
         /// <summary>
         /// Check negative or not.
         /// </summary>
@@ -1128,7 +1267,7 @@ namespace Tono.Gui
         /// <param name="right"></param>
         /// <param name="bottom"></param>
         /// <returns></returns>
-        [DebuggerHidden]
+
         public static ScreenRect FromLTRB(float left, float top, float right, float bottom)
         {
             return new ScreenRect
@@ -1152,7 +1291,7 @@ namespace Tono.Gui
         /// <param name="lt">Left-Top</param>
         /// <param name="rb">Right-Bottom</param>
         /// <returns></returns>
-        [DebuggerHidden]
+
         public static ScreenRect FromLTRB(ScreenPos lt, ScreenPos rb)
         {
             return new ScreenRect
@@ -1178,7 +1317,7 @@ namespace Tono.Gui
         /// <param name="width">width</param>
         /// <param name="height">height</param>
         /// <returns></returns>
-        [DebuggerHidden]
+
         public static ScreenRect FromLTWH(float left, float top, float width, float height)
         {
             return new ScreenRect
@@ -1203,7 +1342,7 @@ namespace Tono.Gui
         /// <param name="width"></param>
         /// <param name="height"></param>
         /// <returns></returns>
-        [DebuggerHidden]
+
         public static ScreenRect FromLTWH(ScreenPos lt, float width, float height)
         {
             return new ScreenRect
@@ -1276,7 +1415,7 @@ namespace Tono.Gui
         /// <param name="width"></param>
         /// <param name="height"></param>
         /// <returns></returns>
-        [DebuggerHidden]
+
         public static ScreenRect FromLWH(ScreenPos leftcenter, float width, float height)
         {
             return new ScreenRect
@@ -1301,7 +1440,7 @@ namespace Tono.Gui
         /// <param name="y0">center Y (screen)</param>
         /// <param name="size"></param>
         /// <returns></returns>
-        [DebuggerHidden]
+
         public static ScreenRect From(float x0, float y0, ScreenSize size)
         {
             return new ScreenRect
@@ -1325,7 +1464,7 @@ namespace Tono.Gui
         /// <param name="center"></param>
         /// <param name="size"></param>
         /// <returns></returns>
-        [DebuggerHidden]
+
         public static ScreenRect FromCS(ScreenPos center, ScreenSize size)
         {
             return FromCWH(center, size.Width, size.Height);
@@ -1337,7 +1476,7 @@ namespace Tono.Gui
         /// <param name="lt"></param>
         /// <param name="size"></param>
         /// <returns></returns>
-        [DebuggerHidden]
+
         public static ScreenRect From(ScreenPos lt, ScreenSize size)
         {
             return new ScreenRect
@@ -1362,7 +1501,7 @@ namespace Tono.Gui
         /// <param name="width"></param>
         /// <param name="height"></param>
         /// <returns></returns>
-        [DebuggerHidden]
+
         public static ScreenRect From(ScreenPos lt, float width, float height)
         {
             return new ScreenRect
@@ -1383,47 +1522,48 @@ namespace Tono.Gui
         /// <summary>
         /// Width (reference only)
         /// </summary>
-        [DebuggerHidden] public ScreenX Width => RB.X - LT.X;
+        public ScreenX Width => RB.X - LT.X;
 
         /// <summary>
         /// Height (reference only)
         /// </summary>
-        [DebuggerHidden] public ScreenY Height => RB.Y - LT.Y;
+        public ScreenY Height => RB.Y - LT.Y;
 
         /// <summary>
         /// Center position (reference only)
         /// </summary>
-        [DebuggerHidden] public ScreenPos C => new ScreenPos { X = (LT.X + RB.X) / 2, Y = (LT.Y + RB.Y) / 2 };
+        public ScreenPos C => new ScreenPos { X = (LT.X + RB.X) / 2, Y = (LT.Y + RB.Y) / 2 };
 
         /// <summary>
         /// Left-Center (reference only)
         /// </summary>
-        [DebuggerHidden] public ScreenPos LC => new ScreenPos { X = LT.X, Y = (LT.Y + RB.Y) / 2 };
+        public ScreenPos LC => new ScreenPos { X = LT.X, Y = (LT.Y + RB.Y) / 2 };
 
         /// <summary>
         /// Right-Center (reference only)
         /// </summary>
-        [DebuggerHidden] public ScreenPos RC => new ScreenPos { X = RB.X, Y = (LT.Y + RB.Y) / 2 };
+        public ScreenPos RC => new ScreenPos { X = RB.X, Y = (LT.Y + RB.Y) / 2 };
 
         /// <summary>
         /// Center-Top (reference only)
         /// </summary>
-        [DebuggerHidden] public ScreenPos CT => new ScreenPos { X = (LT.X + RB.X) / 2, Y = LT.Y };
+        public ScreenPos CT => new ScreenPos { X = (LT.X + RB.X) / 2, Y = LT.Y };
 
         /// <summary>
         /// Center-Bottom (reference only)
         /// </summary>
-        [DebuggerHidden] public ScreenPos CB => new ScreenPos { X = (LT.X + RB.X) / 2, Y = RB.Y };
+        public ScreenPos CB => new ScreenPos { X = (LT.X + RB.X) / 2, Y = RB.Y };
 
         /// <summary>
         /// infrate instance
         /// </summary>
         /// <param name="all"></param>
         /// <returns></returns>
-        public void Inflate(ScreenSize size)
+        public ScreenRect Inflate(ScreenSize size)
         {
             LT -= size / 2;
             RB += size / 2;
+            return this;
         }
 
         /// <summary>
@@ -1431,13 +1571,14 @@ namespace Tono.Gui
         /// </summary>
         /// <param name="all"></param>
         /// <returns></returns>
-        public void Deflate(ScreenSize size)
+        public ScreenRect Deflate(ScreenSize size)
         {
             LT += size / 2;
             RB -= size / 2;
+            return this;
         }
 
-        [DebuggerHidden]
+
         public override bool Equals(object obj)
         {
             if (obj is ScreenRect sr)
@@ -1450,7 +1591,7 @@ namespace Tono.Gui
             }
         }
 
-        [DebuggerHidden]
+
         public override int GetHashCode()
         {
             return LT.GetHashCode() ^ RB.GetHashCode();
@@ -1471,15 +1612,106 @@ namespace Tono.Gui
         }
 
         /// <summary>
-        /// offset horizontal position
+        /// make overlapped arrea rectangle
         /// </summary>
-        /// <param name="v1"></param>
-        /// <param name="v2"></param>
+        /// <param name="r1"></param>
+        /// <param name="r2"></param>
         /// <returns></returns>
-        [DebuggerHidden]
-        public static ScreenRect operator +(ScreenRect v1, ScreenPos v2)
+        public static ScreenRect operator &(ScreenRect r1, ScreenRect r2)
         {
-            return new ScreenRect { LT = ScreenPos.From(v1.LT.X + v2.X, v1.LT.Y + v2.Y), RB = ScreenPos.From(v1.RB.X + v2.X, v1.RB.Y + v2.Y), };
+            if (r1 == null || r2 == null)
+            {
+                return null;
+            }
+            var ret = ScreenRect.FromLTRB(
+                r1.LT.X >= r2.LT.X ? r1.LT.X : r2.LT.X,
+                r1.LT.Y >= r2.LT.Y ? r1.LT.Y : r2.LT.Y,
+                r1.RB.X <= r2.RB.X ? r1.RB.X : r2.RB.X,
+                r1.RB.Y <= r2.RB.Y ? r1.RB.Y : r2.RB.Y
+            );
+            if (ret.IsEmptyNegative() == false)
+            {
+                return null;
+            }
+            else
+            {
+                return ret;
+            }
+        }
+
+        /// <summary>
+        /// r * value (= LT * value, RB * value)
+        /// </summary>
+        /// <param name="r"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static ScreenRect operator *(ScreenRect r, double value)
+        {
+            return new ScreenRect
+            {
+                LT = ScreenPos.From(r.L.Sx * value, r.T.Sy * value),
+                RB = ScreenPos.From(r.R.Sx * value, r.B.Sy * value),
+            };
+        }
+        public static ScreenRect operator *(ScreenRect r, ScreenX value)
+        {
+            return new ScreenRect
+            {
+                LT = ScreenPos.From(r.L.Sx * value.Sx, r.T.Sy),
+                RB = ScreenPos.From(r.R.Sx * value.Sx, r.B.Sy),
+            };
+        }
+        public static ScreenRect operator *(ScreenRect r, ScreenY value)
+        {
+            return new ScreenRect
+            {
+                LT = ScreenPos.From(r.L.Sx, r.T.Sy * value.Sy),
+                RB = ScreenPos.From(r.R.Sx, r.B.Sy * value.Sy),
+            };
+        }
+
+        public static ScreenRect operator *(ScreenRect r, ScreenPos value)
+        {
+            return new ScreenRect
+            {
+                LT = ScreenPos.From(r.L.Sx * value.X.Sx, r.T.Sy * value.Y.Sy),
+                RB = ScreenPos.From(r.R.Sx * value.X.Sx, r.B.Sy * value.Y.Sy),
+            };
+        }
+
+        public static ScreenRect operator /(ScreenRect r, double value)
+        {
+            return new ScreenRect
+            {
+                LT = ScreenPos.From(r.L.Sx / value, r.T.Sy / value),
+                RB = ScreenPos.From(r.R.Sx / value, r.B.Sy / value),
+            };
+        }
+
+        public static ScreenRect operator /(ScreenRect r, ScreenX value)
+        {
+            return new ScreenRect
+            {
+                LT = ScreenPos.From(r.L.Sx / value.Sx, r.T.Sy),
+                RB = ScreenPos.From(r.R.Sx / value.Sx, r.B.Sy),
+            };
+        }
+        public static ScreenRect operator /(ScreenRect r, ScreenY value)
+        {
+            return new ScreenRect
+            {
+                LT = ScreenPos.From(r.L.Sx, r.T.Sy / value.Sy),
+                RB = ScreenPos.From(r.R.Sx, r.B.Sy / value.Sy),
+            };
+        }
+
+        public static ScreenRect operator /(ScreenRect r, ScreenPos value)
+        {
+            return new ScreenRect
+            {
+                LT = ScreenPos.From(r.L.Sx / value.X.Sx, r.T.Sy / value.Y.Sy),
+                RB = ScreenPos.From(r.R.Sx / value.X.Sx, r.B.Sy / value.Y.Sy),
+            };
         }
 
         /// <summary>
@@ -1488,10 +1720,26 @@ namespace Tono.Gui
         /// <param name="v1"></param>
         /// <param name="v2"></param>
         /// <returns></returns>
-        [DebuggerHidden]
+
+        public static ScreenRect operator +(ScreenRect v1, ScreenPos v2)
+        {
+            return new ScreenRect { LT = ScreenPos.From(v1.LT.X + v2.X, v1.LT.Y + v2.Y), RB = ScreenPos.From(v1.R + v2.X, v1.RB.Y + v2.Y), };
+        }
+        public static ScreenRect operator +(ScreenRect v1, ScreenSize v2)
+        {
+            return new ScreenRect { LT = ScreenPos.From(v1.LT.X + v2.Width, v1.LT.Y + v2.Height), RB = ScreenPos.From(v1.R + v2.Width, v1.RB.Y + v2.Height), };
+        }
+
+        /// <summary>
+        /// offset horizontal position
+        /// </summary>
+        /// <param name="v1"></param>
+        /// <param name="v2"></param>
+        /// <returns></returns>
+
         public static ScreenRect operator +(ScreenRect v1, ScreenX v2)
         {
-            return new ScreenRect { LT = ScreenPos.From(v1.LT.X + v2, v1.LT.Y), RB = ScreenPos.From(v1.RB.X + v2, v1.RB.Y), };
+            return new ScreenRect { LT = ScreenPos.From(v1.LT.X + v2, v1.LT.Y), RB = ScreenPos.From(v1.R + v2, v1.RB.Y), };
         }
 
         /// <summary>
@@ -1500,10 +1748,38 @@ namespace Tono.Gui
         /// <param name="v1"></param>
         /// <param name="v2"></param>
         /// <returns></returns>
-        [DebuggerHidden]
+
         public static ScreenRect operator +(ScreenRect v1, ScreenY v2)
         {
-            return new ScreenRect { LT = ScreenPos.From(v1.LT.X, v1.LT.Y + v2), RB = ScreenPos.From(v1.RB.X, v1.RB.Y + v2), };
+            return new ScreenRect { LT = ScreenPos.From(v1.LT.X, v1.LT.Y + v2), RB = ScreenPos.From(v1.R, v1.RB.Y + v2), };
+        }
+
+
+        /// <summary>
+        /// offset position
+        /// </summary>
+        /// <param name="v1"></param>
+        /// <param name="v2"></param>
+        /// <returns></returns>
+        public static ScreenRect operator -(ScreenRect v1, ScreenPos v2)
+        {
+            return new ScreenRect { LT = ScreenPos.From(v1.LT.X - v2.X, v1.LT.Y - v2.Y), RB = ScreenPos.From(v1.R - v2.X, v1.RB.Y - v2.Y), };
+        }
+
+        public static ScreenRect operator -(ScreenRect v1, ScreenSize v2)
+        {
+            return new ScreenRect { LT = ScreenPos.From(v1.LT.X - v2.Width, v1.LT.Y - v2.Height), RB = ScreenPos.From(v1.R - v2.Width, v1.RB.Y - v2.Height), };
+        }
+
+        /// <summary>
+        /// offset horizontal position
+        /// </summary>
+        /// <param name="v1"></param>
+        /// <param name="v2"></param>
+        /// <returns></returns>
+        public static ScreenRect operator -(ScreenRect v1, ScreenX v2)
+        {
+            return new ScreenRect { LT = ScreenPos.From(v1.LT.X - v2, v1.LT.Y), RB = ScreenPos.From(v1.R - v2, v1.RB.Y), };
         }
 
         /// <summary>
@@ -1512,10 +1788,10 @@ namespace Tono.Gui
         /// <param name="v1"></param>
         /// <param name="v2"></param>
         /// <returns></returns>
-        [DebuggerHidden]
+
         public static ScreenRect operator -(ScreenRect v1, ScreenY v2)
         {
-            return new ScreenRect { LT = ScreenPos.From(v1.LT.X, v1.LT.Y - v2), RB = ScreenPos.From(v1.RB.X, v1.RB.Y - v2), };
+            return new ScreenRect { LT = ScreenPos.From(v1.LT.X, v1.LT.Y - v2), RB = ScreenPos.From(v1.R, v1.RB.Y - v2), };
         }
     }
 }

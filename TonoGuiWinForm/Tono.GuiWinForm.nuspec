@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
+  <metadata>
+    <id>Tono.GuiWinForm</id>
+    <version>1.0.2</version>
+    <authors>Manabu Tonosaki</authors>
+    <owners>Manabu Tonosaki</owners>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <license type="expression">MIT</license>
+    <licenseUrl>https://licenses.nuget.org/MIT</licenseUrl>
+    <iconUrl>https://aqtono.com/tomarika/tono/tonoguiwinformicon.png</iconUrl>
+    <description>(Legacy) WinForm Version with GUI MVFP architecure of Tools Of New Operation</description>
+    <releaseNotes>.NET Framework 4.7.2 Support</releaseNotes>
+    <copyright>(c) 2019 Manabu Tonosaki</copyright>
+    <tags>Tono, Gui, WinForm</tags>
+    <repository type="git" url="https://github.com/mtonosaki/Tono.git" />
+    <dependencies>
+      <group targetFramework="uap">
+        <dependency id="Tono.Core" version="1.0.2" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+  </metadata>
+</package>

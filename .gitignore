@@ -15,3 +15,7 @@
 /TonoJit/bin
 /TonoLogic/obj
 /TonoLogic/bin
+/packages
+/TonoGuiWinForm/@Doc
+/TonoGuiWinForm/bin/Release
+/TonoGuiWinForm/obj/Release

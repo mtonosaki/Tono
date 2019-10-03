@@ -24,7 +24,7 @@ namespace Tono.Gui
         /// <summary>
         /// thread managed ID of sender(feature) when throwing event
         /// </summary>
-        public int ThreadManagedID { get; private set; }
+        public int ThreadManagedID { get; protected set; }
 
         /// <summary>
         /// The constructor

@@ -202,7 +202,7 @@ namespace Tono.Gui.Uwp
             {
                 if (_doubleBuffers.TryGetValue(bufferName, out var ddp))
                 {
-                    var lno = MathUtil.Max<int>(ddp.Layer.Value, layers.Select(a => a.Value).Max());
+                    var lno = MathUtil.Max<int>(ddp.Layer.Value.Value, layers.Select(a => a.Value.Value).Max());
                     ddp.Layer = NamedId.From($"(auto.doublebufferlayer.{lno})", lno);
                     ddp.ClearBuffer(false);
                 }

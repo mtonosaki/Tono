@@ -145,6 +145,30 @@ namespace Tono
     /// </summary>
     public class Collection
     {
+        private static readonly object[] _zero = new object[] { };
+
+        /// <summary>
+        /// Zero collection
+        /// </summary>
+        public static System.Collections.ICollection ZeroCollection => _zero;
+
+        /// <summary>
+        /// check any null object
+        /// </summary>
+        /// <param name="objs"></param>
+        /// <returns></returns>
+        public static bool ContainsNull(params object[] objs)
+        {
+            foreach (var obj in objs)
+            {
+                if (obj == null)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
         /// <summary>
         /// Make sequencial numbers
         /// </summary>

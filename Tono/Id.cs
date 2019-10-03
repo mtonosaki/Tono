@@ -24,11 +24,16 @@
             return Equals(Nothing);
         }
 
+        public static bool operator ==(Id a, Id b) => a.Equals(b);
+
+        public static bool operator !=(Id a, Id b) => !a.Equals(b);
+
         public override int GetHashCode()
         {
             return Value;
             //	return uBinary.BitRotateRight(0x78965489, Value & 31) ^ uBinary.BitRotateRight(0x513e7951, Value & 15); // if hash code distribution to expect tree balance
         }
+
         public override bool Equals(object obj)
         {
             if (obj is Id tar)

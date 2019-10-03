@@ -13,7 +13,7 @@ namespace Tono.Gui
         {
             return new LayoutX
             {
-                Lx = cx.Cx.Sx,
+                Lx = cx.Cx,
             };
         }
 
@@ -21,7 +21,7 @@ namespace Tono.Gui
         {
             return new LayoutY
             {
-                Ly = cy.Cy.Sy,
+                Ly = cy.Cy,
             };
         }
 

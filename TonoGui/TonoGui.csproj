@@ -11,12 +11,12 @@
     <Copyright>(c) 2019 Manabu Tonosaki</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageIconUrl>https://aqtono.com/tomarika/tono/tonoguiicon.png</PackageIconUrl>
-    <AssemblyVersion>1.0.0.1</AssemblyVersion>
-    <FileVersion>1.0.0.1</FileVersion>
-    <Version>1.0.0.1</Version>
+    <AssemblyVersion>1.0.2.2</AssemblyVersion>
+    <FileVersion>1.0.2.2</FileVersion>
+    <Version>1.0.2</Version>
     <PackageId>Tono.Gui</PackageId>
     <PackageTags>Tono, Gui</PackageTags>
-    <PackageReleaseNotes>first release version</PackageReleaseNotes>
+    <PackageReleaseNotes>.NET Framework 4.7.2 Support</PackageReleaseNotes>
     <PackageProjectUrl></PackageProjectUrl>
     <RepositoryUrl>https://github.com/mtonosaki/Tono.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
@@ -24,7 +24,7 @@
 
   <ItemGroup>
     <PackageReference Include="System.Numerics.Vectors" Version="4.5.0" />
-    <PackageReference Include="Tono.Core" Version="1.0.0" />
+    <PackageReference Include="Tono.Core" Version="1.0.2" />
   </ItemGroup>
 
 </Project>
