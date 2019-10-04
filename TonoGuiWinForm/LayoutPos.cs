@@ -1,5 +1,4 @@
 using System;
-using System.Diagnostics;
 
 namespace Tono.GuiWinForm
 {
@@ -15,7 +14,7 @@ namespace Tono.GuiWinForm
         /// <param name="v1">値１</param>
         /// <param name="v2">値２</param>
         /// <returns>インスタンス</returns>
-        
+
         public static new LayoutPos FromInt(int v1, int v2)
         {
             var ret = new LayoutPos
@@ -27,18 +26,18 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>演算子のオーバーロード</summary>
-         public static LayoutPos operator +(LayoutPos v1, ValueCouple v2) { return (LayoutPos)((ValueCouple)v1 + v2); }
+        public static LayoutPos operator +(LayoutPos v1, ValueCouple v2) { return (LayoutPos)((ValueCouple)v1 + v2); }
         /// <summary>演算子のオーバーロード</summary>
-         public static LayoutPos operator +(LayoutPos v1, int v2) { return (LayoutPos)((ValueCouple)v1 + v2); }
+        public static LayoutPos operator +(LayoutPos v1, int v2) { return (LayoutPos)((ValueCouple)v1 + v2); }
         /// <summary>演算子のオーバーロード</summary>
-         public static LayoutPos operator -(LayoutPos v1, ValueCouple v2) { return (LayoutPos)((ValueCouple)v1 - v2); }
+        public static LayoutPos operator -(LayoutPos v1, ValueCouple v2) { return (LayoutPos)((ValueCouple)v1 - v2); }
         /// <summary>演算子のオーバーロード</summary>
-         public static LayoutPos operator *(LayoutPos v1, ValueCouple v2) { return (LayoutPos)((ValueCouple)v1 * v2); }
+        public static LayoutPos operator *(LayoutPos v1, ValueCouple v2) { return (LayoutPos)((ValueCouple)v1 * v2); }
         /// <summary>演算子のオーバーロード</summary>
-         public static LayoutPos operator *(LayoutPos v1, int v2) { return (LayoutPos)((ValueCouple)v1 * v2); }
+        public static LayoutPos operator *(LayoutPos v1, int v2) { return (LayoutPos)((ValueCouple)v1 * v2); }
         /// <summary>演算子のオーバーロード</summary>
-         public static LayoutPos operator /(LayoutPos v1, ValueCouple v2) { return (LayoutPos)((ValueCouple)v1 / v2); }
+        public static LayoutPos operator /(LayoutPos v1, ValueCouple v2) { return (LayoutPos)((ValueCouple)v1 / v2); }
         /// <summary>演算子のオーバーロード</summary>
-         public static LayoutPos operator /(LayoutPos v1, int v2) { return (LayoutPos)((ValueCouple)v1 / v2); }
+        public static LayoutPos operator /(LayoutPos v1, int v2) { return (LayoutPos)((ValueCouple)v1 / v2); }
     }
 }

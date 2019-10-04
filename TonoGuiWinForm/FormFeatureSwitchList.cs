@@ -145,157 +145,157 @@ namespace Tono.GuiWinForm
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormFeatureSwitchList));
-            this.lvFeatureSwitchList = new System.Windows.Forms.ListView();
-            this.lvhFeatureSwitchListF = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.lvhFeatureSwitchListID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.lvhFeatureSwitchListParam = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.lvhFeatureSwitchListDesc = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.foFeatureSWTab = new System.Windows.Forms.TabControl();
-            this.foFeatureSWEnableFeatures = new System.Windows.Forms.TabPage();
-            this.foFeatureSWDisableFeatures = new System.Windows.Forms.TabPage();
-            this.lvDisableFeatures = new System.Windows.Forms.ListView();
-            this.lvhDisableFeatureListF = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.lvhDisableFeatureListDesc = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
-            this.foFeatureSWTab.SuspendLayout();
-            this.foFeatureSWEnableFeatures.SuspendLayout();
-            this.foFeatureSWDisableFeatures.SuspendLayout();
-            this.SuspendLayout();
+            lvFeatureSwitchList = new System.Windows.Forms.ListView();
+            lvhFeatureSwitchListF = new System.Windows.Forms.ColumnHeader();
+            lvhFeatureSwitchListID = new System.Windows.Forms.ColumnHeader();
+            lvhFeatureSwitchListParam = new System.Windows.Forms.ColumnHeader();
+            lvhFeatureSwitchListDesc = new System.Windows.Forms.ColumnHeader();
+            foFeatureSWTab = new System.Windows.Forms.TabControl();
+            foFeatureSWEnableFeatures = new System.Windows.Forms.TabPage();
+            foFeatureSWDisableFeatures = new System.Windows.Forms.TabPage();
+            lvDisableFeatures = new System.Windows.Forms.ListView();
+            lvhDisableFeatureListF = new System.Windows.Forms.ColumnHeader();
+            lvhDisableFeatureListDesc = new System.Windows.Forms.ColumnHeader();
+            imageList1 = new System.Windows.Forms.ImageList(components);
+            foFeatureSWTab.SuspendLayout();
+            foFeatureSWEnableFeatures.SuspendLayout();
+            foFeatureSWDisableFeatures.SuspendLayout();
+            SuspendLayout();
             // 
             // lvFeatureSwitchList
             // 
-            this.lvFeatureSwitchList.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.lvFeatureSwitchList.CheckBoxes = true;
-            this.lvFeatureSwitchList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.lvhFeatureSwitchListF,
-            this.lvhFeatureSwitchListID,
-            this.lvhFeatureSwitchListParam,
-            this.lvhFeatureSwitchListDesc});
-            this.lvFeatureSwitchList.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lvFeatureSwitchList.FullRowSelect = true;
-            this.lvFeatureSwitchList.GridLines = true;
-            this.lvFeatureSwitchList.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
-            this.lvFeatureSwitchList.HideSelection = false;
-            this.lvFeatureSwitchList.Location = new System.Drawing.Point(0, 0);
-            this.lvFeatureSwitchList.Name = "lvFeatureSwitchList";
-            this.lvFeatureSwitchList.Size = new System.Drawing.Size(672, 246);
-            this.lvFeatureSwitchList.Sorting = System.Windows.Forms.SortOrder.Ascending;
-            this.lvFeatureSwitchList.TabIndex = 0;
-            this.lvFeatureSwitchList.UseCompatibleStateImageBehavior = false;
-            this.lvFeatureSwitchList.View = System.Windows.Forms.View.Details;
-            this.lvFeatureSwitchList.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.lvFeatureSwitchList_ItemCheck);
-            this.lvFeatureSwitchList.KeyUp += new System.Windows.Forms.KeyEventHandler(this.foFeatureSwitchList_KeyUp);
+            lvFeatureSwitchList.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            lvFeatureSwitchList.CheckBoxes = true;
+            lvFeatureSwitchList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            lvhFeatureSwitchListF,
+            lvhFeatureSwitchListID,
+            lvhFeatureSwitchListParam,
+            lvhFeatureSwitchListDesc});
+            lvFeatureSwitchList.Dock = System.Windows.Forms.DockStyle.Fill;
+            lvFeatureSwitchList.FullRowSelect = true;
+            lvFeatureSwitchList.GridLines = true;
+            lvFeatureSwitchList.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            lvFeatureSwitchList.HideSelection = false;
+            lvFeatureSwitchList.Location = new System.Drawing.Point(0, 0);
+            lvFeatureSwitchList.Name = "lvFeatureSwitchList";
+            lvFeatureSwitchList.Size = new System.Drawing.Size(672, 246);
+            lvFeatureSwitchList.Sorting = System.Windows.Forms.SortOrder.Ascending;
+            lvFeatureSwitchList.TabIndex = 0;
+            lvFeatureSwitchList.UseCompatibleStateImageBehavior = false;
+            lvFeatureSwitchList.View = System.Windows.Forms.View.Details;
+            lvFeatureSwitchList.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(lvFeatureSwitchList_ItemCheck);
+            lvFeatureSwitchList.KeyUp += new System.Windows.Forms.KeyEventHandler(foFeatureSwitchList_KeyUp);
             // 
             // lvhFeatureSwitchListF
             // 
-            this.lvhFeatureSwitchListF.Text = "lvhFeatureSwitchListF";
-            this.lvhFeatureSwitchListF.Width = 180;
+            lvhFeatureSwitchListF.Text = "lvhFeatureSwitchListF";
+            lvhFeatureSwitchListF.Width = 180;
             // 
             // lvhFeatureSwitchListID
             // 
-            this.lvhFeatureSwitchListID.Text = "lvhFeatureSwitchListID";
-            this.lvhFeatureSwitchListID.Width = 40;
+            lvhFeatureSwitchListID.Text = "lvhFeatureSwitchListID";
+            lvhFeatureSwitchListID.Width = 40;
             // 
             // lvhFeatureSwitchListParam
             // 
-            this.lvhFeatureSwitchListParam.Text = "lvhFeatureSwitchListParam";
-            this.lvhFeatureSwitchListParam.Width = 102;
+            lvhFeatureSwitchListParam.Text = "lvhFeatureSwitchListParam";
+            lvhFeatureSwitchListParam.Width = 102;
             // 
             // lvhFeatureSwitchListDesc
             // 
-            this.lvhFeatureSwitchListDesc.Text = "lvhFeatureSwitchListDesc";
-            this.lvhFeatureSwitchListDesc.Width = 322;
+            lvhFeatureSwitchListDesc.Text = "lvhFeatureSwitchListDesc";
+            lvhFeatureSwitchListDesc.Width = 322;
             // 
             // foFeatureSWTab
             // 
-            this.foFeatureSWTab.Alignment = System.Windows.Forms.TabAlignment.Bottom;
-            this.foFeatureSWTab.Controls.Add(this.foFeatureSWEnableFeatures);
-            this.foFeatureSWTab.Controls.Add(this.foFeatureSWDisableFeatures);
-            this.foFeatureSWTab.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.foFeatureSWTab.ImageList = this.imageList1;
-            this.foFeatureSWTab.Location = new System.Drawing.Point(0, 0);
-            this.foFeatureSWTab.Name = "foFeatureSWTab";
-            this.foFeatureSWTab.SelectedIndex = 0;
-            this.foFeatureSWTab.Size = new System.Drawing.Size(680, 273);
-            this.foFeatureSWTab.TabIndex = 1;
-            this.foFeatureSWTab.KeyUp += new System.Windows.Forms.KeyEventHandler(this.foFeatureSwitchList_KeyUp);
+            foFeatureSWTab.Alignment = System.Windows.Forms.TabAlignment.Bottom;
+            foFeatureSWTab.Controls.Add(foFeatureSWEnableFeatures);
+            foFeatureSWTab.Controls.Add(foFeatureSWDisableFeatures);
+            foFeatureSWTab.Dock = System.Windows.Forms.DockStyle.Fill;
+            foFeatureSWTab.ImageList = imageList1;
+            foFeatureSWTab.Location = new System.Drawing.Point(0, 0);
+            foFeatureSWTab.Name = "foFeatureSWTab";
+            foFeatureSWTab.SelectedIndex = 0;
+            foFeatureSWTab.Size = new System.Drawing.Size(680, 273);
+            foFeatureSWTab.TabIndex = 1;
+            foFeatureSWTab.KeyUp += new System.Windows.Forms.KeyEventHandler(foFeatureSwitchList_KeyUp);
             // 
             // foFeatureSWEnableFeatures
             // 
-            this.foFeatureSWEnableFeatures.Controls.Add(this.lvFeatureSwitchList);
-            this.foFeatureSWEnableFeatures.ImageIndex = 1;
-            this.foFeatureSWEnableFeatures.Location = new System.Drawing.Point(4, 4);
-            this.foFeatureSWEnableFeatures.Name = "foFeatureSWEnableFeatures";
-            this.foFeatureSWEnableFeatures.Size = new System.Drawing.Size(672, 246);
-            this.foFeatureSWEnableFeatures.TabIndex = 0;
-            this.foFeatureSWEnableFeatures.Text = "Using Features";
-            this.foFeatureSWEnableFeatures.UseVisualStyleBackColor = true;
+            foFeatureSWEnableFeatures.Controls.Add(lvFeatureSwitchList);
+            foFeatureSWEnableFeatures.ImageIndex = 1;
+            foFeatureSWEnableFeatures.Location = new System.Drawing.Point(4, 4);
+            foFeatureSWEnableFeatures.Name = "foFeatureSWEnableFeatures";
+            foFeatureSWEnableFeatures.Size = new System.Drawing.Size(672, 246);
+            foFeatureSWEnableFeatures.TabIndex = 0;
+            foFeatureSWEnableFeatures.Text = "Using Features";
+            foFeatureSWEnableFeatures.UseVisualStyleBackColor = true;
             // 
             // foFeatureSWDisableFeatures
             // 
-            this.foFeatureSWDisableFeatures.Controls.Add(this.lvDisableFeatures);
-            this.foFeatureSWDisableFeatures.ImageIndex = 0;
-            this.foFeatureSWDisableFeatures.Location = new System.Drawing.Point(4, 4);
-            this.foFeatureSWDisableFeatures.Name = "foFeatureSWDisableFeatures";
-            this.foFeatureSWDisableFeatures.Size = new System.Drawing.Size(672, 246);
-            this.foFeatureSWDisableFeatures.TabIndex = 1;
-            this.foFeatureSWDisableFeatures.Text = "Unused";
-            this.foFeatureSWDisableFeatures.UseVisualStyleBackColor = true;
+            foFeatureSWDisableFeatures.Controls.Add(lvDisableFeatures);
+            foFeatureSWDisableFeatures.ImageIndex = 0;
+            foFeatureSWDisableFeatures.Location = new System.Drawing.Point(4, 4);
+            foFeatureSWDisableFeatures.Name = "foFeatureSWDisableFeatures";
+            foFeatureSWDisableFeatures.Size = new System.Drawing.Size(672, 246);
+            foFeatureSWDisableFeatures.TabIndex = 1;
+            foFeatureSWDisableFeatures.Text = "Unused";
+            foFeatureSWDisableFeatures.UseVisualStyleBackColor = true;
             // 
             // lvDisableFeatures
             // 
-            this.lvDisableFeatures.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.lvDisableFeatures.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.lvhDisableFeatureListF,
-            this.lvhDisableFeatureListDesc});
-            this.lvDisableFeatures.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lvDisableFeatures.FullRowSelect = true;
-            this.lvDisableFeatures.GridLines = true;
-            this.lvDisableFeatures.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
-            this.lvDisableFeatures.HideSelection = false;
-            this.lvDisableFeatures.Location = new System.Drawing.Point(0, 0);
-            this.lvDisableFeatures.Name = "lvDisableFeatures";
-            this.lvDisableFeatures.Size = new System.Drawing.Size(672, 246);
-            this.lvDisableFeatures.Sorting = System.Windows.Forms.SortOrder.Ascending;
-            this.lvDisableFeatures.TabIndex = 1;
-            this.lvDisableFeatures.UseCompatibleStateImageBehavior = false;
-            this.lvDisableFeatures.View = System.Windows.Forms.View.Details;
-            this.lvDisableFeatures.KeyUp += new System.Windows.Forms.KeyEventHandler(this.foFeatureSwitchList_KeyUp);
+            lvDisableFeatures.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            lvDisableFeatures.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            lvhDisableFeatureListF,
+            lvhDisableFeatureListDesc});
+            lvDisableFeatures.Dock = System.Windows.Forms.DockStyle.Fill;
+            lvDisableFeatures.FullRowSelect = true;
+            lvDisableFeatures.GridLines = true;
+            lvDisableFeatures.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            lvDisableFeatures.HideSelection = false;
+            lvDisableFeatures.Location = new System.Drawing.Point(0, 0);
+            lvDisableFeatures.Name = "lvDisableFeatures";
+            lvDisableFeatures.Size = new System.Drawing.Size(672, 246);
+            lvDisableFeatures.Sorting = System.Windows.Forms.SortOrder.Ascending;
+            lvDisableFeatures.TabIndex = 1;
+            lvDisableFeatures.UseCompatibleStateImageBehavior = false;
+            lvDisableFeatures.View = System.Windows.Forms.View.Details;
+            lvDisableFeatures.KeyUp += new System.Windows.Forms.KeyEventHandler(foFeatureSwitchList_KeyUp);
             // 
             // lvhDisableFeatureListF
             // 
-            this.lvhDisableFeatureListF.Text = "lvhDisableFeatureListF";
-            this.lvhDisableFeatureListF.Width = 180;
+            lvhDisableFeatureListF.Text = "lvhDisableFeatureListF";
+            lvhDisableFeatureListF.Width = 180;
             // 
             // lvhDisableFeatureListDesc
             // 
-            this.lvhDisableFeatureListDesc.Text = "lvhDisableFeatureListDesc";
-            this.lvhDisableFeatureListDesc.Width = 471;
+            lvhDisableFeatureListDesc.Text = "lvhDisableFeatureListDesc";
+            lvhDisableFeatureListDesc.Width = 471;
             // 
             // imageList1
             // 
-            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
-            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageList1.Images.SetKeyName(0, "");
-            this.imageList1.Images.SetKeyName(1, "");
+            imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
+            imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            imageList1.Images.SetKeyName(0, "");
+            imageList1.Images.SetKeyName(1, "");
             // 
             // foFeatureSwitchList
             // 
-            this.AutoScaleBaseSize = new System.Drawing.Size(5, 12);
-            this.ClientSize = new System.Drawing.Size(680, 273);
-            this.Controls.Add(this.foFeatureSWTab);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
-            this.Name = "foFeatureSwitchList";
-            this.Text = "Feature Switch";
-            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.foFeatureSwitchList_KeyUp);
-            this.foFeatureSWTab.ResumeLayout(false);
-            this.foFeatureSWEnableFeatures.ResumeLayout(false);
-            this.foFeatureSWDisableFeatures.ResumeLayout(false);
-            this.ResumeLayout(false);
+            AutoScaleBaseSize = new System.Drawing.Size(5, 12);
+            ClientSize = new System.Drawing.Size(680, 273);
+            Controls.Add(foFeatureSWTab);
+            Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            MaximizeBox = false;
+            MinimizeBox = false;
+            Name = "foFeatureSwitchList";
+            Text = "Feature Switch";
+            KeyUp += new System.Windows.Forms.KeyEventHandler(foFeatureSwitchList_KeyUp);
+            foFeatureSWTab.ResumeLayout(false);
+            foFeatureSWEnableFeatures.ResumeLayout(false);
+            foFeatureSWDisableFeatures.ResumeLayout(false);
+            ResumeLayout(false);
 
         }
         #endregion

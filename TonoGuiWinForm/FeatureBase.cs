@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Diagnostics;
 using System.Windows.Forms;
 
 #pragma warning disable 1591, 1572, 1573
@@ -328,11 +327,7 @@ namespace Tono.GuiWinForm
         /// <summary>
         /// メッセージを取得する
         /// </summary>
-        protected Mes Mes
-        {
-            
-            get => Mes.Current;
-        }
+        protected Mes Mes => Mes.Current;
 
         /// <summary>
         /// 自フィーチャーにズーム変更イベントを送出する

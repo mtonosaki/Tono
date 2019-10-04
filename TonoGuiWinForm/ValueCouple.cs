@@ -1,5 +1,4 @@
 using System;
-using System.Diagnostics;
 
 namespace Tono.GuiWinForm
 {
@@ -27,20 +26,12 @@ namespace Tono.GuiWinForm
         /// <summary>
         /// 一つ目の値
         /// </summary>
-        public int Value1
-        {
-            
-            get => _v1;
-        }
+        public int Value1 => _v1;
 
         /// <summary>
         /// 二つ目の値
         /// </summary>
-        public int Value2
-        {
-            
-            get => _v2;
-        }
+        public int Value2 => _v2;
 
         /// <summary>
         /// 値を指定してインスタンスを作る
@@ -48,7 +39,7 @@ namespace Tono.GuiWinForm
         /// <param name="v1">値１</param>
         /// <param name="v2">値２</param>
         /// <returns>インスタンス</returns>
-        
+
         public static ValueCouple FromInt(int v1, int v2)
         {
             var ret = new ValueCouple
@@ -78,7 +69,7 @@ namespace Tono.GuiWinForm
         /// 座標が(0,0)の判定を行う
         /// </summary>
         /// <returns></returns>
-        
+
         public bool IsZero()
         {
             return (_v1 & _v2) == 0 ? true : false;
@@ -90,7 +81,7 @@ namespace Tono.GuiWinForm
         /// <param name="v1">値１</param>
         /// <param name="v2">値２</param>
         /// <returns></returns>
-        
+
         public static ValueCouple operator +(ValueCouple v1, ValueCouple v2)
         {
             var ret = (ValueCouple)v1.Clone();
@@ -107,7 +98,7 @@ namespace Tono.GuiWinForm
         /// <param name="v1">値１</param>
         /// <param name="v2">値２</param>
         /// <returns></returns>
-        
+
         public static ValueCouple operator +(ValueCouple v1, int v2)
         {
             var ret = (ValueCouple)v1.Clone();
@@ -124,7 +115,7 @@ namespace Tono.GuiWinForm
         /// <param name="v1"></param>
         /// <param name="v2"></param>
         /// <returns></returns>
-        
+
         public static ValueCouple operator -(ValueCouple v1, int v2)
         {
             var ret = (ValueCouple)v1.Clone();
@@ -141,7 +132,7 @@ namespace Tono.GuiWinForm
         /// <param name="v1"></param>
         /// <param name="v2"></param>
         /// <returns></returns>
-        
+
         public static ValueCouple operator -(ValueCouple v1, ValueCouple v2)
         {
             var ret = (ValueCouple)v1.Clone();
@@ -158,7 +149,7 @@ namespace Tono.GuiWinForm
         /// <param name="v1"></param>
         /// <param name="v2"></param>
         /// <returns></returns>
-        
+
         public static ValueCouple operator *(ValueCouple v1, ValueCouple v2)
         {
             var ret = (ValueCouple)v1.Clone();
@@ -175,7 +166,7 @@ namespace Tono.GuiWinForm
         /// <param name="v1"></param>
         /// <param name="v2"></param>
         /// <returns></returns>
-        
+
         public static ValueCouple operator *(ValueCouple v1, double v2)
         {
             var ret = (ValueCouple)v1.Clone();
@@ -192,7 +183,7 @@ namespace Tono.GuiWinForm
         /// <param name="v1"></param>
         /// <param name="v2"></param>
         /// <returns></returns>
-        
+
         public static ValueCouple operator *(ValueCouple v1, int v2)
         {
             var ret = (ValueCouple)v1.Clone();
@@ -209,7 +200,7 @@ namespace Tono.GuiWinForm
         /// <param name="v1"></param>
         /// <param name="v2"></param>
         /// <returns></returns>
-        
+
         public static ValueCouple operator /(ValueCouple v1, int v2)
         {
             var ret = (ValueCouple)v1.Clone();
@@ -226,7 +217,7 @@ namespace Tono.GuiWinForm
         /// <param name="v1"></param>
         /// <param name="v2"></param>
         /// <returns></returns>
-        
+
         public static ValueCouple operator /(ValueCouple v1, ValueCouple v2)
         {
             var ret = (ValueCouple)v1.Clone();
@@ -243,7 +234,7 @@ namespace Tono.GuiWinForm
         /// <param name="v1"></param>
         /// <param name="v2"></param>
         /// <returns></returns>
-        
+
         public static bool operator <(ValueCouple v1, ValueCouple v2)
         {
             if (v1._v1 < v2._v1 && v1._v2 < v2._v2)
@@ -260,7 +251,7 @@ namespace Tono.GuiWinForm
         /// <param name="v1"></param>
         /// <param name="v2"></param>
         /// <returns></returns>
-        
+
         public static bool operator >(ValueCouple v1, ValueCouple v2)
         {
             if (v1._v1 > v2._v1 && v1._v2 > v2._v2)
@@ -276,7 +267,7 @@ namespace Tono.GuiWinForm
         /// <param name="v1"></param>
         /// <param name="v2"></param>
         /// <returns></returns>
-        
+
         public static bool operator <=(ValueCouple v1, ValueCouple v2)
         {
             if (v1._v1 <= v2._v1 && v1._v2 <= v2._v2)
@@ -292,7 +283,7 @@ namespace Tono.GuiWinForm
         /// <param name="v1"></param>
         /// <param name="v2"></param>
         /// <returns></returns>
-        
+
         public static bool operator >=(ValueCouple v1, ValueCouple v2)
         {
             if (v1._v1 >= v2._v1 && v1._v2 >= v2._v2)
@@ -339,7 +330,7 @@ namespace Tono.GuiWinForm
         /// 
         /// </summary>
         /// <returns></returns>
-        
+
         public object Clone()
         {
             var r = (ValueCouple)Activator.CreateInstance(GetType());
@@ -354,7 +345,7 @@ namespace Tono.GuiWinForm
         /// インスタンスを表現する文字列を作成する（表示方法は変わるので、視覚目的にのみ使用すること）
         /// </summary>
         /// <returns>文字列</returns>
-        
+
         public override string ToString()
         {
             return "(" + _v1 + ", " + _v2 + ")";

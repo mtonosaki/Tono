@@ -57,7 +57,7 @@ namespace Tono.GuiWinForm
                     var pr = MotherPane.GetPaneRect();
                     bmps[pane, layerid] = new Bitmap(pr.Width, pr.Height);
                 }
-                var bmp = (Bitmap)bmps[pane, layerid];
+                var bmp = bmps[pane, layerid];
                 if (EnableShot == false)
                 {
                     var rp = RichPaneCustomGraphicsBinder.CreateCopy(MotherPane, Graphics.FromImage(bmp));
@@ -71,7 +71,7 @@ namespace Tono.GuiWinForm
                 else
                 {
                     var sr = pane.GetPaneRect();
-                    var rpbak = (IRichPane)panebak[pane, layerid];
+                    var rpbak = panebak[pane, layerid];
                     //					pane.Graphics.SetClip(sr);
                     sr += ScreenPos.FromInt(pane.Scroll.X - rpbak.Scroll.X, pane.Scroll.Y - rpbak.Scroll.Y);
                     MotherPane.Graphics.DrawImageUnscaledAndClipped(bmp, sr);

@@ -1,6 +1,5 @@
 using System;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -47,9 +46,9 @@ namespace Tono.GuiWinForm
         [Category("Tono.GuiWinForm")]
         public bool IsZoomLockX
         {
-            
+
             get => _isZoomLockX;
-            
+
             set => _isZoomLockX = value;
         }
 
@@ -60,9 +59,9 @@ namespace Tono.GuiWinForm
         [Category("Tono.GuiWinForm")]
         public bool IsZoomLockY
         {
-            
+
             get => _isZoomLockY;
-            
+
             set => _isZoomLockY = value;
         }
 
@@ -73,9 +72,9 @@ namespace Tono.GuiWinForm
         [Category("Tono.GuiWinForm")]
         public bool IsScrollLockX
         {
-            
+
             get => _isScrollLockX;
-            
+
             set => _isScrollLockX = value;
         }
 
@@ -86,9 +85,9 @@ namespace Tono.GuiWinForm
         [Category("Tono.GuiWinForm")]
         public bool IsScrollLockY
         {
-            
+
             get => _isScrollLockY;
-            
+
             set => _isScrollLockY = value;
         }
 
@@ -128,7 +127,7 @@ namespace Tono.GuiWinForm
         /// 領域を返す
         /// </summary>
         /// <returns>領域を表す矩形</returns>
-        
+
         public ScreenRect GetPaneRect()
         {
             return ScreenRect.FromLTWH(Left, Top, Width, Height);
@@ -221,9 +220,9 @@ namespace Tono.GuiWinForm
         [Category("Design")]
         public Color IdColor
         {
-            
+
             get => base.BackColor;
-            
+
             set => base.BackColor = value;
         }
 
@@ -235,9 +234,9 @@ namespace Tono.GuiWinForm
         [Category("Design")]
         public string IdText
         {
-            
+
             get => _name;
-            
+
             set
             {
                 var safe = "0123456789.abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -396,9 +395,9 @@ namespace Tono.GuiWinForm
         /// </summary>
         public override AnchorStyles Anchor
         {
-            
+
             get => base.Anchor;
-            
+
             set
             {
                 base.Anchor = value;
@@ -424,17 +423,13 @@ namespace Tono.GuiWinForm
         /// <summary>
         /// 自分のインスタンスをControl型で返す
         /// </summary>
-        public Control Control
-        {
-            
-            get => this;
-        }
+        public Control Control => this;
 
         /// <summary>
         /// 親ペーンを取得する
         /// </summary>
         /// <returns></returns>
-        
+
         public IRichPane GetParent()
         {
             if (Parent is IRichPane)
@@ -448,7 +443,7 @@ namespace Tono.GuiWinForm
         /// 直近のcFeatureRichを返す
         /// </summary>
         /// <returns>cFeatureRichの参照 / null = 無い</returns>
-        
+
         public TGuiView GetFeatureRich()
         {
             for (IRichPane rp = this; rp != null; rp = rp.GetParent())
@@ -537,7 +532,7 @@ namespace Tono.GuiWinForm
 
         public XyBase Zoom
         {
-            
+
             get => _zoom;
             set
             {
@@ -577,7 +572,7 @@ namespace Tono.GuiWinForm
 
         public ScreenPos Scroll
         {
-            
+
             get => _scroll;
             set
             {
@@ -611,17 +606,13 @@ namespace Tono.GuiWinForm
         /// <summary>
         /// グラフィックオブジェクト
         /// </summary>
-        public System.Drawing.Graphics Graphics
-        {
-            
-            get => ((TGuiView)Parent).GetCurrentGraphics();
-        }
+        public System.Drawing.Graphics Graphics => ((TGuiView)Parent).GetCurrentGraphics();
 
         /// <summary>
         /// 描画が必要な領域を返すインターフェース
         /// </summary>
         /// <returns>領域</returns>
-        
+
         public ScreenRect GetPaintClipRect()
         {
             return ((TGuiView)Parent).GetPaintClipRect();

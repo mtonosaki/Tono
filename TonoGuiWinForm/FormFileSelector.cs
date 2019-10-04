@@ -416,255 +416,255 @@ namespace Tono.GuiWinForm
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormFileSelector));
-            this.listViewFileSelect = new System.Windows.Forms.ListView();
-            this.columnHeaderName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeaderSize = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeaderLastModify = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.buttonOK = new System.Windows.Forms.Button();
-            this.textBoxFileSelectorFilename = new System.Windows.Forms.TextBox();
-            this.labelSelectorFilename = new System.Windows.Forms.Label();
-            this.imageListLarge = new System.Windows.Forms.ImageList(this.components);
-            this.imageListSmall = new System.Windows.Forms.ImageList(this.components);
-            this.textBoxFileSelectorPath = new System.Windows.Forms.TextBox();
-            this.labelSelectorPath = new System.Windows.Forms.Label();
-            this.checkBoxFileSelectorLarge = new System.Windows.Forms.CheckBox();
-            this.checkBoxFileSelectorSmall = new System.Windows.Forms.CheckBox();
-            this.checkBoxFileSelectorList = new System.Windows.Forms.CheckBox();
-            this.checkBoxFileSelectorDetail = new System.Windows.Forms.CheckBox();
-            this.imageListApp = new System.Windows.Forms.ImageList(this.components);
-            this.buttonBack = new System.Windows.Forms.Button();
-            this.buttonForward = new System.Windows.Forms.Button();
-            this.comboBoxDrive = new System.Windows.Forms.ComboBox();
-            this.SuspendLayout();
+            listViewFileSelect = new System.Windows.Forms.ListView();
+            columnHeaderName = new System.Windows.Forms.ColumnHeader();
+            columnHeaderSize = new System.Windows.Forms.ColumnHeader();
+            columnHeaderLastModify = new System.Windows.Forms.ColumnHeader();
+            buttonOK = new System.Windows.Forms.Button();
+            textBoxFileSelectorFilename = new System.Windows.Forms.TextBox();
+            labelSelectorFilename = new System.Windows.Forms.Label();
+            imageListLarge = new System.Windows.Forms.ImageList(components);
+            imageListSmall = new System.Windows.Forms.ImageList(components);
+            textBoxFileSelectorPath = new System.Windows.Forms.TextBox();
+            labelSelectorPath = new System.Windows.Forms.Label();
+            checkBoxFileSelectorLarge = new System.Windows.Forms.CheckBox();
+            checkBoxFileSelectorSmall = new System.Windows.Forms.CheckBox();
+            checkBoxFileSelectorList = new System.Windows.Forms.CheckBox();
+            checkBoxFileSelectorDetail = new System.Windows.Forms.CheckBox();
+            imageListApp = new System.Windows.Forms.ImageList(components);
+            buttonBack = new System.Windows.Forms.Button();
+            buttonForward = new System.Windows.Forms.Button();
+            comboBoxDrive = new System.Windows.Forms.ComboBox();
+            SuspendLayout();
             // 
             // listViewFileSelect
             // 
-            this.listViewFileSelect.AllowColumnReorder = true;
-            this.listViewFileSelect.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.listViewFileSelect.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeaderName,
-            this.columnHeaderSize,
-            this.columnHeaderLastModify});
-            this.listViewFileSelect.FullRowSelect = true;
-            this.listViewFileSelect.HideSelection = false;
-            this.listViewFileSelect.Location = new System.Drawing.Point(8, 72);
-            this.listViewFileSelect.Name = "listViewFileSelect";
-            this.listViewFileSelect.Size = new System.Drawing.Size(584, 272);
-            this.listViewFileSelect.TabIndex = 0;
-            this.listViewFileSelect.UseCompatibleStateImageBehavior = false;
-            this.listViewFileSelect.View = System.Windows.Forms.View.List;
-            this.listViewFileSelect.SelectedIndexChanged += new System.EventHandler(this.listViewFileSelect_SelectedIndexChanged);
-            this.listViewFileSelect.DoubleClick += new System.EventHandler(this.listViewFileSelect_DoubleClick);
-            this.listViewFileSelect.KeyUp += new System.Windows.Forms.KeyEventHandler(this.fFileSelector_KeyUp);
-            this.listViewFileSelect.MouseDown += new System.Windows.Forms.MouseEventHandler(this.fFileSelector_MouseDown);
+            listViewFileSelect.AllowColumnReorder = true;
+            listViewFileSelect.Anchor = (((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
+            | System.Windows.Forms.AnchorStyles.Right);
+            listViewFileSelect.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            columnHeaderName,
+            columnHeaderSize,
+            columnHeaderLastModify});
+            listViewFileSelect.FullRowSelect = true;
+            listViewFileSelect.HideSelection = false;
+            listViewFileSelect.Location = new System.Drawing.Point(8, 72);
+            listViewFileSelect.Name = "listViewFileSelect";
+            listViewFileSelect.Size = new System.Drawing.Size(584, 272);
+            listViewFileSelect.TabIndex = 0;
+            listViewFileSelect.UseCompatibleStateImageBehavior = false;
+            listViewFileSelect.View = System.Windows.Forms.View.List;
+            listViewFileSelect.SelectedIndexChanged += new System.EventHandler(listViewFileSelect_SelectedIndexChanged);
+            listViewFileSelect.DoubleClick += new System.EventHandler(listViewFileSelect_DoubleClick);
+            listViewFileSelect.KeyUp += new System.Windows.Forms.KeyEventHandler(fFileSelector_KeyUp);
+            listViewFileSelect.MouseDown += new System.Windows.Forms.MouseEventHandler(fFileSelector_MouseDown);
             // 
             // columnHeaderName
             // 
-            this.columnHeaderName.Text = "Name";
-            this.columnHeaderName.Width = 316;
+            columnHeaderName.Text = "Name";
+            columnHeaderName.Width = 316;
             // 
             // columnHeaderSize
             // 
-            this.columnHeaderSize.Text = "Size";
-            this.columnHeaderSize.Width = 97;
+            columnHeaderSize.Text = "Size";
+            columnHeaderSize.Width = 97;
             // 
             // columnHeaderLastModify
             // 
-            this.columnHeaderLastModify.Text = "LastModify";
-            this.columnHeaderLastModify.Width = 128;
+            columnHeaderLastModify.Text = "LastModify";
+            columnHeaderLastModify.Width = 128;
             // 
             // buttonOK
             // 
-            this.buttonOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonOK.Location = new System.Drawing.Point(512, 376);
-            this.buttonOK.Name = "buttonOK";
-            this.buttonOK.Size = new System.Drawing.Size(80, 24);
-            this.buttonOK.TabIndex = 3;
-            this.buttonOK.Text = "OK";
-            this.buttonOK.Click += new System.EventHandler(this.buttonOK_Click);
-            this.buttonOK.KeyUp += new System.Windows.Forms.KeyEventHandler(this.fFileSelector_KeyUp);
+            buttonOK.Anchor = (System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right);
+            buttonOK.Location = new System.Drawing.Point(512, 376);
+            buttonOK.Name = "buttonOK";
+            buttonOK.Size = new System.Drawing.Size(80, 24);
+            buttonOK.TabIndex = 3;
+            buttonOK.Text = "OK";
+            buttonOK.Click += new System.EventHandler(buttonOK_Click);
+            buttonOK.KeyUp += new System.Windows.Forms.KeyEventHandler(fFileSelector_KeyUp);
             // 
             // textBoxFileSelectorFilename
             // 
-            this.textBoxFileSelectorFilename.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxFileSelectorFilename.Location = new System.Drawing.Point(96, 376);
-            this.textBoxFileSelectorFilename.Name = "textBoxFileSelectorFilename";
-            this.textBoxFileSelectorFilename.Size = new System.Drawing.Size(408, 19);
-            this.textBoxFileSelectorFilename.TabIndex = 2;
-            this.textBoxFileSelectorFilename.TextChanged += new System.EventHandler(this.textBoxFileSelectorFilename_TextChanged);
-            this.textBoxFileSelectorFilename.KeyUp += new System.Windows.Forms.KeyEventHandler(this.fFileSelector_KeyUp);
+            textBoxFileSelectorFilename.Anchor = ((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+            | System.Windows.Forms.AnchorStyles.Right);
+            textBoxFileSelectorFilename.Location = new System.Drawing.Point(96, 376);
+            textBoxFileSelectorFilename.Name = "textBoxFileSelectorFilename";
+            textBoxFileSelectorFilename.Size = new System.Drawing.Size(408, 19);
+            textBoxFileSelectorFilename.TabIndex = 2;
+            textBoxFileSelectorFilename.TextChanged += new System.EventHandler(textBoxFileSelectorFilename_TextChanged);
+            textBoxFileSelectorFilename.KeyUp += new System.Windows.Forms.KeyEventHandler(fFileSelector_KeyUp);
             // 
             // labelSelectorFilename
             // 
-            this.labelSelectorFilename.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.labelSelectorFilename.Location = new System.Drawing.Point(0, 376);
-            this.labelSelectorFilename.Name = "labelSelectorFilename";
-            this.labelSelectorFilename.Size = new System.Drawing.Size(88, 24);
-            this.labelSelectorFilename.TabIndex = 1;
-            this.labelSelectorFilename.Text = "File name";
-            this.labelSelectorFilename.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            labelSelectorFilename.Anchor = (System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left);
+            labelSelectorFilename.Location = new System.Drawing.Point(0, 376);
+            labelSelectorFilename.Name = "labelSelectorFilename";
+            labelSelectorFilename.Size = new System.Drawing.Size(88, 24);
+            labelSelectorFilename.TabIndex = 1;
+            labelSelectorFilename.Text = "File name";
+            labelSelectorFilename.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // imageListLarge
             // 
-            this.imageListLarge.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
-            this.imageListLarge.ImageSize = new System.Drawing.Size(32, 32);
-            this.imageListLarge.TransparentColor = System.Drawing.Color.Transparent;
+            imageListLarge.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
+            imageListLarge.ImageSize = new System.Drawing.Size(32, 32);
+            imageListLarge.TransparentColor = System.Drawing.Color.Transparent;
             // 
             // imageListSmall
             // 
-            this.imageListSmall.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
-            this.imageListSmall.ImageSize = new System.Drawing.Size(16, 16);
-            this.imageListSmall.TransparentColor = System.Drawing.Color.Transparent;
+            imageListSmall.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
+            imageListSmall.ImageSize = new System.Drawing.Size(16, 16);
+            imageListSmall.TransparentColor = System.Drawing.Color.Transparent;
             // 
             // textBoxFileSelectorPath
             // 
-            this.textBoxFileSelectorPath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxFileSelectorPath.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBoxFileSelectorPath.Location = new System.Drawing.Point(96, 352);
-            this.textBoxFileSelectorPath.Name = "textBoxFileSelectorPath";
-            this.textBoxFileSelectorPath.ReadOnly = true;
-            this.textBoxFileSelectorPath.Size = new System.Drawing.Size(496, 19);
-            this.textBoxFileSelectorPath.TabIndex = 12;
-            this.textBoxFileSelectorPath.WordWrap = false;
-            this.textBoxFileSelectorPath.KeyUp += new System.Windows.Forms.KeyEventHandler(this.fFileSelector_KeyUp);
+            textBoxFileSelectorPath.Anchor = ((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+            | System.Windows.Forms.AnchorStyles.Right);
+            textBoxFileSelectorPath.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            textBoxFileSelectorPath.Location = new System.Drawing.Point(96, 352);
+            textBoxFileSelectorPath.Name = "textBoxFileSelectorPath";
+            textBoxFileSelectorPath.ReadOnly = true;
+            textBoxFileSelectorPath.Size = new System.Drawing.Size(496, 19);
+            textBoxFileSelectorPath.TabIndex = 12;
+            textBoxFileSelectorPath.WordWrap = false;
+            textBoxFileSelectorPath.KeyUp += new System.Windows.Forms.KeyEventHandler(fFileSelector_KeyUp);
             // 
             // labelSelectorPath
             // 
-            this.labelSelectorPath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.labelSelectorPath.Location = new System.Drawing.Point(0, 352);
-            this.labelSelectorPath.Name = "labelSelectorPath";
-            this.labelSelectorPath.Size = new System.Drawing.Size(88, 24);
-            this.labelSelectorPath.TabIndex = 11;
-            this.labelSelectorPath.Text = "Path";
-            this.labelSelectorPath.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            labelSelectorPath.Anchor = (System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left);
+            labelSelectorPath.Location = new System.Drawing.Point(0, 352);
+            labelSelectorPath.Name = "labelSelectorPath";
+            labelSelectorPath.Size = new System.Drawing.Size(88, 24);
+            labelSelectorPath.TabIndex = 11;
+            labelSelectorPath.Text = "Path";
+            labelSelectorPath.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // checkBoxFileSelectorLarge
             // 
-            this.checkBoxFileSelectorLarge.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.checkBoxFileSelectorLarge.Appearance = System.Windows.Forms.Appearance.Button;
-            this.checkBoxFileSelectorLarge.Image = ((System.Drawing.Image)(resources.GetObject("checkBoxFileSelectorLarge.Image")));
-            this.checkBoxFileSelectorLarge.Location = new System.Drawing.Point(496, 4);
-            this.checkBoxFileSelectorLarge.Name = "checkBoxFileSelectorLarge";
-            this.checkBoxFileSelectorLarge.Size = new System.Drawing.Size(24, 24);
-            this.checkBoxFileSelectorLarge.TabIndex = 7;
-            this.checkBoxFileSelectorLarge.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.checkBoxFileSelectorLarge.Click += new System.EventHandler(this.checkBoxFileSelectorLarge_Click);
-            this.checkBoxFileSelectorLarge.KeyUp += new System.Windows.Forms.KeyEventHandler(this.fFileSelector_KeyUp);
+            checkBoxFileSelectorLarge.Anchor = (System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right);
+            checkBoxFileSelectorLarge.Appearance = System.Windows.Forms.Appearance.Button;
+            checkBoxFileSelectorLarge.Image = ((System.Drawing.Image)(resources.GetObject("checkBoxFileSelectorLarge.Image")));
+            checkBoxFileSelectorLarge.Location = new System.Drawing.Point(496, 4);
+            checkBoxFileSelectorLarge.Name = "checkBoxFileSelectorLarge";
+            checkBoxFileSelectorLarge.Size = new System.Drawing.Size(24, 24);
+            checkBoxFileSelectorLarge.TabIndex = 7;
+            checkBoxFileSelectorLarge.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            checkBoxFileSelectorLarge.Click += new System.EventHandler(checkBoxFileSelectorLarge_Click);
+            checkBoxFileSelectorLarge.KeyUp += new System.Windows.Forms.KeyEventHandler(fFileSelector_KeyUp);
             // 
             // checkBoxFileSelectorSmall
             // 
-            this.checkBoxFileSelectorSmall.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.checkBoxFileSelectorSmall.Appearance = System.Windows.Forms.Appearance.Button;
-            this.checkBoxFileSelectorSmall.Image = ((System.Drawing.Image)(resources.GetObject("checkBoxFileSelectorSmall.Image")));
-            this.checkBoxFileSelectorSmall.Location = new System.Drawing.Point(520, 4);
-            this.checkBoxFileSelectorSmall.Name = "checkBoxFileSelectorSmall";
-            this.checkBoxFileSelectorSmall.Size = new System.Drawing.Size(24, 24);
-            this.checkBoxFileSelectorSmall.TabIndex = 8;
-            this.checkBoxFileSelectorSmall.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.checkBoxFileSelectorSmall.Click += new System.EventHandler(this.checkBoxFileSelectorSmall_Click);
-            this.checkBoxFileSelectorSmall.KeyUp += new System.Windows.Forms.KeyEventHandler(this.fFileSelector_KeyUp);
+            checkBoxFileSelectorSmall.Anchor = (System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right);
+            checkBoxFileSelectorSmall.Appearance = System.Windows.Forms.Appearance.Button;
+            checkBoxFileSelectorSmall.Image = ((System.Drawing.Image)(resources.GetObject("checkBoxFileSelectorSmall.Image")));
+            checkBoxFileSelectorSmall.Location = new System.Drawing.Point(520, 4);
+            checkBoxFileSelectorSmall.Name = "checkBoxFileSelectorSmall";
+            checkBoxFileSelectorSmall.Size = new System.Drawing.Size(24, 24);
+            checkBoxFileSelectorSmall.TabIndex = 8;
+            checkBoxFileSelectorSmall.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            checkBoxFileSelectorSmall.Click += new System.EventHandler(checkBoxFileSelectorSmall_Click);
+            checkBoxFileSelectorSmall.KeyUp += new System.Windows.Forms.KeyEventHandler(fFileSelector_KeyUp);
             // 
             // checkBoxFileSelectorList
             // 
-            this.checkBoxFileSelectorList.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.checkBoxFileSelectorList.Appearance = System.Windows.Forms.Appearance.Button;
-            this.checkBoxFileSelectorList.Checked = true;
-            this.checkBoxFileSelectorList.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxFileSelectorList.Image = ((System.Drawing.Image)(resources.GetObject("checkBoxFileSelectorList.Image")));
-            this.checkBoxFileSelectorList.Location = new System.Drawing.Point(544, 4);
-            this.checkBoxFileSelectorList.Name = "checkBoxFileSelectorList";
-            this.checkBoxFileSelectorList.Size = new System.Drawing.Size(24, 24);
-            this.checkBoxFileSelectorList.TabIndex = 9;
-            this.checkBoxFileSelectorList.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.checkBoxFileSelectorList.Click += new System.EventHandler(this.checkBoxFileSelectorList_Click);
-            this.checkBoxFileSelectorList.KeyUp += new System.Windows.Forms.KeyEventHandler(this.fFileSelector_KeyUp);
+            checkBoxFileSelectorList.Anchor = (System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right);
+            checkBoxFileSelectorList.Appearance = System.Windows.Forms.Appearance.Button;
+            checkBoxFileSelectorList.Checked = true;
+            checkBoxFileSelectorList.CheckState = System.Windows.Forms.CheckState.Checked;
+            checkBoxFileSelectorList.Image = ((System.Drawing.Image)(resources.GetObject("checkBoxFileSelectorList.Image")));
+            checkBoxFileSelectorList.Location = new System.Drawing.Point(544, 4);
+            checkBoxFileSelectorList.Name = "checkBoxFileSelectorList";
+            checkBoxFileSelectorList.Size = new System.Drawing.Size(24, 24);
+            checkBoxFileSelectorList.TabIndex = 9;
+            checkBoxFileSelectorList.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            checkBoxFileSelectorList.Click += new System.EventHandler(checkBoxFileSelectorList_Click);
+            checkBoxFileSelectorList.KeyUp += new System.Windows.Forms.KeyEventHandler(fFileSelector_KeyUp);
             // 
             // checkBoxFileSelectorDetail
             // 
-            this.checkBoxFileSelectorDetail.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.checkBoxFileSelectorDetail.Appearance = System.Windows.Forms.Appearance.Button;
-            this.checkBoxFileSelectorDetail.Image = ((System.Drawing.Image)(resources.GetObject("checkBoxFileSelectorDetail.Image")));
-            this.checkBoxFileSelectorDetail.Location = new System.Drawing.Point(568, 4);
-            this.checkBoxFileSelectorDetail.Name = "checkBoxFileSelectorDetail";
-            this.checkBoxFileSelectorDetail.Size = new System.Drawing.Size(24, 24);
-            this.checkBoxFileSelectorDetail.TabIndex = 10;
-            this.checkBoxFileSelectorDetail.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.checkBoxFileSelectorDetail.Click += new System.EventHandler(this.checkBoxFileSelectorDetail_Click);
-            this.checkBoxFileSelectorDetail.KeyUp += new System.Windows.Forms.KeyEventHandler(this.fFileSelector_KeyUp);
+            checkBoxFileSelectorDetail.Anchor = (System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right);
+            checkBoxFileSelectorDetail.Appearance = System.Windows.Forms.Appearance.Button;
+            checkBoxFileSelectorDetail.Image = ((System.Drawing.Image)(resources.GetObject("checkBoxFileSelectorDetail.Image")));
+            checkBoxFileSelectorDetail.Location = new System.Drawing.Point(568, 4);
+            checkBoxFileSelectorDetail.Name = "checkBoxFileSelectorDetail";
+            checkBoxFileSelectorDetail.Size = new System.Drawing.Size(24, 24);
+            checkBoxFileSelectorDetail.TabIndex = 10;
+            checkBoxFileSelectorDetail.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            checkBoxFileSelectorDetail.Click += new System.EventHandler(checkBoxFileSelectorDetail_Click);
+            checkBoxFileSelectorDetail.KeyUp += new System.Windows.Forms.KeyEventHandler(fFileSelector_KeyUp);
             // 
             // imageListApp
             // 
-            this.imageListApp.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageListApp.ImageStream")));
-            this.imageListApp.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageListApp.Images.SetKeyName(0, "");
+            imageListApp.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageListApp.ImageStream")));
+            imageListApp.TransparentColor = System.Drawing.Color.Transparent;
+            imageListApp.Images.SetKeyName(0, "");
             // 
             // buttonBack
             // 
-            this.buttonBack.Enabled = false;
-            this.buttonBack.Image = ((System.Drawing.Image)(resources.GetObject("buttonBack.Image")));
-            this.buttonBack.Location = new System.Drawing.Point(10, 4);
-            this.buttonBack.Name = "buttonBack";
-            this.buttonBack.Size = new System.Drawing.Size(30, 24);
-            this.buttonBack.TabIndex = 4;
-            this.buttonBack.Click += new System.EventHandler(this.buttonBack_Click);
-            this.buttonBack.KeyUp += new System.Windows.Forms.KeyEventHandler(this.fFileSelector_KeyUp);
+            buttonBack.Enabled = false;
+            buttonBack.Image = ((System.Drawing.Image)(resources.GetObject("buttonBack.Image")));
+            buttonBack.Location = new System.Drawing.Point(10, 4);
+            buttonBack.Name = "buttonBack";
+            buttonBack.Size = new System.Drawing.Size(30, 24);
+            buttonBack.TabIndex = 4;
+            buttonBack.Click += new System.EventHandler(buttonBack_Click);
+            buttonBack.KeyUp += new System.Windows.Forms.KeyEventHandler(fFileSelector_KeyUp);
             // 
             // buttonForward
             // 
-            this.buttonForward.Enabled = false;
-            this.buttonForward.Image = ((System.Drawing.Image)(resources.GetObject("buttonForward.Image")));
-            this.buttonForward.Location = new System.Drawing.Point(40, 4);
-            this.buttonForward.Name = "buttonForward";
-            this.buttonForward.Size = new System.Drawing.Size(30, 24);
-            this.buttonForward.TabIndex = 5;
-            this.buttonForward.Click += new System.EventHandler(this.buttonForward_Click);
-            this.buttonForward.KeyUp += new System.Windows.Forms.KeyEventHandler(this.fFileSelector_KeyUp);
+            buttonForward.Enabled = false;
+            buttonForward.Image = ((System.Drawing.Image)(resources.GetObject("buttonForward.Image")));
+            buttonForward.Location = new System.Drawing.Point(40, 4);
+            buttonForward.Name = "buttonForward";
+            buttonForward.Size = new System.Drawing.Size(30, 24);
+            buttonForward.TabIndex = 5;
+            buttonForward.Click += new System.EventHandler(buttonForward_Click);
+            buttonForward.KeyUp += new System.Windows.Forms.KeyEventHandler(fFileSelector_KeyUp);
             // 
             // comboBoxDrive
             // 
-            this.comboBoxDrive.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxDrive.Location = new System.Drawing.Point(88, 8);
-            this.comboBoxDrive.MaxDropDownItems = 16;
-            this.comboBoxDrive.Name = "comboBoxDrive";
-            this.comboBoxDrive.Size = new System.Drawing.Size(256, 20);
-            this.comboBoxDrive.TabIndex = 6;
-            this.comboBoxDrive.DropDown += new System.EventHandler(this.comboBoxDrive_DropDown);
-            this.comboBoxDrive.SelectionChangeCommitted += new System.EventHandler(this.comboBoxDrive_SelectionChangeCommitted);
-            this.comboBoxDrive.KeyUp += new System.Windows.Forms.KeyEventHandler(this.fFileSelector_KeyUp);
+            comboBoxDrive.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            comboBoxDrive.Location = new System.Drawing.Point(88, 8);
+            comboBoxDrive.MaxDropDownItems = 16;
+            comboBoxDrive.Name = "comboBoxDrive";
+            comboBoxDrive.Size = new System.Drawing.Size(256, 20);
+            comboBoxDrive.TabIndex = 6;
+            comboBoxDrive.DropDown += new System.EventHandler(comboBoxDrive_DropDown);
+            comboBoxDrive.SelectionChangeCommitted += new System.EventHandler(comboBoxDrive_SelectionChangeCommitted);
+            comboBoxDrive.KeyUp += new System.Windows.Forms.KeyEventHandler(fFileSelector_KeyUp);
             // 
             // foFileSelector
             // 
-            this.AutoScaleBaseSize = new System.Drawing.Size(5, 12);
-            this.ClientSize = new System.Drawing.Size(600, 405);
-            this.Controls.Add(this.comboBoxDrive);
-            this.Controls.Add(this.buttonBack);
-            this.Controls.Add(this.checkBoxFileSelectorLarge);
-            this.Controls.Add(this.labelSelectorFilename);
-            this.Controls.Add(this.textBoxFileSelectorFilename);
-            this.Controls.Add(this.textBoxFileSelectorPath);
-            this.Controls.Add(this.buttonOK);
-            this.Controls.Add(this.listViewFileSelect);
-            this.Controls.Add(this.labelSelectorPath);
-            this.Controls.Add(this.checkBoxFileSelectorSmall);
-            this.Controls.Add(this.checkBoxFileSelectorList);
-            this.Controls.Add(this.checkBoxFileSelectorDetail);
-            this.Controls.Add(this.buttonForward);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
-            this.Name = "foFileSelector";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Select the file.";
-            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.fFileSelector_KeyUp);
-            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.fFileSelector_MouseDown);
-            this.ResumeLayout(false);
-            this.PerformLayout();
+            AutoScaleBaseSize = new System.Drawing.Size(5, 12);
+            ClientSize = new System.Drawing.Size(600, 405);
+            Controls.Add(comboBoxDrive);
+            Controls.Add(buttonBack);
+            Controls.Add(checkBoxFileSelectorLarge);
+            Controls.Add(labelSelectorFilename);
+            Controls.Add(textBoxFileSelectorFilename);
+            Controls.Add(textBoxFileSelectorPath);
+            Controls.Add(buttonOK);
+            Controls.Add(listViewFileSelect);
+            Controls.Add(labelSelectorPath);
+            Controls.Add(checkBoxFileSelectorSmall);
+            Controls.Add(checkBoxFileSelectorList);
+            Controls.Add(checkBoxFileSelectorDetail);
+            Controls.Add(buttonForward);
+            Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            MaximizeBox = false;
+            MinimizeBox = false;
+            Name = "foFileSelector";
+            StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            Text = "Select the file.";
+            KeyUp += new System.Windows.Forms.KeyEventHandler(fFileSelector_KeyUp);
+            MouseDown += new System.Windows.Forms.MouseEventHandler(fFileSelector_MouseDown);
+            ResumeLayout(false);
+            PerformLayout();
 
         }
         #endregion

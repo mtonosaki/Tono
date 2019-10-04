@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -114,7 +113,7 @@ namespace Tono.GuiWinForm
         /// 処理中のGraphicsインスタンスを取得する
         /// </summary>
         /// <returns></returns>
-        
+
         public Graphics GetCurrentGraphics()
         {
             return _currentGraphics;
@@ -221,9 +220,9 @@ namespace Tono.GuiWinForm
         [Description("パーツが無くても背景を描画するかどうかのフラグ")]
         public bool IsDrawEmptyBackground
         {
-            
+
             get => _isDrawEmptyBackground;
-            
+
             set => _isDrawEmptyBackground = value;
         }
 
@@ -684,7 +683,7 @@ namespace Tono.GuiWinForm
 
         #region IRichPane メンバ
 
-        
+
         public IRichPane GetParent()
         {
             if (Parent is IRichPane)
@@ -696,18 +695,14 @@ namespace Tono.GuiWinForm
 
         public string IdText
         {
-            
+
             get => Name;
             set
             {
             }
         }
 
-        public Control Control
-        {
-            
-            get => this;
-        }
+        public Control Control => this;
 
         /// <summary>
         /// 名前でペーンを検索する
@@ -785,7 +780,7 @@ namespace Tono.GuiWinForm
         /// マスターペーンの領域を返す
         /// </summary>
         /// <returns></returns>
-        
+
         public ScreenRect GetPaneRect()
         {
             return ScreenRect.FromLTWH(0, 0, Width, Height);
@@ -795,7 +790,7 @@ namespace Tono.GuiWinForm
         /// 描画が必要な領域を返すインターフェース
         /// </summary>
         /// <returns>領域</returns>
-        
+
         public ScreenRect GetPaintClipRect()
         {
             return _currentPaintClip;
@@ -808,7 +803,7 @@ namespace Tono.GuiWinForm
         [Description("スクロール量")]
         public new ScreenPos Scroll    // new 識別子は、.NET2.0で必要
         {
-            
+
             get => _scroll;
             set
             {
@@ -841,7 +836,7 @@ namespace Tono.GuiWinForm
         [Description("現在のズーム値 * 10[%]")]
         public XyBase Zoom
         {
-            
+
             get => _zoom;
             set
             {
@@ -917,11 +912,7 @@ namespace Tono.GuiWinForm
         /// </summary>
         [Category("Tono.GuiWinForm")]
         [Description("描画用のGraphicオブジェクト")]
-        public System.Drawing.Graphics Graphics
-        {
-            
-            get => _currentGraphics;
-        }
+        public System.Drawing.Graphics Graphics => _currentGraphics;
 
         /// <summary>
         /// 画面を再描画する

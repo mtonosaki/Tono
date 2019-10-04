@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -35,7 +34,10 @@ namespace Tono
         /// <param name="str"></param>
         /// <param name="n"></param>
         /// <returns></returns>
-        public static string StrDup(string str, int count) => Repeat(str, count);
+        public static string StrDup(string str, int count)
+        {
+            return Repeat(str, count);
+        }
 
         /// <summary>
         /// Parse short (space, empty = zero)

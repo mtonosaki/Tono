@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 
 namespace Tono.Gui
 {
@@ -39,10 +38,25 @@ namespace Tono.Gui
             return $"Lx={Lx}";
         }
 
-        public static bool operator <(LayoutX v1, LayoutX v2) => v1.Lx < v2.Lx;
-        public static bool operator >(LayoutX v1, LayoutX v2) => v1.Lx > v2.Lx;
-        public static bool operator <=(LayoutX v1, LayoutX v2) => v1.Lx <= v2.Lx;
-        public static bool operator >=(LayoutX v1, LayoutX v2) => v1.Lx >= v2.Lx;
+        public static bool operator <(LayoutX v1, LayoutX v2)
+        {
+            return v1.Lx < v2.Lx;
+        }
+
+        public static bool operator >(LayoutX v1, LayoutX v2)
+        {
+            return v1.Lx > v2.Lx;
+        }
+
+        public static bool operator <=(LayoutX v1, LayoutX v2)
+        {
+            return v1.Lx <= v2.Lx;
+        }
+
+        public static bool operator >=(LayoutX v1, LayoutX v2)
+        {
+            return v1.Lx >= v2.Lx;
+        }
 
         /// <summary>
         /// v1 + v2
@@ -50,7 +64,7 @@ namespace Tono.Gui
         /// <param name="v1"></param>
         /// <param name="v2"></param>
         /// <returns></returns>
-        
+
         public static LayoutX operator +(LayoutX v1, LayoutX v2)
         {
             return new LayoutX { Lx = v1.Lx + v2.Lx };
@@ -62,7 +76,7 @@ namespace Tono.Gui
         /// <param name="v1"></param>
         /// <param name="v2"></param>
         /// <returns></returns>
-        
+
         public static LayoutX operator -(LayoutX v1, LayoutX v2)
         {
             return new LayoutX { Lx = v1.Lx - v2.Lx };
@@ -74,7 +88,7 @@ namespace Tono.Gui
         /// <param name="v1"></param>
         /// <param name="v2"></param>
         /// <returns></returns>
-        
+
         public static LayoutX operator *(LayoutX v1, double v2)
         {
             return new LayoutX { Lx = v1.Lx * v2 };
@@ -86,7 +100,7 @@ namespace Tono.Gui
         /// <param name="v1"></param>
         /// <param name="v2"></param>
         /// <returns></returns>
-        
+
         public static LayoutX operator /(LayoutX v1, double v2)
         {
             return new LayoutX { Lx = v1.Lx / v2 };
@@ -175,16 +189,31 @@ namespace Tono.Gui
         /// <param name="v1"></param>
         /// <param name="v2"></param>
         /// <returns></returns>
-        
+
         public static LayoutY operator +(LayoutY v1, LayoutY v2)
         {
             return new LayoutY { Ly = v1.Ly + v2.Ly };
         }
 
-        public static bool operator <(LayoutY v1, LayoutY v2) => v1.Ly < v2.Ly;
-        public static bool operator >(LayoutY v1, LayoutY v2) => v1.Ly > v2.Ly;
-        public static bool operator <=(LayoutY v1, LayoutY v2) => v1.Ly <= v2.Ly;
-        public static bool operator >=(LayoutY v1, LayoutY v2) => v1.Ly >= v2.Ly;
+        public static bool operator <(LayoutY v1, LayoutY v2)
+        {
+            return v1.Ly < v2.Ly;
+        }
+
+        public static bool operator >(LayoutY v1, LayoutY v2)
+        {
+            return v1.Ly > v2.Ly;
+        }
+
+        public static bool operator <=(LayoutY v1, LayoutY v2)
+        {
+            return v1.Ly <= v2.Ly;
+        }
+
+        public static bool operator >=(LayoutY v1, LayoutY v2)
+        {
+            return v1.Ly >= v2.Ly;
+        }
 
         /// <summary>
         /// v1 - v2
@@ -192,7 +221,7 @@ namespace Tono.Gui
         /// <param name="v1"></param>
         /// <param name="v2"></param>
         /// <returns></returns>
-        
+
         public static LayoutY operator -(LayoutY v1, LayoutY v2)
         {
             return new LayoutY { Ly = v1.Ly - v2.Ly };
@@ -204,7 +233,7 @@ namespace Tono.Gui
         /// <param name="v1"></param>
         /// <param name="v2"></param>
         /// <returns></returns>
-        
+
         public static LayoutY operator *(LayoutY v1, double v2)
         {
             return new LayoutY { Ly = v1.Ly * v2 };
@@ -216,7 +245,7 @@ namespace Tono.Gui
         /// <param name="v1"></param>
         /// <param name="v2"></param>
         /// <returns></returns>
-        
+
         public static LayoutY operator /(LayoutY v1, double v2)
         {
             return new LayoutY { Ly = v1.Ly / v2 };
@@ -291,7 +320,7 @@ namespace Tono.Gui
         /// <param name="v1"></param>
         /// <param name="v2"></param>
         /// <returns></returns>
-        
+
         public static LayoutSize operator *(LayoutSize v1, double v2)
         {
             return new LayoutSize { Width = v1.Width * v2, Height = v1.Height * v2, };
@@ -306,7 +335,7 @@ namespace Tono.Gui
         /// cast operator from LayoutSize to LayoutPos
         /// </summary>
         /// <param name="size"></param>
-        
+
         public static explicit operator LayoutPos(LayoutSize size)
         {
             return new LayoutPos { X = size.Width, Y = size.Height, };
@@ -396,7 +425,7 @@ namespace Tono.Gui
         /// <param name="v1"></param>
         /// <param name="v2"></param>
         /// <returns></returns>
-        
+
         public static LayoutPos operator +(LayoutPos v1, LayoutPos v2)
         {
             return new LayoutPos { X = v1.X + v2.X, Y = v1.Y + v2.Y, };
@@ -408,7 +437,7 @@ namespace Tono.Gui
         /// <param name="v1"></param>
         /// <param name="v2"></param>
         /// <returns></returns>
-        
+
         public static LayoutPos operator +(LayoutPos v1, LayoutSize v2)
         {
             return new LayoutPos { X = v1.X + v2.Width, Y = v1.Y + v2.Height, };
@@ -420,7 +449,7 @@ namespace Tono.Gui
         /// <param name="v1"></param>
         /// <param name="v2"></param>
         /// <returns></returns>
-        
+
         public static LayoutSize operator -(LayoutPos v1, LayoutPos v2)
         {
             return new LayoutSize { Width = v1.X - v2.X, Height = v1.Y - v2.Y, };
@@ -432,7 +461,7 @@ namespace Tono.Gui
         /// <param name="v1"></param>
         /// <param name="v2"></param>
         /// <returns></returns>
-        
+
         public static LayoutPos operator -(LayoutPos v1, LayoutSize v2)
         {
             return new LayoutPos { X = v1.X - v2.Width, Y = v1.Y - v2.Height, };
@@ -444,7 +473,7 @@ namespace Tono.Gui
         /// <param name="v1"></param>
         /// <param name="v2"></param>
         /// <returns></returns>
-        
+
         public static LayoutPos operator *(LayoutPos v1, double v2)
         {
             return new LayoutPos { X = v1.X * v2, Y = v1.Y * v2, };
@@ -587,7 +616,7 @@ namespace Tono.Gui
         /// <param name="right"></param>
         /// <param name="bottom"></param>
         /// <returns></returns>
-        
+
         public static LayoutRect FromLTRB(double left, double top, double right, double bottom)
         {
             return new LayoutRect
@@ -611,7 +640,7 @@ namespace Tono.Gui
         /// <param name="lt">Left-Top</param>
         /// <param name="rb">Right-Bottom</param>
         /// <returns></returns>
-        
+
         public static LayoutRect FromLTRB(LayoutPos lt, LayoutPos rb)
         {
             return new LayoutRect
@@ -637,7 +666,7 @@ namespace Tono.Gui
         /// <param name="width">width</param>
         /// <param name="height">height</param>
         /// <returns></returns>
-        
+
         public static LayoutRect FromLTWH(double left, double top, double width, double height)
         {
             return new LayoutRect
@@ -662,7 +691,7 @@ namespace Tono.Gui
         /// <param name="width"></param>
         /// <param name="height"></param>
         /// <returns></returns>
-        
+
         public static LayoutRect FromLTWH(LayoutPos lt, double width, double height)
         {
             return new LayoutRect
@@ -735,7 +764,7 @@ namespace Tono.Gui
         /// <param name="width"></param>
         /// <param name="height"></param>
         /// <returns></returns>
-        
+
         public static LayoutRect FromLWH(LayoutPos leftcenter, double width, double height)
         {
             return new LayoutRect
@@ -760,7 +789,7 @@ namespace Tono.Gui
         /// <param name="y0">center Y (Layout)</param>
         /// <param name="size"></param>
         /// <returns></returns>
-        
+
         public static LayoutRect From(double x0, double y0, LayoutSize size)
         {
             return new LayoutRect
@@ -784,7 +813,7 @@ namespace Tono.Gui
         /// <param name="center"></param>
         /// <param name="size"></param>
         /// <returns></returns>
-        
+
         public static LayoutRect FromCS(LayoutPos center, LayoutSize size)
         {
             return FromCWH(center, size.Width.Lx, size.Height.Ly);
@@ -796,7 +825,7 @@ namespace Tono.Gui
         /// <param name="lt"></param>
         /// <param name="size"></param>
         /// <returns></returns>
-        
+
         public static LayoutRect From(LayoutPos lt, LayoutSize size)
         {
             return new LayoutRect
@@ -821,7 +850,7 @@ namespace Tono.Gui
         /// <param name="width"></param>
         /// <param name="height"></param>
         /// <returns></returns>
-        
+
         public static LayoutRect From(LayoutPos lt, double width, double height)
         {
             return new LayoutRect
@@ -842,37 +871,37 @@ namespace Tono.Gui
         /// <summary>
         /// Width (reference only)
         /// </summary>
-         public LayoutX Width => RB.X - LT.X;
+        public LayoutX Width => RB.X - LT.X;
 
         /// <summary>
         /// Height (reference only)
         /// </summary>
-         public LayoutY Height => RB.Y - LT.Y;
+        public LayoutY Height => RB.Y - LT.Y;
 
         /// <summary>
         /// Center position (reference only)
         /// </summary>
-         public LayoutPos C => new LayoutPos { X = (LT.X + RB.X) / 2, Y = (LT.Y + RB.Y) / 2 };
+        public LayoutPos C => new LayoutPos { X = (LT.X + RB.X) / 2, Y = (LT.Y + RB.Y) / 2 };
 
         /// <summary>
         /// Left-Center (reference only)
         /// </summary>
-         public LayoutPos LC => new LayoutPos { X = LT.X, Y = (LT.Y + RB.Y) / 2 };
+        public LayoutPos LC => new LayoutPos { X = LT.X, Y = (LT.Y + RB.Y) / 2 };
 
         /// <summary>
         /// Right-Center (reference only)
         /// </summary>
-         public LayoutPos RC => new LayoutPos { X = RB.X, Y = (LT.Y + RB.Y) / 2 };
+        public LayoutPos RC => new LayoutPos { X = RB.X, Y = (LT.Y + RB.Y) / 2 };
 
         /// <summary>
         /// Center-Top (reference only)
         /// </summary>
-         public LayoutPos CT => new LayoutPos { X = (LT.X + RB.X) / 2, Y = LT.Y };
+        public LayoutPos CT => new LayoutPos { X = (LT.X + RB.X) / 2, Y = LT.Y };
 
         /// <summary>
         /// Center-Bottom (reference only)
         /// </summary>
-         public LayoutPos CB => new LayoutPos { X = (LT.X + RB.X) / 2, Y = RB.Y };
+        public LayoutPos CB => new LayoutPos { X = (LT.X + RB.X) / 2, Y = RB.Y };
 
         /// <summary>
         /// infrate instance
@@ -896,7 +925,7 @@ namespace Tono.Gui
             RB -= size / 2;
         }
 
-        
+
         public override bool Equals(object obj)
         {
             if (obj is LayoutRect sr)
@@ -909,7 +938,7 @@ namespace Tono.Gui
             }
         }
 
-        
+
         public override int GetHashCode()
         {
             return LT.GetHashCode() ^ RB.GetHashCode();
@@ -935,7 +964,7 @@ namespace Tono.Gui
         /// <param name="v1"></param>
         /// <param name="v2"></param>
         /// <returns></returns>
-        
+
         public static LayoutRect operator +(LayoutRect v1, LayoutPos v2)
         {
             return new LayoutRect { LT = LayoutPos.From(v1.LT.X + v2.X, v1.LT.Y + v2.Y), RB = LayoutPos.From(v1.R + v2.X, v1.RB.Y + v2.Y), };
@@ -947,7 +976,7 @@ namespace Tono.Gui
         /// <param name="v1"></param>
         /// <param name="v2"></param>
         /// <returns></returns>
-        
+
         public static LayoutRect operator +(LayoutRect v1, LayoutX v2)
         {
             return new LayoutRect { LT = LayoutPos.From(v1.LT.X + v2, v1.LT.Y), RB = LayoutPos.From(v1.R + v2, v1.RB.Y), };
@@ -959,7 +988,7 @@ namespace Tono.Gui
         /// <param name="v1"></param>
         /// <param name="v2"></param>
         /// <returns></returns>
-        
+
         public static LayoutRect operator +(LayoutRect v1, LayoutY v2)
         {
             return new LayoutRect { LT = LayoutPos.From(v1.LT.X, v1.LT.Y + v2), RB = LayoutPos.From(v1.R, v1.RB.Y + v2), };
@@ -971,7 +1000,7 @@ namespace Tono.Gui
         /// <param name="v1"></param>
         /// <param name="v2"></param>
         /// <returns></returns>
-        
+
         public static LayoutRect operator -(LayoutRect v1, LayoutY v2)
         {
             return new LayoutRect { LT = LayoutPos.From(v1.LT.X, v1.LT.Y - v2), RB = LayoutPos.From(v1.R, v1.RB.Y - v2), };

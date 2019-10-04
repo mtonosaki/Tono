@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
 using Windows.Devices.Input;
-using Tono;
 
 namespace Tono.Gui.Uwp
 {

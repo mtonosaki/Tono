@@ -144,7 +144,7 @@ namespace Tono.GuiWinForm
                 OrgPane = RichPaneBinder.CreateCopyComplete(pane),
                 NowPane = pane,
                 Org = (CodeRect)parts.Rect.Clone(), // 符号化の座標（符号しない場合、単なるパーツ座標）
-                                                   //p.Org = (uCdRect)parts.Rect.Clone() - parts.GetCdPos(pane, _prevShift); // 符号化の座標（符号しない場合、単なるパーツ座標）
+                                                    //p.Org = (uCdRect)parts.Rect.Clone() - parts.GetCdPos(pane, _prevShift); // 符号化の座標（符号しない場合、単なるパーツ座標）
                 Pre = (CodeRect)parts.Rect.Clone(), // 符号化の座標（符号しない場合、単なるパーツ座標）
                 Now = (CodeRect)parts.Rect.Clone(), // 符号化の座標（符号しない場合、単なるパーツ座標）
                 Offset = (CodePos)offset.Clone()

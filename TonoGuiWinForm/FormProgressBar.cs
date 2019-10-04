@@ -48,8 +48,8 @@ namespace Tono.GuiWinForm
                 Top = 0;
 #else
                 System.Drawing.Point sp = _parent.PointToScreen(_parent.Location);
-				this.Left = sp.X + _parent.Width / 2 - this.Width / 2;
-				this.Top  = sp.Y + _parent.Height / 2 - this.Height / 2;
+                Left = sp.X + _parent.Width / 2 - Width / 2;
+                Top = sp.Y + _parent.Height / 2 - Height / 2;
 #endif
             }
             if (Mes.Current != null)
@@ -168,34 +168,34 @@ namespace Tono.GuiWinForm
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormProgressBar));
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
-            this.SuspendLayout();
+            progressBar1 = new System.Windows.Forms.ProgressBar();
+            SuspendLayout();
             // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(8, 5);
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(320, 24);
-            this.progressBar1.TabIndex = 0;
+            progressBar1.Location = new System.Drawing.Point(8, 5);
+            progressBar1.Name = "progressBar1";
+            progressBar1.Size = new System.Drawing.Size(320, 24);
+            progressBar1.TabIndex = 0;
             // 
             // foProgressBar
             // 
-            this.AutoScaleBaseSize = new System.Drawing.Size(5, 12);
-            this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(338, 34);
-            this.ControlBox = false;
-            this.Controls.Add(this.progressBar1);
-            this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
-            this.Name = "foProgressBar";
-            this.ShowInTaskbar = false;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Wait a moment...";
-            this.TopMost = true;
-            this.ResumeLayout(false);
+            AutoScaleBaseSize = new System.Drawing.Size(5, 12);
+            BackColor = System.Drawing.SystemColors.Control;
+            ClientSize = new System.Drawing.Size(338, 34);
+            ControlBox = false;
+            Controls.Add(progressBar1);
+            ForeColor = System.Drawing.Color.FromArgb(64, 64, 64);
+            FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            MaximizeBox = false;
+            MinimizeBox = false;
+            Name = "foProgressBar";
+            ShowInTaskbar = false;
+            StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            Text = "Wait a moment...";
+            TopMost = true;
+            ResumeLayout(false);
 
         }
         #endregion

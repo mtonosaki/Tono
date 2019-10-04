@@ -1,5 +1,4 @@
 using System;
-using System.Diagnostics;
 
 #pragma warning disable 1591, 1572, 1573
 
@@ -11,7 +10,7 @@ namespace Tono.GuiWinForm
     [Serializable]
     public class LayoutRect : Rect
     {
-        
+
         public LayoutRect()
         {
             _lt = new LayoutPos();
@@ -20,17 +19,17 @@ namespace Tono.GuiWinForm
 
         public new LayoutPos LT
         {
-            
+
             get => (LayoutPos)_lt;
-            
+
             set => _lt = value;
         }
 
         public new LayoutPos RB
         {
-            
+
             get => (LayoutPos)_rb;
-            
+
             set => _rb = value;
         }
 
@@ -42,7 +41,7 @@ namespace Tono.GuiWinForm
         /// <param name="width">幅</param>
         /// <param name="height">高さ</param>
         /// <returns></returns>
-        
+
         public static new LayoutRect FromLTWH(int x, int y, int width, int height)
         {
             var ret = new LayoutRect();
@@ -72,7 +71,7 @@ namespace Tono.GuiWinForm
         /// <param name="width">幅</param>
         /// <param name="height">高さ</param>
         /// <returns></returns>
-        
+
         public static new LayoutRect FromLTRB(int l, int t, int r, int b)
         {
             var ret = new LayoutRect();
@@ -86,11 +85,11 @@ namespace Tono.GuiWinForm
         /// <summary>
         /// 演算子オーバーロード
         /// </summary>
-         public static LayoutRect operator &(LayoutRect r1, Rect r2) { return (LayoutRect)((Rect)r1 & r2); }
-         public static LayoutRect operator |(LayoutRect r1, Rect r2) { return (LayoutRect)((Rect)r1 | r2); }
-         public static LayoutRect operator +(LayoutRect r1, XyBase r2) { return (LayoutRect)((Rect)r1 + r2); }
-         public static LayoutRect operator -(LayoutRect r1, XyBase r2) { return (LayoutRect)((Rect)r1 - r2); }
-         public static LayoutRect operator *(LayoutRect r1, XyBase r2) { return (LayoutRect)((Rect)r1 * r2); }
-         public static LayoutRect operator /(LayoutRect r1, XyBase r2) { return (LayoutRect)((Rect)r1 / r2); }
+        public static LayoutRect operator &(LayoutRect r1, Rect r2) { return (LayoutRect)((Rect)r1 & r2); }
+        public static LayoutRect operator |(LayoutRect r1, Rect r2) { return (LayoutRect)((Rect)r1 | r2); }
+        public static LayoutRect operator +(LayoutRect r1, XyBase r2) { return (LayoutRect)((Rect)r1 + r2); }
+        public static LayoutRect operator -(LayoutRect r1, XyBase r2) { return (LayoutRect)((Rect)r1 - r2); }
+        public static LayoutRect operator *(LayoutRect r1, XyBase r2) { return (LayoutRect)((Rect)r1 * r2); }
+        public static LayoutRect operator /(LayoutRect r1, XyBase r2) { return (LayoutRect)((Rect)r1 / r2); }
     }
 }

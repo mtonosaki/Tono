@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 
 #pragma warning disable 1591, 1572, 1573
@@ -7,7 +6,7 @@ namespace Tono.GuiWinForm
 {
     public class Dictionary3d<TKey1, TKey2, TKey3, TVAL>
     {
-        Dictionary<TKey1, Dictionary<TKey2, Dictionary<TKey3, TVAL>>> dat = new Dictionary<TKey1, Dictionary<TKey2, Dictionary<TKey3, TVAL>>>();
+        private readonly Dictionary<TKey1, Dictionary<TKey2, Dictionary<TKey3, TVAL>>> dat = new Dictionary<TKey1, Dictionary<TKey2, Dictionary<TKey3, TVAL>>>();
 
         /// <summary>
         /// ÉNÉäÉA

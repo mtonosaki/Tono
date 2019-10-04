@@ -1,5 +1,4 @@
 using System;
-using System.Diagnostics;
 
 #pragma warning disable 1591, 1572, 1573
 
@@ -11,14 +10,14 @@ namespace Tono.GuiWinForm
     [Serializable]
     public class RangeXx : ValueCouple, ISpace
     {
-         public static RangeXx operator +(RangeXx v1, ValueCouple v2) { return (RangeXx)((ValueCouple)v1 + v2); }
-         public static RangeXx operator +(RangeXx v1, int v2) { return (RangeXx)((ValueCouple)v1 + v2); }
-         public static RangeXx operator -(RangeXx v1, ValueCouple v2) { return (RangeXx)((ValueCouple)v1 - v2); }
-         public static RangeXx operator -(RangeXx v1, int v2) { return (RangeXx)((ValueCouple)v1 - v2); }
-         public static RangeXx operator *(RangeXx v1, ValueCouple v2) { return (RangeXx)((ValueCouple)v1 * v2); }
-         public static RangeXx operator *(RangeXx v1, int v2) { return (RangeXx)((ValueCouple)v1 * v2); }
-         public static RangeXx operator /(RangeXx v1, ValueCouple v2) { return (RangeXx)((ValueCouple)v1 / v2); }
-         public static RangeXx operator /(RangeXx v1, int v2) { return (RangeXx)((ValueCouple)v1 / v2); }
+        public static RangeXx operator +(RangeXx v1, ValueCouple v2) { return (RangeXx)((ValueCouple)v1 + v2); }
+        public static RangeXx operator +(RangeXx v1, int v2) { return (RangeXx)((ValueCouple)v1 + v2); }
+        public static RangeXx operator -(RangeXx v1, ValueCouple v2) { return (RangeXx)((ValueCouple)v1 - v2); }
+        public static RangeXx operator -(RangeXx v1, int v2) { return (RangeXx)((ValueCouple)v1 - v2); }
+        public static RangeXx operator *(RangeXx v1, ValueCouple v2) { return (RangeXx)((ValueCouple)v1 * v2); }
+        public static RangeXx operator *(RangeXx v1, int v2) { return (RangeXx)((ValueCouple)v1 * v2); }
+        public static RangeXx operator /(RangeXx v1, ValueCouple v2) { return (RangeXx)((ValueCouple)v1 / v2); }
+        public static RangeXx operator /(RangeXx v1, int v2) { return (RangeXx)((ValueCouple)v1 / v2); }
 
         /// <summary>
         /// 中心
@@ -31,7 +30,7 @@ namespace Tono.GuiWinForm
         /// <param name="v1">値１</param>
         /// <param name="v2">値２</param>
         /// <returns>インスタンス</returns>
-        
+
         public static new RangeXx FromInt(int v1, int v2)
         {
             var ret = new RangeXx
@@ -56,7 +55,7 @@ namespace Tono.GuiWinForm
         /// </summary>
         /// <param name="value">矩形</param>
         /// <returns>新しいインスタンス</returns>
-        
+
         public static RangeXx FromRect(Rect value)
         {
             var ret = new RangeXx
@@ -72,9 +71,9 @@ namespace Tono.GuiWinForm
         /// </summary>
         public int X0
         {
-            
+
             get => _v1;
-            
+
             set => _v1 = value;
         }
 
@@ -83,9 +82,9 @@ namespace Tono.GuiWinForm
         /// </summary>
         public int X1
         {
-            
+
             get => _v2;
-            
+
             set => _v2 = value;
         }
         #region ISpace メンバ
@@ -141,7 +140,7 @@ namespace Tono.GuiWinForm
         /// オブジェクトの移動
         /// </summary>
         /// <param name="value">uXx型の移動値 (X0,X1)</param>
-        
+
         public void Transfer(object value)
         {
             System.Diagnostics.Debug.Assert(value is int, "Transferはint型だけサポートしています");
@@ -155,7 +154,7 @@ namespace Tono.GuiWinForm
         /// オブジェクトの拡大
         /// </summary>
         /// <param name="value">uXx型の移動値 (X0,X1)</param>
-        
+
         public void Inflate(object value)
         {
             if (value is int)
@@ -178,7 +177,7 @@ namespace Tono.GuiWinForm
         /// オブジェクトの縮小
         /// </summary>
         /// <param name="value">uXx型の移動値 (X0,X1)</param>
-        
+
         public void Deflate(object value)
         {
             if (value is int)

@@ -26,7 +26,10 @@ namespace Tono
         /// implicit cast operator from NamedId to Id
         /// </summary>
         /// <param name="nid"></param>
-        public static implicit operator Id(NamedId nid) => nid?.Value ?? Nothing;
+        public static implicit operator Id(NamedId nid)
+        {
+            return nid?.Value ?? Nothing;
+        }
 
         private static Dictionary<string, NamedId> buf = null;
         private static Dictionary<int, NamedId> idbuf = null;
@@ -50,7 +53,7 @@ namespace Tono
         /// <returns></returns>
         public static NamedId From(string name, Id value)
         {
-            if( buf == null)
+            if (buf == null)
             {
                 buf = new Dictionary<string, NamedId>();
                 idbuf = new Dictionary<int, NamedId>();
@@ -68,7 +71,10 @@ namespace Tono
             }
         }
 
-        public static NamedId FromIDNoName(int id) => FromIDNoName(new Id { Value = id });
+        public static NamedId FromIDNoName(int id)
+        {
+            return FromIDNoName(new Id { Value = id });
+        }
 
         public static NamedId FromIDNoName(Id id)
         {

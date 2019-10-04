@@ -574,7 +574,7 @@ namespace Tono.GuiWinForm
                     if (clipRect != null)   // クリップとペイントの領域内のみ描画する
                     {
                         PartsBase.Mask(pane); // ペーン領域をマスクする
-                                           //System.Diagnostics.Debug.WriteLine(clipRect.ToString());
+                                              //System.Diagnostics.Debug.WriteLine(clipRect.ToString());
                         using (Brush brush = new SolidBrush(pane.Control.BackColor))
                         {
                             pane.Graphics.FillRectangle(brush, clipRect); // 背景を描画
@@ -623,7 +623,7 @@ namespace Tono.GuiWinForm
                         //throw exinner;	// ここにブレークポイントを設けると、どのパーツで例外発生したか特定できる
                     }
 #else
-									dp.Draw(pp);
+                    dp.Draw(pp);
 #endif
                 }
             }

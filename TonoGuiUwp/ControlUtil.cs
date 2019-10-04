@@ -1,5 +1,4 @@
-﻿using Microsoft.Graphics.Canvas.UI.Xaml;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -108,7 +107,7 @@ namespace Tono.Gui.Uwp
                 if (dp is ContentControl content)
                 {
                     dp = content.Content as UIElement;
-                    if( dp == null)
+                    if (dp == null)
                     {
                         yield break;
                     }

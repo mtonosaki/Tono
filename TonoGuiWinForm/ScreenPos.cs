@@ -1,5 +1,4 @@
 using System;
-using System.Diagnostics;
 
 namespace Tono.GuiWinForm
 {
@@ -15,7 +14,7 @@ namespace Tono.GuiWinForm
         /// <param name="v1">値１</param>
         /// <param name="v2">値２</param>
         /// <returns>インスタンス</returns>
-        
+
         public static new ScreenPos FromInt(int v1, int v2)
         {
             var ret = new ScreenPos
@@ -40,20 +39,20 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>演算子のオーバーロード</summary>
-         public static ScreenPos operator +(ScreenPos v1, ValueCouple v2) { return (ScreenPos)((ValueCouple)v1 + v2); }
+        public static ScreenPos operator +(ScreenPos v1, ValueCouple v2) { return (ScreenPos)((ValueCouple)v1 + v2); }
         /// <summary>演算子のオーバーロード</summary>
-         public static ScreenPos operator +(ScreenPos v1, int v2) { return (ScreenPos)((ValueCouple)v1 + v2); }
+        public static ScreenPos operator +(ScreenPos v1, int v2) { return (ScreenPos)((ValueCouple)v1 + v2); }
         /// <summary>演算子のオーバーロード</summary>
-         public static ScreenPos operator -(ScreenPos v1, ValueCouple v2) { return (ScreenPos)((ValueCouple)v1 - v2); }
+        public static ScreenPos operator -(ScreenPos v1, ValueCouple v2) { return (ScreenPos)((ValueCouple)v1 - v2); }
         /// <summary>演算子のオーバーロード</summary>
-         public static ScreenPos operator *(ScreenPos v1, ValueCouple v2) { return (ScreenPos)((ValueCouple)v1 * v2); }
+        public static ScreenPos operator *(ScreenPos v1, ValueCouple v2) { return (ScreenPos)((ValueCouple)v1 * v2); }
         /// <summary>演算子のオーバーロード</summary>
-         public static ScreenPos operator *(ScreenPos v1, int v2) { return (ScreenPos)((ValueCouple)v1 * v2); }
+        public static ScreenPos operator *(ScreenPos v1, int v2) { return (ScreenPos)((ValueCouple)v1 * v2); }
         /// <summary>演算子のオーバーロード</summary>
-         public static ScreenPos operator *(ScreenPos v1, double v2) { return (ScreenPos)((ValueCouple)v1 * v2); }
+        public static ScreenPos operator *(ScreenPos v1, double v2) { return (ScreenPos)((ValueCouple)v1 * v2); }
         /// <summary>演算子のオーバーロード</summary>
-         public static ScreenPos operator /(ScreenPos v1, ValueCouple v2) { return (ScreenPos)((ValueCouple)v1 / v2); }
+        public static ScreenPos operator /(ScreenPos v1, ValueCouple v2) { return (ScreenPos)((ValueCouple)v1 / v2); }
         /// <summary>演算子のオーバーロード</summary>
-         public static ScreenPos operator /(ScreenPos v1, int v2) { return (ScreenPos)((ValueCouple)v1 / v2); }
+        public static ScreenPos operator /(ScreenPos v1, int v2) { return (ScreenPos)((ValueCouple)v1 / v2); }
     }
 }

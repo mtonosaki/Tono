@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Diagnostics;
 
 #pragma warning disable 1591, 1572, 1573
 
@@ -27,7 +26,7 @@ namespace Tono.GuiWinForm
         /// <summary>
         /// コンストラクタ
         /// </summary>
-        
+
         public TimeSpanEx()
         {
         }
@@ -53,7 +52,7 @@ namespace Tono.GuiWinForm
         /// <param name="start">開始時刻</param>
         /// <param name="end">終了時刻</param>
         /// <returns>新しいインスタンス</returns>
-        
+
         public static TimeSpanEx FromTime(DateTimeEx start, DateTimeEx end)
         {
             var ret = new TimeSpanEx
@@ -64,7 +63,7 @@ namespace Tono.GuiWinForm
             return ret;
         }
 
-        
+
         public override bool Equals(object obj)
         {
             if (obj is TimeSpanEx)
@@ -75,14 +74,14 @@ namespace Tono.GuiWinForm
             return false;
         }
 
-        
+
         public override int GetHashCode()
         {
             return _start.TotalSeconds * 86400 * 1000 + _end.TotalSeconds;
 
         }
 
-        
+
         public override string ToString()
         {
             return _start.ToString() + " - " + _end.ToString();
@@ -120,7 +119,7 @@ namespace Tono.GuiWinForm
         /// 指定時刻分、時間をスライドする
         /// </summary>
         /// <param name="value">uTime型のスライド</param>
-        
+
         public void Transfer(object value)
         {
             if (value is DateTimeEx)
@@ -135,7 +134,7 @@ namespace Tono.GuiWinForm
         /// 指定時刻分、時間を拡大する。
         /// </summary>
         /// <param name="value">uTime型の拡大</param>
-        
+
         public void Inflate(object value)
         {
             if (value is DateTimeEx)
@@ -150,7 +149,7 @@ namespace Tono.GuiWinForm
         /// 指定時刻分、時間を縮小する。
         /// </summary>
         /// <param name="value">uTime型の縮小</param>
-        
+
         public void Deflate(object value)
         {
             if (value is DateTimeEx)
@@ -166,17 +165,17 @@ namespace Tono.GuiWinForm
 
         public DateTimeEx Start
         {
-            
+
             get => _start;
-            
+
             set => _start = value;
         }
 
         public DateTimeEx End
         {
-            
+
             get => _end;
-            
+
             set => _end = value;
         }
 

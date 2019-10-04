@@ -1,5 +1,4 @@
 using System;
-using System.Diagnostics;
 
 namespace Tono.GuiWinForm
 {
@@ -15,7 +14,7 @@ namespace Tono.GuiWinForm
         /// <param name="v1">値1</param>
         /// <param name="v2">値2</param>
         /// <returns>インスタンス</returns>
-        
+
         public static new RangeYy FromInt(int v1, int v2)
         {
             var ret = new RangeYy
@@ -51,9 +50,9 @@ namespace Tono.GuiWinForm
         /// </summary>
         public int Y0
         {
-            
+
             get => _v1;
-            
+
             set => _v1 = value;
         }
 
@@ -62,9 +61,9 @@ namespace Tono.GuiWinForm
         /// </summary>
         public int Y1
         {
-            
+
             get => _v2;
-            
+
             set => _v2 = value;
         }
         #region ISpace メンバ
@@ -74,7 +73,7 @@ namespace Tono.GuiWinForm
         /// </summary>
         /// <param name="value">uYy型の指定ポイント / int型の指定ポイント</param>
         /// <returns>true:領域内 / false:領域外</returns>
-        
+
         public bool IsIn(object value)
         {
             if (value is int)
@@ -102,7 +101,7 @@ namespace Tono.GuiWinForm
         /// オブジェクトの移動
         /// </summary>
         /// <param name="value">uYy型の移動値 (Y0,Y1)</param>
-        
+
         public void Transfer(object value)
         {
             System.Diagnostics.Debug.Assert(value is int, "Transferはint型だけサポートします");
@@ -116,7 +115,7 @@ namespace Tono.GuiWinForm
         /// オブジェクトの拡大
         /// </summary>
         /// <param name="value">uYy型の移動値 (Y0,Y1)</param>
-        
+
         public void Inflate(object value)
         {
             if (value is int)
@@ -138,7 +137,7 @@ namespace Tono.GuiWinForm
         /// オブジェクトの縮小
         /// </summary>
         /// <param name="value">uYy型の移動値 (Y0,Y1)</param>
-        
+
         public void Deflate(object value)
         {
             if (value is int)

@@ -1,5 +1,4 @@
 using System;
-using System.Diagnostics;
 using System.Drawing;
 
 #pragma warning disable 1591, 1572, 1573
@@ -36,24 +35,24 @@ namespace Tono.GuiWinForm
 
         public virtual XyBase LT
         {
-            
+
             get => _lt;
-            
+
             set => _lt = value;
         }
 
         public virtual XyBase RB
         {
-            
+
             get => _rb;
-            
+
             set => _rb = value;
         }
 
         /// <summary>
         /// コンストラクタ
         /// </summary>
-        
+
         public Rect()
         {
             _lt = new XyBase();
@@ -103,7 +102,7 @@ namespace Tono.GuiWinForm
         /// </summary>
         /// <param name="r">変換対象</param>
         /// <returns>新しい型のインスタンス</returns>
-        
+
         public static implicit operator RectangleF(Rect r)
         {
             return new RectangleF(r.LT.X, r.LT.Y, r.Width, r.Height);
@@ -114,7 +113,7 @@ namespace Tono.GuiWinForm
         /// </summary>
         /// <param name="r">変換対象</param>
         /// <returns>新しい型のインスタンス</returns>
-        
+
         public static implicit operator Rectangle(Rect r)
         {
             return new Rectangle(r.LT.X, r.LT.Y, r.Width, r.Height);
@@ -128,7 +127,7 @@ namespace Tono.GuiWinForm
         /// <param name="width">幅</param>
         /// <param name="height">高さ</param>
         /// <returns></returns>
-        
+
         public static Rect FromLTWH(int x, int y, int width, int height)
         {
             var ret = new Rect();
@@ -147,7 +146,7 @@ namespace Tono.GuiWinForm
         /// <param name="x1">右下のX座標</param>
         /// <param name="y1">右下のY座標</param>
         /// <returns>構築したインスタンス</returns>
-        
+
         public static Rect FromLTRB(int x0, int y0, int x1, int y1)
         {
             var ret = new Rect();
@@ -161,20 +160,12 @@ namespace Tono.GuiWinForm
         /// <summary>
         /// 幅の計算
         /// </summary>
-        public int Width
-        {
-            
-            get => RB.X - LT.X + 1;
-        }
+        public int Width => RB.X - LT.X + 1;
 
         /// <summary>
         /// 高さの計算
         /// </summary>
-        public int Height
-        {
-            
-            get => RB.Y - LT.Y + 1;
-        }
+        public int Height => RB.Y - LT.Y + 1;
 
         /// <summary>
         /// 中心点を取得する
@@ -197,7 +188,7 @@ namespace Tono.GuiWinForm
         /// サイズを＋１したインスタンスを返す
         /// </summary>
         /// <returns>サイズ＋１したインスタンス</returns>
-        
+
         public Rect GetPpSize()
         {
             var ret = (Rect)Clone();
@@ -230,7 +221,7 @@ namespace Tono.GuiWinForm
         /// <param name="r">領域１</param>
         /// <param name="v">領域２</param>
         /// <returns>AND後の新しいインスタンス</returns>
-        
+
         public static Rect operator &(Rect r1, Rect r2)
         {
             if (r1 == null || r2 == null)
@@ -280,7 +271,7 @@ namespace Tono.GuiWinForm
         /// <param name="r">元のオブジェクト</param>
         /// <param name="v">加算値</param>
         /// <returns>加算後の新しいインスタンス</returns>
-        
+
         public static Rect operator +(Rect r, XyBase v)
         {
             var ret = (Rect)r.Clone();
@@ -294,7 +285,7 @@ namespace Tono.GuiWinForm
         /// <param name="r">元のオブジェクト</param>
         /// <param name="v">加算値</param>
         /// <returns>加算後の新しいインスタンス</returns>
-        
+
         public static Rect operator -(Rect r, XyBase v)
         {
             var ret = (Rect)r.Clone();
@@ -311,7 +302,7 @@ namespace Tono.GuiWinForm
         /// <param name="r">元のオブジェクト</param>
         /// <param name="v">加算値</param>
         /// <returns>加算後の新しいインスタンス</returns>
-        
+
         public static Rect operator *(Rect r, XyBase v)
         {
             var ret = (Rect)r.Clone();
@@ -328,7 +319,7 @@ namespace Tono.GuiWinForm
         /// <param name="r">元のオブジェクト</param>
         /// <param name="v">加算値</param>
         /// <returns>加算後の新しいインスタンス</returns>
-        
+
         public static Rect operator *(Rect r, int v)
         {
             var ret = (Rect)r.Clone();
@@ -345,7 +336,7 @@ namespace Tono.GuiWinForm
         /// <param name="r">元のオブジェクト</param>
         /// <param name="v">加算値</param>
         /// <returns>加算後の新しいインスタンス</returns>
-        
+
         public static Rect operator /(Rect r, int v)
         {
             var ret = (Rect)r.Clone();
@@ -362,7 +353,7 @@ namespace Tono.GuiWinForm
         /// <param name="r">元のオブジェクト</param>
         /// <param name="v">加算値</param>
         /// <returns>加算後の新しいインスタンス</returns>
-        
+
         public static Rect operator /(Rect r, XyBase v)
         {
             var ret = (Rect)r.Clone();
@@ -417,7 +408,7 @@ namespace Tono.GuiWinForm
         /// オブジェクトの移動
         /// </summary>
         /// <param name="value">uXy型の移動値 (X,Y)</param>
-        
+
         public void Transfer(object value)
         {
             System.Diagnostics.Debug.Assert(value is XyBase, "TransferはuXy型だけサポートしています");
@@ -434,7 +425,7 @@ namespace Tono.GuiWinForm
         /// オブジェクトの拡大
         /// </summary>
         /// <param name="value">uXy型の縮小値 (X,Y)</param>
-        
+
         public void Inflate(object value)
         {
             if (value is double)
@@ -476,7 +467,7 @@ namespace Tono.GuiWinForm
         /// オブジェクトの縮小
         /// </summary>
         /// <param name="value">uXyの拡大値 (X,Y)</param>
-        
+
         public void Deflate(object value)
         {
             if (value is double)
@@ -519,7 +510,7 @@ namespace Tono.GuiWinForm
 
         #region ICloneable メンバ
 
-        
+
         public object Clone()
         {
             var r = (Rect)Activator.CreateInstance(GetType());
@@ -536,7 +527,7 @@ namespace Tono.GuiWinForm
         /// インスタンスを表現する文字列を作成する（表示方法は変わるので、視覚目的にのみ使用すること）
         /// </summary>
         /// <returns>文字列</returns>
-        
+
         public override string ToString()
         {
             return LT.ToString() + "-" + RB.ToString();

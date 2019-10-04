@@ -1,4 +1,3 @@
-using System.Diagnostics;
 using System.Windows.Forms;
 
 #pragma warning disable 1591, 1572, 1573
@@ -31,34 +30,22 @@ namespace Tono.GuiWinForm
         /// <summary>
         /// キーの状態
         /// </summary>
-        public Keys Key
-        {
-            
-            get => _key;
-        }
+        public Keys Key => _key;
 
         /// <summary>
         /// シフトキーの状態
         /// </summary>
-        public bool IsShift
-        {
-            
-            get => _isShift;
-        }
+        public bool IsShift => _isShift;
 
         /// <summary>
         /// コントロールキーの状態
         /// </summary>
-        public bool IsControl
-        {
-            
-            get => _isControl;
-        }
+        public bool IsControl => _isControl;
 
         /// <summary>
         /// デフォルトコンストラクタ
         /// </summary>
-        
+
         public KeyState()
         {
             _key = Keys.None;
@@ -67,7 +54,7 @@ namespace Tono.GuiWinForm
         /// <summary>
         /// 初期化コンストラクタ
         /// </summary>
-        
+
         public KeyState(Keys value)
         {
             _key = value;
@@ -96,7 +83,7 @@ namespace Tono.GuiWinForm
         /// </summary>
         /// <param name="value">マウス状態</param>
         /// <returns>新しいインスタンス</returns>
-        
+
         public static KeyState FromMouseStateButtons(MouseState.Buttons value)
         {
             var ret = new KeyState
@@ -113,7 +100,7 @@ namespace Tono.GuiWinForm
         /// </summary>
         /// <param name="obj">比較対照</param>
         /// <returns>true = インスタンスの内容が等しい</returns>
-        
+
         public override bool Equals(object obj)
         {
             if (obj is KeyState)
@@ -127,7 +114,7 @@ namespace Tono.GuiWinForm
         /// インスタンスの内容を数値化する
         /// </summary>
         /// <returns>ハッシュコード</returns>
-        
+
         public override int GetHashCode()
         {
             var ret = (int)Key;

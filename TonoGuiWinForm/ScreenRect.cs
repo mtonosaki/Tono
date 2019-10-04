@@ -1,5 +1,4 @@
 using System;
-using System.Diagnostics;
 using System.Windows.Forms;
 
 #pragma warning disable 1591, 1572, 1573
@@ -17,14 +16,14 @@ namespace Tono.GuiWinForm
         /// <summary>
         /// デフォルトコンストラクタ
         /// </summary>
-        
+
         public ScreenRect()
         {
             _lt = new ScreenPos();
             _rb = new ScreenPos();
         }
 
-        
+
         public ScreenRect(Rect r)
         {
             LT.X = r.LT.X;
@@ -35,29 +34,21 @@ namespace Tono.GuiWinForm
 
         public new ScreenPos LT
         {
-            
+
             get => (ScreenPos)_lt;
-            
+
             set => _lt = value;
         }
 
-        public new ScreenPos RT
-        {
-            
-            get => ScreenPos.FromInt(_rb.X, _lt.Y);
-        }
+        public new ScreenPos RT => ScreenPos.FromInt(_rb.X, _lt.Y);
 
-        public new ScreenPos LB
-        {
-            
-            get => ScreenPos.FromInt(_lt.X, _rb.Y);
-        }
+        public new ScreenPos LB => ScreenPos.FromInt(_lt.X, _rb.Y);
 
         public new ScreenPos RB
         {
-            
+
             get => (ScreenPos)_rb;
-            
+
             set => _rb = value;
         }
 
@@ -66,7 +57,7 @@ namespace Tono.GuiWinForm
         /// </summary>
         /// <param name="c">コントロール</param>
         /// <returns>新しいインスタンス</returns>
-        
+
         public static ScreenRect FromControl(Control c)
         {
             var ret = ScreenRect.FromLTWH(c.Left, c.Top, c.Width, c.Height);
@@ -81,7 +72,7 @@ namespace Tono.GuiWinForm
         /// <param name="width">幅</param>
         /// <param name="height">高さ</param>
         /// <returns>新しいインスタンス</returns>
-        
+
         public static new ScreenRect FromLTWH(int x, int y, int width, int height)
         {
             var ret = new ScreenRect();
@@ -110,7 +101,7 @@ namespace Tono.GuiWinForm
         /// <param name="x1">右下のX座標</param>
         /// <param name="y1">右下のY座標</param>
         /// <returns>構築したインスタンス</returns>
-        
+
         public static new ScreenRect FromLTRB(int x0, int y0, int x1, int y1)
         {
             var ret = new ScreenRect();
@@ -141,10 +132,10 @@ namespace Tono.GuiWinForm
         /// <summary>
         /// 演算子オーバーロード
         /// </summary>
-         public static ScreenRect operator &(ScreenRect r1, Rect r2) { return (ScreenRect)((Rect)r1 & r2); }
-         public static ScreenRect operator +(ScreenRect r1, XyBase r2) { return (ScreenRect)((Rect)r1 + r2); }
-         public static ScreenRect operator -(ScreenRect r1, XyBase r2) { return (ScreenRect)((Rect)r1 - r2); }
-         public static ScreenRect operator *(ScreenRect r1, XyBase r2) { return (ScreenRect)((Rect)r1 * r2); }
-         public static ScreenRect operator /(ScreenRect r1, XyBase r2) { return (ScreenRect)((Rect)r1 / r2); }
+        public static ScreenRect operator &(ScreenRect r1, Rect r2) { return (ScreenRect)((Rect)r1 & r2); }
+        public static ScreenRect operator +(ScreenRect r1, XyBase r2) { return (ScreenRect)((Rect)r1 + r2); }
+        public static ScreenRect operator -(ScreenRect r1, XyBase r2) { return (ScreenRect)((Rect)r1 - r2); }
+        public static ScreenRect operator *(ScreenRect r1, XyBase r2) { return (ScreenRect)((Rect)r1 * r2); }
+        public static ScreenRect operator /(ScreenRect r1, XyBase r2) { return (ScreenRect)((Rect)r1 / r2); }
     }
 }

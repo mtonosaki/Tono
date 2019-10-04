@@ -19,11 +19,20 @@ namespace Tono.Gui
         /// Auto cast to float
         /// </summary>
         /// <param name="val"></param>
-        public static implicit operator float(ScreenX val) => val.Sx;
+        public static implicit operator float(ScreenX val)
+        {
+            return val.Sx;
+        }
 
-        public static explicit operator int(ScreenX val) => (int)val.Sx;
+        public static explicit operator int(ScreenX val)
+        {
+            return (int)val.Sx;
+        }
 
-        public static explicit operator short(ScreenX val) => (short)val.Sx;
+        public static explicit operator short(ScreenX val)
+        {
+            return (short)val.Sx;
+        }
 
         public override bool Equals(object obj)
         {
@@ -54,10 +63,25 @@ namespace Tono.Gui
 
         public static explicit operator ScreenX(LayoutX pos) { return ScreenX.From(pos.Lx); }
 
-        public static bool operator <(ScreenX v1, ScreenX v2) => v1.Sx < v2.Sx;
-        public static bool operator >(ScreenX v1, ScreenX v2) => v1.Sx > v2.Sx;
-        public static bool operator <=(ScreenX v1, ScreenX v2) => v1.Sx <= v2.Sx;
-        public static bool operator >=(ScreenX v1, ScreenX v2) => v1.Sx >= v2.Sx;
+        public static bool operator <(ScreenX v1, ScreenX v2)
+        {
+            return v1.Sx < v2.Sx;
+        }
+
+        public static bool operator >(ScreenX v1, ScreenX v2)
+        {
+            return v1.Sx > v2.Sx;
+        }
+
+        public static bool operator <=(ScreenX v1, ScreenX v2)
+        {
+            return v1.Sx <= v2.Sx;
+        }
+
+        public static bool operator >=(ScreenX v1, ScreenX v2)
+        {
+            return v1.Sx >= v2.Sx;
+        }
 
         /// <summary>
         /// v1 + v2
@@ -237,9 +261,15 @@ namespace Tono.Gui
         /// <param name="val"></param>
         public static implicit operator float(ScreenY val) { return val.Sy; }
 
-        public static explicit operator int(ScreenY val) => (int)val.Sy;
+        public static explicit operator int(ScreenY val)
+        {
+            return (int)val.Sy;
+        }
 
-        public static explicit operator short(ScreenY val) => (short)val.Sy;
+        public static explicit operator short(ScreenY val)
+        {
+            return (short)val.Sy;
+        }
 
         public override bool Equals(object obj)
         {

@@ -24,9 +24,15 @@
             return Equals(Nothing);
         }
 
-        public static bool operator ==(Id a, Id b) => a.Equals(b);
+        public static bool operator ==(Id a, Id b)
+        {
+            return a.Equals(b);
+        }
 
-        public static bool operator !=(Id a, Id b) => !a.Equals(b);
+        public static bool operator !=(Id a, Id b)
+        {
+            return !a.Equals(b);
+        }
 
         public override int GetHashCode()
         {

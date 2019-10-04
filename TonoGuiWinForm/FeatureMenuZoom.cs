@@ -47,7 +47,7 @@ namespace Tono.GuiWinForm
             };
             var _scrollDown = (ScreenPos)Pane.Scroll.Clone();       //ズーム前のスクロール値
             var _zoomDown = (XyBase)Pane.Zoom.Clone();                 //ズーム前のズーム値
-                                                                    // 画面の拡大/縮小
+                                                                       // 画面の拡大/縮小
             var intZ = (int)(zoom * 100);                           //ズーム値の取得
             Pane.Zoom = XyBase.FromInt(1000, 1000);                    // ズーム値の初期化
             var zoomX = Pane.Zoom.X * intZ / 100;
