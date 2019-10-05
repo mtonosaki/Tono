@@ -76,6 +76,12 @@
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>TonoGuiWinForm.pfx</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
@@ -84,9 +90,6 @@
     <Reference Include="System.Management" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="Tono, Version=1.0.2.2, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Tono.Core.1.0.2\lib\netstandard2.0\Tono.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="TCheckBoxDx.cs">
@@ -396,7 +399,6 @@
     <None Include="%40Doc\Feature Architecture.pptx" />
     <None Include="%40Doc\Parts Architecture..pptx" />
     <None Include="%40Doc\uLeastSquareNPolynominal.xlsx" />
-    <None Include="packages.config" />
     <None Include="Resources\lp_Dev_off.png" />
     <None Include="Resources\lp_Dev_on.png" />
     <None Include="Resources\lp_Err_off.png" />
@@ -440,6 +442,7 @@
     <Compile Include="HtmlBulder.cs" />
     <Compile Include="WaitCursor.cs" />
     <None Include="Tono.GuiWinForm.nuspec" />
+    <None Include="TonoGuiWinForm.pfx" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
@@ -450,6 +453,14 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="System.Runtime">
+      <Version>4.3.1</Version>
+    </PackageReference>
+    <PackageReference Include="Tono.Core">
+      <Version>1.0.4</Version>
+    </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

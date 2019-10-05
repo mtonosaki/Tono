@@ -12,17 +12,19 @@
     <Copyright>(c) 2019 Manabu Tonosaki</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageIconUrl>https://aqtono.com/tomarika/tono/tonologicicon.png</PackageIconUrl>
-    <PackageReleaseNotes>.NET Framework 4.7.2 Support</PackageReleaseNotes>
-    <Version>1.0.2</Version>
+    <PackageReleaseNotes>.NET Framework 4.7.2 Support / Strong name support</PackageReleaseNotes>
+    <Version>1.0.4</Version>
     <PackageTags>Tono, Gui, Logic</PackageTags>
     <RepositoryUrl>https://github.com/mtonosaki/Tono.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <AssemblyVersion>1.0.2.2</AssemblyVersion>
-    <FileVersion>1.0.2.2</FileVersion>
+    <AssemblyVersion>1.0.4.4</AssemblyVersion>
+    <FileVersion>1.0.4.4</FileVersion>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>TonoLogic.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Tono.Core" Version="1.0.2" />
+    <PackageReference Include="Tono.Core" Version="1.0.4" />
   </ItemGroup>
 
 </Project>

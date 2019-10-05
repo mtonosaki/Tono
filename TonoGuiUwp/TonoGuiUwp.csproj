@@ -188,7 +188,7 @@
       <Version>6.2.9</Version>
     </PackageReference>
     <PackageReference Include="Tono.Gui">
-      <Version>1.0.2</Version>
+      <Version>1.0.4</Version>
     </PackageReference>
     <PackageReference Include="Win2D.uwp">
       <Version>1.23.0</Version>
@@ -199,6 +199,7 @@
     <None Include="%40Res\LogIcons.psd" />
     <None Include="%40Res\LogPanelTitileDesign.psd" />
     <None Include="Tono.Gui.Uwp.nuspec" />
+    <None Include="TonoGuiUwp.pfx" />
     <PRIResource Include="Strings\ja-JP\Resources.resw" />
     <PRIResource Include="Strings\en-US\Resources.resw" />
   </ItemGroup>
@@ -217,6 +218,12 @@
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject />
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>TonoGuiUwp.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
   <PropertyGroup>

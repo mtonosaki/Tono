@@ -13,18 +13,20 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <RootNamespace>Tono.Excel</RootNamespace>
-    <Version>1.0.2</Version>
-    <AssemblyVersion>1.0.2.2</AssemblyVersion>
-    <FileVersion>1.0.2.2</FileVersion>
+    <Version>1.0.4</Version>
+    <AssemblyVersion>1.0.4.4</AssemblyVersion>
+    <FileVersion>1.0.4.4</FileVersion>
     <PackageTags>Tono, Gui, Excel</PackageTags>
-    <PackageReleaseNotes>.NET Framework 4.7.2 Support</PackageReleaseNotes>
+    <PackageReleaseNotes>.NET Framework 4.7.2 Support / strong name support</PackageReleaseNotes>
     <RepositoryUrl>https://github.com/mtonosaki/Tono.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>TonoExcel.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="ClosedXML" Version="0.94.2" />
-    <PackageReference Include="Tono.Core" Version="1.0.2" />
+    <PackageReference Include="Tono.Core" Version="1.0.4" />
   </ItemGroup>
 
 </Project>

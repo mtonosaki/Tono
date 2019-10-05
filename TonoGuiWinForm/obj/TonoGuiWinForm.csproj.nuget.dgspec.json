@@ -1,0 +1,65 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Projects\\github\\mtonosaki\\Tono\\TonoGuiWinForm\\TonoGuiWinForm.csproj": {}
+  },
+  "projects": {
+    "C:\\Projects\\github\\mtonosaki\\Tono\\TonoGuiWinForm\\TonoGuiWinForm.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Projects\\github\\mtonosaki\\Tono\\TonoGuiWinForm\\TonoGuiWinForm.csproj",
+        "projectName": "TonoGuiWinForm",
+        "projectPath": "C:\\Projects\\github\\mtonosaki\\Tono\\TonoGuiWinForm\\TonoGuiWinForm.csproj",
+        "packagesPath": "C:\\Users\\戸ノ崎学\\.nuget\\packages\\",
+        "outputPath": "C:\\Projects\\github\\mtonosaki\\Tono\\TonoGuiWinForm\\obj\\",
+        "projectStyle": "PackageReference",
+        "skipContentFileWrite": true,
+        "fallbackFolders": [
+          "C:\\Microsoft\\Xamarin\\NuGet\\"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\戸ノ崎学\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net472"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net472": {
+            "projectReferences": {}
+          }
+        }
+      },
+      "frameworks": {
+        "net472": {
+          "dependencies": {
+            "System.Runtime": {
+              "target": "Package",
+              "version": "[4.3.1, )"
+            },
+            "Tono.Core": {
+              "target": "Package",
+              "version": "[1.0.4, )"
+            }
+          }
+        }
+      },
+      "runtimes": {
+        "win": {
+          "#import": []
+        },
+        "win-x64": {
+          "#import": []
+        },
+        "win-x86": {
+          "#import": []
+        }
+      }
+    }
+  }
+}

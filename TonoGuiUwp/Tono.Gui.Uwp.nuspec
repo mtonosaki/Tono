@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
   <metadata>
     <id>Tono.Gui.Uwp</id>
-    <version>1.0.2</version>
+    <version>1.0.4</version>
     <authors>Manabu Tonosaki</authors>
     <owners>Manabu Tonosaki</owners>
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
@@ -10,13 +10,13 @@
     <licenseUrl>https://licenses.nuget.org/MIT</licenseUrl>
     <iconUrl>https://aqtono.com/tomarika/tono/tonoguiuwpicon.png</iconUrl>
     <description>UWP support with GUI MVFP architecure of Tools Of New Operation</description>
-    <releaseNotes>.NET Framework 4.7.2 Support</releaseNotes>
+    <releaseNotes>.NET Framework 4.7.2 Support / Strong name support</releaseNotes>
     <copyright>(c) 2019 Manabu Tonosaki</copyright>
     <tags>Tono, Gui, UWP</tags>
     <repository type="git" url="https://github.com/mtonosaki/Tono.git" />
     <dependencies>
       <group targetFramework="uap">
-        <dependency id="Tono.Gui" version="1.0.0" exclude="Build,Analyzers" />
+        <dependency id="Tono.Gui" version="1.0.4" exclude="Build,Analyzers" />
         <dependency id="Win2D.uwp" version="1.23.0" exclude="Build,Analyzers" />
         <dependency id="Microsoft.NETCore.UniversalWindowsPlatform" version="6.2.9" exclude="Build,Analyzers" />
       </group>

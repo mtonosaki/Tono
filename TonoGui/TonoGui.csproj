@@ -11,20 +11,22 @@
     <Copyright>(c) 2019 Manabu Tonosaki</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageIconUrl>https://aqtono.com/tomarika/tono/tonoguiicon.png</PackageIconUrl>
-    <AssemblyVersion>1.0.2.2</AssemblyVersion>
-    <FileVersion>1.0.2.2</FileVersion>
-    <Version>1.0.2</Version>
+    <AssemblyVersion>1.0.4.4</AssemblyVersion>
+    <FileVersion>1.0.4.4</FileVersion>
+    <Version>1.0.4</Version>
     <PackageId>Tono.Gui</PackageId>
     <PackageTags>Tono, Gui</PackageTags>
-    <PackageReleaseNotes>.NET Framework 4.7.2 Support</PackageReleaseNotes>
+    <PackageReleaseNotes>.NET Framework 4.7.2 Support / Strong name support</PackageReleaseNotes>
     <PackageProjectUrl></PackageProjectUrl>
     <RepositoryUrl>https://github.com/mtonosaki/Tono.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>TonoGui.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="System.Numerics.Vectors" Version="4.5.0" />
-    <PackageReference Include="Tono.Core" Version="1.0.2" />
+    <PackageReference Include="Tono.Core" Version="1.0.4" />
   </ItemGroup>
 
 </Project>
