@@ -21,6 +21,6 @@ packages
 /TonoLogic/bin
 /packages
 /TonoGuiWinForm/@Doc
-/TonoGuiWinForm/bin/
-/TonoGuiWinForm/obj/
+/TonoGuiWinForm/bin
+/TonoGuiWinForm/obj
 /@Cert
