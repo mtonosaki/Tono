@@ -8,7 +8,7 @@ namespace Tono
     /// <summary>
     /// Databse utility
     /// </summary>
-    public class DbUtil
+    public static class DbUtil
     {
         /// <summary>
         /// List up the field names in the obj object
@@ -41,7 +41,7 @@ namespace Tono
         /// </summary>
         /// <param name="value"></param>
         /// <returns>false = null</returns>
-        private static bool isValid(object value)
+        private static bool IsValid(object value)
         {
             if (value == null)
             {
@@ -71,9 +71,9 @@ namespace Tono
                 return true;
             }
 
-            if (value is string)
+            if (value is string str)
             {
-                if (((string)value) == "")
+                if (string.IsNullOrEmpty(str))
                 {
                     return true;
                 }
@@ -88,7 +88,7 @@ namespace Tono
         /// <returns>文字列</returns>
         public static string ToString(object value, string def = default)
         {
-            if (isValid(value))
+            if (IsValid(value))
             {
                 return value.ToString();
             }
@@ -124,10 +124,9 @@ namespace Tono
                 {
                     return ((double)value) != 0.0;
                 }
-                if (value is string)
+                if (value is string s)
                 {
-                    string s = value as string;
-                    if (s.Trim() == "")
+                    if (string.IsNullOrWhiteSpace(s))
                     {
                         return false;
                     }

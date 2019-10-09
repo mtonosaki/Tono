@@ -8,9 +8,9 @@ namespace Tono
     /// Collection utility 1 of 2 (Generic version)
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class Collection<T>
+    public static class Collection<T>
     {
-        private static readonly T[] _zero = new T[] { };
+        private static readonly T[] _zero = Array.Empty<T>();
 
         /// <summary>
         /// Zero collection
@@ -143,9 +143,9 @@ namespace Tono
     /// <summary>
     /// Collection utility 2 of 2 (Object version)
     /// </summary>
-    public class Collection
+    public static class Collection
     {
-        private static readonly object[] _zero = new object[] { };
+        private static readonly object[] _zero = Array.Empty<object>();
 
         /// <summary>
         /// Zero collection
