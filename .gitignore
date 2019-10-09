@@ -3,6 +3,10 @@
 ################################################################################
 
 /.vs
+bin
+obj
+.vs
+packages
 /TonoExcel/bin
 /TonoExcel/obj
 /Tono/obj
