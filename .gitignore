@@ -2,25 +2,7 @@
 # この .gitignore ファイルは Microsoft(R) Visual Studio によって自動的に作成されました。
 ################################################################################
 
-/.vs
-bin
-obj
-.vs
-packages
-/TonoExcel/bin
-/TonoExcel/obj
-/Tono/obj
-/Tono/bin
-/TonoGui/obj
-/TonoGui/bin
-/TonoGuiUwp/obj
-/TonoGuiUwp/bin
-/TonoJit/obj
-/TonoJit/bin
-/TonoLogic/obj
-/TonoLogic/bin
-/packages
-/TonoGuiWinForm/@Doc
-/TonoGuiWinForm/bin
-/TonoGuiWinForm/obj
-/@Cert
+bin/
+obj/
+.vs/
+packages/
