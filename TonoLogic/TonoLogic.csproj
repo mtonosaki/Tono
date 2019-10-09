@@ -19,7 +19,7 @@
     <RepositoryType>git</RepositoryType>
     <AssemblyVersion>1.0.4.4</AssemblyVersion>
     <FileVersion>1.0.4.4</FileVersion>
-    <SignAssembly>false</SignAssembly>
+    <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>TonoLogic.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
 

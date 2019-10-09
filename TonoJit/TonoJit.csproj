@@ -19,7 +19,7 @@
     <FileVersion>0.1.4.4</FileVersion>
     <RepositoryUrl>https://github.com/mtonosaki/Tono.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <SignAssembly>false</SignAssembly>
+    <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>TonoJit.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
 
