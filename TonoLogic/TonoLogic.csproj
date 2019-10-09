@@ -20,7 +20,7 @@
     <AssemblyVersion>1.0.4.4</AssemblyVersion>
     <FileVersion>1.0.4.4</FileVersion>
     <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>TonoLogic.pfx</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>TonoLogic.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
 
   <ItemGroup>

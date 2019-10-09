@@ -80,7 +80,7 @@
     <SignAssembly>true</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>TonoGuiWinForm.pfx</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>TonoGuiWinForm.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -442,7 +442,7 @@
     <Compile Include="HtmlBulder.cs" />
     <Compile Include="WaitCursor.cs" />
     <None Include="Tono.GuiWinForm.nuspec" />
-    <None Include="TonoGuiWinForm.pfx" />
+    <None Include="TonoGuiWinForm.snk" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">

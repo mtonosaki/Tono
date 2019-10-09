@@ -199,7 +199,7 @@
     <None Include="%40Res\LogIcons.psd" />
     <None Include="%40Res\LogPanelTitileDesign.psd" />
     <None Include="Tono.Gui.Uwp.nuspec" />
-    <None Include="TonoGuiUwp.pfx" />
+    <None Include="TonoGuiUwp.snk" />
     <PRIResource Include="Strings\ja-JP\Resources.resw" />
     <PRIResource Include="Strings\en-US\Resources.resw" />
   </ItemGroup>
@@ -223,7 +223,7 @@
     <SignAssembly>true</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>TonoGuiUwp.pfx</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>TonoGuiUwp.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
   <PropertyGroup>

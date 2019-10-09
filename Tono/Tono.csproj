@@ -21,7 +21,7 @@
     <PackageTags>Tono</PackageTags>
     <RepositoryUrl>https://github.com/mtonosaki/Tono.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <AssemblyOriginatorKeyFile>Tono.pfx</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>Tono.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
 
 </Project>

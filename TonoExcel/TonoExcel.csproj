@@ -21,7 +21,7 @@
     <RepositoryUrl>https://github.com/mtonosaki/Tono.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>TonoExcel.pfx</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>TonoExcel.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
 
   <ItemGroup>

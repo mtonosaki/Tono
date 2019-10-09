@@ -20,7 +20,7 @@
     <RepositoryUrl>https://github.com/mtonosaki/Tono.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>TonoJit.pfx</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>TonoJit.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
 
   <ItemGroup>
