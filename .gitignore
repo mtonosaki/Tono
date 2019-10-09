@@ -3,6 +3,10 @@
 ################################################################################
 
 /.vs
+bin
+obj
+.vs
+packages
 /TonoExcel/bin
 /TonoExcel/obj
 /Tono/obj
@@ -17,7 +21,6 @@
 /TonoLogic/bin
 /packages
 /TonoGuiWinForm/@Doc
-/TonoGuiWinForm/bin/Release
-/TonoGuiWinForm/obj/Release
+/TonoGuiWinForm/bin
+/TonoGuiWinForm/obj
 /@Cert
-/TonoGuiWinForm/obj/Debug
