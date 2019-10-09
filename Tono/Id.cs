@@ -24,19 +24,19 @@
             return Equals(Nothing);
         }
 
-        public static bool operator ==(Id a, Id b)
+        public static bool operator ==(Id left, Id right)
         {
-            return a.Equals(b);
+            return left.Equals(right);
         }
 
-        public static bool operator !=(Id a, Id b)
+        public static bool operator !=(Id left, Id right)
         {
-            return !a.Equals(b);
+            return !left.Equals(right);
         }
 
         public override int GetHashCode()
         {
-            return Value;
+            return Value ^ 0x55555555;
             //	return uBinary.BitRotateRight(0x78965489, Value & 31) ^ uBinary.BitRotateRight(0x513e7951, Value & 15); // if hash code distribution to expect tree balance
         }
 

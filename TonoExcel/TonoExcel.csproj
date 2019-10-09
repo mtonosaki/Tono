@@ -20,7 +20,7 @@
     <PackageReleaseNotes>.NET Framework 4.7.2 Support / strong name support</PackageReleaseNotes>
     <RepositoryUrl>https://github.com/mtonosaki/Tono.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <SignAssembly>true</SignAssembly>
+    <SignAssembly>false</SignAssembly>
     <AssemblyOriginatorKeyFile>TonoExcel.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
 

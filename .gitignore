@@ -17,7 +17,6 @@
 /TonoLogic/bin
 /packages
 /TonoGuiWinForm/@Doc
-/TonoGuiWinForm/bin/Release
-/TonoGuiWinForm/obj/Release
+/TonoGuiWinForm/bin/
+/TonoGuiWinForm/obj/
 /@Cert
-/TonoGuiWinForm/obj/Debug
