@@ -19,6 +19,7 @@ namespace Tono
         /// <summary>
         /// Cache handler. This is the base class of your cache accessor
         /// </summary>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1034:Nested types should not be visible", Justification = "<OK>")]
         public abstract class Handler
         {
             /// <summary>
@@ -116,11 +117,13 @@ namespace Tono
         }
     }
 
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1052:Static holder types should be Static or NotInheritable", Justification = "<OK>")]
     public class CacheStack
     {
         /// <summary>
         /// Cache optional parameter
         /// </summary>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1034:Nested types should not be visible", Justification = "<OK>")]
         public interface IParams
         {
         }

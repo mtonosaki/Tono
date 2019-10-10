@@ -5,7 +5,7 @@ namespace Tono
     /// <summary>
     /// Comparer utility
     /// </summary>
-    public class Compare
+    public static class Compare
     {
         /// <summary>
         /// Compare long type to make -1, 0, +1

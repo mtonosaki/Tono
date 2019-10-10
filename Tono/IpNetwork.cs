@@ -15,12 +15,15 @@ namespace Tono
         /// bit number of network address space
         /// </summary>
         [DataMember]
+#pragma warning disable IDE1006
         public int nBit { get; set; }
+#pragma warning restore IDE1006
 
         /// <summary>
         /// IPv4
         /// </summary>
         [IgnoreDataMember]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Performance", "CA1819:Properties should not return arrays", Justification = "<OK>")]
         public byte[] Data { get; } = new byte[4];
 
         /// <summary>
@@ -57,7 +60,10 @@ namespace Tono
             return ret;
         }
 
-
+        /// <summary>
+        /// make instance text
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             return $"{Data[0]}.{Data[1]}.{Data[2]}.{Data[3]}/{nBit}";
@@ -83,11 +89,8 @@ namespace Tono
 
         public override int GetHashCode()
         {
-            int d = (Data[0] << 24) | (Data[1] << 16) | (Data[2] << 8) | Data[1];
-            return d;
+            return Binary.MakeInt32FromBytes(Data);
         }
-
-        private static readonly Dictionary<int/*nBit*/, int/*add value*/> addCache = new Dictionary<int, int>();
 
         // mask table (for speed)
         private static readonly byte[][] masks = new byte[][]
@@ -124,7 +127,7 @@ namespace Tono
 			/*29*/ new byte[]{ 0xf8 },
 			/*30*/ new byte[]{ 0xfc },
 			/*31*/ new byte[]{ 0xfe },
-			/*32*/ new byte[]{ },
+			/*32*/ Array.Empty<byte>(),
         };
 
         /// <summary>
@@ -185,7 +188,7 @@ namespace Tono
         }
 
         /// <summary>
-        /// 
+        /// get host address part
         /// </summary>
         /// <param name="ip"></param>
         /// <returns></returns>
@@ -209,11 +212,11 @@ namespace Tono
         }
 
         /// <summary>
-        /// 指定ネットワークに、ホストアドレス連番を使って、IPAddressのインスタンスを作成する
+        /// make new instance
         /// </summary>
-        /// <param name="net">ネットワーク</param>
-        /// <param name="hostaddress">ホストアドレス</param>
-        /// <returns>IPAddressの新しいインスタンス</returns>
+        /// <param name="net">network part</param>
+        /// <param name="hostaddress">host address part typed ulong</param>
+        /// <returns></returns>
         public static IPAddress MakeIPAddress(IpNetwork net, ulong hostaddress)
         {
             unchecked
@@ -226,7 +229,6 @@ namespace Tono
                     (byte)(hostaddress & 0xff),
                 };
 
-                // hostaddressのオーバーフロービットをカット
                 var rmask = new byte[4];
                 for (var i = 0; i < masks[net.nBit].Length; i++)
                 {
@@ -236,8 +238,6 @@ namespace Tono
                 {
                     ha[i] &= rmask[i];
                 }
-
-                // ネットワークアドレスを追加
                 for (var i = 0; i < 4; i++)
                 {
                     ha[i] |= net.Data[i];
