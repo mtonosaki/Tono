@@ -3,8 +3,38 @@ using System.Collections.Generic;
 
 namespace Tono
 {
-    public class Binary
+    /// <summary>
+    /// Binary utility
+    /// </summary>
+    public static class Binary
     {
+        /// <summary>
+        /// make int32 value from 4 bytes
+        /// </summary>
+        /// <param name="d4">higher byte that start 0x01000000</param>
+        /// <param name="d3">3rd byte that starts 0x010000</param>
+        /// <param name="d2">2nd byte that starts 0x0100 </param>
+        /// <param name="d1">lower byte</param>
+        /// <returns></returns>
+        public static int MakeInt32FromBytes(byte d4, byte d3, byte d2, byte d1)
+        {
+            unchecked
+            {
+                return (d4 << 24) | (d3 << 16) | (d2 << 8) | d1;
+            }
+        }
+        public static int MakeInt32FromBytes(byte[] dat)
+        {
+            if (dat.Length >= 4)
+            {
+                return MakeInt32FromBytes(dat[3], dat[2], dat[1], dat[0]);
+            }
+            else
+            {
+                throw new ArgumentException("Binary.MakeInt32FromBytes needs 4-bytes array only.");
+            }
+        }
+
         /// <summary>
         /// Compare binary foreach bytes
         /// </summary>
