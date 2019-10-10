@@ -9,24 +9,36 @@
     <Copyright>(c) 2019 Manabu Tonosaki</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl />
-    <PackageIconUrl>https://aqtono.com/tomarika/tono/tonoexcelicon.png</PackageIconUrl>
+    <PackageIconUrl></PackageIconUrl>
+    <PackageIcon>/content/TonoExcelIcon.png</PackageIcon>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <RootNamespace>Tono.Excel</RootNamespace>
-    <Version>1.0.4</Version>
-    <AssemblyVersion>1.0.4.4</AssemblyVersion>
-    <FileVersion>1.0.4.4</FileVersion>
+    <Version>1.0.5</Version>
+    <AssemblyVersion>1.0.5.5</AssemblyVersion>
+    <FileVersion>1.0.5.5</FileVersion>
     <PackageTags>Tono, Gui, Excel</PackageTags>
-    <PackageReleaseNotes>.NET Framework 4.7.2 Support / strong name support</PackageReleaseNotes>
+    <PackageReleaseNotes></PackageReleaseNotes>
     <RepositoryUrl>https://github.com/mtonosaki/Tono.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>TonoExcel.snk</AssemblyOriginatorKeyFile>
+    <ApplicationIcon>TonoExcel.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="TonoExcel.snk" />
+    <None Remove="TonoExcelIcon.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="TonoExcel.snk" />
+    <Content Include="TonoExcelIcon.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="ClosedXML" Version="0.94.2" />
-    <PackageReference Include="Tono.Core" Version="1.0.4" />
+    <PackageReference Include="Tono.Core" Version="1.0.6" />
   </ItemGroup>
 
 </Project>

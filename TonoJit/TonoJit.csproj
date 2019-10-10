@@ -11,20 +11,30 @@
     <Description>Just-In-Time flow model of Tools Of New Operation</Description>
     <Copyright>(c) 2019 Manabu Tonosaki</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageIconUrl>https://aqtono.com/tomarika/tono/tonojiticon.png</PackageIconUrl>
-    <Version>0.1.4</Version>
-    <AssemblyVersion>0.1.4.4</AssemblyVersion>
+    <PackageIconUrl></PackageIconUrl>
+    <PackageIcon>/content/TonoJitIcon.png</PackageIcon>
+    <Version>0.1.5</Version>
+    <AssemblyVersion>0.1.5.0</AssemblyVersion>
     <PackageTags>Tono, Gui, Jit</PackageTags>
     <PackageReleaseNotes>on kaizen process / .NET Framework 4.7.2 Support / Strong name support</PackageReleaseNotes>
-    <FileVersion>0.1.4.4</FileVersion>
+    <FileVersion>0.1.5.0</FileVersion>
     <RepositoryUrl>https://github.com/mtonosaki/Tono.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>TonoJit.snk</AssemblyOriginatorKeyFile>
+    <ApplicationIcon>TonoJit.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Tono.Core" Version="1.0.4" />
+    <None Remove="TonoJitIcon.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="TonoJitIcon.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Tono.Core" Version="1.0.6" />
   </ItemGroup>
 
 </Project>

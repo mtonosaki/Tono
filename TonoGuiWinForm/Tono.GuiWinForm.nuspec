@@ -2,22 +2,26 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
   <metadata>
     <id>Tono.GuiWinForm</id>
-    <version>1.0.4</version>
+    <version>1.0.5</version>
     <authors>Manabu Tonosaki</authors>
     <owners>Manabu Tonosaki</owners>
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
     <license type="expression">MIT</license>
     <licenseUrl>https://licenses.nuget.org/MIT</licenseUrl>
-    <iconUrl>https://aqtono.com/tomarika/tono/tonoguiwinformicon.png</iconUrl>
+    <iconUrl>https://aqtono.com/tomarika/tono/TonoGuiWinFormIcon.png</iconUrl>
     <description>(Legacy) WinForm Version with GUI MVFP architecure of Tools Of New Operation</description>
-    <releaseNotes>.NET Framework 4.7.2 Support / Strong name support</releaseNotes>
+    <releaseNotes>Package modernization</releaseNotes>
     <copyright>(c) 2019 Manabu Tonosaki</copyright>
     <tags>Tono, Gui, WinForm</tags>
     <repository type="git" url="https://github.com/mtonosaki/Tono.git" />
     <dependencies>
       <group targetFramework="uap">
-        <dependency id="Tono.Core" version="1.0.4" exclude="Build,Analyzers" />
+        <dependency id="Tono.Core" version="1.0.6" exclude="Build,Analyzers" />
       </group>
     </dependencies>
+    <contentFiles>
+      <files include="any/netstandard2.0/TonoCoreIcon.png" buildAction="Content" />
+      <files include="any/netstandard2.0/TonoGuiWinForm.png" buildAction="Content" />
+    </contentFiles>
   </metadata>
 </package>

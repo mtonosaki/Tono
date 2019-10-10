@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Tono.GuiWinForm</RootNamespace>
     <AssemblyName>TonoGuiWinForm</AssemblyName>
-    <ApplicationIcon>tonowinform.ico</ApplicationIcon>
+    <ApplicationIcon>TonoGuiWinForm.ico</ApplicationIcon>
     <SccProjectName>SAK</SccProjectName>
     <SccLocalPath>SAK</SccLocalPath>
     <SccAuxPath>SAK</SccAuxPath>
@@ -394,7 +394,13 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="tonowinform.ico" />
+    <Content Include="Resources\Icon128.png" />
+    <Content Include="Resources\Icon16.png" />
+    <Content Include="Resources\Icon32.png" />
+    <Content Include="Resources\Icon48.png" />
+    <Content Include="Resources\Icon64.png" />
+    <Content Include="TonoGuiWinForm.ico" />
+    <Content Include="TonoGuiWinForm.png" />
     <Content Include="使い方.txt" />
     <None Include="%40Doc\Feature Architecture.pptx" />
     <None Include="%40Doc\Parts Architecture..pptx" />
@@ -459,14 +465,16 @@
       <Version>4.3.1</Version>
     </PackageReference>
     <PackageReference Include="Tono.Core">
-      <Version>1.0.4</Version>
+      <Version>1.0.6</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>cd $(ProjectDir)
-nuget pack $(ProjectFileName)
-move *.nupkg $(TargetDir)</PostBuildEvent>
+    <PostBuildEvent>if "$(ConfigurationName)" == "Release" (
+  cd $(ProjectDir)
+  nuget pack $(ProjectFileName)
+  move *.nupkg $(TargetDir)
+)</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
