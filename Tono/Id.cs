@@ -16,6 +16,16 @@
         public int Value { get; set; }
 
         /// <summary>
+        /// make instance from int32
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static Id From(int value)
+        {
+            return new Id { Value = value, };
+        }
+
+        /// <summary>
         /// test if nothing value
         /// </summary>
         /// <returns></returns>
@@ -36,10 +46,8 @@
 
         public override int GetHashCode()
         {
-            unchecked
-            {
-                return Value ^ 0x55555555;
-            }
+            return Value;                           // TonoId.Test_TreeSpeed :   212ms for 0...2M sequence Id Dictionary write-read
+            //return Binary.ByteReverse(Value);     // TonoId.Test_TreeSpeed : 1,007ms for 0...2M sequence Id Dictionary write-read
         }
 
         public override bool Equals(object obj)
