@@ -11,20 +11,30 @@
     <Description>Solvers and Helpers.</Description>
     <Copyright>(c) 2019 Manabu Tonosaki</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageIconUrl>https://aqtono.com/tomarika/tono/tonologicicon.png</PackageIconUrl>
-    <PackageReleaseNotes>.NET Framework 4.7.2 Support / Strong name support</PackageReleaseNotes>
-    <Version>1.0.4</Version>
+    <PackageIconUrl></PackageIconUrl>
+    <PackageIcon>/content/TonoLogicIcon.png</PackageIcon>
+    <PackageReleaseNotes></PackageReleaseNotes>
+    <Version>1.0.5</Version>
     <PackageTags>Tono, Gui, Logic</PackageTags>
     <RepositoryUrl>https://github.com/mtonosaki/Tono.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <AssemblyVersion>1.0.4.4</AssemblyVersion>
-    <FileVersion>1.0.4.4</FileVersion>
+    <AssemblyVersion>1.0.5.5</AssemblyVersion>
+    <FileVersion>1.0.5.5</FileVersion>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>TonoLogic.snk</AssemblyOriginatorKeyFile>
+    <ApplicationIcon>TonoLogic.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Tono.Core" Version="1.0.4" />
+    <None Remove="TonoLogicIcon.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="TonoLogicIcon.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Tono.Core" Version="1.0.6" />
   </ItemGroup>
 
 </Project>

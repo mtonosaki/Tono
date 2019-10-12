@@ -10,23 +10,33 @@
     <Description>GUI MVFP architecure of Tools Of New Operation</Description>
     <Copyright>(c) 2019 Manabu Tonosaki</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageIconUrl>https://aqtono.com/tomarika/tono/tonoguiicon.png</PackageIconUrl>
-    <AssemblyVersion>1.0.4.4</AssemblyVersion>
-    <FileVersion>1.0.4.4</FileVersion>
-    <Version>1.0.4</Version>
+    <PackageIconUrl></PackageIconUrl>
+    <AssemblyVersion>1.0.7.0</AssemblyVersion>
+    <FileVersion>1.0.7.0</FileVersion>
+    <Version>1.0.7</Version>
     <PackageId>Tono.Gui</PackageId>
+    <PackageIcon>/content/TonoGuiIcon.png</PackageIcon>
     <PackageTags>Tono, Gui</PackageTags>
-    <PackageReleaseNotes>.NET Framework 4.7.2 Support / Strong name support</PackageReleaseNotes>
+    <PackageReleaseNotes></PackageReleaseNotes>
     <PackageProjectUrl></PackageProjectUrl>
     <RepositoryUrl>https://github.com/mtonosaki/Tono.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>TonoGui.snk</AssemblyOriginatorKeyFile>
+    <ApplicationIcon>TonoGui.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="TonoGuiIcon.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="TonoGuiIcon.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="System.Numerics.Vectors" Version="4.5.0" />
-    <PackageReference Include="Tono.Core" Version="1.0.4" />
+    <PackageReference Include="Tono.Core" Version="1.0.6" />
   </ItemGroup>
 
 </Project>

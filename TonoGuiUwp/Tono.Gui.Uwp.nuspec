@@ -2,24 +2,28 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
   <metadata>
     <id>Tono.Gui.Uwp</id>
-    <version>1.0.4</version>
+    <version>1.0.8</version>
     <authors>Manabu Tonosaki</authors>
     <owners>Manabu Tonosaki</owners>
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
     <license type="expression">MIT</license>
     <licenseUrl>https://licenses.nuget.org/MIT</licenseUrl>
-    <iconUrl>https://aqtono.com/tomarika/tono/tonoguiuwpicon.png</iconUrl>
     <description>UWP support with GUI MVFP architecure of Tools Of New Operation</description>
-    <releaseNotes>.NET Framework 4.7.2 Support / Strong name support</releaseNotes>
+    <iconUrl>https://aqtono.com/tomarika/tono/TonoGuiUwpIcon.png</iconUrl>
+    <releaseNotes>Package modernization</releaseNotes>
     <copyright>(c) 2019 Manabu Tonosaki</copyright>
     <tags>Tono, Gui, UWP</tags>
     <repository type="git" url="https://github.com/mtonosaki/Tono.git" />
     <dependencies>
       <group targetFramework="uap">
-        <dependency id="Tono.Gui" version="1.0.4" exclude="Build,Analyzers" />
+        <dependency id="Tono.Gui" version="1.0.7" exclude="Build,Analyzers" />
         <dependency id="Win2D.uwp" version="1.23.0" exclude="Build,Analyzers" />
         <dependency id="Microsoft.NETCore.UniversalWindowsPlatform" version="6.2.9" exclude="Build,Analyzers" />
       </group>
     </dependencies>
+    <contentFiles>
+      <files include="any/netstandard2.0/TonoCoreIcon.png" buildAction="Content" />
+      <files include="any/netstandard2.0/TonoGuiUwpIcon.png" buildAction="Content" />
+    </contentFiles>
   </metadata>
 </package>
