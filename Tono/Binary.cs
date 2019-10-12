@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Tono
 {
@@ -23,11 +24,12 @@ namespace Tono
                 return (d4 << 24) | (d3 << 16) | (d2 << 8) | d1;
             }
         }
-        public static int MakeInt32FromBytes(byte[] dat)
+        public static int MakeInt32FromBytes(IEnumerable<byte> dat)
         {
-            if (dat.Length >= 4)
+            var col = dat.Take(4).ToArray();
+            if (col.Length >= 4)
             {
-                return MakeInt32FromBytes(dat[3], dat[2], dat[1], dat[0]);
+                return MakeInt32FromBytes(col[3], col[2], col[1], col[0]);
             }
             else
             {
@@ -58,6 +60,30 @@ namespace Tono
                 }
             }
             return 0;
+        }
+
+        /// <summary>
+        /// make reverse bytes
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static int ByteReverse(int value)
+        {
+            //return MakeInt32FromBytes(ByteReverse4(BitConverter.GetBytes(value)));    // 2,125ms for 10M count
+            return BitConverter.ToInt32(BitConverter.GetBytes(value).Reverse().ToArray(), 0);   // 1,200ms for 10M count
+        }
+
+        /// <summary>
+        /// reverse 4 bytes (Use LINQ.Reverse instead of this)
+        /// </summary>
+        /// <param name="dat"></param>
+        /// <returns></returns>
+        public static IEnumerable<byte> ByteReverse4(byte[] dat)
+        {
+            yield return dat[3];
+            yield return dat[2];
+            yield return dat[1];
+            yield return dat[0];
         }
 
         /// <summary>

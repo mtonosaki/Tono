@@ -11,7 +11,7 @@ namespace Tono
         /// m/s/s
         /// </summary>
         private double m_psps;
-        public static readonly Acceleration Zero = Acceleration.FromMeterPerScondPerScond(0);
+        public static readonly Acceleration Zero = new Acceleration { m_psps = 0, };
 
         public double To_m_per_s_per_s => m_psps;
 
