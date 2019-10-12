@@ -1,3 +1,12 @@
+# Tono - Tools Of New Operation
+
+"Tools of new operation" library/framework is for agile SoE(SoI) style development.   
+Expected a lot of developer create original simulators quickly and find business core rule of improvement continuously. That is why this is named "tools of new operation".
+
+## Libraries
+
+### Tono.Gui.Jit
+![](https://aqtono.com/tomarika/tono/TonoJitIcon.png)  
 Simple objects to help design/implement business model with Just-in-time philosophy. Making "Object", "Signal" and "Flow" with below objects.
 
 Function|Object|Comment
