@@ -280,11 +280,11 @@ namespace Tono.Gui.Uwp
             Features.Findable = false;
 
             initPointer();  // TGuiView.Pointer.cs
-            initKeyboard(); // TGuiView.Keyboard.cs
+            InitKeyboard(); // TGuiView.Keyboard.cs
 
             foreach (var fc in (from fc in getFeatures() where fc is IKeyListener select fc))
             {
-                initKeyboard(fc, (IKeyListener)fc);
+                InitKeyboard(fc, (IKeyListener)fc);
             }
 
             initToken();    // TGuiView.Token.cs

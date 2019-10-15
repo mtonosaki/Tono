@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text;
 using Windows.System;
 
@@ -12,7 +13,7 @@ namespace Tono.Gui.Uwp
         /// <summary>
         /// Key event settings (event trigger catch condition)
         /// </summary>
-        KeyListenSetting[] KeyListenSettings { get; }
+        IEnumerable<KeyListenSetting> KeyListenSettings { get; }
 
         /// <summary>
         /// Key event
@@ -78,7 +79,7 @@ namespace Tono.Gui.Uwp
         /// <summary>
         /// event catch condition
         /// </summary>
-        public (VirtualKey key, States state)[] KeyStates { get; set; }
+        public IEnumerable<(VirtualKey key, States state)> KeyStates { get; set; }
 
         /// <summary>
         /// is on "OnKeyEvent"
