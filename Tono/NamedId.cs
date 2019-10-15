@@ -10,12 +10,12 @@ namespace Tono
         /// <summary>
         /// nothing id
         /// </summary>
-        public static readonly NamedId Nothing = new NamedId { Name = "Nothing", Value = new Id { Value = int.MinValue } };
+        public static readonly NamedId Nothing = new NamedId { Name = "Nothing", Id = new Id { Value = int.MinValue } };
 
         /// <summary>
         /// ID integer value
         /// </summary>
-        public Id Value { get; private set; }
+        public Id Id { get; private set; }
 
         /// <summary>
         /// the ID's name
@@ -28,7 +28,7 @@ namespace Tono
         /// <param name="nid"></param>
         public static implicit operator Id(NamedId nid)
         {
-            return nid?.Value ?? Nothing;
+            return nid?.Id ?? Nothing;
         }
 
         private static Dictionary<string, NamedId> buf = null;
@@ -62,7 +62,7 @@ namespace Tono
             {
                 NamedId ret = new NamedId
                 {
-                    Value = value,
+                    Id = value,
                     Name = name,
                 };
                 buf[name] = ret;
@@ -98,7 +98,7 @@ namespace Tono
                         {
                             ret = new NamedId
                             {
-                                Value = new Id { Value = num },
+                                Id = new Id { Value = num },
                                 Name = $"__NamedId_NoName_{id}__",
                             };
                             idbuf[num] = ret;
@@ -132,7 +132,7 @@ namespace Tono
                         {
                             ret = new NamedId
                             {
-                                Value = new Id { Value = num },
+                                Id = new Id { Value = num },
                                 Name = name,
                             };
                             idbuf[num] = ret;
@@ -146,13 +146,13 @@ namespace Tono
 
         public override string ToString()
         {
-            return $"{Name}(id={Value})";
+            return $"{Name}(id={Id})";
         }
         public override bool Equals(object obj)
         {
             if (obj is NamedId ni)
             {
-                return ni.Value == Value;
+                return ni.Id == Id;
             }
             else
             {
@@ -161,7 +161,7 @@ namespace Tono
         }
         public override int GetHashCode()
         {
-            return Value.Value;
+            return Id.Value;
         }
     }
 }

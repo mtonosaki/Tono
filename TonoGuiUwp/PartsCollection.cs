@@ -202,13 +202,13 @@ namespace Tono.Gui.Uwp
             {
                 if (_doubleBuffers.TryGetValue(bufferName, out var ddp))
                 {
-                    var lno = MathUtil.Max<int>(ddp.Layer.Value.Value, layers.Select(a => a.Value.Value).Max());
+                    var lno = MathUtil.Max<int>(ddp.Layer.Id.Value, layers.Select(a => a.Id.Value).Max());
                     ddp.Layer = NamedId.From($"(auto.doublebufferlayer.{lno})", lno);
                     ddp.ClearBuffer(false);
                 }
                 else
                 {
-                    var lno = layers.Select(a => a.Value).Max();
+                    var lno = layers.Select(a => a.Id.Value).Max();
                     _doubleBuffers[bufferName] = ddp = new DrawPropertyDoubleBuffer
                     {
                         Layer = NamedId.From($"(auto.doublebufferlayer.{lno})", lno),
@@ -247,7 +247,7 @@ namespace Tono.Gui.Uwp
             var layerpartsset =
                 from kv in _dat
                 let layer = kv.Key
-                orderby layer.Value ascending
+                orderby layer.Id.Value ascending
                 from kv2 in kv.Value
                 let paneName = kv2.Key
                 where paneName == tarPaneName || paneName == "<all>"

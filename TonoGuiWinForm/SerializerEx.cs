@@ -356,7 +356,7 @@ namespace Tono.GuiWinForm
                 writer.WriteByte((byte)Tag.Dictionary);
 
                 // クラスID
-                SendDirect(writer, cid.Value.Value);
+                SendDirect(writer, cid.Id.Value);
 
                 SendDirect(writer, ((IDictionary)value).Count);
                 foreach (DictionaryEntry de in ((IDictionary)value))
@@ -371,7 +371,7 @@ namespace Tono.GuiWinForm
             if (isClassProced == false)
             {
                 writer.WriteByte((byte)Tag.ClassStart);
-                SendDirect(writer, cid.Value.Value);
+                SendDirect(writer, cid.Id.Value);
             }
             else
             {
@@ -424,7 +424,7 @@ namespace Tono.GuiWinForm
 
                                 // クラス派生先識別IDを埋め込む
                                 var bid = NamedId.FromName(type.FullName);
-                                SendDirect(writer, bid.Value.Value);
+                                SendDirect(writer, bid.Id.Value);
                             }
 
                             // タグの埋め込み
@@ -432,7 +432,7 @@ namespace Tono.GuiWinForm
 
                             // フィールド名を埋め込む
                             var fid = NamedId.FromName($"{type.FullName}...{fi.Name}"); //.FromField(fi);
-                            SendDirect(writer, fid.Value.Value);
+                            SendDirect(writer, fid.Id.Value);
 
                             // フィールドの値を埋め込む
                             sendLoop(writer, fi.GetValue(value));
