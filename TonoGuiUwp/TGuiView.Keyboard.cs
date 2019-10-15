@@ -12,11 +12,11 @@ namespace Tono.Gui.Uwp
     /// </summary>
     public partial class TGuiView
     {
-        private void initKeyboard()
+        private void InitKeyboard()
         {
             var win = Window.Current.CoreWindow;
-            win.KeyDown += onKeyDown;
-            win.KeyUp += onKeyUp;
+            win.KeyDown += OnKeyDown;
+            win.KeyUp += OnKeyUp;
 
             IntervalUtil.Start(TimeSpan.FromMilliseconds(2347), () =>
             {
@@ -26,7 +26,7 @@ namespace Tono.Gui.Uwp
                     var ks = Window.Current.CoreWindow.GetKeyState(key);
                     if ((ks & CoreVirtualKeyStates.Down) == 0)    // no longer press
                     {
-                        keyupProc(key);
+                        KeyUpProc(key);
                     }
                 }
             });
@@ -34,7 +34,7 @@ namespace Tono.Gui.Uwp
 
         private readonly Dictionary<VirtualKey, List<IKeyListener>> _keyliss = new Dictionary<VirtualKey, List<IKeyListener>>();
 
-        private void initKeyboard(FeatureBase feature, IKeyListener keylistener)
+        private void InitKeyboard(FeatureBase _, IKeyListener keylistener)
         {
             foreach (var kls in keylistener.KeyListenSettings)
             {
@@ -62,7 +62,7 @@ namespace Tono.Gui.Uwp
         /// </summary>
         /// <param name="key"></param>
         /// <returns></returns>
-        private bool isKeyDown(VirtualKey key)
+        private bool IsKeyDown(VirtualKey key)
         {
             if (_keys.TryGetValue(key, out var sw))
             {
@@ -79,9 +79,9 @@ namespace Tono.Gui.Uwp
         /// </summary>
         /// <param name="key"></param>
         /// <returns></returns>
-        private KeyListenSetting.States getKeyState(VirtualKey key)
+        private KeyListenSetting.States GetKeyState(VirtualKey key)
         {
-            return isKeyDown(key) ? KeyListenSetting.States.Down : KeyListenSetting.States.Up;
+            return IsKeyDown(key) ? KeyListenSetting.States.Down : KeyListenSetting.States.Up;
         }
 
         /// <summary>
@@ -89,11 +89,11 @@ namespace Tono.Gui.Uwp
         /// </summary>
         /// <param name="keystates"></param>
         /// <returns></returns>
-        private bool checkKeys((VirtualKey key, KeyListenSetting.States state)[] keystates)
+        private bool CheckKeys(IEnumerable<(VirtualKey key, KeyListenSetting.States state)> keystates)
         {
             foreach (var (key, state) in keystates)
             {
-                if (getKeyState(key) != state)
+                if (GetKeyState(key) != state)
                 {
                     return false;
                 }
@@ -107,8 +107,7 @@ namespace Tono.Gui.Uwp
         /// condition change process
         /// </summary>
         /// <param name="key"></param>
-        /// <param name="state"></param>
-        private void onKeyProc(VirtualKey key, KeyListenSetting.States state)
+        private void OnKeyProc(VirtualKey key, KeyListenSetting.States _)
         {
             if (_keyliss.TryGetValue(key, out var listeners))
             {
@@ -116,7 +115,7 @@ namespace Tono.Gui.Uwp
                     from kl in listeners
                     from kls in kl.KeyListenSettings
                     where kls.IsOn == true
-                    where checkKeys(kls.KeyStates) == false
+                    where CheckKeys(kls.KeyStates) == false
                     select kls;
                 foreach (var kls in klss)
                 {
@@ -127,7 +126,7 @@ namespace Tono.Gui.Uwp
                     from kl in listeners                // listening features that are waiting key state changed
                     from kls in kl.KeyListenSettings    // 1 feature can wait multi key event
                     where kls.IsOn == false
-                    where checkKeys(kls.KeyStates) == true
+                    where CheckKeys(kls.KeyStates) == true
                     select (kl, kls);
                 foreach (var (kl, kls) in kllist)
                 {
@@ -163,14 +162,14 @@ namespace Tono.Gui.Uwp
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="args"></param>
-        private void onKeyDown(CoreWindow sender, KeyEventArgs args)
+        private void OnKeyDown(CoreWindow sender, KeyEventArgs args)
         {
             //Debug.WriteLine($"  --- onKeyDown: {args.VirtualKey}");
-            var pre = isKeyDown(args.VirtualKey);
+            var pre = IsKeyDown(args.VirtualKey);
             _keys[args.VirtualKey] = true;
             if (pre == false)   // 変化時のみイベント発行
             {
-                onKeyProc(args.VirtualKey, KeyListenSetting.States.Down);
+                OnKeyProc(args.VirtualKey, KeyListenSetting.States.Down);
             }
         }
         /// <summary>
@@ -178,19 +177,19 @@ namespace Tono.Gui.Uwp
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="args"></param>
-        private void onKeyUp(CoreWindow sender, KeyEventArgs args)
+        private void OnKeyUp(CoreWindow sender, KeyEventArgs args)
         {
-            keyupProc(args.VirtualKey);
+            KeyUpProc(args.VirtualKey);
         }
 
-        private void keyupProc(VirtualKey key)
+        private void KeyUpProc(VirtualKey key)
         {
             //Debug.WriteLine($"  --- onKeyUp  : {key}");
-            var pre = isKeyDown(key);
+            var pre = IsKeyDown(key);
             _keys[key] = false;
             if (pre == true)    // do when condition changed
             {
-                onKeyProc(key, KeyListenSetting.States.Up);
+                OnKeyProc(key, KeyListenSetting.States.Up);
             }
         }
     }

@@ -1,4 +1,5 @@
-﻿using Windows.System;
+﻿using System.Collections.Generic;
+using Windows.System;
 
 namespace Tono.Gui.Uwp
 {
@@ -23,14 +24,13 @@ namespace Tono.Gui.Uwp
                 },
             },
         };
-        public KeyListenSetting[] KeyListenSettings => _keys;
+        public IEnumerable<KeyListenSetting> KeyListenSettings => _keys;
 
         /// <summary>
         /// Start from EventTokenButton(UWP control event) set at ListeningButtonNames
         /// </summary>
-        /// <param name="token"></param>
         [EventCatch]
-        public void Start(EventTokenButton token)
+        public void Start(EventTokenButton _)
         {
             OnKey(null);
         }
