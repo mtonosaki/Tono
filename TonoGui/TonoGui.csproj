@@ -11,13 +11,13 @@
     <Copyright>(c) 2019 Manabu Tonosaki</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageIconUrl></PackageIconUrl>
-    <AssemblyVersion>1.0.7.0</AssemblyVersion>
-    <FileVersion>1.0.7.0</FileVersion>
-    <Version>1.0.7</Version>
+    <AssemblyVersion>1.0.8.0</AssemblyVersion>
+    <FileVersion>1.0.8.0</FileVersion>
+    <Version>1.0.8</Version>
     <PackageId>Tono.Gui</PackageId>
     <PackageIcon>/content/TonoGuiIcon.png</PackageIcon>
     <PackageTags>Tono, Gui</PackageTags>
-    <PackageReleaseNotes></PackageReleaseNotes>
+    <PackageReleaseNotes>update Tono.Core to Version 1.0.7</PackageReleaseNotes>
     <PackageProjectUrl></PackageProjectUrl>
     <RepositoryUrl>https://github.com/mtonosaki/Tono.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
@@ -36,7 +36,7 @@
 
   <ItemGroup>
     <PackageReference Include="System.Numerics.Vectors" Version="4.5.0" />
-    <PackageReference Include="Tono.Core" Version="1.0.6" />
+    <PackageReference Include="Tono.Core" Version="1.0.7" />
   </ItemGroup>
 
 </Project>
