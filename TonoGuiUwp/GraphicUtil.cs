@@ -14,13 +14,19 @@ namespace Tono.Gui.Uwp
         /// <param name="resourceCreator">canvas</param>
         /// <param name="text">measure text</param>
         /// <param name="textFormat">the text format</param>
-        /// <param name="limitedToWidth"></param>
-        /// <param name="limitedToHeight"></param>
+        /// <param name="limitedToWidth">0=auto</param>
+        /// <param name="limitedToHeight">0=auto</param>
         /// <returns></returns>
         public static ScreenSize MeasureString(ICanvasResourceCreator resourceCreator, string text, CanvasTextFormat textFormat, float limitedToWidth = 0.0f, float limitedToHeight = 0.0f)
         {
+            var tmp = textFormat.WordWrapping;
+            if (limitedToHeight < 0.001f && limitedToWidth < 0.001f)
+            {
+                textFormat.WordWrapping = CanvasWordWrapping.NoWrap;
+            }
             var layout = new CanvasTextLayout(resourceCreator, text, textFormat, limitedToWidth, limitedToHeight);
-            return ScreenSize.From(layout.DrawBounds.Height, layout.DrawBounds.Width);
+            textFormat.WordWrapping = tmp;
+            return ScreenSize.From(layout.DrawBounds.Width, layout.DrawBounds.Height);
         }
     }
 }
