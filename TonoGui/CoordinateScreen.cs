@@ -669,173 +669,20 @@ namespace Tono.Gui
             };
         }
 
-        /// <summary>
-        /// v1 + v2
-        /// </summary>
-        /// <param name="v1"></param>
-        /// <param name="v2"></param>
-        /// <returns></returns>
-
-        public static ScreenPos operator +(ScreenPos v1, ScreenPos v2)
-        {
-            return new ScreenPos { X = v1.X + v2.X, Y = v1.Y + v2.Y, };
-        }
-
-        /// <summary>
-        /// v1 + v2
-        /// </summary>
-        /// <param name="v1"></param>
-        /// <param name="v2"></param>
-        /// <returns></returns>
-
-        public static ScreenPos operator +(ScreenPos v1, ScreenSize v2)
-        {
-            return new ScreenPos { X = v1.X + v2.Width, Y = v1.Y + v2.Height, };
-        }
-
-        /// <summary>
-        /// v1.X + v2
-        /// </summary>
-        /// <param name="v1"></param>
-        /// <param name="v2"></param>
-        /// <returns></returns>
-
-        public static ScreenPos operator +(ScreenPos v1, ScreenX v2)
-        {
-            return new ScreenPos { X = v1.X + v2, Y = v1.Y, };
-        }
-
-        /// <summary>
-        /// v1.Y + v2
-        /// </summary>
-        /// <param name="v1"></param>
-        /// <param name="v2"></param>
-        /// <returns></returns>
-
-        public static ScreenPos operator +(ScreenPos v1, ScreenY v2)
-        {
-            return new ScreenPos { X = v1.X, Y = v1.Y + v2, };
-        }
-
-        /// <summary>
-        /// v1 - v2
-        /// </summary>
-        /// <param name="v1"></param>
-        /// <param name="v2"></param>
-        /// <returns></returns>
-
-        public static ScreenPos operator -(ScreenPos v1, ScreenSize v2)
-        {
-            return new ScreenPos { X = v1.X - v2.Width, Y = v1.Y - v2.Height, };
-        }
-
-        /// <summary>
-        /// v1.X - v2
-        /// </summary>
-        /// <param name="v1"></param>
-        /// <param name="v2"></param>
-        /// <returns></returns>
-
-        public static ScreenPos operator -(ScreenPos v1, ScreenX v2)
-        {
-            return new ScreenPos { X = v1.X - v2, Y = v1.Y, };
-        }
-
-        /// <summary>
-        /// v1.Y - v2
-        /// </summary>
-        /// <param name="v1"></param>
-        /// <param name="v2"></param>
-        /// <returns></returns>
-
-        public static ScreenPos operator -(ScreenPos v1, ScreenY v2)
-        {
-            return new ScreenPos { X = v1.X, Y = v1.Y - v2, };
-        }
-
-        /// <summary>
-        /// v1 - v2
-        /// </summary>
-        /// <param name="v1"></param>
-        /// <param name="v2"></param>
-        /// <returns></returns>
-
-        public static ScreenSize operator -(ScreenPos v1, ScreenPos v2)
-        {
-            return new ScreenSize { Width = v1.X - v2.X, Height = v1.Y - v2.Y };
-        }
-
-        /// <summary>
-        /// v1 * v2
-        /// </summary>
-        /// <param name="v1"></param>
-        /// <param name="v2"></param>
-        /// <returns></returns>
-
-        public static ScreenPos operator *(ScreenPos v1, double v2)
-        {
-            return new ScreenPos { X = v1.X * v2, Y = v1.Y * v2, };
-        }
-
-        /// <summary>
-        /// v1 * v2
-        /// </summary>
-        /// <param name="v1"></param>
-        /// <param name="v2"></param>
-        /// <returns></returns>
-
-        public static ScreenPos operator *(ScreenPos v1, ScreenY v2)
-        {
-            return new ScreenPos { X = v1.X, Y = v1.Y * v2.Sy, };
-        }
-
-        /// <summary>
-        /// v1 * v2
-        /// </summary>
-        /// <param name="v1"></param>
-        /// <param name="v2"></param>
-        /// <returns></returns>
-
-        public static ScreenPos operator *(ScreenPos v1, ScreenX v2)
-        {
-            return new ScreenPos { X = v1.X * v2.Sx, Y = v1.Y, };
-        }
-
-        /// <summary>
-        /// v1 * v2
-        /// </summary>
-        /// <param name="v1"></param>
-        /// <param name="v2"></param>
-        /// <returns></returns>
-
-        public static ScreenPos operator *(ScreenPos v1, ScreenPos v2)
-        {
-            return new ScreenPos { X = v1.X * v2.X, Y = v1.Y * v2.Y, };
-        }
-
-        /// <summary>
-        /// v1 / v2
-        /// </summary>
-        /// <param name="v1"></param>
-        /// <param name="v2"></param>
-        /// <returns></returns>
-
-        public static ScreenPos operator /(ScreenPos v1, ScreenPos v2)
-        {
-            return new ScreenPos { X = v1.X / v2.X, Y = v1.Y / v2.Y, };
-        }
-
-        /// <summary>
-        /// v1 - v2
-        /// </summary>
-        /// <param name="v1"></param>
-        /// <param name="v2"></param>
-        /// <returns></returns>
-
-        public static ScreenPos operator /(ScreenPos v1, double v2)
-        {
-            return new ScreenPos { X = v1.X / v2, Y = v1.Y / v2, };
-        }
+        public static ScreenPos operator +(ScreenPos v1, ScreenPos v2) => new ScreenPos { X = v1.X + v2.X, Y = v1.Y + v2.Y, };
+        public static ScreenPos operator +(ScreenPos v1, ScreenSize v2) => new ScreenPos { X = v1.X + v2.Width, Y = v1.Y + v2.Height, };
+        public static ScreenPos operator +(ScreenPos v1, ScreenX v2) => new ScreenPos { X = v1.X + v2, Y = v1.Y, };
+        public static ScreenPos operator +(ScreenPos v1, ScreenY v2) => new ScreenPos { X = v1.X, Y = v1.Y + v2, };
+        public static ScreenSize operator -(ScreenPos v1, ScreenPos v2) => new ScreenSize { Width = v1.X - v2.X, Height = v1.Y - v2.Y };
+        public static ScreenPos operator -(ScreenPos v1, ScreenSize v2) => new ScreenPos { X = v1.X - v2.Width, Y = v1.Y - v2.Height, };
+        public static ScreenPos operator -(ScreenPos v1, ScreenX v2) => new ScreenPos { X = v1.X - v2, Y = v1.Y, };
+        public static ScreenPos operator -(ScreenPos v1, ScreenY v2) => new ScreenPos { X = v1.X, Y = v1.Y - v2, };
+        public static ScreenPos operator *(ScreenPos v1, double v2) => new ScreenPos { X = v1.X * v2, Y = v1.Y * v2, };
+        public static ScreenPos operator *(ScreenPos v1, ScreenY v2) => new ScreenPos { X = v1.X, Y = v1.Y * v2.Sy, };
+        public static ScreenPos operator *(ScreenPos v1, ScreenX v2) => new ScreenPos { X = v1.X * v2.Sx, Y = v1.Y, };
+        public static ScreenPos operator *(ScreenPos v1, ScreenPos v2) => new ScreenPos { X = v1.X * v2.X, Y = v1.Y * v2.Y, };
+        public static ScreenPos operator /(ScreenPos v1, ScreenPos v2) => new ScreenPos { X = v1.X / v2.X, Y = v1.Y / v2.Y, };
+        public static ScreenPos operator /(ScreenPos v1, double v2) => new ScreenPos { X = v1.X / v2, Y = v1.Y / v2, };
 
         /// <summary>
         /// auto cast instance to tuple of double type
@@ -1007,77 +854,19 @@ namespace Tono.Gui
             return h1 ^ h2;
         }
 
-        /// <summary>
-        /// v1 * v2
-        /// </summary>
-        /// <param name="v1"></param>
-        /// <param name="v2"></param>
-        /// <returns></returns>
 
-        public static ScreenSize operator *(ScreenSize v1, float v2)
-        {
-            return new ScreenSize { Width = v1.Width * v2, Height = v1.Height * v2 };
-        }
-
-        /// <summary>
-        /// v1 * v2
-        /// </summary>
-        /// <param name="v1"></param>
-        /// <param name="v2"></param>
-        /// <returns></returns>
-
-        public static ScreenSize operator *(ScreenSize v1, double v2)
-        {
-            return new ScreenSize { Width = v1.Width * v2, Height = v1.Height * v2 };
-        }
-
-        /// <summary>
-        /// v1 * v2
-        /// </summary>
-        /// <param name="v1"></param>
-        /// <param name="v2"></param>
-        /// <returns></returns>
-
-        public static ScreenSize operator *(ScreenSize v1, (double X, double Y) v2)
-        {
-            return new ScreenSize { Width = v1.Width * v2.X, Height = v1.Height * v2.Y };
-        }
-
-        /// <summary>
-        /// v1 * v2
-        /// </summary>
-        /// <param name="v1"></param>
-        /// <param name="v2"></param>
-        /// <returns></returns>
-
-        public static ScreenSize operator /(ScreenSize v1, float v2)
-        {
-            return new ScreenSize { Width = v1.Width / v2, Height = v1.Height / v2 };
-        }
-
-        /// <summary>
-        /// v1 / v2
-        /// </summary>
-        /// <param name="v1"></param>
-        /// <param name="v2"></param>
-        /// <returns></returns>
-
-        public static ScreenSize operator /(ScreenSize v1, double v2)
-        {
-            return new ScreenSize { Width = v1.Width / v2, Height = v1.Height / v2 };
-        }
-
-        /// <summary>
-        /// v1 / v2
-        /// </summary>
-        /// <param name="v1"></param>
-        /// <param name="v2"></param>
-        /// <returns></returns>
-
-        public static ScreenSize operator /(ScreenSize v1, ScreenPos v2)
-        {
-            return new ScreenSize { Width = v1.Width / v2.X, Height = v1.Height / v2.Y };
-        }
+        public static ScreenSize operator +(ScreenSize v1, ScreenSize v2) => new ScreenSize { Width = v1.Width + v2.Width, Height = v1.Height + v2.Height };
+        public static ScreenSize operator +(ScreenSize v1, ScreenX v2) => new ScreenSize { Width = v1.Width + v2, Height = v1.Height };
+        public static ScreenSize operator +(ScreenSize v1, ScreenY v2) => new ScreenSize { Width = v1.Width, Height = v1.Height + v2 };
+        public static ScreenSize operator -(ScreenSize v1, ScreenSize v2) => new ScreenSize { Width = v1.Width - v2.Width, Height = v1.Height - v2.Height };
+        public static ScreenSize operator -(ScreenSize v1, ScreenX v2) => new ScreenSize { Width = v1.Width - v2, Height = v1.Height };
+        public static ScreenSize operator -(ScreenSize v1, ScreenY v2) => new ScreenSize { Width = v1.Width, Height = v1.Height - v2 };
+        public static ScreenSize operator *(ScreenSize v1, float v2) => new ScreenSize { Width = v1.Width * v2, Height = v1.Height * v2 };
+        public static ScreenSize operator *(ScreenSize v1, double v2) => new ScreenSize { Width = v1.Width * v2, Height = v1.Height * v2 };
+        public static ScreenSize operator *(ScreenSize v1, (double X, double Y) v2) => new ScreenSize { Width = v1.Width * v2.X, Height = v1.Height * v2.Y };
+        public static ScreenSize operator /(ScreenSize v1, float v2) =>  new ScreenSize { Width = v1.Width / v2, Height = v1.Height / v2 };
+        public static ScreenSize operator /(ScreenSize v1, double v2) => new ScreenSize { Width = v1.Width / v2, Height = v1.Height / v2 };
+        public static ScreenSize operator /(ScreenSize v1, ScreenPos v2) => new ScreenSize { Width = v1.Width / v2.X, Height = v1.Height / v2.Y };
 
         /// <summary>
         /// cast support to ScreenPos
