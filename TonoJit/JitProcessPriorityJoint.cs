@@ -75,10 +75,12 @@ namespace Tono.Jit
         /// <returns></returns>
         private int SortCmp(LinkedListNode<JitStage.WorkEventQueue.Item> a, LinkedListNode<JitStage.WorkEventQueue.Item> b)
         {
-            int ret = procPriority[a.Value.Work.PrevProcess] - procPriority[b.Value.Work.PrevProcess];      // 1st condition: priority of process 第１条件＝工程の優先順
+            // 1st condition: priority of process 第１条件＝工程の優先順
+            int ret = procPriority[a.Value.Work.PrevProcess] - procPriority[b.Value.Work.PrevProcess];
             if (ret == 0)
             {
-                return (int)(a.Value.Work.EnterTime - b.Value.Work.EnterTime).TotalSeconds; // 2nd condition: enter time 第2条件＝進入時刻準（FIFO）
+                // 2nd condition: enter time 第2条件＝進入時刻準（FIFO）
+                return (int)(a.Value.Work.EnterTime - b.Value.Work.EnterTime).TotalSeconds; 
             }
             else
             {

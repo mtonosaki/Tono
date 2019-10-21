@@ -110,6 +110,11 @@ namespace Tono
             }
         }
 
+        /// <summary>
+        /// Get Instance by name if you have already created. If new one, create as new.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
         public static NamedId FromName(string name)
         {
             if (buf == null)
