@@ -1,3 +1,6 @@
+// Copyright (c) Manabu Tonosaki All rights reserved.
+// Licensed under the MIT license.
+
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Diagnostics;
 using Tono;
@@ -11,7 +14,7 @@ namespace UnitTests
         public void Test_ByteReverse()
         {
             var st = Stopwatch.StartNew();
-            for(var i = 0; i < 10000000; i++)
+            for (var i = 0; i < 10000000; i++)
             {
                 var v = Binary.ByteReverse(i);
             }

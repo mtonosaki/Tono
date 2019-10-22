@@ -1,3 +1,6 @@
+// Copyright (c) Manabu Tonosaki All rights reserved.
+// Licensed under the MIT license.
+
 using System;
 using System.Collections;
 
@@ -8,10 +11,10 @@ namespace Tono.GuiWinForm
     /// <summary>
     /// uConst の概要の説明です。
     /// </summary>
-    public class Const
+    public static class Const
     {
         /// <summary>長さゼロの配列</summary>
-        public static readonly ICollection ZeroCollection = new object[] { };
+        public static readonly ICollection ZeroCollection = Array.Empty<object>();
 
         /// <summary>
         /// 長さゼロのリスト
@@ -31,7 +34,7 @@ namespace Tono.GuiWinForm
         /// <summary>
         /// 文字列のフォーマット
         /// </summary>
-        public class Formatter
+        public static class Formatter
         {
             public static string Size(long size)
             {
@@ -54,7 +57,7 @@ namespace Tono.GuiWinForm
         /// <summary>
         /// レイヤー
         /// </summary>
-        public class Layer
+        public static class Layer
         {
             /// <summary>デバイスプレイヤーが使用するフリーレイヤー</summary>
             public const int DevicePlayer = 60001;
@@ -65,7 +68,7 @@ namespace Tono.GuiWinForm
             /// <summary>
             /// 特殊なパーツ（Clearしたくないもの）専用のレイヤー
             /// </summary>
-            public class StaticLayers
+            public static class StaticLayers
             {
                 // ログ表示用パネル描画
                 public const int LogPanel = 79008;

@@ -1,4 +1,7 @@
-﻿using System;
+﻿// Copyright (c) Manabu Tonosaki All rights reserved.
+// Licensed under the MIT license.
+
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -92,7 +95,7 @@ namespace Tono.Logic
         /// </summary>
         public IntegerDistributer()
         {
-            initAsValueAddMode();
+            InitAsValueAddMode();
         }
 
         /// <summary>
@@ -101,14 +104,14 @@ namespace Tono.Logic
         /// <param name="vals"></param>
         public IntegerDistributer(IList<double> vals)
         {
-            initAsValueAddMode();
+            InitAsValueAddMode();
             Add(vals);
         }
 
         /// <summary>
         /// initialize instance as value Add mode ("USAGE-2" need add method) 
         /// </summary>
-        private void initAsValueAddMode()
+        private void InitAsValueAddMode()
         {
             _rets = new List<int>();
             _value = 0;

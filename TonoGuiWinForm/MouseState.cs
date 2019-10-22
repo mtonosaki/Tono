@@ -1,3 +1,6 @@
+// Copyright (c) Manabu Tonosaki All rights reserved.
+// Licensed under the MIT license.
+
 using System;
 using System.Threading;
 using System.Windows.Forms;
@@ -96,7 +99,7 @@ namespace Tono.GuiWinForm
                     s += "[SHIFT]";
                 }
 
-                if (s == "")
+                if (string.IsNullOrEmpty(s))
                 {
                     s = "(no buttons)";
                 }

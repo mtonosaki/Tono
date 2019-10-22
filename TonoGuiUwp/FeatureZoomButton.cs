@@ -1,4 +1,7 @@
-﻿namespace Tono.Gui.Uwp
+﻿// Copyright (c) Manabu Tonosaki All rights reserved.
+// Licensed under the MIT license.
+
+namespace Tono.Gui.Uwp
 {
     /// <summary>
     /// Change screen zoom volume with UWP control event set at ListeningButtonNames property.

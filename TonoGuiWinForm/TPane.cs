@@ -1,3 +1,6 @@
+// Copyright (c) Manabu Tonosaki All rights reserved.
+// Licensed under the MIT license.
+
 using System;
 using System.ComponentModel;
 using System.Drawing;
@@ -164,7 +167,7 @@ namespace Tono.GuiWinForm
                 using (var drawFont = new Font("MS UI Gothic", 9))
                 {
                     string s;
-                    if (_name == "")
+                    if (string.IsNullOrEmpty(_name))
                     {
                         s = "(ñºèÃñ¢ê›íË)";
                     }

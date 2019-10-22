@@ -1,3 +1,6 @@
+// Copyright (c) Manabu Tonosaki All rights reserved.
+// Licensed under the MIT license.
+
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -102,7 +105,7 @@ namespace Tono.GuiWinForm
                 }
                 var sb = new StringBuilder();
                 sb.Append("\r\n<table");
-                if (_width != "")
+                if (string.IsNullOrEmpty(_width) == false)
                 {
                     sb.AppendFormat(" width=\"{0}\"", _width);
                 }

@@ -1,3 +1,6 @@
+// Copyright (c) Manabu Tonosaki All rights reserved.
+// Licensed under the MIT license.
+
 using System;
 using System.Collections;
 using System.ComponentModel;
@@ -184,7 +187,7 @@ namespace Tono.GuiWinForm
                 {
                     ext = Path.GetExtension(filename).ToLower();
                 }
-                object no = null;
+                object no;
                 if (ext == ".exe")
                 {
                     no = _dat[Path.GetFileName(filename).ToLower()];
@@ -990,9 +993,8 @@ namespace Tono.GuiWinForm
                 {
                     return false;
                 }
-                if (listViewFileSelect.SelectedItems[0].Tag is FileInfo)
+                if (listViewFileSelect.SelectedItems[0].Tag is FileInfo fi)
                 {
-                    var fi = (FileInfo)listViewFileSelect.SelectedItems[0].Tag;
                     s = fi.FullName;
                 }
                 else
@@ -1044,9 +1046,8 @@ namespace Tono.GuiWinForm
                 return;
             }
             string s;
-            if (listViewFileSelect.SelectedItems[0].Tag is FileInfo)
+            if (listViewFileSelect.SelectedItems[0].Tag is FileInfo fi)
             {
-                var fi = (FileInfo)listViewFileSelect.SelectedItems[0].Tag;
                 s = fi.FullName;
             }
             else

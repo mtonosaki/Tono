@@ -1,4 +1,7 @@
-﻿using System;
+﻿// Copyright (c) Manabu Tonosaki All rights reserved.
+// Licensed under the MIT license.
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -80,7 +83,7 @@ namespace Tono.Jit
             if (ret == 0)
             {
                 // 2nd condition: enter time 第2条件＝進入時刻準（FIFO）
-                return (int)(a.Value.Work.EnterTime - b.Value.Work.EnterTime).TotalSeconds; 
+                return (int)(a.Value.Work.EnterTime - b.Value.Work.EnterTime).TotalSeconds;
             }
             else
             {

@@ -1,3 +1,6 @@
+// Copyright (c) Manabu Tonosaki All rights reserved.
+// Licensed under the MIT license.
+
 #if true
 
 using System;
@@ -152,7 +155,7 @@ namespace Tono.GuiWinForm
             }
         }
 
-        private static readonly BindingFlags flags = BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic;
+        private const BindingFlags flags = BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic;
         private static readonly ConstructorInfo ci = typeof(Handle).GetConstructor(flags, null, new Type[] { typeof(int), typeof(object), typeof(object[]) }, null);
 
         /// <summary>
@@ -167,7 +170,7 @@ namespace Tono.GuiWinForm
             {
                 while (_dat.Contains(h.SignalTicks))
                 {
-                    h.SignalTicks = h.SignalTicks + 1;
+                    h.SignalTicks += 1;
                     _counter++;
                 }
                 _dat[h.SignalTicks] = h;

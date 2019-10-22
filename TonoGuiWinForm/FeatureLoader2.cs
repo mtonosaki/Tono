@@ -1,3 +1,6 @@
+// Copyright (c) Manabu Tonosaki All rights reserved.
+// Licensed under the MIT license.
+
 using System;
 using System.Collections;
 using System.Drawing;
@@ -510,7 +513,7 @@ namespace Tono.GuiWinForm
                                             // フィーチャーに引数を割り当てる
                         try
                         {
-                            if (node.InnerText != "")
+                            if (string.IsNullOrEmpty(node.InnerText) == false)
                             {
                                 _fiParamString.SetValue(feature, node.InnerText);
                                 feature.ParseParameter(node.InnerText);

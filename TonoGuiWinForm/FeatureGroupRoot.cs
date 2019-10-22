@@ -1,3 +1,6 @@
+// Copyright (c) Manabu Tonosaki All rights reserved.
+// Licensed under the MIT license.
+
 using System;
 using System.Reflection;
 
@@ -94,7 +97,7 @@ namespace Tono.GuiWinForm
         {
             base.Dispose();
             var mi = typeof(DataLinkManager).GetMethod("disposeByRootGroup", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
-            mi.Invoke(this, new object[] { });
+            mi.Invoke(this, Array.Empty<object>());
         }
 
         #endregion

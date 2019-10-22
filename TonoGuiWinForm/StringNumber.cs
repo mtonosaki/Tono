@@ -1,3 +1,6 @@
+// Copyright (c) Manabu Tonosaki All rights reserved.
+// Licensed under the MIT license.
+
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -139,7 +142,7 @@ namespace Tono.GuiWinForm
                     var k = Math.Pow(Figures, val.Length - i - 1);
                     if (_cv.TryGetValue(val[i], out var v1))
                     {
-                        ret = ret + k * v1;
+                        ret += k * v1;
                     }
                     else
                     {

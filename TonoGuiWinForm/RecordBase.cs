@@ -1,3 +1,6 @@
+// Copyright (c) Manabu Tonosaki All rights reserved.
+// Licensed under the MIT license.
+
 using System;
 using System.Collections;
 using System.Collections.Specialized;
@@ -319,7 +322,6 @@ namespace Tono.GuiWinForm
         public virtual ICollection GetObjects()
         {
             IDictionary buf = new Hashtable();  // データを一時格納するバッファ
-            IList odr = new ArrayList();    // 表示順を考えるバッファ
 
             // メンバ変数をスキャンする
             foreach (var fi in GetType().GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic))
@@ -538,9 +540,6 @@ namespace Tono.GuiWinForm
         /// <returns></returns>
         public virtual void SetObjects(IDictionary data)
         {
-            IDictionary buf = new Hashtable();  // データを一時格納するバッファ
-            IList odr = new ArrayList();    // 表示順を考えるバッファ
-
             // メンバ変数をスキャンする
             foreach (var fi in GetType().GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic))
             {

@@ -1,3 +1,6 @@
+// Copyright (c) Manabu Tonosaki All rights reserved.
+// Licensed under the MIT license.
+
 using System;
 
 #pragma warning disable 1591, 1572, 1573
@@ -9,7 +12,7 @@ namespace Tono.GuiWinForm
     /// </summary>
     [NoTestClass]
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = false)]
-    public class DBTableClassAttribute : Attribute
+    public sealed class DBTableClassAttribute : Attribute
     {
         private readonly string _name;
 
@@ -25,7 +28,7 @@ namespace Tono.GuiWinForm
     /// </summary>
     [NoTestClass]
     [AttributeUsage(AttributeTargets.Field, AllowMultiple = false)]
-    public class DBSchemaAttribute : Attribute
+    public sealed class DBSchemaAttribute : Attribute
     {
         private readonly string _name;
 
@@ -41,7 +44,7 @@ namespace Tono.GuiWinForm
     /// </summary>
     [NoTestClass]
     [AttributeUsage(AttributeTargets.Field, AllowMultiple = false)]
-    public class DBNonSchemaAttribute : Attribute
+    public sealed class DBNonSchemaAttribute : Attribute
     {
         public DBNonSchemaAttribute()
         {
@@ -53,7 +56,7 @@ namespace Tono.GuiWinForm
     /// </summary>
     [NoTestClass]
     [AttributeUsage(AttributeTargets.Field, AllowMultiple = false)]
-    public class DBRelationAttribute : Attribute
+    public sealed class DBRelationAttribute : Attribute
     {
         private readonly string _table;
         private readonly string _col;

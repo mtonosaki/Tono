@@ -1,3 +1,6 @@
+// Copyright (c) Manabu Tonosaki All rights reserved.
+// Licensed under the MIT license.
+
 using System;
 using System.Collections;
 
@@ -194,10 +197,7 @@ namespace Tono.GuiWinForm
         /// </summary>
         public void ChangeState(PartsBase target)
         {
-            if (_stateFunction != null)
-            {
-                _stateFunction(this, target);
-            }
+            _stateFunction?.Invoke(this, target);
         }
 
         /// <summary>

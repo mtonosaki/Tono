@@ -1,8 +1,9 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
+﻿// Copyright (c) Manabu Tonosaki All rights reserved.
+// Licensed under the MIT license.
+
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Text;
 using Tono;
 
 namespace UnitTests

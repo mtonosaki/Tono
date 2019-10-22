@@ -1,3 +1,6 @@
+// Copyright (c) Manabu Tonosaki All rights reserved.
+// Licensed under the MIT license.
+
 using System;
 using System.Collections;
 using System.ComponentModel;
@@ -632,10 +635,8 @@ namespace Tono.GuiWinForm
                 // •K—v‚Å‚ ‚ê‚Î”wŒi‚ğ•`‰æ
                 if (IsDrawEmptyBackground)
                 {
-                    using (Brush brush = new SolidBrush(BackColor))
-                    {
-                        e.Graphics.FillRectangle(brush, e.ClipRectangle);
-                    }
+                    using Brush brush = new SolidBrush(BackColor);
+                    e.Graphics.FillRectangle(brush, e.ClipRectangle);
                 }
                 // ƒp[ƒc“™‚Ì•`‰æ
                 var pb = _rootGroup.GetPartsSet();

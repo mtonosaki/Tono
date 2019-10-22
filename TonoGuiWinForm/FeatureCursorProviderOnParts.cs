@@ -1,3 +1,6 @@
+// Copyright (c) Manabu Tonosaki All rights reserved.
+// Licensed under the MIT license.
+
 using System;
 using System.Windows.Forms;
 
@@ -32,9 +35,6 @@ namespace Tono.GuiWinForm
 
         /// <summary>カーソル表示状態（共有変数）</summary>
         private DataSharingManager.Int _state;
-
-        /// <summary>カーソルセット状況を保存するためのID</summary>
-        private NamedId _cursorSet;
 
         /// <summary>パーツ位置管理オブジェクト</summary>
         protected PartsPositionManager _pos;
@@ -109,8 +109,6 @@ namespace Tono.GuiWinForm
         public override void OnInitInstance()
         {
             base.OnInitInstance();
-
-            _cursorSet = NamedId.FromName("CursorSet");
 
             if (Pane is IControlUI)
             {
@@ -210,7 +208,6 @@ namespace Tono.GuiWinForm
                 }
             }
             onCursorSet();
-            //Finalizers.Add(_cursorSet, new ffFinalizer.Finalize(onCursorSet));
         }
 
         #region IKeyListener メンバ

@@ -1,9 +1,12 @@
-﻿namespace Tono.GuiWinForm
+﻿// Copyright (c) Manabu Tonosaki All rights reserved.
+// Licensed under the MIT license.
+
+namespace Tono.GuiWinForm
 {
     /// <summary>
     /// Tono.GuiWinForm内で使うTokenID
     /// </summary>
-    public class TokenGeneral
+    public static class TokenGeneral
     {
         /// <summary>マウスボタンを押した際に必要な処理を開始するトークン</summary>
         public static readonly NamedId TokenMouseDownNormalize = NamedId.FromName("MouseDownNormalizeJob");

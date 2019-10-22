@@ -1,3 +1,6 @@
+// Copyright (c) Manabu Tonosaki All rights reserved.
+// Licensed under the MIT license.
+
 using System;
 using System.Collections;
 using System.Windows.Forms;
@@ -150,7 +153,7 @@ namespace Tono.GuiWinForm
                             System.Reflection.PropertyInfo pi = t.GetProperty(ts[ts.Length - 1].ToString());
                             if (pi != null)
                             {
-                                _EventCursor = (Cursor)pi.GetValue(null, new object[] { });
+                                _EventCursor = (Cursor)pi.GetValue(null, Array.Empty<object>());
                             }
                         }
                     }
@@ -165,11 +168,6 @@ namespace Tono.GuiWinForm
         public void SetTrigger(MouseState.Buttons value)
         {
             _trigger = value;
-        }
-
-        private void log(string name, object o)
-        {
-            System.Diagnostics.Debug.WriteLine(name + " : " + o.ToString());
         }
 
         #region IMouseListener ÉÅÉìÉo

@@ -1,3 +1,6 @@
+// Copyright (c) Manabu Tonosaki All rights reserved.
+// Licensed under the MIT license.
+
 using System;
 using System.Drawing;
 using System.Windows.Forms;
@@ -216,10 +219,8 @@ namespace Tono.GuiWinForm
                 var sr = (ScreenRect)spos.Clone();
                 sr.LT.X += MarginLeft;
                 sr.LT.Y += MarginTop;
-                using (Brush brush = new SolidBrush(_fontColor))
-                {
-                    rp.Graphics.DrawString(Text, _lastFont, brush, sr, _sf);   // テキストを描画
-                }
+                using Brush brush = new SolidBrush(_fontColor);
+                rp.Graphics.DrawString(Text, _lastFont, brush, sr, _sf);   // テキストを描画
             }
             return true;
         }

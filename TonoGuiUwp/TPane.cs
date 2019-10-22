@@ -1,4 +1,7 @@
-﻿using Windows.UI.Xaml;
+﻿// Copyright (c) Manabu Tonosaki All rights reserved.
+// Licensed under the MIT license.
+
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using static Tono.Gui.Uwp.CastUtil;
 

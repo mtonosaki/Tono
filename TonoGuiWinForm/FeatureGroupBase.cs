@@ -1,3 +1,6 @@
+// Copyright (c) Manabu Tonosaki All rights reserved.
+// Licensed under the MIT license.
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -350,15 +353,11 @@ namespace Tono.GuiWinForm
                     {
                         ((FeatureGroupBase)c).paramloop(tar, fcs);
                     }
-                    else if (c is FeatureBase)
+                    else if (c is FeatureBase fc)
                     {
-                        var fc = c as FeatureBase;
-                        if (fc != null)
+                        if (string.IsNullOrEmpty(fc.CommandParameter) == false)
                         {
-                            if (fc.CommandParameter != null && fc.CommandParameter != "")
-                            {
-                                fcs.Add(fc);
-                            }
+                            fcs.Add(fc);
                         }
                     }
                 }

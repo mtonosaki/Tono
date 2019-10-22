@@ -1,3 +1,6 @@
+// Copyright (c) Manabu Tonosaki All rights reserved.
+// Licensed under the MIT license.
+
 using System;
 using System.Drawing;
 
@@ -8,7 +11,7 @@ namespace Tono.GuiWinForm
     /// <summary>
     /// ColorUtil の概要の説明です。
     /// </summary>
-    public class ColorUtil
+    public static class ColorUtil
     {
         /// <summary>
         /// 指定レンジいっぱいに使って、色で数値を分けることができるようにする。
@@ -37,6 +40,8 @@ namespace Tono.GuiWinForm
                     case 7: return Color.Purple;            // 紫式（７）部
                     case 8: return Color.Gray;              // ハイ（灰）ヤー（８）
                     case 9: return Color.White;             // ホワイトク（９）リスマス
+                    default:
+                        break;
                 }
                 return Color.DarkGray;
             }
@@ -320,7 +325,7 @@ namespace Tono.GuiWinForm
 
                 if (ret.H < 0.0)
                 {
-                    ret.H = ret.H + 360;
+                    ret.H += 360;
                 }
 
                 return ret;

@@ -1,7 +1,8 @@
+// Copyright (c) Manabu Tonosaki All rights reserved.
+// Licensed under the MIT license.
+
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 using System.Diagnostics;
-using System.Linq;
 using Tono.Jit;
 
 namespace UnitTests

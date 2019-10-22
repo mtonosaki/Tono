@@ -1,3 +1,6 @@
+// Copyright (c) Manabu Tonosaki All rights reserved.
+// Licensed under the MIT license.
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -423,7 +426,7 @@ namespace Tono.GuiWinForm
                 }
 
                 // マイナスカラムは、解除を意味する ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
-                var isChanged = false; // イベント発行用 ダーティーフラグ
+                bool isChanged; // イベント発行用 ダーティーフラグ
                 if (column < 0)
                 {
                     isChanged = _column_no_of_distinctedRow >= 0;
@@ -489,19 +492,12 @@ namespace Tono.GuiWinForm
                         }
                         else
                         {
-                            double summary;
-                            switch (summaryMode)
+                            var summary = summaryMode switch
                             {
-                                case SummaryMode.Minimum:
-                                    summary = double.PositiveInfinity;
-                                    break;
-                                case SummaryMode.Maximum:
-                                    summary = double.NegativeInfinity;
-                                    break;
-                                default:
-                                    summary = 0;
-                                    break;
-                            }
+                                SummaryMode.Minimum => double.PositiveInfinity,
+                                SummaryMode.Maximum => double.NegativeInfinity,
+                                _ => 0,
+                            };
                             var isAllSameValue = true;
                             double preval = 0;
                             for (var i = 0; i < lvis.Count; i++)
@@ -731,7 +727,6 @@ namespace Tono.GuiWinForm
             /// <returns>1=ユニークな１種類でサマリ集計していない。２以上=情報の種類数（行数ではない）で集計している</returns>
             public int GetSummaryInfo(ListViewItem lvi, int column, out SummaryMode summaryMode, out object summaryValue)
             {
-                summaryValue = null;
                 if (_status.TryGetValue(lvi, out var status))
                 {
                     summaryMode = status.GetSummaryMode(column);
@@ -1348,10 +1343,7 @@ namespace Tono.GuiWinForm
                 base.Start(who);
                 if (_token.Equals(who))
                 {
-                    if (FilterRequested != null)
-                    {
-                        FilterRequested(this, new ColumnClickEventArgs(-1));    // -1は全フィルターの意味
-                    }
+                    FilterRequested?.Invoke(this, new ColumnClickEventArgs(-1));    // -1は全フィルターの意味
                 }
             }
 
@@ -1365,10 +1357,7 @@ namespace Tono.GuiWinForm
 
                     tb_Leave(sender, EventArgs.Empty);
 
-                    if (FilterRequested != null)
-                    {
-                        FilterRequested(this, new ColumnClickEventArgs((int)tb.Tag));
-                    }
+                    FilterRequested?.Invoke(this, new ColumnClickEventArgs((int)tb.Tag));
                 }
                 if (e.KeyCode == Keys.Escape)
                 {
@@ -1390,7 +1379,7 @@ namespace Tono.GuiWinForm
 
             private void tb_TextChanged(object sender, EventArgs e)
             {
-                var tb = sender as TextBox;
+                //var tb = sender as TextBox;
                 //int col = (int)tb.Tag;	// リアルタイム更新しない
                 //((daData)Data).Filters[col] = tb.Text;
             }
@@ -1484,11 +1473,9 @@ namespace Tono.GuiWinForm
                 // 列名を追加する
                 foreach (ToolStripItem tsi in _menu.Items)
                 {
-                    var tsmi = tsi as ToolStripMenuItem;
-                    if (tsmi != null)
+                    if (tsi is ToolStripMenuItem tsmi)
                     {
-                        var txt = tsmi.Tag as string;
-                        if (txt != null)
+                        if (tsmi.Tag is string txt)
                         {
                             var col = "?";
                             var val = "?";
@@ -1561,14 +1548,14 @@ namespace Tono.GuiWinForm
                 var isNoFilter = true;
                 for (var i = 0; i < dat.Columns.Count; i++)
                 {
-                    if (dat.Filters[i] != "")
+                    if (string.IsNullOrEmpty(dat.Filters[i]) == false)
                     {
                         isNoFilter = false;
                         break;
                     }
                 }
                 _menu.Items["allClearFilterToolStripMenuItem"].Enabled = !isNoFilter;
-                _menu.Items["clearFilterToolStripMenuItem"].Enabled = ps.columnAtMouse >= 0 && dat.Filters[ps.columnAtMouse] != "";
+                _menu.Items["clearFilterToolStripMenuItem"].Enabled = ps.columnAtMouse >= 0 && string.IsNullOrEmpty(dat.Filters[ps.columnAtMouse]) == false;
                 _menu.Items["showAllRecordsToolStripMenuItem"].Enabled = dat.IsDistinctedRow;
                 _menu.Items["setGroupKeyToolStripMenuItem"].Enabled = (dat.GetColumnNoOfDistinctedRow() != ps.columnAtMouse) & _menu.Items["setGroupKeyToolStripMenuItem"].Enabled;
 
@@ -1609,10 +1596,7 @@ namespace Tono.GuiWinForm
 
                 dat.Filters[ps.columnAtMouse] = s;
 
-                if (FilterRequested != null)
-                {
-                    FilterRequested(this, new ColumnClickEventArgs(ps.columnAtMouse));
-                }
+                FilterRequested?.Invoke(this, new ColumnClickEventArgs(ps.columnAtMouse));
                 Pane.Invalidate(null);
             }
 
@@ -1632,10 +1616,7 @@ namespace Tono.GuiWinForm
                 dat.Filters[colKey] = string.Format("^\"{0}\"$", key);
                 dat.SetDistinctRow(-1);
 
-                if (FilterRequested != null)
-                {
-                    FilterRequested(this, new ColumnClickEventArgs(ps.columnAtMouse));
-                }
+                FilterRequested?.Invoke(this, new ColumnClickEventArgs(ps.columnAtMouse));
 
                 Pane.Invalidate(null);
             }
@@ -1660,10 +1641,7 @@ namespace Tono.GuiWinForm
                         }
                     }
                     dat.Filters[ps.columnAtMouse] = string.Format("{0}^{2}${1}", "{", "}", StringMatch.ReplaceMetaStr(ps.valueAtMouse));
-                    if (FilterRequested != null)
-                    {
-                        FilterRequested(this, new ColumnClickEventArgs(ps.columnAtMouse));
-                    }
+                    FilterRequested?.Invoke(this, new ColumnClickEventArgs(ps.columnAtMouse));
                 }
             }
 
@@ -1690,10 +1668,7 @@ namespace Tono.GuiWinForm
                     var s0 = StringMatch.ReplaceMetaStr(ps.valueAtMouse);
                     var s = string.Format("-{0}^{2}${1} {3}", "{", "}", s0, dat.Filters[ps.columnAtMouse]).Trim();
                     dat.Filters[ps.columnAtMouse] = s;
-                    if (FilterRequested != null)
-                    {
-                        FilterRequested(this, new ColumnClickEventArgs(ps.columnAtMouse));
-                    }
+                    FilterRequested?.Invoke(this, new ColumnClickEventArgs(ps.columnAtMouse));
                 }
             }
 
@@ -1806,7 +1781,6 @@ namespace Tono.GuiWinForm
 
             public void OnKeyUp(KeyState e)
             {
-                var dat = (HotData)Data;
                 var ps = (FreeViewPartsCollection)Parts;
 
                 if (e.IsControl && e.Key == Keys.C)
@@ -1888,7 +1862,7 @@ namespace Tono.GuiWinForm
                                 Text = ps.valueAtMouse;
                             }
                         }
-                        if (base.Text != "")
+                        if (string.IsNullOrEmpty(base.Text) == false)
                         {
                             _prePos = (ScreenPos)e.Pos.Clone();
                         }
@@ -2292,9 +2266,9 @@ namespace Tono.GuiWinForm
                         {
                             // 表示スキップの列
                         }
-                        dx = dx + dw;
+                        dx += dw;
                     }
-                    dy = dy + _partsset.scRowHeight;
+                    dy += _partsset.scRowHeight;
                     rp.Graphics.DrawLine(_glidlinePen, Math.Max(paneRect.LB.X, sx), dy, paneRect.RB.X, dy);
                     if (dy > paneRect.RB.Y)
                     {
@@ -2343,7 +2317,7 @@ namespace Tono.GuiWinForm
                             }
                             rp.Graphics.DrawString(hdstr, font, Brushes.White, rect, sf);
 
-                            if (hd.ImageKey != "" && hd.ImageKey != null && _imageList != null)
+                            if (string.IsNullOrEmpty(hd.ImageKey) == false && hd.ImageKey != null && _imageList != null)
                             {
                                 try
                                 {
@@ -2359,7 +2333,7 @@ namespace Tono.GuiWinForm
                             }
                         }
                     }
-                    hx = hx + hw;
+                    hx += hw;
                 }
                 _partsset.scColStartX.Add(hx);
 

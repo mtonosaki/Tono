@@ -1,4 +1,7 @@
-﻿using ClosedXML.Excel;
+﻿// Copyright (c) Manabu Tonosaki All rights reserved.
+// Licensed under the MIT license.
+
+using ClosedXML.Excel;
 using System;
 using System.Collections.Generic;
 using System.Data;

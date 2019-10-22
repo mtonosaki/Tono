@@ -1,3 +1,6 @@
+// Copyright (c) Manabu Tonosaki All rights reserved.
+// Licensed under the MIT license.
+
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Linq;
@@ -1654,7 +1657,7 @@ namespace UnitTests
             {
                 DelayTime = TimeSpan.FromMinutes(2),
             });
-            Z.Constraints.Add(new CoMaxCost     
+            Z.Constraints.Add(new CoMaxCost
             {
                 Name = JitVariable.From("Count"),
                 Value = 1.0,
@@ -1665,7 +1668,7 @@ namespace UnitTests
             });
 
             // テストワーク投入
-            var today = TimeUtil.ClearTime(DateTime.Now);   
+            var today = TimeUtil.ClearTime(DateTime.Now);
             for (var i = 0; i < 3; i++)
             {
                 st.Events.Enqueue(TimeUtil.Set(today, hour: 9, minute: 0), EventTypes.Out, new JitWork
@@ -2145,7 +2148,7 @@ namespace UnitTests
             Assert.IsTrue(CMP(dat[k++], "y2", EventTypes.Out, "9:00"));
             Assert.IsTrue(CMP(dat[k++], "x1", EventTypes.In, "9:00"));
             Assert.IsTrue(CMP(dat[k++], "y1", EventTypes.In, "9:00"));
-            Assert.IsTrue(CMP(dat[k++], "x2", EventTypes.Out, "9:03"));  
+            Assert.IsTrue(CMP(dat[k++], "x2", EventTypes.Out, "9:03"));
 
             st.DoNext();
             dat = st.Events.Peeks(99).ToList(); k = 0;
@@ -2157,16 +2160,16 @@ namespace UnitTests
             st.DoNext();
             dat = st.Events.Peeks(99).ToList(); k = 0;
             Assert.IsTrue(CMP(dat[k++], "y1", EventTypes.In, "9:00"));
-            Assert.IsTrue(CMP(dat[k++], "y2", EventTypes.Out, "9:00"));  
+            Assert.IsTrue(CMP(dat[k++], "y2", EventTypes.Out, "9:00"));
             Assert.IsTrue(CMP(dat[k++], "x1", EventTypes.Out, "9:01", "X")); // enter to X at 9:00
-            Assert.IsTrue(CMP(dat[k++], "x2", EventTypes.Out, "9:03"));  
+            Assert.IsTrue(CMP(dat[k++], "x2", EventTypes.Out, "9:03"));
 
             st.DoNext();
             dat = st.Events.Peeks(99).ToList(); k = 0;
             Assert.IsTrue(CMP(dat[k++], "y2", EventTypes.Out, "9:00"));
             Assert.IsTrue(CMP(dat[k++], "x1", EventTypes.Out, "9:01", "X")); // enter to X at 9:00
             Assert.IsTrue(CMP(dat[k++], "y1", EventTypes.Out, "9:02", "Y")); // enter to Y at 9:00
-            Assert.IsTrue(CMP(dat[k++], "x2", EventTypes.Out, "9:03"));  
+            Assert.IsTrue(CMP(dat[k++], "x2", EventTypes.Out, "9:03"));
 
             st.DoNext();
             dat = st.Events.Peeks(99).ToList(); k = 0;
@@ -2193,99 +2196,99 @@ namespace UnitTests
             dat = st.Events.Peeks(99).ToList(); k = 0;
             Assert.IsTrue(CMP(dat[k++], "x1", EventTypes.In, "9:01", "JP"));
             Assert.IsTrue(CMP(dat[k++], "y1", EventTypes.Out, "9:02", "Y"));
-            Assert.IsTrue(CMP(dat[k++], "y2", EventTypes.Out, "9:02"));  
-            Assert.IsTrue(CMP(dat[k++], "x2", EventTypes.Out, "9:03"));  
+            Assert.IsTrue(CMP(dat[k++], "y2", EventTypes.Out, "9:02"));
+            Assert.IsTrue(CMP(dat[k++], "x2", EventTypes.Out, "9:03"));
 
             st.DoNext();
             dat = st.Events.Peeks(99).ToList(); k = 0;
-            Assert.IsTrue(CMP(dat[k++], "y1", EventTypes.Out, "9:02", "Y")); 
-            Assert.IsTrue(CMP(dat[k++], "y2", EventTypes.Out, "9:02"));  
-            Assert.IsTrue(CMP(dat[k++], "x2", EventTypes.Out, "9:03"));  
+            Assert.IsTrue(CMP(dat[k++], "y1", EventTypes.Out, "9:02", "Y"));
+            Assert.IsTrue(CMP(dat[k++], "y2", EventTypes.Out, "9:02"));
+            Assert.IsTrue(CMP(dat[k++], "x2", EventTypes.Out, "9:03"));
             Assert.IsTrue(CMP(dat[k++], "x1", EventTypes.Out, "9:11", "Z"));
 
             st.DoNext();
             dat = st.Events.Peeks(99).ToList(); k = 0;
-            Assert.IsTrue(CMP(dat[k++], "y2", EventTypes.Out, "9:02"));  
-            Assert.IsTrue(CMP(dat[k++], "y1", EventTypes.In, "9:02", "Y")); 
-            Assert.IsTrue(CMP(dat[k++], "x2", EventTypes.Out, "9:03"));  
+            Assert.IsTrue(CMP(dat[k++], "y2", EventTypes.Out, "9:02"));
+            Assert.IsTrue(CMP(dat[k++], "y1", EventTypes.In, "9:02", "Y"));
+            Assert.IsTrue(CMP(dat[k++], "x2", EventTypes.Out, "9:03"));
             Assert.IsTrue(CMP(dat[k++], "x1", EventTypes.Out, "9:11", "Z"));
 
             st.DoNext();
             dat = st.Events.Peeks(99).ToList(); k = 0;
-            Assert.IsTrue(CMP(dat[k++], "y1", EventTypes.In, "9:02", "Y")); 
-            Assert.IsTrue(CMP(dat[k++], "y2", EventTypes.Out, "9:02"));  
-            Assert.IsTrue(CMP(dat[k++], "x2", EventTypes.Out, "9:03"));  
+            Assert.IsTrue(CMP(dat[k++], "y1", EventTypes.In, "9:02", "Y"));
+            Assert.IsTrue(CMP(dat[k++], "y2", EventTypes.Out, "9:02"));
+            Assert.IsTrue(CMP(dat[k++], "x2", EventTypes.Out, "9:03"));
             Assert.IsTrue(CMP(dat[k++], "x1", EventTypes.Out, "9:11", "Z"));
 
             st.DoNext();
             dat = st.Events.Peeks(99).ToList(); k = 0;
-            Assert.IsTrue(CMP(dat[k++], "y2", EventTypes.Out, "9:02"));     
-            Assert.IsTrue(CMP(dat[k++], "y1", EventTypes.Out, "9:02", "JP"));   
-            Assert.IsTrue(CMP(dat[k++], "x2", EventTypes.Out, "9:03"));     
+            Assert.IsTrue(CMP(dat[k++], "y2", EventTypes.Out, "9:02"));
+            Assert.IsTrue(CMP(dat[k++], "y1", EventTypes.Out, "9:02", "JP"));
+            Assert.IsTrue(CMP(dat[k++], "x2", EventTypes.Out, "9:03"));
             Assert.IsTrue(CMP(dat[k++], "x1", EventTypes.Out, "9:11", "Z"));
 
             st.DoNext();
             dat = st.Events.Peeks(99).ToList(); k = 0;
-            Assert.IsTrue(CMP(dat[k++], "y1", EventTypes.Out, "9:02", "JP"));   
+            Assert.IsTrue(CMP(dat[k++], "y1", EventTypes.Out, "9:02", "JP"));
             Assert.IsTrue(CMP(dat[k++], "y2", EventTypes.In, "9:02"));
-            Assert.IsTrue(CMP(dat[k++], "x2", EventTypes.Out, "9:03"));     
+            Assert.IsTrue(CMP(dat[k++], "x2", EventTypes.Out, "9:03"));
             Assert.IsTrue(CMP(dat[k++], "x1", EventTypes.Out, "9:11", "Z"));
 
             st.DoNext();
             dat = st.Events.Peeks(99).ToList(); k = 0;
             Assert.IsTrue(CMP(dat[k++], "y2", EventTypes.In, "9:02"));
-            Assert.IsTrue(CMP(dat[k++], "x2", EventTypes.Out, "9:03"));     
+            Assert.IsTrue(CMP(dat[k++], "x2", EventTypes.Out, "9:03"));
             Assert.IsTrue(CMP(dat[k++], "x1", EventTypes.Out, "9:11", "Z"));
-            Assert.IsTrue(CMP(dat[k++], "y1", EventTypes.Out, "9:11", "JP"));   
+            Assert.IsTrue(CMP(dat[k++], "y1", EventTypes.Out, "9:11", "JP"));
 
             st.DoNext();
             dat = st.Events.Peeks(99).ToList(); k = 0;
-            Assert.IsTrue(CMP(dat[k++], "x2", EventTypes.Out, "9:03"));     
-            Assert.IsTrue(CMP(dat[k++], "y2", EventTypes.Out, "9:04", "Y"));    
+            Assert.IsTrue(CMP(dat[k++], "x2", EventTypes.Out, "9:03"));
+            Assert.IsTrue(CMP(dat[k++], "y2", EventTypes.Out, "9:04", "Y"));
             Assert.IsTrue(CMP(dat[k++], "x1", EventTypes.Out, "9:11", "Z"));
-            Assert.IsTrue(CMP(dat[k++], "y1", EventTypes.Out, "9:11", "JP"));   
+            Assert.IsTrue(CMP(dat[k++], "y1", EventTypes.Out, "9:11", "JP"));
 
             st.DoNext();
             dat = st.Events.Peeks(99).ToList(); k = 0;
             Assert.IsTrue(CMP(dat[k++], "x2", EventTypes.In, "9:03"));
-            Assert.IsTrue(CMP(dat[k++], "y2", EventTypes.Out, "9:04", "Y"));    
-            Assert.IsTrue(CMP(dat[k++], "x1", EventTypes.Out, "9:11", "Z"));
-            Assert.IsTrue(CMP(dat[k++], "y1", EventTypes.Out, "9:11", "JP"));   
-
-            st.DoNext();
-            dat = st.Events.Peeks(99).ToList(); k = 0;
-            Assert.IsTrue(CMP(dat[k++], "y2", EventTypes.Out, "9:04", "Y")); 
-            Assert.IsTrue(CMP(dat[k++], "x2", EventTypes.Out, "9:04", "X")); 
+            Assert.IsTrue(CMP(dat[k++], "y2", EventTypes.Out, "9:04", "Y"));
             Assert.IsTrue(CMP(dat[k++], "x1", EventTypes.Out, "9:11", "Z"));
             Assert.IsTrue(CMP(dat[k++], "y1", EventTypes.Out, "9:11", "JP"));
 
             st.DoNext();
             dat = st.Events.Peeks(99).ToList(); k = 0;
-            Assert.IsTrue(CMP(dat[k++], "x2", EventTypes.Out, "9:04", "X")); 
-            Assert.IsTrue(CMP(dat[k++], "y2", EventTypes.In, "9:04", "Y")); 
+            Assert.IsTrue(CMP(dat[k++], "y2", EventTypes.Out, "9:04", "Y"));
+            Assert.IsTrue(CMP(dat[k++], "x2", EventTypes.Out, "9:04", "X"));
             Assert.IsTrue(CMP(dat[k++], "x1", EventTypes.Out, "9:11", "Z"));
             Assert.IsTrue(CMP(dat[k++], "y1", EventTypes.Out, "9:11", "JP"));
 
             st.DoNext();
             dat = st.Events.Peeks(99).ToList(); k = 0;
-            Assert.IsTrue(CMP(dat[k++], "y2", EventTypes.In, "9:04"), "Y");                 
-            Assert.IsTrue(CMP(dat[k++], "x2", EventTypes.In, "9:04"), "X");             
+            Assert.IsTrue(CMP(dat[k++], "x2", EventTypes.Out, "9:04", "X"));
+            Assert.IsTrue(CMP(dat[k++], "y2", EventTypes.In, "9:04", "Y"));
             Assert.IsTrue(CMP(dat[k++], "x1", EventTypes.Out, "9:11", "Z"));
-            Assert.IsTrue(CMP(dat[k++], "y1", EventTypes.Out, "9:11", "JP"));                       
+            Assert.IsTrue(CMP(dat[k++], "y1", EventTypes.Out, "9:11", "JP"));
+
+            st.DoNext();
+            dat = st.Events.Peeks(99).ToList(); k = 0;
+            Assert.IsTrue(CMP(dat[k++], "y2", EventTypes.In, "9:04"), "Y");
+            Assert.IsTrue(CMP(dat[k++], "x2", EventTypes.In, "9:04"), "X");
+            Assert.IsTrue(CMP(dat[k++], "x1", EventTypes.Out, "9:11", "Z"));
+            Assert.IsTrue(CMP(dat[k++], "y1", EventTypes.Out, "9:11", "JP"));
 
             st.DoNext();
             dat = st.Events.Peeks(99).ToList(); k = 0;
             Assert.IsTrue(CMP(dat[k++], "x2", EventTypes.In, "9:04", "X"));
             Assert.IsTrue(CMP(dat[k++], "x1", EventTypes.Out, "9:11", "Z"));
-            Assert.IsTrue(CMP(dat[k++], "y1", EventTypes.Out, "9:11", "JP"));                                   
-            Assert.IsTrue(CMP(dat[k++], "y2", EventTypes.Out, "9:11", "JP"));                   
+            Assert.IsTrue(CMP(dat[k++], "y1", EventTypes.Out, "9:11", "JP"));
+            Assert.IsTrue(CMP(dat[k++], "y2", EventTypes.Out, "9:11", "JP"));
 
             st.DoNext();
             dat = st.Events.Peeks(99).ToList(); k = 0;
             Assert.IsTrue(CMP(dat[k++], "x1", EventTypes.Out, "9:11", "Z"));
-            Assert.IsTrue(CMP(dat[k++], "y1", EventTypes.Out, "9:11", "JP"));                               
-            Assert.IsTrue(CMP(dat[k++], "y2", EventTypes.Out, "9:11", "JP"));                   
-            Assert.IsTrue(CMP(dat[k++], "x2", EventTypes.Out, "9:11", "JP"));                           
+            Assert.IsTrue(CMP(dat[k++], "y1", EventTypes.Out, "9:11", "JP"));
+            Assert.IsTrue(CMP(dat[k++], "y2", EventTypes.Out, "9:11", "JP"));
+            Assert.IsTrue(CMP(dat[k++], "x2", EventTypes.Out, "9:11", "JP"));
 
             st.DoNext();
             dat = st.Events.Peeks(99).ToList(); k = 0;
@@ -2299,25 +2302,25 @@ namespace UnitTests
             Assert.IsTrue(CMP(dat[k++], "y2", EventTypes.Out, "9:11", "JP")); // JP-IN 9:04
             Assert.IsTrue(CMP(dat[k++], "x2", EventTypes.Out, "9:11", "JP")); // JP-IN 9:04
             Assert.IsTrue(CMP(dat[k++], "x1", EventTypes.In, "9:11", "Z"));
-            Assert.IsTrue(CMP(dat[k++], "y1", EventTypes.Out, "9:11", "JP"));  
+            Assert.IsTrue(CMP(dat[k++], "y1", EventTypes.Out, "9:11", "JP"));
 
             st.DoNext();
             dat = st.Events.Peeks(99).ToList(); k = 0;
             Assert.IsTrue(CMP(dat[k++], "x2", EventTypes.Out, "9:11", "JP")); // JP-IN 9:04
             Assert.IsTrue(CMP(dat[k++], "x1", EventTypes.In, "9:11", "Z"));
-            Assert.IsTrue(CMP(dat[k++], "y1", EventTypes.Out, "9:11", "JP"));  
+            Assert.IsTrue(CMP(dat[k++], "y1", EventTypes.Out, "9:11", "JP"));
             Assert.IsTrue(CMP(dat[k++], "y2", EventTypes.Out, "9:11", "JP")); // JP-IN 9:04
 
             st.DoNext();
             dat = st.Events.Peeks(99).ToList(); k = 0;
             Assert.IsTrue(CMP(dat[k++], "x1", EventTypes.In, "9:11", "Z"));
-            Assert.IsTrue(CMP(dat[k++], "y1", EventTypes.Out, "9:11", "JP"));  
+            Assert.IsTrue(CMP(dat[k++], "y1", EventTypes.Out, "9:11", "JP"));
             Assert.IsTrue(CMP(dat[k++], "y2", EventTypes.Out, "9:11", "JP")); // JP-IN 9:04
             Assert.IsTrue(CMP(dat[k++], "x2", EventTypes.Out, "9:11", "JP")); // JP-IN 9:04
 
             st.DoNext();
             dat = st.Events.Peeks(99).ToList(); k = 0;
-            Assert.IsTrue(CMP(dat[k++], "y1", EventTypes.Out, "9:11", "JP"));  
+            Assert.IsTrue(CMP(dat[k++], "y1", EventTypes.Out, "9:11", "JP"));
             Assert.IsTrue(CMP(dat[k++], "y2", EventTypes.Out, "9:11", "JP")); // JP-IN 9:04
             Assert.IsTrue(CMP(dat[k++], "x2", EventTypes.Out, "9:11", "JP")); // JP-IN 9:04
 
@@ -2325,12 +2328,12 @@ namespace UnitTests
             dat = st.Events.Peeks(99).ToList(); k = 0;
             Assert.IsTrue(CMP(dat[k++], "y2", EventTypes.Out, "9:11", "JP")); // JP-IN 9:04
             Assert.IsTrue(CMP(dat[k++], "x2", EventTypes.Out, "9:11", "JP")); // JP-IN 9:04
-            Assert.IsTrue(CMP(dat[k++], "y1", EventTypes.In, "9:11", "JP"));  
+            Assert.IsTrue(CMP(dat[k++], "y1", EventTypes.In, "9:11", "JP"));
 
             st.DoNext();
             dat = st.Events.Peeks(99).ToList(); k = 0;
             Assert.IsTrue(CMP(dat[k++], "x2", EventTypes.Out, "9:11", "JP")); // JP-IN 9:04
-            Assert.IsTrue(CMP(dat[k++], "y1", EventTypes.In, "9:11", "JP"));  
+            Assert.IsTrue(CMP(dat[k++], "y1", EventTypes.In, "9:11", "JP"));
             Assert.IsTrue(CMP(dat[k++], "y2", EventTypes.Out, "9:11", "JP")); // JP-IN 9:04
 
             st.DoNext();
@@ -2402,7 +2405,7 @@ namespace UnitTests
 
             st.DoNext();
             dat = st.Events.Peeks(99).ToList(); k = 0;
-            Assert.IsTrue(CMP(dat[k++], "x2", EventTypes.Out, "9:31", "JP"));    
+            Assert.IsTrue(CMP(dat[k++], "x2", EventTypes.Out, "9:31", "JP"));
             Assert.IsTrue(CMP(dat[k++], "y2", EventTypes.In, "9:31", "Z"));
 
             st.DoNext();

@@ -1,3 +1,6 @@
+// Copyright (c) Manabu Tonosaki All rights reserved.
+// Licensed under the MIT license.
+
 using System;
 using System.Collections;
 using System.Reflection;
@@ -214,17 +217,14 @@ namespace Tono.GuiWinForm
 
         private string provideDefault(string str, string def)
         {
-            if (str == null)
+            if (string.IsNullOrEmpty(str))
             {
                 return def;
             }
-
-            if (str == "")
+            else
             {
-                return def;
+                return str;
             }
-
-            return str;
         }
 
         /// <summary>
@@ -589,7 +589,7 @@ namespace Tono.GuiWinForm
             get
             {
                 object ret = this["Class", value.Name];
-                if (ret == null || ret.ToString() == "")
+                if (ret == null || string.IsNullOrEmpty(ret.ToString()))
                 {
                     return value.Name;
                 }
@@ -610,7 +610,7 @@ namespace Tono.GuiWinForm
                 var key = value.GetType().ToString();
                 var ver = value.ToString();
                 object ret = this[key, ver];
-                if (ret == null || ret.ToString() == "")
+                if (ret == null || string.IsNullOrEmpty(ret.ToString()))
                 {
                     return ver;
                 }
@@ -706,7 +706,7 @@ namespace Tono.GuiWinForm
                         if (ptext != null)
                         {
                             PropertyInfo sp;
-                            if (pname == null || (string)pname.GetValue(ao, null) == "")
+                            if (pname == null || string.IsNullOrEmpty((string)pname.GetValue(ao, null)))
                             {
                                 sp = ptext;
 

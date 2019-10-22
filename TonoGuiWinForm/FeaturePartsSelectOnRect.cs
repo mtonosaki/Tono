@@ -1,3 +1,6 @@
+// Copyright (c) Manabu Tonosaki All rights reserved.
+// Licensed under the MIT license.
+
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -132,8 +135,7 @@ namespace Tono.GuiWinForm
             _selectedParts.Clear();
             foreach (var pts in GetFilteredParts())
             {
-                var part = pts as IPartsSelectable;
-                if (part != null && part is PartsBase)
+                if (pts is IPartsSelectable part && part is PartsBase)
                 {
                     if (part.IsSelected)
                     {
@@ -174,8 +176,7 @@ namespace Tono.GuiWinForm
                 {
                     if (Parts.IsOverlapped(_tarPane, pts, _tarPane, _mask, true))
                     {
-                        var selp = pts as IPartsSelectable;
-                        if (selp != null)
+                        if (pts is IPartsSelectable selp)
                         {
                             var selected = _shiftAdd.Contains(selp);
                             var prevSel = selp.IsSelected;

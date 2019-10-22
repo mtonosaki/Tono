@@ -1,3 +1,6 @@
+// Copyright (c) Manabu Tonosaki All rights reserved.
+// Licensed under the MIT license.
+
 using System.Runtime.InteropServices;
 
 namespace Tono.GuiWinForm
@@ -5,9 +8,8 @@ namespace Tono.GuiWinForm
     /// <summary>
     /// uCpuCounter ÇÃäTóvÇÃê‡ñæÇ≈Ç∑ÅB
     /// </summary>
-    public class CpuClockCounter
+    public static class CpuClockCounter
     {
-
         [DllImport("DposeWinNative.dll")]
         private static extern ulong GetCpuCount();
 

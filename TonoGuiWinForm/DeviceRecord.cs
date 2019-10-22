@@ -1,3 +1,6 @@
+// Copyright (c) Manabu Tonosaki All rights reserved.
+// Licensed under the MIT license.
+
 using System.Collections;
 using System.Windows.Forms;
 
@@ -8,7 +11,7 @@ namespace Tono.GuiWinForm
     /// <summary>
     /// DeviceRecord ÇÃäTóvÇÃê‡ñæÇ≈Ç∑ÅB
     /// </summary>
-    public class DeviceRecord
+    public static class DeviceRecord
     {
         public class TagSkipStart
         {

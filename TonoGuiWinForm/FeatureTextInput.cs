@@ -1,3 +1,6 @@
+// Copyright (c) Manabu Tonosaki All rights reserved.
+// Licensed under the MIT license.
+
 using System;
 using System.Windows.Forms;
 
@@ -114,7 +117,7 @@ namespace Tono.GuiWinForm
                     toUpdate = true;
                     if (_tarParts.Text == Mes.Current["RequestInput.Short"] || _tarParts.Text == Mes.Current["RequestInput"])
                     {
-                        if (textBox1.Text == "")
+                        if (string.IsNullOrEmpty(textBox1.Text))
                         {
                             toUpdate = false;
                         }

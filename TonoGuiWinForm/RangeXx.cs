@@ -1,3 +1,6 @@
+// Copyright (c) Manabu Tonosaki All rights reserved.
+// Licensed under the MIT license.
+
 using System;
 
 #pragma warning disable 1591, 1572, 1573
@@ -157,9 +160,8 @@ namespace Tono.GuiWinForm
 
         public void Inflate(object value)
         {
-            if (value is int)
+            if (value is int p)
             {
-                var p = (int)value;
                 X0 -= p;
                 X1 += p;
             }

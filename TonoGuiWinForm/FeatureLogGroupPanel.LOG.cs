@@ -1,4 +1,7 @@
-﻿using System;
+﻿// Copyright (c) Manabu Tonosaki All rights reserved.
+// Licensed under the MIT license.
+
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
@@ -390,10 +393,7 @@ namespace Tono.GuiWinForm
             _dupcheck.Clear();
             _isRequestedDraw = true;
 
-            if (LogClearRequested != null)
-            {
-                LogClearRequested(null, EventArgs.Empty);
-            }
+            LogClearRequested?.Invoke(null, EventArgs.Empty);
         }
 
         /// <summary>

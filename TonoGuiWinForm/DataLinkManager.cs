@@ -1,3 +1,6 @@
+// Copyright (c) Manabu Tonosaki All rights reserved.
+// Licensed under the MIT license.
+
 namespace Tono.GuiWinForm
 {
     /// <summary>
@@ -57,12 +60,12 @@ namespace Tono.GuiWinForm
         /// </summary>
         private void init()
         {
-            _clickParts = _clickParts ?? new DataSharingManager.Object();
-            _clickPane = _clickPane ?? new DataSharingManager.Object();
-            _tokenTray = _tokenTray ?? new TokenTray();
-            _finalizers = _finalizers ?? new FinalizeManageBuffer();
-            _persister = _persister ?? new PersistManager();
-            _timer = _timer ?? new GuiTimer();
+            _clickParts ??= new DataSharingManager.Object();
+            _clickPane ??= new DataSharingManager.Object();
+            _tokenTray ??= new TokenTray();
+            _finalizers ??= new FinalizeManageBuffer();
+            _persister ??= new PersistManager();
+            _timer ??= new GuiTimer();
         }
 
         /// <summary>

@@ -1,3 +1,6 @@
+// Copyright (c) Manabu Tonosaki All rights reserved.
+// Licensed under the MIT license.
+
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -117,8 +120,7 @@ namespace Tono.GuiWinForm
 
         private static void mes_FormClosing(object sender, FormClosingEventArgs e)
         {
-            var mes = sender as FormMessageBoxLight;
-            if (mes != null)
+            if (sender is FormMessageBoxLight mes)
             {
                 var key = mes.getKey();
                 _showing.Remove(key);
