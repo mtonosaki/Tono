@@ -143,6 +143,9 @@
     <Content Include="Assets\Lump16.png" />
     <Content Include="Assets\NoSheet16.png" />
     <Content Include="Assets\Paper16.png" />
+    <Content Include="Assets\Sample001.png" />
+    <Content Include="Assets\Sample002.png" />
+    <Content Include="Assets\Sample003.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
