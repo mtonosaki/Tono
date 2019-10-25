@@ -1,4 +1,7 @@
-﻿namespace Tono.GuiWinForm
+﻿// Copyright (c) Manabu Tonosaki All rights reserved.
+// Licensed under the MIT license.
+
+namespace Tono.GuiWinForm
 {
     /// <summary>
     /// 東経北緯を表すシンプルなクラス１

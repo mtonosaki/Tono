@@ -1,4 +1,7 @@
-﻿using System;
+﻿// Copyright (c) Manabu Tonosaki All rights reserved.
+// Licensed under the MIT license.
+
+using System;
 using System.Diagnostics;
 
 namespace Tono.Logic
@@ -6,7 +9,7 @@ namespace Tono.Logic
     /// <summary>
     /// Interpolation function
     /// </summary>
-    public class Interpolation
+    public static class Interpolation
     {
         /// <summary>
         /// ease-in curve interpolation

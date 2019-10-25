@@ -1,3 +1,6 @@
+// Copyright (c) Manabu Tonosaki All rights reserved.
+// Licensed under the MIT license.
+
 using System;
 using System.Drawing;
 
@@ -373,8 +376,7 @@ namespace Tono.GuiWinForm
         /// <returns>true:óÃàÊì‡ / false:óÃàÊäO</returns>
         public bool IsIn(object value)
         {
-            var xy = value as XyBase;
-            if (xy != null)
+            if (value is XyBase xy)
             {
                 if (LT.X <= xy.X && RB.X >= xy.X && LT.Y <= xy.Y && RB.Y >= xy.Y)
                 {
@@ -385,8 +387,7 @@ namespace Tono.GuiWinForm
                     return false;
                 }
             }
-            var tar = value as Rect;
-            if (tar != null)
+            if (value is Rect tar)
             {
                 if (LT.X <= tar.RB.X && RB.X >= tar.LT.X && LT.Y <= tar.RB.Y && RB.Y >= tar.LT.Y)
                 {
@@ -428,26 +429,22 @@ namespace Tono.GuiWinForm
 
         public void Inflate(object value)
         {
-            if (value is double)
+            if (value is double vald)
             {
-                var val = (double)value;
-
                 //ägëÂ
-                LT.X = (int)(LT.X - val);
-                LT.Y = (int)(LT.Y - val);
-                RB.X = (int)(RB.X + val);
-                RB.Y = (int)(RB.Y + val);
+                LT.X = (int)(LT.X - vald);
+                LT.Y = (int)(LT.Y - vald);
+                RB.X = (int)(RB.X + vald);
+                RB.Y = (int)(RB.Y + vald);
             }
             else
-            if (value is int)
+            if (value is int vali)
             {
-                var val = (int)value;
-
                 //ägëÂ
-                LT.X = LT.X - val;
-                LT.Y = LT.Y - val;
-                RB.X = RB.X + val;
-                RB.Y = RB.Y + val;
+                LT.X = LT.X - vali;
+                LT.Y = LT.Y - vali;
+                RB.X = RB.X + vali;
+                RB.Y = RB.Y + vali;
             }
             else
             {
@@ -470,26 +467,22 @@ namespace Tono.GuiWinForm
 
         public void Deflate(object value)
         {
-            if (value is double)
+            if (value is double vald)
             {
-                var val = (double)value;
-
                 //èkè¨
-                LT.X = (int)(LT.X + val);
-                LT.Y = (int)(LT.Y + val);
-                RB.X = (int)(RB.X - val);
-                RB.Y = (int)(RB.Y - val);
+                LT.X = (int)(LT.X + vald);
+                LT.Y = (int)(LT.Y + vald);
+                RB.X = (int)(RB.X - vald);
+                RB.Y = (int)(RB.Y - vald);
             }
             else
-            if (value is int)
+            if (value is int vali)
             {
-                var val = (int)value;
-
                 //èkè¨
-                LT.X = LT.X + val;
-                LT.Y = LT.Y + val;
-                RB.X = RB.X - val;
-                RB.Y = RB.Y - val;
+                LT.X = LT.X + vali;
+                LT.Y = LT.Y + vali;
+                RB.X = RB.X - vali;
+                RB.Y = RB.Y - vali;
             }
             else
             {

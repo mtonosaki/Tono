@@ -1,3 +1,6 @@
+// Copyright (c) Manabu Tonosaki All rights reserved.
+// Licensed under the MIT license.
+
 using System.Drawing;
 
 #pragma warning disable 1591, 1572, 1573
@@ -120,7 +123,7 @@ namespace Tono.GuiWinForm
                 {
                     _tt.Text = value;
                     Parts.Clear(_rp, LayerID);
-                    if (_tt.Text != string.Empty)
+                    if (string.IsNullOrEmpty(_tt.Text) == false)
                     {
                         _tt.RequestPosition();
                         Parts.Add(_rp, _tt, LayerID);

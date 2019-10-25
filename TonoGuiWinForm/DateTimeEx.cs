@@ -1,3 +1,6 @@
+// Copyright (c) Manabu Tonosaki All rights reserved.
+// Licensed under the MIT license.
+
 using System;
 
 #pragma warning disable 1591, 1572, 1573
@@ -234,7 +237,7 @@ namespace Tono.GuiWinForm
                 return DateTimeEx.FromDHMS(0, 0, 0, 0);
             }
 
-            var v = "";
+            string v;
             if (v0.Split(' ').Length > 1)
             {
                 v = v0.Split(' ')[1];
@@ -244,7 +247,7 @@ namespace Tono.GuiWinForm
                 v = v0.Split(' ')[0];
             }
             var vv = v.Trim();
-            if (vv == "")
+            if (string.IsNullOrEmpty(vv))
             {
                 return DateTimeEx.FromDHMS(0, 0, 0, 0);
             }
@@ -269,7 +272,7 @@ namespace Tono.GuiWinForm
                 s = 0;
             }
             var d = h / 24;
-            h = h % 24;
+            h %= 24;
             return DateTimeEx.FromDHMS(d, h, m, s);
         }
 
@@ -303,7 +306,7 @@ namespace Tono.GuiWinForm
 
         public static bool operator ==(DateTimeEx t, object o)
         {
-            if (object.ReferenceEquals(t, null))
+            if (t is null)
             {
                 return o == null;
             }
@@ -408,13 +411,15 @@ namespace Tono.GuiWinForm
         //
         public static DateTimeEx FromMinutes(int totalMinutes)
         {
-            var t = new DateTimeEx();
-            switch (totalMinutes)
+            var t = new DateTimeEx
             {
-                case int.MaxValue: t._val = totalMinutes; break;
-                case int.MinValue: t._val = totalMinutes; break;
-                default: t._val = totalMinutes * 60; break;
-            }
+                _val = totalMinutes switch
+                {
+                    int.MaxValue => totalMinutes,
+                    int.MinValue => totalMinutes,
+                    _ => totalMinutes * 60,
+                }
+            };
             return t;
         }
 

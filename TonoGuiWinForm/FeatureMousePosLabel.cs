@@ -1,3 +1,6 @@
+// Copyright (c) Manabu Tonosaki All rights reserved.
+// Licensed under the MIT license.
+
 using System.Windows.Forms;
 
 #pragma warning disable 1591, 1572, 1573
@@ -27,25 +30,7 @@ namespace Tono.GuiWinForm
         /// </summary>
         public void OnMouseMove(MouseState e)
         {
-
-            Control c;
-            if (Pane is TPane)
-            {
-                c = ((TPane)Pane).Parent;
-            }
-            else
-            {
-                c = (Control)Pane;
-            }
-
-
-            // マウス座標に応じて、場所を示すアイテムを移動する
-            // つぼがここに作る
-
-            //e.Pos;これがマウス座標
-
             _mousePosLabel.Text = e.Pos.Y + "," + e.Pos.X;
-
         }
 
         #region IMouseListener メンバ

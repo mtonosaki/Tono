@@ -1,3 +1,6 @@
+// Copyright (c) Manabu Tonosaki All rights reserved.
+// Licensed under the MIT license.
+
 using System;
 using System.IO;
 
@@ -47,7 +50,7 @@ namespace Tono.GuiWinForm
             var t = Environment.GetEnvironmentVariable("Temp");
             var proc = System.Diagnostics.Process.GetCurrentProcess();
 
-            if (t == "")
+            if (string.IsNullOrEmpty(t))
             {
                 var ass = System.Reflection.Assembly.GetEntryAssembly();
                 t = ass.CodeBase;

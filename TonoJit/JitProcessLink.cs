@@ -1,4 +1,7 @@
-﻿namespace Tono.Jit
+﻿// Copyright (c) Manabu Tonosaki All rights reserved.
+// Licensed under the MIT license.
+
+namespace Tono.Jit
 {
     /// <summary>
     /// Process link object

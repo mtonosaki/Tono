@@ -400,11 +400,7 @@
     <Content Include="Resources\Icon48.png" />
     <Content Include="Resources\Icon64.png" />
     <Content Include="TonoGuiWinForm.ico" />
-    <Content Include="TonoGuiWinForm.png" />
-    <Content Include="使い方.txt" />
-    <None Include="%40Doc\Feature Architecture.pptx" />
-    <None Include="%40Doc\Parts Architecture..pptx" />
-    <None Include="%40Doc\uLeastSquareNPolynominal.xlsx" />
+    <Content Include="TonoGuiWinFormIcon.png" />
     <None Include="Resources\lp_Dev_off.png" />
     <None Include="Resources\lp_Dev_on.png" />
     <None Include="Resources\lp_Err_off.png" />

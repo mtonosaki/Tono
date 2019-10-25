@@ -1,3 +1,6 @@
+// Copyright (c) Manabu Tonosaki All rights reserved.
+// Licensed under the MIT license.
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -39,6 +42,24 @@ namespace Tono.GuiWinForm
                 Parts = parts;
                 Pane = pane;
                 LayerLevel = layerLevel;
+            }
+
+            public override bool Equals(object obj)
+            {
+                if (obj is PartsEntry pe)
+                {
+                    return Parts.Equals(pe.Parts) && Pane == pe.Pane && LayerLevel == pe.LayerLevel;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            public static bool operator ==(PartsEntry a, PartsEntry b) => a.Equals(b);
+            public static bool operator !=(PartsEntry a, PartsEntry b) => !a.Equals(b);
+            public override int GetHashCode()
+            {
+                return Parts.GetHashCode();
             }
 
             #region Data tips for debugging

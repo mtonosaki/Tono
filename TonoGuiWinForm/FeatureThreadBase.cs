@@ -1,3 +1,6 @@
+// Copyright (c) Manabu Tonosaki All rights reserved.
+// Licensed under the MIT license.
+
 using System;
 using System.Diagnostics;
 using System.Threading;
@@ -19,13 +22,6 @@ namespace Tono.GuiWinForm
         /// <summary>スレッドの優先度(初期値は標準)</summary>
         protected System.Threading.ThreadPriority _priority = System.Threading.ThreadPriority.Normal;
         #endregion
-
-        /// <summary>
-        /// コンストラクタ
-        /// </summary>
-        public FeatureThreadBase()
-        {
-        }
 
         /// <summary>
         /// トークンによる起動イベント

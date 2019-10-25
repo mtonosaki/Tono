@@ -1,3 +1,6 @@
+// Copyright (c) Manabu Tonosaki All rights reserved.
+// Licensed under the MIT license.
+
 namespace Tono.GuiWinForm
 {
     /// <summary>
@@ -56,7 +59,7 @@ namespace Tono.GuiWinForm
         public override void ParseParameter(string param)
         {
             base.ParseParameter(param);
-            if (param != "")
+            if (string.IsNullOrEmpty(param) == false)
             {
                 var s = param.ToUpper();
                 if (s.IndexOf('X') < 0)
@@ -72,12 +75,6 @@ namespace Tono.GuiWinForm
 
         private bool _isX = true;
         private bool _isY = true;
-
-
-        private void log(string name, object o)
-        {
-            System.Diagnostics.Debug.WriteLine(name + " : " + o.ToString());
-        }
 
         #region IMouseListener ƒƒ“ƒo
 

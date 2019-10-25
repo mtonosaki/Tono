@@ -1,4 +1,7 @@
-﻿using Windows.ApplicationModel.DataTransfer;
+﻿// Copyright (c) Manabu Tonosaki All rights reserved.
+// Licensed under the MIT license.
+
+using Windows.ApplicationModel.DataTransfer;
 
 namespace Tono.Gui.Uwp
 {

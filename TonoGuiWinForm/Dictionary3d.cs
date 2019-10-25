@@ -1,3 +1,6 @@
+// Copyright (c) Manabu Tonosaki All rights reserved.
+// Licensed under the MIT license.
+
 using System.Collections.Generic;
 
 #pragma warning disable 1591, 1572, 1573
@@ -32,7 +35,7 @@ namespace Tono.GuiWinForm
             }
             else
             {
-                return new TKey2[] { };
+                return System.Array.Empty<TKey2>();
             }
         }
 
@@ -45,7 +48,7 @@ namespace Tono.GuiWinForm
                     return d3.Keys;
                 }
             }
-            return new TKey3[] { };
+            return System.Array.Empty<TKey3>();
         }
 
         /// <summary>

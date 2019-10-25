@@ -1,3 +1,6 @@
+// Copyright (c) Manabu Tonosaki All rights reserved.
+// Licensed under the MIT license.
+
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -22,7 +25,7 @@ namespace Tono.GuiWinForm
         {
             internal class IconJumpState
             {
-                private static readonly int _steps = 30;
+                private const int _steps = 30;
                 private static readonly Angle _angleStart = Angle.FromDeg(240);
                 private Angle _angle = _angleStart;
                 private int _n = -1;
@@ -37,10 +40,7 @@ namespace Tono.GuiWinForm
                         Thread.Sleep(600 / _steps);
                         if (Next())
                         {
-                            if (Jumping != null)
-                            {
-                                Jumping(this, EventArgs.Empty);
-                            }
+                            Jumping?.Invoke(this, EventArgs.Empty);
                         }
                         else
                         {

@@ -1,3 +1,6 @@
+// Copyright (c) Manabu Tonosaki All rights reserved.
+// Licensed under the MIT license.
+
 using System;
 using System.Collections;
 using System.Drawing;
@@ -127,7 +130,6 @@ namespace Tono.GuiWinForm
             var zx = (double)rp.Zoom.X / 1000;
 
             var org = rp.Scroll;
-            var p0 = ScreenPos.FromInt(0, 0);
 
             RectangleF b = rp.GetPaneRect();
             rp.Graphics.FillRectangle(_bc, b);
@@ -214,7 +216,7 @@ namespace Tono.GuiWinForm
                     }
                 }
             }
-            if (preDs == "" || isLeftWeek)
+            if (string.IsNullOrEmpty(preDs) || isLeftWeek)
             {
                 var day = (int)((mv0 + 24 * 7000) / 24);
                 //string ds = _strDays != null ? _strDays[day % _strDays.Length] : uTime.GetDayString(day % 7);

@@ -1,3 +1,6 @@
+// Copyright (c) Manabu Tonosaki All rights reserved.
+// Licensed under the MIT license.
+
 using System;
 using System.Collections;
 
@@ -132,7 +135,7 @@ namespace Tono.GuiWinForm
             // トークンを投げる（フィーチャーのEnableを設定した後）
             if (_isNoToken == false)
             {
-                if (tokenLidName != string.Empty)
+                if (string.IsNullOrEmpty(tokenLidName) == false)
                 {
                     Token.Add(NamedId.FromName(tokenLidName), this);
                 }
@@ -240,7 +243,7 @@ namespace Tono.GuiWinForm
             else
             if (_tokenReadCompleted.Equals(who) == false)
             {
-                if (_interlockGroup == "")
+                if (string.IsNullOrEmpty(_interlockGroup))
                 {
                     // UNDO/REDOしながら、スイッチ切り替え
                     Persister[UNDO].StartChunk(GetType().Name + ".Start");

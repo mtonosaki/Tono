@@ -1,4 +1,7 @@
-﻿using Microsoft.Graphics.Canvas;
+﻿// Copyright (c) Manabu Tonosaki All rights reserved.
+// Licensed under the MIT license.
+
+using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Text;
 
 namespace Tono.Gui.Uwp

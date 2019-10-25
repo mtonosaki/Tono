@@ -1,3 +1,6 @@
+// Copyright (c) Manabu Tonosaki All rights reserved.
+// Licensed under the MIT license.
+
 using System;
 using System.Collections.Generic;
 
@@ -99,9 +102,7 @@ namespace Tono.GuiWinForm
         /// </summary>
         public override void ProvideDrawFunction()
         {
-            var isMotionNeed = false;
-
-            isMotionNeed = scroll1step();
+            var isMotionNeed = scroll1step();
             isMotionNeed |= zoom1step();
 
             base.ProvideDrawFunction();
@@ -139,7 +140,7 @@ namespace Tono.GuiWinForm
                 else
                 {
                     var diff = tarZoom - nowPos;
-                    diff = diff / 4;    // イーズアウトモーション（終わりがけをゆっくり）
+                    diff /= 4;    // イーズアウトモーション（終わりがけをゆっくり）
                     pane.Zoom = nowPos + diff;
                 }
             }
@@ -181,7 +182,7 @@ namespace Tono.GuiWinForm
                     else
                     {
                         var diff = tarPos - nowPos;
-                        diff = diff / 4;    // イーズアウトモーション（終わりがけをゆっくり）
+                        diff /= 4;    // イーズアウトモーション（終わりがけをゆっくり）
                         pane.Scroll = nowPos + diff;
                     }
                 }
@@ -262,8 +263,8 @@ namespace Tono.GuiWinForm
                             float dx = tar.Pos.X - part.Rect.LT.X;
                             float dy = tar.Pos.Y - part.Rect.LT.Y;
                             var div = (float)tar.StepN * 2;
-                            dx = dx / div;
-                            dy = dy / div;
+                            dx /= div;
+                            dy /= div;
                             part.Rect += CodePos.FromInt((int)dx, (int)dy);
                         }
                         nDone++;

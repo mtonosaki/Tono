@@ -1,3 +1,6 @@
+// Copyright (c) Manabu Tonosaki All rights reserved.
+// Licensed under the MIT license.
+
 using System;
 using System.Collections;
 using System.ComponentModel;
@@ -59,7 +62,7 @@ namespace Tono.GuiWinForm
             var pi = control.GetType().GetProperty(propertyName);
             if (pi != null)
             {
-                var val = pi.GetValue(control, new object[] { });
+                var val = pi.GetValue(control, Array.Empty<object>());
                 if (isSave)
                 {
                     ConfigRegister.Current[key + "." + propertyName] = val;
@@ -74,13 +77,13 @@ namespace Tono.GuiWinForm
                         var regVal = ConfigRegister.Current[key + "." + propertyName, val];
                         try
                         {
-                            pi.SetValue(control, regVal, new object[] { });
+                            pi.SetValue(control, regVal, Array.Empty<object>());
                         }
                         catch (ArgumentException)
                         {
                             // EnumŒ^‚Åƒ`ƒƒƒŒƒ“ƒW
                             var eval = Enum.Parse(pi.PropertyType, regVal.ToString());
-                            pi.SetValue(control, eval, new object[] { });
+                            pi.SetValue(control, eval, Array.Empty<object>());
                         }
                     }
                     catch (Exception)
@@ -186,15 +189,14 @@ namespace Tono.GuiWinForm
         /// </summary>
         private void _parent_Load(object sender, EventArgs e)
         {
-            var c = sender as ISite;
             System.Windows.Forms.Timer t;
-            if (c == null)
+            if (sender is ISite c)
             {
-                t = new System.Windows.Forms.Timer();
+                t = new System.Windows.Forms.Timer(c.Container);
             }
             else
             {
-                t = new System.Windows.Forms.Timer(c.Container);
+                t = new System.Windows.Forms.Timer();
             }
             t.Tick += new EventHandler(t_Tick);
             t.Interval = 2;
@@ -281,7 +283,7 @@ namespace Tono.GuiWinForm
                 var ifs = pi.PropertyType.FindInterfaces(new TypeFilter(_filter), null);
                 if (ifs.Length > 0)
                 {
-                    var col = (ICollection)pi.GetValue(c, new object[] { });
+                    var col = (ICollection)pi.GetValue(c, Array.Empty<object>());
                     foreach (var child in col)
                     {
                         var k = builtKey + ".";
@@ -289,21 +291,21 @@ namespace Tono.GuiWinForm
                         var name = "";
                         if (pin != null)
                         {
-                            name = pin.GetValue(child, new object[] { }).ToString();
+                            name = pin.GetValue(child, Array.Empty<object>()).ToString();
                         }
-                        if (pin == null || name == "")
+                        if (pin == null || string.IsNullOrEmpty(name))
                         {
                             pin = child.GetType().GetProperty("Index");
                             if (pin != null)
                             {
-                                var id = pin.GetValue(child, new object[] { }).ToString();
+                                var id = pin.GetValue(child, Array.Empty<object>()).ToString();
                                 if (child is IComponent)
                                 {
                                     _controlLoop((IComponent)child, builtKey + "." + child.GetType().Name + "(ID=" + id + ")", isSave);
                                 }
                             }
                         }
-                        if (name != "")
+                        if (string.IsNullOrEmpty(name) == false)
                         {
                             if (child is IComponent)
                             {

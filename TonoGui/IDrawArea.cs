@@ -1,4 +1,7 @@
-﻿namespace Tono.Gui
+﻿// Copyright (c) Manabu Tonosaki All rights reserved.
+// Licensed under the MIT license.
+
+namespace Tono.Gui
 {
     /// <summary>
     /// drawing interface for TGuiView and TPane

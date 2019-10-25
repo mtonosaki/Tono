@@ -1,3 +1,6 @@
+// Copyright (c) Manabu Tonosaki All rights reserved.
+// Licensed under the MIT license.
+
 using System;
 using System.Drawing;
 using System.Drawing.Text;
@@ -199,7 +202,7 @@ namespace Tono.GuiWinForm
                     }
 
                 }
-                if (Text == string.Empty)
+                if (string.IsNullOrEmpty(Text))
                 {
                     return true;
                 }

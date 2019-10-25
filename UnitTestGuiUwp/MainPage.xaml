@@ -1,0 +1,31 @@
+﻿<Page
+    x:Class="UnitTestGuiUwp.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:UnitTestGuiUwp"
+    xmlns:tg="using:Tono.Gui.Uwp"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <tg:TGuiView x:Name="GuiView" x:Uid="GuiView" 
+                 ScrollX="620" ScrollY="340">
+        <tg:TGuiView.DataCold>
+            <local:DataCold />
+        </tg:TGuiView.DataCold>
+        <tg:TGuiView.DataHot>
+            <local:DataHot />
+        </tg:TGuiView.DataHot>
+        <tg:TGuiView.Features>
+            <tg:FeatureLogPanel Name="MainLogPanel" TargetPane="LogPanel" BackgroundColor1="#CC202B3E" BackgroundColor2="#CC202B3E" />
+            <tg:FeatureLogOpenAsText ListeningButtonNames="OpenLogText" />
+            <tg:FeatureScrollDrag />
+            <tg:FeatureZoomDrag />
+            <tg:FeatureSelectParts TargetLayer="{x:Bind local:LAYER.SampleLayer}" />
+            <tg:FeatureMoveSelectedParts TargetLayer="{x:Bind local:LAYER.SampleLayer}" />
+            <local:FeatureTestGeneral />
+        </tg:TGuiView.Features>
+        <tg:TPane Name="LogPanel" Height="300" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignBottomWithPanel="True" RelativePanel.AlignRightWithPanel="True" />
+    </tg:TGuiView>
+</Page>

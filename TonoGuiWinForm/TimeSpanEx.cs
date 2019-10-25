@@ -1,3 +1,6 @@
+// Copyright (c) Manabu Tonosaki All rights reserved.
+// Licensed under the MIT license.
+
 using System;
 using System.Collections;
 
@@ -66,9 +69,8 @@ namespace Tono.GuiWinForm
 
         public override bool Equals(object obj)
         {
-            if (obj is TimeSpanEx)
+            if (obj is TimeSpanEx t)
             {
-                var t = (TimeSpanEx)obj;
                 return t._start == _start && t._end == _end;
             }
             return false;
@@ -96,15 +98,12 @@ namespace Tono.GuiWinForm
         /// <returns>true = ”ÍˆÍ“à / false = ”ÍˆÍŠO</returns>
         public bool IsIn(object value)
         {
-            if (value is DateTimeEx)
+            if (value is DateTimeEx t)
             {
-                var t = (DateTimeEx)value;
-
                 return _start <= t && t <= _end;
             }
-            if (value is TimeSpanEx)
+            if (value is TimeSpanEx ts)
             {
-                var ts = (TimeSpanEx)value;
                 if (End >= ts.Start && Start <= ts.End ||
                     Start >= ts.Start && End <= ts.End ||
                     ts.Start >= Start && ts.End <= End)
@@ -122,9 +121,8 @@ namespace Tono.GuiWinForm
 
         public void Transfer(object value)
         {
-            if (value is DateTimeEx)
+            if (value is DateTimeEx t)
             {
-                var t = (DateTimeEx)value;
                 _start += t;
                 _end += t;
             }
@@ -137,9 +135,8 @@ namespace Tono.GuiWinForm
 
         public void Inflate(object value)
         {
-            if (value is DateTimeEx)
+            if (value is DateTimeEx t)
             {
-                var t = (DateTimeEx)value;
                 _start -= t;
                 _end += t;
             }
@@ -152,9 +149,8 @@ namespace Tono.GuiWinForm
 
         public void Deflate(object value)
         {
-            if (value is DateTimeEx)
+            if (value is DateTimeEx t)
             {
-                var t = (DateTimeEx)value;
                 _start += t;
                 _end -= t;
             }

@@ -1,3 +1,6 @@
+// Copyright (c) Manabu Tonosaki All rights reserved.
+// Licensed under the MIT license.
+
 using System.Windows.Forms;
 
 namespace Tono.GuiWinForm
@@ -26,13 +29,11 @@ namespace Tono.GuiWinForm
             base.Start(who);
             var fd = new FontDialog();
 
-
             // èâä˙âª
             foreach (PartsCollectionBase.PartsEntry pe in _selectedParts)
             {
-                if (pe.Parts is PartsTextBase)
+                if (pe.Parts is PartsTextBase fp)
                 {
-                    var fp = (PartsTextBase)pe.Parts;
                     fd.Font = fp.LastFont;
                     fd.Color = fp.FontColor;
                     break;
@@ -51,9 +52,8 @@ namespace Tono.GuiWinForm
             {
                 foreach (PartsCollectionBase.PartsEntry pe in _selectedParts)
                 {
-                    if (pe.Parts is PartsTextBase)
+                    if (pe.Parts is PartsTextBase fp)
                     {
-                        var fp = (PartsTextBase)pe.Parts;
                         fp.FontName = fd.Font.Name;
                         fp.FontSize = fd.Font.SizeInPoints;
                         fp.FontColor = fd.Color;

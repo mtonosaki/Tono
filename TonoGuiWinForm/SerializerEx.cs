@@ -1,3 +1,6 @@
+// Copyright (c) Manabu Tonosaki All rights reserved.
+// Licensed under the MIT license.
+
 using System;
 using System.Collections;
 using System.Collections.Specialized;
@@ -13,7 +16,7 @@ namespace Tono.GuiWinForm
     /// <summary>
     /// SerializerEx ÇÃäTóvÇÃê‡ñæÇ≈Ç∑ÅB
     /// </summary>
-    public class SerializerEx
+    public static class SerializerEx
     {
         private enum Tag : byte
         {
@@ -100,13 +103,12 @@ namespace Tono.GuiWinForm
         private static object receiveLoop(Stream reader)
         {
             object ret = null;
-            Type currentType = null;
             Type subClassType = null;
 
             for (var isLoop = true; isLoop;)
             {
                 var tag = (Tag)reader.ReadByte();
-
+                Type currentType;
                 switch (tag)
                 {
                     case Tag.ClassStart:

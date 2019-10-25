@@ -1,3 +1,6 @@
+// Copyright (c) Manabu Tonosaki All rights reserved.
+// Licensed under the MIT license.
+
 using System;
 using System.Drawing;
 using System.Windows.Forms;
@@ -95,8 +98,7 @@ namespace Tono.GuiWinForm
         {
             foreach (ToolStripItem tsi in _tar.DropDownItems)
             {
-                var ki = tsi.Tag as KeyIntentPair;
-                if (ki != null)
+                if (tsi.Tag is KeyIntentPair ki)
                 {
                     var tc = ki.Intent.GetTodoCaption(ki.Key);
                     tsi.Text = tc.Caption;
@@ -117,8 +119,7 @@ namespace Tono.GuiWinForm
             // 同じ識別子が複数登録されたら、後のほうをキャンセルする
             foreach (ToolStripItem tsi in _tar.DropDownItems)
             {
-                var ki = tsi.Tag as KeyIntentPair;
-                if (ki != null)
+                if (tsi.Tag is KeyIntentPair ki)
                 {
                     if (key == ki.Key)
                     {
@@ -156,8 +157,7 @@ namespace Tono.GuiWinForm
         private static void todo_assist_click(object sender, EventArgs e)
         {
             var db = (ToolStripDropDownButton)sender;
-            var ki = db.Tag as KeyIntentPair;
-            if (ki != null)
+            if (db.Tag is KeyIntentPair ki)
             {
                 ki.Intent.DoAssist(ki.Key);
             }
@@ -172,8 +172,7 @@ namespace Tono.GuiWinForm
         {
             foreach (ToolStripItem tsi in _tar.DropDownItems)
             {
-                var ki = tsi.Tag as KeyIntentPair;
-                if (ki != null)
+                if (tsi.Tag is KeyIntentPair ki)
                 {
                     if (ki.Key == key)
                     {

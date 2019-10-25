@@ -1,4 +1,7 @@
-﻿using System;
+﻿// Copyright (c) Manabu Tonosaki All rights reserved.
+// Licensed under the MIT license.
+
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -143,7 +146,7 @@ namespace Tono.Jit
             work.CurrentProcess = work.NextProcess;
             work.NextProcess = NextLinks.FirstOrNull();
             work.EnterTime = now;
-            checkAndAttachKanban(now); // かんばんが有れば、NextProcessをかんばんで更新する
+            CheckAndAttachKanban(now); // かんばんが有れば、NextProcessをかんばんで更新する
         }
 
         /// <summary>
@@ -279,7 +282,7 @@ namespace Tono.Jit
                 EventQueue = events,
                 Kanban = kanban,
             });
-            return checkAndAttachKanban(now);
+            return CheckAndAttachKanban(now);
         }
 
 
@@ -288,7 +291,7 @@ namespace Tono.Jit
         /// かんばんの目的地をワークに付ける（付け替える）
         /// </summary>
         /// <returns>処理されたかんばん</returns>
-        private JitKanban checkAndAttachKanban(DateTime now)
+        private JitKanban CheckAndAttachKanban(DateTime now)
         {
             if (kanbanQueue.Count == 0)
             {

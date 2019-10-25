@@ -1,3 +1,6 @@
+// Copyright (c) Manabu Tonosaki All rights reserved.
+// Licensed under the MIT license.
+
 using System;
 using System.Diagnostics;
 using System.Drawing;
@@ -46,15 +49,14 @@ namespace Tono.GuiWinForm
 
                 while (lu != null && lu.Value.Seq > lastseq)
                 {
-                    string type;
-                    switch (lu.Value.Level)
+                    var type = lu.Value.Level switch
                     {
-                        case LLV.WAR: type = "w"; break;
-                        case LLV.ERR: type = "e"; break;
-                        case LLV.DEV: type = "d"; break;
-                        case LLV.INF: type = "i"; break;
-                        default: type = "?"; break;
-                    }
+                        LLV.WAR => "w",
+                        LLV.ERR => "e",
+                        LLV.DEV => "d",
+                        LLV.INF => "i",
+                        _ => "?",
+                    };
                     var lvi = new ListViewItem(type);
                     lvi.SubItems.Add(new ListViewItem.ListViewSubItem(lvi, DateTime.Now.ToString())).Tag = DateTime.Now;
                     lvi.SubItems.Add(new ListViewItem.ListViewSubItem(lvi, lu.Value.Mes));

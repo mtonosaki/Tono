@@ -1,3 +1,6 @@
+// Copyright (c) Manabu Tonosaki All rights reserved.
+// Licensed under the MIT license.
+
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -92,8 +95,7 @@ namespace Tono.GuiWinForm
             {
                 registerLoop(cc);
             }
-            var ts = c as ToolStrip;
-            if (ts != null)
+            if (c is ToolStrip ts)
             {
                 foreach (ToolStripItem ti in ts.Items)
                 {

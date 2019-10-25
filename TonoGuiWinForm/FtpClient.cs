@@ -1,4 +1,7 @@
-﻿using System;
+﻿// Copyright (c) Manabu Tonosaki All rights reserved.
+// Licensed under the MIT license.
+
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -112,17 +115,15 @@ namespace Tono.GuiWinForm
             var req = getFtpRequest(WebRequestMethods.Ftp.ListDirectory);
             var res = req.GetResponse() as FtpWebResponse;
 
-            var parnedir = _path == "" ? "" : _path.Substring(_path.LastIndexOf('/') + 1) + "/";
+            var parnedir = string.IsNullOrEmpty(_path) ? "" : _path.Substring(_path.LastIndexOf('/') + 1) + "/";
 
-            using (var sr = new StreamReader(res.GetResponseStream()))
-            {
-                var list = sr.ReadToEnd();
-                var ret = from t in list.Split('\n')
-                          let fn = t.Replace("\r", "").Trim()
-                          where fn != ""
-                          select parnedir != "" ? fn.Replace(parnedir, "") : fn;
-                return ret;
-            }
+            using var sr = new StreamReader(res.GetResponseStream());
+            var list = sr.ReadToEnd();
+            var ret = from t in list.Split('\n')
+                      let fn = t.Replace("\r", "").Trim()
+                      where string.IsNullOrEmpty(fn) == false
+                      select string.IsNullOrEmpty(parnedir) == false ? fn.Replace(parnedir, "") : fn;
+            return ret;
         }
 
         /// <summary>
@@ -168,7 +169,7 @@ namespace Tono.GuiWinForm
         /// <param name="newname">アップロード後のファイル名（パスは除く）</param>
         public void Upload(string localfilename, string newname)
         {
-            if (localfilename == null || localfilename == "")
+            if (string.IsNullOrEmpty(localfilename))
             {
                 return;
             }

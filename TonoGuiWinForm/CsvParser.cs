@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+﻿// Copyright (c) Manabu Tonosaki All rights reserved.
+// Licensed under the MIT license.
+
+using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Text;
@@ -8,7 +11,7 @@ namespace Tono.GuiWinForm
     /// <summary>
     /// 文字列からCSVフォーマットでDataSetのTableを作成する
     /// </summary>
-    public class CsvParser
+    public static class CsvParser
     {
         private static int nullColNameNo = 1;
 
@@ -20,7 +23,8 @@ namespace Tono.GuiWinForm
         /// <returns></returns>
         public static DataTable Load(string csvPath, Encoding encoding)
         {
-            return Load(new StreamReader(csvPath, encoding));
+            var reader = new StreamReader(csvPath, encoding);
+            return Load(reader);
         }
 
         /// <summary>
@@ -45,7 +49,7 @@ namespace Tono.GuiWinForm
                     {
                         var col = cells[i];
                         col = col.Trim();
-                        if (col == "")
+                        if (string.IsNullOrEmpty(col))
                         {
                             col = string.Format("[dummy{0}]", nullColNameNo++);
                         }
@@ -68,7 +72,7 @@ namespace Tono.GuiWinForm
                             var col = cells[i];
                             col = col.Trim();
                             row[columnNames[i]] = col;
-                            if (col != "")
+                            if (string.IsNullOrEmpty(col))
                             {
                                 cellN++;
                             }

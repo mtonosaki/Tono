@@ -1,3 +1,6 @@
+// Copyright (c) Manabu Tonosaki All rights reserved.
+// Licensed under the MIT license.
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -9,7 +12,7 @@ namespace Tono.GuiWinForm
     /// <summary>
     /// ソート機能をサポートします
     /// </summary>
-    public class ComparerUtil
+    public static class ComparerUtil
     {
         /// <summary>
         /// 大文字小文字無視して比較するクラス

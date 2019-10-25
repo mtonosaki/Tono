@@ -1,4 +1,7 @@
-﻿using System;
+﻿// Copyright (c) Manabu Tonosaki All rights reserved.
+// Licensed under the MIT license.
+
+using System;
 using System.IO;
 using System.Windows.Forms;
 
@@ -7,7 +10,7 @@ namespace Tono.GuiWinForm
     /// <summary>
     /// ファイル・フォルダ関係のユーティリティクラス
     /// </summary>
-    public class FileUtil
+    public static class FileUtil
     {
         /// <summary>
         /// Portforioや uMesのXML保存ディレクトリを取得する
@@ -16,9 +19,9 @@ namespace Tono.GuiWinForm
         /// <returns></returns>
         public static string MakeMesFilename(string filename)
         {
-            string fname = null;
+            string fname;
             var deploy = (string)AppDomain.CurrentDomain.GetData("DataDirectory");
-            if (deploy == null || File.Exists(fname = Path.Combine(deploy, filename)) == false)
+            if (string.IsNullOrEmpty(deploy) || File.Exists(fname = Path.Combine(deploy, filename)) == false)
             {
                 if (File.Exists(fname = Path.Combine(Application.StartupPath, filename)) == false)
                 {

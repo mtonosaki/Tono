@@ -1,3 +1,6 @@
+// Copyright (c) Manabu Tonosaki All rights reserved.
+// Licensed under the MIT license.
+
 using System;
 
 namespace Tono.GuiWinForm
@@ -49,13 +52,6 @@ namespace Tono.GuiWinForm
         /// 同期ルート（データ全体）
         /// </summary>
         public virtual object SyncRoot => _mySingleton;
-
-        /// <summary>
-        /// デフォルトコンストラクタ
-        /// </summary>
-        public DataHotBase()
-        {
-        }
 
         /// <summary>
         /// 全アプリケーションデータを消去する

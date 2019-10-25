@@ -1,4 +1,7 @@
-﻿using System.Runtime.Serialization;
+﻿// Copyright (c) Manabu Tonosaki All rights reserved.
+// Licensed under the MIT license.
+
+using System.Runtime.Serialization;
 
 namespace Tono
 {

@@ -1,3 +1,6 @@
+// Copyright (c) Manabu Tonosaki All rights reserved.
+// Licensed under the MIT license.
+
 using Microsoft.Win32;
 using System.Diagnostics;
 using System.Globalization;
@@ -62,7 +65,7 @@ namespace Tono.GuiWinForm
             {
                 title = ((AssemblyTitleAttribute)ats[0]).Title;
             }
-            if (title == "")
+            if (string.IsNullOrEmpty(title))
             {
                 title = tar.GetName().Name;
             }
@@ -75,7 +78,7 @@ namespace Tono.GuiWinForm
             {
                 desc = "";
             }
-            var s = title + (desc == "" ? "" : " : " + desc);
+            var s = title + (string.IsNullOrEmpty(desc) ? "" : " : " + desc);
             kft.SetValue(null, s);
 
             kft.SetValue("BrowserFlags", 8, RegistryValueKind.DWord);

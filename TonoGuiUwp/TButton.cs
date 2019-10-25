@@ -1,4 +1,7 @@
-﻿using System;
+﻿// Copyright (c) Manabu Tonosaki All rights reserved.
+// Licensed under the MIT license.
+
+using System;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 

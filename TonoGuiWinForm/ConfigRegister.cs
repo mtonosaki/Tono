@@ -1,3 +1,6 @@
+// Copyright (c) Manabu Tonosaki All rights reserved.
+// Licensed under the MIT license.
+
 using System;
 
 #pragma warning disable 1591, 1572, 1573
@@ -43,7 +46,7 @@ namespace Tono.GuiWinForm
 
         public ConfigRegister(string rootkey)
         {
-            if (rootkey == "")
+            if (string.IsNullOrEmpty(rootkey))
             {
                 _root = @"Software\uConfigDefault";
             }

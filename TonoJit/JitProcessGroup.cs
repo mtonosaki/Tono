@@ -1,4 +1,7 @@
-﻿using System;
+﻿// Copyright (c) Manabu Tonosaki All rights reserved.
+// Licensed under the MIT license.
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -16,11 +19,6 @@ namespace Tono.Jit
         public virtual void Add(Func<JitProcess> procFunc)
         {
             procSeq.AddFirst(procFunc);
-        }
-
-        private void Assert(bool v)
-        {
-            throw new NotImplementedException();
         }
 
         /// <summary>
