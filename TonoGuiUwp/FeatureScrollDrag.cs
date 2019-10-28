@@ -47,7 +47,7 @@ namespace Tono.Gui.Uwp
                 case PointerState.DeviceTypes.Mouse:
                     return po.IsInContact && po.IsKeyControl && po.IsKeyShift;      // Mouse : [CTRL]+[SHIFT] + Drag
                 case PointerState.DeviceTypes.Touch:
-                    return po.IsInContact && po.Scale == 1 && po.Rotation.IsZero(); // Swipe when NOT rotated and NOT pinched
+                    return po.IsInContact && po.FingerCount == 2; // Swipe when NOT rotated and NOT pinched
                 default:
                     return false;
             }
@@ -55,6 +55,7 @@ namespace Tono.Gui.Uwp
 
         public void OnPointerPressed(PointerState po)
         {
+            //Debug.WriteLine($"OnPointerPressed {po.Position} finger={po.FingerCount}");
             if (isTrigger(po))
             {
                 if (po.Position.Y < Pane.Target.Rect.RB.Y - MarginBottom)
@@ -76,6 +77,7 @@ namespace Tono.Gui.Uwp
 
         public void OnPointerMoved(PointerState po)
         {
+            //Debug.WriteLine($"OnPointerMoved {po.Position} finger={po.FingerCount}");
             if (isScrolling)
             {
                 if (isTrigger(po))
@@ -99,13 +101,14 @@ namespace Tono.Gui.Uwp
                 }
                 else
                 {
-                    OnPointerReleased(po);
+//                    OnPointerReleased(po);
                 }
             }
         }
 
         public void OnPointerReleased(PointerState po)
         {
+            //Debug.WriteLine($"OnPointerReleased {po.Position} finger={po.FingerCount}");
             if (isScrolling)
             {
                 isScrolling = false;

@@ -44,7 +44,7 @@ namespace Tono.Gui
         /// <summary>
         /// number of finger.
         /// </summary>
-        public int Finger { get; set; }
+        public int FingerCount { get; set; }
 
         /// <summary>
         /// mouse wheel notch amount

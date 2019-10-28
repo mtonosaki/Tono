@@ -27,6 +27,7 @@ namespace Tono.Gui.Uwp
             ManipulationStarting += onManipulationStarting;
             ManipulationDelta += onManipulationDelta;
             ManipulationCompleted += onManipulationCompleted;
+            ManipulationInertiaStarting += onManipulationInertiaStarting;
             Holding += onHolding;
         }
 
@@ -122,45 +123,25 @@ namespace Tono.Gui.Uwp
 
         private int PressedCount = 0;
         private PointerState pressed;
+        private bool IsManipulationStartingNoMoveCheck = false;
+        private PointerState KeyBak = null;
 
         private void onPointerPressed(Windows.UI.Core.CoreWindow sender, Windows.UI.Core.PointerEventArgs e)
         {
-            //if (e.CurrentPoint.PointerDevice.PointerDeviceType == PointerDeviceType.Mouse)
-            {
-                PressedCount++;
-                var po = _(e, this, "onPointerPressed");
-                Debug.WriteLine($"onPointerPressed {po.Position}");
-                po.PositionOrigin = ScreenPos.From(po.Position.X, po.Position.Y);
-                pressed = po;
-
-                foreach (var fc in getPointerListenerFeatures())
-                {
-                    try
-                    {
-                        if (isEventCatch(fc, "OnPointerPressed"))
-                        {
-                            ((IPointerListener)fc).OnPointerPressed(po);
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        LOG.AddException(ex);
-
-                        if (fc is IAutoRemovable)   // NOTE: cannot catch when NOT thread safe
-                        {
-                            Kill(fc, ex);
-                        }
-                    }
-                }
-            }
+            ++PressedCount;
+            KeyBak = _(e, this, "onPointerPressed");
         }
 
         private void onPointerMoved(Windows.UI.Core.CoreWindow sender, Windows.UI.Core.PointerEventArgs e)
         {
-            if (e.CurrentPoint.PointerDevice.PointerDeviceType == PointerDeviceType.Mouse)
+            KeyBak = _(e, this, "onPointerMoved");
+
+            if (e.CurrentPoint.PointerDevice.PointerDeviceType == PointerDeviceType.Mouse && IsManipulationStarted == false)
             {
                 var po = _(e, this, "onPointerMoved");
                 po.PositionOrigin = pressed?.PositionOrigin ?? po.PositionOrigin;
+                po.FingerCount = PressedCount;
+                //Debug.WriteLine($"onPointerMoved {po.Position} Finger={po.FingerCount}");
 
                 foreach (var fc in getPointerListenerFeatures())
                 {
@@ -185,11 +166,42 @@ namespace Tono.Gui.Uwp
         }
         private void onPointerReleased(Windows.UI.Core.CoreWindow sender, Windows.UI.Core.PointerEventArgs e)
         {
-            //if (e.CurrentPoint.PointerDevice.PointerDeviceType == PointerDeviceType.Mouse)
+            if (IsManipulationStartingNoMoveCheck )
             {
-                PressedCount = Math.Max(PressedCount - 1, 0);
+                IsManipulationStartingNoMoveCheck = false;
+                var po = _(e, this, "OnPointerPressed");
+                po.FingerCount = PressedCount;
+                //Debug.WriteLine($"onPointerReleased {po.Position} Finger = {po.FingerCount}");
+                if (pressed != null)    // Poka-yoke. released but not pressed when some windows condition
+                {
+                    po.PositionOrigin = pressed.PositionOrigin;
+                }
+                foreach (var fc in getPointerListenerFeatures())
+                {
+                    try
+                    {
+                        if (isEventCatch(fc, "OnPointerPressed"))
+                        {
+                            ((IPointerListener)fc).OnPointerPressed(po);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        LOG.AddException(ex);
+
+                        if (fc is IAutoRemovable)   // NOTE: cannot catch when NOT thread safe
+                        {
+                            Kill(fc, ex);
+                        }
+                    }
+                }
+            }
+            PressedCount = Math.Max(PressedCount - 1, 0);
+            if (IsManipulationStarted == false && IsManipulationCompleted == false)
+            {
                 var po = _(e, this, "onPointerReleased");
-                Debug.WriteLine($"onPointerReleased {po.Position}");
+                po.FingerCount = PressedCount;
+                //Debug.WriteLine($"onPointerReleased {po.Position} Finger = {po.FingerCount}");
                 if (pressed != null)    // Poka-yoke. released but not pressed when some windows condition
                 {
                     po.PositionOrigin = pressed.PositionOrigin;
@@ -247,101 +259,133 @@ namespace Tono.Gui.Uwp
 
         private void onManipulationStarting(object sender, Windows.UI.Xaml.Input.ManipulationStartingRoutedEventArgs e)
         {
-            Debug.WriteLine($"onManipulationStarting {e.Pivot}");
+            //Debug.WriteLine($"onManipulationStarting Mode={e.Mode} / {e.Pivot}");
+            IsManipulationStarted = false;
+            IsManipulationStartingNoMoveCheck = true;
+            IsManipulationCompleted = false;
         }
 
+        int PrevFingerCount = 0;
+        bool IsManipulationStarted = false;
         private void onManipulationStarted(object sender, Windows.UI.Xaml.Input.ManipulationStartedRoutedEventArgs e)
         {
-            if (e.PointerDeviceType == PointerDeviceType.Touch || e.PointerDeviceType == PointerDeviceType.Pen)
+            IsManipulationStartingNoMoveCheck = false;
+            IsManipulationStarted = true;
+            //Debug.WriteLine($"onManipulationStarted {e.Position} Finger={PressedCount}");
+            var po = _(e, this, "onManipulationStarted");
+            keyCopy(po);
+            po.FingerCount = PressedCount;
+            if (pressed == null)
             {
-                var po = _(e, this, "onManipulationStarted");
-                Debug.WriteLine($"onManipulationStarted {po.Position}");
-                if (pressed == null)
-                {
-                    pressed = po;
-                }
-                po.PositionOrigin = pressed?.PositionOrigin ?? po.PositionOrigin;
+                pressed = po;
+            }
+            po.PositionOrigin = pressed?.PositionOrigin ?? po.PositionOrigin;
+            PrevFingerCount = po.FingerCount;
 
-                foreach (var fc in getPointerListenerFeatures())
+            foreach (var fc in getPointerListenerFeatures())
+            {
+                try
                 {
-                    try
+                    if (isEventCatch(fc, "OnPointerPressed"))
                     {
-                        if (isEventCatch(fc, "OnPointerMoved"))
-                        {
-                            ((IPointerListener)fc).OnPointerMoved(po);  // Started of tap event have already sent
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        LOG.AddException(ex);
-
-                        if (fc is IAutoRemovable)   // NOTE: cannot catch when NOT thread safe
-                        {
-                            Kill(fc, ex);
-                        }
+                        ((IPointerListener)fc).OnPointerPressed(po);  // Started of tap event have already sent
                     }
                 }
+                catch (Exception ex)
+                {
+                    LOG.AddException(ex);
+                    if (fc is IAutoRemovable)   // NOTE: cannot catch when NOT thread safe
+                    {
+                        Kill(fc, ex);
+                    }
+                }
+            }
+        }
+
+        private void keyCopy(PointerState po)
+        {
+            if (KeyBak != null)
+            {
+                po.IsKeyControl = KeyBak.IsKeyControl;
+                po.IsKeyShift = KeyBak.IsKeyShift;
+                po.IsKeyMenu = KeyBak.IsKeyMenu;
+                po.IsKeyWindows = KeyBak.IsKeyWindows;
             }
         }
 
         private void onManipulationDelta(object sender, Windows.UI.Xaml.Input.ManipulationDeltaRoutedEventArgs e)
         {
-            if (e.PointerDeviceType == Windows.Devices.Input.PointerDeviceType.Touch || e.PointerDeviceType == Windows.Devices.Input.PointerDeviceType.Pen)
-            {
-                var po = _(e, this, "onManipulationDelta");
-                Debug.WriteLine($"onManipulationDelta {po.Position}");
-                po.PositionOrigin = pressed?.PositionOrigin ?? po.PositionOrigin;
+            //Debug.WriteLine($"onManipulationDelta {e.Position} Finger={PressedCount}");
+            var po = _(e, this, "onManipulationDelta");
+            keyCopy(po);
+            po.FingerCount = PressedCount;
+            po.PositionOrigin = pressed?.PositionOrigin ?? po.PositionOrigin;
+            var fingerDiff = po.FingerCount - PrevFingerCount;
 
-                foreach (var fc in getPointerListenerFeatures())
+            foreach (var fc in getPointerListenerFeatures())
+            {
+                try
                 {
-                    try
+                    for( var i = PrevFingerCount + 1; i <= PressedCount; i++)
                     {
-                        if (isEventCatch(fc, "OnPointerMoved"))
+                        if (isEventCatch(fc, "OnPointerPressed"))
                         {
-                            ((IPointerListener)fc).OnPointerMoved(po);
+                            po.FingerCount = i;
+                            ((IPointerListener)fc).OnPointerPressed(po);
                         }
                     }
-                    catch (Exception ex)
+                    if (isEventCatch(fc, "OnPointerMoved"))
                     {
-                        LOG.AddException(ex);
+                        ((IPointerListener)fc).OnPointerMoved(po);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    LOG.AddException(ex);
 
-                        if (fc is IAutoRemovable)   // NOTE: cannot catch when NOT thread safe
-                        {
-                            Kill(fc, ex);
-                        }
+                    if (fc is IAutoRemovable)   // NOTE: cannot catch when NOT thread safe
+                    {
+                        Kill(fc, ex);
                     }
                 }
             }
+            PrevFingerCount = po.FingerCount;
         }
+
+        private void onManipulationInertiaStarting(object sender, Windows.UI.Xaml.Input.ManipulationInertiaStartingRoutedEventArgs e)
+        {
+            //Debug.WriteLine($"onManipulationInertiaStarting {e.ExpansionBehavior}");
+        }
+
+        private bool IsManipulationCompleted = false;
         private void onManipulationCompleted(object sender, Windows.UI.Xaml.Input.ManipulationCompletedRoutedEventArgs e)
         {
-            if (e.PointerDeviceType == Windows.Devices.Input.PointerDeviceType.Touch || e.PointerDeviceType == Windows.Devices.Input.PointerDeviceType.Pen)
+            IsManipulationCompleted = true;
+            //Debug.WriteLine($"onManipulationCompleted {e.Position} Finger={PressedCount}");
+            var po = _(e, this, "onManipulationCompleted");
+            po.FingerCount = PressedCount;
+            po.PositionOrigin = pressed?.PositionOrigin ?? po.PositionOrigin;
+
+            foreach (var fc in getPointerListenerFeatures())
             {
-                PressedCount = 0;
-                var po = _(e, this, "onManipulationCompleted");
-                Debug.WriteLine($"onManipulationCompleted {po.Position}");
-                po.PositionOrigin = pressed?.PositionOrigin ?? po.PositionOrigin;
-
-                foreach (var fc in getPointerListenerFeatures())
+                try
                 {
-                    try
+                    if (isEventCatch(fc, "OnPointerReleased"))
                     {
-                        if (isEventCatch(fc, "OnPointerReleased"))
-                        {
-                            ((IPointerListener)fc).OnPointerReleased(po);
-                        }
+                        ((IPointerListener)fc).OnPointerReleased(po);
                     }
-                    catch (Exception ex)
-                    {
-                        LOG.AddException(ex);
+                }
+                catch (Exception ex)
+                {
+                    LOG.AddException(ex);
 
-                        if (fc is IAutoRemovable)   // NOTE: cannot catch when NOT thread safe
-                        {
-                            Kill(fc, ex);
-                        }
+                    if (fc is IAutoRemovable)   // NOTE: cannot catch when NOT thread safe
+                    {
+                        Kill(fc, ex);
                     }
                 }
             }
+            IsManipulationStarted = false;
         }
     }
 }
