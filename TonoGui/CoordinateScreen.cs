@@ -18,6 +18,14 @@ namespace Tono.Gui
     {
         public float Sx { get; set; }
 
+        public ScreenX Clone()
+        {
+            return new ScreenX
+            {
+                Sx = Sx,
+            };
+        }
+
         /// <summary>
         /// Auto cast to float
         /// </summary>
@@ -258,6 +266,14 @@ namespace Tono.Gui
     {
         public float Sy { get; set; }
 
+        public ScreenY Clone()
+        {
+            return new ScreenY
+            {
+                Sy = Sy,
+            };
+        }
+
         /// <summary>
         /// auto cast to float type
         /// </summary>
@@ -273,6 +289,9 @@ namespace Tono.Gui
         {
             return (short)val.Sy;
         }
+
+        public static bool operator ==(ScreenY left, ScreenY right) => left.Equals(right);
+        public static bool operator !=(ScreenY left, ScreenY right) => !left.Equals(right);
 
         public override bool Equals(object obj)
         {
@@ -833,6 +852,19 @@ namespace Tono.Gui
         public ScreenY Height { get; set; }
 
         /// <summary>
+        /// make clone instance
+        /// </summary>
+        /// <returns></returns>
+        public ScreenSize Clone()
+        {
+            return new ScreenSize
+            {
+                Width = ScreenX.From(Width.Sx),
+                Height = ScreenY.From(Height.Sy),
+            };
+        }
+
+        /// <summary>
         /// diagonal length of Width-Height
         /// </summary>
         public double Length => GeoEu.Length((Width.Sx, Height.Sy));
@@ -1023,6 +1055,19 @@ namespace Tono.Gui
         public ScreenPos RB { get; set; }
 
         /// <summary>
+        /// make clone instance
+        /// </summary>
+        /// <returns></returns>
+        public ScreenRect Clone()
+        {
+            return new ScreenRect
+            {
+                LT = LT.Clone(),
+                RB = RB.Clone(),
+            };
+        }
+
+        /// <summary>
         /// Left-Bottom (only refference)
         /// </summary>
         public ScreenPos LB => ScreenPos.From(LT.X, RB.Y);
@@ -1066,23 +1111,6 @@ namespace Tono.Gui
         /// Empty insntance
         /// </summary>
         public static readonly ScreenRect Empty = ScreenRect.FromLTWH(0, 0, 0, 0);
-
-        public ScreenRect Clone()
-        {
-            return new ScreenRect
-            {
-                LT = new ScreenPos
-                {
-                    X = new ScreenX { Sx = LT.X.Sx },
-                    Y = new ScreenY { Sy = LT.Y.Sy },
-                },
-                RB = new ScreenPos
-                {
-                    X = new ScreenX { Sx = RB.X.Sx },
-                    Y = new ScreenY { Sy = RB.Y.Sy },
-                },
-            };
-        }
 
         /// <summary>
         /// increment RB x and y
