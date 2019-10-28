@@ -218,8 +218,10 @@ namespace Tono.GuiWinForm
                     LineAlignment = StringAlignment.Center
                 };
                 RectangleF r = (ScreenRect.FromControl(this) - XyBase.FromInt(Left, Top));
-                using var fo = new Font("Arial", 12, FontStyle.Bold);
-                e.Graphics.DrawString("K", fo, Brushes.WhiteSmoke, r, sf);
+                using (var fo = new Font("Arial", 12, FontStyle.Bold))
+                {
+                    e.Graphics.DrawString("K", fo, Brushes.WhiteSmoke, r, sf);
+                }
             }
         }
 

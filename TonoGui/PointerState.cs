@@ -42,6 +42,11 @@ namespace Tono.Gui
         public ScreenSize PositionDelta => Position - PositionOrigin;
 
         /// <summary>
+        /// number of finger.
+        /// </summary>
+        public int Finger { get; set; }
+
+        /// <summary>
         /// mouse wheel notch amount
         /// </summary>
         public static readonly int WheelNotch = 120;

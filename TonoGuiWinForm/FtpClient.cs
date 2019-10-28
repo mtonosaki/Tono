@@ -117,13 +117,15 @@ namespace Tono.GuiWinForm
 
             var parnedir = string.IsNullOrEmpty(_path) ? "" : _path.Substring(_path.LastIndexOf('/') + 1) + "/";
 
-            using var sr = new StreamReader(res.GetResponseStream());
-            var list = sr.ReadToEnd();
-            var ret = from t in list.Split('\n')
-                      let fn = t.Replace("\r", "").Trim()
-                      where string.IsNullOrEmpty(fn) == false
-                      select string.IsNullOrEmpty(parnedir) == false ? fn.Replace(parnedir, "") : fn;
-            return ret;
+            using (var sr = new StreamReader(res.GetResponseStream()))
+            {
+                var list = sr.ReadToEnd();
+                var ret = from t in list.Split('\n')
+                          let fn = t.Replace("\r", "").Trim()
+                          where string.IsNullOrEmpty(fn) == false
+                          select string.IsNullOrEmpty(parnedir) == false ? fn.Replace(parnedir, "") : fn;
+                return ret;
+            }
         }
 
         /// <summary>

@@ -219,8 +219,10 @@ namespace Tono.GuiWinForm
                 var sr = (ScreenRect)spos.Clone();
                 sr.LT.X += MarginLeft;
                 sr.LT.Y += MarginTop;
-                using Brush brush = new SolidBrush(_fontColor);
-                rp.Graphics.DrawString(Text, _lastFont, brush, sr, _sf);   // テキストを描画
+                using (var brush = new SolidBrush(_fontColor))
+                {
+                    rp.Graphics.DrawString(Text, _lastFont, brush, sr, _sf);   // テキストを描画
+                }
             }
             return true;
         }

@@ -492,12 +492,25 @@ namespace Tono.GuiWinForm
                         }
                         else
                         {
-                            var summary = summaryMode switch
+                            double summary;
+                            switch (summaryMode)
                             {
-                                SummaryMode.Minimum => double.PositiveInfinity,
-                                SummaryMode.Maximum => double.NegativeInfinity,
-                                _ => 0,
-                            };
+                                case SummaryMode.Minimum:
+                                    summary = double.PositiveInfinity;
+                                    break;
+                                case SummaryMode.Maximum:
+                                    summary = double.NegativeInfinity;
+                                    break;
+                                default:
+                                    summary = 0;
+                                    break;
+                            }
+                            //var summary = summaryMode switch
+                            //{
+                            //    SummaryMode.Minimum => double.PositiveInfinity,
+                            //    SummaryMode.Maximum => double.NegativeInfinity,
+                            //    _ => 0,
+                            //};
                             var isAllSameValue = true;
                             double preval = 0;
                             for (var i = 0; i < lvis.Count; i++)
