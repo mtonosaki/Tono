@@ -865,6 +865,21 @@ namespace Tono.Gui
         }
 
         /// <summary>
+        /// make a new instance from layout coodinate of the target pane control
+        /// </summary>
+        /// <param name="pane">target pane control</param>
+        /// <param name="pos">position</param>
+        /// <returns></returns>
+        public static ScreenSize From(IDrawArea pane, LayoutSize size)
+        {
+            return new ScreenSize
+            {
+                Width =　ScreenX.From(size.Width.Lx * pane.ZoomX),
+                Height = ScreenY.From(size.Height.Ly * pane.ZoomY),
+            };
+        }
+
+        /// <summary>
         /// diagonal length of Width-Height
         /// </summary>
         public double Length => GeoEu.Length((Width.Sx, Height.Sy));
