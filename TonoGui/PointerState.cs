@@ -42,6 +42,11 @@ namespace Tono.Gui
         public ScreenSize PositionDelta => Position - PositionOrigin;
 
         /// <summary>
+        /// number of finger.
+        /// </summary>
+        public int Finger { get; set; }
+
+        /// <summary>
         /// mouse wheel notch amount
         /// </summary>
         public static readonly int WheelNotch = 120;
@@ -77,7 +82,7 @@ namespace Tono.Gui
         /// <summary>
         /// check no key push
         /// </summary>
-        public bool IsKeyNone => IsKeyControl && IsKeyMenu && IsKeyMenu && IsKeyShift;
+        public bool IsKeyNone => !IsKeyControl && !IsKeyMenu && !IsKeyMenu && !IsKeyShift;
 
         /// <summary>
         /// check pushing control key

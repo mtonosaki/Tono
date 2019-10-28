@@ -49,14 +49,23 @@ namespace Tono.GuiWinForm
 
                 while (lu != null && lu.Value.Seq > lastseq)
                 {
-                    var type = lu.Value.Level switch
+                    string type;
+                    switch (lu.Value.Level)
                     {
-                        LLV.WAR => "w",
-                        LLV.ERR => "e",
-                        LLV.DEV => "d",
-                        LLV.INF => "i",
-                        _ => "?",
-                    };
+                        case LLV.WAR: type = "w"; break;
+                        case LLV.ERR: type = "e"; break;
+                        case LLV.DEV: type = "d"; break;
+                        case LLV.INF: type = "i"; break;
+                        default: type = "?"; break;
+                    }
+                    //var type = lu.Value.Level switch
+                    //{
+                    //    LLV.WAR => "w",
+                    //    LLV.ERR => "e",
+                    //    LLV.DEV => "d",
+                    //    LLV.INF => "i",
+                    //    _ => "?",
+                    //};
                     var lvi = new ListViewItem(type);
                     lvi.SubItems.Add(new ListViewItem.ListViewSubItem(lvi, DateTime.Now.ToString())).Tag = DateTime.Now;
                     lvi.SubItems.Add(new ListViewItem.ListViewSubItem(lvi, lu.Value.Mes));

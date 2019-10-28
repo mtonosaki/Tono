@@ -186,10 +186,12 @@ namespace Tono.GuiWinForm
                 {
                     _sf.FormatFlags = StringFormatFlags.DirectionVertical;
                 }
-                using var font = new Font(_fontFace, Math.Min(MaximumFontSize, Math.Max(MinimunFontSize, _fontSize * rp.Zoom.Y / 1000)));
-                var sposm = (ScreenRect)spos.Clone();
-                sposm.Deflate(_margin);
-                rp.Graphics.DrawString(Text, font, new SolidBrush(_textColor), sposm, _sf); // テキストを描画
+                using (var font = new Font(_fontFace, Math.Min(MaximumFontSize, Math.Max(MinimunFontSize, _fontSize * rp.Zoom.Y / 1000))))
+                {
+                    var sposm = (ScreenRect)spos.Clone();
+                    sposm.Deflate(_margin);
+                    rp.Graphics.DrawString(Text, font, new SolidBrush(_textColor), sposm, _sf); // テキストを描画
+                }
             }
 
             drawSelected(rp);   // 選択状態を描画

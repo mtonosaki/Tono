@@ -411,16 +411,15 @@ namespace Tono.GuiWinForm
         //
         public static DateTimeEx FromMinutes(int totalMinutes)
         {
-            var t = new DateTimeEx
+            switch (totalMinutes)
             {
-                _val = totalMinutes switch
-                {
-                    int.MaxValue => totalMinutes,
-                    int.MinValue => totalMinutes,
-                    _ => totalMinutes * 60,
-                }
-            };
-            return t;
+                case int.MaxValue:
+                    return new DateTimeEx { _val = totalMinutes, };
+                case int.MinValue:
+                    return new DateTimeEx { _val = totalMinutes, };
+                default:
+                    return new DateTimeEx { _val = totalMinutes * 60, };
+            }
         }
 
         /// <summary>

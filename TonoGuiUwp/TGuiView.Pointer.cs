@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using Windows.Devices.Input;
 using Windows.UI.Xaml;
 using static Tono.Gui.Uwp.CastUtil;
@@ -119,13 +120,16 @@ namespace Tono.Gui.Uwp
             }
         }
 
+        private int PressedCount = 0;
         private PointerState pressed;
 
         private void onPointerPressed(Windows.UI.Core.CoreWindow sender, Windows.UI.Core.PointerEventArgs e)
         {
             //if (e.CurrentPoint.PointerDevice.PointerDeviceType == PointerDeviceType.Mouse)
             {
+                PressedCount++;
                 var po = _(e, this, "onPointerPressed");
+                Debug.WriteLine($"onPointerPressed {po.Position}");
                 po.PositionOrigin = ScreenPos.From(po.Position.X, po.Position.Y);
                 pressed = po;
 
@@ -183,7 +187,9 @@ namespace Tono.Gui.Uwp
         {
             //if (e.CurrentPoint.PointerDevice.PointerDeviceType == PointerDeviceType.Mouse)
             {
+                PressedCount = Math.Max(PressedCount - 1, 0);
                 var po = _(e, this, "onPointerReleased");
+                Debug.WriteLine($"onPointerReleased {po.Position}");
                 if (pressed != null)    // Poka-yoke. released but not pressed when some windows condition
                 {
                     po.PositionOrigin = pressed.PositionOrigin;
@@ -241,13 +247,15 @@ namespace Tono.Gui.Uwp
 
         private void onManipulationStarting(object sender, Windows.UI.Xaml.Input.ManipulationStartingRoutedEventArgs e)
         {
+            Debug.WriteLine($"onManipulationStarting {e.Pivot}");
         }
 
         private void onManipulationStarted(object sender, Windows.UI.Xaml.Input.ManipulationStartedRoutedEventArgs e)
         {
-            if (e.PointerDeviceType == Windows.Devices.Input.PointerDeviceType.Touch || e.PointerDeviceType == Windows.Devices.Input.PointerDeviceType.Pen)
+            if (e.PointerDeviceType == PointerDeviceType.Touch || e.PointerDeviceType == PointerDeviceType.Pen)
             {
                 var po = _(e, this, "onManipulationStarted");
+                Debug.WriteLine($"onManipulationStarted {po.Position}");
                 if (pressed == null)
                 {
                     pressed = po;
@@ -281,6 +289,7 @@ namespace Tono.Gui.Uwp
             if (e.PointerDeviceType == Windows.Devices.Input.PointerDeviceType.Touch || e.PointerDeviceType == Windows.Devices.Input.PointerDeviceType.Pen)
             {
                 var po = _(e, this, "onManipulationDelta");
+                Debug.WriteLine($"onManipulationDelta {po.Position}");
                 po.PositionOrigin = pressed?.PositionOrigin ?? po.PositionOrigin;
 
                 foreach (var fc in getPointerListenerFeatures())
@@ -308,7 +317,9 @@ namespace Tono.Gui.Uwp
         {
             if (e.PointerDeviceType == Windows.Devices.Input.PointerDeviceType.Touch || e.PointerDeviceType == Windows.Devices.Input.PointerDeviceType.Pen)
             {
+                PressedCount = 0;
                 var po = _(e, this, "onManipulationCompleted");
+                Debug.WriteLine($"onManipulationCompleted {po.Position}");
                 po.PositionOrigin = pressed?.PositionOrigin ?? po.PositionOrigin;
 
                 foreach (var fc in getPointerListenerFeatures())

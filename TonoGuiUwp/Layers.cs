@@ -9,5 +9,6 @@ namespace Tono.Gui.Uwp
     public static class Layers
     {
         public static readonly NamedId LogPanel = NamedId.From("LogPanel", 8000);
+        public static readonly NamedId TooltipPanel = NamedId.From("TooltipPanel", 7990);
     }
 }

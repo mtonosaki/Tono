@@ -60,12 +60,12 @@ namespace Tono.GuiWinForm
         /// </summary>
         private void init()
         {
-            _clickParts ??= new DataSharingManager.Object();
-            _clickPane ??= new DataSharingManager.Object();
-            _tokenTray ??= new TokenTray();
-            _finalizers ??= new FinalizeManageBuffer();
-            _persister ??= new PersistManager();
-            _timer ??= new GuiTimer();
+            _clickParts = _clickParts == null ? new DataSharingManager.Object() : _clickParts;
+            _clickPane = _clickPane == null ?  new DataSharingManager.Object() : _clickPane;
+            _tokenTray = _tokenTray== null ?  new TokenTray() : _tokenTray;
+            _finalizers = _finalizers == null ? new FinalizeManageBuffer() : _finalizers;
+            _persister = _persister== null ? new PersistManager() : _persister;
+            _timer = _timer == null ? new GuiTimer() : _timer;
         }
 
         /// <summary>

@@ -635,8 +635,10 @@ namespace Tono.GuiWinForm
                 // •K—v‚Å‚ ‚ê‚Î”wŒi‚ğ•`‰æ
                 if (IsDrawEmptyBackground)
                 {
-                    using Brush brush = new SolidBrush(BackColor);
-                    e.Graphics.FillRectangle(brush, e.ClipRectangle);
+                    using (var brush = new SolidBrush(BackColor))
+                    {
+                        e.Graphics.FillRectangle(brush, e.ClipRectangle);
+                    }
                 }
                 // ƒp[ƒc“™‚Ì•`‰æ
                 var pb = _rootGroup.GetPartsSet();
