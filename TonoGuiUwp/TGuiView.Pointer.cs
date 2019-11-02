@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using Windows.Devices.Input;
 using Windows.UI.Xaml;
 using static Tono.Gui.Uwp.CastUtil;
 
@@ -16,24 +15,24 @@ namespace Tono.Gui.Uwp
     /// </summary>
     public partial class TGuiView
     {
-        private void initPointer()
+        private void InitPointer()
         {
             var win = Window.Current.CoreWindow;
-            win.PointerMoved += onPointerMoved;
+            win.PointerMoved += OnPointerMoved;
             win.PointerPressed += OnPointerPressed;
-            win.PointerReleased += onPointerReleased;
-            win.PointerWheelChanged += onPointerWheelChanged;
+            win.PointerReleased += OnPointerReleased;
+            win.PointerWheelChanged += OnPointerWheelChanged;
 
-            ManipulationStarted += onManipulationStarted;
+            ManipulationStarted += OnManipulationStarted;
             ManipulationMode = Windows.UI.Xaml.Input.ManipulationModes.All;
-            ManipulationStarting += onManipulationStarting;
-            ManipulationDelta += onManipulationDelta;
-            ManipulationCompleted += onManipulationCompleted;
-            ManipulationInertiaStarting += onManipulationInertiaStarting;
+            ManipulationStarting += OnManipulationStarting;
+            ManipulationDelta += OnManipulationDelta;
+            ManipulationCompleted += OnManipulationCompleted;
+            ManipulationInertiaStarting += OnManipulationInertiaStarting;
             Holding += OnHolding;
         }
 
-        private Dictionary<FeatureBase, Dictionary<string, EventCatchAttribute>> attrBuf = null;
+#pragma warning disable CS0414, IDE0052
         private bool IsOnPointerPressed;
         private bool IsOnPointerPressFirered;
         private bool IsOnPointerMoved;
@@ -45,10 +44,13 @@ namespace Tono.Gui.Uwp
         private bool IsOnManipulationCompleted;
         private bool IsHolding;
         private bool IsOnManipulationDelta;
+#pragma warning restore CS0414, IDE0052
+
+        private Dictionary<FeatureBase, Dictionary<string, EventCatchAttribute>> attrBuf = null;
         private PointerState PointBak = null;
         private int FingerCount = 0;
         private int PrePressFiredFingerCount = 0;
-        DispatcherTimer PressTimer = null;
+        private DispatcherTimer PressTimer = null;
 
         private void Reset()
         {
@@ -77,7 +79,7 @@ namespace Tono.Gui.Uwp
         private void OnHolding(object sender, Windows.UI.Xaml.Input.HoldingRoutedEventArgs e)
         {
             IsHolding = e.HoldingState == Windows.UI.Input.HoldingState.Started;
-            var po = keyCopy(_(e, this, "onHolding"));
+            var po = KeyCopy(_(e, this, "onHolding"));
             po.Position = PointBak.Position;
             Debug.WriteLine($"onHolding Finger={po.FingerCount} {po.Position}");
             KickPointerEvent(null, fc =>
@@ -145,7 +147,7 @@ namespace Tono.Gui.Uwp
         }
 
 
-        private void onPointerMoved(Windows.UI.Core.CoreWindow sender, Windows.UI.Core.PointerEventArgs e)
+        private void OnPointerMoved(Windows.UI.Core.CoreWindow sender, Windows.UI.Core.PointerEventArgs e)
         {
             if (IsOnManipulationStarting && IsOnPointerPressed == false)
             {
@@ -154,7 +156,7 @@ namespace Tono.Gui.Uwp
             IsOnPointerMoved = true;
             PointBak = _(e, this, "onPointerMoved");
             PointBak.FingerCount = FingerCount;
-            var po = keyCopy(_(e, this, "onPointerMoved"));
+            var po = KeyCopy(_(e, this, "onPointerMoved"));
             Debug.WriteLine($"onPointerMoved Finger={PointBak.FingerCount} {PointBak.Position}");
 
             // expecting mouse move (not for drag)
@@ -164,11 +166,11 @@ namespace Tono.Gui.Uwp
             }
         }
 
-        private void onPointerReleased(Windows.UI.Core.CoreWindow sender, Windows.UI.Core.PointerEventArgs e)
+        private void OnPointerReleased(Windows.UI.Core.CoreWindow sender, Windows.UI.Core.PointerEventArgs e)
         {
             IsOnPointerReleased = true;
             FingerCount = Math.Max(FingerCount - 1, 0);
-            var po = keyCopy(_(e, this, "onPointerReleased"));
+            var po = KeyCopy(_(e, this, "onPointerReleased"));
             Debug.WriteLine($"onPointerReleased Finger = {FingerCount}");
 
             // expecting 1-finger-tap, Mouse Click, Double Click.  (not for drag, swipe. see also onManipulationCompleted)
@@ -178,56 +180,56 @@ namespace Tono.Gui.Uwp
             }
         }
 
-        private void onPointerWheelChanged(Windows.UI.Core.CoreWindow sender, Windows.UI.Core.PointerEventArgs e)
+        private void OnPointerWheelChanged(Windows.UI.Core.CoreWindow sender, Windows.UI.Core.PointerEventArgs e)
         {
             IsOnPointerWheelChanged = true;
-            var po = keyCopy(_(e, this, "onPointerWheelChanged"));
+            var po = KeyCopy(_(e, this, "onPointerWheelChanged"));
             KickWheelEvent("OnMouseWheelChanged", fc => fc.OnMouseWheelChanged(po));
             Debug.WriteLine($"onPointerWheelChanged {po.WheelDelta}");
         }
 
-        private void onManipulationStarting(object sender, Windows.UI.Xaml.Input.ManipulationStartingRoutedEventArgs e)
+        private void OnManipulationStarting(object sender, Windows.UI.Xaml.Input.ManipulationStartingRoutedEventArgs e)
         {
             Reset();
             IsOnManipulationStarting = true;
             Debug.WriteLine($"onManipulationStarting Mode={e.Mode} / {e.Pivot}");
         }
 
-        private void onManipulationStarted(object sender, Windows.UI.Xaml.Input.ManipulationStartedRoutedEventArgs e)
+        private void OnManipulationStarted(object sender, Windows.UI.Xaml.Input.ManipulationStartedRoutedEventArgs e)
         {
             IsOnManipulationStarted = true;
-            PointBak = keyCopy(_(e, this, "onManipulationStarted"));
+            PointBak = KeyCopy(_(e, this, "onManipulationStarted"));
             Debug.WriteLine($"onManipulationStarted {PointBak.Position} Finger={PointBak.FingerCount}");
             PressTimer.Stop();
             PressTimer.Start(); // Reset Interval Timer
         }
 
-        private void onManipulationDelta(object sender, Windows.UI.Xaml.Input.ManipulationDeltaRoutedEventArgs e)
+        private void OnManipulationDelta(object sender, Windows.UI.Xaml.Input.ManipulationDeltaRoutedEventArgs e)
         {
             IsOnManipulationDelta = true;
-            var po = keyCopy(_(e, this, "onManipulationDelta"));
+            var po = KeyCopy(_(e, this, "onManipulationDelta"));
             Debug.WriteLine($"onManipulationDelta {po.Position} Finger={po.FingerCount} Scale={po.Scale}");
 
             KickPointerEvent("OnPointerMoved", fc => fc.OnPointerMoved(po));
         }
 
-        private void onManipulationInertiaStarting(object sender, Windows.UI.Xaml.Input.ManipulationInertiaStartingRoutedEventArgs e)
+        private void OnManipulationInertiaStarting(object sender, Windows.UI.Xaml.Input.ManipulationInertiaStartingRoutedEventArgs e)
         {
             IsOnManipulationInertiaStarting = true;
             Debug.WriteLine($"onManipulationInertiaStarting {e.ExpansionBehavior}");
         }
 
-        private void onManipulationCompleted(object sender, Windows.UI.Xaml.Input.ManipulationCompletedRoutedEventArgs e)
+        private void OnManipulationCompleted(object sender, Windows.UI.Xaml.Input.ManipulationCompletedRoutedEventArgs e)
         {
             Debug.WriteLine($"onManipulationCompleted");
-            var po = keyCopy(_(e, this, "onManipulationCompleted"));
+            var po = KeyCopy(_(e, this, "onManipulationCompleted"));
             po.FingerCount = 0;
             KickPointerEvent("OnPointerReleased", fc => fc.OnPointerReleased(po));
             Reset();
             IsOnManipulationCompleted = true;
         }
 
-        private PointerState keyCopy(PointerState po)
+        private PointerState KeyCopy(PointerState po)
         {
             po.FingerCount = FingerCount;
             po.PositionOrigin = PointBak?.PositionOrigin ?? po.PositionOrigin;
@@ -243,7 +245,7 @@ namespace Tono.Gui.Uwp
         /// <summary>
         /// cache waiting method that have EventCatchAttribute
         /// </summary>
-        private void prepareEventCatchFilter()
+        private void PrepareEventCatchFilter()
         {
             if (attrBuf != null)
             {
