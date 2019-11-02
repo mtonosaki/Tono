@@ -13,7 +13,7 @@ namespace Tono.GuiWinForm
     /// ドラッグでのズームをサポート
     /// </summary>
     /// <remarks>
-    /// 特許公開番号：特開2007-264807	2007/10/11
+    /// 特許公開番号：特開2007-264807
     /// </remarks>
     public class FeatureDragZoom : Tono.GuiWinForm.FeatureBase, IMouseListener, IKeyListener
     {

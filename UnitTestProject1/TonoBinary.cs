@@ -5,7 +5,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Diagnostics;
 using Tono;
 
-namespace UnitTests
+namespace UnitTests1
 {
     [TestClass]
     public class TonoBinary

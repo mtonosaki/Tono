@@ -463,7 +463,6 @@ namespace Tono.GuiWinForm
         public static void CopyObject(object dest, object src)
         {
             IDictionary dat = new HybridDictionary();
-            //TODO:Ç±ÇÃï”Ç≈NulléQè∆Ç™Ç≈ÇÈ TONO 2005.12.6
             System.Diagnostics.Debug.Assert(dest != null);
             System.Diagnostics.Debug.Assert(src != null);
             if (dest == null || src == null)

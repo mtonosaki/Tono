@@ -335,11 +335,6 @@ namespace Tono.GuiWinForm
         //
         public override string ToString()
         {
-            //
-            // 2006.03.07 ZONO
-            // _valの値が－(マイナス)になるとエラーになるので、
-            // マイナスになったら１週間分/*インクリメントする*/に収まるようにする by Tono
-            //
             var temp = (DateTimeEx)Clone();
             if (temp._val < 0)
             {
