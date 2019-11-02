@@ -1,6 +1,8 @@
 ﻿// Copyright (c) Manabu Tonosaki All rights reserved.
 // Licensed under the MIT license.
 
+using System.Diagnostics;
+
 namespace Tono.Gui.Uwp
 {
     /// <summary>
@@ -56,13 +58,17 @@ namespace Tono.Gui.Uwp
 
         public void OnPointerPressed(PointerState po)
         {
-            if (getTrigger(po) != PointerState.DeviceTypes.None)
+            Debug.WriteLine($"★OnPointerPressed {po.Position} finger={po.FingerCount} Scale={po.Scale}");
+            if (getTrigger(po) == PointerState.DeviceTypes.Mouse)
             {
-                _sPosDown = po.Position;
-                _lPosDown = LayoutPos.From(Pane.Target, po.Position);
-                _sZoomDown = ScreenPos.From(Pane.Target.ZoomX, Pane.Target.ZoomY);
-                _lScrollDown = LayoutPos.From(Pane.Target.ScrollX, Pane.Target.ScrollY);
-                isZooming = true;
+                if (isZooming == false)
+                {
+                    _sPosDown = po.Position;
+                    _lPosDown = LayoutPos.From(Pane.Target, po.Position);
+                    _sZoomDown = ScreenPos.From(Pane.Target.ZoomX, Pane.Target.ZoomY);
+                    _lScrollDown = LayoutPos.From(Pane.Target.ScrollX, Pane.Target.ScrollY);
+                    isZooming = true;
+                }
             }
         }
         public void OnPointerHold(PointerState po)
@@ -75,8 +81,17 @@ namespace Tono.Gui.Uwp
 
         public void OnPointerMoved(PointerState po)
         {
-            if (isZooming)
+            Debug.WriteLine($"★OnPointerMoved {po.Position} finger={po.FingerCount} Scale={po.Scale}");
+            if (po.Scale != 1.0f || isZooming)
             {
+                if (isZooming == false)
+                {
+                    _sPosDown = po.Position;
+                    _lPosDown = LayoutPos.From(Pane.Target, po.Position);
+                    _sZoomDown = ScreenPos.From(Pane.Target.ZoomX, Pane.Target.ZoomY);
+                    _lScrollDown = LayoutPos.From(Pane.Target.ScrollX, Pane.Target.ScrollY);
+                    isZooming = true;
+                }
                 ScreenPos sZoom;
                 var lScroll = _lScrollDown;
                 var sMove = po.Position - _sPosDown;    // pointer move distance
@@ -112,19 +127,19 @@ namespace Tono.Gui.Uwp
                     });
                     isChanged = true;
                 }
-                if (Pane.Target.ScrollX != lScroll.X.Lx || Pane.Target.ScrollY != lScroll.Y.Ly)
-                {
-                    Pane.Target.ScrollX = lScroll.X.Lx;
-                    Pane.Target.ScrollY = lScroll.Y.Ly;
-                    Token.Link(po, new EventTokenPaneChanged
-                    {
-                        TokenID = TokensGeneral.Scrolled,
-                        Sender = this,
-                        Remarks = "auto scroll when drag zoom",
-                        TargetPane = Pane.Target,
-                    });
-                    isChanged = true;
-                }
+                //if (Pane.Target.ScrollX != lScroll.X.Lx || Pane.Target.ScrollY != lScroll.Y.Ly)
+                //{
+                //    Pane.Target.ScrollX = lScroll.X.Lx;
+                //    Pane.Target.ScrollY = lScroll.Y.Ly;
+                //    Token.Link(po, new EventTokenPaneChanged
+                //    {
+                //        TokenID = TokensGeneral.Scrolled,
+                //        Sender = this,
+                //        Remarks = "auto scroll when drag zoom",
+                //        TargetPane = Pane.Target,
+                //    });
+                //    isChanged = true;
+                //}
                 if (isChanged)
                 {
                     onZoomed();
@@ -134,6 +149,7 @@ namespace Tono.Gui.Uwp
         }
         public void OnPointerReleased(PointerState po)
         {
+            Debug.WriteLine($"★OnPointerReleased {po.Position} finger={po.FingerCount} Scale={po.Scale}");
             isZooming = false;
         }
     }
