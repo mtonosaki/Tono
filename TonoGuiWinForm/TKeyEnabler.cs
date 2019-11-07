@@ -14,7 +14,6 @@ namespace Tono.GuiWinForm
     /// </summary>
     public class TKeyEnabler : System.Windows.Forms.UserControl
     {
-        private System.Windows.Forms.Timer _timerAutoFocus;
         private System.ComponentModel.IContainer components;
         private static bool _enable = true;
         private Control _parentForm = null;
@@ -107,14 +106,6 @@ namespace Tono.GuiWinForm
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            _timerAutoFocus = new System.Windows.Forms.Timer(components)
-            {
-                // 
-                // timerAutoFocus
-                // 
-                Enabled = true
-            };
-            _timerAutoFocus.Tick += new System.EventHandler(timerAutoFocus_Tick);
             // 
             // fiKeyEnabler
             // 
@@ -235,84 +226,13 @@ namespace Tono.GuiWinForm
                 base.OnPaintBackground(pevent);
             }
         }
-        #region 未使用（様子見中 by Tono 2009.6.22～)
-
-        /// <summary>
-        /// マウス移動時のフォーカスコントロール
-        /// </summary>
-        //private void mouseMoved()
-        //{
-        //    if( _enable == false )
-        //    {
-        //        return;
-        //    }
-
-        //    Point mp = Parent.PointToClient(uMouseState.NowPosition);
-        //    if( mp.X < 0 || mp.Y < 0 || mp.X > Parent.Width || mp.Y > Parent.Height )
-        //    {
-        //        return;
-        //    }
-
-        //    if (_parentForm != null)
-        //    {
-        //        if (_parentForm.ContainsFocus == false)
-        //        {
-        //            return;
-        //        }
-        //    }
-
-        //    Control child = Parent.GetChildAtPoint(mp);
-        //    if( child == null )
-        //    {
-        //        if (this.ContainsFocus == false)
-        //        {
-        //            focus(this);
-        //        }
-        //    } 
-        //    else 
-        //    {
-        //        if (child.ContainsFocus == false)
-        //        {
-        //            focus(child);
-        //        }
-        //    }
-        //}
-
-        //private void focus(Control c)
-        //{
-        //    c.Select();
-        //    c.Focus();
-        //}
 
         /// <summary>
         /// 自動的にフォーカスをONにする処理
         /// </summary>
         private void timerAutoFocus_Tick(object sender, System.EventArgs e)
         {
-            #region 様子見
-            //if( _enable == false )
-            //{
-            //    return;
-            //}
-            //if( DesignMode == false )
-            //{
-            //    // 遅延初期化処理
-            //    if( _isFirstInvalidate  == false )
-            //    {
-            //        _isFirstInvalidate = true;
-            //        Parent.Invalidate();
-            //    }
-
-            //    // マウス移動検出
-            //    if( Math.Abs(uMouseState.NowPosition.X - _prevMousePos.X) > 4 || Math.Abs(uMouseState.NowPosition.Y - _prevMousePos.Y) > 4 )
-            //    {
-            //        mouseMoved();
-            //        _prevMousePos = uMouseState.NowPosition;
-            //    }
-            //}
-            #endregion
         }
-        #endregion
 
         /// <summary>
         /// サイズ変更時の処理

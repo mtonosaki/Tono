@@ -90,7 +90,7 @@ namespace Tono.GuiWinForm
             //			this.Owner.Click += new EventHandler(onOpenMenuItem);	// .NET2.0âª
             //if( OwnerItem.GetType().IsDefined(typeof(ToolStripDropDown), true))
             //{
-            //    ((ToolStripDropDown)OwnerItem).DropDownOpening += new EventHandler(onOpenMenuItem);	// Tono:ñ¢ëŒâûÅ@2007.7.23
+            //    ((ToolStripDropDown)OwnerItem).DropDownOpening += new EventHandler(onOpenMenuItem);
             //}
         }
 

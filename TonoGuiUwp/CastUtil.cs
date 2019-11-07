@@ -2,13 +2,34 @@
 // Licensed under the MIT license.
 
 using System;
-using System.Diagnostics;
 using Windows.Devices.Input;
 
 namespace Tono.Gui.Uwp
 {
     public static class CastUtil
     {
+        /// <summary>
+        /// save pointer state from ManipulationStartedRoutedEventArgs
+        /// </summary>
+        /// <param name="e"></param>
+        /// <returns></returns>
+        public static PointerState _(Windows.UI.Xaml.Input.ManipulationStartingRoutedEventArgs e, object sender, string remarks)
+        {
+            var ret = new PointerState
+            {
+                Sender = sender,
+                Remarks = remarks,
+                PositionOrigin = ScreenPos.From(e.Pivot.Center.X, e.Pivot.Center.Y),
+                Position = ScreenPos.From(e.Pivot.Center.X, e.Pivot.Center.Y),
+                IsInContact = true,
+                Scale = 1.0f,
+                Rotation = Angle.FromRad(e.Pivot.Radius),
+                Time = DateTime.Now,
+            };
+            ret.DeviceType = PointerState.DeviceTypes.Touch;    // set Touch even if using Pen
+            return ret;
+        }
+
         /// <summary>
         /// save pointer state from ManipulationStartedRoutedEventArgs
         /// </summary>
@@ -35,8 +56,8 @@ namespace Tono.Gui.Uwp
                 case PointerDeviceType.Touch:
                     ret.DeviceType = PointerState.DeviceTypes.Touch;
                     break;
-                default:
-                    Debug.Fail("need to support PointerDeviceType");
+                case PointerDeviceType.Mouse:
+                    ret.DeviceType = PointerState.DeviceTypes.Mouse;
                     break;
             }
             return ret;
@@ -67,8 +88,8 @@ namespace Tono.Gui.Uwp
                 case PointerDeviceType.Touch:
                     ret.DeviceType = PointerState.DeviceTypes.Touch;
                     break;
-                default:
-                    Debug.Fail("need to support PointerDeviceType");
+                case PointerDeviceType.Mouse:
+                    ret.DeviceType = PointerState.DeviceTypes.Mouse;
                     break;
             }
             return ret;
@@ -98,8 +119,8 @@ namespace Tono.Gui.Uwp
                 case PointerDeviceType.Touch:
                     ret.DeviceType = PointerState.DeviceTypes.Touch;
                     break;
-                default:
-                    Debug.Fail("need to support PointerDeviceType");
+                case PointerDeviceType.Mouse:
+                    ret.DeviceType = PointerState.DeviceTypes.Mouse;
                     break;
             }
             return ret;

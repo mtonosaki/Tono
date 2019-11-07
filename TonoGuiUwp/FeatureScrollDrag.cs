@@ -47,7 +47,7 @@ namespace Tono.Gui.Uwp
                 case PointerState.DeviceTypes.Mouse:
                     return po.IsInContact && po.IsKeyControl && po.IsKeyShift;      // Mouse : [CTRL]+[SHIFT] + Drag
                 case PointerState.DeviceTypes.Touch:
-                    return po.IsInContact && po.Scale == 1 && po.Rotation.IsZero(); // Swipe when NOT rotated and NOT pinched
+                    return po.IsInContact && po.FingerCount == 2; // Swipe when NOT rotated and NOT pinched
                 default:
                     return false;
             }
@@ -55,6 +55,7 @@ namespace Tono.Gui.Uwp
 
         public void OnPointerPressed(PointerState po)
         {
+            //Debug.WriteLine($"★OnPointerPressed {po.Position} finger={po.FingerCount}");
             if (isTrigger(po))
             {
                 if (po.Position.Y < Pane.Target.Rect.RB.Y - MarginBottom)
@@ -68,6 +69,7 @@ namespace Tono.Gui.Uwp
         }
         public void OnPointerHold(PointerState po)
         {
+            //Debug.WriteLine($"★OnPointerHold {po.Position} finger={po.FingerCount}");
         }
 
         protected virtual void onScrolled()
@@ -76,36 +78,31 @@ namespace Tono.Gui.Uwp
 
         public void OnPointerMoved(PointerState po)
         {
+            //Debug.WriteLine($"★OnPointerMoved {po.Position} finger={po.FingerCount}");
             if (isScrolling)
             {
-                if (isTrigger(po))
+                var sval = (po.Position - _sPosDown) / _sZoomDown;
+                if (sval.Height != 0 || sval.Width != 0)
                 {
-                    var sval = (po.Position - _sPosDown) / _sZoomDown;
-                    if (sval.Height != 0 || sval.Width != 0)
+                    var newpos = _lScrollDown + sval;
+                    Pane.Target.ScrollX = newpos.X.Sx;
+                    Pane.Target.ScrollY = newpos.Y.Sy;
+                    Token.Link(po, new EventTokenPaneChanged
                     {
-                        var newpos = _lScrollDown + sval;
-                        Pane.Target.ScrollX = newpos.X.Sx;
-                        Pane.Target.ScrollY = newpos.Y.Sy;
-                        Token.Link(po, new EventTokenPaneChanged
-                        {
-                            TokenID = TokensGeneral.Scrolled,
-                            Sender = this,
-                            Remarks = "fcDragScrollでのスクロール",
-                            TargetPane = Pane.Target,
-                        });
-                        onScrolled();
-                        Redraw();
-                    }
-                }
-                else
-                {
-                    OnPointerReleased(po);
+                        TokenID = TokensGeneral.Scrolled,
+                        Sender = this,
+                        Remarks = "fcDragScrollでのスクロール",
+                        TargetPane = Pane.Target,
+                    });
+                    onScrolled();
+                    Redraw();
                 }
             }
         }
 
         public void OnPointerReleased(PointerState po)
         {
+            //Debug.WriteLine($"★OnPointerReleased {po.Position} finger={po.FingerCount}");
             if (isScrolling)
             {
                 isScrolling = false;

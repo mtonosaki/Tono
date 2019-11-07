@@ -44,7 +44,7 @@ namespace Tono.Gui
         /// <summary>
         /// number of finger.
         /// </summary>
-        public int Finger { get; set; }
+        public int FingerCount { get; set; }
 
         /// <summary>
         /// mouse wheel notch amount
@@ -103,5 +103,25 @@ namespace Tono.Gui
         /// check pushing windows key
         /// </summary>
         public bool IsKeyWindows { get; set; }
+
+        public PointerState Clone()
+        {
+            return new PointerState
+            {
+                DeviceType = this.DeviceType,
+                PositionOrigin = this.PositionOrigin.Clone(),
+                Position = this.Position.Clone(),
+                FingerCount = this.FingerCount,
+                WheelDelta = this.WheelDelta,
+                Scale = this.Scale,
+                Rotation = Angle.FromDeg(this.Rotation.Deg),
+                Time = this.Time,
+                IsInContact = this.IsInContact,
+                IsKeyControl = this.IsKeyControl,
+                IsKeyMenu = this.IsKeyMenu,
+                IsKeyShift = this.IsKeyShift,
+                IsKeyWindows = this.IsKeyWindows,
+            };
+        }
     }
 }

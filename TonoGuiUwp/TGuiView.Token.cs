@@ -28,10 +28,10 @@ namespace Tono.Gui.Uwp
 
                 if (_tokenQueue.Count > 0)
                 {
-                    tokenEventProc();
+                    TokenEventProc();
                     TokenLoop?.Invoke(this, EventArgs.Empty);
                 }
-                checkInvalidateReqested();
+                CheckInvalidateReqested();
             });
         }
 
@@ -68,7 +68,7 @@ namespace Tono.Gui.Uwp
         /// <summary>
         /// token event implement
         /// </summary>
-        private void tokenEventProc()
+        private void TokenEventProc()
         {
             try
             {
@@ -196,7 +196,7 @@ namespace Tono.Gui.Uwp
             return nMatch;
         }
 
-        private void checkInvalidateReqested()
+        private void CheckInvalidateReqested()
         {
             if (_isDrawing == false && DataHot.IsRedrawRequested == true)
             {

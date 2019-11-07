@@ -4,7 +4,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Tono;
 
-namespace UnitTests
+namespace UnitTests1
 {
     [TestClass]
     public class TonoNamedId

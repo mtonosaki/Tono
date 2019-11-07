@@ -60,7 +60,6 @@ namespace Tono.GuiWinForm
             if (who.Equals(_tokens[0]))
             {
                 Finalizers.Add(new FinalizeManager.Finalize(finalMouseDownPart4Size));  // SezeSelected・・・も継承しているので、ID不指定
-                                                                                        //			Finalizers.Add(_tokenListenID, new ffFinalizer.Finalize(_finalMouseDownPart)); by Tono 調査中 2006.2.2
             }
             // MouseMoveトークン
             if (who.Equals(_tokens[1]))

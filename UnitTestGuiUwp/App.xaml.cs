@@ -52,7 +52,6 @@ namespace UnitTestGuiUwp
 
                 if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
                 {
-                    //TODO: 以前中断したアプリケーションから状態を読み込みます
                 }
 
                 // フレームを現在のウィンドウに配置します
@@ -73,27 +72,14 @@ namespace UnitTestGuiUwp
             }
         }
 
-        /// <summary>
-        /// 特定のページへの移動が失敗したときに呼び出されます
-        /// </summary>
-        /// <param name="sender">移動に失敗したフレーム</param>
-        /// <param name="e">ナビゲーション エラーの詳細</param>
         void OnNavigationFailed(object sender, NavigationFailedEventArgs e)
         {
             throw new Exception("Failed to load Page " + e.SourcePageType.FullName);
         }
 
-        /// <summary>
-        /// アプリケーションの実行が中断されたときに呼び出されます。
-        /// アプリケーションが終了されるか、メモリの内容がそのままで再開されるかに
-        /// かかわらず、アプリケーションの状態が保存されます。
-        /// </summary>
-        /// <param name="sender">中断要求の送信元。</param>
-        /// <param name="e">中断要求の詳細。</param>
         private void OnSuspending(object sender, SuspendingEventArgs e)
         {
             var deferral = e.SuspendingOperation.GetDeferral();
-            //TODO: アプリケーションの状態を保存してバックグラウンドの動作があれば停止します
             deferral.Complete();
         }
     }
