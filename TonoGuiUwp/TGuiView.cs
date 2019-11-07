@@ -219,7 +219,7 @@ namespace Tono.Gui.Uwp
                         select fc;
                     featuresCopy2 = fcs.ToArray();
                 }
-                prepareEventCatchFilter();
+                PrepareEventCatchFilter();
             }
             return featuresCopy2;
         }
@@ -240,7 +240,7 @@ namespace Tono.Gui.Uwp
                         select fc;
                     featuresCopy3 = fcs.ToArray();
                 }
-                prepareEventCatchFilter();
+                PrepareEventCatchFilter();
             }
             return featuresCopy3;
         }
@@ -282,7 +282,7 @@ namespace Tono.Gui.Uwp
 
             Features.Findable = false;
 
-            initPointer();  // TGuiView.Pointer.cs
+            InitPointer();  // TGuiView.Pointer.cs
             InitKeyboard(); // TGuiView.Keyboard.cs
 
             foreach (var fc in (from fc in getFeatures() where fc is IKeyListener select fc))

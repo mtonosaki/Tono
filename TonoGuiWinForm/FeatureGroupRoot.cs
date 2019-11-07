@@ -213,7 +213,7 @@ namespace Tono.GuiWinForm
         public override void ZoomChanged(IRichPane target)
         {
             base.ZoomChanged(target);
-            //FlushFeatureTriggers();	// TODO:ここは、コメントでもOK？ by Tono 2006.1.23
+            //FlushFeatureTriggers();
         }
     }
 }
