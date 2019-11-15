@@ -12,6 +12,25 @@ namespace Tono
     public static class MathUtil
     {
         /// <summary>
+        /// Calc FNV Hash code
+        /// </summary>
+        /// <param name="str">input string</param>
+        /// <returns>hash code</returns>
+        public static int GetFnvHash(string str)
+        {
+            unchecked
+            {
+                const UInt32 key = 16777619;
+                UInt32 hash = 2166136261;
+                foreach (var c in str)
+                {
+                    hash = (key * hash) ^ c;
+                }
+                return (int)hash;
+            }
+        }
+
+        /// <summary>
         /// Trim val between min and max
         /// </summary>
         /// <param name="val"></param>
