@@ -1,6 +1,8 @@
 ﻿// Copyright (c) Manabu Tonosaki All rights reserved.
 // Licensed under the MIT license.
 
+using System.Diagnostics;
+
 namespace Tono.Gui.Uwp
 {
     /// <summary>
