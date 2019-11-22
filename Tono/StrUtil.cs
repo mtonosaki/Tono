@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -602,6 +603,160 @@ namespace Tono
                 rets[i] = ret[i];
             }
             return rets;
+        }
+
+        /// <summary>
+        /// split string with separation character considering to keep them between double quotations.
+        /// </summary>
+        /// <param name="str">文字列</param>
+        /// <param name="separation">区切り文字</param>
+        /// <param name="isTrim"></param>
+        /// <returns></returns>
+        /// <example>
+        /// t1 = StrUtil.SplitConsideringDoubleQuatation2("aaa=bbb : ccc = ddd =: eee  ", new[] { '=', ':', ' ' }, true, true);
+        /// separations '='TOP PRIORITY ----- ':'HIGH ----- ' 'LOW  (left is high priority)
+        /// ret
+        ///     "aaa", ""       // no separator yet
+        ///     "bbb", "="      // "=bbb"
+        ///     "ccc", ":"      // " : ccc"  ':' takes precedence over ' '
+        ///     "ddd", "="      // " = ddd"  '=' takes precedence over ' '
+        ///     "eee", "="      // " =: eee" '=' takes precedence over both ':' and ' '
+        /// </example>
+        public static (string Block, string Separator)[] SplitConsideringDoubleQuatation(string str, char[] separations, bool isTrim, bool isIgnoreEmpty)
+        {
+            var ret = new List<(string Block, string Separator)>();
+            var sb = new StringBuilder();
+            var isDQ = false;
+            var lastSeparator = "";
+            var lastSepId = int.MaxValue;
+            var sepstr = string.Join("", separations);
+            for (var i = 0; i < str.Length; i++)
+            {
+                var c = str[i];
+                if (c == '\"')
+                {
+                    isDQ = !isDQ;
+                    continue;
+                }
+                if (isDQ == false)
+                {
+                    var sepid = sepstr.IndexOf(c);
+                    if (sepid >= 0)
+                    {
+                        var ss = sb.ToString();
+                        if (isTrim)
+                        {
+                            ss = ss.Trim();
+                        }
+                        if (isIgnoreEmpty == false || ss.Length > 0)
+                        {
+                            ret.Add((ss, lastSeparator));
+                            lastSepId = int.MaxValue;
+                        }
+                        sb.Clear();
+                        if (sepid < lastSepId)
+                        {
+                            lastSeparator = c.ToString();
+                            lastSepId = sepid;
+                        }
+                        continue;
+                    }
+                }
+                sb.Append(c);
+            }
+            var sss = sb.ToString().Trim();
+            if (sss.Length > 0)
+            {
+                ret.Add((sss, lastSeparator));
+            }
+            return ret.ToArray();
+        }
+
+        /// <summary>
+        /// split string with separation character considering to keep them between double quotations.
+        /// </summary>
+        /// <param name="str"></param>
+        /// <param name="separations"></param>
+        /// <param name="isTrim"></param>
+        /// <param name="isIgnoreEmpty"></param>
+        /// <returns></returns>
+        /// <example>
+        /// t1 = StrUtil.SplitConsideringDoubleQuatation(" aaa=bbb : ccc = ddd =: eee  ", new[] { '=', ':', ' ' }, true, true);
+        /// separations '='TOP PRIORITY ----- ':'HIGH ----- ' 'LOW  (left is high priority)
+        /// ret
+        ///     "aaa"
+        ///     "="
+        ///     "bbb"
+        ///     ":"
+        ///     "ccc"
+        ///     "="
+        ///     "ddd"
+        ///     "="
+        ///     ":"
+        ///     "eee"
+        /// </example>
+        public static string[] SplitConsideringQuatationContainsSeparator(string str, char[] separations, bool isTrim, bool isIgnoreEmpty, bool isRemoveQuotation = true)
+        {
+            var ret = new List<string>();
+            var sb = new StringBuilder();
+            var isDQ = false;
+            char preQ = char.MinValue;
+            var sepstr = string.Join("", separations);
+            for (var i = 0; i < str.Length; i++)
+            {
+                var c = str[i];
+                if (isDQ == false && c == '\"' || c == '\'')
+                {
+                    preQ = c;
+                    isDQ = true;
+                    if (isRemoveQuotation) continue;
+                }
+                else
+                if (isDQ && c == preQ)
+                {
+                    isDQ = false;
+                    if (isRemoveQuotation) continue;
+                }
+                else
+                if (isDQ == false)
+                {
+                    var sepid = sepstr.IndexOf(c);
+                    if (sepid >= 0)
+                    {
+                        var ss = sb.ToString();
+                        if (isTrim)
+                        {
+                            ss = ss.Trim();
+                        }
+                        if (sb.Length > 0 && (isIgnoreEmpty == false || ss.Length > 0))
+                        {
+                            ret.Add(ss);
+                            sb.Clear();
+                        }
+                        var sep = sepstr[sepid].ToString();
+                        if (isTrim)
+                        {
+                            sep = sep.Trim();
+                        }
+                        if (isIgnoreEmpty == false || sep.Length > 0)
+                        {
+                            ret.Add(sep);
+                        }
+                        continue;
+                    }
+                }
+                sb.Append(c);
+            }
+            var sss = sb.ToString();
+            if (isTrim)
+            {
+                sss = sss.Trim();
+            }
+            if (sb.Length > 0 && (isIgnoreEmpty == false || sss.Length > 0))
+            {
+                ret.Add(sss);
+            }
+            return ret.ToArray();
         }
 
         /// <summary>

@@ -8,9 +8,10 @@ namespace Tono.Jit
     /// <summary>
     /// in-command to make exit delay time
     /// </summary>
+    [JacTarget(Name = "CiDelay")]
     public class CiDelay : CiBase
     {
-        public TimeSpan DelayTime { get; set; }
+        public TimeSpan Delay { get; set; }
 
         /// <summary>
         /// set exit time
@@ -19,7 +20,7 @@ namespace Tono.Jit
         /// <param name="now">simulation time</param>
         public override void Exec(JitWork work, DateTime now)
         {
-            work.ExitTime = work.EnterTime + DelayTime;
+            work.ExitTime = work.EnterTime + Delay;
         }
     }
 }

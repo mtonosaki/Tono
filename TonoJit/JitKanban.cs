@@ -11,6 +11,7 @@ namespace Tono.Jit
     /// <remarks>
     /// 1-Kanban can call 1-Work
     /// </remarks>
+    [JacTarget(Name = "Kanban")]
     public class JitKanban : JitVariable
     {
         private static int _counter = 0;

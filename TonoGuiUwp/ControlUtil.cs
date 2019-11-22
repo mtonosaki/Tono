@@ -145,7 +145,7 @@ namespace Tono.Gui.Uwp
         /// <returns></returns>
         public static TGuiView FindView(FrameworkElement tar)
         {
-            // TODO: support to find control in humburger menu
+            // HACK: support to find control in humburger menu
             var top = Window.Current.Content;
             var allControls = DescendantsAndSelf(top);
             var views = allControls.OfType<TGuiView>();

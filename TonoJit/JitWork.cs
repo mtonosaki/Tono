@@ -12,6 +12,7 @@ namespace Tono.Jit
     /// <remarks>
     /// Work is general item to make flow in just-in-time model that is not only physical item.
     /// </remarks>
+    [JacTarget(Name = "Work")]
     public class JitWork : JitVariable
     {
         // public string Name	// work Name is come from JitVariable

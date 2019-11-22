@@ -15,17 +15,13 @@ namespace Tono.Jit
     /// Process is the general object to make operation flow
     /// 工程は、物や情報の流れを作る基本的なオブジェクト
     /// </remarks>
+    [JacTarget(Name = "Process")]
     public partial class JitProcess
     {
         /// <summary>
         /// Process name
         /// </summary>
         public string Name { get; set; }
-
-        /// <summary>
-        /// Data source
-        /// </summary>
-        public string Source { get; set; }
 
         /// <summary>
         /// in-command collection utility
@@ -49,18 +45,55 @@ namespace Tono.Jit
                 _data.Add(ci);
             }
 
+            public void Remove(CiBase item)
+            {
+                _data.Remove(item);
+            }
+
             public CiBase this[int index] => _data[index];
         }
-
-        private InCommandCollection _inCommands = new InCommandCollection();
 
         /// <summary>
         /// Having in-command objects
         /// </summary>
-        public InCommandCollection InCommands
+        public InCommandCollection InCommands { get; set; } = new InCommandCollection();
+
+        [JacListAdd(PropertyName = "Cio")]
+        public void CioAdd(object obj)
         {
-            get => _inCommands;
-            set => _inCommands = value;
+            if (obj is CiBase ci)
+            {
+                InCommands.Add(ci);
+            }
+            else if (obj is CoBase co)
+            {
+                Constraints.Add(co);
+            }
+            else
+            {
+                throw new JacException(JacException.Codes.TypeMismatch, $"Cio.Add type mismatch arg type={(obj?.GetType().Name ?? "null")}");
+            }
+        }
+
+        [JacListRemove(PropertyName = "Cio")]
+        public void CioRemove(string name)
+        {
+            foreach (var item in Cios.Where(a => a.Name == name).ToArray())
+            {
+                if (item is CiBase ci)
+                {
+                    InCommands.Remove(ci);
+                }
+                else
+                if (item is CoBase co)
+                {
+                    Constraints.Remove(co);
+                }
+                else
+                {
+                    throw new JacException(JacException.Codes.TypeMismatch, $"Cio.Remove type mismatch Name={name}");
+                }
+            }
         }
 
         /// <summary>
@@ -71,7 +104,7 @@ namespace Tono.Jit
         /// NOTE: register sequence is important. first sequence is priority.
         /// 制約登録順番に注意：先頭から制約実行し、制約有りのオブジェクトが見つかったら、以降の制約は実行しない
         /// </remarks>
-        public List<CoBase> Constraints = new List<CoBase>();
+        public List<CoBase> Constraints { get; } = new List<CoBase>();
 
         /// <summary>
         /// Link set of the owner stage

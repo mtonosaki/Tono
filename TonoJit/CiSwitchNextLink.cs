@@ -6,14 +6,16 @@ using System;
 namespace Tono.Jit
 {
     /// <summary>
+    /// WARNING : THIS CLASS IS NOT YET COMPLETED 2019.11.17
     /// in-command to switch next process with parameter
     /// </summary>
+    [JacTarget(Name = "CiSwitchNextLink")]
     public class CiSwitchNextLink : CiBase
     {
         /// <summary>
         /// ワークに書かれているスイッチ値の変数名
         /// </summary>
-        public JitVariable Name { get; set; } = JitVariable.From("NextLinkNo");
+        public JitVariable NextLinkVarName { get; set; } = JitVariable.From("NextLinkNo");
 
         /// <summary>
         /// work filter classes
@@ -30,7 +32,7 @@ namespace Tono.Jit
         {
             if (work.Is(TargetWorkClass))
             {
-                int nextLinkNo = DbUtil.ToInt(work.ChildVriables.GetValueOrNull(Name.Value.ToString())?.Value, def: -1);
+                int nextLinkNo = DbUtil.ToInt(work.ChildVriables.GetValueOrNull(NextLinkVarName.Value.ToString())?.Value, def: -1);
                 if (nextLinkNo >= 0)
                 {
                     work.NextProcess = GetParentProcess(work).NextLinks[nextLinkNo];

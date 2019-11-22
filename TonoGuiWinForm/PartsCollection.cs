@@ -286,7 +286,7 @@ namespace Tono.GuiWinForm
         /// <returns>指定キーに合致するパーツ群</returns>
         public override IList<PartsBase> GetPartsByLocationID(IRichPane rp, Id pos)
         {
-            //TODO:GetPartsByLocationID遅い
+            // HACK: Slow GetPartsByLocationID method
             var ret = new List<PartsBase>();
 
             foreach (var layers in _data.Values)
@@ -315,7 +315,7 @@ namespace Tono.GuiWinForm
         /// <returns>パーツのコレクション</returns>
         public override ICollection<PartsBase> GetOverlappedParts(Type partsClass, PartsBase tar, IRichPane rp, bool checkIllustion)
         {
-            //TODO: GetOverlappedParts遅い
+            //HACK: Slow GetOverlappedParts method
             var ret = new List<PartsBase>();
 
             if (_data.TryGetValue(rp, out var layers))

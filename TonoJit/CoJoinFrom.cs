@@ -9,6 +9,7 @@ namespace Tono.Jit
     /// get work to owner process from specified PullFrom process when work can be confluence condition.
     /// 横工程からワークがINできる場合かどうかを評価する。INできる場合は横工程からワークをOUTさせて、対象ワークに投入する
     /// </summary>
+    [JacTarget(Name = "CoJoinFrom")]
     public class CoJoinFrom : CoBase
     {
         /// <summary>

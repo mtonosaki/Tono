@@ -10,6 +10,7 @@ namespace Tono.Jit
     /// in-command : request to push works into other process
     /// 子ワークを指定工程にPUSH(要求) 
     /// </summary>
+    [JacTarget(Name = "CiPickTo")]
     public class CiPickTo : CiBase
     {
         /// <summary>
@@ -31,7 +32,7 @@ namespace Tono.Jit
         /// <summary>
         /// delay time to complete push work
         /// </summary>
-        public TimeSpan DelayTime { get; set; } = TimeSpan.FromSeconds(0);
+        public TimeSpan Delay { get; set; } = TimeSpan.FromSeconds(0);
 
         /// <summary>
         /// destination prosess of push operation
@@ -39,7 +40,14 @@ namespace Tono.Jit
         public Func<JitProcess> Destination { get; set; }
 
         /// <summary>
-        /// the constructor of this class
+        /// Default constructor for Jit as Code
+        /// </summary>
+        public CiPickTo()
+        {
+        }
+
+        /// <summary>
+        /// initial constructor
         /// </summary>
         /// <param name="parent"></param>
         public CiPickTo(JitStage stage)
@@ -67,7 +75,7 @@ namespace Tono.Jit
                                                  // childWork.PrevProcess = null; // workがAssyされた元工程を覚えておく
 
                 work.ChildWorks.Remove(childWorkName);  // 子ワークから外す
-                Stage.Events.Enqueue(now + DelayTime, EventTypes.Out, childWork);   // 次工程にPUSH予約
+                Stage.Events.Enqueue(now + Delay, EventTypes.Out, childWork);   // 次工程にPUSH予約
             }
         }
     }

@@ -7,7 +7,7 @@ using System.Linq;
 using Tono;
 using Tono.Jit;
 
-namespace UnitTests1
+namespace UnitTestProject1
 {
     [TestClass]
     public class TonoJit_Process
@@ -29,7 +29,7 @@ namespace UnitTests1
                 {
                     new CiDelay
                     {
-                        DelayTime = TimeSpan.FromMinutes(3),
+                        Delay = TimeSpan.FromMinutes(3),
                     },
                 },
                 NextLinks = new JitProcess.Destinations
@@ -108,15 +108,15 @@ namespace UnitTests1
 
             A.InCommands.Add(new CiDelay
             {
-                DelayTime = TimeSpan.FromMinutes(10),
+                Delay = TimeSpan.FromMinutes(10),
             });
             B.InCommands.Add(new CiDelay
             {
-                DelayTime = TimeSpan.FromMinutes(20),
+                Delay = TimeSpan.FromMinutes(20),
             });
             B.Constraints.Add(new CoMaxCost
             {
-                Name = JitVariable.From("Count"),
+                ReferenceVarName = JitVariable.From("Count"),
                 Value = 1.0,
             });
             CoJoinFrom JFY;
@@ -134,16 +134,16 @@ namespace UnitTests1
             C.InCommands.Add(new CiPickTo(st)  // CH’ö‚Å D‚É•ªŠò
             {
                 Destination = () => D,
-                DelayTime = TimeSpan.FromMinutes(1),
+                Delay = TimeSpan.FromMinutes(1),
                 TargetWorkClass = ":Sumaho",
             });
             C.InCommands.Add(new CiDelay
             {
-                DelayTime = TimeSpan.FromMinutes(8),
+                Delay = TimeSpan.FromMinutes(8),
             });
             D.InCommands.Add(new CiDelay
             {
-                DelayTime = TimeSpan.FromMinutes(50),
+                Delay = TimeSpan.FromMinutes(50),
             });
             D.Constraints.Add(new CoSpan
             {
@@ -151,11 +151,11 @@ namespace UnitTests1
             });
             Y.InCommands.Add(new CiDelay
             {
-                DelayTime = TimeSpan.FromMinutes(30),
+                Delay = TimeSpan.FromMinutes(30),
             });
             Z.InCommands.Add(new CiDelay
             {
-                DelayTime = TimeSpan.FromMinutes(30),
+                Delay = TimeSpan.FromMinutes(30),
             });
 
 
@@ -338,15 +338,15 @@ namespace UnitTests1
 
             A.InCommands.Add(new CiDelay
             {
-                DelayTime = TimeSpan.FromMinutes(10),
+                Delay = TimeSpan.FromMinutes(10),
             });
             B.InCommands.Add(new CiDelay
             {
-                DelayTime = TimeSpan.FromMinutes(20),
+                Delay = TimeSpan.FromMinutes(20),
             });
             B.Constraints.Add(new CoMaxCost
             {
-                Name = JitVariable.From("Count"),
+                ReferenceVarName = JitVariable.From("Count"),
                 Value = 1.0,
             });
             CoJoinFrom JFY;
@@ -363,11 +363,11 @@ namespace UnitTests1
             });
             Y.InCommands.Add(new CiDelay
             {
-                DelayTime = TimeSpan.FromMinutes(30),
+                Delay = TimeSpan.FromMinutes(30),
             });
             Z.InCommands.Add(new CiDelay
             {
-                DelayTime = TimeSpan.FromMinutes(30),
+                Delay = TimeSpan.FromMinutes(30),
             });
 
             //----------------------------------------------------
@@ -498,17 +498,17 @@ namespace UnitTests1
 
             X.InCommands.Add(new CiDelay
             {
-                DelayTime = TimeSpan.FromMinutes(10),
+                Delay = TimeSpan.FromMinutes(10),
             });
             Y.InCommands.Add(new CiDelay
             {
-                DelayTime = TimeSpan.FromMinutes(20),
+                Delay = TimeSpan.FromMinutes(20),
             });
 
             // H’ö‚É§–ñ‚ð•t—^
             Y.InCommands.Add(new CiKanbanReturn(st)
             {
-                DelayTime = TimeSpan.FromMinutes(0),
+                Delay = TimeSpan.FromMinutes(0),
                 TargetKanbanClass = ":Dog",
             });
 
@@ -640,20 +640,20 @@ namespace UnitTests1
             });
             X.InCommands.Add(new CiDelay
             {
-                DelayTime = TimeSpan.FromMinutes(5),
+                Delay = TimeSpan.FromMinutes(5),
             });
             Y.Constraints.Add(new CoMaxCost
             {
-                Name = JitVariable.From("Count"),
+                ReferenceVarName = JitVariable.From("Count"),
                 Value = 1.0,
             });
             Y.InCommands.Add(new CiDelay
             {
-                DelayTime = TimeSpan.FromMinutes(10),
+                Delay = TimeSpan.FromMinutes(10),
             });
             Y.InCommands.Add(new CiKanbanReturn(st) // ‚©‚ñ‚Î‚ñ‚ð‘OH’ö‚ÉŽ©“®“I‚É•Ô‹p‚·‚éƒ‚[ƒhiuŽž‚É‚©‚ñ‚Î‚ñ‚ª‹A‚éj
             {
-                DelayTime = TimeSpan.FromSeconds(15),
+                Delay = TimeSpan.FromSeconds(15),
             });
 
 
@@ -886,16 +886,16 @@ namespace UnitTests1
             });
             X.InCommands.Add(new CiDelay
             {
-                DelayTime = TimeSpan.FromMinutes(5),
+                Delay = TimeSpan.FromMinutes(5),
             });
             Y.Constraints.Add(new CoMaxCost
             {
-                Name = JitVariable.From("Count"),
+                ReferenceVarName = JitVariable.From("Count"),
                 Value = 1.0,
             });
             Y.InCommands.Add(new CiDelay
             {
-                DelayTime = TimeSpan.FromMinutes(10),
+                Delay = TimeSpan.FromMinutes(10),
             });
 
             var today = TimeUtil.ClearTime(DateTime.Now);  // H:M:S:MS‚ð‚O‚É‚·‚é
@@ -1353,16 +1353,16 @@ namespace UnitTests1
             });
             X.InCommands.Add(new CiDelay
             {
-                DelayTime = TimeSpan.FromMinutes(5),
+                Delay = TimeSpan.FromMinutes(5),
             });
             Y.Constraints.Add(new CoMaxCost
             {
-                Name = JitVariable.From("Count"),
+                ReferenceVarName = JitVariable.From("Count"),
                 Value = 1.0,
             });
             Y.InCommands.Add(new CiDelay
             {
-                DelayTime = TimeSpan.FromMinutes(10),
+                Delay = TimeSpan.FromMinutes(10),
             });
 
             var today = TimeUtil.ClearTime(DateTime.Now);  // H:M:S:MS‚ð‚O‚É‚·‚é
@@ -1646,25 +1646,25 @@ namespace UnitTests1
             });
             X.InCommands.Add(new CiDelay
             {
-                DelayTime = TimeSpan.FromMinutes(1),
+                Delay = TimeSpan.FromMinutes(1),
             });
             Y.Constraints.Add(new CoMaxCost
             {
-                Name = JitVariable.From("Count"),
+                ReferenceVarName = JitVariable.From("Count"),
                 Value = 1.0,
             });
             Y.InCommands.Add(new CiDelay
             {
-                DelayTime = TimeSpan.FromMinutes(2),
+                Delay = TimeSpan.FromMinutes(2),
             });
             Z.Constraints.Add(new CoMaxCost
             {
-                Name = JitVariable.From("Count"),
+                ReferenceVarName = JitVariable.From("Count"),
                 Value = 1.0,
             });
             Z.InCommands.Add(new CiDelay
             {
-                DelayTime = TimeSpan.FromMinutes(10),
+                Delay = TimeSpan.FromMinutes(10),
             });
 
             // ƒeƒXƒgƒ[ƒN“Š“ü
@@ -2083,25 +2083,25 @@ namespace UnitTests1
             });
             X.InCommands.Add(new CiDelay
             {
-                DelayTime = TimeSpan.FromMinutes(1),
+                Delay = TimeSpan.FromMinutes(1),
             });
             Y.Constraints.Add(new CoMaxCost
             {
-                Name = JitVariable.From("Count"),
+                ReferenceVarName = JitVariable.From("Count"),
                 Value = 1.0,
             });
             Y.InCommands.Add(new CiDelay
             {
-                DelayTime = TimeSpan.FromMinutes(2),
+                Delay = TimeSpan.FromMinutes(2),
             });
             Z.Constraints.Add(new CoMaxCost
             {
-                Name = JitVariable.From("Count"),
+                ReferenceVarName = JitVariable.From("Count"),
                 Value = 1.0,
             });
             Z.InCommands.Add(new CiDelay
             {
-                DelayTime = TimeSpan.FromMinutes(10),
+                Delay = TimeSpan.FromMinutes(10),
             });
 
             var today = TimeUtil.ClearTime(DateTime.Now);
@@ -2472,20 +2472,20 @@ namespace UnitTests1
             });
             X.InCommands.Add(new CiDelay
             {
-                DelayTime = TimeSpan.FromMinutes(1),
+                Delay = TimeSpan.FromMinutes(1),
             });
             Y.Constraints.Add(new CoMaxCost
             {
-                Name = JitVariable.From("Count"),
+                ReferenceVarName = JitVariable.From("Count"),
                 Value = 1.0,
             });
             Y.InCommands.Add(new CiDelay
             {
-                DelayTime = TimeSpan.FromMinutes(4),
+                Delay = TimeSpan.FromMinutes(4),
             });
             Z.Constraints.Add(new CoMaxCost
             {
-                Name = JitVariable.From("Count"),
+                ReferenceVarName = JitVariable.From("Count"),
                 Value = 2.0,
             });
             Z.Constraints.Add(new CoSpan
@@ -2494,7 +2494,7 @@ namespace UnitTests1
             });
             Z.InCommands.Add(new CiDelay
             {
-                DelayTime = TimeSpan.FromMinutes(6),
+                Delay = TimeSpan.FromMinutes(6),
             });
 
             var today = TimeUtil.ClearTime(DateTime.Now);
@@ -2659,16 +2659,16 @@ namespace UnitTests1
             });
             X.InCommands.Add(new CiDelay
             {
-                DelayTime = TimeSpan.FromMinutes(1),
+                Delay = TimeSpan.FromMinutes(1),
             });
             Y.Constraints.Add(new CoMaxCost
             {
-                Name = JitVariable.From("Count"),
+                ReferenceVarName = JitVariable.From("Count"),
                 Value = 1.0,
             });
             Y.InCommands.Add(new CiDelay
             {
-                DelayTime = TimeSpan.FromMinutes(4),
+                Delay = TimeSpan.FromMinutes(4),
             });
 
             X.NextLinks.Add(() => Y);
@@ -2832,16 +2832,16 @@ namespace UnitTests1
             });
             X.InCommands.Add(new CiDelay
             {
-                DelayTime = TimeSpan.FromMinutes(1),
+                Delay = TimeSpan.FromMinutes(1),
             });
             Y.Constraints.Add(new CoMaxCost
             {
-                Name = JitVariable.From("Count"),
+                ReferenceVarName = JitVariable.From("Count"),
                 Value = 1.0,
             });
             Y.InCommands.Add(new CiDelay
             {
-                DelayTime = TimeSpan.FromMinutes(4),
+                Delay = TimeSpan.FromMinutes(4),
             });
 
             X.NextLinks.Add(() => Y);

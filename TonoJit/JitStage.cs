@@ -9,6 +9,7 @@ namespace Tono.Jit
     /// JIT-Model Root Object : Stage
     /// 工程やワーク全体を動かす 根幹のオブジェクト
     /// </summary>
+    [JacTarget(Name = "Stage")]
     public partial class JitStage : JitVariable
     {
         /// <summary>
@@ -36,16 +37,41 @@ namespace Tono.Jit
             Events = new WorkEventQueue();
         }
 
+        [JacListAdd(PropertyName = "Procs")]
+        public void ProcsAdd(object obj)
+        {
+            if (obj is JitProcess proc)
+            {
+                Procs.Add(proc);
+            }
+            else
+            {
+                throw new JacException(JacException.Codes.TypeMismatch, $"Procs.Add type mismatch arg type={(obj?.GetType().Name ?? "null")}");
+            }
+        }
+
+        [JacListRemove(PropertyName = "Procs")]
+        public void ProcsRemove(object obj)
+        {
+            if (obj is JitProcess proc)
+            {
+                Procs.Remove(proc);
+            }
+            else
+            {
+                throw new JacException(JacException.Codes.TypeMismatch, $"Procs.Add type mismatch arg type={(obj?.GetType().Name ?? "null")}");
+            }
+        }
+
+
         /// <summary>
         /// do next action (from event queue)
         /// </summary>
         public void DoNext()
         {
-            WorkEventQueue.Item ei = Events.Dequeue();
-            if (ei == null)
-            {
-                return;
-            }
+            var ei = Events.Dequeue();
+            if (ei == null) return;
+
             Now = ei.DT;
 
             switch (ei.Type)
