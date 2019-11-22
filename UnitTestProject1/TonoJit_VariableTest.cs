@@ -5,7 +5,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Diagnostics;
 using Tono.Jit;
 
-namespace UnitTests1
+namespace UnitTestProject1
 {
     [TestClass]
     public class TonoJit_VariableTest

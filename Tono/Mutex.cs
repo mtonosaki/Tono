@@ -11,7 +11,7 @@ namespace Tono
     /// <example>
     /// using(new uMutex("MyMutexName")
     /// {
-    ///     // TODO mutexed task
+    ///     // write mutexed task here
     /// }
     /// </example>
     public class Mutex : IDisposable

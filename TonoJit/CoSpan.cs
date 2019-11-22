@@ -9,6 +9,7 @@ namespace Tono.Jit
     /// out-constraint to keep enter span
     /// 自工程のIN間隔を一定以上になる様、前工程からのOUTを制御 
     /// </summary>
+    [JacTarget(Name = "CoSpan")]
     public class CoSpan : CoBase, CioBase.ILastInTime
     {
         /// <summary>

@@ -5,11 +5,12 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Diagnostics;
 using Tono;
 
-namespace UnitTests1
+namespace UnitTestProject2
 {
     [TestClass]
     public class TonoBinary
     {
+#if HEAVYTEST
         [TestMethod]
         public void Test_ByteReverse()
         {
@@ -20,5 +21,6 @@ namespace UnitTests1
             }
             Debug.WriteLine($"TonoBinary.Test_ByteReverse : {st.ElapsedMilliseconds:#,##0}ms for 10M count");
         }
+#endif
     }
 }

@@ -10,6 +10,7 @@ namespace Tono.Jit
     /// <summary>
     /// simulation variable object
     /// </summary>
+    [JacTarget(Name = "Variable")]
     public partial class JitVariable
     {
         /// <summary>
@@ -73,7 +74,7 @@ namespace Tono.Jit
 
         public JitVariable Clone()
         {
-            JitVariable ret = new JitVariable
+            var ret = new JitVariable
             {
                 Name = Name,
                 Value = Value,
@@ -95,11 +96,11 @@ namespace Tono.Jit
             Name = from.Name;   // Name will be changed to "from" one.
             Value = from.Value; // Value will be changed to "from" one.
                                 // Parent will NOT be changed
-            foreach (KeyValuePair<JitVariable, JitVariable> kv in KeyValues)   // upsert KeyValue objects
+            foreach (var kv in KeyValues)   // upsert KeyValue objects
             {
                 KeyValues[kv.Key] = kv.Value;
             }
-            foreach (string name in from.ChildVriables.Names)
+            foreach (var name in from.ChildVriables.Names)
             {
                 ChildVriables[name] = from.ChildVriables[name];
             }
@@ -152,12 +153,12 @@ namespace Tono.Jit
         /// <returns></returns>
         public static IEnumerable<string> GetClassNames(string instanceAndClassNames)
         {
-            string cn = instanceAndClassNames.Trim();
+            var cn = instanceAndClassNames.Trim();
             if (cn.StartsWith(":") == false)    // not start with ":" means "instance" (not "class")
             {
                 cn = StrUtil.MidFind(cn, ":");
             }
-            IEnumerable<string> col = instanceAndClassNames.Split(new[] { ':' }, StringSplitOptions.RemoveEmptyEntries).Select(a => ":" + a.Trim()).Where(a => a != ":");
+            var col = instanceAndClassNames.Split(new[] { ':' }, StringSplitOptions.RemoveEmptyEntries).Select(a => ":" + a.Trim()).Where(a => a != ":");
             return col;
         }
 
@@ -176,7 +177,7 @@ namespace Tono.Jit
         /// </example>
         public bool Is(string classNames)
         {
-            string cns = classNames.Trim();
+            var cns = classNames.Trim();
             if (cns.StartsWith(":") == false)
             {
                 throw new SyntaxErrorException("string of class should start with : character");
@@ -196,7 +197,7 @@ namespace Tono.Jit
         /// </example>
         public bool As(JitVariable tar)
         {
-            foreach (string c in tar.Classes)
+            foreach (var c in tar.Classes)
             {
                 if (Classes.Contains(c) == false)
                 {
@@ -221,7 +222,7 @@ namespace Tono.Jit
                 }
                 else
                 {
-                    JitVariable nv = Null();
+                    var nv = Null();
                     KeyValues[key] = nv;
                     return nv;
                 }
@@ -241,7 +242,7 @@ namespace Tono.Jit
         /// </summary>
         public static JitVariable Null(string classNames = null)
         {
-            JitVariable ret = new JitVariable
+            var ret = new JitVariable
             {
                 Name = $"(noname_{++_dummyCount})",
                 Value = null,
@@ -260,7 +261,7 @@ namespace Tono.Jit
         /// <returns></returns>
         public static JitVariable From(double value, string classNames = null)
         {
-            JitVariable ret = new JitVariable
+            var ret = new JitVariable
             {
                 Name = $"(noname_{++_dummyCount})",
                 Value = value,
@@ -283,7 +284,7 @@ namespace Tono.Jit
         /// <returns></returns>
         public static JitVariable From(int value, string classNames = null)
         {
-            JitVariable ret = new JitVariable
+            var ret = new JitVariable
             {
                 Name = $"(noname_{++_dummyCount})",
                 Value = value,
@@ -306,7 +307,7 @@ namespace Tono.Jit
         /// <returns></returns>
         public static JitVariable From(string value, string classNames = null)
         {
-            JitVariable ret = new JitVariable
+            var ret = new JitVariable
             {
                 Name = $"(noname_{++_dummyCount})",
                 Value = value,
@@ -330,7 +331,7 @@ namespace Tono.Jit
         /// <returns></returns>
         public static JitVariable From(JitVariable src, string classNames = null)
         {
-            JitVariable ret = src.Clone();
+            var ret = src.Clone();
             if (classNames != null)
             {
                 ret.Classes.Add(classNames);    // コピー元のクラス情報を転送する

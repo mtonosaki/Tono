@@ -10,6 +10,8 @@ namespace Tono.Jit
     /// </summary>
     public abstract class CioBase
     {
+        public string Name { get; set; } = "Cio:" + Guid.NewGuid().ToString();
+
         /// <summary>
         /// get owner process from work object
         /// </summary>
@@ -31,6 +33,26 @@ namespace Tono.Jit
         {
             void AddWorkInReserve(JitWork work);
             void RemoveWorkInReserve(JitWork work);
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj is CioBase cio)
+            {
+                return cio.Name == Name;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        public override int GetHashCode()
+        {
+            return MathUtil.GetFnvHash(Name);
+        }
+        public override string ToString()
+        {
+            return $"{GetType().Name} Name={Name}";
         }
     }
 }

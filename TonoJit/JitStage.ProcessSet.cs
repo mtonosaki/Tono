@@ -28,10 +28,16 @@ namespace Tono.Jit
 
             public void Add(IEnumerable<JitProcess> procs)
             {
-                foreach (JitProcess proc in procs)
+                foreach (var proc in procs)
                 {
                     Add(proc);
                 }
+            }
+
+            public void Remove(JitProcess proc)
+            {
+                _procs.Remove(proc);
+                cache.Remove(proc.Name);
             }
 
             /// <summary>
@@ -52,6 +58,14 @@ namespace Tono.Jit
                     {
                         return null;
                     }
+                }
+            }
+
+            public JitProcess this[int index]
+            {
+                get
+                {
+                    return _procs[index];
                 }
             }
         }

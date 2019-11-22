@@ -6,11 +6,12 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using Tono;
 
-namespace UnitTests1
+namespace UnitTestProject2
 {
     [TestClass]
     public class TonoId
     {
+#if HEAVYTEST
         [TestMethod]
         public void Test_TreeSpeed()
         {
@@ -27,5 +28,6 @@ namespace UnitTests1
             }
             Debug.WriteLine($"TonoId.Test_TreeSpeed : {st.ElapsedMilliseconds:#,##0}ms for 2M count");
         }
+#endif
     }
 }

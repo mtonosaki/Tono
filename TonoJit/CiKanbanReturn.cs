@@ -9,6 +9,7 @@ namespace Tono.Jit
     /// <summary>
     /// in-command of auto return kanban
     /// </summary>
+    [JacTarget(Name = "CiKanbanReturn")]
     public class CiKanbanReturn : CiBase
     {
         /// <summary>
@@ -28,7 +29,7 @@ namespace Tono.Jit
         /// <summary>
         /// Delay time for kanban return
         /// </summary>
-        public TimeSpan DelayTime { get; set; } = TimeSpan.FromSeconds(0);
+        public TimeSpan Delay { get; set; } = TimeSpan.FromSeconds(0);
 
         /// <summary>
         /// The construction of this class
@@ -56,7 +57,7 @@ namespace Tono.Jit
             {
                 work.Kanbans.Remove(kanban);
                 kanban.Work = null;
-                Stage.SendKanban(now + DelayTime, kanban);
+                Stage.SendKanban(now + Delay, kanban);
             }
         }
     }
