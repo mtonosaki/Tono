@@ -9,12 +9,20 @@ namespace Tono.Jit
     /// Jit model template powerd with JaC
     /// </summary>
     [JacTarget(Name = "Template")]
-    public class JitTemplate
+    public class JitTemplate : JitVariable
     {
+        /// <summary>
+        /// The constructor of this class
+        /// </summary>
+        public JitTemplate() : base()
+        {
+            Classes.Set(":Template");
+        }
+
         /// <summary>
         /// Instance Name = Template name
         /// </summary>
-        public string Name { get; set; }
+        ///public string Name { get; set; } // Using Variable's member
 
         private readonly List<string> JacBlock = new List<string>();
 
