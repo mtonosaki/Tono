@@ -167,6 +167,7 @@ namespace UnitTestProject1
                 Name = $"w1",
                 NextProcess = A,
             });
+            Assert.IsTrue(w1.Is(":Work"));
             st.Events.Enqueue(TimeUtil.Set(today, hour: 9, minute: 0), EventTypes.Out, y1 = new JitWork
             {
                 Name = $"y1",
@@ -514,12 +515,13 @@ namespace UnitTestProject1
 
 
             var today = TimeUtil.ClearTime(DateTime.Now);  // H:M:S:MS‚ð‚O‚É‚·‚é
-
-            st.SendKanban(new JitKanban
+            JitKanban ka;
+            st.SendKanban(ka = new JitKanban
             {
                 PullFrom = () => X,
                 PullTo = () => Y,
             }).Classes.Add(":Dog");
+            Assert.IsTrue(ka.Is(":Kanban"));
 
             st.SendKanban(new JitKanban
             {
@@ -2825,6 +2827,8 @@ namespace UnitTestProject1
                     Name = "Z",
                 },
             });
+
+            Assert.IsTrue(X.Is(":Process"));
 
             X.Constraints.Add(new CoSpan
             {

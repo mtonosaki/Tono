@@ -10,7 +10,7 @@ using Tono.Jit;
 namespace UnitTestProject1
 {
     [TestClass]
-    public class TonoJit_JaC
+    public class TonoJit_JaC_General
     {
         [TestMethod]
         public void Test01()
@@ -176,18 +176,21 @@ namespace UnitTestProject1
                         add p1 = new Process
                             Name = 'PROCP1'
                         add p2 = new Process
+                        add p3 = new Process
             ";
             var jac = new JacInterpreter();
             jac.Exec(code);
             //--------------------------------------------------------
             code = $@"
-                'MyStage'               // To find Stage object named 'MyStage'
+                MyStage               // To find Stage object named 'MyStage'
                     Procs
                         remove 'PROCP1' // find JitProcess instance by name
                         remove p2       // find JitProcess instance by variable
             ";
             jac.Exec(code);
-            Assert.AreEqual(jac.Stage("'MyStage'")?.Procs.Count, 0);
+            var MyStage = jac.Stage("MyStage");
+            Assert.IsNotNull(MyStage);
+            Assert.AreEqual(MyStage.Procs.Count, 1);
         }
         [TestMethod]
         public void Test09()
@@ -204,7 +207,7 @@ namespace UnitTestProject1
             jac.Exec(code);
             //--------------------------------------------------------
             code = $@"
-                'MyStage'
+                'MyStage'               // You can also to find with string value 'MyStage' 
                     Procs
                         remove 'PROCP1' // find JitProcess instance by name
                         remove p2       // find JitProcess instance by variable
@@ -525,7 +528,7 @@ namespace UnitTestProject1
                 var jac = new JacInterpreter();
                 jac.Exec(code);
             }
-            catch (JacException ex)
+            catch (JacException)
             {
                 Assert.Fail();
             }

@@ -16,12 +16,20 @@ namespace Tono.Jit
     /// 工程は、物や情報の流れを作る基本的なオブジェクト
     /// </remarks>
     [JacTarget(Name = "Process")]
-    public partial class JitProcess
+    public partial class JitProcess : JitVariable
     {
+        /// <summary>
+        /// The Constructor of this class
+        /// </summary>
+        public JitProcess() : base()
+        {
+            Classes.Set(":Process");
+        }
+
         /// <summary>
         /// Process name
         /// </summary>
-        public string Name { get; set; }
+        // public string Name { get; set; } // Using JitVariable's Name
 
         /// <summary>
         /// in-command collection utility
@@ -112,6 +120,9 @@ namespace Tono.Jit
         /// </summary>
         public Destinations NextLinks { get; set; } = new Destinations();
 
+
+
+
         /// <summary>
         /// having work-in time mapping
         /// 属するワークのIN時刻マップ
@@ -131,11 +142,11 @@ namespace Tono.Jit
         {
             get
             {
-                foreach (CoBase c in Constraints)
+                foreach (var c in Constraints)
                 {
                     yield return c;
                 }
-                foreach (CiBase c in InCommands)
+                foreach (var c in InCommands)
                 {
                     yield return c;
                 }
@@ -206,12 +217,12 @@ namespace Tono.Jit
         /// </remarks>
         public virtual JitWork ExitCollectedWork(DateTime now)
         {
-            IEnumerable<WorkEntery> buf =
+            var buf =
                 from w in WorkInTimes
                 where w.Key.NextProcess == null // work that have not next process
                 where w.Key.ExitTime <= now     // select work that exit time expired.
                 select new WorkEntery { Work = w.Key, Enter = w.Value };
-            JitWork work = ExitWorkSelector.Invoke(buf);
+            var work = ExitWorkSelector.Invoke(buf);
             if (work != null)
             {
                 Exit(work);
@@ -235,7 +246,7 @@ namespace Tono.Jit
         public bool CheckConstraints(JitWork work, DateTime time, out CoBase hitConstraint)
         {
             hitConstraint = null;
-            foreach (CoBase co in Constraints)
+            foreach (var co in Constraints)
             {
                 bool ret = co.Check(work, time);
                 if (ret)
@@ -254,7 +265,7 @@ namespace Tono.Jit
         /// <param name="time">simulation time</param>
         public void ExecInCommands(JitWork work, DateTime time)
         {
-            foreach (CiBase ci in InCommands)
+            foreach (var ci in InCommands)
             {
                 ci.Exec(work, time);
             }
@@ -318,8 +329,6 @@ namespace Tono.Jit
             return CheckAndAttachKanban(now);
         }
 
-
-
         /// <summary>
         /// かんばんの目的地をワークに付ける（付け替える）
         /// </summary>
@@ -331,18 +340,18 @@ namespace Tono.Jit
                 return null;
             }
 
-            IEnumerable<WorkEntery> buf =
+            var buf =
                 from w in WorkInTimes
                 where w.Key.NextProcess == null // 行先が無い
                 select new WorkEntery { Work = w.Key, Enter = w.Value };
-            JitWork work = ExitWorkSelector.Invoke(buf);
+            var work = ExitWorkSelector.Invoke(buf);
 
             if (work == null)
             {
                 return null;
             }
 
-            EventQueueKanban sk = kanbanQueue.Dequeue();
+            var sk = kanbanQueue.Dequeue();
             work.NextProcess = sk.Kanban.PullTo();
             work.Kanbans.Add(sk.Kanban);
             sk.Kanban.Work = work;
