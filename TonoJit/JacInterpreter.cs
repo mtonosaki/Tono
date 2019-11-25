@@ -89,7 +89,7 @@ namespace Tono.Jit
                     var line = Lines[iChunk][iLine];
                     var level = Levels[iChunk][iLine];
                     var isNextLine = iLine < Lines[iChunk].Count - 1;
-                    var blocks = Dummy.SplitConsideringQuatationContainsSeparator(line, new[] { '=', ' ' }, true, true, false);   // TODO: Waiting NuGet Tono.Core StrUtil.---
+                    var blocks = StrUtil.SplitConsideringQuatationContainsSeparator(line, new[] { '=', ' ' }, true, true, false);
 
                     // PUSH PHASE =========================================
                     for (var i = 0; i < blocks.Length; i++)
