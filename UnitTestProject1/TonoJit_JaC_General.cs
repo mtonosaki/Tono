@@ -10,7 +10,7 @@ using Tono.Jit;
 namespace UnitTestProject1
 {
     [TestClass]
-    public class TonoJit_JaC
+    public class TonoJit_JaC_General
     {
         [TestMethod]
         public void Test01()

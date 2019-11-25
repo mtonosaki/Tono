@@ -72,6 +72,7 @@ namespace Tono.Jit
             RegisterJacTarget(typeof(JacInterpreter).Assembly);
         }
 
+
         /// <summary>
         /// Parse command
         /// </summary>
@@ -173,6 +174,42 @@ namespace Tono.Jit
                     }
                 }
             }
+        }
+
+        /// <summary>
+        /// Parse command from JitTemplate
+        /// </summary>
+        /// <param name="template"></param>
+        public void Exec(JitTemplate template)
+        {
+            foreach( var block in template.GetBlocks())
+            {
+                Exec(block);
+            }
+        }
+
+        /// <summary>
+        /// Instanciate from code
+        /// </summary>
+        /// <param name="jac"></param>
+        /// <returns></returns>
+        public static JacInterpreter From(string jac)
+        {
+            var ret = new JacInterpreter();
+            ret.Exec(jac);
+            return ret;
+        }
+        
+        /// <summary>
+        /// Instanciate from code
+        /// </summary>
+        /// <param name="jac"></param>
+        /// <returns></returns>
+        public static JacInterpreter From(JitTemplate jac)
+        {
+            var ret = new JacInterpreter();
+            ret.Exec(jac);
+            return ret;
         }
 
 
@@ -497,6 +534,16 @@ namespace Tono.Jit
         {
             get => ParseValue(varname);
             set => varBuf[varname] = value;
+        }
+
+        /// <summary>
+        /// Get variable as a Template
+        /// </summary>
+        /// <param name="varname"></param>
+        /// <returns></returns>
+        public JitTemplate Template(string varname)
+        {
+            return ParseValue(varname) as JitTemplate;
         }
 
         /// <summary>
