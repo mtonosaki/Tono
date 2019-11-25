@@ -41,6 +41,7 @@ Signal|Kanban|Pull signal between processes. Means a "Work" stop mechanism at a 
 Flow|Process|Node of work flow for graph theory.
 Flow rule|Constraints|For example, MaxCount constraint describes like a transpotation road because road can have limited object at one time.
 Flow control|Commands|Another constraint model like "Delay" time to simulate work through speed.
+JAC|JacInterpreter|JAC (Just-in-time model As a Code) helps you to implement Undo/Redo as a "Compensating Transaction Pattern"
 
 ### Tono.Excel
 ![](https://aqtono.com/tomarika/tono/TonoExcelIcon.png)  

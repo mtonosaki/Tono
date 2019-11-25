@@ -13,11 +13,11 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageIconUrl></PackageIconUrl>
     <PackageIcon>/content/TonoJitIcon.png</PackageIcon>
-    <Version>0.1.5</Version>
-    <AssemblyVersion>0.1.5.0</AssemblyVersion>
+    <Version>0.1.6</Version>
+    <AssemblyVersion>0.1.6.0</AssemblyVersion>
     <PackageTags>Tono, Gui, Jit</PackageTags>
-    <PackageReleaseNotes>on kaizen process / .NET Framework 4.7.2 Support / Strong name support</PackageReleaseNotes>
-    <FileVersion>0.1.5.0</FileVersion>
+    <PackageReleaseNotes>Continuous Kaizen</PackageReleaseNotes>
+    <FileVersion>0.1.6.0</FileVersion>
     <RepositoryUrl>https://github.com/mtonosaki/Tono.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <SignAssembly>true</SignAssembly>
@@ -34,7 +34,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Tono.Core" Version="1.0.8" />
+    <PackageReference Include="Tono.Core" Version="1.0.9" />
   </ItemGroup>
 
 </Project>
