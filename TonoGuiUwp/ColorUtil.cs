@@ -52,6 +52,20 @@ namespace Tono.Gui.Uwp
         }
 
         /// <summary>
+        /// Create instance from hex decimal string such as #ff112233 (ff=A, 11=R, 22=G, 33=B)
+        /// </summary>
+        /// <param name="hexstr">Hex decimal string 0xff112233 or #ff112233 format</param>
+        /// <returns></returns>
+        public static Color From(string hexstr)
+        {
+            if (hexstr.StartsWith("#")) hexstr = StrUtil.Mid(hexstr, 1);
+            else if (hexstr.StartsWith("0x")) hexstr = StrUtil.Mid(hexstr, 2);
+
+            var val = UInt32.Parse(hexstr, System.Globalization.NumberStyles.HexNumber);
+            return Color.FromArgb((byte)((val & 0xff000000) / 0x1000000), (byte)((val & 0x00ff0000) / 0x10000), (byte)((val & 0x0000ff00) / 0x100), (byte)(val & 0x000000ff));
+        }
+
+        /// <summary>
         /// Blend two colors
         /// </summary>
         /// <param name="c1"></param>
