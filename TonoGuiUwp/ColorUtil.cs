@@ -237,6 +237,12 @@ namespace Tono.Gui.Uwp
             /// </summary>
             public float V = 0; // 0-1.0f
 
+            /// <summary>
+            /// Create instance
+            /// </summary>
+            /// <param name="h">0-360</param>
+            /// <param name="s">0-1.0</param>
+            /// <param name="v">0-1.0</param>
             public HSV(float h, float s, float v)
             {
                 H = h;
