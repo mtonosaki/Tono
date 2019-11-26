@@ -2,6 +2,7 @@
 // Licensed under the MIT license.
 
 using System;
+using System.Text.RegularExpressions;
 using Windows.UI;
 
 namespace Tono.Gui.Uwp
@@ -50,20 +51,36 @@ namespace Tono.Gui.Uwp
                 return hsv.ToColor();   // 48000 color cycle
             }
         }
+        private static Regex hexpattern = new Regex("^[0-9,a-f,A-F]+$");
 
         /// <summary>
         /// Create instance from hex decimal string such as #ff112233 (ff=A, 11=R, 22=G, 33=B)
         /// </summary>
         /// <param name="hexstr">Hex decimal string 0xff112233 or #ff112233 format</param>
         /// <returns></returns>
-        public static Color From(string hexstr)
+        public static Color From(string str)
         {
-            if (string.IsNullOrEmpty(hexstr) || string.IsNullOrWhiteSpace(hexstr)) return Colors.Transparent;
-            else if (hexstr.StartsWith("#")) hexstr = StrUtil.Mid(hexstr, 1);
-            else if (hexstr.StartsWith("0x")) hexstr = StrUtil.Mid(hexstr, 2);
+            if (str.StartsWith("#")) str = StrUtil.Mid(str, 1);
+            if (str.StartsWith("0x")) str = StrUtil.Mid(str, 2);
 
-            var val = UInt32.Parse(hexstr, System.Globalization.NumberStyles.HexNumber);
-            return Color.FromArgb((byte)((val & 0xff000000) / 0x1000000), (byte)((val & 0x00ff0000) / 0x10000), (byte)((val & 0x0000ff00) / 0x100), (byte)(val & 0x000000ff));
+            if (hexpattern.IsMatch(str))
+            {
+                var val = UInt32.Parse(str, System.Globalization.NumberStyles.HexNumber);
+                return Color.FromArgb((byte)((val & 0xff000000) / 0x1000000), (byte)((val & 0x00ff0000) / 0x10000), (byte)((val & 0x0000ff00) / 0x100), (byte)(val & 0x000000ff));
+            }
+            else
+            {
+                var pi = typeof(Colors).GetProperty(str);
+                var ret = pi.GetValue(null);
+                if (ret is Color col)
+                {
+                    return col;
+                }
+                else
+                {
+                    throw new ArgumentException("ColorUtil.From support #ff112233 or 0xff112233 or Blue style only");
+                }
+            }
         }
 
         /// <summary>
