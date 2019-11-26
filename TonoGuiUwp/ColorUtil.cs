@@ -58,7 +58,8 @@ namespace Tono.Gui.Uwp
         /// <returns></returns>
         public static Color From(string hexstr)
         {
-            if (hexstr.StartsWith("#")) hexstr = StrUtil.Mid(hexstr, 1);
+            if (string.IsNullOrEmpty(hexstr) || string.IsNullOrWhiteSpace(hexstr)) return Colors.Transparent;
+            else if (hexstr.StartsWith("#")) hexstr = StrUtil.Mid(hexstr, 1);
             else if (hexstr.StartsWith("0x")) hexstr = StrUtil.Mid(hexstr, 2);
 
             var val = UInt32.Parse(hexstr, System.Globalization.NumberStyles.HexNumber);
