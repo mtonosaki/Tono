@@ -347,7 +347,7 @@ namespace Tono.Jit
                             pi.SetValue(obj, item);
                             if (variable.Com.Equals("name", StringComparison.CurrentCultureIgnoreCase))
                             {
-                                varBuf[item?.ToString()] = obj;
+                                varBuf[item?.ToString() ?? "null"] = obj;
                             }
                         }
                         return;
@@ -435,7 +435,8 @@ namespace Tono.Jit
             }
         }
 
-        private static readonly Regex chkTimeSpan = new Regex(@"^[0-9]+(\.[0-9]*)?(ms|s|m|h|d|w)$");
+        private static readonly Regex chkTimeSpan = new Regex(@"^[0-9]+(\.[0-9]*)?(MS|S|M|H|D|W)$");
+        private static readonly Regex chkDistance = new Regex(@"^[0-9]+(\.[0-9]*)?(mm|cm|m|km)$");
         private static readonly Regex chkInteger = new Regex(@"^[0-9]+$");
         private static readonly Regex chkDouble = new Regex(@"^[0-9]+(\.[0-9]*)?$");
         private static readonly Regex chkDotValue = new Regex(@"^[a-z,A-Z]+[a-z,A-Z,0-9]*\.[a-z,A-Z]+[a-z,A-Z,0-9]*$");
@@ -482,6 +483,10 @@ namespace Tono.Jit
                 {
                     return ParseTimeSpan(valuestr);
                 }
+                if (chkDistance.IsMatch(valuestr))
+                {
+                    return ParseDistance(valuestr);
+                }
                 if (chkInteger.IsMatch(valuestr))
                 {
                     return int.Parse(valuestr);
@@ -506,8 +511,17 @@ namespace Tono.Jit
             return value;
         }
 
+        private Distance ParseDistance(string valuestr)
+        {
+            if (valuestr.EndsWith("mm")) return Distance.FromMeter(double.Parse(StrUtil.Left(valuestr, valuestr.Length - 2)) / 1000.0);
+            if (valuestr.EndsWith("cm")) return Distance.FromMeter(double.Parse(StrUtil.Left(valuestr, valuestr.Length - 2)) / 100.0);
+            if (valuestr.EndsWith("km")) return Distance.FromMeter(double.Parse(StrUtil.Left(valuestr, valuestr.Length - 2)) * 1000.0);
+            if (valuestr.EndsWith("m")) return Distance.FromMeter(double.Parse(StrUtil.Left(valuestr, valuestr.Length - 1)));
+            throw new JacException(JacException.Codes.NotSupportedUnit, $"Cannot specify distance unit from {valuestr}");
+        }
+
         /// <summary>
-        /// Parse TimeSpan string
+        /// Parse TimeSpan string (Time Units are Upper case)
         /// </summary>
         /// <param name="valuestr"></param>
         /// <returns></returns>
@@ -515,9 +529,9 @@ namespace Tono.Jit
         {
             double val;
             string unit;
-            if (valuestr.EndsWith("ms"))
+            if (valuestr.EndsWith("MS"))
             {
-                unit = "ms";
+                unit = "MS";
                 val = double.Parse(valuestr.Substring(0, valuestr.Length - 2));
             }
             else
@@ -527,17 +541,17 @@ namespace Tono.Jit
             }
             switch (unit)
             {
-                case "ms":
+                case "MS":
                     return TimeSpan.FromMilliseconds(val);
-                case "s":
+                case "S":
                     return TimeSpan.FromSeconds(val);
-                case "m":
+                case "M":
                     return TimeSpan.FromMinutes(val);
-                case "h":
+                case "H":
                     return TimeSpan.FromHours(val);
-                case "d":
+                case "D":
                     return TimeSpan.FromDays(val);
-                case "w":
+                case "W":
                     return TimeSpan.FromDays(val * 7);
                 default:
                     throw new JacException(JacException.Codes.NotSupportedUnit, $"Unit '{unit}' is not supported.");

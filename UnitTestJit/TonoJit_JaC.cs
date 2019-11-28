@@ -202,9 +202,9 @@ namespace UnitTestProject1
                             Name = 'PROCP1'
                             Cio
                                 add new CoSpan
-                                    Span = 11s
+                                    Span = 11S
                                 add new CiDelay
-                                    Delay = 66m
+                                    Delay = 66M
             ";
             var jac = new JacInterpreter();
             jac.Exec(code);
@@ -218,15 +218,15 @@ namespace UnitTestProject1
         }
 
         [TestMethod]
-        public void Test11()
+        public void Test11T()
         {
             var code = @"
-                a = 1ms
-                b = 2s
-                c = 3m
-                d = 4h
-                e = 5d
-                f = 6w
+                a = 1MS
+                b = 2S
+                c = 3M
+                d = 4H
+                e = 5D
+                f = 6W
             ";
             var jac = new JacInterpreter();
             jac.Exec(code);
@@ -238,15 +238,31 @@ namespace UnitTestProject1
             Assert.AreEqual(jac["f"], TimeSpan.FromDays(6 * 7));
         }
         [TestMethod]
-        public void Test12()
+        public void Test11D()
         {
             var code = @"
-                a = 1.1ms
-                b = 2.1s
-                c = 3.1m
-                d = 4.1h
-                e = 5.1d
-                f = 6.1w
+                a = 1mm
+                b = 2cm
+                c = 3m
+                d = 4km
+            ";
+            var jac = new JacInterpreter();
+            jac.Exec(code);
+            Assert.AreEqual(jac["a"], Distance.FromMeter(1.0 / 1000));
+            Assert.AreEqual(jac["b"], Distance.FromMeter(2.0 / 100));
+            Assert.AreEqual(jac["c"], Distance.FromMeter(3.0 / 1));
+            Assert.AreEqual(jac["d"], Distance.FromMeter(4.0 * 1000));
+        }
+        [TestMethod]
+        public void Test12T()
+        {
+            var code = @"
+                a = 1.1MS
+                b = 2.1S
+                c = 3.1M
+                d = 4.1H
+                e = 5.1D
+                f = 6.1W
             ";
             var jac = new JacInterpreter();
             jac.Exec(code);
@@ -259,6 +275,24 @@ namespace UnitTestProject1
         }
 
         [TestMethod]
+        public void Test12D()
+        {
+            var code = @"
+                a = 1.1mm
+                b = 2.1cm
+                c = 3.1m
+                d = 4.1km
+            ";
+            var jac = new JacInterpreter();
+            jac.Exec(code);
+            Assert.AreEqual(jac["a"], Distance.FromMeter(1.1 / 1000));
+            Assert.AreEqual(jac["b"], Distance.FromMeter(2.1 / 100));
+            Assert.AreEqual(jac["c"], Distance.FromMeter(3.1 / 1));
+            Assert.AreEqual(jac["d"], Distance.FromMeter(4.1 * 1000));
+        }
+
+
+        [TestMethod]
         public void Test13()
         {
             var code = @"
@@ -267,7 +301,7 @@ namespace UnitTestProject1
                 b = new Variable
                     Value = 123
                 c = new Variable
-                    Value = 123s
+                    Value = 123S
                 d = new Variable
                     Value = 1.232
                 e = new Variable
@@ -295,11 +329,11 @@ namespace UnitTestProject1
                             Name = 'PROCP1'
                             Cio
                                 add i1 = new CiPickTo
-                                    Delay = 1.5m
+                                    Delay = 1.5M
                                     TargetWorkClass = ':Car'
                                     Destination = sink
                                 add i2 = new CiDelay
-                                    Delay = 2.5h
+                                    Delay = 2.5H
                                 add i3 = new CiSwitchNextLink
                                     NextLinkVarName = new Variable
                                         Value = 'AA'
@@ -372,7 +406,7 @@ namespace UnitTestProject1
                                 add o1 = new CoJoinFrom
                                     PullFrom = sink
                                     ChildPartName = 'TEPA'
-                                    WaitSpan = 0.5m
+                                    WaitSpan = 0.5M
                                     
             ";
             var jac = new JacInterpreter();
@@ -437,8 +471,8 @@ namespace UnitTestProject1
                         add p1 = new Process
                             Cio
                                 add o1 = new CoSpan
-                                    Span = 0.1h
-                                    PorlingSpan = 1s
+                                    Span = 0.1H
+                                    PorlingSpan = 1S
             ";
             var jac = new JacInterpreter();
             jac.Exec(code);

@@ -226,9 +226,9 @@ namespace UnitTestProject1
                             Name = 'PROCP1'
                             Cio
                                 add new CoSpan
-                                    Span = 11s
+                                    Span = 11S
                                 add new CiDelay
-                                    Delay = 66m
+                                    Delay = 66M
             ";
             var jac = new JacInterpreter();
             jac.Exec(code);
@@ -245,12 +245,12 @@ namespace UnitTestProject1
         public void Test11()
         {
             var code = @"
-                a = 1ms
-                b = 2s
-                c = 3m
-                d = 4h
-                e = 5d
-                f = 6w
+                a = 1MS
+                b = 2S
+                c = 3M
+                d = 4H
+                e = 5D
+                f = 6W
             ";
             var jac = new JacInterpreter();
             jac.Exec(code);
@@ -265,12 +265,12 @@ namespace UnitTestProject1
         public void Test12()
         {
             var code = @"
-                a = 1.1ms
-                b = 2.1s
-                c = 3.1m
-                d = 4.1h
-                e = 5.1d
-                f = 6.1w
+                a = 1.1MS
+                b = 2.1S
+                c = 3.1M
+                d = 4.1H
+                e = 5.1D
+                f = 6.1W
             ";
             var jac = new JacInterpreter();
             jac.Exec(code);
@@ -291,7 +291,7 @@ namespace UnitTestProject1
                 b = new Variable
                     Value = 123
                 c = new Variable
-                    Value = 123s
+                    Value = 123S
                 d = new Variable
                     Value = 1.232
                 e = new Variable
@@ -319,11 +319,11 @@ namespace UnitTestProject1
                             Name = 'PROCP1'
                             Cio
                                 add i1 = new CiPickTo
-                                    Delay = 1.5m
+                                    Delay = 1.5M
                                     TargetWorkClass = ':Car'
                                     Destination = sink
                                 add i2 = new CiDelay
-                                    Delay = 2.5h
+                                    Delay = 2.5H
                                 add i3 = new CiSwitchNextLink
                                     NextLinkVarName = new Variable
                                         Value = 'AA'
@@ -396,8 +396,7 @@ namespace UnitTestProject1
                                 add o1 = new CoJoinFrom
                                     PullFrom = sink
                                     ChildPartName = 'TEPA'
-                                    WaitSpan = 0.5m
-                                    
+                                    WaitSpan = 0.5M                                    
             ";
             var jac = new JacInterpreter();
             jac.Exec(code);
@@ -461,8 +460,8 @@ namespace UnitTestProject1
                         add p1 = new Process
                             Cio
                                 add o1 = new CoSpan
-                                    Span = 0.1h
-                                    PorlingSpan = 1s
+                                    Span = 0.1H
+                                    PorlingSpan = 1S
             ";
             var jac = new JacInterpreter();
             jac.Exec(code);
