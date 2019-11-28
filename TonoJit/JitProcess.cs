@@ -27,11 +27,6 @@ namespace Tono.Jit
         }
 
         /// <summary>
-        /// Process name
-        /// </summary>
-        // public string Name { get; set; } // Using JitVariable's Name
-
-        /// <summary>
         /// in-command collection utility
         /// </summary>
         public class InCommandCollection : IEnumerable<CiBase>

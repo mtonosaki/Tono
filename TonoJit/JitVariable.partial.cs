@@ -19,6 +19,7 @@ namespace Tono.Jit
             public const string String = ":String";
             public const string Double = ":Double";
             public const string Int = ":Int";
+            // if add constant value here, consider FromObject method
         }
 
         /// <summary>
@@ -198,12 +199,12 @@ namespace Tono.Jit
             /// <param name="classNames"></param>
             public void Add(string classNames)
             {
-                string cn = classNames.Trim();
+                var cn = classNames.Trim();
                 if (cn.StartsWith(":") == false)
                 {
                     throw new SyntaxErrorException("Class name should by started with : character");
                 }
-                List<string> adds = JitVariable.GetClassNames(classNames).ToList();
+                var adds = JitVariable.GetClassNames(classNames).ToList();
                 if (adds.Count < 3)
                 {
                     foreach (string c in adds)
@@ -224,7 +225,7 @@ namespace Tono.Jit
 
             public void Add(ClassList from)
             {
-                List<string> adds = from.ToList();
+                var adds = from.ToList();
                 if (adds.Count < 3)
                 {
                     foreach (string c in adds)

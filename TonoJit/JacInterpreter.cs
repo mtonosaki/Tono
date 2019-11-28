@@ -72,7 +72,6 @@ namespace Tono.Jit
             RegisterJacTarget(typeof(JacInterpreter).Assembly);
         }
 
-
         /// <summary>
         /// Parse command
         /// </summary>
@@ -182,7 +181,7 @@ namespace Tono.Jit
         /// <param name="template"></param>
         public void Exec(JitTemplate template)
         {
-            foreach( var block in template.GetBlocks())
+            foreach (var block in template.GetBlocks())
             {
                 Exec(block);
             }
@@ -199,7 +198,7 @@ namespace Tono.Jit
             ret.Exec(jac);
             return ret;
         }
-        
+
         /// <summary>
         /// Instanciate from code
         /// </summary>
@@ -297,10 +296,24 @@ namespace Tono.Jit
                 throw new JacException(JacException.Codes.SyntaxError, $"Cannot set '=' when no left value");
             }
 
+
             var val = rpnStack.Pop();           // value name
             var item = ParseValue(val.Com);     // value object
             var variable = rpnStack.Pop();      // variable name
 
+            int dotid;
+            if ((dotid = variable.Com.IndexOf('.')) >= 0)
+            {
+                // varname.varname の場合、ChildValuesに保存する
+                var parentVar = StrUtil.Left(variable.Com, dotid);
+                var childVar = StrUtil.Mid(variable.Com, dotid + 1);
+                var parentVarObj = Variable(parentVar);
+                var tarmethods =
+                    from me in parentVarObj.GetType().GetMethods()
+                    from at in me.GetCustomAttributes<JacSetDotValueAttribute>(true)
+                    select me;
+                tarmethods.FirstOrDefault()?.Invoke(parentVarObj, new object[] { childVar, ParseValue(val.Com) });
+            }
             if (rpnStack.Count > 0)
             {
                 var objName = rpnStack.Peek();  // parent object name
@@ -432,6 +445,7 @@ namespace Tono.Jit
         private static readonly Regex chkTimeSpan = new Regex(@"^[0-9]+(\.[0-9]*)?(ms|s|m|h|d|w)$");
         private static readonly Regex chkInteger = new Regex(@"^[0-9]+$");
         private static readonly Regex chkDouble = new Regex(@"^[0-9]+(\.[0-9]*)?$");
+        private static readonly Regex chkDotValue = new Regex(@"^[a-z,A-Z]+[a-z,A-Z,0-9]*\.[a-z,A-Z]+[a-z,A-Z,0-9]*$");
 
         /// <summary>
         /// Get value managed instance name, variable, string and some object parsing.
@@ -442,6 +456,35 @@ namespace Tono.Jit
         {
             if (value is string valuestr)
             {
+                if (chkDotValue.IsMatch(valuestr))
+                {
+                    var dotid = valuestr.IndexOf('.');
+                    var parentName = StrUtil.Left(valuestr, dotid);
+                    var childName = StrUtil.Mid(valuestr, dotid + 1);
+                    var parentObj = ParseValue(parentName);
+
+                    // Check [JacGetDotValue] method first
+                    var mechk =
+                        from me in parentObj?.GetType().GetMethods()
+                        from at in me.GetCustomAttributes<JacGetDotValueAttribute>(true)
+                        select me;
+                    var method = mechk.FirstOrDefault();
+                    object ret = null;
+                    if (method != null)
+                    {
+                        ret = method.Invoke(parentObj, new object[] { childName });
+                        if( ret != null)
+                        {
+                            return ret;
+                        }
+                    }
+                    // No [JacGetDotValue] so try to find public property of the object
+                    var ppchk =
+                        from me in parentObj?.GetType().GetProperties()
+                        where me.Name == childName
+                        select me;
+                    return ppchk.FirstOrDefault()?.GetValue(parentObj);
+                }
                 if (chkTimeSpan.IsMatch(valuestr))
                 {
                     return ParseTimeSpan(valuestr);
@@ -664,6 +707,19 @@ namespace Tono.Jit
         public string Name { get; set; }
     }
 
+    /// <summary>
+    /// Method attribute : Mark to ChildValues Accessor   [JacGetDotValue] object GetChildValue(string varname)
+    /// </summary>
+    public class JacGetDotValueAttribute : Attribute
+    {
+    }
+
+    /// <summary>
+    /// Method attribute : Mark to ChildValues Accessor   [JacSetDotValue] object SetChildValue(string varname, object value)
+    /// </summary>
+    public class JacSetDotValueAttribute : Attribute
+    {
+    }
 
     /// <summary>
     /// Method attribute base class of list accessor
