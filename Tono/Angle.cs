@@ -16,7 +16,7 @@ namespace Tono
         /// <summary>
         /// Pi = 3.14159...
         /// </summary>
-        public static readonly double PI = Math.PI;
+        public const double PI = Math.PI;
 
         /// <summary>
         /// Convert to radian

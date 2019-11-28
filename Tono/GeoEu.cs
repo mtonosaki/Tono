@@ -15,12 +15,12 @@ namespace Tono
         /// <summary>
         /// Equatorial radius[mm]
         /// </summary>
-        public static readonly double EarthRadiusX = 6378137000;
+        public const double EarthRadiusX = 6378137000;
 
         /// <summary>
         /// Polar radius[mm]
         /// </summary>
-        public static readonly double EarthRadiusY = 6356752000;
+        public const double EarthRadiusY = 6356752000;
 
         /// <summary>
         /// Make positon (0,0)=Left-Top
