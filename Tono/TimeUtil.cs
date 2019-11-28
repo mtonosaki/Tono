@@ -13,19 +13,19 @@ namespace Tono
         /// <summary>
         /// date time format "yyyy/MM/dd HH:mm:ss.fff"
         /// </summary>
-        public static readonly string FormatYMDHMSms = "yyyy/MM/dd HH:mm:ss.fff";
+        public const string FormatYMDHMSms = "yyyy/MM/dd HH:mm:ss.fff";
         /// <summary>
         /// date time format "yyyy/MM/dd HH:mm:ss"
         /// </summary>
-        public static readonly string FormatYMDHMS = "yyyy/MM/dd HH:mm:ss";
+        public const string FormatYMDHMS = "yyyy/MM/dd HH:mm:ss";
         /// <summary>
         /// date time format "HH:mm:ss"
         /// </summary>
-        public static readonly string FormatHMS = "HH:mm:ss";
+        public const string FormatHMS = "HH:mm:ss";
         /// <summary>
         /// date time format "HH:mm"
         /// </summary>
-        public static readonly string FormatHM = "HH:mm";
+        public const string FormatHM = "HH:mm";
 
         /// <summary>
         /// change specific value (means keep the other values)

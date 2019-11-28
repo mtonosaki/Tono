@@ -91,8 +91,6 @@ namespace Tono
         private static readonly Random _rand0 = new Random(0);
         private static readonly Random _rand = new Random((int)DateTime.Now.Ticks);
 
-
-
         /// <summary>
         /// make random value between 0.0 - 1.0 (Random seed = 0, set at App startup)
         /// </summary>

@@ -25,7 +25,7 @@ namespace Tono
     /// </summary>
     public struct Longitude
     {
-        public static readonly Datum ClassDatum = Datum.WGS84;
+        public const Datum ClassDatum = Datum.WGS84;
 
         public Angle Lon { get; set; }
 
@@ -190,7 +190,7 @@ namespace Tono
     /// </summary>
     public struct Latitude
     {
-        public static readonly Datum ClassDatum = Datum.WGS84;
+        public const Datum ClassDatum = Datum.WGS84;
 
         public Angle Lat { get; set; }
 

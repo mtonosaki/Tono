@@ -1,7 +1,9 @@
 ﻿// Copyright (c) Manabu Tonosaki All rights reserved.
 // Licensed under the MIT license.
 
+using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Tono.Jit
 {
@@ -24,7 +26,7 @@ namespace Tono.Jit
         /// </summary>
         ///public string Name { get; set; } // Using Variable's member
 
-        private readonly List<string> JacBlock = new List<string>();
+        private readonly List<(string RemoveKey, string Value)> JacBlock = new List<(string RemoveKey, string Value)>();
 
         /// <summary>
         /// Template block count
@@ -37,33 +39,51 @@ namespace Tono.Jit
         /// <returns></returns>
         public IEnumerable<string> GetBlocks()
         {
-            return JacBlock;
+            return JacBlock.Select(a => a.Value);
         }
+
+        private static int recordCounter = 0;
 
         /// <summary>
         /// JaC support Block.add
         /// </summary>
         /// <param name="jac"></param>
+        /// <returns>remove key</returns>
         [JacListAdd(PropertyName = "Block")]
-        public void AddBlock(string jac)
+        public string AddBlock(string jac)
         {
-            JacBlock.Add(jac);
+            var key = $"t.{DateTime.Now.ToString("yyyyMMddHHmmss")}.{++recordCounter}";
+            JacBlock.Add((key, jac));
+            return key;
         }
+
+        /// <summary>
+        /// For RemoveBlock jac
+        /// </summary>
+        public const string LastBlockJac = "::LAST::";
 
         /// <summary>
         /// Jac Support Block.remove
         /// </summary>
         /// <param name="jac"></param>
         [JacListRemove(PropertyName = "Block")]
-        public void RemoveBlock(string jac)
+        public void RemoveBlock(string removeKey)
         {
-            if (jac.Equals("::LAST::", System.StringComparison.OrdinalIgnoreCase))
+            if (JacBlock.Count < 1) return;
+
+            if (removeKey == LastBlockJac)
             {
-                RemoveLastBlock();
+                JacBlock.RemoveAt(JacBlock.Count - 1);
             }
             else
             {
-                JacBlock.Add(jac);
+                for (var i = JacBlock.Count - 1; i >= 0; i--)
+                {
+                    if (JacBlock[i].RemoveKey == removeKey)
+                    {
+                        JacBlock.RemoveAt(i);
+                    }
+                }
             }
         }
 

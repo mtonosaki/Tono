@@ -24,8 +24,8 @@ namespace UnitTestProject1
             var jac = new JacInterpreter();
             jac.Exec(c);
             Assert.AreEqual(jac["te"].GetType(), typeof(JitTemplate));
-            Assert.IsNotNull(jac.Template("te"));
-            Assert.AreEqual(jac.Template("te").Name, "MyTemp");
+            Assert.IsNotNull(jac.GetTemplate("te"));
+            Assert.AreEqual(jac.GetTemplate("te").Name, "MyTemp");
         }
 
 
@@ -42,7 +42,7 @@ namespace UnitTestProject1
             ";
             var jac = new JacInterpreter();
             jac.Exec(c);
-            var te = jac.Template("te");
+            var te = jac.GetTemplate("te");
             Assert.IsNotNull(te);
             Assert.AreEqual(te.Count, 4);
 
@@ -79,12 +79,12 @@ namespace UnitTestProject1
             var jac = new JacInterpreter();
             jac.Exec(c);
 
-            var jac2 = JacInterpreter.From(jac.Template("te"));
-            Assert.IsNotNull(jac2.Stage("st"));
-            Assert.IsNotNull(jac2.Process("p1"));
-            Assert.IsNotNull(jac2.Work("w1"));
-            Assert.IsNotNull(jac2.Kanban("k1"));
-            Assert.IsNull(jac2.Template("te")); // child JacInterpreter should has NOT the template instance
+            var jac2 = JacInterpreter.From(jac.GetTemplate("te"));
+            Assert.IsNotNull(jac2.GetStage("st"));
+            Assert.IsNotNull(jac2.GetProcess("p1"));
+            Assert.IsNotNull(jac2.GetWork("w1"));
+            Assert.IsNotNull(jac2.GetKanban("k1"));
+            Assert.IsNull(jac2.GetTemplate("te")); // child JacInterpreter should has NOT the template instance
         }
     }
 }
