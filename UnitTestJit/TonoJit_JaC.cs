@@ -530,5 +530,42 @@ namespace UnitTestProject1
                 Assert.Fail();
             }
         }
+
+        [TestMethod]
+        public void Test22()
+        {
+            var code = @"
+                    p = new Process
+                    p.X = 1234
+                    p.Y = '5678' // Jac parser deeply makes to integer 5678
+                    p.Z = p.X
+                ";
+            var jac = JacInterpreter.From(code);
+            Assert.IsNotNull(jac.Process("p"));
+            Assert.AreEqual(jac.Process("p").ChildVriables["X"]?.Value, 1234);
+            Assert.AreEqual(jac.Process("p").ChildVriables["Y"]?.Value, 5678);  // To check '5678' will be parsed deeply to integer
+            Assert.AreEqual(jac.Process("p").ChildVriables["Z"]?.Value, 1234);
+        }
+
+        [TestMethod]
+        public void Test23()
+        {
+            var code = @"
+                    p = new Process
+                        Name = 'TestProc'
+                    a123 = new Variable
+                    a123.AAA = p
+                    a123.BBB = p.Name   // To check .Name that is NOT child value (JitProcess's property)
+                ";
+            var jac = JacInterpreter.From(code);
+            var p = jac.Process("p");
+            var a123 = jac.Variable("a123");
+            Assert.IsNotNull(p);
+            Assert.IsTrue(a123.ChildVriables["AAA"].Is(":Process"));
+            Assert.IsTrue(a123.ChildVriables["AAA"].Value is JitProcess);
+            Assert.AreEqual(((JitProcess)a123.ChildVriables["AAA"].Value).Name, "TestProc");
+            Assert.IsTrue(a123.ChildVriables["BBB"].Is(JitProcess.Class.String));
+            Assert.AreEqual(a123.ChildVriables["BBB"].Value, "TestProc");
+        }
     }
 }

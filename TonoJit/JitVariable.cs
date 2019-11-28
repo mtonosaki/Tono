@@ -57,6 +57,28 @@ namespace Tono.Jit
         public ChildValueDic ChildVriables { get; private set; }
 
         /// <summary>
+        /// Child value accessor for Jac
+        /// </summary>
+        /// <param name="varname"></param>
+        /// <returns></returns>
+        [JacGetDotValue]
+        public object GetChildValue(string varname)
+        {
+            return ChildVriables[varname]?.Value;
+        }
+
+        /// <summary>
+        /// Child value accessor for Jac
+        /// </summary>
+        /// <param name="varname"></param>
+        /// <param name="val"></param>
+        [JacSetDotValue]
+        public void SetChildValue(string varname, object val)
+        {
+            ChildVriables[varname] = JitVariable.FromObject(val);
+        }
+
+        /// <summary>
         /// the constructor of this class
         /// </summary>
         public JitVariable()
@@ -337,6 +359,37 @@ namespace Tono.Jit
                 ret.Classes.Add(classNames);    // コピー元のクラス情報を転送する
             }
             return ret;
+        }
+
+        /// <summary>
+        /// make a new instance copy from obj (try to set class name from object type or set :Object)
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <param name="classNames"></param>
+        /// <returns></returns>
+        public static JitVariable FromObject(object obj, string classNames = null)
+        {
+            var ret = new JitVariable
+            {
+                Name = $"(noname_{++_dummyCount})",
+                Value = obj,
+            };
+            if (classNames != null)
+            {
+                ret.Classes.Set(classNames);
+            }
+            else
+            {
+                if (obj is int) ret.Classes.Add(Class.Int);
+                else if (obj is double) ret.Classes.Add(Class.Double);
+                else if (obj is string) ret.Classes.Add(Class.String);
+                else if (obj is JitVariable jv)
+                {
+                    ret.Classes.Set(jv.Classes.ToArray());
+                }
+            }
+            return ret;
+
         }
 
         /// <summary>
