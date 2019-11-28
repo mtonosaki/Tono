@@ -307,12 +307,12 @@ namespace Tono.Jit
                 // varname.varname の場合、ChildValuesに保存する
                 var parentVar = StrUtil.Left(variable.Com, dotid);
                 var childVar = StrUtil.Mid(variable.Com, dotid + 1);
-                var parentVarObj = Variable(parentVar);
+                var parentVarObj = GetVariable(parentVar);
                 var tarmethods =
                     from me in parentVarObj.GetType().GetMethods()
                     from at in me.GetCustomAttributes<JacSetDotValueAttribute>(true)
                     select me;
-                tarmethods.FirstOrDefault()?.Invoke(parentVarObj, new object[] { childVar, ParseValue(val.Com) });
+                tarmethods.FirstOrDefault()?.Invoke(parentVarObj, new object[] { childVar, item });
             }
             if (rpnStack.Count > 0)
             {
@@ -320,9 +320,10 @@ namespace Tono.Jit
                 if (IsInstance(objName.Com) && objName.Level < variable.Level)
                 {
                     var obj = ParseValue(objName.Com);
-                    var pi = obj.GetType().GetProperty(variable.Com);
+                    var pi = obj?.GetType().GetProperty(variable.Com);
                     if (pi != null)
                     {
+                        // Support lazy Set
                         if (pi.GetMethod.ReturnParameter.ParameterType.Name == "Func`1")
                         {
                             switch (item?.GetType().Name)
@@ -335,50 +336,42 @@ namespace Tono.Jit
                                 default: throw new JacException(JacException.Codes.NotSupportLazyMethodType, $"Not supported Func<{item?.GetType().Name}> property.");
                             }
                         }
+                        // Normal Set
                         else
-                        if (pi.GetMethod.ReturnParameter.ParameterType.Name == "JitVariable" && item != null)
+                        if (pi.GetMethod.ReturnParameter.ParameterType.Name == "JitVariable" && item != null && item is JitVariable == false)
                         {
-                            if (item is JitVariable itemvar)
-                            {
-                                pi.SetValue(obj, itemvar);
-                            }
-                            else
-                            if (item is string itemstr)
-                            {
-                                pi.SetValue(obj, JitVariable.From(itemstr));
-                            }
-                            else
-                            if (item is string itemint)
-                            {
-                                pi.SetValue(obj, JitVariable.From(itemint));
-                            }
-                            else
-                            if (item is string itemdouble)
-                            {
-                                pi.SetValue(obj, JitVariable.From(itemdouble));
-                            }
-                            else
-                            {
-                                throw new JacException(JacException.Codes.NotSupportedType, $"Type {item.GetType().Name} is not support to JitVariable.Value");
-                            }
+                            pi.SetValue(obj, JitVariable.FromObject(item));
                         }
                         else
                         {
                             pi.SetValue(obj, item);
                             if (variable.Com.Equals("name", StringComparison.CurrentCultureIgnoreCase))
                             {
-                                varBuf[ParseValue(val.Com)?.ToString()] = obj;
+                                varBuf[item?.ToString()] = obj;
                             }
                         }
                         return;
                     }
                     else
                     {
-                        throw new JacException(JacException.Codes.NotImplementedProperty, $"Property name '{variable.Com}' is not implemented yet in {(obj?.GetType().Name ?? "null")}.");
+                        var tarmethods =
+                            from me in obj.GetType().GetMethods()
+                            from at in me.GetCustomAttributes<JacSetDotValueAttribute>(true)
+                            select me;
+                        var pp = tarmethods.FirstOrDefault();
+                        if (pp != null)
+                        {
+                            pp.Invoke(obj, new object[] { variable.Com, item });
+                        }
+                        else
+                        {
+                            throw new JacException(JacException.Codes.NotImplementedProperty, $"Property name '{variable.Com}' is not implemented yet in {(obj?.GetType().Name ?? "null")}.");
+                        }
+                        return;
                     }
                 }
             }
-            varBuf[variable.Com] = ParseValue(val.Com);
+            varBuf[variable.Com] = item;
             rpnStack.Push(variable);
         }
 
@@ -473,7 +466,7 @@ namespace Tono.Jit
                     if (method != null)
                     {
                         ret = method.Invoke(parentObj, new object[] { childName });
-                        if( ret != null)
+                        if (ret != null)
                         {
                             return ret;
                         }
@@ -584,7 +577,7 @@ namespace Tono.Jit
         /// </summary>
         /// <param name="varname"></param>
         /// <returns></returns>
-        public JitTemplate Template(string varname)
+        public JitTemplate GetTemplate(string varname)
         {
             return ParseValue(varname) as JitTemplate;
         }
@@ -594,7 +587,7 @@ namespace Tono.Jit
         /// </summary>
         /// <param name="varname"></param>
         /// <returns></returns>
-        public JitStage Stage(string varname)
+        public JitStage GetStage(string varname)
         {
             return ParseValue(varname) as JitStage;
         }
@@ -604,7 +597,7 @@ namespace Tono.Jit
         /// </summary>
         /// <param name="varname"></param>
         /// <returns></returns>
-        public JitProcess Process(string varname)
+        public JitProcess GetProcess(string varname)
         {
             return ParseValue(varname) as JitProcess;
         }
@@ -614,7 +607,7 @@ namespace Tono.Jit
         /// </summary>
         /// <param name="varname"></param>
         /// <returns></returns>
-        public JitWork Work(string varname)
+        public JitWork GetWork(string varname)
         {
             return ParseValue(varname) as JitWork;
         }
@@ -624,7 +617,7 @@ namespace Tono.Jit
         /// </summary>
         /// <param name="varname"></param>
         /// <returns></returns>
-        public JitVariable Variable(string varname)
+        public JitVariable GetVariable(string varname)
         {
             return ParseValue(varname) as JitVariable;
         }
@@ -634,7 +627,7 @@ namespace Tono.Jit
         /// </summary>
         /// <param name="varname"></param>
         /// <returns></returns>
-        public JitKanban Kanban(string varname)
+        public JitKanban GetKanban(string varname)
         {
             return ParseValue(varname) as JitKanban;
         }

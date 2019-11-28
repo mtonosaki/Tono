@@ -141,8 +141,8 @@ namespace UnitTestProject1
                         remove    'IgnoreProcess'
             ";
             jac.Exec(code);
-            Assert.AreEqual(jac.Stage("st")?.Procs.Count, 1);
-            Assert.AreNotEqual(jac.Stage("st")?.Procs[0].Name, "IgnoreProcess");
+            Assert.AreEqual(jac.GetStage("st")?.Procs.Count, 1);
+            Assert.AreNotEqual(jac.GetStage("st")?.Procs[0].Name, "IgnoreProcess");
         }
         [TestMethod]
         public void Test07()
@@ -164,7 +164,7 @@ namespace UnitTestProject1
                         remove p2
             ";
             jac.Exec(code);
-            Assert.AreEqual(jac.Stage("st")?.Procs.Count, 0);
+            Assert.AreEqual(jac.GetStage("st")?.Procs.Count, 0);
         }
         [TestMethod]
         public void Test08()
@@ -188,7 +188,7 @@ namespace UnitTestProject1
                         remove p2       // find JitProcess instance by variable
             ";
             jac.Exec(code);
-            var MyStage = jac.Stage("MyStage");
+            var MyStage = jac.GetStage("MyStage");
             Assert.IsNotNull(MyStage);
             Assert.AreEqual(MyStage.Procs.Count, 1);
         }
@@ -213,7 +213,7 @@ namespace UnitTestProject1
                         remove p2       // find JitProcess instance by variable
             ";
             jac.Exec(code);
-            Assert.AreEqual(jac.Stage("'MyStage'")?.Procs.Count, 0);
+            Assert.AreEqual(jac.GetStage("'MyStage'")?.Procs.Count, 0);
         }
 
         [TestMethod]
@@ -232,7 +232,7 @@ namespace UnitTestProject1
             ";
             var jac = new JacInterpreter();
             jac.Exec(code);
-            var proc = jac.Process("p1");
+            var proc = jac.GetProcess("p1");
             Assert.IsNotNull(proc);
 
             var span = proc.Cios.Select(a => a as CoSpan).Where(a => a != null).FirstOrDefault();
@@ -299,13 +299,13 @@ namespace UnitTestProject1
             ";
             var jac = new JacInterpreter();
             jac.Exec(code);
-            Assert.AreEqual(jac.Variable("a").Value, "STR");
-            Assert.AreEqual(jac.Variable("b").Value, 123);
-            Assert.AreEqual(jac.Variable("c").Value, TimeSpan.FromSeconds(123));
-            Assert.AreEqual(jac.Variable("d").Value, 1.232);
-            Assert.AreEqual(jac.Variable("e").Value, jac.Variable("a"));
-            Assert.IsTrue(ReferenceEquals(jac.Variable("e").Value, jac.Variable("a")));
-            Assert.IsFalse(ReferenceEquals(jac.Variable("e").Value, jac.Variable("b")));
+            Assert.AreEqual(jac.GetVariable("a").Value, "STR");
+            Assert.AreEqual(jac.GetVariable("b").Value, 123);
+            Assert.AreEqual(jac.GetVariable("c").Value, TimeSpan.FromSeconds(123));
+            Assert.AreEqual(jac.GetVariable("d").Value, 1.232);
+            Assert.AreEqual(jac.GetVariable("e").Value, jac.GetVariable("a"));
+            Assert.IsTrue(ReferenceEquals(jac.GetVariable("e").Value, jac.GetVariable("a")));
+            Assert.IsFalse(ReferenceEquals(jac.GetVariable("e").Value, jac.GetVariable("b")));
         }
 
         [TestMethod]
@@ -335,7 +335,7 @@ namespace UnitTestProject1
             Assert.IsNotNull(i1);
             Assert.AreEqual(i1.Delay, TimeSpan.FromMinutes(1.5));
             Assert.AreEqual(i1.TargetWorkClass, ":Car");
-            Assert.AreEqual(i1.Destination(), jac.Process("sink")); // check lazy method
+            Assert.AreEqual(i1.Destination(), jac.GetProcess("sink")); // check lazy method
 
             var i2 = jac["i2"] as CiDelay;
             Assert.IsNotNull(i2);
@@ -403,7 +403,7 @@ namespace UnitTestProject1
             jac.Exec(code);
             var o1 = jac["o1"] as CoJoinFrom;
             Assert.IsNotNull(o1);
-            Assert.AreEqual(o1.PullFrom(), jac.Process("sink"));
+            Assert.AreEqual(o1.PullFrom(), jac.GetProcess("sink"));
             Assert.AreEqual(o1.ChildPartName, "TEPA");
             Assert.AreEqual(o1.WaitSpan, TimeSpan.FromSeconds(30));
         }
@@ -436,7 +436,7 @@ namespace UnitTestProject1
             Assert.IsNotNull(o1);
             Assert.AreEqual(o1.ReferenceVarName, JitVariable.From("Weight"));
             Assert.AreEqual(o1.Value, 500.0);
-            var w1 = jac.Work("MyWork01");
+            var w1 = jac.GetWork("MyWork01");
             Assert.IsNotNull(w1);
             Assert.AreEqual(o1.GetWorkInReserves().Count(), 4);
             Assert.AreEqual(o1.GetWorkInReserves().FirstOrDefault(), w1);
@@ -486,10 +486,10 @@ namespace UnitTestProject1
             ";
             var jac = new JacInterpreter();
             jac.Exec(code);
-            var k1 = jac.Kanban("k1");
-            var p1 = jac.Process("p1");
-            var p2 = jac.Process("p2");
-            var w1 = jac.Work("w1");
+            var k1 = jac.GetKanban("k1");
+            var p1 = jac.GetProcess("p1");
+            var p2 = jac.GetProcess("p2");
+            var w1 = jac.GetWork("w1");
             Assert.IsNotNull(k1);
             Assert.IsNotNull(p1);
             Assert.IsNotNull(p2);
