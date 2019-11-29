@@ -396,8 +396,7 @@ namespace UnitTestProject1
                                 add o1 = new CoJoinFrom
                                     PullFrom = sink
                                     ChildPartName = 'TEPA'
-                                    WaitSpan = 0.5M
-                                    
+                                    WaitSpan = 0.5M                                    
             ";
             var jac = new JacInterpreter();
             jac.Exec(code);
