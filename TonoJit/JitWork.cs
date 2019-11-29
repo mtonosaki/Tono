@@ -16,7 +16,7 @@ namespace Tono.Jit
     [JacTarget(Name = "Work")]
     public class JitWork : JitVariable
     {
-        public readonly string ID = "Work." + string.Join("", Guid.NewGuid().ToByteArray().Select(a => $"{a:X2}"));
+        public string ID { get; set; } = "Work." + string.Join("", Guid.NewGuid().ToByteArray().Select(a => $"{a:X2}"));
 
         /// <summary>
         /// Previous process (null = no previous)

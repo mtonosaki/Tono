@@ -18,7 +18,7 @@ namespace Tono.Jit
     [JacTarget(Name = "Process")]
     public partial class JitProcess : JitVariable
     {
-        public readonly string ID = "Process." + string.Join("", Guid.NewGuid().ToByteArray().Select(a => $"{a:X2}"));
+        public string ID { get; set; } = "Process." + string.Join("", Guid.NewGuid().ToByteArray().Select(a => $"{a:X2}"));
 
         /// <summary>
         /// The Constructor of this class

@@ -357,7 +357,7 @@ namespace Tono.Jit
                         else
                         {
                             pi.SetValue(obj, item);
-                            if (variable.Com.Equals("name", StringComparison.CurrentCultureIgnoreCase))
+                            if (variable.Com.Equals("ID", StringComparison.CurrentCultureIgnoreCase))
                             {
                                 varBuf[item?.ToString() ?? "null"] = obj;
                             }

@@ -13,7 +13,7 @@ namespace Tono.Jit
     [JacTarget(Name = "Template")]
     public class JitTemplate : JitVariable
     {
-        public readonly string ID = "Template." + string.Join("", Guid.NewGuid().ToByteArray().Select(a => $"{a:X2}"));
+        public string ID { get; set; } = "Template." + string.Join("", Guid.NewGuid().ToByteArray().Select(a => $"{a:X2}"));
 
         /// <summary>
         /// The constructor of this class

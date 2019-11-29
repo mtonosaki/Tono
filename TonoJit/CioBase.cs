@@ -11,7 +11,7 @@ namespace Tono.Jit
     /// </summary>
     public abstract class CioBase
     {
-        public readonly string ID = "CIO." + string.Join("", Guid.NewGuid().ToByteArray().Select(a => $"{a:X2}"));
+        public string ID { get; set; } = "CIO." + string.Join("", Guid.NewGuid().ToByteArray().Select(a => $"{a:X2}"));
 
         /// <summary>
         /// get owner process from work object
