@@ -62,7 +62,27 @@ namespace Tono.Jit
         private readonly Stack<(int Level, string Com)> opeStack = new Stack<(int Level, string Com)>();
         private readonly Dictionary<string/*instance Key*/, object> instanceBuf = new Dictionary<string, object>();
         private readonly Dictionary<string/*variable name*/, object> varBuf = new Dictionary<string, object>();
+        private readonly List<List<string>> Lines = new List<List<string>>();
+        private readonly List<List<int>> Levels = new List<List<int>>();
+        private int TargetLevel;
         private int instanceIdCounter = 0;
+        private const int tabspace = 4;
+
+        /// <summary>
+        /// Reset Jac interpreter instance
+        /// </summary>
+        public void Reset()
+        {
+            Vars.Clear();
+            rpnStack.Clear();
+            opeStack.Clear();
+            instanceBuf.Clear();
+            varBuf.Clear();
+            Lines.Clear();
+            Levels.Clear();
+            TargetLevel = 0;
+            instanceIdCounter = 0;
+        }
 
         /// <summary>
         /// Static constructor
@@ -210,12 +230,6 @@ namespace Tono.Jit
             ret.Exec(jac);
             return ret;
         }
-
-
-        private const int tabspace = 4;
-        private readonly List<List<string>> Lines = new List<List<string>>();
-        private readonly List<List<int>> Levels = new List<List<int>>();
-        private int TargetLevel;
 
         /// <summary>
         /// Normalize code string
@@ -722,7 +736,7 @@ namespace Tono.Jit
     }
 
     /// <summary>
-    /// Method attribute : Mark to ChildValues Accessor   [JacSetDotValue] object SetChildValue(string varname, object value)
+    /// Method attribute : Mark to ChildValues Accessor   [JacSetDotValue] void SetChildValue(string varname, object value)
     /// </summary>
     public class JacSetDotValueAttribute : Attribute
     {
