@@ -18,7 +18,7 @@ namespace Tono.Jit
         /// <summary>
         /// Kanvan instance ID (auto numbering)
         /// </summary>
-        public string ID { get; set; } = "Kanban." + string.Join("", Guid.NewGuid().ToByteArray().Select(a => $"{a:X2}"));
+        public string ID { get; set; } = JacInterpreter.MakeID("Kanban");
 
         public int TestID { get => (int)(ChildVriables["TestID"].Value ?? int.MinValue); set => ChildVriables["TestID"] = JitVariable.From(value); }
 

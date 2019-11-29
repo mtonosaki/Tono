@@ -311,6 +311,7 @@ namespace Tono.Jit
 
             var val = rpnStack.Pop();           // value name
             var item = ParseValue(val.Com);     // value object
+            if (item == null) item = null;
             var variable = rpnStack.Pop();      // variable name
 
             int dotid;
@@ -685,6 +686,16 @@ namespace Tono.Jit
         {
             return str.StartsWith("::Jac:Instance:");
         }
+
+        /// <summary>
+        /// Make ID such as GUID
+        /// </summary>
+        /// <param name="preName"></param>
+        /// <returns></returns>
+        public static string MakeID(string preName)
+        {
+            return $"{preName}:{string.Join("", Guid.NewGuid().ToByteArray().Select(a => $"{a:X2}"))}";
+        }
     }
 
     /// <summary>
@@ -702,6 +713,7 @@ namespace Tono.Jit
             NotSupportedUnit,
             NotSupportLazyMethodType,
             NotSupportedType,
+            ArgumentError,
         }
         public Codes Code { get; set; }
 

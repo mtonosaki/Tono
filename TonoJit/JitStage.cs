@@ -13,7 +13,7 @@ namespace Tono.Jit
     [JacTarget(Name = "Stage")]
     public partial class JitStage : JitVariable
     {
-        public string ID { get; set; } = "Stage." + string.Join("", Guid.NewGuid().ToByteArray().Select(a => $"{a:X2}"));
+        public string ID { get; set; } = JacInterpreter.MakeID("Stage");
 
         /// <summary>
         /// having processes
