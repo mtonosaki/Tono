@@ -13,6 +13,8 @@ namespace Tono.Jit
     [JacTarget(Name = "Template")]
     public class JitTemplate : JitVariable
     {
+        public readonly string ID = "Template." + string.Join("", Guid.NewGuid().ToByteArray().Select(a => $"{a:X2}"));
+
         /// <summary>
         /// The constructor of this class
         /// </summary>
@@ -96,6 +98,25 @@ namespace Tono.Jit
             {
                 JacBlock.RemoveAt(JacBlock.Count - 1);
             }
+        }
+        public override int GetHashCode()
+        {
+            return ID.GetHashCode();
+        }
+        public override bool Equals(object obj)
+        {
+            if (obj is JitTemplate te)
+            {
+                return te.ID == ID;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        public override string ToString()
+        {
+            return $"{GetType().Name} ID={ID}";
         }
     }
 }

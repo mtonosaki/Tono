@@ -57,7 +57,6 @@ namespace Tono.Jit
     public class JacInterpreter
     {
         private static readonly Dictionary<string/*JacTarget.Name*/, Type> JacTargets = new Dictionary<string, Type>();
-        private readonly Dictionary<string, object> Vars = new Dictionary<string, object>();  // variables buffer
         private readonly Stack<(int Level, string Com)> rpnStack = new Stack<(int Level, string Com)>();
         private readonly Stack<(int Level, string Com)> opeStack = new Stack<(int Level, string Com)>();
         private readonly Dictionary<string/*instance Key*/, object> instanceBuf = new Dictionary<string, object>();
@@ -73,7 +72,6 @@ namespace Tono.Jit
         /// </summary>
         public void Reset()
         {
-            Vars.Clear();
             rpnStack.Clear();
             opeStack.Clear();
             instanceBuf.Clear();

@@ -18,6 +18,8 @@ namespace Tono.Jit
     [JacTarget(Name = "Process")]
     public partial class JitProcess : JitVariable
     {
+        public readonly string ID = "Process." + string.Join("", Guid.NewGuid().ToByteArray().Select(a => $"{a:X2}"));
+
         /// <summary>
         /// The Constructor of this class
         /// </summary>
@@ -81,7 +83,7 @@ namespace Tono.Jit
         [JacListRemove(PropertyName = "Cio")]
         public void CioRemove(string name)
         {
-            foreach (var item in Cios.Where(a => a.Name == name).ToArray())
+            foreach (var item in Cios.Where(a => a.ID == name).ToArray())
             {
                 if (item is CiBase ci)
                 {
@@ -152,7 +154,7 @@ namespace Tono.Jit
         {
             if (obj is JitProcess proc)
             {
-                return proc.Name?.Equals(Name) ?? false;
+                return proc.ID.Equals(ID);
             }
             else
             {
@@ -161,12 +163,12 @@ namespace Tono.Jit
         }
         public override int GetHashCode()
         {
-            return Name?.GetHashCode() ?? 0;
+            return ID.GetHashCode();
         }
 
         public override string ToString()
         {
-            return $"{GetType().Name} {Name}";
+            return $"{GetType().Name} {Name} (ID={ID})";
         }
 
         /// <summary>

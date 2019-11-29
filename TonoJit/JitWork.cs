@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Tono.Jit
 {
@@ -15,7 +16,7 @@ namespace Tono.Jit
     [JacTarget(Name = "Work")]
     public class JitWork : JitVariable
     {
-        // public string Name	// work Name is come from JitVariable
+        public readonly string ID = "Work." + string.Join("", Guid.NewGuid().ToByteArray().Select(a => $"{a:X2}"));
 
         /// <summary>
         /// Previous process (null = no previous)
@@ -75,7 +76,7 @@ namespace Tono.Jit
         {
             if (obj is JitWork w)
             {
-                return w.Name?.Equals(Name) ?? Name == null;
+                return w.ID == ID;
             }
             else
             {
@@ -85,12 +86,12 @@ namespace Tono.Jit
 
         public override int GetHashCode()
         {
-            return Name?.GetHashCode() ?? 0;
+            return ID.GetHashCode();
         }
 
         public override string ToString()
         {
-            return $"{GetType().Name} {Name}@{CurrentProcess?.Name ?? "n/a"} → {NextProcess?.Name ?? "n/a"}";
+            return $"{GetType().Name} {Name}@{CurrentProcess?.Name ?? "n/a"} → {NextProcess?.Name ?? "n/a"} ID={ID}";
         }
     }
 
