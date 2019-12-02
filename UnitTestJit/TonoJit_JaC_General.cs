@@ -3,6 +3,7 @@
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Tono;
 using Tono.Jit;
@@ -504,11 +505,6 @@ namespace UnitTestProject1
             Assert.AreEqual(k1.Work, w1);
         }
 
-        [JacTarget(Name = "TestJitClass")]
-        public class TestJitClass
-        {
-        }
-
         [TestMethod]
         public void Test21()
         {
@@ -589,5 +585,50 @@ namespace UnitTestProject1
             Assert.AreEqual(p.ChildVriables["AAA"]?.Value, 123);
             Assert.AreEqual(p.ChildVriables["BBB"]?.Value, 456);
         }
+
+        [TestMethod]
+        public void Test25()
+        {
+            var code = @"
+                    Piyo = new TestJitClass
+                        ChildValueA = 'abc'
+                ";
+            JacInterpreter.RegisterJacTarget(typeof(TestJitClass).Assembly);
+            var jac = new JacInterpreter();
+            jac.Exec(code);
+            var Piyo = jac["Piyo"] as TestJitClass;
+            Assert.IsNotNull(Piyo);
+            Assert.IsTrue(Piyo.Contains("ChildValueA"));
+            Assert.AreEqual(Piyo["ChildValueA"], "abc");
+
+            code = $@"
+                Piyo.ChildValueB = 'def'
+            ";
+            jac.Exec(code);
+            Assert.IsTrue(Piyo.Contains("ChildValueB"));
+            Assert.AreEqual(Piyo["ChildValueB"], "def");
+        }
     }
+
+    [JacTarget(Name = "TestJitClass")]
+    public class TestJitClass
+    {
+        Dictionary<string, object> dic = new Dictionary<string, object>();
+
+        [JacSetDotValue]
+        public void SetDotValue(string name, object value)
+        {
+            dic[name] = value;
+        }
+
+        public object this[string name]
+        {
+            get => dic[name];
+            set => dic[name] = value;
+        }
+
+        public bool Contains(string name) => dic.ContainsKey(name);
+    }
+
+
 }

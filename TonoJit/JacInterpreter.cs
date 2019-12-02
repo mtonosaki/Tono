@@ -311,7 +311,6 @@ namespace Tono.Jit
 
             var val = rpnStack.Pop();           // value name
             var item = ParseValue(val.Com);     // value object
-            if (item == null) item = null;
             var variable = rpnStack.Pop();      // variable name
 
             int dotid;
@@ -320,7 +319,7 @@ namespace Tono.Jit
                 // varname.varname の場合、ChildValuesに保存する
                 var parentVar = StrUtil.Left(variable.Com, dotid);
                 var childVar = StrUtil.Mid(variable.Com, dotid + 1);
-                var parentVarObj = GetVariable(parentVar);
+                var parentVarObj = ParseValue(parentVar);
                 var tarmethods =
                     from me in parentVarObj.GetType().GetMethods()
                     from at in me.GetCustomAttributes<JacSetDotValueAttribute>(true)
