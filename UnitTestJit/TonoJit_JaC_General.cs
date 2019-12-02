@@ -137,6 +137,9 @@ namespace UnitTestProject1
             ";
             var jac = new JacInterpreter();
             jac.Exec(code);
+            Assert.IsNotNull(jac.GetProcess("IgnoreProcess"));
+            var name = jac.GetProcess("IgnoreProcess").Name;
+            Assert.IsNotNull(jac.GetProcess(name));
             //--------------------------------------------------------
             code = $@"
                 st
@@ -146,6 +149,8 @@ namespace UnitTestProject1
             jac.Exec(code);
             Assert.AreEqual(jac.GetStage("st")?.Procs.Count, 1);
             Assert.AreNotEqual(jac.GetStage("st")?.Procs[0].Name, "IgnoreProcess");
+            Assert.IsNull(jac.GetProcess("IgnoreProcess")); // removed from VarBuffer
+            Assert.IsNull(jac.GetProcess(name));            // removed from InstanceBuffer
         }
         [TestMethod]
         public void Test07()
