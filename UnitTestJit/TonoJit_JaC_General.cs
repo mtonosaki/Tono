@@ -302,22 +302,63 @@ namespace UnitTestProject1
                     Value = 'STR'
                 b = new Variable
                     Value = 123
+                bm = new Variable
+                    Value = -123
                 c = new Variable
                     Value = 123S
+                cm = new Variable
+                    Value = -123S
+                cmd = new Variable
+                    Value = -123.4S
+                cmd2 = new Variable
+                    Value = -1.234e-2S
+                cmd3 = new Variable
+                    Value = -1.234e+2S
+                cmd4 = new Variable
+                    Value = -1.234E2S
                 d = new Variable
                     Value = 1.232
                 e = new Variable
                     Value = a
+                f = new Variable
+                    Value = 1.23e10
+                g = new Variable
+                    Value = 1.23E10
+                h = new Variable
+                    Value = 1.23e-10
+                i = new Variable
+                    Value = 95.5%
+                j = new Variable
+                    Value = 9.5e-2%
+                k = new Variable
+                    Value = -9.5e-2%
+                l = new Variable
+                    Value = -9.5e+2%
+                m = new Variable
+                    Value = -9.5e2%
             ";
             var jac = new JacInterpreter();
             jac.Exec(code);
             Assert.AreEqual(jac.GetVariable("a").Value, "STR");
             Assert.AreEqual(jac.GetVariable("b").Value, 123);
+            Assert.AreEqual(jac.GetVariable("bm").Value, -123);
             Assert.AreEqual(jac.GetVariable("c").Value, TimeSpan.FromSeconds(123));
+            Assert.AreEqual(jac.GetVariable("cm").Value, TimeSpan.FromSeconds(-123));
+            Assert.AreEqual(jac.GetVariable("cmd").Value, TimeSpan.FromSeconds(-123.4));
+            Assert.AreEqual(jac.GetVariable("cmd2").Value, TimeSpan.FromSeconds(-1.234e-2));
+            Assert.AreEqual(jac.GetVariable("cmd3").Value, TimeSpan.FromSeconds(-1.234e+2));
+            Assert.AreEqual(jac.GetVariable("cmd4").Value, TimeSpan.FromSeconds(-1.234E2));
             Assert.AreEqual(jac.GetVariable("d").Value, 1.232);
             Assert.AreEqual(jac.GetVariable("e").Value, jac.GetVariable("a"));
             Assert.IsTrue(ReferenceEquals(jac.GetVariable("e").Value, jac.GetVariable("a")));
             Assert.IsFalse(ReferenceEquals(jac.GetVariable("e").Value, jac.GetVariable("b")));
+            Assert.AreEqual(jac.GetVariable("f").Value, 1.23e10);
+            Assert.AreEqual(jac.GetVariable("g").Value, 1.23e10);
+            Assert.AreEqual(jac.GetVariable("h").Value, 1.23e-10);
+            Assert.AreEqual(jac.GetVariable("i").Value, 95.5 / 100.0);
+            Assert.AreEqual(jac.GetVariable("j").Value, 9.5e-2 / 100.0);
+            Assert.AreEqual(jac.GetVariable("k").Value, -9.5e-2 / 100.0);
+            Assert.AreEqual(jac.GetVariable("l").Value, -9.5e2 / 100.0);
         }
 
         [TestMethod]
