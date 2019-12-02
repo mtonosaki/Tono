@@ -413,6 +413,24 @@ namespace Tono.Jit
             }
             tarMethod?.Invoke(parentObject, new[] { itemValue });
 
+            // Remove cached object
+            if( isAdd == false)
+            {
+                // from instanceBuf
+                var dels = instanceBuf.Where(a => ReferenceEquals(a.Value, itemValue)).Select(a => a.Key);
+                foreach (var delkey in dels.ToArray())
+                {
+                    instanceBuf.Remove(delkey);
+                }
+
+                // from varBuf
+                if (itemName.Com.StartsWith("'") && itemName.Com.EndsWith("'") || itemName.Com.StartsWith("\"") && itemName.Com.EndsWith("\""))
+                {
+                    itemName.Com = itemName.Com.Substring(1, itemName.Com.Length - 2);
+                }
+                varBuf.Remove(itemName.Com);
+            }
+
             rpnStack.Push(parentObjectName);
             if (isNextAddRemove)
             {
