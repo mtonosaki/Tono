@@ -155,7 +155,7 @@ namespace Tono.Gui.Uwp
         /// get parts set
         /// </summary>
         /// <param name="layer"></param>
-        /// <param name="filter"></param>
+        /// <param name="filter">parts filter</param>
         /// <returns></returns>
         public IEnumerable<IPartsDraw> GetParts(NamedId layer, Func<IPartsDraw, bool> filter = null)
         {
@@ -166,6 +166,26 @@ namespace Tono.Gui.Uwp
                 from pt in kv2.Value
                 where filter == null || filter?.Invoke(pt) == true
                 select pt;
+            return tarParts;
+        }
+
+        /// <summary>
+        /// get parts set
+        /// </summary>
+        /// <typeparam name="T">specified Parts class based PartsBase</typeparam>
+        /// <param name="layer"></param>
+        /// <param name="filter">parts filter</param>
+        /// <returns></returns>
+        public IEnumerable<T> GetParts<T>(NamedId layer, Func<T, bool> filter = null)
+        {
+            var tarParts =
+                from kv in _dat
+                where kv.Key.Equals(layer)
+                from kv2 in kv.Value
+                from pt in kv2.Value
+                where pt is T
+                where filter == null || filter?.Invoke((T)pt) == true
+                select (T)pt;
             return tarParts;
         }
 
