@@ -66,7 +66,6 @@ namespace UnitTestProject1
         [TestMethod]
         public void Test011_get_y1_and_z1_from_w1_assy_with_CoJoinFrom()
         {
-            JitKanban.ResetIDCounter();
             var st = new JitStage();
 
             JitProcess A, B, C, SINK, Y, Z, D;
@@ -308,7 +307,6 @@ namespace UnitTestProject1
         {
             // 前工程Aで横工程YからJoinできたら、工程Bに移動
 
-            JitKanban.ResetIDCounter();
             var st = new JitStage();
 
             JitProcess A, B, SINK, Y, Z;
@@ -477,7 +475,6 @@ namespace UnitTestProject1
         [TestMethod]
         public void Test009_CiKanbanReturn()
         {
-            JitKanban.ResetIDCounter();
             var st = new JitStage();
 
             JitProcess X, Y, SINK;
@@ -516,10 +513,12 @@ namespace UnitTestProject1
 
             var today = TimeUtil.ClearTime(DateTime.Now);  // H:M:S:MSを０にする
             JitKanban ka;
+            var testid = 0;
             st.SendKanban(ka = new JitKanban
             {
                 PullFrom = () => X,
                 PullTo = () => Y,
+                TestID = ++testid,
             }).Classes.Add(":Dog");
             Assert.IsTrue(ka.Is(":Kanban"));
 
@@ -527,6 +526,7 @@ namespace UnitTestProject1
             {
                 PullFrom = () => X,
                 PullTo = () => Y,
+                TestID = ++testid,
             }).Classes.Add(":Cat");
 
             // テストワーク投入（Xに工程充足）
@@ -614,7 +614,6 @@ namespace UnitTestProject1
         [TestMethod]
         public void Test008_PULL_Kanban_reuse()
         {
-            JitKanban.ResetIDCounter();
             var st = new JitStage();
 
             JitProcess X, Y, SINK;
@@ -665,6 +664,7 @@ namespace UnitTestProject1
             {
                 PullFrom = () => X,
                 PullTo = () => Y,
+                TestID = 1,
             });
 
             // テストワーク投入（Xに工程充足）
@@ -860,7 +860,6 @@ namespace UnitTestProject1
         [TestMethod]
         public void Test007_PULL_Kanban_too_late()
         {
-            JitKanban.ResetIDCounter();
             var st = new JitStage();
 
             JitProcess X, Y, SINK;
@@ -966,10 +965,12 @@ namespace UnitTestProject1
             Assert.IsTrue(dat.Count == 0);
 
             // 初期かんばんを投入
+            var testid = 0;
             st.SendKanban(TimeUtil.Set(today, hour: 9, minute: 30), new JitKanban   // かんばん送るも、工程Xにはワークが無いので、なにもしない
             {
                 PullFrom = () => X,
                 PullTo = () => Y,
+                TestID = ++testid,
             });
             dat = st.Events.Peeks(99).ToList(); k = 0;
             Assert.IsTrue(CMP(dat[k++], "Kanban1", EventTypes.KanbanIn, "9:30"));
@@ -978,6 +979,7 @@ namespace UnitTestProject1
             {
                 PullFrom = () => X,
                 PullTo = () => Y,
+                TestID = ++testid,
             });
             dat = st.Events.Peeks(99).ToList(); k = 0;
             Assert.IsTrue(CMP(dat[k++], "Kanban1", EventTypes.KanbanIn, "9:30"));
@@ -987,6 +989,7 @@ namespace UnitTestProject1
             {
                 PullFrom = () => X,
                 PullTo = () => Y,
+                TestID = ++testid,
             });
             dat = st.Events.Peeks(99).ToList(); k = 0;
             Assert.IsTrue(CMP(dat[k++], "Kanban1", EventTypes.KanbanIn, "9:30"));
@@ -1119,6 +1122,7 @@ namespace UnitTestProject1
                 {
                     PullFrom = () => SINK,
                     PullTo = () => Y,
+                    TestID = ++testid,
                 });
             }
 
@@ -1327,7 +1331,6 @@ namespace UnitTestProject1
         [TestMethod]
         public void Test006_Case_Pull_Kanban_JIT_or_not()
         {
-            JitKanban.ResetIDCounter();
             var st = new JitStage();
 
             JitProcess X, Y, SINK;
@@ -1370,8 +1373,10 @@ namespace UnitTestProject1
             var today = TimeUtil.ClearTime(DateTime.Now);  // H:M:S:MSを０にする
 
             // 初期かんばんを投入
+            int testid = 0;
             st.SendKanban(TimeUtil.Set(today, hour: 8, minute: 0), new JitKanban   // かんばん送るも、工程Xにはワークが無いので、なにもしない
             {
+                TestID = ++testid,
                 PullFrom = () => X,
                 PullTo = () => Y,
             });
@@ -1454,6 +1459,7 @@ namespace UnitTestProject1
             // Kanban2を Xに投入依頼
             st.SendKanban(TimeUtil.Set(today, hour: 9, minute: 4), new JitKanban
             {
+                TestID = ++testid,
                 PullFrom = () => X,
                 PullTo = () => Y,
             });
@@ -1478,6 +1484,7 @@ namespace UnitTestProject1
             // Kanban3を Xに投入依頼。w3のInに先立ち、入れとくテスト
             st.SendKanban(new JitKanban
             {
+                TestID = ++testid,
                 PullFrom = () => X,
                 PullTo = () => Y,
             });
@@ -3037,7 +3044,7 @@ namespace UnitTestProject1
             }
             if (ei.Kanban != null)
             {
-                ret &= name == ("Kanban" + ei.Kanban.ID.ToString());
+                ret &= name == ("Kanban" + ei.Kanban.TestID.ToString());
             }
             if (procName != null)
             {
