@@ -468,11 +468,12 @@ namespace Tono.Jit
             }
         }
 
-        private static readonly Regex chkTimeSpan = new Regex(@"^[0-9]+(\.[0-9]*)?(MS|S|M|H|D|W)$");
-        private static readonly Regex chkDistance = new Regex(@"^[0-9]+(\.[0-9]*)?(mm|cm|m|km)$");
-        private static readonly Regex chkInteger = new Regex(@"^[0-9]+$");
-        private static readonly Regex chkDouble = new Regex(@"^[0-9]+(\.[0-9]*)?$");
+        private static readonly Regex chkTimeSpan = new Regex(@"^-?[0-9]+(\.[0-9]*)?([eE][-+]?[0-9]+)?(MS|S|M|H|D|W)$");
+        private static readonly Regex chkDistance = new Regex(@"^-?[0-9]+(\.[0-9]*)?(mm|cm|m|km)$");
+        private static readonly Regex chkInteger = new Regex(@"^-?[0-9]+$");
+        private static readonly Regex chkDouble = new Regex(@"^-?[0-9]+(\.[0-9]*)?([eE][-+]?[0-9]+)?%?$");
         private static readonly Regex chkDotValue = new Regex(@"^[a-z,A-Z]+[a-z,A-Z,0-9]*\.[a-z,A-Z]+[a-z,A-Z,0-9]*$");
+        private static readonly Regex chkBoolean = new Regex(@"^([Tt][Rr][Uu][Ee]|[Ff][Aa][Ll][Ss][Ee])$");
 
         /// <summary>
         /// Get value managed instance name, variable, string and some object parsing.
@@ -526,7 +527,11 @@ namespace Tono.Jit
                 }
                 if (chkDouble.IsMatch(valuestr))
                 {
-                    return double.Parse(valuestr);
+                    return StrUtil.ParseDouble(valuestr);
+                }
+                if (chkBoolean.IsMatch(valuestr))
+                {
+                    return DbUtil.ToBoolean(valuestr);
                 }
                 if (valuestr.StartsWith("'") && valuestr.EndsWith("'") || valuestr.StartsWith("\"") && valuestr.EndsWith("\""))
                 {
