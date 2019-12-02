@@ -11,13 +11,13 @@
     <Copyright>(c) 2019 Manabu Tonosaki</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageIconUrl></PackageIconUrl>
-    <AssemblyVersion>1.0.11.0</AssemblyVersion>
-    <FileVersion>1.0.11.0</FileVersion>
-    <Version>1.0.11</Version>
+    <AssemblyVersion>1.0.12.0</AssemblyVersion>
+    <FileVersion>1.0.12.0</FileVersion>
+    <Version>1.0.12</Version>
     <PackageId>Tono.Gui</PackageId>
     <PackageIcon>/content/TonoGuiIcon.png</PackageIcon>
     <PackageTags>Tono, Gui</PackageTags>
-    <PackageReleaseNotes>Kaizen PointerState class</PackageReleaseNotes>
+    <PackageReleaseNotes>on Kaizen Activities</PackageReleaseNotes>
     <PackageProjectUrl></PackageProjectUrl>
     <RepositoryUrl>https://github.com/mtonosaki/Tono.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
