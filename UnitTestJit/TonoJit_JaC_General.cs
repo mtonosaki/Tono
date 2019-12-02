@@ -15,7 +15,7 @@ namespace UnitTestProject1
         [TestMethod]
         public void Test01()
         {
-            var c = @"
+            var c = $@"
                 st = new Stage
                     Procs
                         add b  = new Process
@@ -41,6 +41,7 @@ namespace UnitTestProject1
                             Name = 'AAA'
                             Name = 'aaa'
                         add c=new Process
+                            ID = 'IDFINDB'  // Try to find by ID
                             Name = 'BBB'
                             Name = 'bbb'
             ";
@@ -54,7 +55,8 @@ namespace UnitTestProject1
             Assert.AreEqual(jac["c"].GetType(), typeof(JitProcess));
             var c = jac["c"] as JitProcess;         // get instance by variable
             Assert.AreEqual(c.Name, "bbb");
-            var bbb = jac["'bbb'"] as JitProcess;   // get instance by name
+
+            var bbb = jac["'IDFINDB'"] as JitProcess;   // get instance by name
             Assert.AreEqual(c, bbb);
         }
         [TestMethod]
@@ -130,7 +132,7 @@ namespace UnitTestProject1
                     Procs
                         add new Process
                         add new Process
-                            Name = 'IgnoreProcess'
+                            ID = 'IgnoreProcess'
             ";
             var jac = new JacInterpreter();
             jac.Exec(code);
@@ -151,7 +153,7 @@ namespace UnitTestProject1
                 st = new Stage
                     Procs
                         add p1 = new Process
-                            Name = 'PROCP1'
+                            ID = 'PROCP1'
                         add p2 = new Process
             ";
             var jac = new JacInterpreter();
@@ -171,10 +173,12 @@ namespace UnitTestProject1
         {
             var code = @"
                 new Stage
-                    Name = 'MyStage'
+                    ID = 'MyStage'
+                    Name = 'MySweetStage'
                     Procs
                         add p1 = new Process
-                            Name = 'PROCP1'
+                            ID = 'PROCP1'
+                            Name = 'MyPROCP1'
                         add p2 = new Process
                         add p3 = new Process
             ";
@@ -184,11 +188,13 @@ namespace UnitTestProject1
             code = $@"
                 MyStage               // To find Stage object named 'MyStage'
                     Procs
-                        remove 'PROCP1' // find JitProcess instance by name
+                        remove 'PROCP1' // find JitProcess instance by ID
                         remove p2       // find JitProcess instance by variable
             ";
             jac.Exec(code);
+            Assert.IsNull(jac.GetStage("MySweetStage"));
             var MyStage = jac.GetStage("MyStage");
+            Assert.IsNotNull(MyStage);
             Assert.IsNotNull(MyStage);
             Assert.AreEqual(MyStage.Procs.Count, 1);
         }
@@ -199,9 +205,9 @@ namespace UnitTestProject1
                 new Stage
                     Procs
                         add p1 = new Process
-                            Name = 'PROCP1'
+                            ID = 'PROCP1'
                         add p2 = new Process
-                    Name = 'MyStage'
+                    ID = 'MyStage'
             ";
             var jac = new JacInterpreter();
             jac.Exec(code);
@@ -423,7 +429,7 @@ namespace UnitTestProject1
                                     ReferenceVarName = 'Weight'
                                     WorkInReserve
                                         add new Work
-                                            Name = 'MyWork01'
+                                            ID = 'MyWork01'
                                         add w1
                                         add w2
                                         add w3
@@ -531,6 +537,57 @@ namespace UnitTestProject1
             {
                 Assert.Fail();
             }
+        }
+        [TestMethod]
+        public void Test22()
+        {
+            var code = @"
+                    p = new Process
+                    p.X = 1234
+                    p.Y = '5678' // Jac parser deeply makes to integer 5678
+                    p.Z = p.X
+                ";
+            var jac = JacInterpreter.From(code);
+            Assert.IsNotNull(jac.GetProcess("p"));
+            Assert.AreEqual(jac.GetProcess("p").ChildVriables["X"]?.Value, 1234);
+            Assert.AreEqual(jac.GetProcess("p").ChildVriables["Y"]?.Value, 5678);  // To check '5678' will be parsed deeply to integer
+            Assert.AreEqual(jac.GetProcess("p").ChildVriables["Z"]?.Value, 1234);
+        }
+
+        [TestMethod]
+        public void Test23()
+        {
+            var code = @"
+                    p = new Process
+                        Name = 'TestProc'
+                    a123 = new Variable
+                    a123.AAA = p
+                    a123.BBB = p.Name   // To check .Name that is NOT child value (JitProcess's property)
+                ";
+            var jac = JacInterpreter.From(code);
+            var p = jac.GetProcess("p");
+            var a123 = jac.GetVariable("a123");
+            Assert.IsNotNull(p);
+            Assert.IsTrue(a123.ChildVriables["AAA"].Is(":Process"));
+            Assert.IsTrue(a123.ChildVriables["AAA"].Value is JitProcess);
+            Assert.AreEqual(((JitProcess)a123.ChildVriables["AAA"].Value).Name, "TestProc");
+            Assert.IsTrue(a123.ChildVriables["BBB"].Is(JitProcess.Class.String));
+            Assert.AreEqual(a123.ChildVriables["BBB"].Value, "TestProc");
+        }
+        [TestMethod]
+        public void Test24()
+        {
+            var code = @"
+                    new Process
+                        ID = 'TestProc'
+                        AAA = 123   // When Process has NOT property named AAA then, call JacSetDotValueAttribute
+                        BBB = 456   // Same
+                ";
+            var jac = JacInterpreter.From(code);
+            var p = jac.GetProcess("TestProc");
+            Assert.IsNotNull(p);
+            Assert.AreEqual(p.ChildVriables["AAA"]?.Value, 123);
+            Assert.AreEqual(p.ChildVriables["BBB"]?.Value, 456);
         }
     }
 }

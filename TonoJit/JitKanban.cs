@@ -2,6 +2,7 @@
 // Licensed under the MIT license.
 
 using System;
+using System.Linq;
 
 namespace Tono.Jit
 {
@@ -14,29 +15,21 @@ namespace Tono.Jit
     [JacTarget(Name = "Kanban")]
     public class JitKanban : JitVariable
     {
-        private static int _counter = 0;
-
         /// <summary>
         /// Kanvan instance ID (auto numbering)
         /// </summary>
-        public int ID { get; private set; }
+        public string ID { get; set; } = JacInterpreter.MakeID("Kanban");
+
+        public int TestID { get => (int)(ChildVriables["TestID"].Value ?? int.MinValue); set => ChildVriables["TestID"] = JitVariable.From(value); }
 
         /// <summary>
         /// The constuctor of this class
         /// </summary>
         public JitKanban()
         {
-            ID = ++_counter;
             Classes.Set(":Kanban");
         }
 
-        /// <summary>
-        /// NOTE: This is for testing. reset kanban ID counter
-        /// </summary>
-        public static void ResetIDCounter()
-        {
-            _counter = 0;
-        }
 
         /// <summary>
         /// Previous process (Work origin, Kanban destination)
@@ -70,7 +63,7 @@ namespace Tono.Jit
 
         public override int GetHashCode()
         {
-            return ID;
+            return ID.GetHashCode();
         }
 
         public override string ToString()

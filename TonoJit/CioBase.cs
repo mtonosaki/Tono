@@ -2,6 +2,7 @@
 // Licensed under the MIT license.
 
 using System;
+using System.Linq;
 
 namespace Tono.Jit
 {
@@ -10,7 +11,7 @@ namespace Tono.Jit
     /// </summary>
     public abstract class CioBase
     {
-        public string Name { get; set; } = "Cio:" + Guid.NewGuid().ToString();
+        public string ID { get; set; } = JacInterpreter.MakeID("CIO");
 
         /// <summary>
         /// get owner process from work object
@@ -39,7 +40,7 @@ namespace Tono.Jit
         {
             if (obj is CioBase cio)
             {
-                return cio.Name == Name;
+                return cio.ID == ID;
             }
             else
             {
@@ -48,11 +49,11 @@ namespace Tono.Jit
         }
         public override int GetHashCode()
         {
-            return MathUtil.GetFnvHash(Name);
+            return ID.GetHashCode();
         }
         public override string ToString()
         {
-            return $"{GetType().Name} Name={Name}";
+            return $"{GetType().Name} ID={ID}";
         }
     }
 }

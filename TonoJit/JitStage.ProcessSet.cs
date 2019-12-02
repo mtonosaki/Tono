@@ -2,6 +2,7 @@
 // Licensed under the MIT license.
 
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Tono.Jit
 {
@@ -13,7 +14,6 @@ namespace Tono.Jit
         public class ProcessSet
         {
             private readonly List<JitProcess> _procs = new List<JitProcess>();
-            private readonly Dictionary<string, JitProcess> cache = new Dictionary<string, JitProcess>();
 
             /// <summary>
             /// process count
@@ -23,7 +23,6 @@ namespace Tono.Jit
             public void Add(JitProcess proc)
             {
                 _procs.Add(proc);
-                cache[proc.Name] = proc;
             }
 
             public void Add(IEnumerable<JitProcess> procs)
@@ -37,7 +36,6 @@ namespace Tono.Jit
             public void Remove(JitProcess proc)
             {
                 _procs.Remove(proc);
-                cache.Remove(proc.Name);
             }
 
             /// <summary>
@@ -50,14 +48,7 @@ namespace Tono.Jit
             {
                 get
                 {
-                    if (cache.TryGetValue(procname, out JitProcess proc))
-                    {
-                        return proc;
-                    }
-                    else
-                    {
-                        return null;
-                    }
+                    return _procs.Where(a => a.Name?.Equals(procname) ?? false).FirstOrDefault();
                 }
             }
 

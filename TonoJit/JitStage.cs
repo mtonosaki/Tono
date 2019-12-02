@@ -2,6 +2,7 @@
 // Licensed under the MIT license.
 
 using System;
+using System.Linq;
 
 namespace Tono.Jit
 {
@@ -12,6 +13,8 @@ namespace Tono.Jit
     [JacTarget(Name = "Stage")]
     public partial class JitStage : JitVariable
     {
+        public string ID { get; set; } = JacInterpreter.MakeID("Stage");
+
         /// <summary>
         /// having processes
         /// </summary>
@@ -168,6 +171,26 @@ namespace Tono.Jit
         public void SendKanban(DateTime time, JitKanban kanban)
         {
             Events.Enqueue(time, EventTypes.KanbanIn, kanban);
+        }
+
+        public override int GetHashCode()
+        {
+            return ID.GetHashCode();
+        }
+        public override bool Equals(object obj)
+        {
+            if (obj is JitStage st)
+            {
+                return st.ID == ID;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        public override string ToString()
+        {
+            return $"{GetType().Name} ID={ID}";
         }
     }
 }

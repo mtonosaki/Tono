@@ -57,12 +57,30 @@ namespace Tono.Jit
     public class JacInterpreter
     {
         private static readonly Dictionary<string/*JacTarget.Name*/, Type> JacTargets = new Dictionary<string, Type>();
-        private readonly Dictionary<string, object> Vars = new Dictionary<string, object>();  // variables buffer
         private readonly Stack<(int Level, string Com)> rpnStack = new Stack<(int Level, string Com)>();
         private readonly Stack<(int Level, string Com)> opeStack = new Stack<(int Level, string Com)>();
         private readonly Dictionary<string/*instance Key*/, object> instanceBuf = new Dictionary<string, object>();
         private readonly Dictionary<string/*variable name*/, object> varBuf = new Dictionary<string, object>();
+        private readonly List<List<string>> Lines = new List<List<string>>();
+        private readonly List<List<int>> Levels = new List<List<int>>();
+        private int TargetLevel;
         private int instanceIdCounter = 0;
+        private const int tabspace = 4;
+
+        /// <summary>
+        /// Reset Jac interpreter instance
+        /// </summary>
+        public void Reset()
+        {
+            rpnStack.Clear();
+            opeStack.Clear();
+            instanceBuf.Clear();
+            varBuf.Clear();
+            Lines.Clear();
+            Levels.Clear();
+            TargetLevel = 0;
+            instanceIdCounter = 0;
+        }
 
         /// <summary>
         /// Static constructor
@@ -211,12 +229,6 @@ namespace Tono.Jit
             return ret;
         }
 
-
-        private const int tabspace = 4;
-        private readonly List<List<string>> Lines = new List<List<string>>();
-        private readonly List<List<int>> Levels = new List<List<int>>();
-        private int TargetLevel;
-
         /// <summary>
         /// Normalize code string
         /// </summary>
@@ -299,6 +311,7 @@ namespace Tono.Jit
 
             var val = rpnStack.Pop();           // value name
             var item = ParseValue(val.Com);     // value object
+            if (item == null) item = null;
             var variable = rpnStack.Pop();      // variable name
 
             int dotid;
@@ -345,7 +358,7 @@ namespace Tono.Jit
                         else
                         {
                             pi.SetValue(obj, item);
-                            if (variable.Com.Equals("name", StringComparison.CurrentCultureIgnoreCase))
+                            if (variable.Com.Equals("ID", StringComparison.CurrentCultureIgnoreCase))
                             {
                                 varBuf[item?.ToString() ?? "null"] = obj;
                             }
@@ -673,6 +686,16 @@ namespace Tono.Jit
         {
             return str.StartsWith("::Jac:Instance:");
         }
+
+        /// <summary>
+        /// Make ID such as GUID
+        /// </summary>
+        /// <param name="preName"></param>
+        /// <returns></returns>
+        public static string MakeID(string preName)
+        {
+            return $"{preName}:{string.Join("", Guid.NewGuid().ToByteArray().Select(a => $"{a:X2}"))}";
+        }
     }
 
     /// <summary>
@@ -690,6 +713,7 @@ namespace Tono.Jit
             NotSupportedUnit,
             NotSupportLazyMethodType,
             NotSupportedType,
+            ArgumentError,
         }
         public Codes Code { get; set; }
 
@@ -722,7 +746,7 @@ namespace Tono.Jit
     }
 
     /// <summary>
-    /// Method attribute : Mark to ChildValues Accessor   [JacSetDotValue] object SetChildValue(string varname, object value)
+    /// Method attribute : Mark to ChildValues Accessor   [JacSetDotValue] void SetChildValue(string varname, object value)
     /// </summary>
     public class JacSetDotValueAttribute : Attribute
     {
