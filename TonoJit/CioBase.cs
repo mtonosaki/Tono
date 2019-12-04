@@ -9,7 +9,7 @@ namespace Tono.Jit
     /// <summary> 
     /// in-command and out-constraint base class
     /// </summary>
-    public abstract class CioBase
+    public abstract class CioBase : IJitObjectID
     {
         public string ID { get; set; } = JacInterpreter.MakeID("CIO");
 

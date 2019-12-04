@@ -2,7 +2,6 @@
 // Licensed under the MIT license.
 
 using System;
-using System.Linq;
 
 namespace Tono.Jit
 {
@@ -13,7 +12,7 @@ namespace Tono.Jit
     /// 1-Kanban can call 1-Work
     /// </remarks>
     [JacTarget(Name = "Kanban")]
-    public class JitKanban : JitVariable
+    public class JitKanban : JitVariable, IJitObjectID
     {
         /// <summary>
         /// Kanvan instance ID (auto numbering)

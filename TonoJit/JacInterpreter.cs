@@ -719,7 +719,7 @@ namespace Tono.Jit
         /// <returns></returns>
         public static string MakeID(string preName)
         {
-            return $"{preName}:{string.Join("", Guid.NewGuid().ToByteArray().Select(a => $"{a:X2}"))}";
+            return $"{preName}_{string.Join("", Guid.NewGuid().ToByteArray().Select(a => $"{a:X2}"))}";
         }
     }
 

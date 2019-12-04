@@ -14,7 +14,7 @@ namespace Tono.Jit
     /// Work is general item to make flow in just-in-time model that is not only physical item.
     /// </remarks>
     [JacTarget(Name = "Work")]
-    public class JitWork : JitVariable
+    public class JitWork : JitVariable, IJitObjectID
     {
         public string ID { get; set; } = JacInterpreter.MakeID("Work");
 
