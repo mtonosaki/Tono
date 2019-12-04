@@ -17,6 +17,14 @@ namespace Tono.Gui.Uwp
         float SelectingScore(IDrawArea pane, ScreenPos pos);
 
         /// <summary>
+        /// Check this parts is in the specified rectangle (Virtual one(dummy) is implemented in PartsBase)
+        /// </summary>
+        /// <param name="pane"></param>
+        /// <param name="sr"></param>
+        /// <returns>true = parts is in sr</returns>
+        bool IsIn(IDrawArea pane, ScreenRect sr);
+
+        /// <summary>
         /// true=Selected
         /// </summary>
         bool IsSelected { get; set; }

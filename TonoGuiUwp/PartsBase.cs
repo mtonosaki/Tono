@@ -133,6 +133,20 @@ namespace Tono.Gui.Uwp
         }
 
         /// <summary>
+        /// To Support Rectangle overlap check
+        /// </summary>
+        /// <param name="pane"></param>
+        /// <param name="sr">check rectangle area</param>
+        /// <returns>this parts is in sr</returns>
+        /// <remarks>
+        /// Using by FeaturePartsSelectOnRect
+        /// </remarks>
+        public virtual bool IsIn(IDrawArea pane, ScreenRect sr)
+        {
+            return false;
+        }
+
+        /// <summary>
         /// Get code position from screen position
         /// </summary>
         /// <param name="pane"></param>
