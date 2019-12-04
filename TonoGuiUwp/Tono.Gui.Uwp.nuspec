@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
   <metadata>
     <id>Tono.Gui.Uwp</id>
-    <version>1.0.14</version>
+    <version>1.0.15</version>
     <authors>Manabu Tonosaki</authors>
     <owners>Manabu Tonosaki</owners>
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
@@ -10,7 +10,7 @@
     <licenseUrl>https://licenses.nuget.org/MIT</licenseUrl>
     <description>UWP support with GUI MVFP architecure of Tools Of New Operation</description>
     <iconUrl>https://aqtono.com/tomarika/tono/TonoGuiUwpIcon.png</iconUrl>
-    <releaseNotes>Bug Fix (GitHub a9c8f001)</releaseNotes>
+    <releaseNotes>Add new feature FeaturePartsSelectOnRect to support parts selection on pointer dragging area</releaseNotes>
     <copyright>(c) 2019 Manabu Tonosaki</copyright>
     <tags>Tono, Gui, UWP</tags>
     <repository type="git" url="https://github.com/mtonosaki/Tono.git" />
