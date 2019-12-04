@@ -41,6 +41,12 @@ namespace UnitTestGuiUwp
             return (float)GeoEu.Length(s1.X.Sx, s1.Y.Sy, pos.X.Sx, pos.Y.Sy) / DotR;
         }
 
+        public override bool IsIn(IDrawArea pane, ScreenRect sr)
+        {
+            var s1 = GetScreenPos(pane);
+            return sr.IsIn(s1);
+        }
+
         private CodePos<Distance, Angle> PositionBackup { get; set; }
 
         public void SaveLocationAsOrigin()

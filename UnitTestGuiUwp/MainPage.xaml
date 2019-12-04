@@ -24,6 +24,7 @@
             <tg:FeatureZoomDrag />
             <tg:FeatureSelectParts TargetLayer="{x:Bind local:LAYER.SampleLayer}" />
             <tg:FeatureMoveSelectedParts TargetLayer="{x:Bind local:LAYER.SampleLayer}" />
+            <tg:FeaturePartsSelectOnRect TargetLayer="{x:Bind local:LAYER.SampleLayer}" MaskLayer="{x:Bind local:LAYER.SampleSelectMaskLayer}" />
             <local:FeatureTestGeneral />
         </tg:TGuiView.Features>
         <tg:TPane Name="LogPanel" Height="300" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignBottomWithPanel="True" RelativePanel.AlignRightWithPanel="True" />

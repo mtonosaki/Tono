@@ -146,6 +146,7 @@
     <Compile Include="FeatureLogPanel.cs" />
     <Compile Include="FeatureMoveSelectedParts.cs" />
     <Compile Include="FeatureNothing.cs" />
+    <Compile Include="FeaturePartsSelectOnRect.cs" />
     <Compile Include="FeatureScrollDrag.cs" />
     <Compile Include="FeatureSelectParts.cs" />
     <Compile Include="FeatureZoomButton.cs" />
