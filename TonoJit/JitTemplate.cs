@@ -11,7 +11,7 @@ namespace Tono.Jit
     /// Jit model template powerd with JaC
     /// </summary>
     [JacTarget(Name = "Template")]
-    public class JitTemplate : JitVariable
+    public class JitTemplate : JitVariable, IJitObjectID
     {
         public string ID { get; set; } = JacInterpreter.MakeID("Template");
 

@@ -11,7 +11,7 @@ namespace Tono.Jit
     /// 工程やワーク全体を動かす 根幹のオブジェクト
     /// </summary>
     [JacTarget(Name = "Stage")]
-    public partial class JitStage : JitVariable
+    public partial class JitStage : JitVariable, IJitObjectID
     {
         public string ID { get; set; } = JacInterpreter.MakeID("Stage");
 

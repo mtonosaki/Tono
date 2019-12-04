@@ -10,6 +10,10 @@ namespace Tono.Jit
     /// <summary>
     /// simulation variable object
     /// </summary>
+    /// <remarks>
+    /// OBJ.XXX --> ChildValues
+    /// OBJ[XXX] --> KeyValuers
+    /// </remarks>
     [JacTarget(Name = "Variable")]
     public partial class JitVariable
     {

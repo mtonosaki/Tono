@@ -16,7 +16,7 @@ namespace Tono.Jit
     /// 工程は、物や情報の流れを作る基本的なオブジェクト
     /// </remarks>
     [JacTarget(Name = "Process")]
-    public partial class JitProcess : JitVariable
+    public partial class JitProcess : JitVariable, IJitObjectID
     {
         public string ID { get; set; } = JacInterpreter.MakeID("Process");
 

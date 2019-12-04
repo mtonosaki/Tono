@@ -137,7 +137,7 @@ namespace Tono.Gui.Uwp
                     Token.Link(po, new EventTokenPartsMovedTrigger
                     {
                         TokenID = TokensGeneral.PartsMoved,
-                        Parts = (from pt in moving where pt.IsMoved() select pt).ToArray(),
+                        Parts = moved,
                         Sender = this,
                         Remarks = "FinishMoveParts@fcMoveSelectedParts",
                     });
