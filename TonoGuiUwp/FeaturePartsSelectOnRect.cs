@@ -87,6 +87,8 @@ namespace Tono.Gui.Uwp
         {
             base.OnInitialInstance();
 
+            Status["IsEnableSelectingBox"].AddBooleanValues(true);  // Prepare runtime feature enable control
+
             Pane.Target = TargetPaneName == null ? Pane.Main : Pane[TargetPaneName];
 
             Mask = new PartsMask
@@ -105,6 +107,7 @@ namespace Tono.Gui.Uwp
         }
 
         private Dictionary<ISelectableParts, bool> FirstState = new Dictionary<ISelectableParts, bool>();
+        private bool IsSelectingBox = false;
 
         private bool IsTrigger(PointerState po)
         {
@@ -117,6 +120,7 @@ namespace Tono.Gui.Uwp
         public void OnPointerPressed(PointerState po)
         {
             if (IsTrigger(po) == false) return;
+            if (Status["IsEnableSelectingBox"].ValueB == false) return;
 
             FirstState.Clear();
             foreach (var pt in Parts.GetParts(TargetLayer, PartsFilter))
@@ -128,7 +132,7 @@ namespace Tono.Gui.Uwp
                 }
                 FirstState[pt] = pt.IsSelected;
             }
-            Mask.Visible = true;
+            IsSelectingBox = true;
         }
 
         public void OnPointerHold(PointerState po)
@@ -139,7 +143,7 @@ namespace Tono.Gui.Uwp
         public void OnPointerMoved(PointerState po)
         {
             lastPo = po.Clone();
-            if (Mask.Visible)
+            if (IsSelectingBox)
             {
                 if (IsTrigger(po) == false)
                 {
@@ -152,6 +156,7 @@ namespace Tono.Gui.Uwp
                 Mask.Top = CodeY<ScreenY>.From(sr.T);
                 Mask.Right = CodeX<ScreenX>.From(sr.R);
                 Mask.Bottom = CodeY<ScreenY>.From(sr.B);
+                Mask.Visible = true;
 
                 foreach (var pt in Parts.GetParts(TargetLayer, PartsFilter))
                 {
@@ -185,6 +190,7 @@ namespace Tono.Gui.Uwp
         public void OnPointerReleased(PointerState po)
         {
             Mask.Visible = false;
+            IsSelectingBox = false;
             Redraw();
         }
     }
