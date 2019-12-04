@@ -58,7 +58,7 @@ namespace Tono.Gui.Uwp
 
         public void OnPointerPressed(PointerState po)
         {
-            Debug.WriteLine($"★OnPointerPressed {po.Position} finger={po.FingerCount} Scale={po.Scale}");
+            //Debug.WriteLine($"★OnPointerPressed {po.Position} finger={po.FingerCount} Scale={po.Scale}");
             if (getTrigger(po) == PointerState.DeviceTypes.Mouse)
             {
                 if (isZooming == false)
@@ -81,7 +81,7 @@ namespace Tono.Gui.Uwp
 
         public void OnPointerMoved(PointerState po)
         {
-            Debug.WriteLine($"★OnPointerMoved {po.Position} finger={po.FingerCount} Scale={po.Scale}");
+            //Debug.WriteLine($"★OnPointerMoved {po.Position} finger={po.FingerCount} Scale={po.Scale}");
             if (po.Scale != 1.0f || isZooming)
             {
                 if (isZooming == false)
@@ -149,7 +149,7 @@ namespace Tono.Gui.Uwp
         }
         public void OnPointerReleased(PointerState po)
         {
-            Debug.WriteLine($"★OnPointerReleased {po.Position} finger={po.FingerCount} Scale={po.Scale}");
+            //Debug.WriteLine($"★OnPointerReleased {po.Position} finger={po.FingerCount} Scale={po.Scale}");
             isZooming = false;
         }
     }

@@ -50,6 +50,7 @@ namespace Tono.Gui.Uwp
         private PointerState PointBak = null;
         private int FingerCount = 0;
         private int PrePressFiredFingerCount = 0;
+        private ScreenPos OriginPoint = ScreenPos.Zero;
         private DispatcherTimer PressTimer = null;
 
         private void Reset()
@@ -67,6 +68,7 @@ namespace Tono.Gui.Uwp
             IsHolding = false;
             FingerCount = 0;
             PrePressFiredFingerCount = 0;
+            OriginPoint = ScreenPos.Zero;
             PointBak = null;
             PressTimer?.Stop();
             PressTimer = new DispatcherTimer
@@ -81,7 +83,7 @@ namespace Tono.Gui.Uwp
             IsHolding = e.HoldingState == Windows.UI.Input.HoldingState.Started;
             var po = KeyCopy(_(e, this, "onHolding"));
             po.Position = PointBak.Position;
-            Debug.WriteLine($"onHolding Finger={po.FingerCount} {po.Position}");
+            //Debug.WriteLine($"onHolding Finger={po.FingerCount} {po.Position}");
             KickPointerEvent(null, fc =>
             {
                 if (IsHolding)
@@ -99,7 +101,7 @@ namespace Tono.Gui.Uwp
                     }
                 }
             });
-            Debug.WriteLine($"onHolding {IsHolding}");
+            //Debug.WriteLine($"onHolding {IsHolding}");
         }
 
         private void OnPointerPressed(Windows.UI.Core.CoreWindow sender, Windows.UI.Core.PointerEventArgs e)
@@ -110,12 +112,14 @@ namespace Tono.Gui.Uwp
             {
                 PointBak = _(e, this, "onPointerPressed");
                 PointBak.FingerCount = FingerCount;
+                OriginPoint = PointBak.Position.Clone();
+                PointBak.PositionOrigin = OriginPoint;
             }
             else
             {
                 PointBak.FingerCount = FingerCount;
             }
-            Debug.WriteLine($"onPointerPressed Finger={PointBak.FingerCount} {PointBak.Position}");
+            //Debug.WriteLine($"onPointerPressed Finger={PointBak.FingerCount} {PointBak.Position}");
             PressTimer.Stop();
             PressTimer.Start(); // Reset Interval Timer
         }
@@ -140,6 +144,7 @@ namespace Tono.Gui.Uwp
                 {
                     var po = PointBak.Clone();
                     po.FingerCount = finger;
+                    po.PositionOrigin = OriginPoint;
                     KickPointerEvent("OnPointerPressed", fc => fc.OnPointerPressed(po));
                 }
                 PrePressFiredFingerCount = PointBak.FingerCount;
@@ -156,14 +161,16 @@ namespace Tono.Gui.Uwp
             IsOnPointerMoved = true;
             PointBak = _(e, this, "onPointerMoved");
             PointBak.FingerCount = FingerCount;
-            var po = KeyCopy(_(e, this, "onPointerMoved"));
-            Debug.WriteLine($"onPointerMoved Finger={PointBak.FingerCount} {PointBak.Position}");
+            PointBak.PositionOrigin = OriginPoint;
 
             // expecting mouse move (not for drag)
             if (IsOnPointerPressed == false)
             {
+                var po = KeyCopy(_(e, this, "onPointerMoved"));
+                po.PositionOrigin = OriginPoint;
                 KickPointerEvent("OnPointerMoved", fc => fc.OnPointerMoved(po));
             }
+            //Debug.WriteLine($"onPointerMoved Finger={PointBak.FingerCount} {PointBak.Position}");
         }
 
         private void OnPointerReleased(Windows.UI.Core.CoreWindow sender, Windows.UI.Core.PointerEventArgs e)
@@ -171,7 +178,8 @@ namespace Tono.Gui.Uwp
             IsOnPointerReleased = true;
             FingerCount = Math.Max(FingerCount - 1, 0);
             var po = KeyCopy(_(e, this, "onPointerReleased"));
-            Debug.WriteLine($"onPointerReleased Finger = {FingerCount}");
+            po.PositionOrigin = OriginPoint;
+            //Debug.WriteLine($"onPointerReleased Finger = {FingerCount}");
 
             // expecting 1-finger-tap, Mouse Click, Double Click.  (not for drag, swipe. see also onManipulationCompleted)
             if (IsOnManipulationCompleted == false && FingerCount == 0 && IsOnManipulationInertiaStarting == false)
@@ -185,21 +193,22 @@ namespace Tono.Gui.Uwp
             IsOnPointerWheelChanged = true;
             var po = KeyCopy(_(e, this, "onPointerWheelChanged"));
             KickWheelEvent("OnMouseWheelChanged", fc => fc.OnMouseWheelChanged(po));
-            Debug.WriteLine($"onPointerWheelChanged {po.WheelDelta}");
+            //Debug.WriteLine($"onPointerWheelChanged {po.WheelDelta}");
         }
 
         private void OnManipulationStarting(object sender, Windows.UI.Xaml.Input.ManipulationStartingRoutedEventArgs e)
         {
             Reset();
             IsOnManipulationStarting = true;
-            Debug.WriteLine($"onManipulationStarting Mode={e.Mode} / {e.Pivot}");
+            //Debug.WriteLine($"onManipulationStarting Mode={e.Mode} / {e.Pivot}");
         }
 
         private void OnManipulationStarted(object sender, Windows.UI.Xaml.Input.ManipulationStartedRoutedEventArgs e)
         {
             IsOnManipulationStarted = true;
             PointBak = KeyCopy(_(e, this, "onManipulationStarted"));
-            Debug.WriteLine($"onManipulationStarted {PointBak.Position} Finger={PointBak.FingerCount}");
+            PointBak.PositionOrigin = OriginPoint;
+            //Debug.WriteLine($"onManipulationStarted {PointBak.Position} Finger={PointBak.FingerCount}");
             PressTimer.Stop();
             PressTimer.Start(); // Reset Interval Timer
         }
@@ -208,7 +217,8 @@ namespace Tono.Gui.Uwp
         {
             IsOnManipulationDelta = true;
             var po = KeyCopy(_(e, this, "onManipulationDelta"));
-            Debug.WriteLine($"onManipulationDelta {po.Position} Finger={po.FingerCount} Scale={po.Scale}");
+            po.PositionOrigin = OriginPoint;
+            //Debug.WriteLine($"onManipulationDelta {po.Position} Finger={po.FingerCount} Scale={po.Scale}");
 
             KickPointerEvent("OnPointerMoved", fc => fc.OnPointerMoved(po));
         }
@@ -216,14 +226,15 @@ namespace Tono.Gui.Uwp
         private void OnManipulationInertiaStarting(object sender, Windows.UI.Xaml.Input.ManipulationInertiaStartingRoutedEventArgs e)
         {
             IsOnManipulationInertiaStarting = true;
-            Debug.WriteLine($"onManipulationInertiaStarting {e.ExpansionBehavior}");
+            //Debug.WriteLine($"onManipulationInertiaStarting {e.ExpansionBehavior}");
         }
 
         private void OnManipulationCompleted(object sender, Windows.UI.Xaml.Input.ManipulationCompletedRoutedEventArgs e)
         {
-            Debug.WriteLine($"onManipulationCompleted");
+            //Debug.WriteLine($"onManipulationCompleted");
             var po = KeyCopy(_(e, this, "onManipulationCompleted"));
             po.FingerCount = 0;
+            po.PositionOrigin = OriginPoint;
             KickPointerEvent("OnPointerReleased", fc => fc.OnPointerReleased(po));
             Reset();
             IsOnManipulationCompleted = true;
@@ -232,7 +243,6 @@ namespace Tono.Gui.Uwp
         private PointerState KeyCopy(PointerState po)
         {
             po.FingerCount = FingerCount;
-            po.PositionOrigin = PointBak?.PositionOrigin ?? po.PositionOrigin;
             if (PointBak != null)
             {
                 po.IsKeyControl = PointBak.IsKeyControl;
