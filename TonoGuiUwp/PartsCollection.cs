@@ -159,7 +159,19 @@ namespace Tono.Gui.Uwp
         /// <returns></returns>
         public IEnumerable<IPartsDraw> GetParts(NamedId layer, Func<IPartsDraw, bool> filter = null)
         {
+            return GetParts(new[] { layer }, filter);
+        }
+
+        /// <summary>
+        /// get parts set
+        /// </summary>
+        /// <param name="layers"></param>
+        /// <param name="filter"></param>
+        /// <returns></returns>
+        public IEnumerable<IPartsDraw> GetParts(IEnumerable<NamedId> layers, Func<IPartsDraw, bool> filter = null)
+        {
             var tarParts =
+                from layer in layers
                 from kv in _dat
                 where kv.Key.Equals(layer)
                 from kv2 in kv.Value
@@ -178,7 +190,20 @@ namespace Tono.Gui.Uwp
         /// <returns></returns>
         public IEnumerable<T> GetParts<T>(NamedId layer, Func<T, bool> filter = null)
         {
+            return GetParts<T>(new[] { layer }, filter);
+        }
+
+        /// <summary>
+        /// get parts set
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="layers"></param>
+        /// <param name="filter"></param>
+        /// <returns></returns>
+        public IEnumerable<T> GetParts<T>(IEnumerable<NamedId> layers, Func<T, bool> filter = null)
+        {
             var tarParts =
+                from layer in layers
                 from kv in _dat
                 where kv.Key.Equals(layer)
                 from kv2 in kv.Value
@@ -188,6 +213,7 @@ namespace Tono.Gui.Uwp
                 select (T)pt;
             return tarParts;
         }
+
 
         private readonly Dictionary<NamedId/*layer*/, string/*doubleBufferName*/> _doubleBufferLayerGroups = new Dictionary<NamedId, string>();
         private readonly Dictionary<string/*double buffer name*/, DrawPropertyDoubleBuffer> _doubleBuffers = new Dictionary<string, DrawPropertyDoubleBuffer>();
