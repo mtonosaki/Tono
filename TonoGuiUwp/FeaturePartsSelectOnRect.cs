@@ -14,10 +14,20 @@ namespace Tono.Gui.Uwp
     {
         private class PartsMask : PartsRectangleBase<ScreenX, ScreenY, ScreenX, ScreenY>
         {
+            /// <summary>
+            /// Visible Flag
+            /// </summary>
             public bool Visible { get; set; }
 
-            private static readonly Color MaskBG = Color.FromArgb(32, 0, 255, 0);
-            private static readonly Color MaskPen = Color.FromArgb(128, 0, 255, 0);
+            /// <summary>
+            /// Masking rectangle color
+            /// </summary>
+            public Color MaskBG { get; set; } = Color.FromArgb(32, 0, 255, 0);
+
+            /// <summary>
+            /// Masking rectangle border color
+            /// </summary>
+            public Color MaskPen { get; set; } = Color.FromArgb(128, 0, 255, 0);
 
             /// <summary>
             /// The constructor
