@@ -64,7 +64,7 @@ namespace Tono
         public TVAL Getset(TKEY key, CacheStack.IParams param = null)
         {
             var ret = GetsetNoFeedback(key, param);
-            if (FeedbackLastDefault && ret == default)
+            if (FeedbackLastDefault && (ret?.Equals(default) ?? false))
             {
                 Stack.First?.Value.Set(key, default, param);
             }
