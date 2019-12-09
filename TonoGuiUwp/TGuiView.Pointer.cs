@@ -30,6 +30,9 @@ namespace Tono.Gui.Uwp
             ManipulationCompleted += OnManipulationCompleted;
             ManipulationInertiaStarting += OnManipulationInertiaStarting;
             Holding += OnHolding;
+            IsHoldingEnabled = true;
+            //Canvas.Holding += OnHolding;
+            //Canvas.IsHoldingEnabled = true;
         }
 
 #pragma warning disable CS0414, IDE0052
@@ -47,8 +50,8 @@ namespace Tono.Gui.Uwp
 #pragma warning restore CS0414, IDE0052
 
         private Dictionary<FeatureBase, Dictionary<string, EventCatchAttribute>> attrBuf = null;
-        private PointerState PointBak = null;
-        private int FingerCount = 0;
+        private PointerState PositionBak = null;    // Position
+        private PointerState KeyBak = new PointerState(); // IsInContact, FingerCount and IsKey...
         private int PrePressFiredFingerCount = 0;
         private ScreenPos OriginPoint = ScreenPos.Zero;
         private DispatcherTimer PressTimer = null;
@@ -66,10 +69,10 @@ namespace Tono.Gui.Uwp
             IsOnPointerReleased = false;
             IsOnPointerWheelChanged = false;
             IsHolding = false;
-            FingerCount = 0;
             PrePressFiredFingerCount = 0;
             OriginPoint = ScreenPos.Zero;
-            PointBak = null;
+            PositionBak = null;
+            KeyBak = new PointerState();
             PressTimer?.Stop();
             PressTimer = new DispatcherTimer
             {
@@ -80,10 +83,14 @@ namespace Tono.Gui.Uwp
 
         private void OnHolding(object sender, Windows.UI.Xaml.Input.HoldingRoutedEventArgs e)
         {
+            // TODO: Not Implemented 'OnHolding' function yet.
             IsHolding = e.HoldingState == Windows.UI.Input.HoldingState.Started;
-            var po = KeyCopy(_(e, this, "onHolding"));
-            po.Position = PointBak.Position;
+            var po = _(e, this, "onHolding");
+            po.Position = PositionBak.Position;
+            CopyKeyState(po);
+            po.FingerCount = KeyBak.FingerCount;
             //Debug.WriteLine($"onHolding Finger={po.FingerCount} {po.Position}");
+
             KickPointerEvent(null, fc =>
             {
                 if (IsHolding)
@@ -101,23 +108,19 @@ namespace Tono.Gui.Uwp
                     }
                 }
             });
-            //Debug.WriteLine($"onHolding {IsHolding}");
         }
 
         private void OnPointerPressed(Windows.UI.Core.CoreWindow sender, Windows.UI.Core.PointerEventArgs e)
         {
             IsOnPointerPressed = true;
-            FingerCount++;
+            var po = _(e, this, "onPointerPressed");
+            CopyKeyState(from: po, to: KeyBak); // Copy latest keystate to KeyBak
+            KeyBak.FingerCount++;
             if (IsOnManipulationStarted == false) // not override position because of multi finger swiping
             {
-                PointBak = _(e, this, "onPointerPressed");
-                PointBak.FingerCount = FingerCount;
-                OriginPoint = PointBak.Position.Clone();
-                PointBak.PositionOrigin = OriginPoint;
-            }
-            else
-            {
-                PointBak.FingerCount = FingerCount;
+                PositionBak = po;
+                OriginPoint = PositionBak.Position.Clone();
+                PositionBak.PositionOrigin = OriginPoint;
             }
             //Debug.WriteLine($"onPointerPressed Finger={PointBak.FingerCount} {PointBak.Position}");
             PressTimer.Stop();
@@ -126,28 +129,31 @@ namespace Tono.Gui.Uwp
 
         private void PressTimer_Tick(object sender, object e)
         {
-            if (PointBak == null)
+            if (PositionBak == null)
             {
                 PressTimer.Stop();  // Poka yoke
                 return;
             }
+            var po = PositionBak.Clone();
+            CopyKeyState(from: null, to: po);
+            po.FingerCount = KeyBak.FingerCount;
+            po.PositionOrigin = OriginPoint;
+
             if (IsOnPointerPressFirered == false)
             {
                 PressTimer.Stop();
                 IsOnPointerPressFirered = true;
-                KickPointerEvent("OnPointerPressed", fc => fc.OnPointerPressed(PointBak));
-                PrePressFiredFingerCount = PointBak.FingerCount;
+                KickPointerEvent("OnPointerPressed", fc => fc.OnPointerPressed(po));
+                PrePressFiredFingerCount = PositionBak.FingerCount;
             }
             else
             {
-                for (var finger = PrePressFiredFingerCount + 1; finger <= PointBak.FingerCount; finger++)
+                for (var finger = PrePressFiredFingerCount + 1; finger <= PositionBak.FingerCount; finger++)
                 {
-                    var po = PointBak.Clone();
                     po.FingerCount = finger;
-                    po.PositionOrigin = OriginPoint;
-                    KickPointerEvent("OnPointerPressed", fc => fc.OnPointerPressed(po));
+                    KickPointerEvent("OnPointerPressed", fc => fc.OnPointerPressed(po.Clone()));
                 }
-                PrePressFiredFingerCount = PointBak.FingerCount;
+                PrePressFiredFingerCount = PositionBak.FingerCount;
             }
         }
 
@@ -159,14 +165,15 @@ namespace Tono.Gui.Uwp
                 return; // waiting pressed timer
             }
             IsOnPointerMoved = true;
-            PointBak = _(e, this, "onPointerMoved");
-            PointBak.FingerCount = FingerCount;
-            PointBak.PositionOrigin = OriginPoint;
+            PositionBak = _(e, this, "onPointerMoved");
+            PositionBak.PositionOrigin = OriginPoint;
+            CopyKeyState(from: PositionBak, to: KeyBak);    // Copy latest keystate to KeyBak
 
             // expecting mouse move (not for drag)
             if (IsOnPointerPressed == false)
             {
-                var po = KeyCopy(_(e, this, "onPointerMoved"));
+                var po = PositionBak.Clone();
+                po.FingerCount = KeyBak.FingerCount;
                 po.PositionOrigin = OriginPoint;
                 KickPointerEvent("OnPointerMoved", fc => fc.OnPointerMoved(po));
             }
@@ -176,14 +183,15 @@ namespace Tono.Gui.Uwp
         private void OnPointerReleased(Windows.UI.Core.CoreWindow sender, Windows.UI.Core.PointerEventArgs e)
         {
             IsOnPointerReleased = true;
-            FingerCount = Math.Max(FingerCount - 1, 0);
-            var po = KeyCopy(_(e, this, "onPointerReleased"));
-            po.PositionOrigin = OriginPoint;
-            //Debug.WriteLine($"onPointerReleased Finger = {FingerCount}");
+            KeyBak.FingerCount = Math.Max(KeyBak.FingerCount - 1, 0);
+            var po = _(e, this, "onPointerReleased");
+            CopyKeyState(from: po, to:KeyBak);  // Copy latest key state to KeyBak
 
             // expecting 1-finger-tap, Mouse Click, Double Click.  (not for drag, swipe. see also onManipulationCompleted)
-            if (IsOnManipulationCompleted == false && FingerCount == 0 && IsOnManipulationInertiaStarting == false)
+            if (IsOnManipulationCompleted == false && KeyBak.FingerCount == 0 && IsOnManipulationInertiaStarting == false)
             {
+                po.PositionOrigin = OriginPoint;
+                po.FingerCount = KeyBak.FingerCount;
                 KickPointerEvent("OnPointerReleased", fc => fc.OnPointerReleased(po));
             }
         }
@@ -191,8 +199,12 @@ namespace Tono.Gui.Uwp
         private void OnPointerWheelChanged(Windows.UI.Core.CoreWindow sender, Windows.UI.Core.PointerEventArgs e)
         {
             IsOnPointerWheelChanged = true;
-            var po = KeyCopy(_(e, this, "onPointerWheelChanged"));
+            var po = _(e, this, "onPointerWheelChanged");
+            CopyKeyState(from: po, to: KeyBak); // Save Latest key state
+            po.FingerCount = po.FingerCount;
+            po.PositionOrigin = OriginPoint;
             KickWheelEvent("OnMouseWheelChanged", fc => fc.OnMouseWheelChanged(po));
+
             //Debug.WriteLine($"onPointerWheelChanged {po.WheelDelta}");
         }
 
@@ -200,27 +212,30 @@ namespace Tono.Gui.Uwp
         {
             Reset();
             IsOnManipulationStarting = true;
+
             //Debug.WriteLine($"onManipulationStarting Mode={e.Mode} / {e.Pivot}");
         }
 
         private void OnManipulationStarted(object sender, Windows.UI.Xaml.Input.ManipulationStartedRoutedEventArgs e)
         {
             IsOnManipulationStarted = true;
-            PointBak = KeyCopy(_(e, this, "onManipulationStarted"));
-            PointBak.PositionOrigin = OriginPoint;
-            //Debug.WriteLine($"onManipulationStarted {PointBak.Position} Finger={PointBak.FingerCount}");
+            PositionBak = _(e, this, "onManipulationStarted");
+            PositionBak.PositionOrigin = OriginPoint;
             PressTimer.Stop();
             PressTimer.Start(); // Reset Interval Timer
+            //Debug.WriteLine($"onManipulationStarted {PointBak.Position} Finger={PointBak.FingerCount}");
         }
 
         private void OnManipulationDelta(object sender, Windows.UI.Xaml.Input.ManipulationDeltaRoutedEventArgs e)
         {
             IsOnManipulationDelta = true;
-            var po = KeyCopy(_(e, this, "onManipulationDelta"));
+            var po = _(e, this, "onManipulationDelta");
+            CopyKeyState(po);
             po.PositionOrigin = OriginPoint;
-            //Debug.WriteLine($"onManipulationDelta {po.Position} Finger={po.FingerCount} Scale={po.Scale}");
-
+            po.FingerCount = KeyBak.FingerCount;
             KickPointerEvent("OnPointerMoved", fc => fc.OnPointerMoved(po));
+
+            //Debug.WriteLine($"onManipulationDelta {po.Position} Finger={po.FingerCount} Scale={po.Scale}");
         }
 
         private void OnManipulationInertiaStarting(object sender, Windows.UI.Xaml.Input.ManipulationInertiaStartingRoutedEventArgs e)
@@ -232,7 +247,8 @@ namespace Tono.Gui.Uwp
         private void OnManipulationCompleted(object sender, Windows.UI.Xaml.Input.ManipulationCompletedRoutedEventArgs e)
         {
             //Debug.WriteLine($"onManipulationCompleted");
-            var po = KeyCopy(_(e, this, "onManipulationCompleted"));
+            var po = _(e, this, "onManipulationCompleted");
+            CopyKeyState(po);
             po.FingerCount = 0;
             po.PositionOrigin = OriginPoint;
             KickPointerEvent("OnPointerReleased", fc => fc.OnPointerReleased(po));
@@ -240,18 +256,19 @@ namespace Tono.Gui.Uwp
             IsOnManipulationCompleted = true;
         }
 
-        private PointerState KeyCopy(PointerState po)
+        private void CopyKeyState(PointerState to, PointerState from = null )
         {
-            po.FingerCount = FingerCount;
-            if (PointBak != null)
+            if( from == null)
             {
-                po.IsKeyControl = PointBak.IsKeyControl;
-                po.IsKeyShift = PointBak.IsKeyShift;
-                po.IsKeyMenu = PointBak.IsKeyMenu;
-                po.IsKeyWindows = PointBak.IsKeyWindows;
+                from = KeyBak;
             }
-            return po;
+            to.IsInContact = from.IsInContact;
+            to.IsKeyControl = from.IsKeyControl;
+            to.IsKeyMenu = from.IsKeyMenu;
+            to.IsKeyShift = from.IsKeyShift;
+            to.IsKeyWindows = from.IsKeyWindows;
         }
+
         /// <summary>
         /// cache waiting method that have EventCatchAttribute
         /// </summary>

@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Manabu Tonosaki All rights reserved.
 // Licensed under the MIT license.
 
+using System;
 using System.Diagnostics;
 
 namespace Tono.Gui.Uwp
@@ -67,9 +68,9 @@ namespace Tono.Gui.Uwp
                 }
             }
         }
+
         public void OnPointerHold(PointerState po)
         {
-            //Debug.WriteLine($"★OnPointerHold {po.Position} finger={po.FingerCount}");
         }
 
         protected virtual void onScrolled()
@@ -91,7 +92,7 @@ namespace Tono.Gui.Uwp
                     {
                         TokenID = TokensGeneral.Scrolled,
                         Sender = this,
-                        Remarks = "fcDragScrollでのスクロール",
+                        Remarks = "Scrolling",
                         TargetPane = Pane.Target,
                     });
                     onScrolled();
