@@ -1,6 +1,7 @@
 ﻿using Microsoft.Graphics.Canvas.Brushes;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -122,6 +123,7 @@ namespace Tono.Gui.Uwp
         private bool IsTrigger(PointerState po)
         {
             return po.IsInContact
+                && po.FingerCount <= 1
                 && !po.IsKeyControl
                 && !po.IsKeyMenu
                 && !po.IsKeyWindows;
