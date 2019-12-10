@@ -81,6 +81,7 @@ namespace Tono.Gui.Uwp
 
         public void OnPointerMoved(PointerState po)
         {
+            return;
             //Debug.WriteLine($"★OnPointerMoved {po.Position} finger={po.FingerCount} Scale={po.Scale}");
             if (po.Scale != 1.0f || isZooming)
             {

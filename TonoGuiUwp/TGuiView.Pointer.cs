@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Input;
 using static Tono.Gui.Uwp.CastUtil;
 
 namespace Tono.Gui.Uwp
@@ -15,6 +16,8 @@ namespace Tono.Gui.Uwp
     /// </summary>
     public partial class TGuiView
     {
+        private Dictionary<FeatureBase, Dictionary<string, EventCatchAttribute>> attrBuf = null;
+
         private void InitPointer()
         {
             var win = Window.Current.CoreWindow;
@@ -24,7 +27,7 @@ namespace Tono.Gui.Uwp
             win.PointerWheelChanged += OnPointerWheelChanged;
 
             ManipulationStarted += OnManipulationStarted;
-            ManipulationMode = Windows.UI.Xaml.Input.ManipulationModes.All;
+            ManipulationMode = ManipulationModes.All;
             ManipulationStarting += OnManipulationStarting;
             ManipulationDelta += OnManipulationDelta;
             ManipulationCompleted += OnManipulationCompleted;
@@ -35,72 +38,305 @@ namespace Tono.Gui.Uwp
             //Canvas.IsHoldingEnabled = true;
         }
 
-#pragma warning disable CS0414, IDE0052
-        private bool IsOnPointerPressed;
-        private bool IsOnPointerPressFirered;
-        private bool IsOnPointerMoved;
-        private bool IsOnPointerReleased;
-        private bool IsOnPointerWheelChanged;
-        private bool IsOnManipulationStarting;
-        private bool IsOnManipulationStarted;
-        private bool IsOnManipulationInertiaStarting;
-        private bool IsOnManipulationCompleted;
-        private bool IsHolding;
-        private bool IsOnManipulationDelta;
-#pragma warning restore CS0414, IDE0052
+        private string ___(PointerState po)
+        {
+            return $"{po.Time.ToString(TimeUtil.FormatYMDHMSms)} {po.DeviceType} {po.Remarks}  Pos={po.Position}  Finger={po.FingerCount}  Contact={po.IsInContact}, Key='{(po.IsKeyControl ? "C" : "")}{(po.IsKeyControl ? "S" : "")}{(po.IsKeyShift ? "S" : "")}{(po.IsKeyWindows ? "W" : "")}{(po.IsKeyMenu ? "M" : "")}' Scale={po.Scale} Wheel={po.WheelDelta}";
+        }
 
-        private Dictionary<FeatureBase, Dictionary<string, EventCatchAttribute>> attrBuf = null;
-        private PointerState PositionBak = null;    // Position
-        private PointerState KeyBak = new PointerState(); // IsInContact, FingerCount and IsKey...
-        private int PrePressFiredFingerCount = 0;
-        private ScreenPos OriginPoint = ScreenPos.Zero;
-        private DispatcherTimer PressTimer = null;
+
+        bool IsOnPointerPressed = false;
+        bool IsOnManipulationStarted = false;
+        bool IsOnManipulationInertiaStarting = false;
+        bool IsWaitingManipulationDelta = false;
+        PointerState StateAtPressed = null;
+        ScreenPos StartPosition;
+        int FingerCount = 0;
 
         private void Reset()
         {
-            IsOnManipulationStarting = false;
+            IsOnPointerPressed = false;
             IsOnManipulationStarted = false;
             IsOnManipulationInertiaStarting = false;
-            IsOnManipulationDelta = false;
-            IsOnManipulationCompleted = false;
-            IsOnPointerPressed = false;
-            IsOnPointerPressFirered = false;
-            IsOnPointerMoved = false;
-            IsOnPointerReleased = false;
-            IsOnPointerWheelChanged = false;
-            IsHolding = false;
-            PrePressFiredFingerCount = 0;
-            OriginPoint = ScreenPos.Zero;
-            PositionBak = null;
-            KeyBak = new PointerState();
-            PressTimer?.Stop();
-            PressTimer = new DispatcherTimer
-            {
-                Interval = TimeSpan.FromMilliseconds(5),
-            };
-            PressTimer.Tick += PressTimer_Tick;
+            IsWaitingManipulationDelta = false;
+            _2ndFingerLostFollow?.Stop();
+            _2ndFingerLostFollow = null;
+            StateAtPressed = null;
+            FingerCount = 0;
         }
 
-        private void OnHolding(object sender, Windows.UI.Xaml.Input.HoldingRoutedEventArgs e)
+        /// <summary>
+        /// [DONW-1] On Manipulation Starting
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        /// <remarks>
+        /// by all pointer's first activity
+        /// </remarks>
+        private void OnManipulationStarting(object sender, ManipulationStartingRoutedEventArgs e)
         {
-            // TODO: Not Implemented 'OnHolding' function yet.
-            IsHolding = e.HoldingState == Windows.UI.Input.HoldingState.Started;
-            var po = _(e, this, "onHolding");
-            po.Position = PositionBak.Position;
-            CopyKeyState(po);
-            po.FingerCount = KeyBak.FingerCount;
-            //Debug.WriteLine($"onHolding Finger={po.FingerCount} {po.Position}");
+            Reset();    // Poka-yoke
+            var po = _(e, this, "OnManipulationStarting");
+            //Debug.WriteLine(___(po));
+        }
+
+
+        /// <summary>
+        /// [DONW-2] On Pointer Pressed
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        /// <remarks>
+        /// by Finger / Click
+        /// </remarks>
+        private void OnPointerPressed(Windows.UI.Core.CoreWindow sender, Windows.UI.Core.PointerEventArgs e)
+        {
+            var po = _(e, this, "OnPointerPressed");
+            FingerCount++;
+            po.FingerCount = FingerCount;
+            //Debug.WriteLine(___(po));
+
+            if (po.DeviceType == PointerState.DeviceTypes.Mouse)
+            {
+                StartPosition = po.Position;
+                po.PositionOrigin = StartPosition;
+                KickPointerEvent("OnPointerPressed", fc => fc.OnPointerPressed(po));
+            }
+            else
+            {
+                if (IsOnManipulationStarted)
+                {
+                    IsWaitingManipulationDelta = true;
+                    _2ndFingerLostFollow?.Stop();
+                    _2ndFingerLostFollow = new DispatcherTimer
+                    {
+                        Interval = TimeSpan.FromMilliseconds(100),
+                    };
+                    _2ndFingerLostFollow.Tick += _2ndFingerLostFollow_Tick;
+                    StateAtPressed = po.Clone();
+                    _2ndFingerLostFollow.Start();
+                }
+            }
+            IsOnPointerPressed = true;
+        }
+
+        /// <summary>
+        /// [DONW-3] On Manipulation Started
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        /// <remarks>
+        /// MOUSE : Hold + Drag
+        /// TOUCH : not 1-Tap (1-Swipe, 2-Tap)
+        /// </remarks>
+        private void OnManipulationStarted(object sender, ManipulationStartedRoutedEventArgs e)
+        {
+            var po = _(e, this, "OnManipulationStarted");
+            po.FingerCount = FingerCount;
+            //Debug.WriteLine(___(po));
+
+            if (po.DeviceType == PointerState.DeviceTypes.Mouse)
+            {
+            }
+            else
+            {
+                StartPosition = po.Position;
+                po.PositionOrigin = StartPosition;
+                KickPointerEvent("OnPointerPressed", fc => fc.OnPointerPressed(po));
+            }
+
+            IsOnManipulationStarted = true;
+        }
+
+        /// <summary>
+        /// [DOWN-4] On Manipulation Inertia Starting
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        /// <remarks>
+        /// Auto acceleration Starging
+        /// </remarks>
+        private void OnManipulationInertiaStarting(object sender, ManipulationInertiaStartingRoutedEventArgs e)
+        {
+            var po = _(e, this, "OnManipulationInertiaStarting");
+            //Debug.WriteLine(___(po));
+
+            IsOnManipulationInertiaStarting = true;
+        }
+
+        /// <summary>
+        /// [MOVE-1] On Pointer Moved
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        /// <remarks>
+        /// by Finger
+        /// by OnPointerPressed
+        /// Coodinations are in "On Pointer Pressed"
+        /// </remarks>
+        private void OnPointerMoved(Windows.UI.Core.CoreWindow sender, Windows.UI.Core.PointerEventArgs e)
+        {
+            var po = _(e, this, "OnPointerMoved");
+            po.FingerCount = FingerCount;
+            //Debug.WriteLine(___(po));
+
+            if (po.DeviceType == PointerState.DeviceTypes.Mouse)
+            {
+                if (IsOnManipulationStarted == false)
+                {
+                    po.PositionOrigin = StartPosition;
+                    KickPointerEvent("OnPointerMoved", fc => fc.OnPointerMoved(po));
+                }
+            }
+        }
+
+        /// <summary>
+        /// [MOVE-2] On Manipulation Delta
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        /// <remarks>
+        /// by Action(not by finger)
+        /// Coodination is in "On Manipulation Started"
+        /// </remarks>
+        private void OnManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
+        {
+            var po = _(e, this, "OnManipulationDelta");
+            po.FingerCount = FingerCount;
+            //Debug.WriteLine($"{___(po)} Angular={e.Velocities.Angular}  Linear={e.Velocities.Linear}  Expansion={e.Velocities.Expansion}");
+
+            if (po.DeviceType == PointerState.DeviceTypes.Mouse)
+            {
+                if (IsOnManipulationStarted)
+                {
+                    po.PositionOrigin = StartPosition;
+                    KickPointerEvent("OnPointerMoved", fc => fc.OnPointerMoved(po));
+                }
+            }
+            else
+            {
+                if (IsWaitingManipulationDelta)
+                {
+                    _2ndFingerLostFollow?.Stop();
+                    IsWaitingManipulationDelta = false;
+                    po.PositionOrigin = po.Position;
+                    KickPointerEvent("OnPointerPressed", fc => fc.OnPointerPressed(po));    // Fire 2nd finger (Waited Delta to get adjusted position)
+                }
+
+                po.PositionOrigin = StartPosition;
+                KickPointerEvent("OnPointerMoved", fc => fc.OnPointerMoved(po));    // TODO: When release finger 2 to 1, Position jump by UWP
+            }
+        }
+
+        DispatcherTimer _2ndFingerLostFollow = null;
+        private void _2ndFingerLostFollow_Tick(object sender, object e)
+        {
+            IsWaitingManipulationDelta = false;
+            _2ndFingerLostFollow?.Stop();
+            var po = StateAtPressed;
+            po.PositionOrigin = StartPosition;
+            KickPointerEvent("OnPointerPressed", fc => fc.OnPointerPressed(po));    // Fire 2nd finger (no Delta event follow-up)
+        }
+
+
+        /// <summary>
+        /// [UP-1] On Pointer Released
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        /// <remarks>
+        /// by Finger
+        /// by OnPointerPressed
+        /// The last trigger when there is no "OnManipulationStarted"
+        /// </remarks>
+        private void OnPointerReleased(Windows.UI.Core.CoreWindow sender, Windows.UI.Core.PointerEventArgs e)
+        {
+            var po = _(e, this, "OnPointerReleased");
+            FingerCount--;
+            po.FingerCount = FingerCount;
+            //Debug.WriteLine(___(po));
+
+            if (IsOnManipulationInertiaStarting == false)   // otherwise, waiting OnManipulationCompleted
+            {
+                if (po.DeviceType == PointerState.DeviceTypes.Mouse)
+                {
+                    KickPointerEvent("OnPointerReleased", fc => fc.OnPointerReleased(po));
+                }
+                else
+                {
+                    if (IsOnPointerPressed && IsOnManipulationStarted == false) // One Finger Tap
+                    {
+                        po.PositionOrigin = po.Position;
+                        po.FingerCount++;
+                        po.IsInContact = true;
+                        KickPointerEvent("OnPointerPressed", fc => fc.OnPointerPressed(po));    // Fire virtual press event
+                        po.FingerCount--;
+                        po.IsInContact = false;
+                        KickPointerEvent("OnPointerReleased", fc => fc.OnPointerReleased(po));
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// [UP-2] On Manipulation Completed
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        /// <remarks>
+        /// The last trigger when "OnManipulationStarted"
+        /// </remarks>
+        private void OnManipulationCompleted(object sender, ManipulationCompletedRoutedEventArgs e)
+        {
+            var po = _(e, this, "OnManipulationCompleted");
+            po.FingerCount = FingerCount;
+            po.PositionOrigin = StartPosition;
+            //Debug.WriteLine(___(po));
+
+            if (po.DeviceType == PointerState.DeviceTypes.Mouse)
+            {
+                if (IsOnManipulationInertiaStarting)
+                {
+                    KickPointerEvent("OnPointerReleased", fc => fc.OnPointerReleased(po));
+                    Reset();
+                }
+            }
+            else
+            {
+                KickPointerEvent("OnPointerReleased", fc => fc.OnPointerReleased(po));
+                Reset();
+            }
+        }
+
+        /// <summary>
+        /// [OTHER]
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void OnPointerWheelChanged(Windows.UI.Core.CoreWindow sender, Windows.UI.Core.PointerEventArgs e)
+        {
+            var po = _(e, this, "OnPointerWheelChanged");
+            po.FingerCount = FingerCount;
+            //Debug.WriteLine(___(po));
+            KickWheelEvent("OnPointerWheelChanged", fc => fc.OnMouseWheelChanged(po));
+        }
+
+        private void OnHolding(object sender, HoldingRoutedEventArgs e)
+        {
+            var holding = e.HoldingState == Windows.UI.Input.HoldingState.Started;
+            var po = _(e, this, $"OnHolding {e.HoldingState}");
+            po.FingerCount = FingerCount;
+            //Debug.WriteLine(___(po));
 
             KickPointerEvent(null, fc =>
             {
-                if (IsHolding)
+                if (e.HoldingState == Windows.UI.Input.HoldingState.Started)
                 {
                     if (CheckEventCatchStatus((FeatureBase)fc, "OnPointerHold"))
                     {
                         fc.OnPointerHold(po);
                     }
                 }
-                else
+                if (e.HoldingState == Windows.UI.Input.HoldingState.Completed)
                 {
                     if (CheckEventCatchStatus((FeatureBase)fc, "OnPointerReleased"))
                     {
@@ -108,165 +344,6 @@ namespace Tono.Gui.Uwp
                     }
                 }
             });
-        }
-
-        private void OnPointerPressed(Windows.UI.Core.CoreWindow sender, Windows.UI.Core.PointerEventArgs e)
-        {
-            IsOnPointerPressed = true;
-            var po = _(e, this, "onPointerPressed");
-            CopyKeyState(from: po, to: KeyBak); // Copy latest keystate to KeyBak
-            KeyBak.FingerCount++;
-            if (IsOnManipulationStarted == false) // not override position because of multi finger swiping
-            {
-                PositionBak = po;
-                OriginPoint = PositionBak.Position.Clone();
-                PositionBak.PositionOrigin = OriginPoint;
-            }
-            //Debug.WriteLine($"onPointerPressed Finger={PointBak.FingerCount} {PointBak.Position}");
-            PressTimer.Stop();
-            PressTimer.Start(); // Reset Interval Timer
-        }
-
-        private void PressTimer_Tick(object sender, object e)
-        {
-            if (PositionBak == null)
-            {
-                PressTimer.Stop();  // Poka yoke
-                return;
-            }
-            var po = PositionBak.Clone();
-            CopyKeyState(from: null, to: po);
-            po.FingerCount = KeyBak.FingerCount;
-            po.PositionOrigin = OriginPoint;
-
-            if (IsOnPointerPressFirered == false)
-            {
-                PressTimer.Stop();
-                IsOnPointerPressFirered = true;
-                KickPointerEvent("OnPointerPressed", fc => fc.OnPointerPressed(po));
-                PrePressFiredFingerCount = PositionBak.FingerCount;
-            }
-            else
-            {
-                for (var finger = PrePressFiredFingerCount + 1; finger <= PositionBak.FingerCount; finger++)
-                {
-                    po.FingerCount = finger;
-                    KickPointerEvent("OnPointerPressed", fc => fc.OnPointerPressed(po.Clone()));
-                }
-                PrePressFiredFingerCount = PositionBak.FingerCount;
-            }
-        }
-
-
-        private void OnPointerMoved(Windows.UI.Core.CoreWindow sender, Windows.UI.Core.PointerEventArgs e)
-        {
-            if (IsOnManipulationStarting && IsOnPointerPressed == false)
-            {
-                return; // waiting pressed timer
-            }
-            IsOnPointerMoved = true;
-            PositionBak = _(e, this, "onPointerMoved");
-            PositionBak.PositionOrigin = OriginPoint;
-            CopyKeyState(from: PositionBak, to: KeyBak);    // Copy latest keystate to KeyBak
-
-            // expecting mouse move (not for drag)
-            if (IsOnPointerPressed == false)
-            {
-                var po = PositionBak.Clone();
-                po.FingerCount = KeyBak.FingerCount;
-                po.PositionOrigin = OriginPoint;
-                KickPointerEvent("OnPointerMoved", fc => fc.OnPointerMoved(po));
-            }
-            //Debug.WriteLine($"onPointerMoved Finger={PointBak.FingerCount} {PointBak.Position}");
-        }
-
-        private void OnPointerReleased(Windows.UI.Core.CoreWindow sender, Windows.UI.Core.PointerEventArgs e)
-        {
-            IsOnPointerReleased = true;
-            KeyBak.FingerCount = Math.Max(KeyBak.FingerCount - 1, 0);
-            var po = _(e, this, "onPointerReleased");
-            CopyKeyState(from: po, to:KeyBak);  // Copy latest key state to KeyBak
-
-            // expecting 1-finger-tap, Mouse Click, Double Click.  (not for drag, swipe. see also onManipulationCompleted)
-            if (IsOnManipulationCompleted == false && KeyBak.FingerCount == 0 && IsOnManipulationInertiaStarting == false)
-            {
-                po.PositionOrigin = OriginPoint;
-                po.FingerCount = KeyBak.FingerCount;
-                KickPointerEvent("OnPointerReleased", fc => fc.OnPointerReleased(po));
-            }
-        }
-
-        private void OnPointerWheelChanged(Windows.UI.Core.CoreWindow sender, Windows.UI.Core.PointerEventArgs e)
-        {
-            IsOnPointerWheelChanged = true;
-            var po = _(e, this, "onPointerWheelChanged");
-            CopyKeyState(from: po, to: KeyBak); // Save Latest key state
-            po.FingerCount = po.FingerCount;
-            po.PositionOrigin = OriginPoint;
-            KickWheelEvent("OnMouseWheelChanged", fc => fc.OnMouseWheelChanged(po));
-
-            //Debug.WriteLine($"onPointerWheelChanged {po.WheelDelta}");
-        }
-
-        private void OnManipulationStarting(object sender, Windows.UI.Xaml.Input.ManipulationStartingRoutedEventArgs e)
-        {
-            Reset();
-            IsOnManipulationStarting = true;
-
-            //Debug.WriteLine($"onManipulationStarting Mode={e.Mode} / {e.Pivot}");
-        }
-
-        private void OnManipulationStarted(object sender, Windows.UI.Xaml.Input.ManipulationStartedRoutedEventArgs e)
-        {
-            IsOnManipulationStarted = true;
-            PositionBak = _(e, this, "onManipulationStarted");
-            PositionBak.PositionOrigin = OriginPoint;
-            PressTimer.Stop();
-            PressTimer.Start(); // Reset Interval Timer
-            //Debug.WriteLine($"onManipulationStarted {PointBak.Position} Finger={PointBak.FingerCount}");
-        }
-
-        private void OnManipulationDelta(object sender, Windows.UI.Xaml.Input.ManipulationDeltaRoutedEventArgs e)
-        {
-            IsOnManipulationDelta = true;
-            var po = _(e, this, "onManipulationDelta");
-            CopyKeyState(po);
-            po.PositionOrigin = OriginPoint;
-            po.FingerCount = KeyBak.FingerCount;
-            KickPointerEvent("OnPointerMoved", fc => fc.OnPointerMoved(po));
-
-            //Debug.WriteLine($"onManipulationDelta {po.Position} Finger={po.FingerCount} Scale={po.Scale}");
-        }
-
-        private void OnManipulationInertiaStarting(object sender, Windows.UI.Xaml.Input.ManipulationInertiaStartingRoutedEventArgs e)
-        {
-            IsOnManipulationInertiaStarting = true;
-            //Debug.WriteLine($"onManipulationInertiaStarting {e.ExpansionBehavior}");
-        }
-
-        private void OnManipulationCompleted(object sender, Windows.UI.Xaml.Input.ManipulationCompletedRoutedEventArgs e)
-        {
-            //Debug.WriteLine($"onManipulationCompleted");
-            var po = _(e, this, "onManipulationCompleted");
-            CopyKeyState(po);
-            po.FingerCount = 0;
-            po.PositionOrigin = OriginPoint;
-            KickPointerEvent("OnPointerReleased", fc => fc.OnPointerReleased(po));
-            Reset();
-            IsOnManipulationCompleted = true;
-        }
-
-        private void CopyKeyState(PointerState to, PointerState from = null )
-        {
-            if( from == null)
-            {
-                from = KeyBak;
-            }
-            to.IsInContact = from.IsInContact;
-            to.IsKeyControl = from.IsKeyControl;
-            to.IsKeyMenu = from.IsKeyMenu;
-            to.IsKeyShift = from.IsKeyShift;
-            to.IsKeyWindows = from.IsKeyWindows;
         }
 
         /// <summary>
@@ -315,13 +392,13 @@ namespace Tono.Gui.Uwp
             return true;    // when no status, return true to be a check target
         }
 
-        private void KickPointerEvent(string description, Action<IPointerListener> pointerEvent)
+        private void KickPointerEvent(string methodName, Action<IPointerListener> pointerEvent)
         {
             foreach (IPointerListener fc in getPointerListenerFeatures().Where(a => a is IPointerListener))
             {
                 try
                 {
-                    if (string.IsNullOrEmpty(description) || CheckEventCatchStatus((FeatureBase)fc, description))
+                    if (string.IsNullOrEmpty(methodName) || CheckEventCatchStatus((FeatureBase)fc, methodName))
                     {
                         pointerEvent.Invoke(fc);
                     }
