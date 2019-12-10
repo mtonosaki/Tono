@@ -19,13 +19,17 @@ namespace Tono.Gui.Uwp
             {
                 Sender = sender,
                 Remarks = remarks,
-                PositionOrigin = ScreenPos.From(e.Pivot.Center.X, e.Pivot.Center.Y),
-                Position = ScreenPos.From(e.Pivot.Center.X, e.Pivot.Center.Y),
                 IsInContact = true,
                 Scale = 1.0f,
-                Rotation = Angle.FromRad(e.Pivot.Radius),
                 Time = DateTime.Now,
             };
+            if (e.Pivot != null)
+            {
+                ret.PositionOrigin = ScreenPos.From(e.Pivot.Center.X, e.Pivot.Center.Y);
+                ret.Position = ScreenPos.From(e.Pivot.Center.X, e.Pivot.Center.Y);
+                ret.Rotation = Angle.FromRad(e.Pivot.Radius);
+            }
+
             ret.DeviceType = PointerState.DeviceTypes.Touch;    // set Touch even if using Pen
             return ret;
         }
@@ -125,6 +129,33 @@ namespace Tono.Gui.Uwp
             }
             return ret;
         }
+
+        public static PointerState _(Windows.UI.Xaml.Input.ManipulationInertiaStartingRoutedEventArgs e, object sender, string remarks)
+        {
+            var ret = new PointerState
+            {
+                Sender = sender,
+                Remarks = remarks,
+                IsInContact = true,
+                Scale = e.Cumulative.Scale,
+                Rotation = Angle.FromDeg(e.Cumulative.Rotation),
+                Time = DateTime.Now,
+            };
+            switch (e.PointerDeviceType)
+            {
+                case PointerDeviceType.Pen:
+                    ret.DeviceType = PointerState.DeviceTypes.Pen;
+                    break;
+                case PointerDeviceType.Touch:
+                    ret.DeviceType = PointerState.DeviceTypes.Touch;
+                    break;
+                case PointerDeviceType.Mouse:
+                    ret.DeviceType = PointerState.DeviceTypes.Mouse;
+                    break;
+            }
+            return ret;
+        }
+        
 
 
         /// <summary>

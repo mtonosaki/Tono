@@ -19,6 +19,9 @@ namespace Tono.Gui.Uwp
         /// </summary>
         public event EventHandler TokenLoop;
 
+        /// <summary>
+        /// Create Porling Process
+        /// </summary>
         private void initToken()
         {
             // start event porling
@@ -28,7 +31,25 @@ namespace Tono.Gui.Uwp
 
                 if (_tokenQueue.Count > 0)
                 {
-                    TokenEventProc();
+                    var sw = Stopwatch.StartNew();
+                    while (TokenEventProc() > 0)
+                    {
+                        killproc(); // remove kill requested features
+
+                        if (sw.ElapsedMilliseconds > 20000)
+                        {
+                            LOG.AddException(new TimeoutException("Token Loop timeout (It is possible infinity token loop)"));
+                            break;
+                        }
+                    }
+                    // Exec Finalizer
+                    var ics = finalizeActions.ToArray();
+                    finalizeActions.Clear();
+                    foreach (var act in ics)
+                    {
+                        act.Invoke();
+                    }
+                    // all tokens are execed here. Fire the TokenLoop Event
                     TokenLoop?.Invoke(this, EventArgs.Empty);
                 }
                 CheckInvalidateReqested();
@@ -68,8 +89,10 @@ namespace Tono.Gui.Uwp
         /// <summary>
         /// token event implement
         /// </summary>
-        private void TokenEventProc()
+        private int TokenEventProc()
         {
+            var execCount = 0;
+
             try
             {
                 EventToken[] tokensNow;
@@ -78,7 +101,6 @@ namespace Tono.Gui.Uwp
                     tokensNow = _tokenQueue.ToArray();
                     _tokenQueue.Clear();
                 }
-                var nMatch = 0;
                 foreach (var token in tokensNow)
                 {
                     foreach (var fc in getFeatures().Where(f => f.IsEnabled))
@@ -87,7 +109,7 @@ namespace Tono.Gui.Uwp
                         {
                             foreach (var (Attr, Mi, Pi) in ams)
                             {
-                                nMatch = CheckAndExec(nMatch, token, fc, Attr, Mi, Pi);
+                                execCount = CheckAndExec(execCount, token, fc, Attr, Mi, Pi);
                             }
                         }
                         else
@@ -101,25 +123,19 @@ namespace Tono.Gui.Uwp
                                     if (pi != null)
                                     {
                                         ams.Add((attr, mi, pi));
-                                        nMatch = CheckAndExec(nMatch, token, fc, attr, mi, pi);
+                                        execCount = CheckAndExec(execCount, token, fc, attr, mi, pi);
                                     }
                                 }
                             }
                         }
                     }
                 }
-
-                var ics = finalizeActions.ToArray();
-                finalizeActions.Clear();
-                foreach (var act in ics)
-                {
-                    act.Invoke();
-                }
             }
             catch (Exception ex)
             {
                 LOG.AddException(ex);
             }
+            return execCount;
         }
 
         /// <summary>

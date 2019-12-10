@@ -318,13 +318,16 @@ namespace Tono.Gui.Uwp
                 killnow = _kills.ToList();
                 _kills.Clear();
             }
-            lock (Features)
+            if(killnow.Count > 0)
             {
-                foreach (var (fc, ex) in killnow)
+                lock (Features)
                 {
-                    Features.Remove(fc);
-                    LOG.AddException(ex);
-                    LOG.WriteLine(LLV.ERR, $"Feature {fc.GetType().Name}[{(fc?.Name ?? "noname")}] ID={fc.ID.Value} is removed automatically.");
+                    foreach (var (fc, ex) in killnow)
+                    {
+                        Features.Remove(fc);
+                        LOG.AddException(ex);
+                        LOG.WriteLine(LLV.ERR, $"Feature {fc.GetType().Name}[{(fc?.Name ?? "noname")}] ID={fc.ID.Value} is removed automatically.");
+                    }
                 }
             }
         }

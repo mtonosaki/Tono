@@ -56,7 +56,7 @@ namespace Tono.Gui.Uwp
 
         public void OnPointerPressed(PointerState po)
         {
-            //Debug.WriteLine($"★OnPointerPressed {po.Position} finger={po.FingerCount}");
+            //Debug.WriteLine($"{po.Time.ToString(TimeUtil.FormatYMDHMSms)} {po.DeviceType} PRESSED  Pos={po.Position}  Finger={po.FingerCount}  Contact={po.IsInContact}, Key='{(po.IsKeyControl ? "C" : "")}{(po.IsKeyControl ? "S" : "")}{(po.IsKeyShift ? "S" : "")}{(po.IsKeyWindows ? "W" : "")}{(po.IsKeyMenu ? "M" : "")}' Scale={po.Scale} Wheel={po.WheelDelta} -------------------------------------");
             if (isTrigger(po))
             {
                 if (po.Position.Y < Pane.Target.Rect.RB.Y - MarginBottom)
@@ -71,6 +71,7 @@ namespace Tono.Gui.Uwp
 
         public void OnPointerHold(PointerState po)
         {
+            //Debug.WriteLine($"{po.Time.ToString(TimeUtil.FormatYMDHMSms)} {po.DeviceType} HOLD  Pos={po.Position}  Finger={po.FingerCount}  Contact={po.IsInContact}, Key='{(po.IsKeyControl ? "C" : "")}{(po.IsKeyControl ? "S" : "")}{(po.IsKeyShift ? "S" : "")}{(po.IsKeyWindows ? "W" : "")}{(po.IsKeyMenu ? "M" : "")}' Scale={po.Scale} Wheel={po.WheelDelta} -------------------------------------");
         }
 
         protected virtual void onScrolled()
@@ -79,7 +80,7 @@ namespace Tono.Gui.Uwp
 
         public void OnPointerMoved(PointerState po)
         {
-            //Debug.WriteLine($"★OnPointerMoved {po.Position} finger={po.FingerCount}");
+            //Debug.WriteLine($"{po.Time.ToString(TimeUtil.FormatYMDHMSms)} {po.DeviceType} MOVED  Pos={po.Position}  Finger={po.FingerCount}  Contact={po.IsInContact}, Key='{(po.IsKeyControl ? "C" : "")}{(po.IsKeyControl ? "S" : "")}{(po.IsKeyShift ? "S" : "")}{(po.IsKeyWindows ? "W" : "")}{(po.IsKeyMenu ? "M" : "")}' Scale={po.Scale} Wheel={po.WheelDelta} -------------------------------------");
             if (isScrolling)
             {
                 var sval = (po.Position - _sPosDown) / _sZoomDown;
@@ -103,7 +104,7 @@ namespace Tono.Gui.Uwp
 
         public void OnPointerReleased(PointerState po)
         {
-            //Debug.WriteLine($"★OnPointerReleased {po.Position} finger={po.FingerCount}");
+            //Debug.WriteLine($"{po.Time.ToString(TimeUtil.FormatYMDHMSms)} {po.DeviceType} RELEASED  Pos={po.Position}  Finger={po.FingerCount}  Contact={po.IsInContact}, Key='{(po.IsKeyControl ? "C" : "")}{(po.IsKeyControl ? "S" : "")}{(po.IsKeyShift ? "S" : "")}{(po.IsKeyWindows ? "W" : "")}{(po.IsKeyMenu ? "M" : "")}' Scale={po.Scale} Wheel={po.WheelDelta} -------------------------------------");
             if (isScrolling)
             {
                 isScrolling = false;

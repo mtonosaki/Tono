@@ -197,8 +197,8 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="%40Doc\UWP Pointer Events.txt" />
     <Content Include="TonoGuiUwpIcon.png" />
+    <None Include="%40Doc\UWP_Pointer_Log.xlsx" />
     <None Include="%40Res\btnLogPanel.psd" />
     <None Include="%40Res\LogIcons.psd" />
     <None Include="%40Res\LogPanelTitileDesign.psd" />
