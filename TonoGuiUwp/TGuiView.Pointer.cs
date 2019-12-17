@@ -50,6 +50,7 @@ namespace Tono.Gui.Uwp
         bool IsWaitingManipulationDelta = false;
         PointerState StateAtPressed = null;
         ScreenPos StartPosition;
+        PointerState Move;
         int FingerCount = 0;
 
         private void Reset()
@@ -93,6 +94,7 @@ namespace Tono.Gui.Uwp
             var po = _(e, this, "OnPointerPressed");
             FingerCount++;
             po.FingerCount = FingerCount;
+            Move = po.Clone();
             //Debug.WriteLine(___(po));
 
             if (po.DeviceType == PointerState.DeviceTypes.Mouse)
@@ -177,6 +179,7 @@ namespace Tono.Gui.Uwp
         {
             var po = _(e, this, "OnPointerMoved");
             po.FingerCount = FingerCount;
+            Move = po.Clone();
             //Debug.WriteLine(___(po));
 
             if (po.DeviceType == PointerState.DeviceTypes.Mouse)
@@ -200,7 +203,7 @@ namespace Tono.Gui.Uwp
         /// </remarks>
         private void OnManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
         {
-            var po = _(e, this, "OnManipulationDelta");
+            var po = _(e, this, "OnManipulationDelta", Move);
             po.FingerCount = FingerCount;
             //Debug.WriteLine($"{___(po)} Angular={e.Velocities.Angular}  Linear={e.Velocities.Linear}  Expansion={e.Velocities.Expansion}");
 
