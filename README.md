@@ -77,3 +77,10 @@ Library|Color, Timer, Configulation, Some UWP controls having MVFP linkage.
 A framework of MVFP architecture for WinForm developments with .NET Framework version 4.7.1  
 (legacy library. not recommended to use it)
 
+### Tono.AspNetCore
+![](https://aqtono.com/tomarika/tono/TonoAspNetCoreIcon.png)  
+Utility for Web application of ASP.NET Core   
+ex. Client Certificate authentication.
+
+
+

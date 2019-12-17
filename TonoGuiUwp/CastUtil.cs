@@ -98,12 +98,16 @@ namespace Tono.Gui.Uwp
             }
             return ret;
         }
+
         /// <summary>
         /// save pointer state from ManipulationDeltaRoutedEventArgs
         /// </summary>
         /// <param name="e"></param>
+        /// <param name="sender"></param>
+        /// <param name="remarks"></param>
+        /// <param name="atMove">pointer state at OnMove to copy key</param>
         /// <returns></returns>
-        public static PointerState _(Windows.UI.Xaml.Input.ManipulationDeltaRoutedEventArgs e, object sender, string remarks)
+        public static PointerState _(Windows.UI.Xaml.Input.ManipulationDeltaRoutedEventArgs e, object sender, string remarks, PointerState atMove)
         {
             var ret = new PointerState
             {
@@ -111,6 +115,10 @@ namespace Tono.Gui.Uwp
                 Remarks = remarks,
                 Position = ScreenPos.From(e.Position.X, e.Position.Y),
                 IsInContact = true,
+                IsKeyControl = atMove?.IsKeyControl ?? false,
+                IsKeyMenu = atMove?.IsKeyMenu ?? false,
+                IsKeyShift = atMove?.IsKeyShift ?? false,
+                IsKeyWindows = atMove?.IsKeyWindows ?? false,
                 Scale = e.Cumulative.Scale,
                 Rotation = Angle.FromDeg(e.Cumulative.Rotation),
                 Time = DateTime.Now,

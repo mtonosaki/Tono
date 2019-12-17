@@ -12,7 +12,7 @@
     <Copyright>(c) 2019 Manabu Tonosaki</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageIconUrl></PackageIconUrl>
-    <PackageIcon>/content/TonoLogicIcon.png</PackageIcon>
+    <PackageIcon>\content\TonoLogicIcon.png</PackageIcon>
     <PackageReleaseNotes></PackageReleaseNotes>
     <Version>1.0.5</Version>
     <PackageTags>Tono, Gui, Logic</PackageTags>
