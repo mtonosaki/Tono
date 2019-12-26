@@ -182,6 +182,7 @@
     <Compile Include="TMenuFlyoutItem.cs" />
     <Compile Include="TokensGeneral.cs" />
     <Compile Include="TPane.cs" />
+    <Compile Include="TTextValidate.cs" />
     <Compile Include="Validator.cs" />
     <EmbeddedResource Include="Properties\TonoGuiUwp.rd.xml" />
   </ItemGroup>
