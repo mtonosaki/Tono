@@ -29,7 +29,7 @@ Interpolation|Ease-in / Ease-out / Ease-in-out curve function
 Least Squares N-Polynominal|Prospect values from some input data using least squares method.
 Route solver|To find a low-cost link connection with Dijekstra algorithm.
 
-### Tono.Gui.Jit
+### Tono.Jit
 ![](https://aqtono.com/tomarika/tono/TonoJitIcon.png)  
 Simple objects to help design/implement business model with Just-in-time philosophy. Making "Object", "Signal" and "Flow" with below objects.
 
@@ -80,7 +80,7 @@ A framework of MVFP architecture for WinForm developments with .NET Framework ve
 ### Tono.AspNetCore
 ![](https://aqtono.com/tomarika/tono/TonoAspNetCoreIcon.png)  
 Utility for Web application of ASP.NET Core   
-ex. Client Certificate authentication.
+ex. Client Certificate Authentication.
 
 
 
