@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Tono.Jit
 {
-    interface IJitObjectID
+    public interface IJitObjectID
     {
         /// <summary>
         /// JIT Object ID

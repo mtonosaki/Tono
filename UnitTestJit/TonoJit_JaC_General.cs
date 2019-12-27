@@ -57,7 +57,7 @@ namespace UnitTestProject1
             var c = jac["c"] as JitProcess;         // get instance by variable
             Assert.AreEqual(c.Name, "bbb");
 
-            var bbb = jac["'IDFINDB'"] as JitProcess;   // get instance by name
+            var bbb = jac["IDFINDB"] as JitProcess;   // get instance by name
             Assert.AreEqual(c, bbb);
         }
         [TestMethod]
@@ -119,7 +119,7 @@ namespace UnitTestProject1
             code = $@"
                 st
                     Procs
-                        remove '{st.Procs[0].Name}'
+                        remove {st.Procs[0].Name}
             ";
             jac.Exec(code);
             Assert.AreEqual(st.Procs.Count, 1);
@@ -144,7 +144,7 @@ namespace UnitTestProject1
             code = $@"
                 st
                     Procs
-                        remove    'IgnoreProcess'
+                        remove    IgnoreProcess  // Can specify ID (Cannot specify 'IgnoreProcess' as string)
             ";
             jac.Exec(code);
             Assert.AreEqual(jac.GetStage("st")?.Procs.Count, 1);
@@ -168,7 +168,7 @@ namespace UnitTestProject1
             code = $@"
                 st
                     Procs
-                        remove 'PROCP1'
+                        remove PROCP1   // Can specify ID (Cannot specify 'PROCP1' as string)
                         remove p2
             ";
             jac.Exec(code);
@@ -194,7 +194,7 @@ namespace UnitTestProject1
             code = $@"
                 MyStage               // To find Stage object named 'MyStage'
                     Procs
-                        remove 'PROCP1' // find JitProcess instance by ID
+                        remove PROCP1   // find JitProcess instance by ID (not by ID as string)
                         remove p2       // find JitProcess instance by variable
             ";
             jac.Exec(code);
@@ -219,13 +219,13 @@ namespace UnitTestProject1
             jac.Exec(code);
             //--------------------------------------------------------
             code = $@"
-                'MyStage'               // You can also to find with string value 'MyStage' 
+                MyStage                 // You can also to find with variable name 'MyStage'
                     Procs
-                        remove 'PROCP1' // find JitProcess instance by name
+                        remove PROCP1   // find JitProcess instance by ID
                         remove p2       // find JitProcess instance by variable
             ";
             jac.Exec(code);
-            Assert.AreEqual(jac.GetStage("'MyStage'")?.Procs.Count, 0);
+            Assert.AreEqual(jac.GetStage("MyStage")?.Procs.Count, 0);
         }
 
         [TestMethod]
@@ -592,7 +592,7 @@ namespace UnitTestProject1
             var jac = JacInterpreter.From(code);
             Assert.IsNotNull(jac.GetProcess("p"));
             Assert.AreEqual(jac.GetProcess("p").ChildVriables["X"]?.Value, 1234);
-            Assert.AreEqual(jac.GetProcess("p").ChildVriables["Y"]?.Value, 5678);  // To check '5678' will be parsed deeply to integer
+            Assert.AreEqual(jac.GetProcess("p").ChildVriables["Y"]?.Value, "5678");  // To check '5678' is as string
             Assert.AreEqual(jac.GetProcess("p").ChildVriables["Z"]?.Value, 1234);
         }
 
@@ -604,7 +604,7 @@ namespace UnitTestProject1
                         Name = 'TestProc'
                     a123 = new Variable
                     a123.AAA = p
-                    a123.BBB = p.Name   // To check .Name that is NOT child value (JitProcess's property)
+                    a123.BBB = p.Name   // To check that a123.BBB reference equals to p.Name
                 ";
             var jac = JacInterpreter.From(code);
             var p = jac.GetProcess("p");
@@ -616,6 +616,21 @@ namespace UnitTestProject1
             Assert.IsTrue(a123.ChildVriables["BBB"].Is(JitProcess.Class.String));
             Assert.AreEqual(a123.ChildVriables["BBB"].Value, "TestProc");
         }
+
+        [TestMethod]
+        public void Test23_2()
+        {
+            var code = @"
+                    p = new Process
+                        Name = 'TestProc'
+                    p.Name = 'ChangedName'
+                ";
+            var jac = JacInterpreter.From(code);
+            var p = jac.GetProcess("p");
+            Assert.IsNotNull(p);
+            Assert.AreEqual(p.Name, "ChangedName");
+        }
+
         [TestMethod]
         public void Test24()
         {
