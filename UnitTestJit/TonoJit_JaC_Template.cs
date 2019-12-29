@@ -47,7 +47,7 @@ namespace UnitTestProject1
             Assert.AreEqual(te.Count, 4);
 
             c = @"
-                'te'
+                te
                     Block
                         add 'w2 = new Work'
                         add 'w3 = new Work'
@@ -57,7 +57,7 @@ namespace UnitTestProject1
             Assert.AreEqual(te.Count, 7);
 
             c = @"
-                'te'
+                te
                     Block
                         remove '::LAST::'
             ";

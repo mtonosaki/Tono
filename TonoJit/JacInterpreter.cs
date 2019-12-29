@@ -323,6 +323,15 @@ namespace Tono.Jit
                 var parentVar = StrUtil.Left(variable.Com, dotid);
                 var childVar = StrUtil.Mid(variable.Com, dotid + 1);
                 var parentVarObj = ParseValue(parentVar);
+
+                // to try to set into property like [obj.Name]
+                var pp = parentVarObj.GetType().GetProperty(childVar);
+                if( pp != null && pp.PropertyType.Equals(item?.GetType()))
+                {
+                    pp?.SetValue(parentVarObj, item);
+                }
+
+                // To set to JacSetDotValue
                 var tarmethods =
                     from me in parentVarObj.GetType().GetMethods()
                     from at in me.GetCustomAttributes<JacSetDotValueAttribute>(true)
@@ -417,7 +426,7 @@ namespace Tono.Jit
             tarMethod?.Invoke(parentObject, new[] { itemValue });
 
             // Remove cached object
-            if( isAdd == false)
+            if (isAdd == false)
             {
                 // from instanceBuf
                 var dels = instanceBuf.Where(a => ReferenceEquals(a.Value, itemValue)).Select(a => a.Key);
@@ -535,7 +544,7 @@ namespace Tono.Jit
                 }
                 if (valuestr.StartsWith("'") && valuestr.EndsWith("'") || valuestr.StartsWith("\"") && valuestr.EndsWith("\""))
                 {
-                    return ParseValue(valuestr.Substring(1, valuestr.Length - 2));
+                    return valuestr.Substring(1, valuestr.Length - 2);
                 }
                 if (instanceBuf.TryGetValue(valuestr, out var ret1))
                 {
