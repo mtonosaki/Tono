@@ -56,10 +56,10 @@ namespace Tono.Gui.Uwp
         /// Set value
         /// </summary>
         /// <param name="v"></param>
-        /// <param name="path"></param>
-        public static void Set(string v, object path)
+        /// <param name="value"></param>
+        public static void Set(string v, object value)
         {
-            throw new NotImplementedException();    // 文字列で代入してください
+            throw new NotImplementedException("The value should be set as string.");    // 文字列で代入してください
         }
     }
 }
