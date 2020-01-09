@@ -12,10 +12,12 @@ namespace Tono.Jit
     [JacTarget(Name = "CiKanbanReturn")]
     public class CiKanbanReturn : CiBase
     {
+        public static readonly Type Type = typeof(CiKanbanReturn);
+
         /// <summary>
         /// target Stage
         /// </summary>
-        private JitStage Stage { get; set; }
+        private JitStage Stage { get; set; }    // TODO: Stage should come from parent process instead of set by programmer.
 
         /// <summary>
         /// work filter with class setting
@@ -30,6 +32,25 @@ namespace Tono.Jit
         /// Delay time for kanban return
         /// </summary>
         public TimeSpan Delay { get; set; } = TimeSpan.FromSeconds(0);
+
+        public override string MakeShortValue()
+        {
+            if (TargetKanbanClass != ":Kanban")
+            {
+                return TargetKanbanClass;
+            }
+            else
+            {
+                return $"";
+            }
+        }
+
+        /// <summary>
+        /// Default constructor : NOTE Do not forget to set Stage property
+        /// </summary>
+        public CiKanbanReturn()
+        {
+        }
 
         /// <summary>
         /// The construction of this class
@@ -47,13 +68,13 @@ namespace Tono.Jit
         /// <param name="now">simulation time</param>
         public override void Exec(JitWork work, DateTime now)
         {
-            System.Collections.Generic.IEnumerable<JitKanban> kanbans =
+            var kanbans =
                 from kanban in work.Kanbans
                 where kanban.Is(TargetKanbanClass)
                 where kanban.PullTo().Equals(work.CurrentProcess)
                 select kanban;
 
-            foreach (JitKanban kanban in kanbans.ToArray())
+            foreach (var kanban in kanbans.ToArray())
             {
                 work.Kanbans.Remove(kanban);
                 kanban.Work = null;

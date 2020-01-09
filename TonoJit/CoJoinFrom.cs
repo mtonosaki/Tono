@@ -6,12 +6,14 @@ using System;
 namespace Tono.Jit
 {
     /// <summary> 
-    /// get work to owner process from specified PullFrom process when work can be confluence condition.
+    /// Let Work at previous process wait when there is no signal-like-Work in side process. Then join a signal-Work as a child to the Work that come from previous process.
     /// 横工程からワークがINできる場合かどうかを評価する。INできる場合は横工程からワークをOUTさせて、対象ワークに投入する
     /// </summary>
     [JacTarget(Name = "CoJoinFrom")]
     public class CoJoinFrom : CoBase
     {
+        public static readonly Type Type = typeof(CoJoinFrom);
+
         /// <summary>
         /// PULLする工程
         /// </summary>

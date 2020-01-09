@@ -16,6 +16,8 @@ namespace Tono.Jit
     [JacTarget(Name = "CoMaxCost")]
     public class CoMaxCost : CoBase, IWorkInReserved
     {
+        public static readonly Type Type = typeof(CoMaxCost);
+
         /// <summary>
         /// cost variable name of work
         /// MAX制約値の変数名
@@ -26,6 +28,12 @@ namespace Tono.Jit
         /// MAX制約値
         /// </summary>
         public double Value { get; set; } = 1.0;    // maximum cost value. 最大コストの指定値
+
+        public override string MakeShortValue()
+        {
+            return $"{ReferenceVarName.Value}≤{Value}";
+        }
+
 
         private Dictionary<JitWork, JitWork> WorkInReserves { get; set; } = new Dictionary<JitWork, JitWork>();
 

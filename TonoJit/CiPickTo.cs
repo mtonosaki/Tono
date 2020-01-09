@@ -7,12 +7,14 @@ using System.Linq;
 namespace Tono.Jit
 {
     /// <summary>
-    /// in-command : request to push works into other process
+    /// in-command : request to push children works into other process
     /// 子ワークを指定工程にPUSH(要求) 
     /// </summary>
     [JacTarget(Name = "CiPickTo")]
     public class CiPickTo : CiBase
     {
+        public static readonly Type Type = typeof(CiPickTo);
+
         /// <summary>
         /// owner stage object
         /// 子ワークを返却するステージインスタンス（EventキューにワークをPUSH要求する為に使う）
@@ -62,14 +64,14 @@ namespace Tono.Jit
         /// <param name="now">simulation time</param>
         public override void Exec(JitWork work, DateTime now)
         {
-            System.Collections.Generic.IEnumerable<string> childworkNames =
+            var childworkNames =
                 from cw in work.ChildWorks
                 where cw.Value.Is(TargetWorkClass)
                 select cw.Key;
 
             foreach (string childWorkName in childworkNames.ToArray())
             {
-                JitWork childWork = work.ChildWorks[childWorkName];
+                var childWork = work.ChildWorks[childWorkName];
                 childWork.NextProcess = Destination();
                 childWork.CurrentProcess = null; // 子Workであった事を null とする。
                                                  // childWork.PrevProcess = null; // workがAssyされた元工程を覚えておく
