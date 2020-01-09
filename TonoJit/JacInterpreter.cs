@@ -326,7 +326,7 @@ namespace Tono.Jit
 
                 // to try to set into property like [obj.Name]
                 var pp = parentVarObj.GetType().GetProperty(childVar);
-                if( pp != null && pp.PropertyType.Equals(item?.GetType()))
+                if (pp != null && pp.PropertyType.Equals(item?.GetType()))
                 {
                     pp?.SetValue(parentVarObj, item);
                 }
@@ -572,7 +572,7 @@ namespace Tono.Jit
         /// </summary>
         /// <param name="valuestr"></param>
         /// <returns></returns>
-        private TimeSpan ParseTimeSpan(string valuestr)
+        public static TimeSpan ParseTimeSpan(string valuestr)
         {
             double val;
             string unit;
@@ -603,6 +603,54 @@ namespace Tono.Jit
                 default:
                     throw new JacException(JacException.Codes.NotSupportedUnit, $"Unit '{unit}' is not supported.");
             }
+        }
+
+        public static string MakeTimeSpanString(TimeSpan ts)
+        {
+            var sect = new[] { 0.1, 0.2, 0.25, 0.3, 0.4, 0.5, 0.6, 0.7, 0.75, 0.8, 0.9 };
+            if (ts.TotalMilliseconds < 1)
+            {
+                return "0";
+            }
+            if (ts.TotalSeconds < 1.0)
+            {
+                return $"{ts.TotalMilliseconds}MS";
+            }
+            if (ts.TotalSeconds < 60)
+            {
+                return $"{ts.TotalSeconds}S";
+            }
+            if (ts.TotalMinutes < 5)
+            {
+                if (sect.Contains(ts.TotalMinutes % 1.0))
+                {
+                    return $"{ts.TotalMinutes}M";
+                }
+                else
+                {
+                    return $"{ts.Seconds}S";
+                }
+            }
+            if (ts.TotalMinutes < 60)
+            {
+                return $"{ts.TotalMinutes}M";
+            }
+            if (ts.TotalHours <= 3)
+            {
+                if (sect.Contains(ts.TotalHours % 1.0))
+                {
+                    return $"{ts.TotalHours}H";
+                }
+                else
+                {
+                    return $"{ts.TotalMinutes}M";
+                }
+            }
+            if (ts.TotalHours < 24)
+            {
+                return $"{ts.TotalHours}H";
+            }
+            return $"{ts.TotalDays}D";
         }
 
         /// <summary>

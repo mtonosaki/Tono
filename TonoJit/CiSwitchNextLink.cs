@@ -12,7 +12,10 @@ namespace Tono.Jit
     [JacTarget(Name = "CiSwitchNextLink")]
     public class CiSwitchNextLink : CiBase
     {
+        public static readonly Type Type = typeof(CiSwitchNextLink);
+
         /// <summary>
+        /// Switching variable name of work object
         /// ワークに書かれているスイッチ値の変数名
         /// </summary>
         public JitVariable NextLinkVarName { get; set; } = JitVariable.From("NextLinkNo");
