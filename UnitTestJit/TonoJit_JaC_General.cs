@@ -669,6 +669,57 @@ namespace UnitTestProject1
             Assert.IsTrue(Piyo.Contains("ChildValueB"));
             Assert.AreEqual(Piyo["ChildValueB"], "def");
         }
+        [TestMethod]
+        public void Test26()
+        {
+            var code = @"
+                p1 = new Process
+                    ID = 'AAA123'
+                AAA123
+                    Cio
+                        add o1 = new CoSpan
+                            Span = 0.1H
+                            PorlingSpan = 1S
+            ";
+            var jac = new JacInterpreter();
+            jac.Exec(code);
+            var p1 = jac["p1"] as JitProcess;
+            var o1 = p1.Cios.FirstOrDefault() as CoSpan;
+            Assert.IsNotNull(o1);
+            Assert.AreEqual(o1.Span, TimeSpan.FromHours(0.1));
+            Assert.AreEqual(o1.PorlingSpan, TimeSpan.FromSeconds(1.0));
+        }
+
+        [TestMethod]
+        public void Test27()
+        {
+            var code = @"
+                p1 = new Process
+                    ID = 'AAA123'
+                AAA123
+                    Cio
+                        add o1 = new CoSpan
+                            ID = 'SPANID'
+                            Span = 0.1H
+                            PorlingSpan = 1S
+            ";
+            var jac = new JacInterpreter();
+            jac.Exec(code);
+            var p1 = jac["p1"] as JitProcess;
+            var o1 = p1.Cios.FirstOrDefault() as CoSpan;
+            Assert.IsNotNull(o1);
+            Assert.AreEqual(o1.Span, TimeSpan.FromHours(0.1));
+            Assert.AreEqual(o1.PorlingSpan, TimeSpan.FromSeconds(1.0));
+
+            var code2 = @$"
+                AAA123
+                    Cio
+                        remove SPANID
+            ";
+            jac.Exec(code2);
+            var ciosCount = p1.Cios.Count();
+            Assert.AreEqual(ciosCount, 0);
+        }
     }
 
     [JacTarget(Name = "TestJitClass")]

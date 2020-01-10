@@ -81,9 +81,18 @@ namespace Tono.Jit
         }
 
         [JacListRemove(PropertyName = "Cio")]
-        public void CioRemove(string name)
+        public void CioRemove(object obj)
         {
-            foreach (var item in Cios.Where(a => a.ID == name).ToArray())
+            string id = "";
+            if (obj is CioBase cio)
+            {
+                id = cio.ID;
+            }
+            if (obj is string str)
+            {
+                id = str;
+            }
+            foreach (var item in Cios.Where(a => a.ID == id).ToArray())
             {
                 if (item is CiBase ci)
                 {
@@ -96,7 +105,7 @@ namespace Tono.Jit
                 }
                 else
                 {
-                    throw new JacException(JacException.Codes.TypeMismatch, $"Cio.Remove type mismatch Name={name}");
+                    throw new JacException(JacException.Codes.TypeMismatch, $"Cio.Remove type mismatch Name={id}");
                 }
             }
         }

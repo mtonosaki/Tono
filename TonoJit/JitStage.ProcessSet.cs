@@ -38,6 +38,11 @@ namespace Tono.Jit
                 _procs.Remove(proc);
             }
 
+            public JitProcess FindById(string processid)
+            {
+                return _procs.Where(a => a.ID.Equals(processid)).FirstOrDefault();
+            }
+
             /// <summary>
             /// get process by name
             /// 名前で子プロセスを検索。遅延評価はこのタイミングで行ったものを覚えておく
