@@ -13,11 +13,11 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageIconUrl></PackageIconUrl>
     <PackageIcon>/content/TonoJitIcon.png</PackageIcon>
-    <Version>0.1.7</Version>
-    <AssemblyVersion>0.1.7.0</AssemblyVersion>
+    <Version>0.1.8</Version>
+    <AssemblyVersion>0.1.8.0</AssemblyVersion>
     <PackageTags>Tono, Gui, Jit</PackageTags>
     <PackageReleaseNotes>Continuous Kaizen</PackageReleaseNotes>
-    <FileVersion>0.1.7.0</FileVersion>
+    <FileVersion>0.1.8.0</FileVersion>
     <RepositoryUrl>https://github.com/mtonosaki/Tono.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <SignAssembly>true</SignAssembly>
@@ -34,7 +34,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Tono.Core" Version="1.0.9" />
+    <PackageReference Include="Tono.Core" Version="1.0.10" />
   </ItemGroup>
 
 </Project>

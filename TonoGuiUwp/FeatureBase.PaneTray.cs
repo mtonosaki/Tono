@@ -1,6 +1,5 @@
-﻿// Copyright (c) Manabu Tonosaki All rights reserved.
+﻿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
-
 namespace Tono.Gui.Uwp
 {
     public abstract partial class FeatureBase

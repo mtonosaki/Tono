@@ -1,3 +1,6 @@
+// (c) 2019 Manabu Tonosaki
+// Licensed under the MIT license.
+
 using System;
 
 #pragma warning disable 1591, 1572, 1573

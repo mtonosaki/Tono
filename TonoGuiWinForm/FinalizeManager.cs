@@ -1,4 +1,4 @@
-// Copyright (c) Manabu Tonosaki All rights reserved.
+// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System;
@@ -10,7 +10,7 @@ using System.Collections.Specialized;
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// ffFinalizer の概要の説明です。
+    /// Finalizer Manager の概要の説明です。
     /// </summary>
     public class FinalizeManager
     {

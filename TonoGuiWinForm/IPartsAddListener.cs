@@ -1,4 +1,4 @@
-// Copyright (c) Manabu Tonosaki All rights reserved.
+// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System.Collections;
@@ -15,7 +15,7 @@ namespace Tono.GuiWinForm
         /// <summary>
         /// パーツ追加イベント
         /// </summary>
-        /// <param name="removedPartsSet">追加されたパーツの一覧（daPartsBase.PartsEntry型のコレクション）</param>
+        /// <param name="removedPartsSet">追加されたパーツの一覧</param>
         void OnPartsAdded(ICollection addedPartsSet);
     }
 }

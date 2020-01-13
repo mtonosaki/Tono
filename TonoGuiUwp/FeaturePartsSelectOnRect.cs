@@ -1,10 +1,8 @@
-﻿using Microsoft.Graphics.Canvas.Brushes;
+﻿// (c) 2019 Manabu Tonosaki
+// Licensed under the MIT license.
+
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Windows.System;
 using Windows.UI;
 using static Tono.Gui.Uwp.CastUtil;
@@ -117,7 +115,7 @@ namespace Tono.Gui.Uwp
             Parts.Add(Pane.Target, Mask, MaskLayer);
         }
 
-        private Dictionary<ISelectableParts, bool> FirstState = new Dictionary<ISelectableParts, bool>();
+        private readonly Dictionary<ISelectableParts, bool> FirstState = new Dictionary<ISelectableParts, bool>();
         private bool IsSelectingBox = false;
 
         private bool IsTrigger(PointerState po)
@@ -131,8 +129,15 @@ namespace Tono.Gui.Uwp
 
         public void OnPointerPressed(PointerState po)
         {
-            if (IsTrigger(po) == false) return;
-            if (Status["IsEnableSelectingBox"].ValueB == false) return;
+            if (IsTrigger(po) == false)
+            {
+                return;
+            }
+
+            if (Status["IsEnableSelectingBox"].ValueB == false)
+            {
+                return;
+            }
 
             FirstState.Clear();
             foreach (var pt in Parts.GetParts(TargetLayer, PartsFilter))
@@ -151,7 +156,7 @@ namespace Tono.Gui.Uwp
         {
         }
 
-        PointerState lastPo = null;
+        private PointerState lastPo = null;
         public void OnPointerMoved(PointerState po)
         {
             lastPo = po.Clone();

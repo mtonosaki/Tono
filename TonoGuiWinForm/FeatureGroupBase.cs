@@ -1,4 +1,4 @@
-// Copyright (c) Manabu Tonosaki All rights reserved.
+// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System;
@@ -11,7 +11,7 @@ using System.Reflection;
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// fgBase の概要の説明です。
+    /// Feature Group Base の概要の説明です。
     /// fg : Feature Group
     /// 複数のフィーチャーをひとつのパッケージとして管理するための基本クラス
     /// </summary>

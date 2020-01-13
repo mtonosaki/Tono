@@ -1,4 +1,4 @@
-// Copyright (c) Manabu Tonosaki All rights reserved.
+// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System;
@@ -14,7 +14,8 @@ namespace Tono.GuiWinForm
     /// </summary>
     public class DataSharingManager
     {
-        /// <summary>Žg—p‹ÖŽ~
+        /// <summary>
+        /// Žg—p‹ÖŽ~
         /// ‹¤—L‚ÉŽg‚¦‚é•¶Žš—ñŒ^
         /// </summary>
         public class String

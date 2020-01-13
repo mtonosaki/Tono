@@ -1,4 +1,4 @@
-﻿// Copyright (c) Manabu Tonosaki All rights reserved.
+﻿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using Microsoft.AspNetCore.Authorization;
@@ -71,7 +71,7 @@ namespace TonoAspNetCore
             {
                 throw new Exception("ConfirmClientCertificate.HandleRequirementAsync.AuthorizationHandlerContext.Resource should be a AuthorizationFilterContext");
             }
-            var clicert = res.HttpContext.Request.Headers["X-ARR-ClientCert"];
+            var clicert = res.HttpContext.Request.Headers["X-ARR-ClientCert"];  // This header parameter have added by Azure WebApp
             if (string.IsNullOrEmpty(clicert))
             {
                 context.Fail();
@@ -109,11 +109,11 @@ namespace TonoAspNetCore
                     var foundIssuerO = false;
                     foreach (string s in cert.Issuer.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
                     {
-                        if (!foundIssuerCN && string.Compare(s.Trim(), $"CN={config.CN}") == 0)
+                        if (foundIssuerCN == false && string.Compare(s.Trim(), $"CN={config.CN}") == 0)
                         {
                             foundIssuerCN = true;
                         }
-                        if (!foundIssuerO && string.Compare(s.Trim(), $"O={config.O}") == 0)
+                        if (foundIssuerO == false && string.Compare(s.Trim(), $"O={config.O}") == 0)
                         {
                             foundIssuerO = true;
                         }
@@ -123,7 +123,6 @@ namespace TonoAspNetCore
                         continue;
                     }
 
-                    // 5. OK
                     context.Succeed(requirement);
                     return Task.CompletedTask;
                 }

@@ -1,4 +1,4 @@
-// Copyright (c) Manabu Tonosaki All rights reserved.
+// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System;
@@ -15,7 +15,7 @@ using System.Xml;
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// uFeatureLoader の概要の説明です。
+    /// FeatureLoader2 の概要の説明です。
     /// .NET Framework 2.0用、MenuStripに対するローダ
     /// </summary>
     public class FeatureLoader2 : FeatureLoaderBase

@@ -1,4 +1,4 @@
-﻿// Copyright (c) Manabu Tonosaki All rights reserved.
+﻿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System;
@@ -10,7 +10,7 @@ using static Tono.Jit.JitStage;
 namespace Tono.Jit
 {
     /// <summary>
-    /// out-constraint of maximum cost caluclated from works in this process to wait previous process exit.
+    /// out-constraint of maximum cost caluclated from works in this process to wait previous process exiting.
     /// 自工程のコスト制約を評価して、前工程のOUTを制御 
     /// </summary>
     [JacTarget(Name = "CoMaxCost")]

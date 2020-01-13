@@ -1,4 +1,4 @@
-// Copyright (c) Manabu Tonosaki All rights reserved.
+// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System;
@@ -7,7 +7,7 @@ using System.Drawing;
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// uXy の概要の説明です。
+    /// XyBase の概要の説明です。
     /// </summary>
     [Serializable]
     public class XyBase : ValueCouple

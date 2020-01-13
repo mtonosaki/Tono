@@ -1,4 +1,4 @@
-// Copyright (c) Manabu Tonosaki All rights reserved.
+// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System;
@@ -10,7 +10,7 @@ using System.Windows.Forms;
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// fiToolStripButton2 の概要の説明です。
+    /// TToolStripButton2 の概要の説明です。
     /// メニューの実行で起動するフィーチャー起動タイミング監視クラス
     /// </summary>
     public class TToolStripButton2 : System.Windows.Forms.ToolStripButton, IFeatureEventListener

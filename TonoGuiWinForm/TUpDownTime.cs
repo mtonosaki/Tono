@@ -1,4 +1,4 @@
-// Copyright (c) Manabu Tonosaki All rights reserved.
+// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System.Drawing;
@@ -7,7 +7,7 @@ using System.Windows.Forms;
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// cTimeUpDown の概要の説明です。
+    /// TUpDownTime の概要の説明です。
     /// </summary>
     public class TUpDownTime : System.Windows.Forms.UserControl
     {

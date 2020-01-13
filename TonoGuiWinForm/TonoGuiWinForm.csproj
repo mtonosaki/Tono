@@ -279,7 +279,6 @@
     <Compile Include="ConfigRegister.cs" />
     <Compile Include="Const.cs" />
     <Compile Include="CoupleObject.cs" />
-    <Compile Include="CpuClockCounter.cs" />
     <Compile Include="CsvParser.cs" />
     <Compile Include="DeviceRecord.cs" />
     <Compile Include="Dictionary2d.cs" />
@@ -461,7 +460,7 @@
       <Version>4.3.1</Version>
     </PackageReference>
     <PackageReference Include="Tono.Core">
-      <Version>1.0.9</Version>
+      <Version>1.0.10</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
