@@ -11,7 +11,14 @@ namespace Tono.Jit
     [JacTarget(Name = "CiDelay")]
     public class CiDelay : CiBase
     {
-        public TimeSpan Delay { get; set; }
+        public static readonly Type Type = typeof(CiDelay);
+
+        public TimeSpan Delay { get; set; } = TimeSpan.FromSeconds(1);
+
+        public override string MakeShortValue()
+        {
+            return $"{JacInterpreter.MakeTimeSpanString(Delay)}";
+        }
 
         /// <summary>
         /// set exit time

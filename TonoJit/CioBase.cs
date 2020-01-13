@@ -25,6 +25,15 @@ namespace Tono.Jit
         /// </summary>
         public string Remarks { get; set; }
 
+        /// <summary>
+        /// Make one point innstance value.
+        /// </summary>
+        /// <returns></returns>
+        public virtual string MakeShortValue()
+        {
+            return "";
+        }
+
         // remember last work in-time (especially for Span constraint)
         public interface ILastInTime
         {

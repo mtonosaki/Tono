@@ -12,10 +12,24 @@ namespace Tono.Jit
     [JacTarget(Name = "CoSpan")]
     public class CoSpan : CoBase, CioBase.ILastInTime
     {
+        public static readonly Type Type = typeof(CoSpan);
+
         /// <summary>
         /// minimum time span to enter to this owner process
         /// </summary>
-        public TimeSpan Span { get; set; }
+        public TimeSpan Span { get; set; } = TimeSpan.FromSeconds(1);
+
+        /// <summary>
+        /// default interval time to confirm span constraint 
+        /// Span制約で、再度確認する時間
+        /// </summary>
+        public TimeSpan PorlingSpan { get; set; } = TimeSpan.FromSeconds(60);
+
+
+        public override string MakeShortValue()
+        {
+            return $"{JacInterpreter.MakeTimeSpanString(Span)}";
+        }
 
         /// <summary>
         /// last work enter time 最後にINした時刻
@@ -25,12 +39,6 @@ namespace Tono.Jit
         /// この値でSpanを評価。実際にProcessにINしたタイミングではなく、前ProcessでOutされた時にセットされる
         /// </remarks>
         public DateTime LastInTime { get; set; }
-
-        /// <summary>
-        /// default interval time to confirm span constraint 
-        /// Span制約で、再度確認する時間
-        /// </summary>
-        public TimeSpan PorlingSpan { get; set; } = TimeSpan.FromSeconds(60);
 
         /// <summary>
         /// check span constraint
