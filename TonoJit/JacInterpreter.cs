@@ -341,7 +341,7 @@ namespace Tono.Jit
             if (rpnStack.Count > 0)
             {
                 var objName = rpnStack.Peek();  // parent object name
-                if (IsInstance(objName.Com) && objName.Level < variable.Level)
+                if ((IsInstance(objName.Com) || varBuf.ContainsKey(objName.Com)) && objName.Level < variable.Level)
                 {
                     var obj = ParseValue(objName.Com);
                     var pi = obj?.GetType().GetProperty(variable.Com);

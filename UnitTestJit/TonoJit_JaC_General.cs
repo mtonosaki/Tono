@@ -678,6 +678,7 @@ namespace UnitTestProject1
                 AAA123
                     Cio
                         add o1 = new CoSpan
+                            ID = 'SPANCONSTRAINTID'
                             Span = 0.1H
                             PorlingSpan = 1S
             ";
@@ -688,6 +689,17 @@ namespace UnitTestProject1
             Assert.IsNotNull(o1);
             Assert.AreEqual(o1.Span, TimeSpan.FromHours(0.1));
             Assert.AreEqual(o1.PorlingSpan, TimeSpan.FromSeconds(1.0));
+
+            code = @"
+                SPANCONSTRAINTID
+                    Span = 0.2H
+                    PorlingSpan = 1.2S
+            ";
+            jac.Exec(code);
+            o1 = p1.Cios.FirstOrDefault() as CoSpan;
+            Assert.IsNotNull(o1);
+            Assert.AreEqual(o1.Span, TimeSpan.FromHours(0.2));
+            Assert.AreEqual(o1.PorlingSpan, TimeSpan.FromSeconds(1.2));
         }
 
         [TestMethod]
