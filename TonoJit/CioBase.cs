@@ -27,7 +27,7 @@ namespace Tono.Jit
         /// </summary>
         /// <param name="work"></param>
         /// <returns></returns>
-        protected abstract JitProcess GetParentProcess(JitWork work);
+        protected abstract JitProcess GetCheckTargetProcess(JitWork work);
 
         /// <summary>
         /// Remarks

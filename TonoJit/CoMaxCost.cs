@@ -65,7 +65,7 @@ namespace Tono.Jit
         public override bool Check(JitWork work, DateTime now)
         {
             var costs =
-                from w in GetParentProcess(work).Works.Concat(WorkInReserves.Keys)
+                from w in GetCheckTargetProcess(work).Works.Concat(WorkInReserves.Keys)
                 let cost = w.ChildVriables.GetValueOrNull("Cost")
                 where cost != null
                 let varval = cost[ReferenceVarName]
