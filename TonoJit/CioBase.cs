@@ -14,14 +14,23 @@ namespace Tono.Jit
         public string ID { get; set; } = JacInterpreter.MakeID("CIO");
 
         /// <summary>
-        /// get owner process from work object
+        /// Parent Process of this Ci/Co
+        /// </summary>
+        /// <remarks>
+        /// Automatically set by Process.Ci.Add / Process.Co.Add 
+        /// </remarks>
+        public JitProcess ParentProcess { get; set; }
+
+        /// <summary>
+        /// Parent Process from work.
+        /// Ci = Same with ParentProcess Property. Co = NextProcess of work
         /// </summary>
         /// <param name="work"></param>
         /// <returns></returns>
         protected abstract JitProcess GetParentProcess(JitWork work);
 
         /// <summary>
-        /// remarks
+        /// Remarks
         /// </summary>
         public string Remarks { get; set; }
 
