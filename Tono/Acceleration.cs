@@ -1,4 +1,4 @@
-﻿// Copyright (c) Manabu Tonosaki All rights reserved.
+﻿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System;
@@ -73,7 +73,14 @@ namespace Tono
         /// <returns></returns>
         public override bool Equals(object obj)
         {
-            return Equals(obj as Acceleration);
+            if (obj is Acceleration tar)
+            {
+                return m_psps == tar.m_psps;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         /// <summary>
@@ -150,7 +157,9 @@ namespace Tono
         /// <returns></returns>
         public static bool operator ==(Acceleration v1, Acceleration v2)
         {
-            return (v1.m_psps == v2.m_psps);
+            if (v1 == null && v2 == null) return true;
+
+            return v1?.Equals(v2) ?? false;
         }
 
         /// <summary>
@@ -161,7 +170,14 @@ namespace Tono
         /// <returns></returns>
         public static bool operator !=(Acceleration v1, Acceleration v2)
         {
-            return (v1.m_psps != v2.m_psps);
+            if (v1 == null && v2 == null) return false;
+
+            return !(v1?.Equals(v2) ?? false);
+        }
+
+        public override string ToString()
+        {
+            return $"{To_m_per_s_per_s}m/s/s";
         }
     }
 }

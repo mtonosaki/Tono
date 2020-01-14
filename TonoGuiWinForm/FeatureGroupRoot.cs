@@ -1,4 +1,4 @@
-// Copyright (c) Manabu Tonosaki All rights reserved.
+// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System;
@@ -9,7 +9,7 @@ using System.Reflection;
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// fgRoot の概要の説明です。
+    /// Feature Group Root の概要の説明です。
     /// ルートのフィーチャーグループ
     /// 他のすべてのフィーチャーグループは、この子フィーチャーグループとなる
     /// </summary>

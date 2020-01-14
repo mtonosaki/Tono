@@ -14,11 +14,11 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <RootNamespace>Tono.Excel</RootNamespace>
-    <Version>1.0.5</Version>
-    <AssemblyVersion>1.0.5.5</AssemblyVersion>
-    <FileVersion>1.0.5.5</FileVersion>
+    <Version>1.0.6</Version>
+    <AssemblyVersion>1.0.6.0</AssemblyVersion>
+    <FileVersion>1.0.6.0</FileVersion>
     <PackageTags>Tono, Gui, Excel</PackageTags>
-    <PackageReleaseNotes></PackageReleaseNotes>
+    <PackageReleaseNotes>Continuous Kaizen</PackageReleaseNotes>
     <RepositoryUrl>https://github.com/mtonosaki/Tono.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <SignAssembly>true</SignAssembly>
@@ -38,7 +38,7 @@
 
   <ItemGroup>
     <PackageReference Include="ClosedXML" Version="0.94.2" />
-    <PackageReference Include="Tono.Core" Version="1.0.9" />
+    <PackageReference Include="Tono.Core" Version="1.0.10" />
   </ItemGroup>
 
 </Project>

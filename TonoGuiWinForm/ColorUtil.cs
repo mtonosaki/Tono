@@ -1,4 +1,4 @@
-// Copyright (c) Manabu Tonosaki All rights reserved.
+// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System;
@@ -9,7 +9,7 @@ using System.Drawing;
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// ColorUtil ‚ÌŠT—v‚Ìà–¾‚Å‚·B
+    /// Color Utility
     /// </summary>
     public static class ColorUtil
     {

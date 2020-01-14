@@ -1,4 +1,4 @@
-// Copyright (c) Manabu Tonosaki All rights reserved.
+// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System;
@@ -14,7 +14,7 @@ using System.Windows.Forms;
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// fFileSelector の概要の説明です。
+    /// FormFileSelector の概要の説明です。
     /// </summary>
     public class FormFileSelector : System.Windows.Forms.Form
     {

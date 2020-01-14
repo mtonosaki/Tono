@@ -1,6 +1,5 @@
-﻿// Copyright (c) Manabu Tonosaki All rights reserved.
+﻿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
-
 using System;
 using System.Linq;
 using System.Net;

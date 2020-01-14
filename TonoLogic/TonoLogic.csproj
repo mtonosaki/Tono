@@ -13,13 +13,13 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageIconUrl></PackageIconUrl>
     <PackageIcon>\content\TonoLogicIcon.png</PackageIcon>
-    <PackageReleaseNotes></PackageReleaseNotes>
-    <Version>1.0.5</Version>
+    <PackageReleaseNotes>Continuous Kaizen</PackageReleaseNotes>
+    <Version>1.0.6</Version>
     <PackageTags>Tono, Gui, Logic</PackageTags>
     <RepositoryUrl>https://github.com/mtonosaki/Tono.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <AssemblyVersion>1.0.5.5</AssemblyVersion>
-    <FileVersion>1.0.5.5</FileVersion>
+    <AssemblyVersion>1.0.6.0</AssemblyVersion>
+    <FileVersion>1.0.6.0</FileVersion>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>TonoLogic.snk</AssemblyOriginatorKeyFile>
     <ApplicationIcon>TonoLogic.ico</ApplicationIcon>
@@ -34,7 +34,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Tono.Core" Version="1.0.9" />
+    <PackageReference Include="Tono.Core" Version="1.0.10" />
   </ItemGroup>
 
 </Project>

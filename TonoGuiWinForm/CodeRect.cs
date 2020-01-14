@@ -1,4 +1,4 @@
-// Copyright (c) Manabu Tonosaki All rights reserved.
+// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System;
@@ -8,7 +8,7 @@ using System;
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// uCdRect ‚ÌŠT—v‚Ìà–¾‚Å‚·B
+    /// CodeRect
     /// </summary>
     [Serializable]
     public class CodeRect : Rect

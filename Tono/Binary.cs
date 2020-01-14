@@ -1,4 +1,4 @@
-﻿// Copyright (c) Manabu Tonosaki All rights reserved.
+﻿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System;
@@ -118,7 +118,7 @@ namespace Tono
         /// make binary collection
         /// </summary>
         /// <param name="value"></param>
-        /// <returns></returns>
+        /// <returns>[0]=Upper bit / [31]=Lower bit</returns>
         public static IEnumerable<bool> GetBits(int value)
         {
             unchecked

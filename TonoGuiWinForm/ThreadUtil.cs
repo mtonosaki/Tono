@@ -1,10 +1,9 @@
-// Copyright (c) Manabu Tonosaki All rights reserved.
+// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System;
 using System.Collections;
 using System.Drawing;
-//using System.Collections.Generic;
 using System.Windows.Forms;
 
 #pragma warning disable 1591, 1572, 1573
