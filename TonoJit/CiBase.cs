@@ -14,7 +14,7 @@ namespace Tono.Jit
         /// </summary>
         /// <param name="work"></param>
         /// <returns></returns>
-        protected override JitProcess GetParentProcess(JitWork work)
+        protected override JitProcess GetCheckTargetProcess(JitWork work)
         {
             return work.CurrentProcess;
         }

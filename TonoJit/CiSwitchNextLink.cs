@@ -38,7 +38,7 @@ namespace Tono.Jit
                 int nextLinkNo = DbUtil.ToInt(work.ChildVriables.GetValueOrNull(NextLinkVarName.Value.ToString())?.Value, def: -1);
                 if (nextLinkNo >= 0)
                 {
-                    work.NextProcess = GetParentProcess(work).NextLinks[nextLinkNo];
+                    work.NextProcess = GetCheckTargetProcess(work).NextLinks[nextLinkNo];
                 }
             }
         }

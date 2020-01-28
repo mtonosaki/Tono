@@ -68,10 +68,12 @@ namespace Tono.Jit
         {
             if (obj is CiBase ci)
             {
+                ci.ParentProcess = this;
                 InCommands.Add(ci);
             }
             else if (obj is CoBase co)
             {
+                co.ParentProcess = this;
                 Constraints.Add(co);
             }
             else
@@ -125,9 +127,6 @@ namespace Tono.Jit
         /// jfStageにあるリンクセット
         /// </summary>
         public Destinations NextLinks { get; set; } = new Destinations();
-
-
-
 
         /// <summary>
         /// having work-in time mapping
