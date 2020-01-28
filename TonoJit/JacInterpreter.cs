@@ -357,6 +357,20 @@ namespace Tono.Jit
                                 case "JitKanban": pi.SetValue(obj, (Func<JitKanban>)(() => (JitKanban)item)); break;
                                 case "JitVariable": pi.SetValue(obj, (Func<JitVariable>)(() => (JitVariable)item)); break;
                                 case "JitWork": pi.SetValue(obj, (Func<JitWork>)(() => (JitWork)item)); break;
+                                case "String":
+                                    // Super Lazy Set (Support name only no instance condition)
+                                    var expectedType = StrUtil.MidSkip(pi.GetMethod.ReturnParameter.ParameterType.FullName, @"System.Func`1\[\[Tono\.Jit\.");
+                                    expectedType = StrUtil.LeftBefore(expectedType, ",");
+                                    switch (expectedType)
+                                    {
+                                        case "JitProcess": SetSuperLazyIfPossible<JitProcess>(item, obj, pi); break;
+                                        case "JitStage": SetSuperLazyIfPossible<JitStage>(item, obj, pi); break;
+                                        case "JitKanban": SetSuperLazyIfPossible<JitKanban>(item, obj, pi); break;
+                                        case "JitVariable": SetSuperLazyIfPossible<JitVariable>(item, obj, pi); break;
+                                        case "JitWork": SetSuperLazyIfPossible<JitWork>(item, obj, pi); break;
+                                        default: throw new JacException(JacException.Codes.NotSupportLazyMethodType, $"Not supported Func<{item?.GetType().Name}> in Jit class.");
+                                    }
+                                    break;
                                 default: throw new JacException(JacException.Codes.NotSupportLazyMethodType, $"Not supported Func<{item?.GetType().Name}> property.");
                             }
                         }
@@ -370,6 +384,10 @@ namespace Tono.Jit
                         {
                             pi.SetValue(obj, item);
                             if (variable.Com.Equals("ID", StringComparison.CurrentCultureIgnoreCase))
+                            {
+                                varBuf[item?.ToString() ?? "null"] = obj;
+                            }
+                            if (variable.Com.Equals("Name", StringComparison.CurrentCultureIgnoreCase))
                             {
                                 varBuf[item?.ToString() ?? "null"] = obj;
                             }
@@ -397,6 +415,19 @@ namespace Tono.Jit
             }
             varBuf[variable.Com] = item;
             rpnStack.Push(variable);
+        }
+
+        private void SetSuperLazyIfPossible<LAZYT>(object item, object obj, PropertyInfo pi)
+        {
+            var pv = ParseValue((string)item, false);
+            if (pv != null)
+            {
+                pi.SetValue(obj, (Func<LAZYT>)(() => (LAZYT)pv));
+            }
+            else
+            {
+                pi.SetValue(obj, (Func<LAZYT>)(() => (LAZYT)ParseValue((string)item, false)));
+            }
         }
 
         private void ProcList(Stack<(int Level, string Com)> rpnStack, bool isNextAddRemove, bool isAdd)
@@ -489,7 +520,7 @@ namespace Tono.Jit
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        private object ParseValue(object value)
+        private object ParseValue(object value, bool returnInputWhenNotExists = true)
         {
             if (value is string valuestr)
             {
@@ -555,16 +586,42 @@ namespace Tono.Jit
                     return ret2;
                 }
             }
-            return value;
+            if (returnInputWhenNotExists)
+            {
+                return value;
+            }
+            else
+            {
+                return null;
+            }
         }
 
-        private Distance ParseDistance(string valuestr)
+        /// <summary>
+        /// Parse to Distance instance
+        /// </summary>
+        /// <param name="valuestr"></param>
+        /// <returns></returns>
+        public static Distance ParseDistance(string valuestr)
         {
             if (valuestr.EndsWith("mm")) return Distance.FromMeter(double.Parse(StrUtil.Left(valuestr, valuestr.Length - 2)) / 1000.0);
             if (valuestr.EndsWith("cm")) return Distance.FromMeter(double.Parse(StrUtil.Left(valuestr, valuestr.Length - 2)) / 100.0);
             if (valuestr.EndsWith("km")) return Distance.FromMeter(double.Parse(StrUtil.Left(valuestr, valuestr.Length - 2)) * 1000.0);
             if (valuestr.EndsWith("m")) return Distance.FromMeter(double.Parse(StrUtil.Left(valuestr, valuestr.Length - 1)));
             throw new JacException(JacException.Codes.NotSupportedUnit, $"Cannot specify distance unit from {valuestr}");
+        }
+
+        /// <summary>
+        /// Check Variable name rule
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public static bool CheckVariableName(string name)
+        {
+            if (name == null) return false;
+            if (name.Length < 1 || name.Length > 16) return false;
+
+            var reg = new Regex("^[A-Za-z][A-Za-z0-9]*$");
+            return reg.IsMatch(name);
         }
 
         /// <summary>
@@ -575,6 +632,11 @@ namespace Tono.Jit
         public static TimeSpan ParseTimeSpan(string valuestr)
         {
             double val;
+            if (valuestr.StartsWith("0") && char.IsNumber(valuestr[valuestr.Length - 1]))
+            {
+                val = double.Parse(valuestr);
+                if (val == 0) return TimeSpan.Zero;
+            }
             string unit;
             if (valuestr.EndsWith("MS"))
             {
@@ -610,7 +672,7 @@ namespace Tono.Jit
             var sect = new[] { 0, 0.1, 0.2, 0.25, 0.3, 0.4, 0.5, 0.6, 0.7, 0.75, 0.8, 0.9 };
             if (ts.TotalMilliseconds < 1)
             {
-                return "0";
+                return "0S";
             }
             if (ts.TotalSeconds < 1.0)
             {

@@ -19,7 +19,7 @@ namespace Tono.Jit
         /// owner stage object
         /// 子ワークを返却するステージインスタンス（EventキューにワークをPUSH要求する為に使う）
         /// </summary>
-        private JitStage Stage { get; set; }
+        private JitStage Stage { get; set; }    // TODO: Stageは親Processのを参照
 
         /// <summary>
         /// work filter classes

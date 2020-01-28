@@ -198,10 +198,11 @@ namespace UnitTestProject1
                         remove p2       // find JitProcess instance by variable
             ";
             jac.Exec(code);
-            Assert.IsNull(jac.GetStage("MySweetStage"));
             var MyStage = jac.GetStage("MyStage");
+            var MySweetStage = jac.GetStage("MySweetStage");
             Assert.IsNotNull(MyStage);
-            Assert.IsNotNull(MyStage);
+            Assert.IsNotNull(MySweetStage);
+            Assert.AreEqual(MyStage, MySweetStage);
             Assert.AreEqual(MyStage.Procs.Count, 1);
         }
         [TestMethod]
@@ -397,6 +398,39 @@ namespace UnitTestProject1
             var i3 = jac["i3"] as CiSwitchNextLink;
             Assert.IsNotNull(i3);
             Assert.AreEqual(i3.NextLinkVarName, JitVariable.From("AA"));
+        }
+
+        [TestMethod]
+        public void Test14_2()
+        {
+            var code = @"
+                new Stage
+                    Procs
+                        add p1 = new Process
+                            Name = 'PROCP1'
+                            Cio
+                                add i1 = new CiPickTo
+                                    Delay = 1.5M
+                                    TargetWorkClass = ':Car'
+                                    Destination = SUPERLAZY
+            ";
+            var jac = new JacInterpreter();
+            jac.Exec(code);
+
+            var i1 = jac["i1"] as CiPickTo;
+            Assert.IsNotNull(i1);
+            var i1dest = i1.Destination?.Invoke();
+            Assert.IsNull(i1dest);
+
+            var code2 = @"
+                new Stage
+                    Procs
+                        add p2 = new Process
+                            Name = 'SUPERLAZY'
+            ";
+            jac.Exec(code2);
+            i1dest = i1.Destination?.Invoke();
+            Assert.AreEqual(i1dest, jac.GetProcess("SUPERLAZY"));
         }
 
         [TestMethod]
