@@ -2,6 +2,7 @@
 // Licensed under the MIT license.
 
 using System;
+using System.Collections.Generic;
 
 namespace Tono.Jit
 {
@@ -140,7 +141,7 @@ namespace Tono.Jit
             }
             else // next process : have constraint 次工程 制約ありの状態
             {
-                TimeSpan alpha = co.GetWaitTime(Events, ei, Now);
+                var alpha = co.GetWaitTime(Events, ei, Now);
                 Events.Enqueue(Now + alpha, EventTypes.Out, ei.Work);
             }
         }
@@ -203,6 +204,36 @@ namespace Tono.Jit
         public override string ToString()
         {
             return $"{GetType().Name} ID={ID}";
+        }
+
+        private Dictionary<CioBase, Dictionary<JitWork, bool/*dummy*/>> _cioWorkCache = new Dictionary<CioBase, Dictionary<JitWork, bool>>();
+
+        public void AddWorkInReserve(CioBase cio, JitWork work)
+        {
+            var works = _cioWorkCache.GetValueOrDefault(cio, true, a => new Dictionary<JitWork, bool>());
+            works[work] = true;
+        }
+
+        /// <summary>
+        /// Remove Work instance
+        /// </summary>
+        /// <param name="cio"></param>
+        /// <param name="work"></param>
+        public void RemoveWorkInReserve(CioBase cio, JitWork work)
+        {
+            var works = _cioWorkCache.GetValueOrDefault(cio, true, a => new Dictionary<JitWork, bool>());
+            works.Remove(work);
+        }
+
+        /// <summary>
+        /// Query works in reserve
+        /// </summary>
+        /// <param name="cio"></param>
+        /// <returns></returns>
+        public IEnumerable<JitWork> GetWorksInReserve(CioBase cio)
+        {
+            var works = _cioWorkCache.GetValueOrDefault(cio, true, a => new Dictionary<JitWork, bool>());
+            return works.Keys;
         }
     }
 }

@@ -185,9 +185,9 @@ namespace Tono.Jit
         /// <param name="work"></param>
         public virtual void Enter(JitWork work, DateTime now)
         {
-            foreach (CioBase.IWorkInReserved c in Cios.Where(a => a is CioBase.IWorkInReserved))
+            foreach (var cio in Cios)
             {
-                c.RemoveWorkInReserve(work);
+                work.Stage.RemoveWorkInReserve(cio, work);
             }
 
             WorkInTimes[work] = now;
@@ -290,9 +290,9 @@ namespace Tono.Jit
             }
 
             // reserve work-in (for Max constraint)
-            foreach (CioBase.IWorkInReserved c in Cios.Where(a => a is CioBase.IWorkInReserved))
+            foreach (var cio in Cios)
             {
-                c.AddWorkInReserve(ei.Work);
+                ei.Work.Stage.AddWorkInReserve(cio, ei.Work);
             }
         }
 

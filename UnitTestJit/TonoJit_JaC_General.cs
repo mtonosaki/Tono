@@ -525,12 +525,6 @@ namespace UnitTestProject1
             var code3 = @"
                 o1
                     ReferenceVarName = 'Weight'
-                    WorkInReserve
-                        add new Work
-                            ID = 'MyWork01'
-                        add w1
-                        add w2
-                        add w3
                     Value = 500
             ";
             jac.Exec(code3);
@@ -539,19 +533,6 @@ namespace UnitTestProject1
             Assert.IsNotNull(o1);
             Assert.AreEqual(o1.ReferenceVarName, JitVariable.From("Weight"));
             Assert.AreEqual(o1.Value, 500.0);
-            var w1 = jac.GetWork("MyWork01");
-            Assert.IsNotNull(w1);
-            Assert.AreEqual(o1.GetWorkInReserves().Count(), 4);
-            Assert.AreEqual(o1.GetWorkInReserves().FirstOrDefault(), w1);
-
-            code = @"
-                o1
-                    WorkInReserve
-                        remove MyWork01
-            ";
-            jac.Exec(code);
-            Assert.AreEqual(o1.GetWorkInReserves().Count(), 3);
-            Assert.IsNull(o1.GetWorkInReserves().Where(a => a.Name == w1.Name).FirstOrDefault());
         }
 
         [TestMethod]

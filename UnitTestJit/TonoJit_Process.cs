@@ -2147,6 +2147,7 @@ namespace UnitTestProject1
             {
                 st.Events.Enqueue(TimeUtil.Set(today, hour: 9, minute: 0), EventTypes.Out, new JitWork
                 {
+                    Stage = st,
                     Name = $"y{(i + 1):0}",
                     NextProcess = Y,
                 });
@@ -2721,6 +2722,7 @@ namespace UnitTestProject1
             });
             st.Events.Enqueue(TimeUtil.Set(today, hour: 9, minute: 0), EventTypes.Out, c = new JitWork
             {
+                Stage = st,
                 Name = "c",
                 NextProcess = X,
             });

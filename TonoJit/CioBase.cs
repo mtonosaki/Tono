@@ -43,18 +43,9 @@ namespace Tono.Jit
         }
 
         // remember last work in-time (especially for Span constraint)
-        public interface ILastInTime
+        public interface ILastInTime    // TODO: move to Stage
         {
             DateTime LastInTime { get; set; }
-        }
-
-        /// <summary>
-        /// For Calclation with WORK objects
-        /// </summary>
-        public interface IWorkInReserved    // TODO: Move to Stage
-        {
-            void AddWorkInReserve(JitWork work);
-            void RemoveWorkInReserve(JitWork work);
         }
 
         public override bool Equals(object obj)
