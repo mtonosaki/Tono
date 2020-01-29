@@ -15,7 +15,7 @@ namespace Tono.Jit
         /// </summary>
         public class Destinations : IEnumerable<JitProcess>
         {
-            private readonly List<Func<JitProcess>> _dstFuncs = new List<Func<JitProcess>>(); // TODO: Move to Stage
+            private readonly List<Func<JitProcess>> _dstFuncs = new List<Func<JitProcess>>(); // TODO: change to super lazy by process.Name/ID
 
             /// <summary>
             /// destination count

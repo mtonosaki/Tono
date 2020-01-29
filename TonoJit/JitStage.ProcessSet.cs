@@ -13,6 +13,7 @@ namespace Tono.Jit
         /// </summary>
         public class ProcessSet
         {
+            private Dictionary<string, JitProcess> _idProcs = new Dictionary<string, JitProcess>();
             private readonly List<JitProcess> _procs = new List<JitProcess>();
 
             /// <summary>
@@ -22,6 +23,7 @@ namespace Tono.Jit
 
             public void Add(JitProcess proc)
             {
+                _idProcs[proc.ID] = proc;
                 _procs.Add(proc);
             }
 
@@ -35,18 +37,20 @@ namespace Tono.Jit
 
             public void Remove(JitProcess proc)
             {
+                _idProcs.Remove(proc.ID);
                 _procs.Remove(proc);
             }
 
             public JitProcess Find(string procKey)
             {
-                // TODO: Speed up
-                var ret = _procs.Where(a => a.ID.Equals(procKey)).FirstOrDefault();
-                if (ret == null)
+                if (_idProcs.TryGetValue(procKey, out var ret))
                 {
-                    ret = _procs.Where(a => a.Name?.Equals(procKey) ?? false).FirstOrDefault();
+                    return ret;
                 }
-                return ret;
+                else
+                {
+                    return _procs.Where(a => a.Name?.Equals(procKey) ?? false).FirstOrDefault();    // Concidering Process.Name is change/set later
+                }
             }
 
             /// <summary>
