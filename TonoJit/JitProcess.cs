@@ -283,16 +283,10 @@ namespace Tono.Jit
         /// <param name="now"></param>
         public void RememberWorkWillBeIn(DateTime now, JitStage.WorkEventQueue.Item ei)
         {
-            // save in-time (for Span constraint)
-            foreach (CioBase.ILastInTime c in Cios.Where(a => a is CioBase.ILastInTime))
-            {
-                c.LastInTime = now;
-            }
-
-            // reserve work-in (for Max constraint)
             foreach (var cio in Cios)
             {
-                ei.Work.Stage.AddWorkInReserve(cio, ei.Work);
+                ei.Work.Stage.SetLastInTime(cio, now);  // save in-time (for Span constraint)
+                ei.Work.Stage.AddWorkInReserve(cio, ei.Work);   // reserve work-in (for Max constraint)
             }
         }
 

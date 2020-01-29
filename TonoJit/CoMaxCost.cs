@@ -60,9 +60,9 @@ namespace Tono.Jit
         /// 制約中のワークに対し、待ち時間を計算する
         /// </summary>
         /// <returns></returns>
-        public override TimeSpan GetWaitTime(WorkEventQueue Events, WorkEventQueue.Item ei, DateTime Now)
+        public override TimeSpan GetWaitTime(JitStage stage, WorkEventQueue.Item ei, DateTime Now)
         {
-            var nextexit = Events.Find(ei.Work.NextProcess, EventTypes.Out, ":Work");
+            var nextexit = stage.Events.Find(ei.Work.NextProcess, EventTypes.Out, ":Work");
             if (nextexit != null)
             {
                 var ret = MathUtil.Min(TimeSpan.FromDays(999.9), nextexit.Value.Work.ExitTime - Now);

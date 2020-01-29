@@ -10,7 +10,7 @@ namespace Tono.Jit
     /// 自工程のIN間隔を一定以上になる様、前工程からのOUTを制御 
     /// </summary>
     [JacTarget(Name = "CoSpan")]
-    public class CoSpan : CoBase, CioBase.ILastInTime
+    public class CoSpan : CoBase
     {
         public static readonly Type Type = typeof(CoSpan);
 
@@ -32,15 +32,6 @@ namespace Tono.Jit
         }
 
         /// <summary>
-        /// last work enter time 最後にINした時刻
-        /// </summary>
-        /// <remarks>
-        /// This value will be set when out timing at previous process
-        /// この値でSpanを評価。実際にProcessにINしたタイミングではなく、前ProcessでOutされた時にセットされる
-        /// </remarks>
-        public DateTime LastInTime { get; set; }
-
-        /// <summary>
         /// check span constraint
         /// </summary>
         /// <param name="work"></param>
@@ -48,7 +39,8 @@ namespace Tono.Jit
         /// <returns>true=waiting / false=Can Enter</returns>
         public override bool Check(JitWork work, DateTime now)
         {
-            return (now - LastInTime) < Span;
+            
+            return (now - work.Stage.GetLastInTime(this)) < Span;
         }
 
         /// <summary>
@@ -60,9 +52,9 @@ namespace Tono.Jit
         /// <param name="work"></param>
         /// <param name="Now"></param>
         /// <returns></returns>
-        public override TimeSpan GetWaitTime(JitStage.WorkEventQueue Events, JitStage.WorkEventQueue.Item ei, DateTime Now)
+        public override TimeSpan GetWaitTime(JitStage stage, JitStage.WorkEventQueue.Item ei, DateTime Now)
         {
-            TimeSpan ret = MathUtil.Min(TimeSpan.FromDays(999.9), LastInTime + Span - Now);
+            TimeSpan ret = MathUtil.Min(TimeSpan.FromDays(999.9), stage.GetLastInTime(this) + Span - Now);
             if (ret < TimeSpan.FromSeconds(1))
             {
                 ret = PorlingSpan;

@@ -42,12 +42,6 @@ namespace Tono.Jit
             return "";
         }
 
-        // remember last work in-time (especially for Span constraint)
-        public interface ILastInTime    // TODO: move to Stage
-        {
-            DateTime LastInTime { get; set; }
-        }
-
         public override bool Equals(object obj)
         {
             if (obj is CioBase cio)

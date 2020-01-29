@@ -133,7 +133,7 @@ namespace Tono.Jit
                 return;
             }
             // STEP1
-            if (ei.Work.NextProcess.CheckConstraints(ei.Work, Now, out CoBase co) == false)   // no constraint 制約なしの状態
+            if (ei.Work.NextProcess.CheckConstraints(ei.Work, Now, out var co) == false)   // no constraint 制約なしの状態
             {
                 // STEP2
                 Events.Enqueue(Now, EventTypes.In, ei.Work);
@@ -141,7 +141,7 @@ namespace Tono.Jit
             }
             else // next process : have constraint 次工程 制約ありの状態
             {
-                var alpha = co.GetWaitTime(Events, ei, Now);
+                var alpha = co.GetWaitTime(this, ei, Now);
                 Events.Enqueue(Now + alpha, EventTypes.Out, ei.Work);
             }
         }
@@ -234,6 +234,32 @@ namespace Tono.Jit
         {
             var works = _cioWorkCache.GetValueOrDefault(cio, true, a => new Dictionary<JitWork, bool>());
             return works.Keys;
+        }
+
+        private Dictionary<CioBase, DateTime> _lastInTimes = new Dictionary<CioBase, DateTime>();
+
+        /// <summary>
+        /// Save Last Work enter time.
+        /// </summary>
+        /// <param name="cio"></param>
+        /// <param name="now"></param>
+        public void SetLastInTime(CioBase cio, DateTime now)
+        {
+            _lastInTimes[cio] = now;
+        }
+
+        /// <summary>
+        /// last work enter time 最後にINした時刻
+        /// </summary>
+        /// <param name="cio"></param>
+        /// <returns></returns>
+        /// <remarks>
+        /// This value will be set when out timing at previous process
+        /// この値でSpanを評価。実際にProcessにINしたタイミングではなく、前ProcessでOutされた時にセットされる
+        /// </remarks>
+        public DateTime GetLastInTime(CioBase cio)
+        {
+            return _lastInTimes.GetValueOrDefault(cio);
         }
     }
 }
