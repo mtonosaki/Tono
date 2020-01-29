@@ -126,19 +126,7 @@ namespace Tono.Jit
         /// Link set of the owner stage
         /// jfStageにあるリンクセット
         /// </summary>
-        public Destinations NextLinks { get; set; } = new Destinations(); // TODO: move to Stage
-
-        /// <summary>
-        /// having work-in time mapping
-        /// 属するワークのIN時刻マップ
-        /// </summary>
-        public Dictionary<JitWork, DateTime/*In Time*/> WorkInTimes { get; private set; } = new Dictionary<JitWork, DateTime>(); // TODO: move to stage
-
-        /// <summary>
-        /// Having works
-        /// ワーク一覧
-        /// </summary>
-        public IEnumerable<JitWork> Works => WorkInTimes.Keys; // TODO: move to stage
+        public Destinations NextLinks { get; set; } = new Destinations(); // TODO: Change super lazy by process key
 
         /// <summary>
         /// Collection utility COs UNION CIs
@@ -190,12 +178,12 @@ namespace Tono.Jit
                 work.Stage.RemoveWorkInReserve(cio, work);
             }
 
-            WorkInTimes[work] = now;
+            work.Stage.EnterWorkToProcess(this, work, now);
             work.PrevProcess = work.CurrentProcess;
             work.CurrentProcess = work.NextProcess;
             work.NextProcess = NextLinks.FirstOrNull();
             work.EnterTime = now;
-            CheckAndAttachKanban(now); // かんばんが有れば、NextProcessをかんばんで更新する
+            CheckAndAttachKanban(work.Stage, now); // かんばんが有れば、NextProcessをかんばんで更新する
         }
 
         /// <summary>
@@ -205,7 +193,7 @@ namespace Tono.Jit
         /// <param name="now"></param>
         public virtual void Exit(JitWork work)
         {
-            WorkInTimes.Remove(work);
+            work.Stage.ExitWorkFromProcess(this, work);
         }
 
         /// <summary>
@@ -220,13 +208,13 @@ namespace Tono.Jit
         /// ret.NextProcess = null
         /// ret.CurrentProcess = null
         /// </remarks>
-        public virtual JitWork ExitCollectedWork(DateTime now)
+        public virtual JitWork ExitCollectedWork(JitStage stage, DateTime now)
         {
             var buf =
-                from w in WorkInTimes
-                where w.Key.NextProcess == null // work that have not next process
-                where w.Key.ExitTime <= now     // select work that exit time expired.
-                select new WorkEntery { Work = w.Key, Enter = w.Value };
+                from wt in stage.GetWorks(this)
+                where wt.Work.NextProcess == null // work that have not next process
+                where wt.Work.ExitTime <= now     // select work that exit time expired.
+                select new WorkEntery { Work = wt.Work, Enter = wt.EnterTime };
             var work = ExitWorkSelector.Invoke(buf);
             if (work != null)
             {
@@ -318,21 +306,21 @@ namespace Tono.Jit
         /// Add kanban
         /// </summary>
         /// <param name="kanban"></param>
-        public virtual JitKanban AddKanban(JitStage.WorkEventQueue events, JitKanban kanban, DateTime now)
+        public virtual JitKanban AddKanban(JitStage stage, JitKanban kanban, DateTime now)
         {
             kanbanQueue.Enqueue(new EventQueueKanban
             {
-                EventQueue = events,
+                EventQueue = stage.Events,
                 Kanban = kanban,
             });
-            return CheckAndAttachKanban(now);
+            return CheckAndAttachKanban(stage, now);
         }
 
         /// <summary>
         /// かんばんの目的地をワークに付ける（付け替える）
         /// </summary>
         /// <returns>処理されたかんばん</returns>
-        private JitKanban CheckAndAttachKanban(DateTime now)
+        private JitKanban CheckAndAttachKanban(JitStage stage, DateTime now)
         {
             if (kanbanQueue.Count == 0)
             {
@@ -340,9 +328,9 @@ namespace Tono.Jit
             }
 
             var buf =
-                from w in WorkInTimes
-                where w.Key.NextProcess == null // 行先が無い
-                select new WorkEntery { Work = w.Key, Enter = w.Value };
+                from w in stage.GetWorks(this)
+                where w.Work.NextProcess == null // 行先が無い
+                select new WorkEntery { Work = w.Work, Enter = w.EnterTime };
             var work = ExitWorkSelector.Invoke(buf);
 
             if (work == null)

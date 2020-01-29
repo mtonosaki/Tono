@@ -470,12 +470,12 @@ namespace UnitTestProject1
             st.DoNext();
             dat = st.Events.Peeks(99).ToList(); k = 0;
             Assert.IsTrue(CMP(dat[k++], "w1", EventTypes.In, "10:00", "B"));
-            Assert.AreEqual(SINK.Works.Count(), 0);
+            Assert.AreEqual(st.GetWorks(SINK).Count(), 0);
 
             st.DoNext();
             dat = st.Events.Peeks(99).ToList(); k = 0;
             Assert.AreEqual(dat.Count, 0);
-            Assert.AreEqual(SINK.Works.Count(), 1);
+            Assert.AreEqual(st.GetWorks(SINK).Count(), 1);
         }
 
         [TestMethod]
@@ -2918,7 +2918,7 @@ namespace UnitTestProject1
             Assert.IsTrue(CMP(dat[0], "b", EventTypes.Out, "9:01"));
             Assert.IsTrue(CMP(dat[1], "a", EventTypes.Out, "9:01")); Assert.IsTrue(dat[1].Work.CurrentProcess.Name == "X");
             Assert.IsTrue(CMP(dat[2], "c", EventTypes.Out, "9:02"));
-            Assert.IsTrue(st.Procs["X"].Works.Count() == 1);
+            Assert.IsTrue(st.GetWorks(st.Procs["X"]).Count() == 1);
 
             st.DoNext();    //  3
             dat = st.Events.Peeks(3).ToList();
@@ -2937,8 +2937,8 @@ namespace UnitTestProject1
             Assert.IsTrue(CMP(dat[0], "c", EventTypes.Out, "9:02"));
             Assert.IsTrue(CMP(dat[1], "b", EventTypes.Out, "9:03"));
             Assert.IsTrue(CMP(dat[2], "a", EventTypes.Out, "9:05")); Assert.IsTrue(dat[2].Work.CurrentProcess.Name == "Y");
-            Assert.IsTrue(st.Procs["X"].Works.Count() == 0);
-            Assert.IsTrue(st.Procs["Y"].Works.Count() == 1);
+            Assert.IsTrue(st.GetWorks(st.Procs["X"]).Count() == 0);
+            Assert.IsTrue(st.GetWorks(st.Procs["Y"]).Count() == 1);
 
             st.DoNext();    //  6
             dat = st.Events.Peeks(3).ToList();
@@ -2963,7 +2963,7 @@ namespace UnitTestProject1
             Assert.IsTrue(CMP(dat[0], "b", EventTypes.Out, "9:04")); Assert.IsTrue(dat[0].Work.CurrentProcess.Name == "X");
             Assert.IsTrue(CMP(dat[1], "a", EventTypes.Out, "9:05"));
             Assert.IsTrue(CMP(dat[2], "c", EventTypes.Out, "9:06"));
-            Assert.IsTrue(st.Procs["X"].Works.Count() == 1);
+            Assert.IsTrue(st.GetWorks(st.Procs["X"]).Count() == 1);
 
 
             st.DoNext();    // 10
@@ -2989,8 +2989,8 @@ namespace UnitTestProject1
             Assert.IsTrue(dat.Count == 2, "a moved to Z. a have sunk because Z have not next process");
             Assert.IsTrue(CMP(dat[0], "b", EventTypes.Out, "9:05"));
             Assert.IsTrue(CMP(dat[1], "c", EventTypes.Out, "9:06"));
-            Assert.IsTrue(st.Procs["Y"].Works.Count() == 0);
-            Assert.IsTrue(st.Procs["Z"].Works.Count() == 1);
+            Assert.IsTrue(st.GetWorks(st.Procs["Y"]).Count() == 0);
+            Assert.IsTrue(st.GetWorks(st.Procs["Z"]).Count() == 1);
 
             st.DoNext();    // 14
             dat = st.Events.Peeks(3).ToList();
@@ -3001,9 +3001,9 @@ namespace UnitTestProject1
             dat = st.Events.Peeks(3).ToList();
             Assert.IsTrue(CMP(dat[0], "c", EventTypes.Out, "9:06"));
             Assert.IsTrue(CMP(dat[1], "b", EventTypes.Out, "9:09"));
-            Assert.IsTrue(st.Procs["X"].Works.Count() == 0);
-            Assert.IsTrue(st.Procs["Y"].Works.Count() == 1);
-            Assert.IsTrue(st.Procs["Z"].Works.Count() == 1);
+            Assert.IsTrue(st.GetWorks(st.Procs["X"]).Count() == 0);
+            Assert.IsTrue(st.GetWorks(st.Procs["Y"]).Count() == 1);
+            Assert.IsTrue(st.GetWorks(st.Procs["Z"]).Count() == 1);
 
             st.DoNext();    // 16
             dat = st.Events.Peeks(3).ToList();
@@ -3019,9 +3019,9 @@ namespace UnitTestProject1
             dat = st.Events.Peeks(3).ToList();
             Assert.IsTrue(CMP(dat[0], "b", EventTypes.Out, "9:09"));
             Assert.IsTrue(CMP(dat[1], "c", EventTypes.Out, "9:09"));
-            Assert.IsTrue(st.Procs["X"].Works.Count() == 1);
-            Assert.IsTrue(st.Procs["Y"].Works.Count() == 1);
-            Assert.IsTrue(st.Procs["Z"].Works.Count() == 1);
+            Assert.IsTrue(st.GetWorks(st.Procs["X"]).Count() == 1);
+            Assert.IsTrue(st.GetWorks(st.Procs["Y"]).Count() == 1);
+            Assert.IsTrue(st.GetWorks(st.Procs["Z"]).Count() == 1);
 
             st.DoNext();    // 19
             dat = st.Events.Peeks(3).ToList();
@@ -3037,9 +3037,9 @@ namespace UnitTestProject1
             dat = st.Events.Peeks(3).ToList();
             Assert.IsTrue(dat.Count == 1, "b moved to Z then b have sunk because Z have not next process");
             Assert.IsTrue(CMP(dat[0], "c", EventTypes.Out, "9:09"));
-            Assert.IsTrue(st.Procs["X"].Works.Count() == 1);
-            Assert.IsTrue(st.Procs["Y"].Works.Count() == 0);
-            Assert.IsTrue(st.Procs["Z"].Works.Count() == 2);
+            Assert.IsTrue(st.GetWorks(st.Procs["X"]).Count() == 1);
+            Assert.IsTrue(st.GetWorks(st.Procs["Y"]).Count() == 0);
+            Assert.IsTrue(st.GetWorks(st.Procs["Z"]).Count() == 2);
 
             st.DoNext();    // 22
             dat = st.Events.Peeks(3).ToList();
@@ -3056,9 +3056,9 @@ namespace UnitTestProject1
             st.DoNext();    // 25
             dat = st.Events.Peeks(3).ToList();
             Assert.IsTrue(dat.Count == 0, "c moved to Z them c have sunk because Z have not next process");
-            Assert.IsTrue(st.Procs["X"].Works.Count() == 0);
-            Assert.IsTrue(st.Procs["Y"].Works.Count() == 0);
-            Assert.IsTrue(st.Procs["Z"].Works.Count() == 3);
+            Assert.IsTrue(st.GetWorks(st.Procs["X"]).Count() == 0);
+            Assert.IsTrue(st.GetWorks(st.Procs["Y"]).Count() == 0);
+            Assert.IsTrue(st.GetWorks(st.Procs["Z"]).Count() == 3);
         }
 
         private bool CMP(JitStage.WorkEventQueue.Item ei, string name, EventTypes et, string time, string procName = null)

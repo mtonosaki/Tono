@@ -45,7 +45,7 @@ namespace Tono.Jit
         {
             var wirs = work.Stage.GetWorksInReserve(this);
             var costs =
-                from w in GetCheckTargetProcess(work).Works.Concat(wirs)
+                from w in work.Stage.GetWorks(GetCheckTargetProcess(work)).Select(wt => wt.Work).Concat(wirs)
                 let cost = w.ChildVriables.GetValueOrNull("Cost")
                 where cost != null
                 let varval = cost[ReferenceVarName]

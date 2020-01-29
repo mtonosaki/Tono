@@ -45,7 +45,7 @@ namespace Tono.Jit
             }
 
             var procPullFrom = parentWork.Stage.FindProcess(PullFromProcessKey);
-            if (procPullFrom.ExitCollectedWork(now) is JitWork sideWork)    // work at PullFrom process 横工程のワーク
+            if (procPullFrom.ExitCollectedWork(parentWork.Stage, now) is JitWork sideWork)    // work at PullFrom process 横工程のワーク
             {
                 parentWork.ChildWorks[ChildPartName] = sideWork;
                 return false;

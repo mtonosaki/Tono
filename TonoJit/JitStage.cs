@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Tono.Jit
 {
@@ -110,7 +111,7 @@ namespace Tono.Jit
         /// <param name="ei"></param>
         private void ProcKanban(WorkEventQueue.Item ei)
         {
-            var usedKanban = ei.Kanban.Stage.FindProcess(ei.Kanban.PullFromProcessKey).AddKanban(Events, ei.Kanban, Now); // 工程にかんばんを投入して、処理を促す
+            var usedKanban = ei.Kanban.Stage.FindProcess(ei.Kanban.PullFromProcessKey).AddKanban(this, ei.Kanban, Now); // 工程にかんばんを投入して、処理を促す
             if (usedKanban != null)
             {
                 usedKanban.Work.CurrentProcess.AddAndAdjustExitTiming(Events, usedKanban.Work); // Eventキューに Outイベントを登録
@@ -236,7 +237,7 @@ namespace Tono.Jit
             return works.Keys;
         }
 
-        private Dictionary<CioBase, DateTime> _lastInTimes = new Dictionary<CioBase, DateTime>();
+        private Dictionary<CioBase, DateTime> _lastInTimesCio = new Dictionary<CioBase, DateTime>();
 
         /// <summary>
         /// Save Last Work enter time.
@@ -245,7 +246,7 @@ namespace Tono.Jit
         /// <param name="now"></param>
         public void SetLastInTime(CioBase cio, DateTime now)
         {
-            _lastInTimes[cio] = now;
+            _lastInTimesCio[cio] = now;
         }
 
         /// <summary>
@@ -259,7 +260,42 @@ namespace Tono.Jit
         /// </remarks>
         public DateTime GetLastInTime(CioBase cio)
         {
-            return _lastInTimes.GetValueOrDefault(cio);
+            return _lastInTimesCio.GetValueOrDefault(cio);
+        }
+
+        private Dictionary<JitProcess, Dictionary<JitWork, DateTime/*Enter-Time*/>> _worksInProcess = new Dictionary<JitProcess, Dictionary<JitWork, DateTime>>();
+
+        /// <summary>
+        /// Save Work enter time.
+        /// </summary>
+        /// <param name="cio"></param>
+        /// <param name="now"></param>
+        public void EnterWorkToProcess(JitProcess process, JitWork work, DateTime now)
+        {
+            var works = _worksInProcess.GetValueOrDefault(process, true, a => new Dictionary<JitWork, DateTime/*Enter-Time*/>());
+            works[work] = now;
+        }
+
+        /// <summary>
+        /// Leave Work enter time.
+        /// </summary>
+        /// <param name="cio"></param>
+        /// <param name="now"></param>
+        public void ExitWorkFromProcess(JitProcess process, JitWork work)
+        {
+            var works = _worksInProcess.GetValueOrDefault(process, true, a => new Dictionary<JitWork, DateTime/*Enter-Time*/>());
+            works.Remove(work);
+        }
+
+        /// <summary>
+        /// Query Works in process
+        /// </summary>
+        /// <param name="process"></param>
+        /// <returns></returns>
+        public IEnumerable<(JitWork Work, DateTime EnterTime)> GetWorks(JitProcess process)
+        {
+            var works = _worksInProcess.GetValueOrDefault(process, true, a => new Dictionary<JitWork, DateTime/*Enter-Time*/>());
+            return works.Select(kv => (kv.Key, kv.Value));
         }
     }
 }
