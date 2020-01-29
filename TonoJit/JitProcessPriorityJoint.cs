@@ -27,10 +27,10 @@ namespace Tono.Jit
         {
             base.Add(procFunc);
 
-            procFunc().NextLinks.Add(() => this); // グループの親工程に逃がすルートを作る
+            procFunc().NextLinks.Add(this.ID); // グループの親工程に逃がすルートを作る
 
             int no = 0;
-            foreach (JitProcess p in ChildProcs)
+            foreach (var p in ChildProcs)
             {
                 procPriority[p] = ++no; // larger number is priority 数字が大きい方が、先にOUTされる
             }

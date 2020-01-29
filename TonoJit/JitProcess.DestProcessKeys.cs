@@ -13,42 +13,47 @@ namespace Tono.Jit
         /// <summary>
         /// work destination collection class 
         /// </summary>
-        public class Destinations : IEnumerable<JitProcess>
+        public class DestProcessKeys : IEnumerable<string>
         {
-            private readonly List<Func<JitProcess>> _dstFuncs = new List<Func<JitProcess>>(); // TODO: change to super lazy by process.Name/ID
+            private readonly List<string> _dstProcKeys = new List<string>();
 
             /// <summary>
             /// destination count
             /// </summary>
-            public int Count => _dstFuncs.Count;
+            public int Count => _dstProcKeys.Count;
 
             /// <summary>
             /// add process (NOTE: add sequence is important because of for being sequence of CiSwitchNext)
             /// </summary>
-            /// <param name="dstFunc">next process</param>
-            public void Add(Func<JitProcess> dstFunc)
+            /// <param name="processKey">next process ID/Name</param>
+            public void Add(string processKey)
             {
-                _dstFuncs.Add(dstFunc);
+                _dstProcKeys.Add(processKey);
+            }
+
+            public void Add(JitProcess process)
+            {
+                Add(process.ID);
             }
 
             /// <summary>
             /// add processes(see also comment of Add method)
             /// </summary>
             /// <param name="dst"></param>
-            public void AddRange(IEnumerable<Func<JitProcess>> dstFuncs)
+            public void AddRange(IEnumerable<string> dstProcKeys)
             {
-                foreach (Func<JitProcess> dstFunc in dstFuncs)
+                foreach (var dstProcKey in dstProcKeys)
                 {
-                    Add(dstFunc);
+                    Add(dstProcKey);
                 }
             }
 
             /// <summary>
-            /// next processes (0=first process)
+            /// next processes key(Name/ID) (0=first process)
             /// </summary>
             /// <param name="index"></param>
             /// <returns></returns>
-            public JitProcess this[int index]
+            public string this[int index]
             {
                 get
                 {
@@ -56,22 +61,22 @@ namespace Tono.Jit
                     {
                         return null;
                     }
-                    if (index < _dstFuncs.Count)
+                    if (index < _dstProcKeys.Count)
                     {
-                        return _dstFuncs[MathUtil.Max(0, index)]();
+                        return _dstProcKeys[MathUtil.Max(0, index)];
                     }
                     else
                     {
-                        return _dstFuncs[_dstFuncs.Count - 1]();
+                        return _dstProcKeys[_dstProcKeys.Count - 1];
                     }
                 }
             }
 
             /// <summary>
-            /// Get first process or null
+            /// Get first process ID/Name or null
             /// </summary>
             /// <returns></returns>
-            public JitProcess FirstOrNull()
+            public string FirstOrNull()
             {
                 if (Count > 0)
                 {
@@ -83,22 +88,14 @@ namespace Tono.Jit
                 }
             }
 
-            public IEnumerator<JitProcess> GetEnumerator()
+            public IEnumerator<string> GetEnumerator()
             {
-                var ret =
-                    from func in _dstFuncs
-                    let proc = func()
-                    select proc;
-                return ret.GetEnumerator();
+                return _dstProcKeys.GetEnumerator();
             }
 
             IEnumerator IEnumerable.GetEnumerator()
             {
-                var ret =
-                    from func in _dstFuncs
-                    let proc = func()
-                    select proc;
-                return ret.GetEnumerator();
+                return _dstProcKeys.GetEnumerator();
             }
         }
     }

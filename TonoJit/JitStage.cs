@@ -67,10 +67,21 @@ namespace Tono.Jit
             }
         }
 
-        public JitProcess FindProcess(string processKey)
+        public JitProcess FindProcess(string processKey, bool isReturnNull = false)
         {
+            if (string.IsNullOrEmpty(processKey))
+            {
+                if (isReturnNull)
+                {
+                    return null;
+                }
+                else
+                {
+                    throw new JitException($"Cannot find the NULL Process");
+                }
+            }
             var ret = Procs[processKey];
-            if( ret == null)
+            if (ret == null)
             {
                 throw new JitException($"Cannot find the Process '{processKey}'");
             }

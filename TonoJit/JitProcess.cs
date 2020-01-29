@@ -126,7 +126,7 @@ namespace Tono.Jit
         /// Link set of the owner stage
         /// jfStageにあるリンクセット
         /// </summary>
-        public Destinations NextLinks { get; set; } = new Destinations(); // TODO: Change super lazy by process key
+        public DestProcessKeys NextLinks { get; set; } = new DestProcessKeys();
 
         /// <summary>
         /// Collection utility COs UNION CIs
@@ -181,7 +181,7 @@ namespace Tono.Jit
             work.Stage.EnterWorkToProcess(this, work, now);
             work.PrevProcess = work.CurrentProcess;
             work.CurrentProcess = work.NextProcess;
-            work.NextProcess = NextLinks.FirstOrNull();
+            work.NextProcess = work.Stage.FindProcess(NextLinks.FirstOrNull(), isReturnNull: true);
             work.EnterTime = now;
             CheckAndAttachKanban(work.Stage, now); // かんばんが有れば、NextProcessをかんばんで更新する
         }

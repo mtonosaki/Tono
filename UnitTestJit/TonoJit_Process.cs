@@ -32,33 +32,33 @@ namespace UnitTestProject1
                         Delay = TimeSpan.FromMinutes(3),
                     },
                 },
-                NextLinks = new JitProcess.Destinations
+                NextLinks = new JitProcess.DestProcessKeys
                 {
-                    () => SINK,
+                    SINK.ID,
                 },
             });
             st.Procs.Add(Y = new JitProcess
             {
                 Name = "Y",
-                NextLinks = new JitProcess.Destinations
+                NextLinks = new JitProcess.DestProcessKeys
                 {
-                    () => SINK,
+                    SINK,
                 },
             });
             st.Procs.Add(B = new JitProcess // •ªŠòŒ³
             {
                 Name = "B",
-                NextLinks = new JitProcess.Destinations
+                NextLinks = new JitProcess.DestProcessKeys
                 {
-                    () => X, () => Y,
+                    X, Y,
                 },
             });
             st.Procs.Add(A = new JitProcess  // ‘OH’ö
             {
                 Name = "A",
-                NextLinks = new JitProcess.Destinations
+                NextLinks = new JitProcess.DestProcessKeys
                 {
-                    () => B,
+                    B,
                 },
             });
         }
@@ -100,10 +100,10 @@ namespace UnitTestProject1
 
 
             // H’öŠÔƒŠƒ“ƒN
-            A.NextLinks.Add(() => B);     // A¨B PushB’A‚µAB.Co.JoinFrom‚ÅJoin‚Å‚«‚é‚Ü‚Å‘Ò‚Â
-            B.NextLinks.Add(() => C);     // B¨C PushB•ªŠòH’ö‚Ö‚ÌˆÚ“®
-            C.NextLinks.Add(() => SINK);  // B¨SINK Push
-            D.NextLinks.Add(() => SINK);  // D¨SINK Push
+            A.NextLinks.Add(B);             // A¨B PushB’A‚µAB.Co.JoinFrom‚ÅJoin‚Å‚«‚é‚Ü‚Å‘Ò‚Â
+            B.NextLinks.Add("C");           // B¨C PushB•ªŠòH’ö‚Ö‚ÌˆÚ“®
+            C.NextLinks.Add(SINK.ID);       // B¨SINK Push
+            D.NextLinks.Add(SINK.Name);     // D¨SINK Push
 
             A.InCommands.Add(new CiDelay
             {
@@ -335,8 +335,8 @@ namespace UnitTestProject1
             });
 
             // H’öŠÔƒŠƒ“ƒN
-            A.NextLinks.Add(() => B);     // A¨B PushB’A‚µAB.Co.JoinFrom‚ÅJoin‚Å‚«‚é‚Ü‚Å‘Ò‚Â
-            B.NextLinks.Add(() => SINK);  // B¨SINK Push
+            A.NextLinks.Add(B);     // A¨B PushB’A‚µAB.Co.JoinFrom‚ÅJoin‚Å‚«‚é‚Ü‚Å‘Ò‚Â
+            B.NextLinks.Add(SINK);  // B¨SINK Push
 
             A.InCommands.Add(new CiDelay
             {
@@ -498,7 +498,7 @@ namespace UnitTestProject1
             });
 
             // H’öŠÔƒŠƒ“ƒN
-            Y.NextLinks.Add(() => SINK);
+            Y.NextLinks.Add(SINK);
 
             X.InCommands.Add(new CiDelay
             {
@@ -641,7 +641,7 @@ namespace UnitTestProject1
 
             // H’öŠÔƒŠƒ“ƒN
             // st.Links.SetPushLink(X, Y);  // ŒãH’öˆø‚«Žæ‚è‚Ìê‡‚ÍAPushLink‚ÍÝ’è‚µ‚È‚¢B
-            Y.NextLinks.Add(() => SINK);
+            Y.NextLinks.Add(SINK);
 
             // H’ö‚É§–ñ‚ð•t—^
             X.Constraints.Add(new CoSpan
@@ -887,7 +887,7 @@ namespace UnitTestProject1
 
             // H’öŠÔƒŠƒ“ƒN
             // st.Links.SetPushLink(X, Y);  // ŒãH’öˆø‚«Žæ‚è‚Ìê‡‚ÍAPushLink‚ÍÝ’è‚µ‚È‚¢B
-            Y.NextLinks.Add(() => SINK);
+            Y.NextLinks.Add(SINK);
 
             // H’ö‚É§–ñ‚ð•t—^
             X.Constraints.Add(new CoSpan
@@ -1363,7 +1363,7 @@ namespace UnitTestProject1
 
             // H’öŠÔƒŠƒ“ƒN
             // st.Links.SetPushLink(X, Y);  // ŒãH’öˆø‚«Žæ‚è‚Ìê‡‚ÍAPushLink‚ÍÝ’è‚µ‚È‚¢B
-            Y.NextLinks.Add(() => SINK);
+            Y.NextLinks.Add(SINK);
 
             // H’ö‚É§–ñ‚ð•t—^
             X.Constraints.Add(new CoSpan
@@ -1662,8 +1662,8 @@ namespace UnitTestProject1
             });
 
 
-            JP.NextLinks.Add(() => Z);
-            Z.NextLinks.Add(() => SINK);
+            JP.NextLinks.Add(Z);
+            Z.NextLinks.Add(SINK);
             // No need to add next link from X to JP because X is a child of JP(auto linked)
             // No need to add next link from Y to JP because Y is a child of JP(auto linked)
 
@@ -2103,8 +2103,8 @@ namespace UnitTestProject1
                 Name = "SINK",
             });
 
-            JP.NextLinks.Add(() => Z);
-            Z.NextLinks.Add(() => SINK);
+            JP.NextLinks.Add(Z);
+            Z.NextLinks.Add(SINK);
 
             X.Constraints.Add(new CoSpan
             {
@@ -2495,7 +2495,7 @@ namespace UnitTestProject1
                 Name = "Z",
             });
 
-            JP.NextLinks.Add(() => Z);
+            JP.NextLinks.Add(Z);
 
             X.Constraints.Add(new CoSpan
             {
@@ -2703,8 +2703,8 @@ namespace UnitTestProject1
                 Delay = TimeSpan.FromMinutes(4),
             });
 
-            X.NextLinks.Add(() => Y);
-            Y.NextLinks.Add(() => Z);
+            X.NextLinks.Add(Y);
+            Y.NextLinks.Add(Z);
 
             var today = TimeUtil.ClearTime(DateTime.Now);
             JitWork a, b, c;
@@ -2881,8 +2881,8 @@ namespace UnitTestProject1
                 Delay = TimeSpan.FromMinutes(4),
             });
 
-            X.NextLinks.Add(() => Y);
-            Y.NextLinks.Add(() => Z);
+            X.NextLinks.Add(Y);
+            Y.NextLinks.Add(Z);
 
             var today = TimeUtil.ClearTime(DateTime.Now);  // H:M:S:MS = 00:00:00:000
             JitWork a, b, c;
