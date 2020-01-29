@@ -53,7 +53,10 @@ namespace Tono.Jit
         /// Query work in reserve
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<JitWork> GetWorkInReserves() => WorkInReserves.Keys;
+        public IEnumerable<JitWork> GetWorkInReserves()
+        {
+            return WorkInReserves.Keys;
+        }
 
         /// <summary>
         /// check maximum cost constraint to let the work wait at previous process

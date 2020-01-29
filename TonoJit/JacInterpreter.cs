@@ -603,10 +603,26 @@ namespace Tono.Jit
         /// <returns></returns>
         public static Distance ParseDistance(string valuestr)
         {
-            if (valuestr.EndsWith("mm")) return Distance.FromMeter(double.Parse(StrUtil.Left(valuestr, valuestr.Length - 2)) / 1000.0);
-            if (valuestr.EndsWith("cm")) return Distance.FromMeter(double.Parse(StrUtil.Left(valuestr, valuestr.Length - 2)) / 100.0);
-            if (valuestr.EndsWith("km")) return Distance.FromMeter(double.Parse(StrUtil.Left(valuestr, valuestr.Length - 2)) * 1000.0);
-            if (valuestr.EndsWith("m")) return Distance.FromMeter(double.Parse(StrUtil.Left(valuestr, valuestr.Length - 1)));
+            if (valuestr.EndsWith("mm"))
+            {
+                return Distance.FromMeter(double.Parse(StrUtil.Left(valuestr, valuestr.Length - 2)) / 1000.0);
+            }
+
+            if (valuestr.EndsWith("cm"))
+            {
+                return Distance.FromMeter(double.Parse(StrUtil.Left(valuestr, valuestr.Length - 2)) / 100.0);
+            }
+
+            if (valuestr.EndsWith("km"))
+            {
+                return Distance.FromMeter(double.Parse(StrUtil.Left(valuestr, valuestr.Length - 2)) * 1000.0);
+            }
+
+            if (valuestr.EndsWith("m"))
+            {
+                return Distance.FromMeter(double.Parse(StrUtil.Left(valuestr, valuestr.Length - 1)));
+            }
+
             throw new JacException(JacException.Codes.NotSupportedUnit, $"Cannot specify distance unit from {valuestr}");
         }
 
@@ -617,8 +633,15 @@ namespace Tono.Jit
         /// <returns></returns>
         public static bool CheckVariableName(string name)
         {
-            if (name == null) return false;
-            if (name.Length < 1 || name.Length > 16) return false;
+            if (name == null)
+            {
+                return false;
+            }
+
+            if (name.Length < 1 || name.Length > 16)
+            {
+                return false;
+            }
 
             var reg = new Regex("^[A-Za-z][A-Za-z0-9]*$");
             return reg.IsMatch(name);
@@ -635,7 +658,10 @@ namespace Tono.Jit
             if (valuestr.StartsWith("0") && char.IsNumber(valuestr[valuestr.Length - 1]))
             {
                 val = double.Parse(valuestr);
-                if (val == 0) return TimeSpan.Zero;
+                if (val == 0)
+                {
+                    return TimeSpan.Zero;
+                }
             }
             string unit;
             if (valuestr.EndsWith("MS"))
@@ -845,7 +871,7 @@ namespace Tono.Jit
     /// <summary>
     /// Jit model as a Code common exception object
     /// </summary>
-    public class JacException : Exception
+    public class JacException : JitException
     {
         public enum Codes
         {

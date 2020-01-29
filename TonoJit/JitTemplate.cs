@@ -71,7 +71,10 @@ namespace Tono.Jit
         [JacListRemove(PropertyName = "Block")]
         public void RemoveBlock(string removeKey)
         {
-            if (JacBlock.Count < 1) return;
+            if (JacBlock.Count < 1)
+            {
+                return;
+            }
 
             if (removeKey == LastBlockJac)
             {

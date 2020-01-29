@@ -15,7 +15,7 @@ namespace Tono.Jit
         /// </summary>
         public class Destinations : IEnumerable<JitProcess>
         {
-            private readonly List<Func<JitProcess>> _dstFuncs = new List<Func<JitProcess>>();
+            private readonly List<Func<JitProcess>> _dstFuncs = new List<Func<JitProcess>>(); // TODO: Move to Stage
 
             /// <summary>
             /// destination count
@@ -85,7 +85,7 @@ namespace Tono.Jit
 
             public IEnumerator<JitProcess> GetEnumerator()
             {
-                IEnumerable<JitProcess> ret =
+                var ret =
                     from func in _dstFuncs
                     let proc = func()
                     select proc;
@@ -94,7 +94,7 @@ namespace Tono.Jit
 
             IEnumerator IEnumerable.GetEnumerator()
             {
-                IEnumerable<JitProcess> ret =
+                var ret =
                     from func in _dstFuncs
                     let proc = func()
                     select proc;

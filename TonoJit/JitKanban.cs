@@ -21,6 +21,8 @@ namespace Tono.Jit
 
         public int TestID { get => (int)(ChildVriables["TestID"].Value ?? int.MinValue); set => ChildVriables["TestID"] = JitVariable.From(value); }
 
+        public JitStage Stage { get; set; }
+
         /// <summary>
         /// The constuctor of this class
         /// </summary>
@@ -34,13 +36,13 @@ namespace Tono.Jit
         /// Previous process (Work origin, Kanban destination)
         /// かんばんを投入する（ワークがある）工程 = FROM
         /// </summary>
-        public Func<JitProcess> PullFrom { get; set; }
+        public string PullFromProcessKey { get; set; }
 
         /// <summary>
         /// This process (Work destination, Kanban origin)
         /// ワークの目的地 = TO
         /// </summary>
-        public Func<JitProcess> PullTo { get; set; }
+        public string PullToProcessKey { get; set; }
 
         /// <summary>
         /// kanban owner work (if no work, null)
@@ -67,7 +69,7 @@ namespace Tono.Jit
 
         public override string ToString()
         {
-            return $"{GetType().Name} ID={ID} From={(PullFrom?.Invoke()?.Name ?? "?")} To={(PullTo?.Invoke()?.Name ?? "?")}";
+            return $"{GetType().Name} ID={ID} From={(PullFromProcessKey ?? "?")} To={(PullToProcessKey ?? "?")}";
         }
     }
 }

@@ -2,7 +2,6 @@
 // Licensed under the MIT license.
 
 using System;
-using System.Linq;
 
 namespace Tono.Jit
 {
@@ -66,6 +65,16 @@ namespace Tono.Jit
             }
         }
 
+        public JitProcess FindProcess(string processKey)
+        {
+            var ret = Procs[processKey];
+            if( ret == null)
+            {
+                throw new JitException($"Cannot find the Process '{processKey}'");
+            }
+            return ret;
+        }
+
 
         /// <summary>
         /// do next action (from event queue)
@@ -73,7 +82,10 @@ namespace Tono.Jit
         public void DoNext()
         {
             var ei = Events.Dequeue();
-            if (ei == null) return;
+            if (ei == null)
+            {
+                return;
+            }
 
             Now = ei.DT;
 
@@ -97,7 +109,7 @@ namespace Tono.Jit
         /// <param name="ei"></param>
         private void ProcKanban(WorkEventQueue.Item ei)
         {
-            var usedKanban = ei.Kanban.PullFrom().AddKanban(Events, ei.Kanban, Now); // 工程にかんばんを投入して、処理を促す
+            var usedKanban = ei.Kanban.Stage.FindProcess(ei.Kanban.PullFromProcessKey).AddKanban(Events, ei.Kanban, Now); // 工程にかんばんを投入して、処理を促す
             if (usedKanban != null)
             {
                 usedKanban.Work.CurrentProcess.AddAndAdjustExitTiming(Events, usedKanban.Work); // Eventキューに Outイベントを登録

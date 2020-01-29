@@ -121,16 +121,16 @@ namespace UnitTestProject1
             CoJoinFrom JFY;
             B.Constraints.Add(JFY = new CoJoinFrom
             {
-                PullFrom = () => Y,
+                PullFromProcessKey = Y.ID,
                 WaitSpan = TimeSpan.FromMinutes(10),
             });
             CoJoinFrom JFZ;
             B.Constraints.Add(JFZ = new CoJoinFrom
             {
-                PullFrom = () => Z,
+                PullFromProcessKey = Z.ID,
                 WaitSpan = TimeSpan.FromMinutes(10),
             });
-            C.InCommands.Add(new CiPickTo(st)  // C工程で Dに分岐
+            C.InCommands.Add(new CiPickTo  // C工程で Dに分岐
             {
                 Destination = () => D,
                 Delay = TimeSpan.FromMinutes(1),
@@ -163,18 +163,21 @@ namespace UnitTestProject1
             JitWork w1, y1, z1;
             st.Events.Enqueue(TimeUtil.Set(today, hour: 9, minute: 0), EventTypes.Out, w1 = new JitWork
             {
+                Stage = st,
                 Name = $"w1",
                 NextProcess = A,
             });
             Assert.IsTrue(w1.Is(":Work"));
             st.Events.Enqueue(TimeUtil.Set(today, hour: 9, minute: 0), EventTypes.Out, y1 = new JitWork
             {
+                Stage = st,
                 Name = $"y1",
                 NextProcess = Y,
                 Classes = JitVariable.ClassList.From(":iOS:Sumaho"),    // :Workに、クラス「追加」
             });
             st.Events.Enqueue(TimeUtil.Set(today, hour: 9, minute: 2), EventTypes.Out, z1 = new JitWork
             {
+                Stage = st,
                 Name = $"z1",
                 NextProcess = Z,
                 Classes = JitVariable.ClassList.From(":Android:Sumaho"),    // :Workに、クラス「追加」
@@ -351,13 +354,13 @@ namespace UnitTestProject1
             CoJoinFrom JFY;
             B.Constraints.Add(JFY = new CoJoinFrom
             {
-                PullFrom = () => Y,
+                PullFromProcessKey = Y.ID,
                 WaitSpan = TimeSpan.FromMinutes(10),
             });
             CoJoinFrom JFZ;
             B.Constraints.Add(JFZ = new CoJoinFrom
             {
-                PullFrom = () => Z,
+                PullFromProcessKey = Z.ID,
                 WaitSpan = TimeSpan.FromMinutes(10),
             });
             Y.InCommands.Add(new CiDelay
@@ -374,16 +377,19 @@ namespace UnitTestProject1
             JitWork w1, y1, z1;
             st.Events.Enqueue(TimeUtil.Set(today, hour: 9, minute: 0), EventTypes.Out, w1 = new JitWork
             {
+                Stage = st,
                 Name = $"w1",
                 NextProcess = A,
             });
             st.Events.Enqueue(TimeUtil.Set(today, hour: 9, minute: 0), EventTypes.Out, y1 = new JitWork
             {
+                Stage = st,
                 Name = $"y1",
                 NextProcess = Y,
             });
             st.Events.Enqueue(TimeUtil.Set(today, hour: 9, minute: 2), EventTypes.Out, z1 = new JitWork
             {
+                Stage = st,
                 Name = $"z1",
                 NextProcess = Z,
             });
@@ -504,7 +510,7 @@ namespace UnitTestProject1
             });
 
             // 工程に制約を付与
-            Y.InCommands.Add(new CiKanbanReturn(st)
+            Y.InCommands.Add(new CiKanbanReturn
             {
                 Delay = TimeSpan.FromMinutes(0),
                 TargetKanbanClass = ":Dog",
@@ -516,16 +522,18 @@ namespace UnitTestProject1
             var testid = 0;
             st.SendKanban(ka = new JitKanban
             {
-                PullFrom = () => X,
-                PullTo = () => Y,
+                Stage = st,
+                PullFromProcessKey = X.ID,  // You can set ID here
+                PullToProcessKey = Y.Name,  // You can also set Name here
                 TestID = ++testid,
             }).Classes.Add(":Dog");
             Assert.IsTrue(ka.Is(":Kanban"));
 
             st.SendKanban(new JitKanban
             {
-                PullFrom = () => X,
-                PullTo = () => Y,
+                Stage = st,
+                PullFromProcessKey = "X",   // You can set Name here
+                PullToProcessKey = "Y",
                 TestID = ++testid,
             }).Classes.Add(":Cat");
 
@@ -534,6 +542,7 @@ namespace UnitTestProject1
             {
                 st.Events.Enqueue(TimeUtil.Set(today, hour: 9, minute: i + 1), EventTypes.Out, new JitWork
                 {
+                    Stage = st,
                     Name = $"w{(i + 1):0}",
                     NextProcess = X,
                 });
@@ -652,7 +661,7 @@ namespace UnitTestProject1
             {
                 Delay = TimeSpan.FromMinutes(10),
             });
-            Y.InCommands.Add(new CiKanbanReturn(st) // かんばんを前工程に自動的に返却するモード（瞬時にかんばんが帰る）
+            Y.InCommands.Add(new CiKanbanReturn // かんばんを前工程に自動的に返却するモード（瞬時にかんばんが帰る）
             {
                 Delay = TimeSpan.FromSeconds(15),
             });
@@ -662,8 +671,9 @@ namespace UnitTestProject1
 
             st.SendKanban(new JitKanban
             {
-                PullFrom = () => X,
-                PullTo = () => Y,
+                Stage = st,
+                PullFromProcessKey = "X",
+                PullToProcessKey = "Y",
                 TestID = 1,
             });
 
@@ -672,6 +682,7 @@ namespace UnitTestProject1
             {
                 st.Events.Enqueue(TimeUtil.Set(today, hour: 9, minute: 0), EventTypes.Out, new JitWork
                 {
+                    Stage = st,
                     Name = $"w{(i + 1):0}",
                     NextProcess = X,
                 });
@@ -739,8 +750,6 @@ namespace UnitTestProject1
             Assert.IsTrue(CMP(dat[k++], "w1", EventTypes.In, "9:05", "X"));
             Assert.IsTrue(CMP(dat[k++], "w3", EventTypes.Out, "9:06"));
             Assert.IsTrue(dat.Count == 2);   // w2 9:08 はXに入ったが、かんばんが無いので、Eventキューには入らなかった
-
-
 
 
             // w1がYに入る。w1についていた かんばんが、Xに自動で返却されるモードになっている
@@ -906,6 +915,7 @@ namespace UnitTestProject1
             {
                 st.Events.Enqueue(TimeUtil.Set(today, hour: 9, minute: 0), EventTypes.Out, new JitWork
                 {
+                    Stage = st,
                     Name = $"w{(i + 1):0}",
                     NextProcess = X,
                 });
@@ -968,8 +978,9 @@ namespace UnitTestProject1
             var testid = 0;
             st.SendKanban(TimeUtil.Set(today, hour: 9, minute: 30), new JitKanban   // かんばん送るも、工程Xにはワークが無いので、なにもしない
             {
-                PullFrom = () => X,
-                PullTo = () => Y,
+                Stage = st,
+                PullFromProcessKey = "X",
+                PullToProcessKey = Y.ID,
                 TestID = ++testid,
             });
             dat = st.Events.Peeks(99).ToList(); k = 0;
@@ -977,8 +988,9 @@ namespace UnitTestProject1
 
             st.SendKanban(TimeUtil.Set(today, hour: 9, minute: 30), new JitKanban   // かんばん送るも、工程Xにはワークが無いので、なにもしない
             {
-                PullFrom = () => X,
-                PullTo = () => Y,
+                Stage = st,
+                PullFromProcessKey = X.Name,
+                PullToProcessKey = "Y",
                 TestID = ++testid,
             });
             dat = st.Events.Peeks(99).ToList(); k = 0;
@@ -987,8 +999,9 @@ namespace UnitTestProject1
 
             st.SendKanban(TimeUtil.Set(today, hour: 9, minute: 32), new JitKanban   // かんばん送るも、工程Xにはワークが無いので、なにもしない
             {
-                PullFrom = () => X,
-                PullTo = () => Y,
+                Stage = st,
+                PullFromProcessKey = "X",
+                PullToProcessKey = "Y",
                 TestID = ++testid,
             });
             dat = st.Events.Peeks(99).ToList(); k = 0;
@@ -1120,8 +1133,9 @@ namespace UnitTestProject1
             {
                 st.SendKanban(TimeUtil.Set(today, hour: 12, minute: 00), new JitKanban   // かんばん送るも、工程Xにはワークが無いので、なにもしない
                 {
-                    PullFrom = () => SINK,
-                    PullTo = () => Y,
+                    Stage = st,
+                    PullFromProcessKey = "SINK",
+                    PullToProcessKey = "Y",
                     TestID = ++testid,
                 });
             }
@@ -1376,9 +1390,10 @@ namespace UnitTestProject1
             int testid = 0;
             st.SendKanban(TimeUtil.Set(today, hour: 8, minute: 0), new JitKanban   // かんばん送るも、工程Xにはワークが無いので、なにもしない
             {
+                Stage = st,
                 TestID = ++testid,
-                PullFrom = () => X,
-                PullTo = () => Y,
+                PullFromProcessKey = "X",
+                PullToProcessKey = "Y",
             });
 
             // テストワーク投入（Xに工程充足）
@@ -1386,6 +1401,7 @@ namespace UnitTestProject1
             {
                 st.Events.Enqueue(TimeUtil.Set(today, hour: 9, minute: 0), EventTypes.Out, new JitWork
                 {
+                    Stage = st,
                     Name = $"w{(i + 1):0}",
                     NextProcess = X,
                 });
@@ -1459,9 +1475,10 @@ namespace UnitTestProject1
             // Kanban2を Xに投入依頼
             st.SendKanban(TimeUtil.Set(today, hour: 9, minute: 4), new JitKanban
             {
+                Stage = st,
                 TestID = ++testid,
-                PullFrom = () => X,
-                PullTo = () => Y,
+                PullFromProcessKey = "X",
+                PullToProcessKey = "Y",
             });
             dat = st.Events.Peeks(99).ToList(); k = 0;
             Assert.IsTrue(CMP(dat[k++], "Kanban2", EventTypes.KanbanIn, "9:04"));
@@ -1484,9 +1501,10 @@ namespace UnitTestProject1
             // Kanban3を Xに投入依頼。w3のInに先立ち、入れとくテスト
             st.SendKanban(new JitKanban
             {
+                Stage = st,
                 TestID = ++testid,
-                PullFrom = () => X,
-                PullTo = () => Y,
+                PullFromProcessKey = "X",
+                PullToProcessKey = "Y",
             });
 
             // Kanban3 In待ち
@@ -1682,6 +1700,7 @@ namespace UnitTestProject1
             {
                 st.Events.Enqueue(TimeUtil.Set(today, hour: 9, minute: 0), EventTypes.Out, new JitWork
                 {
+                    Stage = st,
                     Name = $"x{(i + 1):0}",
                     NextProcess = X,
                 });
@@ -1690,6 +1709,7 @@ namespace UnitTestProject1
             {
                 st.Events.Enqueue(TimeUtil.Set(today, hour: 9, minute: 5), EventTypes.Out, new JitWork
                 {
+                    Stage = st,
                     Name = $"y{(i + 1):0}",
                     NextProcess = Y,
                 });
@@ -2118,6 +2138,7 @@ namespace UnitTestProject1
             {
                 st.Events.Enqueue(TimeUtil.Set(today, hour: 9, minute: 0), EventTypes.Out, new JitWork
                 {
+                    Stage = st,
                     Name = $"x{(i + 1):0}",
                     NextProcess = X,
                 });
@@ -2511,6 +2532,7 @@ namespace UnitTestProject1
             {
                 st.Events.Enqueue(TimeUtil.Set(today, hour: 9, minute: 0), EventTypes.Out, new JitWork
                 {
+                    Stage = st,
                     Name = $"y{(i + 1):0}",
                     NextProcess = Y,
                 });
@@ -2687,11 +2709,13 @@ namespace UnitTestProject1
             JitWork a, b, c;
             st.Events.Enqueue(TimeUtil.Set(today, hour: 9, minute: 0), EventTypes.Out, a = new JitWork
             {
+                Stage = st,
                 Name = "a",
                 NextProcess = X,
             });
             st.Events.Enqueue(TimeUtil.Set(today, hour: 9, minute: 0), EventTypes.Out, b = new JitWork
             {
+                Stage = st,
                 Name = "b",
                 NextProcess = X,
             });
@@ -2862,16 +2886,19 @@ namespace UnitTestProject1
             JitWork a, b, c;
             st.Events.Enqueue(TimeUtil.Set(today, hour: 9, minute: 0), EventTypes.Out, a = new JitWork
             {
+                Stage = st,
                 Name = "a",
                 NextProcess = X,
             });
             st.Events.Enqueue(TimeUtil.Set(today, hour: 9, minute: 1), EventTypes.Out, b = new JitWork
             {
+                Stage = st,
                 Name = "b",
                 NextProcess = X,
             });
             st.Events.Enqueue(TimeUtil.Set(today, hour: 9, minute: 2), EventTypes.Out, c = new JitWork
             {
+                Stage = st,
                 Name = "c",
                 NextProcess = X,
             });

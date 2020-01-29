@@ -2,7 +2,6 @@
 // Licensed under the MIT license.
 
 using System;
-using System.Linq;
 
 namespace Tono.Jit
 {
@@ -48,7 +47,11 @@ namespace Tono.Jit
         {
             DateTime LastInTime { get; set; }
         }
-        public interface IWorkInReserved
+
+        /// <summary>
+        /// For Calclation with WORK objects
+        /// </summary>
+        public interface IWorkInReserved    // TODO: Move to Stage
         {
             void AddWorkInReserve(JitWork work);
             void RemoveWorkInReserve(JitWork work);

@@ -318,7 +318,7 @@ namespace Tono.Gui.Uwp
                 killnow = _kills.ToList();
                 _kills.Clear();
             }
-            if(killnow.Count > 0)
+            if (killnow.Count > 0)
             {
                 lock (Features)
                 {

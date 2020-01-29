@@ -126,19 +126,19 @@ namespace Tono.Jit
         /// Link set of the owner stage
         /// jfStageにあるリンクセット
         /// </summary>
-        public Destinations NextLinks { get; set; } = new Destinations();
+        public Destinations NextLinks { get; set; } = new Destinations(); // TODO: move to Stage
 
         /// <summary>
         /// having work-in time mapping
         /// 属するワークのIN時刻マップ
         /// </summary>
-        public Dictionary<JitWork, DateTime/*In Time*/> WorkInTimes { get; private set; } = new Dictionary<JitWork, DateTime>();
+        public Dictionary<JitWork, DateTime/*In Time*/> WorkInTimes { get; private set; } = new Dictionary<JitWork, DateTime>(); // TODO: move to stage
 
         /// <summary>
         /// Having works
         /// ワーク一覧
         /// </summary>
-        public IEnumerable<JitWork> Works => WorkInTimes.Keys;
+        public IEnumerable<JitWork> Works => WorkInTimes.Keys; // TODO: move to stage
 
         /// <summary>
         /// Collection utility COs UNION CIs
@@ -357,7 +357,7 @@ namespace Tono.Jit
             }
 
             var sk = kanbanQueue.Dequeue();
-            work.NextProcess = sk.Kanban.PullTo();
+            work.NextProcess = sk.Kanban.Stage.FindProcess(sk.Kanban.PullToProcessKey);
             work.Kanbans.Add(sk.Kanban);
             sk.Kanban.Work = work;
             if (work.ExitTime < now)

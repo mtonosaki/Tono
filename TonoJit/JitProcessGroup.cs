@@ -9,7 +9,7 @@ namespace Tono.Jit
 {
     public abstract class JitProcessGroup : JitProcess
     {
-        private readonly LinkedList<Func<JitProcess>> procSeq = new LinkedList<Func<JitProcess>>();
+        private readonly LinkedList<Func<JitProcess>> procSeq = new LinkedList<Func<JitProcess>>(); // TODO: Support lazy by Process key.
         private readonly Dictionary<string, JitProcess> nameProcMap = new Dictionary<string, JitProcess>();
 
         /// <summary>
@@ -28,7 +28,7 @@ namespace Tono.Jit
         {
             get
             {
-                for (LinkedListNode<Func<JitProcess>> node = procSeq.First; node != null; node = node.Next)
+                for (var node = procSeq.First; node != null; node = node.Next)
                 {
                     yield return node.Value();
                 }
@@ -55,12 +55,12 @@ namespace Tono.Jit
                 }
                 else
                 {
-                    IEnumerable<JitProcess> ps =
+                    var ps =
                         from pf in procSeq
                         let p0 = pf()
                         where p0.Name == procName
                         select p0;
-                    JitProcess p = ps.FirstOrDefault();
+                    var p = ps.FirstOrDefault();
                     if (p != null)
                     {
                         nameProcMap[procName] = p;

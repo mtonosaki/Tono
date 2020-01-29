@@ -15,11 +15,6 @@ namespace Tono.Jit
         public static readonly Type Type = typeof(CiKanbanReturn);
 
         /// <summary>
-        /// target Stage
-        /// </summary>
-        private JitStage Stage { get; set; }    // TODO: Stage should come from parent process instead of set by programmer.
-
-        /// <summary>
         /// work filter with class setting
         /// </summary>
         /// <example>
@@ -46,22 +41,6 @@ namespace Tono.Jit
         }
 
         /// <summary>
-        /// Default constructor : NOTE Do not forget to set Stage property
-        /// </summary>
-        public CiKanbanReturn()
-        {
-        }
-
-        /// <summary>
-        /// The construction of this class
-        /// </summary>
-        /// <param name="parent"></param>
-        public CiKanbanReturn(JitStage stage)
-        {
-            Stage = stage;
-        }
-
-        /// <summary>
         /// in-command execute
         /// </summary>
         /// <param name="work">target work</param>
@@ -71,14 +50,14 @@ namespace Tono.Jit
             var kanbans =
                 from kanban in work.Kanbans
                 where kanban.Is(TargetKanbanClass)
-                where kanban.PullTo().Equals(work.CurrentProcess)
+                where kanban.Stage.FindProcess(kanban.PullToProcessKey).Equals(work.CurrentProcess)
                 select kanban;
 
             foreach (var kanban in kanbans.ToArray())
             {
                 work.Kanbans.Remove(kanban);
                 kanban.Work = null;
-                Stage.SendKanban(now + Delay, kanban);
+                work.Stage.SendKanban(now + Delay, kanban);
             }
         }
     }

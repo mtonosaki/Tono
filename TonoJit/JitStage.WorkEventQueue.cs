@@ -83,7 +83,7 @@ namespace Tono.Jit
             /// <param name="nodes"></param>
             public void Remove(IEnumerable<LinkedListNode<Item>> nodes)
             {
-                foreach (LinkedListNode<Item> node in nodes)
+                foreach (var node in nodes)
                 {
                     Remove(node);
                 }
@@ -109,7 +109,7 @@ namespace Tono.Jit
                 PrepareDummyItems(dt);
 
                 LinkedListNode<Item> node;
-                if (_sections.TryGetValue(TimeUtil.ClearSeconds(dt), out LinkedListNode<Item> topnode) == false)    // 分毎にシーク位置をスキップできる
+                if (_sections.TryGetValue(TimeUtil.ClearSeconds(dt), out var topnode) == false)    // 分毎にシーク位置をスキップできる
                 {
                     topnode = _dat.First;
                 }
@@ -120,7 +120,7 @@ namespace Tono.Jit
                         break;
                     }
                 }
-                Item item = new Item
+                var item = new Item
                 {
                     DT = dt,
                     Work = workOrKanban as JitWork,
@@ -145,7 +145,7 @@ namespace Tono.Jit
             /// <returns></returns>
             public Item PeekNext()
             {
-                LinkedListNode<Item> node = _dat.First;
+                var node = _dat.First;
                 for (; node?.Value is DummyItem; node = node.Next)
                 {
                     ;
@@ -162,7 +162,7 @@ namespace Tono.Jit
             /// <returns></returns>
             public IEnumerable<Item> Peeks(int maxCount)
             {
-                for (LinkedListNode<Item> node = _dat.First; node != null && maxCount > 0; node = node.Next)
+                for (var node = _dat.First; node != null && maxCount > 0; node = node.Next)
                 {
                     if ((node.Value is DummyItem) == false)
                     {
@@ -183,14 +183,14 @@ namespace Tono.Jit
             /// <remarks></remarks>
             public virtual LinkedListNode<Item> Find(JitProcess proc, EventTypes etype, string workclass = JitVariable.Class.Object)
             {
-                for (LinkedListNode<Item> node = _dat.First; node != null; node = node.Next)
+                for (var node = _dat.First; node != null; node = node.Next)
                 {
-                    Item ei = node.Value;
+                    var ei = node.Value;
                     if (ei is DummyItem || ei.Work is JitWork == false)
                     {
                         continue;
                     }
-                    JitWork w = ei.Work;
+                    var w = ei.Work;
                     if ((w.CurrentProcess?.Equals(proc) ?? false) && ei.Type == etype && w.Is(workclass))
                     {
                         return node;
@@ -210,14 +210,14 @@ namespace Tono.Jit
             /// <remarks></remarks>
             public virtual IEnumerable<LinkedListNode<Item>> FindAll(JitProcess proc, EventTypes etype, string workclass = JitVariable.Class.Object)
             {
-                for (LinkedListNode<Item> node = _dat.First; node != null; node = node.Next)
+                for (var node = _dat.First; node != null; node = node.Next)
                 {
-                    Item ei = node.Value;
+                    var ei = node.Value;
                     if (ei is DummyItem)
                     {
                         continue;
                     }
-                    JitWork w = ei.Work;
+                    var w = ei.Work;
                     if ((w.CurrentProcess?.Equals(proc) ?? false) && ei.Type == etype && w.Is(workclass))
                     {
                         yield return node;
@@ -234,7 +234,7 @@ namespace Tono.Jit
             /// <returns></returns>
             public Item Dequeue()
             {
-                for (LinkedListNode<Item> node = _dat.First; node != null; node = _dat.First)
+                for (var node = _dat.First; node != null; node = _dat.First)
                 {
                     _dat.RemoveFirst();
                     if (node.Value is DummyItem == false)
@@ -265,9 +265,9 @@ namespace Tono.Jit
                 {
                     return;
                 }
-                for (DateTime t = TimeUtil.ClearSeconds(dt); t < dt + TimeSpan.FromDays(2); t += TimeSpan.FromMinutes(1))
+                for (var t = TimeUtil.ClearSeconds(dt); t < dt + TimeSpan.FromDays(2); t += TimeSpan.FromMinutes(1))
                 {
-                    LinkedListNode<Item> node = _dat.AddLast(new DummyItem   // 検索の速度を上げるための分毎のダミーItem
+                    var node = _dat.AddLast(new DummyItem   // 検索の速度を上げるための分毎のダミーItem
                     {
                         DT = t,
                         Work = null,

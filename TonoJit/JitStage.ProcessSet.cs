@@ -38,32 +38,29 @@ namespace Tono.Jit
                 _procs.Remove(proc);
             }
 
-            public JitProcess FindById(string processid)
+            public JitProcess Find(string procKey)
             {
-                return _procs.Where(a => a.ID.Equals(processid)).FirstOrDefault();
+                // TODO: Speed up
+                var ret = _procs.Where(a => a.ID.Equals(procKey)).FirstOrDefault();
+                if (ret == null)
+                {
+                    ret = _procs.Where(a => a.Name?.Equals(procKey) ?? false).FirstOrDefault();
+                }
+                return ret;
             }
 
             /// <summary>
-            /// get process by name
+            /// get process by Name/ID
             /// 名前で子プロセスを検索。遅延評価はこのタイミングで行ったものを覚えておく
             /// </summary>
-            /// <param name="procname"></param>
+            /// <param name="procKey"></param>
             /// <returns></returns>
-            public JitProcess this[string procname]
+            public JitProcess this[string procKey]
             {
-                get
-                {
-                    return _procs.Where(a => a.Name?.Equals(procname) ?? false).FirstOrDefault();
-                }
+                get => Find(procKey);
             }
 
-            public JitProcess this[int index]
-            {
-                get
-                {
-                    return _procs[index];
-                }
-            }
+            public JitProcess this[int index] => _procs[index];
         }
     }
 }

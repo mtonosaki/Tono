@@ -477,11 +477,12 @@ namespace UnitTestProject1
                 new Stage
                     Procs
                         add sink = new Process
+                            Name = 'SinkProc'
                         add p1 = new Process
                             Name = 'MyProc'
                             Cio
                                 add o1 = new CoJoinFrom
-                                    PullFrom = sink
+                                    PullFromProcessKey = 'SinkProc'
                                     ChildPartName = 'TEPA'
                                     WaitSpan = 0.5M                                    
             ";
@@ -489,7 +490,7 @@ namespace UnitTestProject1
             jac.Exec(code);
             var o1 = jac["o1"] as CoJoinFrom;
             Assert.IsNotNull(o1);
-            Assert.AreEqual(o1.PullFrom(), jac.GetProcess("sink"));
+            Assert.AreEqual(o1.PullFromProcessKey, jac.GetProcess("SinkProc").Name);
             Assert.AreEqual(o1.ChildPartName, "TEPA");
             Assert.AreEqual(o1.WaitSpan, TimeSpan.FromSeconds(30));
         }
@@ -497,27 +498,43 @@ namespace UnitTestProject1
         public void Test18()
         {
             var code = @"
-                w1 = new Work
-                w2 = new Work
-                w3 = new Work
-                new Stage
+                st = new Stage
                     Procs
                         add sink = new Process
                         add p1 = new Process
                             Name = 'MyProc'
                             Cio
                                 add o1 = new CoMaxCost
-                                    ReferenceVarName = 'Weight'
-                                    WorkInReserve
-                                        add new Work
-                                            ID = 'MyWork01'
-                                        add w1
-                                        add w2
-                                        add w3
-                                    Value = 500
             ";
             var jac = new JacInterpreter();
             jac.Exec(code);
+            var st = jac.GetStage("st");
+
+            var code2 = @"
+                w1 = new Work
+                    Stage = st
+                w2 = new Work
+                    Stage = st
+                w3 = new Work
+                    Stage = st
+            ";
+            jac.Exec(code2);
+            var w2 = jac.GetWork("w2");
+            Assert.AreEqual(st, w2.Stage);
+
+            var code3 = @"
+                o1
+                    ReferenceVarName = 'Weight'
+                    WorkInReserve
+                        add new Work
+                            ID = 'MyWork01'
+                        add w1
+                        add w2
+                        add w3
+                    Value = 500
+            ";
+            jac.Exec(code3);
+
             var o1 = jac["o1"] as CoMaxCost;
             Assert.IsNotNull(o1);
             Assert.AreEqual(o1.ReferenceVarName, JitVariable.From("Weight"));
@@ -566,8 +583,8 @@ namespace UnitTestProject1
                 p2 = new Process
                 w1 = new Work
                 k1 = new Kanban
-                    PullFrom = p1
-                    PullTo = p2
+                    PullFromProcessKey = p1.ID
+                    PullToProcessKey = p2.ID
                     Work = w1
             ";
             var jac = new JacInterpreter();
@@ -580,8 +597,8 @@ namespace UnitTestProject1
             Assert.IsNotNull(p1);
             Assert.IsNotNull(p2);
             Assert.IsNotNull(w1);
-            Assert.AreEqual(k1.PullFrom(), p1);
-            Assert.AreEqual(k1.PullTo(), p2);
+            Assert.AreEqual(k1.PullFromProcessKey, p1.ID);
+            Assert.AreEqual(k1.PullToProcessKey, p2.ID);
             Assert.AreEqual(k1.Work, w1);
         }
 

@@ -6,7 +6,7 @@ using System;
 namespace Tono.Jit
 {
     /// <summary>
-    /// WARNING : THIS CLASS IS NOT YET COMPLETED 2019.11.17
+    /// TODO: WARNING : THIS CLASS IS NOT YET COMPLETED 2019.11.17
     /// in-command to switch next process with parameter
     /// </summary>
     [JacTarget(Name = "CiSwitchNextLink")]
