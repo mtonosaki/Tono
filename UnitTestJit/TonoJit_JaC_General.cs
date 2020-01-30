@@ -769,6 +769,37 @@ namespace UnitTestProject1
             var ciosCount = p1.Cios.Count();
             Assert.AreEqual(ciosCount, 0);
         }
+
+        [TestMethod]
+        public void Test28()
+        {
+            var code = @"
+                st = new Stage
+                    Procs
+                        add sink = new Process
+                        add p1 = new Process
+                            Name = 'PROCP1'
+                            Cio
+                                add pt = new CiPickTo
+                                    Delay = 0MS
+                                    TargetWorkClass = ':Car'
+                                    DestProcessKey = sink.ID // To confirm Objct.Property style string set
+            ";
+            var jac = new JacInterpreter();
+            jac.Exec(code);
+            var pt = jac["pt"] as CiPickTo;
+            Assert.IsNotNull(pt);
+            var p1 = jac.GetProcess("p1");
+            Assert.IsNotNull(p1);
+
+            var redo = $"{pt.ID}\r\n" +
+                          $"    DestProcessKey = 'REDO_PROC'r\n";
+            var undo = $"{pt.ID}\r\n" +
+                          $"    DestProcessKey = 'UNDO_PROC'\r\n";
+
+            jac.Exec(redo);
+
+        }
     }
 
     [JacTarget(Name = "TestJitClass")]
@@ -790,6 +821,4 @@ namespace UnitTestProject1
 
         public bool Contains(string name) => dic.ContainsKey(name);
     }
-
-
 }
