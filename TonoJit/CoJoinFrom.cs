@@ -2,6 +2,7 @@
 // Licensed under the MIT license.
 
 using System;
+using ProcessKey = System.String;
 
 namespace Tono.Jit
 {
@@ -17,13 +18,13 @@ namespace Tono.Jit
         /// <summary>
         /// PULLする工程
         /// </summary>
-        public string PullFromProcessKey { get; set; }
+        public ProcessKey PullFromProcessKey { get; set; }
 
         /// <summary>
         /// child work name
         /// ワークに付く子ワークの名前
         /// </summary>
-        public string ChildPartName { get; set; } = Guid.NewGuid().ToString();
+        public ProcessKey ChildPartName { get; set; } = Guid.NewGuid().ToString();
 
         /// <summary>
         /// interval time of next confirmation confluence condition

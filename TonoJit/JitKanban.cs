@@ -2,6 +2,7 @@
 // Licensed under the MIT license.
 
 using System;
+using ProcessKey = System.String;
 
 namespace Tono.Jit
 {
@@ -36,13 +37,13 @@ namespace Tono.Jit
         /// Previous process (Work origin, Kanban destination)
         /// かんばんを投入する（ワークがある）工程 = FROM
         /// </summary>
-        public string PullFromProcessKey { get; set; }
+        public ProcessKey PullFromProcessKey { get; set; }
 
         /// <summary>
         /// This process (Work destination, Kanban origin)
         /// ワークの目的地 = TO
         /// </summary>
-        public string PullToProcessKey { get; set; }
+        public ProcessKey PullToProcessKey { get; set; }
 
         /// <summary>
         /// kanban owner work (if no work, null)

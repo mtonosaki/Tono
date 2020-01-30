@@ -5,6 +5,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using ProcessKey = System.String;
 
 namespace Tono.Jit
 {
@@ -29,39 +30,19 @@ namespace Tono.Jit
         }
 
         /// <summary>
-        /// in-command collection utility
-        /// </summary>
-        public class InCommandCollection : IEnumerable<CiBase>
-        {
-            private readonly List<CiBase> _data = new List<CiBase>();
-
-            public IEnumerator<CiBase> GetEnumerator()
-            {
-                return _data.GetEnumerator();
-            }
-
-            IEnumerator IEnumerable.GetEnumerator()
-            {
-                return _data.GetEnumerator();
-            }
-
-            public void Add(CiBase ci)
-            {
-                _data.Add(ci);
-            }
-
-            public void Remove(CiBase item)
-            {
-                _data.Remove(item);
-            }
-
-            public CiBase this[int index] => _data[index];
-        }
-
-        /// <summary>
         /// Having in-command objects
         /// </summary>
-        public InCommandCollection InCommands { get; set; } = new InCommandCollection();
+        public List<CiBase> InCommands { get; set; } = new List<CiBase>();
+
+        /// <summary>
+        /// Having out-constraint objects to let work wait at previous process
+        /// OUT制約（次工程へのINを抑制できる）
+        /// </summary>
+        /// <remarks>
+        /// NOTE: register sequence is important. first sequence is priority.
+        /// 制約登録順番に注意：先頭から制約実行し、制約有りのオブジェクトが見つかったら、以降の制約は実行しない
+        /// </remarks>
+        public List<CoBase> Constraints { get; } = new List<CoBase>();
 
         [JacListAdd(PropertyName = "Cio")]
         public void CioAdd(object obj)
@@ -111,16 +92,6 @@ namespace Tono.Jit
                 }
             }
         }
-
-        /// <summary>
-        /// Having out-constraint objects to let work wait at previous process
-        /// OUT制約（次工程へのINを抑制できる）
-        /// </summary>
-        /// <remarks>
-        /// NOTE: register sequence is important. first sequence is priority.
-        /// 制約登録順番に注意：先頭から制約実行し、制約有りのオブジェクトが見つかったら、以降の制約は実行しない
-        /// </remarks>
-        public List<CoBase> Constraints { get; } = new List<CoBase>();
 
         /// <summary>
         /// Collection utility COs UNION CIs

@@ -12,8 +12,8 @@ namespace Tono.Jit
     /// </summary>
     public class JitException : Exception
     {
-        public const string FormatNoProcKey = "Cannot find the Process '{0}'";  // set ProcessKey(ID/Name)
-        public const string NullProcKey = "Cannot find the NULL Process";
+        public const string NullProcKey = "EJIT1001: Cannot find the NULL Process";
+        public const string FormatNoProcKey = "EJIT1002: Cannot find the Process '{0}'";  // set ProcessKey(ID/Name)
 
         public JitException() :  base()
         {

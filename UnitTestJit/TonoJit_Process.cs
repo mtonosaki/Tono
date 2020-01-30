@@ -3,6 +3,7 @@
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Tono;
 using Tono.Jit;
@@ -25,7 +26,7 @@ namespace UnitTestProject1
             st.Procs.Add(X = new JitProcess
             {
                 Name = "X",
-                InCommands = new JitProcess.InCommandCollection
+                InCommands = new List<CiBase>
                 {
                     new CiDelay
                     {

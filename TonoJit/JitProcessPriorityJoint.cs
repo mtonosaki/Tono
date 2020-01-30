@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using ProcessKey = System.String;
 
 namespace Tono.Jit
 {
@@ -19,13 +20,13 @@ namespace Tono.Jit
     /// </remarks>
     public class JitProcessPriorityJoint : JitProcessGroup
     {
-        private readonly Dictionary<string/*Process Key(ID/Name)*/, int> procPriority = new Dictionary<string, int>();
+        private readonly Dictionary<ProcessKey, int> procPriority = new Dictionary<ProcessKey, int>();
 
         /// <summary>
         /// add child process as top priority 工程を追加。後に追加したものが高優先でOUTされる
         /// </summary>
         /// <param name="processKey"></param>
-        public override void Add(JitStage stage, string processKey, bool isCheckNoInstanceError = true)
+        public override void Add(JitStage stage, ProcessKey processKey, bool isCheckNoInstanceError = true)
         {
             base.Add(stage, processKey, isCheckNoInstanceError);
 
@@ -78,7 +79,7 @@ namespace Tono.Jit
         private class QueueItemComparer
         {
             public JitStage Stage { get; set; }
-            public Dictionary<string, int> ProcPriorities { get; set; }
+            public Dictionary<ProcessKey, int> ProcPriorities { get; set; }
 
             /// <summary>
             /// sort rule of out sequece

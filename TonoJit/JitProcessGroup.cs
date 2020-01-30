@@ -4,19 +4,19 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using ProcessKey = System.String;
 
 namespace Tono.Jit
 {
     public abstract class JitProcessGroup : JitProcess
     {
-        private readonly LinkedList<string> procKeySeq = new LinkedList<string>();
-        private readonly Dictionary<string, JitProcess> nameProcMap = new Dictionary<string, JitProcess>();
+        private readonly LinkedList<ProcessKey> procKeySeq = new LinkedList<ProcessKey>();
 
         /// <summary>
         /// add child process as top priority
         /// </summary>
         /// <param name="procKey">Process Key(ID/Name)</param>
-        public virtual void Add(JitStage stage, string procKey, bool isCheckNoInstanceError = true)
+        public virtual void Add(JitStage stage, ProcessKey procKey, bool isCheckNoInstanceError = true)
         {
             procKeySeq.AddFirst(procKey);
             if (isCheckNoInstanceError)
@@ -31,7 +31,7 @@ namespace Tono.Jit
         /// <summary>
         /// query child processes order by priority
         /// </summary>
-        public IEnumerable<string> ChildProcessKeys
+        public IEnumerable<ProcessKey> ChildProcessKeys
         {
             get
             {

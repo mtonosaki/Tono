@@ -5,6 +5,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using ProcessKey = System.String;
 
 namespace Tono.Jit
 {
@@ -13,9 +14,9 @@ namespace Tono.Jit
         /// <summary>
         /// work destination collection class 
         /// </summary>
-        public class DestProcessKeys : IEnumerable<string>
+        public class DestProcessKeys : IEnumerable<ProcessKey>
         {
-            private readonly List<string> _dstProcKeys = new List<string>();
+            private readonly List<ProcessKey> _dstProcKeys = new List<ProcessKey>();
 
             /// <summary>
             /// destination count
@@ -26,7 +27,7 @@ namespace Tono.Jit
             /// add process (NOTE: add sequence is important because of for being sequence of CiSwitchNext)
             /// </summary>
             /// <param name="processKey">next process ID/Name</param>
-            public void Add(string processKey)
+            public void Add(ProcessKey processKey)
             {
                 _dstProcKeys.Add(processKey);
             }
@@ -40,7 +41,7 @@ namespace Tono.Jit
             /// add processes(see also comment of Add method)
             /// </summary>
             /// <param name="dst"></param>
-            public void AddRange(IEnumerable<string> dstProcKeys)
+            public void AddRange(IEnumerable<ProcessKey> dstProcKeys)
             {
                 foreach (var dstProcKey in dstProcKeys)
                 {
