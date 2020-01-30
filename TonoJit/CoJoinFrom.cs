@@ -2,6 +2,7 @@
 // Licensed under the MIT license.
 
 using System;
+using ProcessKey = System.String;
 
 namespace Tono.Jit
 {
@@ -17,13 +18,13 @@ namespace Tono.Jit
         /// <summary>
         /// PULLする工程
         /// </summary>
-        public Func<JitProcess> PullFrom { get; set; }
+        public ProcessKey PullFromProcessKey { get; set; }
 
         /// <summary>
         /// child work name
         /// ワークに付く子ワークの名前
         /// </summary>
-        public string ChildPartName { get; set; } = Guid.NewGuid().ToString();
+        public ProcessKey ChildPartName { get; set; } = Guid.NewGuid().ToString();
 
         /// <summary>
         /// interval time of next confirmation confluence condition
@@ -44,7 +45,8 @@ namespace Tono.Jit
                 return false;   // already moved. すでにワークが付いているので制約なし（完了）
             }
 
-            if (PullFrom().ExitCollectedWork(now) is JitWork sideWork)    // work at PullFrom process 横工程のワーク
+            var procPullFrom = parentWork.Stage.FindProcess(PullFromProcessKey);
+            if (procPullFrom.ExitCollectedWork(parentWork.Stage, now) is JitWork sideWork)    // work at PullFrom process 横工程のワーク
             {
                 parentWork.ChildWorks[ChildPartName] = sideWork;
                 return false;
@@ -60,7 +62,7 @@ namespace Tono.Jit
         /// <param name="ei"></param>
         /// <param name="Now"></param>
         /// <returns></returns>
-        public override TimeSpan GetWaitTime(JitStage.WorkEventQueue Events, JitStage.WorkEventQueue.Item ei, DateTime Now)
+        public override TimeSpan GetWaitTime(JitStage stage, JitStage.WorkEventQueue.Item ei, DateTime Now)
         {
             return WaitSpan;
         }

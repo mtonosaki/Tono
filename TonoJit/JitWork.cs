@@ -3,7 +3,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Tono.Jit
 {
@@ -17,6 +16,11 @@ namespace Tono.Jit
     public class JitWork : JitVariable, IJitObjectID
     {
         public string ID { get; set; } = JacInterpreter.MakeID("Work");
+
+        /// <summary>
+        /// Target Stage instance
+        /// </summary>
+        public JitStage Stage { get; set; }
 
         /// <summary>
         /// Previous process (null = no previous)
@@ -42,12 +46,12 @@ namespace Tono.Jit
         public JitWorkStatus Status { get; set; } = JitWorkStatus.None;
 
         /// <summary>
-        /// time when this work enter to CurrentProcess
+        /// time when this work enter to CurrentProcess of the Stage
         /// </summary>
         public DateTime EnterTime { get; set; }
 
         /// <summary>
-        /// scheduled exit time
+        /// scheduled exit time of the Stage
         /// </summary>
         public DateTime ExitTime { get; set; }
 

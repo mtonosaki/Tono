@@ -2,7 +2,6 @@
 // Licensed under the MIT license.
 
 using System;
-using System.Linq;
 
 namespace Tono.Jit
 {
@@ -41,17 +40,6 @@ namespace Tono.Jit
         public virtual string MakeShortValue()
         {
             return "";
-        }
-
-        // remember last work in-time (especially for Span constraint)
-        public interface ILastInTime
-        {
-            DateTime LastInTime { get; set; }
-        }
-        public interface IWorkInReserved
-        {
-            void AddWorkInReserve(JitWork work);
-            void RemoveWorkInReserve(JitWork work);
         }
 
         public override bool Equals(object obj)

@@ -3,7 +3,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Input;
@@ -43,15 +42,14 @@ namespace Tono.Gui.Uwp
             return $"{po.Time.ToString(TimeUtil.FormatYMDHMSms)} {po.DeviceType} {po.Remarks}  Pos={po.Position}  Finger={po.FingerCount}  Contact={po.IsInContact}, Key='{(po.IsKeyControl ? "C" : "")}{(po.IsKeyControl ? "S" : "")}{(po.IsKeyShift ? "S" : "")}{(po.IsKeyWindows ? "W" : "")}{(po.IsKeyMenu ? "M" : "")}' Scale={po.Scale} Wheel={po.WheelDelta}";
         }
 
-
-        bool IsOnPointerPressed = false;
-        bool IsOnManipulationStarted = false;
-        bool IsOnManipulationInertiaStarting = false;
-        bool IsWaitingManipulationDelta = false;
-        PointerState StateAtPressed = null;
-        ScreenPos StartPosition;
-        PointerState Move;
-        int FingerCount = 0;
+        private bool IsOnPointerPressed = false;
+        private bool IsOnManipulationStarted = false;
+        private bool IsOnManipulationInertiaStarting = false;
+        private bool IsWaitingManipulationDelta = false;
+        private PointerState StateAtPressed = null;
+        private ScreenPos StartPosition;
+        private PointerState Move;
+        private int FingerCount = 0;
 
         private void Reset()
         {
@@ -230,7 +228,7 @@ namespace Tono.Gui.Uwp
             }
         }
 
-        DispatcherTimer _2ndFingerLostFollow = null;
+        private DispatcherTimer _2ndFingerLostFollow = null;
         private void _2ndFingerLostFollow_Tick(object sender, object e)
         {
             IsWaitingManipulationDelta = false;

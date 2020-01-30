@@ -3,6 +3,7 @@
 
 using System;
 using System.Linq;
+using ProcessKey = System.String;
 
 namespace Tono.Jit
 {
@@ -14,12 +15,6 @@ namespace Tono.Jit
     public class CiPickTo : CiBase
     {
         public static readonly Type Type = typeof(CiPickTo);
-
-        /// <summary>
-        /// owner stage object
-        /// 子ワークを返却するステージインスタンス（EventキューにワークをPUSH要求する為に使う）
-        /// </summary>
-        private JitStage Stage { get; set; }    // TODO: Stageは親Processのを参照
 
         /// <summary>
         /// work filter classes
@@ -39,23 +34,7 @@ namespace Tono.Jit
         /// <summary>
         /// destination prosess of push operation
         /// </summary>
-        public Func<JitProcess> Destination { get; set; }
-
-        /// <summary>
-        /// Default constructor for Jit as Code
-        /// </summary>
-        public CiPickTo()
-        {
-        }
-
-        /// <summary>
-        /// initial constructor
-        /// </summary>
-        /// <param name="parent"></param>
-        public CiPickTo(JitStage stage)
-        {
-            Stage = stage;
-        }
+        public ProcessKey DestProcessKey { get; set; }
 
         /// <summary>
         /// in-command execute
@@ -72,12 +51,12 @@ namespace Tono.Jit
             foreach (string childWorkName in childworkNames.ToArray())
             {
                 var childWork = work.ChildWorks[childWorkName];
-                childWork.NextProcess = Destination();
+                childWork.NextProcess = work.Stage.FindProcess(DestProcessKey);
                 childWork.CurrentProcess = null; // 子Workであった事を null とする。
                                                  // childWork.PrevProcess = null; // workがAssyされた元工程を覚えておく
 
-                work.ChildWorks.Remove(childWorkName);  // 子ワークから外す
-                Stage.Events.Enqueue(now + Delay, EventTypes.Out, childWork);   // 次工程にPUSH予約
+                work.ChildWorks.Remove(childWorkName);  // Remove work from child works.  子ワークから外す
+                work.Stage.Events.Enqueue(now + Delay, EventTypes.Out, childWork);   // Reserve destination of push move. 次工程にPUSH予約
             }
         }
     }

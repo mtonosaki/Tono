@@ -366,7 +366,7 @@ namespace UnitTestProject1
         public void Test14()
         {
             var code = @"
-                new Stage
+                st = new Stage
                     Procs
                         add sink = new Process
                         add p1 = new Process
@@ -375,7 +375,7 @@ namespace UnitTestProject1
                                 add i1 = new CiPickTo
                                     Delay = 1.5M
                                     TargetWorkClass = ':Car'
-                                    Destination = sink
+                                    DestProcessKey = sink.ID
                                 add i2 = new CiDelay
                                     Delay = 2.5H
                                 add i3 = new CiSwitchNextLink
@@ -384,12 +384,12 @@ namespace UnitTestProject1
             ";
             var jac = new JacInterpreter();
             jac.Exec(code);
-
+            var st = jac.GetStage("st");
             var i1 = jac["i1"] as CiPickTo;
             Assert.IsNotNull(i1);
             Assert.AreEqual(i1.Delay, TimeSpan.FromMinutes(1.5));
             Assert.AreEqual(i1.TargetWorkClass, ":Car");
-            Assert.AreEqual(i1.Destination(), jac.GetProcess("sink")); // check lazy method
+            Assert.AreEqual(st.FindProcess(i1.DestProcessKey), jac.GetProcess("sink")); // check lazy method
 
             var i2 = jac["i2"] as CiDelay;
             Assert.IsNotNull(i2);
@@ -404,7 +404,7 @@ namespace UnitTestProject1
         public void Test14_2()
         {
             var code = @"
-                new Stage
+                st = new Stage
                     Procs
                         add p1 = new Process
                             Name = 'PROCP1'
@@ -412,25 +412,30 @@ namespace UnitTestProject1
                                 add i1 = new CiPickTo
                                     Delay = 1.5M
                                     TargetWorkClass = ':Car'
-                                    Destination = SUPERLAZY
+                                    DestProcessKey = 'SUPERLAZY'
             ";
             var jac = new JacInterpreter();
             jac.Exec(code);
+            var st = jac.GetStage("st");
 
             var i1 = jac["i1"] as CiPickTo;
             Assert.IsNotNull(i1);
-            var i1dest = i1.Destination?.Invoke();
-            Assert.IsNull(i1dest);
+            var i1dest = st.FindProcess("SUPERLAZY", isReturnNull: true);
+            Assert.IsNull(i1dest);  // Expected Null because of no registered yet.
 
             var code2 = @"
-                new Stage
+                st
                     Procs
                         add p2 = new Process
                             Name = 'SUPERLAZY'
             ";
             jac.Exec(code2);
-            i1dest = i1.Destination?.Invoke();
-            Assert.AreEqual(i1dest, jac.GetProcess("SUPERLAZY"));
+            i1dest = st.FindProcess("SUPERLAZY", isReturnNull: true);
+            var p2 = jac.GetProcess("p2");
+            Assert.AreEqual(i1dest, p2);  // Then FindProcess can find p2 named SUPERLAZY
+
+            i1dest = st.FindProcess(p2.ID, isReturnNull: true);  // You can also find by ID 
+            Assert.AreEqual(i1dest, p2);
         }
 
         [TestMethod]
@@ -477,11 +482,12 @@ namespace UnitTestProject1
                 new Stage
                     Procs
                         add sink = new Process
+                            Name = 'SinkProc'
                         add p1 = new Process
                             Name = 'MyProc'
                             Cio
                                 add o1 = new CoJoinFrom
-                                    PullFrom = sink
+                                    PullFromProcessKey = 'SinkProc'
                                     ChildPartName = 'TEPA'
                                     WaitSpan = 0.5M                                    
             ";
@@ -489,7 +495,7 @@ namespace UnitTestProject1
             jac.Exec(code);
             var o1 = jac["o1"] as CoJoinFrom;
             Assert.IsNotNull(o1);
-            Assert.AreEqual(o1.PullFrom(), jac.GetProcess("sink"));
+            Assert.AreEqual(o1.PullFromProcessKey, jac.GetProcess("SinkProc").Name);
             Assert.AreEqual(o1.ChildPartName, "TEPA");
             Assert.AreEqual(o1.WaitSpan, TimeSpan.FromSeconds(30));
         }
@@ -497,44 +503,41 @@ namespace UnitTestProject1
         public void Test18()
         {
             var code = @"
-                w1 = new Work
-                w2 = new Work
-                w3 = new Work
-                new Stage
+                st = new Stage
                     Procs
                         add sink = new Process
                         add p1 = new Process
                             Name = 'MyProc'
                             Cio
                                 add o1 = new CoMaxCost
-                                    ReferenceVarName = 'Weight'
-                                    WorkInReserve
-                                        add new Work
-                                            ID = 'MyWork01'
-                                        add w1
-                                        add w2
-                                        add w3
-                                    Value = 500
             ";
             var jac = new JacInterpreter();
             jac.Exec(code);
+            var st = jac.GetStage("st");
+
+            var code2 = @"
+                w1 = new Work
+                    Stage = st
+                w2 = new Work
+                    Stage = st
+                w3 = new Work
+                    Stage = st
+            ";
+            jac.Exec(code2);
+            var w2 = jac.GetWork("w2");
+            Assert.AreEqual(st, w2.Stage);
+
+            var code3 = @"
+                o1
+                    ReferenceVarName = 'Weight'
+                    Value = 500
+            ";
+            jac.Exec(code3);
+
             var o1 = jac["o1"] as CoMaxCost;
             Assert.IsNotNull(o1);
             Assert.AreEqual(o1.ReferenceVarName, JitVariable.From("Weight"));
             Assert.AreEqual(o1.Value, 500.0);
-            var w1 = jac.GetWork("MyWork01");
-            Assert.IsNotNull(w1);
-            Assert.AreEqual(o1.GetWorkInReserves().Count(), 4);
-            Assert.AreEqual(o1.GetWorkInReserves().FirstOrDefault(), w1);
-
-            code = @"
-                o1
-                    WorkInReserve
-                        remove MyWork01
-            ";
-            jac.Exec(code);
-            Assert.AreEqual(o1.GetWorkInReserves().Count(), 3);
-            Assert.IsNull(o1.GetWorkInReserves().Where(a => a.Name == w1.Name).FirstOrDefault());
         }
 
         [TestMethod]
@@ -566,8 +569,8 @@ namespace UnitTestProject1
                 p2 = new Process
                 w1 = new Work
                 k1 = new Kanban
-                    PullFrom = p1
-                    PullTo = p2
+                    PullFromProcessKey = p1.ID
+                    PullToProcessKey = p2.ID
                     Work = w1
             ";
             var jac = new JacInterpreter();
@@ -580,8 +583,8 @@ namespace UnitTestProject1
             Assert.IsNotNull(p1);
             Assert.IsNotNull(p2);
             Assert.IsNotNull(w1);
-            Assert.AreEqual(k1.PullFrom(), p1);
-            Assert.AreEqual(k1.PullTo(), p2);
+            Assert.AreEqual(k1.PullFromProcessKey, p1.ID);
+            Assert.AreEqual(k1.PullToProcessKey, p2.ID);
             Assert.AreEqual(k1.Work, w1);
         }
 
@@ -766,6 +769,37 @@ namespace UnitTestProject1
             var ciosCount = p1.Cios.Count();
             Assert.AreEqual(ciosCount, 0);
         }
+
+        [TestMethod]
+        public void Test28()
+        {
+            var code = @"
+                st = new Stage
+                    Procs
+                        add sink = new Process
+                        add p1 = new Process
+                            Name = 'PROCP1'
+                            Cio
+                                add pt = new CiPickTo
+                                    Delay = 0MS
+                                    TargetWorkClass = ':Car'
+                                    DestProcessKey = sink.ID // To confirm Objct.Property style string set
+            ";
+            var jac = new JacInterpreter();
+            jac.Exec(code);
+            var pt = jac["pt"] as CiPickTo;
+            Assert.IsNotNull(pt);
+            var p1 = jac.GetProcess("p1");
+            Assert.IsNotNull(p1);
+
+            var redo = $"{pt.ID}\r\n" +
+                          $"    DestProcessKey = 'REDO_PROC'r\n";
+            var undo = $"{pt.ID}\r\n" +
+                          $"    DestProcessKey = 'UNDO_PROC'\r\n";
+
+            jac.Exec(redo);
+
+        }
     }
 
     [JacTarget(Name = "TestJitClass")]
@@ -787,6 +821,4 @@ namespace UnitTestProject1
 
         public bool Contains(string name) => dic.ContainsKey(name);
     }
-
-
 }

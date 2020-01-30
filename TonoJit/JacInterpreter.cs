@@ -376,20 +376,28 @@ namespace Tono.Jit
                         }
                         // Normal Set
                         else
-                        if (pi.GetMethod.ReturnParameter.ParameterType.Name == "JitVariable" && item != null && item is JitVariable == false)
                         {
-                            pi.SetValue(obj, JitVariable.FromObject(item));
-                        }
-                        else
-                        {
-                            pi.SetValue(obj, item);
-                            if (variable.Com.Equals("ID", StringComparison.CurrentCultureIgnoreCase))
+                            var isSet = false;
+                            var requestedTypeName = pi.GetMethod.ReturnParameter.ParameterType.Name;
+                            if (requestedTypeName == "JitVariable" && item != null && item is JitVariable == false)
                             {
-                                varBuf[item?.ToString() ?? "null"] = obj;
+                                pi.SetValue(obj, JitVariable.FromObject(item));
+                                isSet = true;
                             }
-                            if (variable.Com.Equals("Name", StringComparison.CurrentCultureIgnoreCase))
+                            if (requestedTypeName == "String")
                             {
-                                varBuf[item?.ToString() ?? "null"] = obj;
+                            }
+                            if (isSet == false)
+                            {
+                                pi.SetValue(obj, item);
+                                if (variable.Com.Equals("ID", StringComparison.CurrentCultureIgnoreCase))
+                                {
+                                    varBuf[item?.ToString() ?? "null"] = obj;
+                                }
+                                if (variable.Com.Equals("Name", StringComparison.CurrentCultureIgnoreCase))
+                                {
+                                    varBuf[item?.ToString() ?? "null"] = obj;
+                                }
                             }
                         }
                         return;
@@ -501,6 +509,8 @@ namespace Tono.Jit
                 }
                 instanceBuf[instanceKey] = instance;
                 rpnStack.Push((typeName.Level, instanceKey));
+
+                
             }
             else
             {
@@ -603,10 +613,26 @@ namespace Tono.Jit
         /// <returns></returns>
         public static Distance ParseDistance(string valuestr)
         {
-            if (valuestr.EndsWith("mm")) return Distance.FromMeter(double.Parse(StrUtil.Left(valuestr, valuestr.Length - 2)) / 1000.0);
-            if (valuestr.EndsWith("cm")) return Distance.FromMeter(double.Parse(StrUtil.Left(valuestr, valuestr.Length - 2)) / 100.0);
-            if (valuestr.EndsWith("km")) return Distance.FromMeter(double.Parse(StrUtil.Left(valuestr, valuestr.Length - 2)) * 1000.0);
-            if (valuestr.EndsWith("m")) return Distance.FromMeter(double.Parse(StrUtil.Left(valuestr, valuestr.Length - 1)));
+            if (valuestr.EndsWith("mm"))
+            {
+                return Distance.FromMeter(double.Parse(StrUtil.Left(valuestr, valuestr.Length - 2)) / 1000.0);
+            }
+
+            if (valuestr.EndsWith("cm"))
+            {
+                return Distance.FromMeter(double.Parse(StrUtil.Left(valuestr, valuestr.Length - 2)) / 100.0);
+            }
+
+            if (valuestr.EndsWith("km"))
+            {
+                return Distance.FromMeter(double.Parse(StrUtil.Left(valuestr, valuestr.Length - 2)) * 1000.0);
+            }
+
+            if (valuestr.EndsWith("m"))
+            {
+                return Distance.FromMeter(double.Parse(StrUtil.Left(valuestr, valuestr.Length - 1)));
+            }
+
             throw new JacException(JacException.Codes.NotSupportedUnit, $"Cannot specify distance unit from {valuestr}");
         }
 
@@ -617,8 +643,15 @@ namespace Tono.Jit
         /// <returns></returns>
         public static bool CheckVariableName(string name)
         {
-            if (name == null) return false;
-            if (name.Length < 1 || name.Length > 16) return false;
+            if (name == null)
+            {
+                return false;
+            }
+
+            if (name.Length < 1 || name.Length > 16)
+            {
+                return false;
+            }
 
             var reg = new Regex("^[A-Za-z][A-Za-z0-9]*$");
             return reg.IsMatch(name);
@@ -635,7 +668,10 @@ namespace Tono.Jit
             if (valuestr.StartsWith("0") && char.IsNumber(valuestr[valuestr.Length - 1]))
             {
                 val = double.Parse(valuestr);
-                if (val == 0) return TimeSpan.Zero;
+                if (val == 0)
+                {
+                    return TimeSpan.Zero;
+                }
             }
             string unit;
             if (valuestr.EndsWith("MS"))
@@ -845,7 +881,7 @@ namespace Tono.Jit
     /// <summary>
     /// Jit model as a Code common exception object
     /// </summary>
-    public class JacException : Exception
+    public class JacException : JitException
     {
         public enum Codes
         {

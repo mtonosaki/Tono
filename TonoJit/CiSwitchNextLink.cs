@@ -6,7 +6,7 @@ using System;
 namespace Tono.Jit
 {
     /// <summary>
-    /// WARNING : THIS CLASS IS NOT YET COMPLETED 2019.11.17
+    /// TODO: WARNING : THIS CLASS IS NOT YET COMPLETED 2019.11.17
     /// in-command to switch next process with parameter
     /// </summary>
     [JacTarget(Name = "CiSwitchNextLink")]
@@ -38,7 +38,9 @@ namespace Tono.Jit
                 int nextLinkNo = DbUtil.ToInt(work.ChildVriables.GetValueOrNull(NextLinkVarName.Value.ToString())?.Value, def: -1);
                 if (nextLinkNo >= 0)
                 {
-                    work.NextProcess = GetCheckTargetProcess(work).NextLinks[nextLinkNo];
+                    var tarProc = GetCheckTargetProcess(work);
+                    var nexts = work.Stage.GetProcessLinks(tarProc);
+                    work.NextProcess = work.Stage.FindProcess(nexts[nextLinkNo]);
                 }
             }
         }

@@ -3,6 +3,7 @@
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Tono;
 using Tono.Jit;
@@ -25,42 +26,34 @@ namespace UnitTestProject1
             st.Procs.Add(X = new JitProcess
             {
                 Name = "X",
-                InCommands = new JitProcess.InCommandCollection
+                InCommands = new List<CiBase>
                 {
                     new CiDelay
                     {
                         Delay = TimeSpan.FromMinutes(3),
                     },
                 },
-                NextLinks = new JitProcess.Destinations
-                {
-                    () => SINK,
-                },
             });
+            st.AddProcessLink(X, SINK);
+
             st.Procs.Add(Y = new JitProcess
             {
                 Name = "Y",
-                NextLinks = new JitProcess.Destinations
-                {
-                    () => SINK,
-                },
             });
+            st.AddProcessLink(Y, SINK);
+
             st.Procs.Add(B = new JitProcess // 分岐元
             {
                 Name = "B",
-                NextLinks = new JitProcess.Destinations
-                {
-                    () => X, () => Y,
-                },
             });
+            st.AddProcessLink(B, X);
+            st.AddProcessLink(B, Y);
+
             st.Procs.Add(A = new JitProcess  // 前工程
             {
                 Name = "A",
-                NextLinks = new JitProcess.Destinations
-                {
-                    () => B,
-                },
             });
+            st.AddProcessLink(A, B);
         }
 
         [TestMethod]
@@ -100,10 +93,11 @@ namespace UnitTestProject1
 
 
             // 工程間リンク
-            A.NextLinks.Add(() => B);     // A→B Push。但し、B.Co.JoinFromでJoinできるまで待つ
-            B.NextLinks.Add(() => C);     // B→C Push。分岐工程への移動
-            C.NextLinks.Add(() => SINK);  // B→SINK Push
-            D.NextLinks.Add(() => SINK);  // D→SINK Push
+
+            st.AddProcessLink(A, B); // A→B Push。但し、B.Co.JoinFromでJoinできるまで待つ
+            st.AddProcessLink(B, C); // B→C Push。分岐工程への移動
+            st.AddProcessLink(C, SINK); // B→SINK Push
+            st.AddProcessLink(D, SINK); // D→SINK Push
 
             A.InCommands.Add(new CiDelay
             {
@@ -121,18 +115,18 @@ namespace UnitTestProject1
             CoJoinFrom JFY;
             B.Constraints.Add(JFY = new CoJoinFrom
             {
-                PullFrom = () => Y,
+                PullFromProcessKey = Y.ID,
                 WaitSpan = TimeSpan.FromMinutes(10),
             });
             CoJoinFrom JFZ;
             B.Constraints.Add(JFZ = new CoJoinFrom
             {
-                PullFrom = () => Z,
+                PullFromProcessKey = Z.ID,
                 WaitSpan = TimeSpan.FromMinutes(10),
             });
-            C.InCommands.Add(new CiPickTo(st)  // C工程で Dに分岐
+            C.InCommands.Add(new CiPickTo  // C工程で Dに分岐
             {
-                Destination = () => D,
+                DestProcessKey = "D",
                 Delay = TimeSpan.FromMinutes(1),
                 TargetWorkClass = ":Sumaho",
             });
@@ -163,18 +157,21 @@ namespace UnitTestProject1
             JitWork w1, y1, z1;
             st.Events.Enqueue(TimeUtil.Set(today, hour: 9, minute: 0), EventTypes.Out, w1 = new JitWork
             {
+                Stage = st,
                 Name = $"w1",
                 NextProcess = A,
             });
             Assert.IsTrue(w1.Is(":Work"));
             st.Events.Enqueue(TimeUtil.Set(today, hour: 9, minute: 0), EventTypes.Out, y1 = new JitWork
             {
+                Stage = st,
                 Name = $"y1",
                 NextProcess = Y,
                 Classes = JitVariable.ClassList.From(":iOS:Sumaho"),    // :Workに、クラス「追加」
             });
             st.Events.Enqueue(TimeUtil.Set(today, hour: 9, minute: 2), EventTypes.Out, z1 = new JitWork
             {
+                Stage = st,
                 Name = $"z1",
                 NextProcess = Z,
                 Classes = JitVariable.ClassList.From(":Android:Sumaho"),    // :Workに、クラス「追加」
@@ -332,8 +329,8 @@ namespace UnitTestProject1
             });
 
             // 工程間リンク
-            A.NextLinks.Add(() => B);     // A→B Push。但し、B.Co.JoinFromでJoinできるまで待つ
-            B.NextLinks.Add(() => SINK);  // B→SINK Push
+            st.AddProcessLink(A, B); // A→B Push。但し、B.Co.JoinFromでJoinできるまで待つ
+            st.AddProcessLink(B, SINK); // B→SINK Push
 
             A.InCommands.Add(new CiDelay
             {
@@ -351,13 +348,13 @@ namespace UnitTestProject1
             CoJoinFrom JFY;
             B.Constraints.Add(JFY = new CoJoinFrom
             {
-                PullFrom = () => Y,
+                PullFromProcessKey = Y.ID,
                 WaitSpan = TimeSpan.FromMinutes(10),
             });
             CoJoinFrom JFZ;
             B.Constraints.Add(JFZ = new CoJoinFrom
             {
-                PullFrom = () => Z,
+                PullFromProcessKey = Z.ID,
                 WaitSpan = TimeSpan.FromMinutes(10),
             });
             Y.InCommands.Add(new CiDelay
@@ -374,16 +371,19 @@ namespace UnitTestProject1
             JitWork w1, y1, z1;
             st.Events.Enqueue(TimeUtil.Set(today, hour: 9, minute: 0), EventTypes.Out, w1 = new JitWork
             {
+                Stage = st,
                 Name = $"w1",
                 NextProcess = A,
             });
             st.Events.Enqueue(TimeUtil.Set(today, hour: 9, minute: 0), EventTypes.Out, y1 = new JitWork
             {
+                Stage = st,
                 Name = $"y1",
                 NextProcess = Y,
             });
             st.Events.Enqueue(TimeUtil.Set(today, hour: 9, minute: 2), EventTypes.Out, z1 = new JitWork
             {
+                Stage = st,
                 Name = $"z1",
                 NextProcess = Z,
             });
@@ -464,12 +464,12 @@ namespace UnitTestProject1
             st.DoNext();
             dat = st.Events.Peeks(99).ToList(); k = 0;
             Assert.IsTrue(CMP(dat[k++], "w1", EventTypes.In, "10:00", "B"));
-            Assert.AreEqual(SINK.Works.Count(), 0);
+            Assert.AreEqual(st.GetWorks(SINK).Count(), 0);
 
             st.DoNext();
             dat = st.Events.Peeks(99).ToList(); k = 0;
             Assert.AreEqual(dat.Count, 0);
-            Assert.AreEqual(SINK.Works.Count(), 1);
+            Assert.AreEqual(st.GetWorks(SINK).Count(), 1);
         }
 
         [TestMethod]
@@ -492,7 +492,7 @@ namespace UnitTestProject1
             });
 
             // 工程間リンク
-            Y.NextLinks.Add(() => SINK);
+            st.AddProcessLink(Y, SINK);
 
             X.InCommands.Add(new CiDelay
             {
@@ -504,7 +504,7 @@ namespace UnitTestProject1
             });
 
             // 工程に制約を付与
-            Y.InCommands.Add(new CiKanbanReturn(st)
+            Y.InCommands.Add(new CiKanbanReturn
             {
                 Delay = TimeSpan.FromMinutes(0),
                 TargetKanbanClass = ":Dog",
@@ -516,16 +516,18 @@ namespace UnitTestProject1
             var testid = 0;
             st.SendKanban(ka = new JitKanban
             {
-                PullFrom = () => X,
-                PullTo = () => Y,
+                Stage = st,
+                PullFromProcessKey = X.ID,  // You can set ID here
+                PullToProcessKey = Y.Name,  // You can also set Name here
                 TestID = ++testid,
             }).Classes.Add(":Dog");
             Assert.IsTrue(ka.Is(":Kanban"));
 
             st.SendKanban(new JitKanban
             {
-                PullFrom = () => X,
-                PullTo = () => Y,
+                Stage = st,
+                PullFromProcessKey = "X",   // You can set Name here
+                PullToProcessKey = "Y",
                 TestID = ++testid,
             }).Classes.Add(":Cat");
 
@@ -534,6 +536,7 @@ namespace UnitTestProject1
             {
                 st.Events.Enqueue(TimeUtil.Set(today, hour: 9, minute: i + 1), EventTypes.Out, new JitWork
                 {
+                    Stage = st,
                     Name = $"w{(i + 1):0}",
                     NextProcess = X,
                 });
@@ -632,7 +635,7 @@ namespace UnitTestProject1
 
             // 工程間リンク
             // st.Links.SetPushLink(X, Y);  // 後工程引き取りの場合は、PushLinkは設定しない。
-            Y.NextLinks.Add(() => SINK);
+            st.AddProcessLink(Y, SINK);
 
             // 工程に制約を付与
             X.Constraints.Add(new CoSpan
@@ -652,7 +655,7 @@ namespace UnitTestProject1
             {
                 Delay = TimeSpan.FromMinutes(10),
             });
-            Y.InCommands.Add(new CiKanbanReturn(st) // かんばんを前工程に自動的に返却するモード（瞬時にかんばんが帰る）
+            Y.InCommands.Add(new CiKanbanReturn // かんばんを前工程に自動的に返却するモード（瞬時にかんばんが帰る）
             {
                 Delay = TimeSpan.FromSeconds(15),
             });
@@ -662,8 +665,9 @@ namespace UnitTestProject1
 
             st.SendKanban(new JitKanban
             {
-                PullFrom = () => X,
-                PullTo = () => Y,
+                Stage = st,
+                PullFromProcessKey = "X",
+                PullToProcessKey = "Y",
                 TestID = 1,
             });
 
@@ -672,6 +676,7 @@ namespace UnitTestProject1
             {
                 st.Events.Enqueue(TimeUtil.Set(today, hour: 9, minute: 0), EventTypes.Out, new JitWork
                 {
+                    Stage = st,
                     Name = $"w{(i + 1):0}",
                     NextProcess = X,
                 });
@@ -739,8 +744,6 @@ namespace UnitTestProject1
             Assert.IsTrue(CMP(dat[k++], "w1", EventTypes.In, "9:05", "X"));
             Assert.IsTrue(CMP(dat[k++], "w3", EventTypes.Out, "9:06"));
             Assert.IsTrue(dat.Count == 2);   // w2 9:08 はXに入ったが、かんばんが無いので、Eventキューには入らなかった
-
-
 
 
             // w1がYに入る。w1についていた かんばんが、Xに自動で返却されるモードになっている
@@ -878,7 +881,7 @@ namespace UnitTestProject1
 
             // 工程間リンク
             // st.Links.SetPushLink(X, Y);  // 後工程引き取りの場合は、PushLinkは設定しない。
-            Y.NextLinks.Add(() => SINK);
+            st.AddProcessLink(Y, SINK);
 
             // 工程に制約を付与
             X.Constraints.Add(new CoSpan
@@ -906,6 +909,7 @@ namespace UnitTestProject1
             {
                 st.Events.Enqueue(TimeUtil.Set(today, hour: 9, minute: 0), EventTypes.Out, new JitWork
                 {
+                    Stage = st,
                     Name = $"w{(i + 1):0}",
                     NextProcess = X,
                 });
@@ -968,8 +972,9 @@ namespace UnitTestProject1
             var testid = 0;
             st.SendKanban(TimeUtil.Set(today, hour: 9, minute: 30), new JitKanban   // かんばん送るも、工程Xにはワークが無いので、なにもしない
             {
-                PullFrom = () => X,
-                PullTo = () => Y,
+                Stage = st,
+                PullFromProcessKey = "X",
+                PullToProcessKey = Y.ID,
                 TestID = ++testid,
             });
             dat = st.Events.Peeks(99).ToList(); k = 0;
@@ -977,8 +982,9 @@ namespace UnitTestProject1
 
             st.SendKanban(TimeUtil.Set(today, hour: 9, minute: 30), new JitKanban   // かんばん送るも、工程Xにはワークが無いので、なにもしない
             {
-                PullFrom = () => X,
-                PullTo = () => Y,
+                Stage = st,
+                PullFromProcessKey = X.Name,
+                PullToProcessKey = "Y",
                 TestID = ++testid,
             });
             dat = st.Events.Peeks(99).ToList(); k = 0;
@@ -987,8 +993,9 @@ namespace UnitTestProject1
 
             st.SendKanban(TimeUtil.Set(today, hour: 9, minute: 32), new JitKanban   // かんばん送るも、工程Xにはワークが無いので、なにもしない
             {
-                PullFrom = () => X,
-                PullTo = () => Y,
+                Stage = st,
+                PullFromProcessKey = "X",
+                PullToProcessKey = "Y",
                 TestID = ++testid,
             });
             dat = st.Events.Peeks(99).ToList(); k = 0;
@@ -1120,8 +1127,9 @@ namespace UnitTestProject1
             {
                 st.SendKanban(TimeUtil.Set(today, hour: 12, minute: 00), new JitKanban   // かんばん送るも、工程Xにはワークが無いので、なにもしない
                 {
-                    PullFrom = () => SINK,
-                    PullTo = () => Y,
+                    Stage = st,
+                    PullFromProcessKey = "SINK",
+                    PullToProcessKey = "Y",
                     TestID = ++testid,
                 });
             }
@@ -1349,7 +1357,7 @@ namespace UnitTestProject1
 
             // 工程間リンク
             // st.Links.SetPushLink(X, Y);  // 後工程引き取りの場合は、PushLinkは設定しない。
-            Y.NextLinks.Add(() => SINK);
+            st.AddProcessLink(Y, SINK);
 
             // 工程に制約を付与
             X.Constraints.Add(new CoSpan
@@ -1376,9 +1384,10 @@ namespace UnitTestProject1
             int testid = 0;
             st.SendKanban(TimeUtil.Set(today, hour: 8, minute: 0), new JitKanban   // かんばん送るも、工程Xにはワークが無いので、なにもしない
             {
+                Stage = st,
                 TestID = ++testid,
-                PullFrom = () => X,
-                PullTo = () => Y,
+                PullFromProcessKey = "X",
+                PullToProcessKey = "Y",
             });
 
             // テストワーク投入（Xに工程充足）
@@ -1386,6 +1395,7 @@ namespace UnitTestProject1
             {
                 st.Events.Enqueue(TimeUtil.Set(today, hour: 9, minute: 0), EventTypes.Out, new JitWork
                 {
+                    Stage = st,
                     Name = $"w{(i + 1):0}",
                     NextProcess = X,
                 });
@@ -1459,9 +1469,10 @@ namespace UnitTestProject1
             // Kanban2を Xに投入依頼
             st.SendKanban(TimeUtil.Set(today, hour: 9, minute: 4), new JitKanban
             {
+                Stage = st,
                 TestID = ++testid,
-                PullFrom = () => X,
-                PullTo = () => Y,
+                PullFromProcessKey = "X",
+                PullToProcessKey = "Y",
             });
             dat = st.Events.Peeks(99).ToList(); k = 0;
             Assert.IsTrue(CMP(dat[k++], "Kanban2", EventTypes.KanbanIn, "9:04"));
@@ -1484,9 +1495,10 @@ namespace UnitTestProject1
             // Kanban3を Xに投入依頼。w3のInに先立ち、入れとくテスト
             st.SendKanban(new JitKanban
             {
+                Stage = st,
                 TestID = ++testid,
-                PullFrom = () => X,
-                PullTo = () => Y,
+                PullFromProcessKey = "X",
+                PullToProcessKey = "Y",
             });
 
             // Kanban3 In待ち
@@ -1630,8 +1642,11 @@ namespace UnitTestProject1
             {
                 Name = "Y",
             };
-            JP.Add(() => X);
-            JP.Add(() => Y);
+            st.Procs.Add(X);
+            JP.Add(st, X.ID);
+
+            st.Procs.Add(Y);
+            JP.Add(st, Y.ID);
 
             st.Procs.Add(JP);
             st.Procs.Add(Z = new JitProcess
@@ -1643,9 +1658,8 @@ namespace UnitTestProject1
                 Name = "SINK",
             });
 
-
-            JP.NextLinks.Add(() => Z);
-            Z.NextLinks.Add(() => SINK);
+            st.AddProcessLink(JP, Z);
+            st.AddProcessLink(Z, SINK);
             // No need to add next link from X to JP because X is a child of JP(auto linked)
             // No need to add next link from Y to JP because Y is a child of JP(auto linked)
 
@@ -1682,6 +1696,7 @@ namespace UnitTestProject1
             {
                 st.Events.Enqueue(TimeUtil.Set(today, hour: 9, minute: 0), EventTypes.Out, new JitWork
                 {
+                    Stage = st,
                     Name = $"x{(i + 1):0}",
                     NextProcess = X,
                 });
@@ -1690,6 +1705,7 @@ namespace UnitTestProject1
             {
                 st.Events.Enqueue(TimeUtil.Set(today, hour: 9, minute: 5), EventTypes.Out, new JitWork
                 {
+                    Stage = st,
                     Name = $"y{(i + 1):0}",
                     NextProcess = Y,
                 });
@@ -2070,8 +2086,12 @@ namespace UnitTestProject1
             {
                 Name = "Y",
             };
-            JP.Add(() => X);
-            JP.Add(() => Y);    // Y is priority
+            st.Procs.Add(X);    // NEED TO ADD PROCESS INSTANCE TO STAGE
+            st.Procs.Add(Y);    // NEED TO ADD PROCESS INSTANCE TO STAGE
+
+            JP.Add(st, "X");
+            JP.Add(st, "Y");    // Y is priority
+
 
             st.Procs.Add(JP);
             st.Procs.Add(Z = new JitProcess
@@ -2083,8 +2103,8 @@ namespace UnitTestProject1
                 Name = "SINK",
             });
 
-            JP.NextLinks.Add(() => Z);
-            Z.NextLinks.Add(() => SINK);
+            st.AddProcessLink(JP, Z);
+            st.AddProcessLink(Z, SINK);
 
             X.Constraints.Add(new CoSpan
             {
@@ -2118,6 +2138,7 @@ namespace UnitTestProject1
             {
                 st.Events.Enqueue(TimeUtil.Set(today, hour: 9, minute: 0), EventTypes.Out, new JitWork
                 {
+                    Stage = st,
                     Name = $"x{(i + 1):0}",
                     NextProcess = X,
                 });
@@ -2126,6 +2147,7 @@ namespace UnitTestProject1
             {
                 st.Events.Enqueue(TimeUtil.Set(today, hour: 9, minute: 0), EventTypes.Out, new JitWork
                 {
+                    Stage = st,
                     Name = $"y{(i + 1):0}",
                     NextProcess = Y,
                 });
@@ -2464,8 +2486,11 @@ namespace UnitTestProject1
             {
                 Name = "Y",
             };
-            JP.Add(() => X);
-            JP.Add(() => Y);
+            st.Procs.Add(X);
+            JP.Add(st, "X");
+
+            st.Procs.Add(Y);
+            JP.Add(st, Y.ID);
 
             st.Procs.Add(JP);
             st.Procs.Add(Z = new JitProcess
@@ -2473,7 +2498,7 @@ namespace UnitTestProject1
                 Name = "Z",
             });
 
-            JP.NextLinks.Add(() => Z);
+            st.AddProcessLink(JP, Z);
 
             X.Constraints.Add(new CoSpan
             {
@@ -2511,6 +2536,7 @@ namespace UnitTestProject1
             {
                 st.Events.Enqueue(TimeUtil.Set(today, hour: 9, minute: 0), EventTypes.Out, new JitWork
                 {
+                    Stage = st,
                     Name = $"y{(i + 1):0}",
                     NextProcess = Y,
                 });
@@ -2680,23 +2706,26 @@ namespace UnitTestProject1
                 Delay = TimeSpan.FromMinutes(4),
             });
 
-            X.NextLinks.Add(() => Y);
-            Y.NextLinks.Add(() => Z);
+            st.AddProcessLink(X, Y);
+            st.AddProcessLink(Y, Z);
 
             var today = TimeUtil.ClearTime(DateTime.Now);
             JitWork a, b, c;
             st.Events.Enqueue(TimeUtil.Set(today, hour: 9, minute: 0), EventTypes.Out, a = new JitWork
             {
+                Stage = st,
                 Name = "a",
                 NextProcess = X,
             });
             st.Events.Enqueue(TimeUtil.Set(today, hour: 9, minute: 0), EventTypes.Out, b = new JitWork
             {
+                Stage = st,
                 Name = "b",
                 NextProcess = X,
             });
             st.Events.Enqueue(TimeUtil.Set(today, hour: 9, minute: 0), EventTypes.Out, c = new JitWork
             {
+                Stage = st,
                 Name = "c",
                 NextProcess = X,
             });
@@ -2855,23 +2884,26 @@ namespace UnitTestProject1
                 Delay = TimeSpan.FromMinutes(4),
             });
 
-            X.NextLinks.Add(() => Y);
-            Y.NextLinks.Add(() => Z);
+            st.AddProcessLink("X", Y.ID);
+            st.AddProcessLink(Y, Z);
 
             var today = TimeUtil.ClearTime(DateTime.Now);  // H:M:S:MS = 00:00:00:000
             JitWork a, b, c;
             st.Events.Enqueue(TimeUtil.Set(today, hour: 9, minute: 0), EventTypes.Out, a = new JitWork
             {
+                Stage = st,
                 Name = "a",
                 NextProcess = X,
             });
             st.Events.Enqueue(TimeUtil.Set(today, hour: 9, minute: 1), EventTypes.Out, b = new JitWork
             {
+                Stage = st,
                 Name = "b",
                 NextProcess = X,
             });
             st.Events.Enqueue(TimeUtil.Set(today, hour: 9, minute: 2), EventTypes.Out, c = new JitWork
             {
+                Stage = st,
                 Name = "c",
                 NextProcess = X,
             });
@@ -2889,7 +2921,7 @@ namespace UnitTestProject1
             Assert.IsTrue(CMP(dat[0], "b", EventTypes.Out, "9:01"));
             Assert.IsTrue(CMP(dat[1], "a", EventTypes.Out, "9:01")); Assert.IsTrue(dat[1].Work.CurrentProcess.Name == "X");
             Assert.IsTrue(CMP(dat[2], "c", EventTypes.Out, "9:02"));
-            Assert.IsTrue(st.Procs["X"].Works.Count() == 1);
+            Assert.IsTrue(st.GetWorks(st.Procs["X"]).Count() == 1);
 
             st.DoNext();    //  3
             dat = st.Events.Peeks(3).ToList();
@@ -2908,8 +2940,8 @@ namespace UnitTestProject1
             Assert.IsTrue(CMP(dat[0], "c", EventTypes.Out, "9:02"));
             Assert.IsTrue(CMP(dat[1], "b", EventTypes.Out, "9:03"));
             Assert.IsTrue(CMP(dat[2], "a", EventTypes.Out, "9:05")); Assert.IsTrue(dat[2].Work.CurrentProcess.Name == "Y");
-            Assert.IsTrue(st.Procs["X"].Works.Count() == 0);
-            Assert.IsTrue(st.Procs["Y"].Works.Count() == 1);
+            Assert.IsTrue(st.GetWorks(st.Procs["X"]).Count() == 0);
+            Assert.IsTrue(st.GetWorks(st.Procs["Y"]).Count() == 1);
 
             st.DoNext();    //  6
             dat = st.Events.Peeks(3).ToList();
@@ -2934,7 +2966,7 @@ namespace UnitTestProject1
             Assert.IsTrue(CMP(dat[0], "b", EventTypes.Out, "9:04")); Assert.IsTrue(dat[0].Work.CurrentProcess.Name == "X");
             Assert.IsTrue(CMP(dat[1], "a", EventTypes.Out, "9:05"));
             Assert.IsTrue(CMP(dat[2], "c", EventTypes.Out, "9:06"));
-            Assert.IsTrue(st.Procs["X"].Works.Count() == 1);
+            Assert.IsTrue(st.GetWorks(st.Procs["X"]).Count() == 1);
 
 
             st.DoNext();    // 10
@@ -2960,8 +2992,8 @@ namespace UnitTestProject1
             Assert.IsTrue(dat.Count == 2, "a moved to Z. a have sunk because Z have not next process");
             Assert.IsTrue(CMP(dat[0], "b", EventTypes.Out, "9:05"));
             Assert.IsTrue(CMP(dat[1], "c", EventTypes.Out, "9:06"));
-            Assert.IsTrue(st.Procs["Y"].Works.Count() == 0);
-            Assert.IsTrue(st.Procs["Z"].Works.Count() == 1);
+            Assert.IsTrue(st.GetWorks(st.Procs["Y"]).Count() == 0);
+            Assert.IsTrue(st.GetWorks(st.Procs["Z"]).Count() == 1);
 
             st.DoNext();    // 14
             dat = st.Events.Peeks(3).ToList();
@@ -2972,9 +3004,9 @@ namespace UnitTestProject1
             dat = st.Events.Peeks(3).ToList();
             Assert.IsTrue(CMP(dat[0], "c", EventTypes.Out, "9:06"));
             Assert.IsTrue(CMP(dat[1], "b", EventTypes.Out, "9:09"));
-            Assert.IsTrue(st.Procs["X"].Works.Count() == 0);
-            Assert.IsTrue(st.Procs["Y"].Works.Count() == 1);
-            Assert.IsTrue(st.Procs["Z"].Works.Count() == 1);
+            Assert.IsTrue(st.GetWorks(st.Procs["X"]).Count() == 0);
+            Assert.IsTrue(st.GetWorks(st.Procs["Y"]).Count() == 1);
+            Assert.IsTrue(st.GetWorks(st.Procs["Z"]).Count() == 1);
 
             st.DoNext();    // 16
             dat = st.Events.Peeks(3).ToList();
@@ -2990,9 +3022,9 @@ namespace UnitTestProject1
             dat = st.Events.Peeks(3).ToList();
             Assert.IsTrue(CMP(dat[0], "b", EventTypes.Out, "9:09"));
             Assert.IsTrue(CMP(dat[1], "c", EventTypes.Out, "9:09"));
-            Assert.IsTrue(st.Procs["X"].Works.Count() == 1);
-            Assert.IsTrue(st.Procs["Y"].Works.Count() == 1);
-            Assert.IsTrue(st.Procs["Z"].Works.Count() == 1);
+            Assert.IsTrue(st.GetWorks(st.Procs["X"]).Count() == 1);
+            Assert.IsTrue(st.GetWorks(st.Procs["Y"]).Count() == 1);
+            Assert.IsTrue(st.GetWorks(st.Procs["Z"]).Count() == 1);
 
             st.DoNext();    // 19
             dat = st.Events.Peeks(3).ToList();
@@ -3008,9 +3040,9 @@ namespace UnitTestProject1
             dat = st.Events.Peeks(3).ToList();
             Assert.IsTrue(dat.Count == 1, "b moved to Z then b have sunk because Z have not next process");
             Assert.IsTrue(CMP(dat[0], "c", EventTypes.Out, "9:09"));
-            Assert.IsTrue(st.Procs["X"].Works.Count() == 1);
-            Assert.IsTrue(st.Procs["Y"].Works.Count() == 0);
-            Assert.IsTrue(st.Procs["Z"].Works.Count() == 2);
+            Assert.IsTrue(st.GetWorks(st.Procs["X"]).Count() == 1);
+            Assert.IsTrue(st.GetWorks(st.Procs["Y"]).Count() == 0);
+            Assert.IsTrue(st.GetWorks(st.Procs["Z"]).Count() == 2);
 
             st.DoNext();    // 22
             dat = st.Events.Peeks(3).ToList();
@@ -3027,9 +3059,9 @@ namespace UnitTestProject1
             st.DoNext();    // 25
             dat = st.Events.Peeks(3).ToList();
             Assert.IsTrue(dat.Count == 0, "c moved to Z them c have sunk because Z have not next process");
-            Assert.IsTrue(st.Procs["X"].Works.Count() == 0);
-            Assert.IsTrue(st.Procs["Y"].Works.Count() == 0);
-            Assert.IsTrue(st.Procs["Z"].Works.Count() == 3);
+            Assert.IsTrue(st.GetWorks(st.Procs["X"]).Count() == 0);
+            Assert.IsTrue(st.GetWorks(st.Procs["Y"]).Count() == 0);
+            Assert.IsTrue(st.GetWorks(st.Procs["Z"]).Count() == 3);
         }
 
         private bool CMP(JitStage.WorkEventQueue.Item ei, string name, EventTypes et, string time, string procName = null)

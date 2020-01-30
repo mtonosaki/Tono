@@ -3,6 +3,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using ProcessKey = System.String;
 
 namespace Tono.Jit
 {
@@ -13,6 +14,7 @@ namespace Tono.Jit
         /// </summary>
         public class ProcessSet
         {
+            private Dictionary<string, JitProcess> _idProcs = new Dictionary<string, JitProcess>();
             private readonly List<JitProcess> _procs = new List<JitProcess>();
 
             /// <summary>
@@ -22,6 +24,7 @@ namespace Tono.Jit
 
             public void Add(JitProcess proc)
             {
+                _idProcs[proc.ID] = proc;
                 _procs.Add(proc);
             }
 
@@ -35,35 +38,43 @@ namespace Tono.Jit
 
             public void Remove(JitProcess proc)
             {
+                _idProcs.Remove(proc.ID);
                 _procs.Remove(proc);
             }
 
-            public JitProcess FindById(string processid)
+            public JitProcess Find(ProcessKey procKey)
             {
-                return _procs.Where(a => a.ID.Equals(processid)).FirstOrDefault();
+                if (_idProcs.TryGetValue(procKey, out var ret))
+                {
+                    return ret;
+                }
+                else
+                {
+                    var ret1 = _procs.Where(a => a.Name?.Equals(procKey) ?? false).FirstOrDefault();    // Concidering Process.Name is change/set later
+                    if (ret1 == null)
+                    {
+                        var ret2 = _procs.Where(a => a.ID?.Equals(procKey) ?? false).FirstOrDefault();
+                        return ret2;
+                    }
+                    else
+                    {
+                        return ret1;
+                    }
+                }
             }
 
             /// <summary>
-            /// get process by name
+            /// get process by Name/ID
             /// 名前で子プロセスを検索。遅延評価はこのタイミングで行ったものを覚えておく
             /// </summary>
-            /// <param name="procname"></param>
+            /// <param name="procKey"></param>
             /// <returns></returns>
-            public JitProcess this[string procname]
+            public JitProcess this[ProcessKey procKey]
             {
-                get
-                {
-                    return _procs.Where(a => a.Name?.Equals(procname) ?? false).FirstOrDefault();
-                }
+                get => Find(procKey);
             }
 
-            public JitProcess this[int index]
-            {
-                get
-                {
-                    return _procs[index];
-                }
-            }
+            public JitProcess this[int index] => _procs[index];
         }
     }
 }

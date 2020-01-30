@@ -14,7 +14,7 @@ namespace Tono.Jit
     /// 自工程のコスト制約を評価して、前工程のOUTを制御 
     /// </summary>
     [JacTarget(Name = "CoMaxCost")]
-    public class CoMaxCost : CoBase, IWorkInReserved
+    public class CoMaxCost : CoBase
     {
         public static readonly Type Type = typeof(CoMaxCost);
 
@@ -34,27 +34,6 @@ namespace Tono.Jit
             return $"{ReferenceVarName.Value}≤{Value}";
         }
 
-
-        private Dictionary<JitWork, JitWork> WorkInReserves { get; set; } = new Dictionary<JitWork, JitWork>();
-
-        [JacListAdd(PropertyName = "WorkInReserve")]
-        public void AddWorkInReserve(JitWork work)
-        {
-            WorkInReserves[work] = work;
-        }
-
-        [JacListRemove(PropertyName = "WorkInReserve")]
-        public void RemoveWorkInReserve(JitWork work)
-        {
-            WorkInReserves.Remove(work);
-        }
-
-        /// <summary>
-        /// Query work in reserve
-        /// </summary>
-        /// <returns></returns>
-        public IEnumerable<JitWork> GetWorkInReserves() => WorkInReserves.Keys;
-
         /// <summary>
         /// check maximum cost constraint to let the work wait at previous process
         /// MAXコストの制約を調べる
@@ -64,8 +43,9 @@ namespace Tono.Jit
         /// <returns>true=waiting</returns>
         public override bool Check(JitWork work, DateTime now)
         {
+            var wirs = work.Stage.GetWorksInReserve(this);
             var costs =
-                from w in GetCheckTargetProcess(work).Works.Concat(WorkInReserves.Keys)
+                from w in work.Stage.GetWorks(GetCheckTargetProcess(work)).Select(wt => wt.Work).Concat(wirs)
                 let cost = w.ChildVriables.GetValueOrNull("Cost")
                 where cost != null
                 let varval = cost[ReferenceVarName]
@@ -80,9 +60,9 @@ namespace Tono.Jit
         /// 制約中のワークに対し、待ち時間を計算する
         /// </summary>
         /// <returns></returns>
-        public override TimeSpan GetWaitTime(WorkEventQueue Events, WorkEventQueue.Item ei, DateTime Now)
+        public override TimeSpan GetWaitTime(JitStage stage, WorkEventQueue.Item ei, DateTime Now)
         {
-            var nextexit = Events.Find(ei.Work.NextProcess, EventTypes.Out, ":Work");
+            var nextexit = stage.Events.Find(ei.Work.NextProcess, EventTypes.Out, ":Work");
             if (nextexit != null)
             {
                 var ret = MathUtil.Min(TimeSpan.FromDays(999.9), nextexit.Value.Work.ExitTime - Now);

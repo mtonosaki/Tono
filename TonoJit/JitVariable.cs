@@ -384,9 +384,18 @@ namespace Tono.Jit
             }
             else
             {
-                if (obj is int) ret.Classes.Add(Class.Int);
-                else if (obj is double) ret.Classes.Add(Class.Double);
-                else if (obj is string) ret.Classes.Add(Class.String);
+                if (obj is int)
+                {
+                    ret.Classes.Add(Class.Int);
+                }
+                else if (obj is double)
+                {
+                    ret.Classes.Add(Class.Double);
+                }
+                else if (obj is string)
+                {
+                    ret.Classes.Add(Class.String);
+                }
                 else if (obj is JitVariable jv)
                 {
                     ret.Classes.Set(jv.Classes.ToArray());

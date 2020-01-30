@@ -1,7 +1,6 @@
 ﻿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
-using System.Diagnostics;
 using System.Text.RegularExpressions;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -44,7 +43,7 @@ namespace Tono.Gui.Uwp
                 {
                     pattern = new Regex(Pattern);
                 }
-                return pattern.IsMatch(this.Text);
+                return pattern.IsMatch(Text);
             }
         }
 

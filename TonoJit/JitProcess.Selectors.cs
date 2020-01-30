@@ -27,9 +27,9 @@ namespace Tono.Jit
         /// <returns></returns>
         public static JitWork FIFOSelector(IEnumerable<WorkEntery> buf)
         {
-            DateTime min = DateTime.MaxValue;
+            var min = DateTime.MaxValue;
             JitWork ret = null;
-            foreach (WorkEntery wt in buf)
+            foreach (var wt in buf)
             {
                 if (wt.Enter < min)
                 {
@@ -47,9 +47,9 @@ namespace Tono.Jit
         /// <returns></returns>
         public static JitWork LIFOSelector(IEnumerable<WorkEntery> buf)
         {
-            DateTime max = DateTime.MinValue;
+            var max = DateTime.MinValue;
             JitWork ret = null;
-            foreach (WorkEntery wt in buf)
+            foreach (var wt in buf)
             {
                 if (wt.Enter > max)
                 {
@@ -67,7 +67,7 @@ namespace Tono.Jit
         /// <returns></returns>
         public static JitWork SomeSelector(IEnumerable<WorkEntery> buf)
         {
-            WorkEntery item = buf.FirstOrDefault();
+            var item = buf.FirstOrDefault();
             if (item != default)
             {
                 return item.Work;
@@ -85,7 +85,7 @@ namespace Tono.Jit
         /// <returns></returns>
         public static JitWork RandomSelector(IEnumerable<WorkEntery> buf)
         {
-            WorkEntery[] works = buf.ToArray();
+            var works = buf.ToArray();
             if (works.Length == 0)
             {
                 return null;
