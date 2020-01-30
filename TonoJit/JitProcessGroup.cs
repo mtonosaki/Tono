@@ -9,28 +9,35 @@ namespace Tono.Jit
 {
     public abstract class JitProcessGroup : JitProcess
     {
-        private readonly LinkedList<Func<JitProcess>> procSeq = new LinkedList<Func<JitProcess>>(); // TODO: Support lazy by Process key.
+        private readonly LinkedList<string> procKeySeq = new LinkedList<string>();
         private readonly Dictionary<string, JitProcess> nameProcMap = new Dictionary<string, JitProcess>();
 
         /// <summary>
         /// add child process as top priority
         /// </summary>
-        /// <param name="procFunc"></param>
-        public virtual void Add(Func<JitProcess> procFunc)
+        /// <param name="procKey">Process Key(ID/Name)</param>
+        public virtual void Add(JitStage stage, string procKey, bool isCheckNoInstanceError = true)
         {
-            procSeq.AddFirst(procFunc);
+            procKeySeq.AddFirst(procKey);
+            if (isCheckNoInstanceError)
+            {
+                if( stage.FindProcess(procKey) == null)
+                {
+                    throw new JitException(JitException.FormatNoProcKey, procKey);
+                }
+            }
         }
 
         /// <summary>
         /// query child processes order by priority
         /// </summary>
-        public IEnumerable<JitProcess> ChildProcs
+        public IEnumerable<string> ChildProcessKeys
         {
             get
             {
-                for (var node = procSeq.First; node != null; node = node.Next)
+                for (var node = procKeySeq.First; node != null; node = node.Next)
                 {
-                    yield return node.Value();
+                    yield return node.Value;
                 }
             }
         }
@@ -38,36 +45,6 @@ namespace Tono.Jit
         /// <summary>
         /// process count in this group
         /// </summary>
-        public int Count => procSeq.Count;
-
-        /// <summary>
-        /// access to child process by name
-        /// </summary>
-        /// <param name="procName"></param>
-        /// <returns></returns>
-        public JitProcess this[string procName]
-        {
-            get
-            {
-                if (nameProcMap.TryGetValue(procName, out JitProcess proc))
-                {
-                    return proc;
-                }
-                else
-                {
-                    var ps =
-                        from pf in procSeq
-                        let p0 = pf()
-                        where p0.Name == procName
-                        select p0;
-                    var p = ps.FirstOrDefault();
-                    if (p != null)
-                    {
-                        nameProcMap[procName] = p;
-                    }
-                    return p;
-                }
-            }
-        }
+        public int Count => procKeySeq.Count;
     }
 }

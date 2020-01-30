@@ -49,7 +49,16 @@ namespace Tono.Jit
                 }
                 else
                 {
-                    return _procs.Where(a => a.Name?.Equals(procKey) ?? false).FirstOrDefault();    // Concidering Process.Name is change/set later
+                    var ret1 = _procs.Where(a => a.Name?.Equals(procKey) ?? false).FirstOrDefault();    // Concidering Process.Name is change/set later
+                    if (ret1 == null)
+                    {
+                        var ret2 = _procs.Where(a => a.ID?.Equals(procKey) ?? false).FirstOrDefault();
+                        return ret2;
+                    }
+                    else
+                    {
+                        return ret1;
+                    }
                 }
             }
 

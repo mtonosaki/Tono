@@ -77,13 +77,13 @@ namespace Tono.Jit
                 }
                 else
                 {
-                    throw new JitException($"Cannot find the NULL Process");
+                    throw new JitException(JitException.FormatNoProcKey);
                 }
             }
             var ret = Procs[processKey];
             if (ret == null)
             {
-                throw new JitException($"Cannot find the Process '{processKey}'");
+                throw new JitException(JitException.FormatNoProcKey, processKey);
             }
             return ret;
         }
@@ -307,6 +307,60 @@ namespace Tono.Jit
         {
             var works = _worksInProcess.GetValueOrDefault(process, true, a => new Dictionary<JitWork, DateTime/*Enter-Time*/>());
             return works.Select(kv => (kv.Key, kv.Value));
+        }
+
+        private Dictionary<string, List<string>> _processKeyLinks = new Dictionary<string, List<string>>();
+
+        /// <summary>
+        /// Save Process link
+        /// </summary>
+        /// <param name="procKey1"></param>
+        /// <param name="procKey2"></param>
+        public void AddProcessLink(string procKeyFrom, string procKeyTo)
+        {
+            var links = _processKeyLinks.GetValueOrDefault(procKeyFrom, true, a => new List<string>());
+            if( links.Contains(procKeyTo) == false)
+            {
+                links.Add(procKeyTo);
+            }
+        }
+        public void AddProcessLink(JitProcess from, JitProcess to)
+        {
+            AddProcessLink(from.ID, to.ID);
+        }
+
+        /// <summary>
+        /// Get Process Key(ID/Name) Destinations
+        /// </summary>
+        /// <param name="procKeyFrom"></param>
+        /// <returns></returns>
+        public IReadOnlyList<string> GetProcessLinks(string procKeyFrom)
+        {
+            if (_processKeyLinks.TryGetValue(procKeyFrom, out var list))
+            {
+                return list;
+            }
+            var proc = FindProcess(procKeyFrom);
+            if( proc != null)
+            {
+                if (_processKeyLinks.TryGetValue(proc.ID, out var list2))
+                {
+                    return list2;
+                }
+                if (_processKeyLinks.TryGetValue(proc.Name, out var list3))
+                {
+                    return list3;
+                }
+                procKeyFrom = proc.ID;
+            }
+            var list4 = new List<string>();
+            _processKeyLinks[procKeyFrom] = list4;
+
+            return list4;
+        }
+        public IReadOnlyList<string> GetProcessLinks(JitProcess proc)
+        {
+            return GetProcessLinks(proc.ID);
         }
     }
 }

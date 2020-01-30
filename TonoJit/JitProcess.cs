@@ -123,12 +123,6 @@ namespace Tono.Jit
         public List<CoBase> Constraints { get; } = new List<CoBase>();
 
         /// <summary>
-        /// Link set of the owner stage
-        /// jfStageにあるリンクセット
-        /// </summary>
-        public DestProcessKeys NextLinks { get; set; } = new DestProcessKeys();
-
-        /// <summary>
         /// Collection utility COs UNION CIs
         /// </summary>
         public IEnumerable<CioBase> Cios
@@ -181,7 +175,7 @@ namespace Tono.Jit
             work.Stage.EnterWorkToProcess(this, work, now);
             work.PrevProcess = work.CurrentProcess;
             work.CurrentProcess = work.NextProcess;
-            work.NextProcess = work.Stage.FindProcess(NextLinks.FirstOrNull(), isReturnNull: true);
+            work.NextProcess = work.Stage.FindProcess(work.Stage.GetProcessLinks(this).FirstOrDefault(), isReturnNull: true);
             work.EnterTime = now;
             CheckAndAttachKanban(work.Stage, now); // かんばんが有れば、NextProcessをかんばんで更新する
         }
