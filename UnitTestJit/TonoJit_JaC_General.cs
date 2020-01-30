@@ -420,8 +420,8 @@ namespace UnitTestProject1
 
             var i1 = jac["i1"] as CiPickTo;
             Assert.IsNotNull(i1);
-            var i1dest = st.FindProcess(i1.DestProcessKey, isReturnNull: true);
-            Assert.IsNull(i1dest);
+            var i1dest = st.FindProcess("SUPERLAZY", isReturnNull: true);
+            Assert.IsNull(i1dest);  // Expected Null because of no registered yet.
 
             var code2 = @"
                 st
@@ -430,8 +430,12 @@ namespace UnitTestProject1
                             Name = 'SUPERLAZY'
             ";
             jac.Exec(code2);
-            i1dest = st.FindProcess(i1.DestProcessKey, isReturnNull: true);
-            Assert.AreEqual(i1dest, jac.GetProcess("SUPERLAZY"));
+            i1dest = st.FindProcess("SUPERLAZY", isReturnNull: true);
+            var p2 = jac.GetProcess("p2");
+            Assert.AreEqual(i1dest, p2);  // Then FindProcess can find p2 named SUPERLAZY
+
+            i1dest = st.FindProcess(p2.ID, isReturnNull: true);  // You can also find by ID 
+            Assert.AreEqual(i1dest, p2);
         }
 
         [TestMethod]
