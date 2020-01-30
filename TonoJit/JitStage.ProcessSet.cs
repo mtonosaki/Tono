@@ -3,6 +3,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using ProcessKey = System.String;
 
 namespace Tono.Jit
 {
@@ -41,7 +42,7 @@ namespace Tono.Jit
                 _procs.Remove(proc);
             }
 
-            public JitProcess Find(string procKey)
+            public JitProcess Find(ProcessKey procKey)
             {
                 if (_idProcs.TryGetValue(procKey, out var ret))
                 {
@@ -68,7 +69,7 @@ namespace Tono.Jit
             /// </summary>
             /// <param name="procKey"></param>
             /// <returns></returns>
-            public JitProcess this[string procKey]
+            public JitProcess this[ProcessKey procKey]
             {
                 get => Find(procKey);
             }

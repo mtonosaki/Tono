@@ -81,7 +81,7 @@ namespace Tono.Jit
                 }
             }
             var ret = Procs[processKey];
-            if (ret == null)
+            if (ret == null && isReturnNull == false)
             {
                 throw new JitException(JitException.FormatNoProcKey, processKey);
             }

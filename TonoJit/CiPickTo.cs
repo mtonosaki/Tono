@@ -3,6 +3,7 @@
 
 using System;
 using System.Linq;
+using ProcessKey = System.String;
 
 namespace Tono.Jit
 {
@@ -33,7 +34,7 @@ namespace Tono.Jit
         /// <summary>
         /// destination prosess of push operation
         /// </summary>
-        public Func<JitProcess> Destination { get; set; }
+        public ProcessKey DestProcessKey { get; set; }
 
         /// <summary>
         /// in-command execute
@@ -50,7 +51,7 @@ namespace Tono.Jit
             foreach (string childWorkName in childworkNames.ToArray())
             {
                 var childWork = work.ChildWorks[childWorkName];
-                childWork.NextProcess = Destination();
+                childWork.NextProcess = work.Stage.FindProcess(DestProcessKey);
                 childWork.CurrentProcess = null; // 子Workであった事を null とする。
                                                  // childWork.PrevProcess = null; // workがAssyされた元工程を覚えておく
 

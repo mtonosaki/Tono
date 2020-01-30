@@ -376,20 +376,28 @@ namespace Tono.Jit
                         }
                         // Normal Set
                         else
-                        if (pi.GetMethod.ReturnParameter.ParameterType.Name == "JitVariable" && item != null && item is JitVariable == false)
                         {
-                            pi.SetValue(obj, JitVariable.FromObject(item));
-                        }
-                        else
-                        {
-                            pi.SetValue(obj, item);
-                            if (variable.Com.Equals("ID", StringComparison.CurrentCultureIgnoreCase))
+                            var isSet = false;
+                            var requestedTypeName = pi.GetMethod.ReturnParameter.ParameterType.Name;
+                            if (requestedTypeName == "JitVariable" && item != null && item is JitVariable == false)
                             {
-                                varBuf[item?.ToString() ?? "null"] = obj;
+                                pi.SetValue(obj, JitVariable.FromObject(item));
+                                isSet = true;
                             }
-                            if (variable.Com.Equals("Name", StringComparison.CurrentCultureIgnoreCase))
+                            if (requestedTypeName == "String")
                             {
-                                varBuf[item?.ToString() ?? "null"] = obj;
+                            }
+                            if (isSet == false)
+                            {
+                                pi.SetValue(obj, item);
+                                if (variable.Com.Equals("ID", StringComparison.CurrentCultureIgnoreCase))
+                                {
+                                    varBuf[item?.ToString() ?? "null"] = obj;
+                                }
+                                if (variable.Com.Equals("Name", StringComparison.CurrentCultureIgnoreCase))
+                                {
+                                    varBuf[item?.ToString() ?? "null"] = obj;
+                                }
                             }
                         }
                         return;
@@ -501,6 +509,8 @@ namespace Tono.Jit
                 }
                 instanceBuf[instanceKey] = instance;
                 rpnStack.Push((typeName.Level, instanceKey));
+
+                
             }
             else
             {

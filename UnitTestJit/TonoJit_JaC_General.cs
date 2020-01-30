@@ -366,7 +366,7 @@ namespace UnitTestProject1
         public void Test14()
         {
             var code = @"
-                new Stage
+                st = new Stage
                     Procs
                         add sink = new Process
                         add p1 = new Process
@@ -375,7 +375,7 @@ namespace UnitTestProject1
                                 add i1 = new CiPickTo
                                     Delay = 1.5M
                                     TargetWorkClass = ':Car'
-                                    Destination = sink
+                                    DestProcessKey = sink.ID
                                 add i2 = new CiDelay
                                     Delay = 2.5H
                                 add i3 = new CiSwitchNextLink
@@ -384,12 +384,12 @@ namespace UnitTestProject1
             ";
             var jac = new JacInterpreter();
             jac.Exec(code);
-
+            var st = jac.GetStage("st");
             var i1 = jac["i1"] as CiPickTo;
             Assert.IsNotNull(i1);
             Assert.AreEqual(i1.Delay, TimeSpan.FromMinutes(1.5));
             Assert.AreEqual(i1.TargetWorkClass, ":Car");
-            Assert.AreEqual(i1.Destination(), jac.GetProcess("sink")); // check lazy method
+            Assert.AreEqual(st.FindProcess(i1.DestProcessKey), jac.GetProcess("sink")); // check lazy method
 
             var i2 = jac["i2"] as CiDelay;
             Assert.IsNotNull(i2);
@@ -404,7 +404,7 @@ namespace UnitTestProject1
         public void Test14_2()
         {
             var code = @"
-                new Stage
+                st = new Stage
                     Procs
                         add p1 = new Process
                             Name = 'PROCP1'
@@ -412,24 +412,25 @@ namespace UnitTestProject1
                                 add i1 = new CiPickTo
                                     Delay = 1.5M
                                     TargetWorkClass = ':Car'
-                                    Destination = SUPERLAZY
+                                    DestProcessKey = 'SUPERLAZY'
             ";
             var jac = new JacInterpreter();
             jac.Exec(code);
+            var st = jac.GetStage("st");
 
             var i1 = jac["i1"] as CiPickTo;
             Assert.IsNotNull(i1);
-            var i1dest = i1.Destination?.Invoke();
+            var i1dest = st.FindProcess(i1.DestProcessKey, isReturnNull: true);
             Assert.IsNull(i1dest);
 
             var code2 = @"
-                new Stage
+                st
                     Procs
                         add p2 = new Process
                             Name = 'SUPERLAZY'
             ";
             jac.Exec(code2);
-            i1dest = i1.Destination?.Invoke();
+            i1dest = st.FindProcess(i1.DestProcessKey, isReturnNull: true);
             Assert.AreEqual(i1dest, jac.GetProcess("SUPERLAZY"));
         }
 

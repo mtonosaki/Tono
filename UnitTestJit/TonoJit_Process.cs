@@ -126,7 +126,7 @@ namespace UnitTestProject1
             });
             C.InCommands.Add(new CiPickTo  // CH’ö‚Å D‚É•ªŠò
             {
-                Destination = () => D,
+                DestProcessKey = "D",
                 Delay = TimeSpan.FromMinutes(1),
                 TargetWorkClass = ":Sumaho",
             });
