@@ -791,14 +791,18 @@ namespace UnitTestProject1
             Assert.IsNotNull(pt);
             var p1 = jac.GetProcess("p1");
             Assert.IsNotNull(p1);
+            var sink = jac.GetProcess("sink");
+            Assert.IsNotNull(p1);
 
             var redo = $"{pt.ID}\r\n" +
                           $"    DestProcessKey = 'REDO_PROC'r\n";
             var undo = $"{pt.ID}\r\n" +
-                          $"    DestProcessKey = 'UNDO_PROC'\r\n";
+                          $"    DestProcessKey = '{sink.ID}'\r\n";
 
+            Assert.AreEqual(pt.DestProcessKey, sink.ID);
             jac.Exec(redo);
-
+            jac.Exec(undo);
+            Assert.AreEqual(pt.DestProcessKey, sink.ID);
         }
     }
 
