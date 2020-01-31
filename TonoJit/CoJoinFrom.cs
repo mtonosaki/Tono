@@ -24,13 +24,13 @@ namespace Tono.Jit
         /// child work name
         /// ワークに付く子ワークの名前
         /// </summary>
-        public ProcessKey ChildPartName { get; set; } = Guid.NewGuid().ToString();
+        public string ChildWorkName { get; set; } = Guid.NewGuid().ToString();
 
         /// <summary>
         /// interval time of next confirmation confluence condition
         /// PullFrom工程からワークが取得できない場合、次に確認するための時間
         /// </summary>
-        public TimeSpan WaitSpan { get; set; } = TimeSpan.FromMinutes(1.0);
+        public TimeSpan PorlingSpan { get; set; } = TimeSpan.FromMinutes(1.0);
 
         /// <summary>
         /// confirm condition and pick work from PullFrom process
@@ -40,7 +40,7 @@ namespace Tono.Jit
         /// <returns>true=cannot move work / false=moved</returns>
         public override bool Check(JitWork parentWork, DateTime now)
         {
-            if (parentWork.ChildWorks.ContainsKey(ChildPartName))
+            if (parentWork.ChildWorks.ContainsKey(ChildWorkName))
             {
                 return false;   // already moved. すでにワークが付いているので制約なし（完了）
             }
@@ -48,7 +48,7 @@ namespace Tono.Jit
             var procPullFrom = parentWork.Stage.FindProcess(PullFromProcessKey);
             if (procPullFrom.ExitCollectedWork(parentWork.Stage, now) is JitWork sideWork)    // work at PullFrom process 横工程のワーク
             {
-                parentWork.ChildWorks[ChildPartName] = sideWork;
+                parentWork.ChildWorks[ChildWorkName] = sideWork;
                 return false;
             }
             return true;
@@ -64,7 +64,7 @@ namespace Tono.Jit
         /// <returns></returns>
         public override TimeSpan GetWaitTime(JitStage stage, JitStage.WorkEventQueue.Item ei, DateTime Now)
         {
-            return WaitSpan;
+            return PorlingSpan;
         }
     }
 }
