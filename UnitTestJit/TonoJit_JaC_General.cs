@@ -488,16 +488,16 @@ namespace UnitTestProject1
                             Cio
                                 add o1 = new CoJoinFrom
                                     PullFromProcessKey = 'SinkProc'
-                                    ChildPartName = 'TEPA'
-                                    WaitSpan = 0.5M                                    
+                                    ChildWorkKey = 'TEPA'
+                                    PorlingSpan = 0.5M                                    
             ";
             var jac = new JacInterpreter();
             jac.Exec(code);
             var o1 = jac["o1"] as CoJoinFrom;
             Assert.IsNotNull(o1);
             Assert.AreEqual(o1.PullFromProcessKey, jac.GetProcess("SinkProc").Name);
-            Assert.AreEqual(o1.ChildPartName, "TEPA");
-            Assert.AreEqual(o1.WaitSpan, TimeSpan.FromSeconds(30));
+            Assert.AreEqual(o1.ChildWorkKey, "TEPA");
+            Assert.AreEqual(o1.PorlingSpan, TimeSpan.FromSeconds(30));
         }
         [TestMethod]
         public void Test18()
@@ -802,6 +802,67 @@ namespace UnitTestProject1
             jac.Exec(redo);
             jac.Exec(undo);
             Assert.AreEqual(pt.DestProcessKey, sink.ID);
+        }
+
+        [TestMethod]
+        public void Test29()
+        {
+            var code = @"
+                st = new Stage
+                    Procs
+                        add p1 = new Process
+                            Name = 'PROC1'
+                        add p2 = new Process
+                            Name = 'PROC2'
+                        add new Process
+                            Name = 'PROC3'
+                        add new Process
+                            ID = 'PROCID4'
+            ";
+            var jac = new JacInterpreter();
+            jac.Exec(code);
+            var st = jac.GetStage("st");
+
+            code = @"
+                st
+                    ProcLinks
+                        add p1 -> p2
+            ";
+            jac.Exec(code);
+            var tos = st.GetProcessLinks(jac.GetProcess("p1")).Select(key => st.FindProcess(key)).ToArray();
+            Assert.AreEqual(tos.Length, 1);
+            Assert.AreEqual(tos[0], jac.GetProcess("p2"));
+
+            code = @"
+                st
+                    ProcLinks
+                        add p1->'PROC3'      // try to confirm super lazy link by Name
+            ";
+            jac.Exec(code);
+            code = @"
+                st
+                    ProcLinks
+                        add p1 ->'PROCID4'    // try to confirm lazy link by ID
+            ";
+            jac.Exec(code);
+            code = @"
+                st
+                    ProcLinks
+                        add 'PROC3'-> p2
+            ";
+            jac.Exec(code);
+            code = @"
+                st
+                    ProcLinks
+                        add 'PROCID4', p2
+            ";
+            jac.Exec(code);
+            code = @"
+                st
+                    ProcLinks
+                        add 'PROC3', 'PROCID4'
+            ";
+            jac.Exec(code);
         }
     }
 

@@ -110,15 +110,29 @@ namespace Tono.Jit
                     var line = Lines[iChunk][iLine];
                     var level = Levels[iChunk][iLine];
                     var isNextLine = iLine < Lines[iChunk].Count - 1;
-                    var blocks = StrUtil.SplitConsideringQuatationContainsSeparator(line, new[] { '=', ' ' }, true, true, false);
+                    var blocks = StrUtil.SplitConsideringQuatationContainsSeparator(line, new[] { '=', '-', '>', ' ' }, true, true, false).ToList();
+                    for (var i = 0; i < blocks.Count - 1; i++)
+                    {
+                        if (blocks[i] == "=" && blocks[i + 1] == ">")
+                        {
+                            blocks[i] = "=>";
+                            blocks.RemoveAt(i + 1);
+                        }
+                        if (blocks[i] == "-" && blocks[i + 1] == ">")
+                        {
+                            blocks[i] = "->";
+                            blocks.RemoveAt(i + 1);
+                        }
+                    }
 
                     // PUSH PHASE =========================================
-                    for (var i = 0; i < blocks.Length; i++)
+                    for (var i = 0; i < blocks.Count; i++)
                     {
                         var com = blocks[i];
                         switch (com)
                         {
                             case "=":
+                            case "->":
                             case "new":
                             case "add":
                             case "remove":
@@ -180,6 +194,11 @@ namespace Tono.Jit
                                 case "new":
                                     opeStack.Pop();
                                     ProcNew(rpnStack);
+                                    break;
+                                case "->":
+                                case "=>":
+                                    opeStack.Pop();
+                                    ProcPair(rpnStack, ope.Com);
                                     break;
                             }
                             if (isStackComsuming == false && opeStack.Count > 0)
@@ -296,6 +315,33 @@ namespace Tono.Jit
                 }
                 lvs.Add(levels[i]);
                 lis.Add(lines[i]);
+            }
+        }
+
+        private void ProcPair(Stack<(int Level, string Com)> rpnStack, string ope)
+        {
+            if (rpnStack.Count < 1)
+            {
+                throw new JacException(JacException.Codes.SyntaxError, $"Cannot set '=' when no value");
+            }
+
+            if (rpnStack.Count < 2)
+            {
+                throw new JacException(JacException.Codes.SyntaxError, $"Cannot set '=' when no left value");
+            }
+
+            var right = rpnStack.Pop();     // left value
+            var left = rpnStack.Pop();      // right value
+            if (ope == "->")
+            {
+                var obj = new JacPushLinkDescription
+                {
+                    Name = MakeID("PushFromTo_"),
+                    From = ParseValue(left.Com),
+                    To = ParseValue(right.Com),
+                };
+                varBuf[obj.Name] = obj;
+                rpnStack.Push((left.Level, obj.Name));
             }
         }
 
@@ -445,13 +491,22 @@ namespace Tono.Jit
                 throw new JacException(JacException.Codes.SyntaxError, $"should chain next command : obj collection {(isAdd ? "add" : "remove")} value");
             }
 
+            //=== EXSAMPLE ===
+            //st = new Stage
+            //    Procs
+            //        add p1 = new Process
+
+            //st
+            //    ProcLinks
+            //      add p1 -> p2
+
             var attrType = isAdd ? typeof(JacListAddAttribute) : typeof(JacListRemoveAttribute);
-            var itemName = rpnStack.Pop();
-            var itemValue = ParseValue(itemName.Com);
-            var collectionName = rpnStack.Pop();
-            var parentObjectName = rpnStack.Pop();
-            var parentObject = ParseValue(parentObjectName.Com);
-            var methods =
+            var itemName = rpnStack.Pop();                          // (8,"p1")                     | (8,"PushFromTo_1170D29C45C4AD4F9BCB6700EB1D4EFD") 
+            var itemValue = ParseValue(itemName.Com);               // the process instance of p1   | the PushFromTo instance
+            var collectionName = rpnStack.Pop();                    // (4,"Procs")                  | (4,"ProcLinks")
+            var parentObjectName = rpnStack.Pop();                  // (0, "Stage ID of st")        | (0, "Stage ID of st") 
+            var parentObject = ParseValue(parentObjectName.Com);    // the stage instance of st     | the stage instance of st
+            var methods =                                           // to get MethodInfo named "Procs" in Stage Class
                 from method in parentObject.GetType().GetMethods()
                 from atobj in method.GetCustomAttributes(attrType, true)
                 let at = atobj as JacListAccessAttrubute
@@ -874,7 +929,7 @@ namespace Tono.Jit
         /// <returns></returns>
         public static string MakeID(string preName)
         {
-            return $"{preName}_{string.Join("", Guid.NewGuid().ToByteArray().Select(a => $"{a:X2}"))}";
+            return $"{preName}{string.Join("", Guid.NewGuid().ToByteArray().Select(a => $"{a:X2}"))}";
         }
     }
 
@@ -908,6 +963,16 @@ namespace Tono.Jit
         {
             Code = code;
         }
+    }
+
+    /// <summary>
+    /// left -> right object
+    /// </summary>
+    public class JacPushLinkDescription
+    {
+        public string Name { get; set; }
+        public object From { get; set; }
+        public object To { get; set; }
     }
 
     /// <summary>

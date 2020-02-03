@@ -311,6 +311,25 @@ namespace Tono.Jit
 
         private Dictionary<string, List<string>> _processKeyLinks = new Dictionary<string, List<string>>();
 
+        [JacListAdd(PropertyName = "ProcLinks")]
+        public void AddProcLinks(object description)
+        {
+            if (description == null)
+            {
+                throw new JitException(JitException.NullValue, "ProcLinks");
+            }
+            if (description is JacPushLinkDescription push)
+            {
+                var key1 = push.From is JitProcess p1 ? p1.ID : push.From?.ToString();
+                var key2 = push.To is JitProcess p2 ? p2.ID : push.To?.ToString();
+                AddProcessLink(key1, key2);
+            }
+            else
+            {
+                throw new JitException(JitException.TypeMissmatch, $"Expecting type JacPushLinkDescription but {description.GetType().Name}");
+            }
+        }
+
         /// <summary>
         /// Save Process link
         /// </summary>
@@ -319,7 +338,7 @@ namespace Tono.Jit
         public void AddProcessLink(string procKeyFrom, string procKeyTo)
         {
             var links = _processKeyLinks.GetValueOrDefault(procKeyFrom, true, a => new List<string>());
-            if( links.Contains(procKeyTo) == false)
+            if (links.Contains(procKeyTo) == false)
             {
                 links.Add(procKeyTo);
             }
@@ -341,7 +360,7 @@ namespace Tono.Jit
                 return list;
             }
             var proc = FindProcess(procKeyFrom);
-            if( proc != null)
+            if (proc != null)
             {
                 if (_processKeyLinks.TryGetValue(proc.ID, out var list2))
                 {
