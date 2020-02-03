@@ -803,6 +803,67 @@ namespace UnitTestProject1
             jac.Exec(undo);
             Assert.AreEqual(pt.DestProcessKey, sink.ID);
         }
+
+        [TestMethod]
+        public void Test29()
+        {
+            var code = @"
+                st = new Stage
+                    Procs
+                        add p1 = new Process
+                            Name = 'PROC1'
+                        add p2 = new Process
+                            Name = 'PROC2'
+                        add new Process
+                            Name = 'PROC3'
+                        add new Process
+                            ID = 'PROCID4'
+            ";
+            var jac = new JacInterpreter();
+            jac.Exec(code);
+            var st = jac.GetStage("st");
+
+            code = @"
+                st
+                    ProcLinks
+                        add p1 -> p2
+            ";
+            jac.Exec(code);
+            var tos = st.GetProcessLinks(jac.GetProcess("p1")).Select(key => st.FindProcess(key)).ToArray();
+            Assert.AreEqual(tos.Length, 1);
+            Assert.AreEqual(tos[0], jac.GetProcess("p2"));
+
+            code = @"
+                st
+                    ProcLinks
+                        add p1->'PROC3'      // try to confirm super lazy link by Name
+            ";
+            jac.Exec(code);
+            code = @"
+                st
+                    ProcLinks
+                        add p1 ->'PROCID4'    // try to confirm lazy link by ID
+            ";
+            jac.Exec(code);
+            code = @"
+                st
+                    ProcLinks
+                        add 'PROC3'-> p2
+            ";
+            jac.Exec(code);
+            code = @"
+                st
+                    ProcLinks
+                        add 'PROCID4', p2
+            ";
+            jac.Exec(code);
+            code = @"
+                st
+                    ProcLinks
+                        add 'PROC3', 'PROCID4'
+            ";
+            jac.Exec(code);
+        }
     }
 
     [JacTarget(Name = "TestJitClass")]
