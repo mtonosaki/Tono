@@ -116,13 +116,13 @@ namespace UnitTestProject1
             B.Constraints.Add(JFY = new CoJoinFrom
             {
                 PullFromProcessKey = Y.ID,
-                WaitSpan = TimeSpan.FromMinutes(10),
+                PorlingSpan = TimeSpan.FromMinutes(10),
             });
             CoJoinFrom JFZ;
             B.Constraints.Add(JFZ = new CoJoinFrom
             {
                 PullFromProcessKey = Z.ID,
-                WaitSpan = TimeSpan.FromMinutes(10),
+                PorlingSpan = TimeSpan.FromMinutes(10),
             });
             C.InCommands.Add(new CiPickTo  // C工程で Dに分岐
             {
@@ -237,14 +237,14 @@ namespace UnitTestProject1
             st.DoNext();
             dat = st.Events.Peeks(99).ToList(); k = 0;
             Assert.IsTrue(CMP(dat[k++], "w1", EventTypes.Out, "9:40", "A"));
-            Assert.AreEqual(w1.ChildWorks[JFY.ChildPartName], y1);
+            Assert.AreEqual(w1.ChildWorks[JFY.ChildWorkKey], y1);
 
             // 9:40は、z1も到着しているので、w1が次の工程にIn準備
             st.DoNext();
             dat = st.Events.Peeks(99).ToList(); k = 0;
             Assert.IsTrue(CMP(dat[k++], "w1", EventTypes.In, "9:40", "A"));
-            Assert.AreEqual(w1.ChildWorks[JFY.ChildPartName], y1);
-            Assert.AreEqual(w1.ChildWorks[JFZ.ChildPartName], z1);
+            Assert.AreEqual(w1.ChildWorks[JFY.ChildWorkKey], y1);
+            Assert.AreEqual(w1.ChildWorks[JFZ.ChildWorkKey], z1);
 
             // BにInOK。B.Ci.Delay=20
             st.DoNext();
@@ -349,13 +349,13 @@ namespace UnitTestProject1
             B.Constraints.Add(JFY = new CoJoinFrom
             {
                 PullFromProcessKey = Y.ID,
-                WaitSpan = TimeSpan.FromMinutes(10),
+                PorlingSpan = TimeSpan.FromMinutes(10),
             });
             CoJoinFrom JFZ;
             B.Constraints.Add(JFZ = new CoJoinFrom
             {
                 PullFromProcessKey = Z.ID,
-                WaitSpan = TimeSpan.FromMinutes(10),
+                PorlingSpan = TimeSpan.FromMinutes(10),
             });
             Y.InCommands.Add(new CiDelay
             {
@@ -448,14 +448,14 @@ namespace UnitTestProject1
             st.DoNext();
             dat = st.Events.Peeks(99).ToList(); k = 0;
             Assert.IsTrue(CMP(dat[k++], "w1", EventTypes.Out, "9:40", "A"));
-            Assert.AreEqual(w1.ChildWorks[JFY.ChildPartName], y1);
+            Assert.AreEqual(w1.ChildWorks[JFY.ChildWorkKey], y1);
 
             // 9:40は、z1も到着しているので、w1が次の工程にIn準備
             st.DoNext();
             dat = st.Events.Peeks(99).ToList(); k = 0;
             Assert.IsTrue(CMP(dat[k++], "w1", EventTypes.In, "9:40", "A"));
-            Assert.AreEqual(w1.ChildWorks[JFY.ChildPartName], y1);
-            Assert.AreEqual(w1.ChildWorks[JFZ.ChildPartName], z1);
+            Assert.AreEqual(w1.ChildWorks[JFY.ChildWorkKey], y1);
+            Assert.AreEqual(w1.ChildWorks[JFZ.ChildWorkKey], z1);
 
             st.DoNext();
             dat = st.Events.Peeks(99).ToList(); k = 0;

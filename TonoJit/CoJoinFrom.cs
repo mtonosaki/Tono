@@ -24,7 +24,7 @@ namespace Tono.Jit
         /// child work name
         /// ワークに付く子ワークの名前
         /// </summary>
-        public string ChildWorkName { get; set; } = Guid.NewGuid().ToString();
+        public string ChildWorkKey { get; set; } = JacInterpreter.MakeID("ByCoJoinFrom");
 
         /// <summary>
         /// interval time of next confirmation confluence condition
@@ -40,7 +40,7 @@ namespace Tono.Jit
         /// <returns>true=cannot move work / false=moved</returns>
         public override bool Check(JitWork parentWork, DateTime now)
         {
-            if (parentWork.ChildWorks.ContainsKey(ChildWorkName))
+            if (parentWork.ChildWorks.ContainsKey(ChildWorkKey))
             {
                 return false;   // already moved. すでにワークが付いているので制約なし（完了）
             }
@@ -48,7 +48,7 @@ namespace Tono.Jit
             var procPullFrom = parentWork.Stage.FindProcess(PullFromProcessKey);
             if (procPullFrom.ExitCollectedWork(parentWork.Stage, now) is JitWork sideWork)    // work at PullFrom process 横工程のワーク
             {
-                parentWork.ChildWorks[ChildWorkName] = sideWork;
+                parentWork.ChildWorks[ChildWorkKey] = sideWork;
                 return false;
             }
             return true;

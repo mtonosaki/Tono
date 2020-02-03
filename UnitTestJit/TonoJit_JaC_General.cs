@@ -488,16 +488,16 @@ namespace UnitTestProject1
                             Cio
                                 add o1 = new CoJoinFrom
                                     PullFromProcessKey = 'SinkProc'
-                                    ChildPartName = 'TEPA'
-                                    WaitSpan = 0.5M                                    
+                                    ChildWorkKey = 'TEPA'
+                                    PorlingSpan = 0.5M                                    
             ";
             var jac = new JacInterpreter();
             jac.Exec(code);
             var o1 = jac["o1"] as CoJoinFrom;
             Assert.IsNotNull(o1);
             Assert.AreEqual(o1.PullFromProcessKey, jac.GetProcess("SinkProc").Name);
-            Assert.AreEqual(o1.ChildPartName, "TEPA");
-            Assert.AreEqual(o1.WaitSpan, TimeSpan.FromSeconds(30));
+            Assert.AreEqual(o1.ChildWorkKey, "TEPA");
+            Assert.AreEqual(o1.PorlingSpan, TimeSpan.FromSeconds(30));
         }
         [TestMethod]
         public void Test18()
