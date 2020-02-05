@@ -1,3 +1,8 @@
+# Tono - Tools Of New Operation
+
+"Tools of new operation" library/framework is for agile SoE(SoI) style development.   
+Expected a lot of developer create original simulators quickly and find business core rule of improvement continuously. That is why this is named "tools of new operation".
+
 [![licence badge]][licence]
 [![stars badge]][stars]
 [![forks badge]][forks]
@@ -12,11 +17,6 @@
 [stars]:https://github.com/mtonosaki/Markdown/stargazers
 [forks]:https://github.com/mtonosaki/Markdown/network
 [issues]:https://github.com/mtonosaki/Markdown/issues
-
-# Tono - Tools Of New Operation
-
-"Tools of new operation" library/framework is for agile SoE(SoI) style development.   
-Expected a lot of developer create original simulators quickly and find business core rule of improvement continuously. That is why this is named "tools of new operation".
 
 ## Libraries
 
