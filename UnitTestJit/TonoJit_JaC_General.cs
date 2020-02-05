@@ -829,7 +829,8 @@ namespace UnitTestProject1
                         add p1 -> p2
             ";
             jac.Exec(code);
-            var tos = st.GetProcessLinks(jac.GetProcess("p1")).Select(key => st.FindProcess(key)).ToArray();
+            var p1 = jac.GetProcess("p1");
+            var tos = st.GetProcessLinks(p1).Select(key => st.FindProcess(key)).ToArray();
             Assert.AreEqual(tos.Length, 1);
             Assert.AreEqual(tos[0], jac.GetProcess("p2"));
 
@@ -839,25 +840,46 @@ namespace UnitTestProject1
                         add p1->'PROC3'      // try to confirm super lazy link by Name
             ";
             jac.Exec(code);
+            tos = st.GetProcessLinks(p1).Select(key => st.FindProcess(key)).ToArray();
+            Assert.AreEqual(tos.Length, 2);
+            Assert.AreEqual(tos[0], jac.GetProcess("p2"));
+            Assert.AreEqual(tos[1], jac.GetProcess("PROC3"));
+
+
             code = @"
                 st
                     ProcLinks
                         add p1 ->'PROCID4'    // try to confirm lazy link by ID
             ";
             jac.Exec(code);
+            tos = st.GetProcessLinks(p1).Select(key => st.FindProcess(key)).ToArray();
+            Assert.AreEqual(tos.Length, 3);
+            Assert.AreEqual(tos[0], jac.GetProcess("p2"));
+            Assert.AreEqual(tos[1], jac.GetProcess("PROC3"));
+            Assert.AreEqual(tos[2], jac.GetProcess("PROCID4"));
+
+
             code = @"
                 st
                     ProcLinks
                         add 'PROC3'-> p2
             ";
             jac.Exec(code);
+
+            var PROC3 = jac.GetProcess("PROC3");
+            tos = st.GetProcessLinks(PROC3).Select(key => st.FindProcess(key)).ToArray();
+            Assert.AreEqual(tos.Length, 1);
+            Assert.AreEqual(tos[0], jac.GetProcess("p2"));
+
+
             code = @"
                 st
                     ProcLinks
                         add 'PROCID4', p2
             ";
             jac.Exec(code);
-            code = @"
+
+          code = @"
                 st
                     ProcLinks
                         add 'PROC3', 'PROCID4'

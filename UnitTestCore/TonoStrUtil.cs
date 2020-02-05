@@ -4,6 +4,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using Tono;
 
 namespace UnitTestProject2
@@ -75,6 +76,18 @@ namespace UnitTestProject2
             {
                 Assert.AreEqual(t1[i++], ex);
             }
+        }
+
+        [TestMethod]
+        public void Test005()
+        {
+            var str = "add 'PROC3'->p2";
+            var blocks = StrUtil.SplitConsideringQuatationContainsSeparator(str, new[] { '=', '-', '>', ' ' }, true, true, false).ToList();
+            Assert.AreEqual(blocks[0], "add");
+            Assert.AreEqual(blocks[1], "'PROC3'");
+            Assert.AreEqual(blocks[2], "-");
+            Assert.AreEqual(blocks[3], ">");
+            Assert.AreEqual(blocks[4], "p2");
         }
     }
 }

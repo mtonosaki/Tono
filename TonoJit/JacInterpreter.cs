@@ -565,7 +565,7 @@ namespace Tono.Jit
                 instanceBuf[instanceKey] = instance;
                 rpnStack.Push((typeName.Level, instanceKey));
 
-                
+
             }
             else
             {
@@ -861,7 +861,14 @@ namespace Tono.Jit
         /// <returns></returns>
         public JitProcess GetProcess(string varname)
         {
-            return ParseValue(varname) as JitProcess;
+            if (ParseValue(varname) is JitProcess ret)
+            {
+                return ret;
+            }
+            else
+            {
+                return null;
+            }
         }
 
         /// <summary>
