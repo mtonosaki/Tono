@@ -296,7 +296,7 @@ namespace UnitTestProject1
         }
 
         [TestMethod]
-        public void Test13()
+        public void Test13_1()
         {
             var code = @"
                 a = new Variable
@@ -361,6 +361,44 @@ namespace UnitTestProject1
             Assert.AreEqual(jac.GetVariable("k").Value, -9.5e-2 / 100.0);
             Assert.AreEqual(jac.GetVariable("l").Value, -9.5e2 / 100.0);
         }
+
+        [TestMethod]
+        public void Test13_2()
+        {
+            var code = @"
+                bm = new Variable
+                    Value = -123
+            ";
+            var jac = new JacInterpreter();
+            jac.Exec(code);
+            Assert.AreEqual(jac.GetVariable("bm").Value, -123);
+        }
+
+        [TestMethod]
+        public void Test13_3()
+        {
+            var code = @"
+                cmd2 = new Variable
+                    Value = -1.234e-2S
+            ";
+            var jac = new JacInterpreter();
+            jac.Exec(code);
+            Assert.AreEqual(jac.GetVariable("cmd2").Value, TimeSpan.FromSeconds(-1.234e-2));
+        }
+
+        [TestMethod]
+        public void Test13_4()
+        {
+            var code = @"
+                h = new Variable
+                    Value = 1.23e-10
+            ";
+            var jac = new JacInterpreter();
+            jac.Exec(code);
+            Assert.AreEqual(jac.GetVariable("h").Value, 1.23e-10);
+        }
+
+
 
         [TestMethod]
         public void Test14()
@@ -875,16 +913,24 @@ namespace UnitTestProject1
             code = @"
                 st
                     ProcLinks
-                        add 'PROCID4', p2
+                        add 'PROCID4' ->p2
             ";
             jac.Exec(code);
+            var PROCID4 = jac.GetProcess("PROCID4");
+            tos = st.GetProcessLinks(PROCID4).Select(key => st.FindProcess(key)).ToArray();
+            Assert.AreEqual(tos.Length, 1);
+            Assert.AreEqual(tos[0], jac.GetProcess("p2"));
 
-          code = @"
+            code = @"
                 st
                     ProcLinks
-                        add 'PROC3', 'PROCID4'
+                        add 'PROC3'->'PROCID4'
             ";
             jac.Exec(code);
+            tos = st.GetProcessLinks(PROC3).Select(key => st.FindProcess(key)).ToArray();
+            Assert.AreEqual(tos.Length, 2);
+            Assert.AreEqual(tos[0], jac.GetProcess("p2"));
+            Assert.AreEqual(tos[1], jac.GetProcess("PROCID4"));
         }
     }
 
