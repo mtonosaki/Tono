@@ -1,3 +1,18 @@
+[![licence badge]][licence]
+[![stars badge]][stars]
+[![forks badge]][forks]
+[![issues badge]][issues]
+
+[licence badge]:https://img.shields.io/badge/license-MIT-blue.svg
+[stars badge]:https://img.shields.io/github/stars/hey-red/Markdown.svg
+[forks badge]:https://img.shields.io/github/forks/hey-red/Markdown.svg
+[issues badge]:https://img.shields.io/github/issues/hey-red/Markdown.svg
+
+[licence]:https://github.com/hey-red/Markdown/blob/master/LICENSE.md
+[stars]:https://github.com/hey-red/Markdown/stargazers
+[forks]:https://github.com/hey-red/Markdown/network
+[issues]:https://github.com/hey-red/Markdown/issues
+
 # Tono - Tools Of New Operation
 
 "Tools of new operation" library/framework is for agile SoE(SoI) style development.   
