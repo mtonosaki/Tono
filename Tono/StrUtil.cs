@@ -705,7 +705,7 @@ namespace Tono
             for (var i = 0; i < str.Length; i++)
             {
                 var c = str[i];
-                if (isDQ == false && c == '\"' || c == '\'')
+                if (isDQ == false && (c == '\"' || c == '\''))
                 {
                     preQ = c;
                     isDQ = true;
