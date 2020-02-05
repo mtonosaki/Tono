@@ -865,6 +865,7 @@ namespace UnitTestProject1
                         add 'PROC3'-> p2
             ";
             jac.Exec(code);
+
             var PROC3 = jac.GetProcess("PROC3");
             tos = st.GetProcessLinks(PROC3).Select(key => st.FindProcess(key)).ToArray();
             Assert.AreEqual(tos.Length, 1);
@@ -878,8 +879,7 @@ namespace UnitTestProject1
             ";
             jac.Exec(code);
 
-
-            code = @"
+          code = @"
                 st
                     ProcLinks
                         add 'PROC3', 'PROCID4'
