@@ -24,7 +24,7 @@ namespace Tono.Jit
         /// <summary>
         /// Stage runtime data
         /// </summary>
-        public JitStageEngine Engine { get; set; }
+        public IJitStageEngine Engine { get; set; }
 
         /// <summary>
         /// Process Push Links

@@ -271,7 +271,7 @@ namespace Tono.Jit
         /// Add kanban
         /// </summary>
         /// <param name="kanban"></param>
-        public virtual JitKanban AddKanban(JitStageEngine engine, JitKanban kanban, DateTime now)
+        public virtual JitKanban AddKanban(IJitStageEngine engine, JitKanban kanban, DateTime now)
         {
             kanbanQueue.Enqueue(new EventQueueKanban
             {
@@ -285,7 +285,7 @@ namespace Tono.Jit
         /// かんばんの目的地をワークに付ける（付け替える）
         /// </summary>
         /// <returns>処理されたかんばん</returns>
-        private JitKanban CheckAndAttachKanban(JitStageEngine engine, DateTime now)
+        private JitKanban CheckAndAttachKanban(IJitStageEngine engine, DateTime now)
         {
             if (kanbanQueue.Count == 0)
             {

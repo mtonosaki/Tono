@@ -60,7 +60,7 @@ namespace Tono.Jit
         /// 制約中のワークに対し、待ち時間を計算する
         /// </summary>
         /// <returns></returns>
-        public override TimeSpan GetWaitTime(JitStageEngine engine, WorkEventQueue.Item ei, DateTime Now)
+        public override TimeSpan GetWaitTime(IJitStageEngine engine, WorkEventQueue.Item ei, DateTime Now)
         {
             var nextexit = engine.Events.Find(ei.Work.NextProcess, EventTypes.Out, ":Work");
             if (nextexit != null)
