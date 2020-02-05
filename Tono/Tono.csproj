@@ -15,10 +15,10 @@
     <PackageId>Tono.Core</PackageId>
     <Description>Core utilities of Tools Of New Operation</Description>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageReleaseNotes>Continuous Kaizen</PackageReleaseNotes>
-    <Version>1.0.10</Version>
-    <AssemblyVersion>1.0.10.0</AssemblyVersion>
-    <FileVersion>1.0.10.0</FileVersion>
+    <PackageReleaseNotes>Bug Fix. Continuous Kaizen</PackageReleaseNotes>
+    <Version>1.0.11</Version>
+    <AssemblyVersion>1.0.11.0</AssemblyVersion>
+    <FileVersion>1.0.11.0</FileVersion>
     <PackageTags>Tono</PackageTags>
     <RepositoryUrl>https://github.com/mtonosaki/Tono.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
