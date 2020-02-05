@@ -111,6 +111,8 @@ namespace Tono.Jit
                     var level = Levels[iChunk][iLine];
                     var isNextLine = iLine < Lines[iChunk].Count - 1;
                     var blocks = StrUtil.SplitConsideringQuatationContainsSeparator(line, new[] { '=', '-', '>', ' ' }, true, true, false).ToList();
+
+                    // PASS-1
                     for (var i = 0; i < blocks.Count - 1; i++)
                     {
                         if (blocks[i] == "=" && blocks[i + 1] == ">")
@@ -118,9 +120,20 @@ namespace Tono.Jit
                             blocks[i] = "=>";
                             blocks.RemoveAt(i + 1);
                         }
-                        if (blocks[i] == "-" && blocks[i + 1] == ">")
+                        if (blocks[i] == "-")
                         {
-                            blocks[i] = "->";
+                            blocks[i] = $"-{blocks[i + 1]}";
+                            blocks.RemoveAt(i + 1);
+                        }
+                    }
+
+                    // PASS-2
+                    var reg = new Regex(@"^[-+]?[0-9]+(\.[0-9]+)?[eE]$");
+                    for ( var i = 0; i < blocks.Count - 1; i++)
+                    {
+                        if (reg.IsMatch(blocks[i]) && blocks[i + 1].StartsWith("-"))
+                        {
+                            blocks[i] = blocks[i] + blocks[i + 1];
                             blocks.RemoveAt(i + 1);
                         }
                     }
