@@ -62,7 +62,7 @@ namespace Tono.Jit
         /// <param name="ei"></param>
         /// <param name="Now"></param>
         /// <returns></returns>
-        public override TimeSpan GetWaitTime(JitStage stage, JitStage.WorkEventQueue.Item ei, DateTime Now)
+        public override TimeSpan GetWaitTime(JitStageEngine engine, JitStage.WorkEventQueue.Item ei, DateTime Now)
         {
             return PorlingSpan;
         }

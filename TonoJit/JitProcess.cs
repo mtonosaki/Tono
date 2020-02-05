@@ -140,15 +140,15 @@ namespace Tono.Jit
         {
             foreach (var cio in Cios)
             {
-                work.Stage.RemoveWorkInReserve(cio, work);
+                work.Stage.Engine.RemoveWorkInReserve(cio, work);
             }
 
-            work.Stage.EnterWorkToProcess(this, work, now);
+            work.Stage.Engine.EnterWorkToProcess(this, work, now);
             work.PrevProcess = work.CurrentProcess;
             work.CurrentProcess = work.NextProcess;
             work.NextProcess = work.Stage.FindProcess(work.Stage.GetProcessLinks(this).FirstOrDefault(), isReturnNull: true);
             work.EnterTime = now;
-            CheckAndAttachKanban(work.Stage, now); // かんばんが有れば、NextProcessをかんばんで更新する
+            CheckAndAttachKanban(work.Stage.Engine, now); // かんばんが有れば、NextProcessをかんばんで更新する
         }
 
         /// <summary>
@@ -158,7 +158,7 @@ namespace Tono.Jit
         /// <param name="now"></param>
         public virtual void Exit(JitWork work)
         {
-            work.Stage.ExitWorkFromProcess(this, work);
+            work.Stage.Engine.ExitWorkFromProcess(this, work);
         }
 
         /// <summary>
@@ -176,7 +176,7 @@ namespace Tono.Jit
         public virtual JitWork ExitCollectedWork(JitStage stage, DateTime now)
         {
             var buf =
-                from wt in stage.GetWorks(this)
+                from wt in stage.Engine.GetWorks(this)
                 where wt.Work.NextProcess == null // work that have not next process
                 where wt.Work.ExitTime <= now     // select work that exit time expired.
                 select new WorkEntery { Work = wt.Work, Enter = wt.EnterTime };
@@ -238,8 +238,8 @@ namespace Tono.Jit
         {
             foreach (var cio in Cios)
             {
-                ei.Work.Stage.SetLastInTime(cio, now);  // save in-time (for Span constraint)
-                ei.Work.Stage.AddWorkInReserve(cio, ei.Work);   // reserve work-in (for Max constraint)
+                ei.Work.Stage.Engine.SetLastInTime(cio, now);  // save in-time (for Span constraint)
+                ei.Work.Stage.Engine.AddWorkInReserve(cio, ei.Work);   // reserve work-in (for Max constraint)
             }
         }
 
@@ -271,21 +271,21 @@ namespace Tono.Jit
         /// Add kanban
         /// </summary>
         /// <param name="kanban"></param>
-        public virtual JitKanban AddKanban(JitStage stage, JitKanban kanban, DateTime now)
+        public virtual JitKanban AddKanban(JitStageEngine engine, JitKanban kanban, DateTime now)
         {
             kanbanQueue.Enqueue(new EventQueueKanban
             {
-                EventQueue = stage.Events,
+                EventQueue = engine.Events,
                 Kanban = kanban,
             });
-            return CheckAndAttachKanban(stage, now);
+            return CheckAndAttachKanban(engine, now);
         }
 
         /// <summary>
         /// かんばんの目的地をワークに付ける（付け替える）
         /// </summary>
         /// <returns>処理されたかんばん</returns>
-        private JitKanban CheckAndAttachKanban(JitStage stage, DateTime now)
+        private JitKanban CheckAndAttachKanban(JitStageEngine engine, DateTime now)
         {
             if (kanbanQueue.Count == 0)
             {
@@ -293,7 +293,7 @@ namespace Tono.Jit
             }
 
             var buf =
-                from w in stage.GetWorks(this)
+                from w in engine.GetWorks(this)
                 where w.Work.NextProcess == null // 行先が無い
                 select new WorkEntery { Work = w.Work, Enter = w.EnterTime };
             var work = ExitWorkSelector.Invoke(buf);
