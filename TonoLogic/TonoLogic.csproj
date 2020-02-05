@@ -34,7 +34,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Tono.Core" Version="1.0.10" />
+    <PackageReference Include="Tono.Core" Version="1.0.11" />
   </ItemGroup>
 
 </Project>
