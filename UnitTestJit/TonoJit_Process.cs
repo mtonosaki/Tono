@@ -1642,10 +1642,10 @@ namespace UnitTestProject1
                 Name = "Y",
             };
             st.Model.Procs.Add(X);
-            JP.Add(st, X.ID);
+            JP.Add(st.Model, X.ID);
 
             st.Model.Procs.Add(Y);
-            JP.Add(st, Y.ID);
+            JP.Add(st.Model, Y.ID);
 
             st.Model.Procs.Add(JP);
             st.Model.Procs.Add(Z = new JitProcess
@@ -2088,8 +2088,8 @@ namespace UnitTestProject1
             st.Model.Procs.Add(X);    // NEED TO ADD PROCESS INSTANCE TO STAGE
             st.Model.Procs.Add(Y);    // NEED TO ADD PROCESS INSTANCE TO STAGE
 
-            JP.Add(st, "X");
-            JP.Add(st, "Y");    // Y is priority
+            JP.Add(st.Model, "X");
+            JP.Add(st.Model, "Y");    // Y is priority
 
 
             st.Model.Procs.Add(JP);
@@ -2486,10 +2486,10 @@ namespace UnitTestProject1
                 Name = "Y",
             };
             st.Model.Procs.Add(X);
-            JP.Add(st, "X");
+            JP.Add(st.Model, "X");
 
             st.Model.Procs.Add(Y);
-            JP.Add(st, Y.ID);
+            JP.Add(st.Model, Y.ID);
 
             st.Model.Procs.Add(JP);
             st.Model.Procs.Add(Z = new JitProcess

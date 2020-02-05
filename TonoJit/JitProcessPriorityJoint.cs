@@ -26,11 +26,11 @@ namespace Tono.Jit
         /// add child process as top priority 工程を追加。後に追加したものが高優先でOUTされる
         /// </summary>
         /// <param name="processKey"></param>
-        public override void Add(JitStage stage, ProcessKey processKey, bool isCheckNoInstanceError = true)
+        public override void Add(IJitStageModel model, ProcessKey processKey, bool isCheckNoInstanceError = true)
         {
-            base.Add(stage, processKey, isCheckNoInstanceError);
+            base.Add(model, processKey, isCheckNoInstanceError);
 
-            stage.Model.AddProcessLink(processKey, this.ID);  // グループの親工程に逃がすルートを作る 
+            model.AddProcessLink(processKey, this.ID);  // グループの親工程に逃がすルートを作る 
 
             int no = 0;
             foreach (var pkey in ChildProcessKeys)
