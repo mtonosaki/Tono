@@ -3,21 +3,6 @@
 "Tools of new operation" library/framework is for agile SoE(SoI) style development.   
 Expected a lot of developer create original simulators quickly and find business core rule of improvement continuously. That is why this is named "tools of new operation".
 
-[![licence badge]][licence]
-[![stars badge]][stars]
-[![forks badge]][forks]
-[![issues badge]][issues]
-
-[licence badge]:https://img.shields.io/badge/license-MIT-blue.svg
-[stars badge]:https://img.shields.io/github/stars/mtonosaki/Markdown.svg
-[forks badge]:https://img.shields.io/github/forks/mtonosaki/Markdown.svg
-[issues badge]:https://img.shields.io/github/issues/mtonosaki/Markdown.svg
-
-[licence]:https://github.com/hey-red/Markdown/blob/master/LICENSE.md
-[stars]:https://github.com/mtonosaki/Markdown/stargazers
-[forks]:https://github.com/mtonosaki/Markdown/network
-[issues]:https://github.com/mtonosaki/Markdown/issues
-
 ## Libraries
 
 ### Tono.Core
