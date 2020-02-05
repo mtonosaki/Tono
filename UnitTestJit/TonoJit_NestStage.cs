@@ -304,6 +304,14 @@ namespace UnitTestProject1
             }
         }
 
+        [TestMethod]
+        public void Test002()
+        {
+            // Test case come from Jit Model Class Design.pptx
+
+
+        }
+
         private bool CMP(JitStage.WorkEventQueue.Item ei, string name, EventTypes et, string time, string procName = null)
         {
             var ts = time.Split(':');

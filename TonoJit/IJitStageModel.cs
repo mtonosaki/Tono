@@ -13,13 +13,7 @@ namespace Tono.Jit
         /// </summary>
         ProcessSet Procs { get; }
 
-        void ProcsAdd(object obj);
-
-        void ProcsRemove(object obj);
-
         JitProcess FindProcess(string processKey, bool isReturnNull = false);
-
-        void AddProcLinks(object description);
 
         /// <summary>
         /// Save Process link
