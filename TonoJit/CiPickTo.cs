@@ -51,7 +51,7 @@ namespace Tono.Jit
             foreach (string childWorkName in childworkNames.ToArray())
             {
                 var childWork = work.ChildWorks[childWorkName];
-                childWork.NextProcess = work.Stage.FindProcess(DestProcessKey);
+                childWork.NextProcess = work.Stage.Model.FindProcess(DestProcessKey);
                 childWork.CurrentProcess = null; // 子Workであった事を null とする。
                                                  // childWork.PrevProcess = null; // workがAssyされた元工程を覚えておく
 

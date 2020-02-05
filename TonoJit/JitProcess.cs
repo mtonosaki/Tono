@@ -146,7 +146,7 @@ namespace Tono.Jit
             work.Stage.Engine.EnterWorkToProcess(this, work, now);
             work.PrevProcess = work.CurrentProcess;
             work.CurrentProcess = work.NextProcess;
-            work.NextProcess = work.Stage.FindProcess(work.Stage.GetProcessLinks(this).FirstOrDefault(), isReturnNull: true);
+            work.NextProcess = work.Stage.Model.FindProcess(work.Stage.Model.GetProcessLinks(this).FirstOrDefault(), isReturnNull: true);
             work.EnterTime = now;
             CheckAndAttachKanban(work.Stage.Engine, now); // かんばんが有れば、NextProcessをかんばんで更新する
         }
@@ -304,7 +304,7 @@ namespace Tono.Jit
             }
 
             var sk = kanbanQueue.Dequeue();
-            work.NextProcess = sk.Kanban.Stage.FindProcess(sk.Kanban.PullToProcessKey);
+            work.NextProcess = sk.Kanban.Stage.Model.FindProcess(sk.Kanban.PullToProcessKey);
             work.Kanbans.Add(sk.Kanban);
             sk.Kanban.Work = work;
             if (work.ExitTime < now)

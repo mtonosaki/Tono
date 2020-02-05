@@ -50,7 +50,7 @@ namespace Tono.Jit
             var kanbans =
                 from kanban in work.Kanbans
                 where kanban.Is(TargetKanbanClass)
-                where kanban.Stage.FindProcess(kanban.PullToProcessKey).Equals(work.CurrentProcess)
+                where kanban.Stage.Model.FindProcess(kanban.PullToProcessKey).Equals(work.CurrentProcess)
                 select kanban;
 
             foreach (var kanban in kanbans.ToArray())

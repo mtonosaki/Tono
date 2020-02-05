@@ -39,8 +39,8 @@ namespace Tono.Jit
                 if (nextLinkNo >= 0)
                 {
                     var tarProc = GetCheckTargetProcess(work);
-                    var nexts = work.Stage.GetProcessLinks(tarProc);
-                    work.NextProcess = work.Stage.FindProcess(nexts[nextLinkNo]);
+                    var nexts = work.Stage.Model.GetProcessLinks(tarProc);
+                    work.NextProcess = work.Stage.Model.FindProcess(nexts[nextLinkNo]);
                 }
             }
         }

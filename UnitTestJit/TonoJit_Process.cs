@@ -19,11 +19,11 @@ namespace UnitTestProject1
             var st = new JitStage();
 
             JitProcess A, B, X, Y, SINK;
-            st.Procs.Add(SINK = new JitProcess
+            st.Model.Procs.Add(SINK = new JitProcess
             {
                 Name = "SINK",
             });
-            st.Procs.Add(X = new JitProcess
+            st.Model.Procs.Add(X = new JitProcess
             {
                 Name = "X",
                 InCommands = new List<CiBase>
@@ -34,26 +34,26 @@ namespace UnitTestProject1
                     },
                 },
             });
-            st.AddProcessLink(X, SINK);
+            st.Model.AddProcessLink(X, SINK);
 
-            st.Procs.Add(Y = new JitProcess
+            st.Model.Procs.Add(Y = new JitProcess
             {
                 Name = "Y",
             });
-            st.AddProcessLink(Y, SINK);
+            st.Model.AddProcessLink(Y, SINK);
 
-            st.Procs.Add(B = new JitProcess // ï™äÚå≥
+            st.Model.Procs.Add(B = new JitProcess // ï™äÚå≥
             {
                 Name = "B",
             });
-            st.AddProcessLink(B, X);
-            st.AddProcessLink(B, Y);
+            st.Model.AddProcessLink(B, X);
+            st.Model.AddProcessLink(B, Y);
 
-            st.Procs.Add(A = new JitProcess  // ëOçHíˆ
+            st.Model.Procs.Add(A = new JitProcess  // ëOçHíˆ
             {
                 Name = "A",
             });
-            st.AddProcessLink(A, B);
+            st.Model.AddProcessLink(A, B);
         }
 
         [TestMethod]
@@ -62,31 +62,31 @@ namespace UnitTestProject1
             var st = new JitStage();
 
             JitProcess A, B, C, SINK, Y, Z, D;
-            st.Procs.Add(A = new JitProcess  // ëOçHíˆ
+            st.Model.Procs.Add(A = new JitProcess  // ëOçHíˆ
             {
                 Name = "A",
             });
-            st.Procs.Add(B = new JitProcess  // éüçHíˆÅiçáó¨çHíˆÅj
+            st.Model.Procs.Add(B = new JitProcess  // éüçHíˆÅiçáó¨çHíˆÅj
             {
                 Name = "B",
             });
-            st.Procs.Add(C = new JitProcess  // ï™äÚçHíˆ
+            st.Model.Procs.Add(C = new JitProcess  // ï™äÚçHíˆ
             {
                 Name = "C",
             });
-            st.Procs.Add(Y = new JitProcess  // â°çHíˆY
+            st.Model.Procs.Add(Y = new JitProcess  // â°çHíˆY
             {
                 Name = "Y",
             });
-            st.Procs.Add(Z = new JitProcess  // â°çHíˆZ
+            st.Model.Procs.Add(Z = new JitProcess  // â°çHíˆZ
             {
                 Name = "Z",
             });
-            st.Procs.Add(SINK = new JitProcess // è¡ñ≈çHíˆ
+            st.Model.Procs.Add(SINK = new JitProcess // è¡ñ≈çHíˆ
             {
                 Name = "SINK",
             });
-            st.Procs.Add(D = new JitProcess // ï™äÚçHíˆ
+            st.Model.Procs.Add(D = new JitProcess // ï™äÚçHíˆ
             {
                 Name = "D",
             });
@@ -94,10 +94,10 @@ namespace UnitTestProject1
 
             // çHíˆä‘ÉäÉìÉN
 
-            st.AddProcessLink(A, B); // AÅ®B PushÅBíAÇµÅAB.Co.JoinFromÇ≈JoinÇ≈Ç´ÇÈÇ‹Ç≈ë“Ç¬
-            st.AddProcessLink(B, C); // BÅ®C PushÅBï™äÚçHíˆÇ÷ÇÃà⁄ìÆ
-            st.AddProcessLink(C, SINK); // BÅ®SINK Push
-            st.AddProcessLink(D, SINK); // DÅ®SINK Push
+            st.Model.AddProcessLink(A, B); // AÅ®B PushÅBíAÇµÅAB.Co.JoinFromÇ≈JoinÇ≈Ç´ÇÈÇ‹Ç≈ë“Ç¬
+            st.Model.AddProcessLink(B, C); // BÅ®C PushÅBï™äÚçHíˆÇ÷ÇÃà⁄ìÆ
+            st.Model.AddProcessLink(C, SINK); // BÅ®SINK Push
+            st.Model.AddProcessLink(D, SINK); // DÅ®SINK Push
 
             A.InCommands.Add(new CiDelay
             {
@@ -307,30 +307,30 @@ namespace UnitTestProject1
             var st = new JitStage();
 
             JitProcess A, B, SINK, Y, Z;
-            st.Procs.Add(A = new JitProcess  // ëOçHíˆ
+            st.Model.Procs.Add(A = new JitProcess  // ëOçHíˆ
             {
                 Name = "A",
             });
-            st.Procs.Add(B = new JitProcess  // éüçHíˆ
+            st.Model.Procs.Add(B = new JitProcess  // éüçHíˆ
             {
                 Name = "B",
             });
-            st.Procs.Add(Y = new JitProcess  // â°çHíˆY
+            st.Model.Procs.Add(Y = new JitProcess  // â°çHíˆY
             {
                 Name = "Y",
             });
-            st.Procs.Add(Z = new JitProcess  // â°çHíˆZ
+            st.Model.Procs.Add(Z = new JitProcess  // â°çHíˆZ
             {
                 Name = "Z",
             });
-            st.Procs.Add(SINK = new JitProcess // è¡ñ≈çHíˆ
+            st.Model.Procs.Add(SINK = new JitProcess // è¡ñ≈çHíˆ
             {
                 Name = "SINK",
             });
 
             // çHíˆä‘ÉäÉìÉN
-            st.AddProcessLink(A, B); // AÅ®B PushÅBíAÇµÅAB.Co.JoinFromÇ≈JoinÇ≈Ç´ÇÈÇ‹Ç≈ë“Ç¬
-            st.AddProcessLink(B, SINK); // BÅ®SINK Push
+            st.Model.AddProcessLink(A, B); // AÅ®B PushÅBíAÇµÅAB.Co.JoinFromÇ≈JoinÇ≈Ç´ÇÈÇ‹Ç≈ë“Ç¬
+            st.Model.AddProcessLink(B, SINK); // BÅ®SINK Push
 
             A.InCommands.Add(new CiDelay
             {
@@ -478,21 +478,21 @@ namespace UnitTestProject1
             var st = new JitStage();
 
             JitProcess X, Y, SINK;
-            st.Procs.Add(X = new JitProcess
+            st.Model.Procs.Add(X = new JitProcess
             {
                 Name = "X",
             });
-            st.Procs.Add(Y = new JitProcess
+            st.Model.Procs.Add(Y = new JitProcess
             {
                 Name = "Y",
             });
-            st.Procs.Add(SINK = new JitProcess
+            st.Model.Procs.Add(SINK = new JitProcess
             {
                 Name = "SINK",
             });
 
             // çHíˆä‘ÉäÉìÉN
-            st.AddProcessLink(Y, SINK);
+            st.Model.AddProcessLink(Y, SINK);
 
             X.InCommands.Add(new CiDelay
             {
@@ -619,22 +619,22 @@ namespace UnitTestProject1
             var st = new JitStage();
 
             JitProcess X, Y, SINK;
-            st.Procs.Add(X = new JitProcess
+            st.Model.Procs.Add(X = new JitProcess
             {
                 Name = "X",
             });
-            st.Procs.Add(Y = new JitProcess
+            st.Model.Procs.Add(Y = new JitProcess
             {
                 Name = "Y",
             });
-            st.Procs.Add(SINK = new JitProcess
+            st.Model.Procs.Add(SINK = new JitProcess
             {
                 Name = "SINK",
             });
 
             // çHíˆä‘ÉäÉìÉN
             // st.Links.SetPushLink(X, Y);  // å„çHíˆà¯Ç´éÊÇËÇÃèÍçáÇÕÅAPushLinkÇÕê›íËÇµÇ»Ç¢ÅB
-            st.AddProcessLink(Y, SINK);
+            st.Model.AddProcessLink(Y, SINK);
 
             // çHíˆÇ…êßñÒÇïtó^
             X.Constraints.Add(new CoSpan
@@ -865,22 +865,22 @@ namespace UnitTestProject1
             var st = new JitStage();
 
             JitProcess X, Y, SINK;
-            st.Procs.Add(X = new JitProcess
+            st.Model.Procs.Add(X = new JitProcess
             {
                 Name = "X",
             });
-            st.Procs.Add(Y = new JitProcess
+            st.Model.Procs.Add(Y = new JitProcess
             {
                 Name = "Y",
             });
-            st.Procs.Add(SINK = new JitProcess
+            st.Model.Procs.Add(SINK = new JitProcess
             {
                 Name = "SINK",
             });
 
             // çHíˆä‘ÉäÉìÉN
             // st.Links.SetPushLink(X, Y);  // å„çHíˆà¯Ç´éÊÇËÇÃèÍçáÇÕÅAPushLinkÇÕê›íËÇµÇ»Ç¢ÅB
-            st.AddProcessLink(Y, SINK);
+            st.Model.AddProcessLink(Y, SINK);
 
             // çHíˆÇ…êßñÒÇïtó^
             X.Constraints.Add(new CoSpan
@@ -1341,22 +1341,22 @@ namespace UnitTestProject1
             var st = new JitStage();
 
             JitProcess X, Y, SINK;
-            st.Procs.Add(X = new JitProcess
+            st.Model.Procs.Add(X = new JitProcess
             {
                 Name = "X",
             });
-            st.Procs.Add(Y = new JitProcess
+            st.Model.Procs.Add(Y = new JitProcess
             {
                 Name = "Y",
             });
-            st.Procs.Add(SINK = new JitProcess
+            st.Model.Procs.Add(SINK = new JitProcess
             {
                 Name = "SINK",
             });
 
             // çHíˆä‘ÉäÉìÉN
             // st.Links.SetPushLink(X, Y);  // å„çHíˆà¯Ç´éÊÇËÇÃèÍçáÇÕÅAPushLinkÇÕê›íËÇµÇ»Ç¢ÅB
-            st.AddProcessLink(Y, SINK);
+            st.Model.AddProcessLink(Y, SINK);
 
             // çHíˆÇ…êßñÒÇïtó^
             X.Constraints.Add(new CoSpan
@@ -1627,7 +1627,7 @@ namespace UnitTestProject1
             JitProcessPriorityJoint JP;
             var st = new JitStage();
 
-            st.Procs.Add(JP = new JitProcessPriorityJoint
+            st.Model.Procs.Add(JP = new JitProcessPriorityJoint
             {
                 Name = "JP",
             });
@@ -1641,24 +1641,24 @@ namespace UnitTestProject1
             {
                 Name = "Y",
             };
-            st.Procs.Add(X);
+            st.Model.Procs.Add(X);
             JP.Add(st, X.ID);
 
-            st.Procs.Add(Y);
+            st.Model.Procs.Add(Y);
             JP.Add(st, Y.ID);
 
-            st.Procs.Add(JP);
-            st.Procs.Add(Z = new JitProcess
+            st.Model.Procs.Add(JP);
+            st.Model.Procs.Add(Z = new JitProcess
             {
                 Name = "Z",
             });
-            st.Procs.Add(SINK = new JitProcess
+            st.Model.Procs.Add(SINK = new JitProcess
             {
                 Name = "SINK",
             });
 
-            st.AddProcessLink(JP, Z);
-            st.AddProcessLink(Z, SINK);
+            st.Model.AddProcessLink(JP, Z);
+            st.Model.AddProcessLink(Z, SINK);
             // No need to add next link from X to JP because X is a child of JP(auto linked)
             // No need to add next link from Y to JP because Y is a child of JP(auto linked)
 
@@ -2071,7 +2071,7 @@ namespace UnitTestProject1
             JitProcessPriorityJoint JP;
             var st = new JitStage();
 
-            st.Procs.Add(JP = new JitProcessPriorityJoint
+            st.Model.Procs.Add(JP = new JitProcessPriorityJoint
             {
                 Name = "JP",
             });
@@ -2085,25 +2085,25 @@ namespace UnitTestProject1
             {
                 Name = "Y",
             };
-            st.Procs.Add(X);    // NEED TO ADD PROCESS INSTANCE TO STAGE
-            st.Procs.Add(Y);    // NEED TO ADD PROCESS INSTANCE TO STAGE
+            st.Model.Procs.Add(X);    // NEED TO ADD PROCESS INSTANCE TO STAGE
+            st.Model.Procs.Add(Y);    // NEED TO ADD PROCESS INSTANCE TO STAGE
 
             JP.Add(st, "X");
             JP.Add(st, "Y");    // Y is priority
 
 
-            st.Procs.Add(JP);
-            st.Procs.Add(Z = new JitProcess
+            st.Model.Procs.Add(JP);
+            st.Model.Procs.Add(Z = new JitProcess
             {
                 Name = "Z",
             });
-            st.Procs.Add(SINK = new JitProcess
+            st.Model.Procs.Add(SINK = new JitProcess
             {
                 Name = "SINK",
             });
 
-            st.AddProcessLink(JP, Z);
-            st.AddProcessLink(Z, SINK);
+            st.Model.AddProcessLink(JP, Z);
+            st.Model.AddProcessLink(Z, SINK);
 
             X.Constraints.Add(new CoSpan
             {
@@ -2471,7 +2471,7 @@ namespace UnitTestProject1
             JitProcessPriorityJoint JP;
             var st = new JitStage();
 
-            st.Procs.Add(JP = new JitProcessPriorityJoint
+            st.Model.Procs.Add(JP = new JitProcessPriorityJoint
             {
                 Name = "JP",
             });
@@ -2485,19 +2485,19 @@ namespace UnitTestProject1
             {
                 Name = "Y",
             };
-            st.Procs.Add(X);
+            st.Model.Procs.Add(X);
             JP.Add(st, "X");
 
-            st.Procs.Add(Y);
+            st.Model.Procs.Add(Y);
             JP.Add(st, Y.ID);
 
-            st.Procs.Add(JP);
-            st.Procs.Add(Z = new JitProcess
+            st.Model.Procs.Add(JP);
+            st.Model.Procs.Add(Z = new JitProcess
             {
                 Name = "Z",
             });
 
-            st.AddProcessLink(JP, Z);
+            st.Model.AddProcessLink(JP, Z);
 
             X.Constraints.Add(new CoSpan
             {
@@ -2671,7 +2671,7 @@ namespace UnitTestProject1
         {
             var st = new JitStage();
             JitProcess X, Y, Z;
-            st.Procs.Add(new[]
+            st.Model.Procs.Add(new[]
             {
                 X = new JitProcess
                 {
@@ -2705,8 +2705,8 @@ namespace UnitTestProject1
                 Delay = TimeSpan.FromMinutes(4),
             });
 
-            st.AddProcessLink(X, Y);
-            st.AddProcessLink(Y, Z);
+            st.Model.AddProcessLink(X, Y);
+            st.Model.AddProcessLink(Y, Z);
 
             var today = TimeUtil.ClearTime(DateTime.Now);
             JitWork a, b, c;
@@ -2847,7 +2847,7 @@ namespace UnitTestProject1
             var st = new JitStage();
 
             JitProcess X, Y, Z;
-            st.Procs.Add(new[]
+            st.Model.Procs.Add(new[]
             {
                 X = new JitProcess
                 {
@@ -2883,8 +2883,8 @@ namespace UnitTestProject1
                 Delay = TimeSpan.FromMinutes(4),
             });
 
-            st.AddProcessLink("X", Y.ID);
-            st.AddProcessLink(Y, Z);
+            st.Model.AddProcessLink("X", Y.ID);
+            st.Model.AddProcessLink(Y, Z);
 
             var today = TimeUtil.ClearTime(DateTime.Now);  // H:M:S:MS = 00:00:00:000
             JitWork a, b, c;
@@ -2920,7 +2920,7 @@ namespace UnitTestProject1
             Assert.IsTrue(CMP(dat[0], "b", EventTypes.Out, "9:01"));
             Assert.IsTrue(CMP(dat[1], "a", EventTypes.Out, "9:01")); Assert.IsTrue(dat[1].Work.CurrentProcess.Name == "X");
             Assert.IsTrue(CMP(dat[2], "c", EventTypes.Out, "9:02"));
-            Assert.IsTrue(st.Engine.GetWorks(st.Procs["X"]).Count() == 1);
+            Assert.IsTrue(st.Engine.GetWorks(st.Model.Procs["X"]).Count() == 1);
 
             st.Engine.DoNext();    //  3
             dat = st.Engine.Events.Peeks(3).ToList();
@@ -2939,8 +2939,8 @@ namespace UnitTestProject1
             Assert.IsTrue(CMP(dat[0], "c", EventTypes.Out, "9:02"));
             Assert.IsTrue(CMP(dat[1], "b", EventTypes.Out, "9:03"));
             Assert.IsTrue(CMP(dat[2], "a", EventTypes.Out, "9:05")); Assert.IsTrue(dat[2].Work.CurrentProcess.Name == "Y");
-            Assert.IsTrue(st.Engine.GetWorks(st.Procs["X"]).Count() == 0);
-            Assert.IsTrue(st.Engine.GetWorks(st.Procs["Y"]).Count() == 1);
+            Assert.IsTrue(st.Engine.GetWorks(st.Model.Procs["X"]).Count() == 0);
+            Assert.IsTrue(st.Engine.GetWorks(st.Model.Procs["Y"]).Count() == 1);
 
             st.Engine.DoNext();    //  6
             dat = st.Engine.Events.Peeks(3).ToList();
@@ -2965,7 +2965,7 @@ namespace UnitTestProject1
             Assert.IsTrue(CMP(dat[0], "b", EventTypes.Out, "9:04")); Assert.IsTrue(dat[0].Work.CurrentProcess.Name == "X");
             Assert.IsTrue(CMP(dat[1], "a", EventTypes.Out, "9:05"));
             Assert.IsTrue(CMP(dat[2], "c", EventTypes.Out, "9:06"));
-            Assert.IsTrue(st.Engine.GetWorks(st.Procs["X"]).Count() == 1);
+            Assert.IsTrue(st.Engine.GetWorks(st.Model.Procs["X"]).Count() == 1);
 
 
             st.Engine.DoNext();    // 10
@@ -2991,8 +2991,8 @@ namespace UnitTestProject1
             Assert.IsTrue(dat.Count == 2, "a moved to Z. a have sunk because Z have not next process");
             Assert.IsTrue(CMP(dat[0], "b", EventTypes.Out, "9:05"));
             Assert.IsTrue(CMP(dat[1], "c", EventTypes.Out, "9:06"));
-            Assert.IsTrue(st.Engine.GetWorks(st.Procs["Y"]).Count() == 0);
-            Assert.IsTrue(st.Engine.GetWorks(st.Procs["Z"]).Count() == 1);
+            Assert.IsTrue(st.Engine.GetWorks(st.Model.Procs["Y"]).Count() == 0);
+            Assert.IsTrue(st.Engine.GetWorks(st.Model.Procs["Z"]).Count() == 1);
 
             st.Engine.DoNext();    // 14
             dat = st.Engine.Events.Peeks(3).ToList();
@@ -3003,9 +3003,9 @@ namespace UnitTestProject1
             dat = st.Engine.Events.Peeks(3).ToList();
             Assert.IsTrue(CMP(dat[0], "c", EventTypes.Out, "9:06"));
             Assert.IsTrue(CMP(dat[1], "b", EventTypes.Out, "9:09"));
-            Assert.IsTrue(st.Engine.GetWorks(st.Procs["X"]).Count() == 0);
-            Assert.IsTrue(st.Engine.GetWorks(st.Procs["Y"]).Count() == 1);
-            Assert.IsTrue(st.Engine.GetWorks(st.Procs["Z"]).Count() == 1);
+            Assert.IsTrue(st.Engine.GetWorks(st.Model.Procs["X"]).Count() == 0);
+            Assert.IsTrue(st.Engine.GetWorks(st.Model.Procs["Y"]).Count() == 1);
+            Assert.IsTrue(st.Engine.GetWorks(st.Model.Procs["Z"]).Count() == 1);
 
             st.Engine.DoNext();    // 16
             dat = st.Engine.Events.Peeks(3).ToList();
@@ -3021,9 +3021,9 @@ namespace UnitTestProject1
             dat = st.Engine.Events.Peeks(3).ToList();
             Assert.IsTrue(CMP(dat[0], "b", EventTypes.Out, "9:09"));
             Assert.IsTrue(CMP(dat[1], "c", EventTypes.Out, "9:09"));
-            Assert.IsTrue(st.Engine.GetWorks(st.Procs["X"]).Count() == 1);
-            Assert.IsTrue(st.Engine.GetWorks(st.Procs["Y"]).Count() == 1);
-            Assert.IsTrue(st.Engine.GetWorks(st.Procs["Z"]).Count() == 1);
+            Assert.IsTrue(st.Engine.GetWorks(st.Model.Procs["X"]).Count() == 1);
+            Assert.IsTrue(st.Engine.GetWorks(st.Model.Procs["Y"]).Count() == 1);
+            Assert.IsTrue(st.Engine.GetWorks(st.Model.Procs["Z"]).Count() == 1);
 
             st.Engine.DoNext();    // 19
             dat = st.Engine.Events.Peeks(3).ToList();
@@ -3039,9 +3039,9 @@ namespace UnitTestProject1
             dat = st.Engine.Events.Peeks(3).ToList();
             Assert.IsTrue(dat.Count == 1, "b moved to Z then b have sunk because Z have not next process");
             Assert.IsTrue(CMP(dat[0], "c", EventTypes.Out, "9:09"));
-            Assert.IsTrue(st.Engine.GetWorks(st.Procs["X"]).Count() == 1);
-            Assert.IsTrue(st.Engine.GetWorks(st.Procs["Y"]).Count() == 0);
-            Assert.IsTrue(st.Engine.GetWorks(st.Procs["Z"]).Count() == 2);
+            Assert.IsTrue(st.Engine.GetWorks(st.Model.Procs["X"]).Count() == 1);
+            Assert.IsTrue(st.Engine.GetWorks(st.Model.Procs["Y"]).Count() == 0);
+            Assert.IsTrue(st.Engine.GetWorks(st.Model.Procs["Z"]).Count() == 2);
 
             st.Engine.DoNext();    // 22
             dat = st.Engine.Events.Peeks(3).ToList();
@@ -3058,9 +3058,9 @@ namespace UnitTestProject1
             st.Engine.DoNext();    // 25
             dat = st.Engine.Events.Peeks(3).ToList();
             Assert.IsTrue(dat.Count == 0, "c moved to Z them c have sunk because Z have not next process");
-            Assert.IsTrue(st.Engine.GetWorks(st.Procs["X"]).Count() == 0);
-            Assert.IsTrue(st.Engine.GetWorks(st.Procs["Y"]).Count() == 0);
-            Assert.IsTrue(st.Engine.GetWorks(st.Procs["Z"]).Count() == 3);
+            Assert.IsTrue(st.Engine.GetWorks(st.Model.Procs["X"]).Count() == 0);
+            Assert.IsTrue(st.Engine.GetWorks(st.Model.Procs["Y"]).Count() == 0);
+            Assert.IsTrue(st.Engine.GetWorks(st.Model.Procs["Z"]).Count() == 3);
         }
 
         private bool CMP(JitStage.WorkEventQueue.Item ei, string name, EventTypes et, string time, string procName = null)

@@ -122,19 +122,19 @@ namespace UnitTestProject1
 
             foreach (var st in new[] { st1, st2 })
             {
-                st.Procs.Add(A);
-                st.Procs.Add(B);
-                st.Procs.Add(C);
-                st.Procs.Add(Y);
-                st.Procs.Add(Z);
-                st.Procs.Add(SINK);
-                st.Procs.Add(D);
+                st.Model.Procs.Add(A);
+                st.Model.Procs.Add(B);
+                st.Model.Procs.Add(C);
+                st.Model.Procs.Add(Y);
+                st.Model.Procs.Add(Z);
+                st.Model.Procs.Add(SINK);
+                st.Model.Procs.Add(D);
 
                 // H’öŠÔƒŠƒ“ƒN
-                st.AddProcessLink(A, B); // A¨B PushB’A‚µAB.Co.JoinFrom‚ÅJoin‚Å‚«‚é‚Ü‚Å‘Ò‚Â
-                st.AddProcessLink(B, C); // B¨C PushB•ªŠòH’ö‚Ö‚ÌˆÚ“®
-                st.AddProcessLink(C, SINK); // B¨SINK Push
-                st.AddProcessLink(D, SINK); // D¨SINK Push
+                st.Model.AddProcessLink(A, B); // A¨B PushB’A‚µAB.Co.JoinFrom‚ÅJoin‚Å‚«‚é‚Ü‚Å‘Ò‚Â
+                st.Model.AddProcessLink(B, C); // B¨C PushB•ªŠòH’ö‚Ö‚ÌˆÚ“®
+                st.Model.AddProcessLink(C, SINK); // B¨SINK Push
+                st.Model.AddProcessLink(D, SINK); // D¨SINK Push
 
                 var today = TimeUtil.ClearTime(DateTime.Now);  // H:M:S:MS‚ğ‚O‚É‚·‚é
                 st.Engine.Events.Enqueue(TimeUtil.Set(today, hour: tp[st], minute: 0), EventTypes.Out, tw[(st, "w1")] = new JitWork

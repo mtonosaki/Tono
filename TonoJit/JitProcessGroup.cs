@@ -21,7 +21,7 @@ namespace Tono.Jit
             procKeySeq.AddFirst(procKey);
             if (isCheckNoInstanceError)
             {
-                if( stage.FindProcess(procKey) == null)
+                if( stage.Model.FindProcess(procKey) == null)
                 {
                     throw new JitException(JitException.FormatNoProcKey, procKey);
                 }
