@@ -43,9 +43,9 @@ namespace Tono.Jit
         /// <returns>true=waiting</returns>
         public override bool Check(JitWork work, DateTime now)
         {
-            var wirs = work.Stage.GetWorksInReserve(this);
+            var wirs = work.Stage.Engine.GetWorksInReserve(this);
             var costs =
-                from w in work.Stage.GetWorks(GetCheckTargetProcess(work)).Select(wt => wt.Work).Concat(wirs)
+                from w in work.Stage.Engine.GetWorks(GetCheckTargetProcess(work)).Select(wt => wt.Work).Concat(wirs)
                 let cost = w.ChildVriables.GetValueOrNull("Cost")
                 where cost != null
                 let varval = cost[ReferenceVarName]
@@ -60,9 +60,9 @@ namespace Tono.Jit
         /// 制約中のワークに対し、待ち時間を計算する
         /// </summary>
         /// <returns></returns>
-        public override TimeSpan GetWaitTime(JitStage stage, WorkEventQueue.Item ei, DateTime Now)
+        public override TimeSpan GetWaitTime(IJitStageEngine engine, WorkEventQueue.Item ei, DateTime Now)
         {
-            var nextexit = stage.Events.Find(ei.Work.NextProcess, EventTypes.Out, ":Work");
+            var nextexit = engine.Events.Find(ei.Work.NextProcess, EventTypes.Out, ":Work");
             if (nextexit != null)
             {
                 var ret = MathUtil.Min(TimeSpan.FromDays(999.9), nextexit.Value.Work.ExitTime - Now);

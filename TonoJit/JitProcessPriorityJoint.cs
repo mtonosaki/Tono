@@ -30,7 +30,7 @@ namespace Tono.Jit
         {
             base.Add(stage, processKey, isCheckNoInstanceError);
 
-            stage.AddProcessLink(processKey, this.ID);  // グループの親工程に逃がすルートを作る 
+            stage.Model.AddProcessLink(processKey, this.ID);  // グループの親工程に逃がすルートを作る 
 
             int no = 0;
             foreach (var pkey in ChildProcessKeys)
