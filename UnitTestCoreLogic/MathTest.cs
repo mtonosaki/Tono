@@ -6,10 +6,10 @@ using System;
 using System.Collections.Generic;
 using Tono;
 
-namespace Tono.Core
+namespace TestTonoCore
 {
     [TestClass]
-    public class TonoMath
+    public class MathTest
     {
         [TestMethod]
         public void Test001()

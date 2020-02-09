@@ -7,10 +7,10 @@ using System.Linq;
 using Tono;
 using Tono.Jit;
 
-namespace Tono.Jit
+namespace TestTonoJit
 {
     [TestClass]
-    public class TonoJit_JaC_Template
+    public class JaC_Template
     {
         [TestMethod]
         public void Test01()

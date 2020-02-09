@@ -6,10 +6,10 @@ using System.Diagnostics;
 using System.Linq;
 using Tono;
 
-namespace Tono.Core
+namespace TestTonoCore
 {
     [TestClass]
-    public class TonoBinary
+    public class BinaryTest
     {
 #if HEAVYTEST
         [TestMethod]

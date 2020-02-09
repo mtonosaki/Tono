@@ -4,10 +4,10 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Tono;
 
-namespace Tono.Core
+namespace TestTonoCore
 {
     [TestClass]
-    public class TonoAcceleration
+    public class AccelerationTest
     {
         [TestMethod]
         public void Test001()

@@ -6,10 +6,10 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using Tono;
 
-namespace UnitTestProject2
+namespace TestTonoCore
 {
     [TestClass]
-    public class TonoId
+    public class IdTest
     {
 #if HEAVYTEST
         [TestMethod]

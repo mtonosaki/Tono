@@ -8,10 +8,10 @@ using System.Linq;
 using Tono;
 using Tono.Jit;
 
-namespace Tono.Jit
+namespace TestTonoJit
 {
     [TestClass]
-    public class TonoJit_JaC_General
+    public class JaC_General
     {
         [TestMethod]
         public void Test01()

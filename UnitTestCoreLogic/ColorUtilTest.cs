@@ -3,10 +3,10 @@
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Tono.Core
+namespace TestTonoCore
 {
     [TestClass]
-    public class TonoColorUtil
+    public class ColorUtilTest
     {
         [TestMethod]
         public void Test001()

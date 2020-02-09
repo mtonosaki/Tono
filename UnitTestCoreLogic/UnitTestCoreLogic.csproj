@@ -4,6 +4,8 @@
     <TargetFramework>netcoreapp3.0</TargetFramework>
 
     <IsPackable>false</IsPackable>
+
+    <RootNamespace>TestTonoCore</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -17,6 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\TonoLogic\TonoLogic.csproj" />
     <ProjectReference Include="..\Tono\Tono.csproj" />
   </ItemGroup>
 
