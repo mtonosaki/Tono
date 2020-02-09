@@ -56,7 +56,7 @@ namespace Tono.Jit
                                                  // childWork.PrevProcess = null; // workがAssyされた元工程を覚えておく
 
                 work.ChildWorks.Remove(childWorkName);  // Remove work from child works.  子ワークから外す
-                work.Stage.Engine.Events.Enqueue(now + Delay, EventTypes.Out, childWork);   // Reserve destination of push move. 次工程にPUSH予約
+                work.Stage.Engine?.Invoke().Events.Enqueue(now + Delay, EventTypes.Out, childWork);   // Reserve destination of push move. 次工程にPUSH予約
             }
         }
     }
