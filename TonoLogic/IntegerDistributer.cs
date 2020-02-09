@@ -13,7 +13,7 @@ namespace Tono.Logic
     /// </summary>
     /// <example>
     /// USAGE-1================================================
-    ///	foreach (int n in new uIntegerDistributer(27, 8))  // 27 ÷ 8 = 3.375
+    ///	foreach (int n in new IntegerDistributer(27, 8))  // 27 ÷ 8 = 3.375
     ///	{
     ///		Console.Write(n);
     ///		Console.Write(" : ");
@@ -52,7 +52,7 @@ namespace Tono.Logic
     ///		}
     /// Result  0 : 0 : 0 : 1 : 0 : 0 : 0 : 0 : 1 : 0 : 0 : 0 : 
     /// </example>
-    public class IntegerDistributer : IEnumerable, IEnumerator
+    public class IntegerDistributer : IEnumerable, IEnumerator, IEnumerable<int>
     {
         private bool _isFirstPriority = true;   // true=10001000  false=00100010
         private double _value = 0;
@@ -73,9 +73,10 @@ namespace Tono.Logic
         /// <remarks>
         /// results as 10001000 instead of 00100010
         /// </remarks>
-        public void SetFirstPriorityMode()
+        public IntegerDistributer SetFirstPriorityMode()
         {
             _isFirstPriority = true;
+            return this;
         }
 
         /// <summary>
@@ -83,11 +84,12 @@ namespace Tono.Logic
         /// NOTE: execute this method BEFORE Add values
         /// </summary>
         /// <remarks>
-        /// results as 00100010 instead of 10001000
+        /// results as 00100100 instead of 10001000 (not LOOP-able result)
         /// </remarks>
-        public void SetMiddlePriorityMode()
+        public IntegerDistributer SetMiddlePriorityMode()
         {
             _isFirstPriority = false;
+            return this;
         }
 
         /// <summary>
@@ -220,7 +222,7 @@ namespace Tono.Logic
         #region IEnumerable member
 
         /// <summary>
-        /// IEnumeratorを返す
+        /// IEnumerator
         /// </summary>
         /// <returns></returns>
         public IEnumerator GetEnumerator()
@@ -233,12 +235,12 @@ namespace Tono.Logic
         #region IEnumerator member
 
         /// <summary>
-        /// 現在の値
+        /// Current Value
         /// </summary>
         public object Current => this[_pos];
 
         /// <summary>
-        /// 次の値取得
+        /// Get next value
         /// </summary>
         /// <returns></returns>
         public bool MoveNext()
@@ -248,11 +250,20 @@ namespace Tono.Logic
         }
 
         /// <summary>
-        /// リセット
+        /// reset enumerator
         /// </summary>
         public void Reset()
         {
             _pos = -1;
+        }
+
+        IEnumerator<int> IEnumerable<int>.GetEnumerator()
+        {
+            foreach (var ret in this)
+            {
+                yield return (int)ret;
+            }
+            Reset();
         }
 
         #endregion
