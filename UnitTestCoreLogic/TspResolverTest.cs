@@ -60,6 +60,15 @@ namespace TestTonoLogic
             tsp.Start();
             var route = string.Join("", tsp.List.Select(a => a.ToString()));
             Assert.AreEqual(route, "ABDC"); // The minimum route is ABDCA (loop)
+
+            var cost = 0.0;
+            for( var i = 0; i < tsp.List.Count; i++)
+            {
+                var nodeX = tsp.List[i % tsp.List.Count];
+                var nodeY = tsp.List[(i + 1) % tsp.List.Count];
+                cost += tsp.CostCaluclator(nodeX, nodeY, TspResolverBase<Node>.CaluclationStage.Normal);
+            }
+            Assert.AreEqual(Math.Round(cost, 8), 18.0);
         }
     }
 }
