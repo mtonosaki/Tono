@@ -70,6 +70,29 @@ namespace Tono.Jit
             AddProcessLink(from.ID, to.ID);
         }
 
+        public void RemoveProcessLink(string procKeyFrom, string procKeyTo)
+        {
+            var li = GetProcessLinks(procKeyFrom);
+            var links = _processKeyLinks.Values.Where(a => ReferenceEquals(a, li)).FirstOrDefault();
+            if( links != null)
+            {
+                links.Remove(procKeyTo);
+                var pt = FindProcess(procKeyTo);
+                if( pt != null)
+                {
+                    links.Remove(pt.ID);
+                    if (pt.Name != null)
+                    {
+                        links.Remove(pt.Name);
+                    }
+                }
+            }
+        }
+        public void RemoveProcessLink(JitProcess from, JitProcess to)
+        {
+            RemoveProcessLink(from.ID, to.ID);
+        }
+
         /// <summary>
         /// Get Process Key(ID/Name) Destinations
         /// </summary>

@@ -140,15 +140,15 @@ namespace Tono.Jit
         {
             foreach (var cio in Cios)
             {
-                work.Stage.Engine.RemoveWorkInReserve(cio, work);
+                work.Stage.Engine?.Invoke().RemoveWorkInReserve(cio, work);
             }
 
-            work.Stage.Engine.EnterWorkToProcess(this, work, now);
+            work.Stage.Engine?.Invoke().EnterWorkToProcess(this, work, now);
             work.PrevProcess = work.CurrentProcess;
             work.CurrentProcess = work.NextProcess;
             work.NextProcess = work.Stage.Model.FindProcess(work.Stage.Model.GetProcessLinks(this).FirstOrDefault(), isReturnNull: true);
             work.EnterTime = now;
-            CheckAndAttachKanban(work.Stage.Engine, now); // かんばんが有れば、NextProcessをかんばんで更新する
+            CheckAndAttachKanban(work.Stage.Engine(), now); // かんばんが有れば、NextProcessをかんばんで更新する
         }
 
         /// <summary>
@@ -158,7 +158,7 @@ namespace Tono.Jit
         /// <param name="now"></param>
         public virtual void Exit(JitWork work)
         {
-            work.Stage.Engine.ExitWorkFromProcess(this, work);
+            work.Stage.Engine?.Invoke().ExitWorkFromProcess(this, work);
         }
 
         /// <summary>
@@ -176,7 +176,7 @@ namespace Tono.Jit
         public virtual JitWork ExitCollectedWork(JitStage stage, DateTime now)
         {
             var buf =
-                from wt in stage.Engine.GetWorks(this)
+                from wt in stage.Engine?.Invoke().GetWorks(this)
                 where wt.Work.NextProcess == null // work that have not next process
                 where wt.Work.ExitTime <= now     // select work that exit time expired.
                 select new WorkEntery { Work = wt.Work, Enter = wt.EnterTime };
@@ -238,8 +238,8 @@ namespace Tono.Jit
         {
             foreach (var cio in Cios)
             {
-                ei.Work.Stage.Engine.SetLastInTime(cio, now);  // save in-time (for Span constraint)
-                ei.Work.Stage.Engine.AddWorkInReserve(cio, ei.Work);   // reserve work-in (for Max constraint)
+                ei.Work.Stage.Engine?.Invoke().SetLastInTime(cio, now);  // save in-time (for Span constraint)
+                ei.Work.Stage.Engine?.Invoke().AddWorkInReserve(cio, ei.Work);   // reserve work-in (for Max constraint)
             }
         }
 

@@ -4,14 +4,15 @@ using System.Text;
 
 namespace Tono.Jit
 {
+    [JacTarget(Name = "StageSubset")]
     public class JitStageSubset : JitVariable, IJitObjectID
     {
-        public string ID { get; set; } = JacInterpreter.MakeID("Stage");
+        public string ID { get; set; } = JacInterpreter.MakeID("StageSubset");
 
         /// <summary>
         /// Stage runtime data
         /// </summary>
-        public IJitStageEngine Engine { get; set; }
+        public Func<IJitStageEngine> Engine { get; set; }
 
         /// <summary>
         /// Jit Sub Model
@@ -19,11 +20,18 @@ namespace Tono.Jit
         public IJitStageModel Model { get; set; }
 
         /// <summary>
+        /// Jit Child Models
+        /// </summary>
+        private List<JitStageSubset> ChildModels { get; set; }
+
+        /// <summary>
         /// The Constructor
         /// </summary>
         public JitStageSubset()
         {
             Classes.Add(":StageSubset");
+            Model = new JitStageModel();
+            ChildModels = new List<JitStageSubset>();
         }
 
         public override int GetHashCode()
@@ -44,6 +52,20 @@ namespace Tono.Jit
         public override string ToString()
         {
             return $"{GetType().Name} ID={ID}";
+        }
+
+        [JacListAdd(PropertyName = "Models")]
+        public void ModelsAdd(object obj)
+        {
+            if (obj is JitStage stage)
+            {
+                throw new JitException(JitException.DoubleStage, stage.ID, this.ID);
+            }
+            if (obj is JitStageSubset subset)
+            {
+                ChildModels.Add(subset);
+                subset.Engine = this.Engine;    // TODO: Local Find Engine
+            }
         }
 
         [JacListAdd(PropertyName = "Procs")]
@@ -84,6 +106,25 @@ namespace Tono.Jit
                 var key1 = push.From is JitProcess p1 ? p1.ID : push.From?.ToString();
                 var key2 = push.To is JitProcess p2 ? p2.ID : push.To?.ToString();
                 Model.AddProcessLink(key1, key2);
+            }
+            else
+            {
+                throw new JitException(JitException.TypeMissmatch, $"Expecting type JacPushLinkDescription but {description.GetType().Name}");
+            }
+        }
+
+        [JacListRemove(PropertyName = "ProcLinks")]
+        public void RemoveProcLinks(object description)
+        {
+            if (description == null)
+            {
+                throw new JitException(JitException.NullValue, "ProcLinks");
+            }
+            if (description is JacPushLinkDescription push)
+            {
+                var key1 = push.From is JitProcess p1 ? p1.ID : push.From?.ToString();
+                var key2 = push.To is JitProcess p2 ? p2.ID : push.To?.ToString();
+                Model.RemoveProcessLink(key1, key2);
             }
             else
             {

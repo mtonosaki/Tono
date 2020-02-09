@@ -896,6 +896,37 @@ namespace Tono.Jit
             Assert.AreEqual(tos[1], jac.GetProcess("PROC3"));
             Assert.AreEqual(tos[2], jac.GetProcess("PROCID4"));
 
+            code = @"
+                st
+                    ProcLinks
+                        remove p1 -> p2
+            ";
+            jac.Exec(code);
+            tos = st.Model.GetProcessLinks(p1).Select(key => st.Model.FindProcess(key)).ToArray();
+            Assert.AreEqual(tos.Length, 2);
+            Assert.AreEqual(tos[0], jac.GetProcess("PROC3"));
+            Assert.AreEqual(tos[1], jac.GetProcess("PROCID4"));
+
+            code = @"
+                st
+                    ProcLinks
+                        remove p1->'PROC3'      // try to confirm super lazy link by Name
+            ";
+            jac.Exec(code);
+            tos = st.Model.GetProcessLinks(p1).Select(key => st.Model.FindProcess(key)).ToArray();
+            Assert.AreEqual(tos.Length, 1);
+            Assert.AreEqual(tos[0], jac.GetProcess("PROCID4"));
+
+            code = @"
+                st
+                    ProcLinks
+                        remove p1 ->'PROCID4'    // try to confirm lazy link by ID
+            ";
+            jac.Exec(code);
+            tos = st.Model.GetProcessLinks(p1).Select(key => st.Model.FindProcess(key)).ToArray();
+            Assert.AreEqual(tos.Length, 0);
+
+            //--------------------------------------------------------------------------------------------
 
             code = @"
                 st
@@ -909,6 +940,17 @@ namespace Tono.Jit
             Assert.AreEqual(tos.Length, 1);
             Assert.AreEqual(tos[0], jac.GetProcess("p2"));
 
+            code = @"
+                st
+                    ProcLinks
+                        remove 'PROC3'-> p2
+            ";
+            jac.Exec(code);
+
+            tos = st.Model.GetProcessLinks(PROC3).Select(key => st.Model.FindProcess(key)).ToArray();
+            Assert.AreEqual(tos.Length, 0);
+
+            //--------------------------------------------------------------------------------------------
 
             code = @"
                 st
@@ -924,13 +966,11 @@ namespace Tono.Jit
             code = @"
                 st
                     ProcLinks
-                        add 'PROC3'->'PROCID4'
+                        remove 'PROCID4' ->p2
             ";
             jac.Exec(code);
-            tos = st.Model.GetProcessLinks(PROC3).Select(key => st.Model.FindProcess(key)).ToArray();
-            Assert.AreEqual(tos.Length, 2);
-            Assert.AreEqual(tos[0], jac.GetProcess("p2"));
-            Assert.AreEqual(tos[1], jac.GetProcess("PROCID4"));
+            tos = st.Model.GetProcessLinks(PROCID4).Select(key => st.Model.FindProcess(key)).ToArray();
+            Assert.AreEqual(tos.Length, 0);
         }
     }
 

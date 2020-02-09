@@ -17,11 +17,11 @@ namespace Tono.Jit
         /// <summary>
         /// the constructor of this class
         /// </summary>
-        public JitStage()
+        public JitStage() : base()
         {
             Classes.Add(":Stage");
-            Engine = new JitStageEngine();
-            Model = new JitStageModel();
+            var engine = new JitStageEngine();
+            Engine = (() => engine);
         }
     }
 }
