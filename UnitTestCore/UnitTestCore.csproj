@@ -14,7 +14,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\TonoLogic\TonoLogic.csproj" />
     <ProjectReference Include="..\Tono\Tono.csproj" />
   </ItemGroup>
 
