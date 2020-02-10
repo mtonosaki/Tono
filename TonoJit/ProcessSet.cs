@@ -157,13 +157,30 @@ namespace Tono.Jit
         {
             foreach (var proc in _procData)
             {
-                if (proc is JitProcessDummy)
+                yield return GetProcessKey(proc);
+            }
+        }
+
+        /// <summary>
+        /// Get Process Key
+        /// </summary>
+        /// <param name="proc"></param>
+        /// <returns></returns>
+        public static ProcessKey GetProcessKey(JitProcess proc)
+        {
+            if (proc is JitProcessDummy)
+            {
+                return proc.Name;
+            }
+            else
+            {
+                if (proc.Name == null)
                 {
-                    yield return proc.Name;
+                    return proc.ID;
                 }
                 else
                 {
-                    yield return proc.ID;   // HACK: Need to know which is better ID or Name.
+                    return proc.Name;
                 }
             }
         }

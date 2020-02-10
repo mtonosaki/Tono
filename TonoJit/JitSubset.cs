@@ -131,7 +131,7 @@ namespace Tono.Jit
         }
         public IReadOnlyList<ProcessKey> GetProcessLinks(JitProcess proc)
         {
-            return GetProcessLinks(proc.ID);
+            return GetProcessLinks(ProcessSet.GetProcessKey(proc));
         }
     }
 }

@@ -2552,7 +2552,7 @@ namespace UnitTestJit
                 {
                     Subset = st.Subset,
                     Name = $"y{(i + 1):0}",
-                    Next = (st.Subset, Y),
+                    Next = (JP, Y),
                 });
             }
 
