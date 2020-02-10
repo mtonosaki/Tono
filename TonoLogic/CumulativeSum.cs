@@ -4,9 +4,12 @@ using System.Text;
 
 namespace Tono.Logic
 {
+    /// <summary>
+    /// Cumulative Sum Utility 累積和
+    /// </summary>
     public class CumulativeSum
     {
-        private double[] data;
+        private double[] data = new double[] { };
 
         private List<double> Buffer;
 
@@ -21,7 +24,7 @@ namespace Tono.Logic
         }
 
         /// <summary>
-        /// Prepare the all result first.
+        /// Prepare the all result first.(Run after Data set)
         /// </summary>
         /// <returns></returns>
         public CumulativeSum Prepare()
