@@ -18,26 +18,29 @@ namespace Tono.Jit
 
     /// Note : Need to add Process Object to Stage before use thid method.
     /// </remarks>
-    public class JitProcessPriorityJoint : JitProcessGroup
+    public class JitProcessPriorityJoint : JitSubset
     {
         private readonly Dictionary<ProcessKey, int> procPriority = new Dictionary<ProcessKey, int>();
 
-        /// <summary>
-        /// add child process as top priority 工程を追加。後に追加したものが高優先でOUTされる
-        /// </summary>
-        /// <param name="processKey"></param>
-        public override void Add(IJitStageModel model, ProcessKey processKey, bool isCheckNoInstanceError = true)
+        public JitProcessPriorityJoint()
         {
-            base.Add(model, processKey, isCheckNoInstanceError);
+            ChildProcesses.Added += ChildProcesses_Added;
+        }
 
-            model.AddProcessLink(processKey, this.ID);  // グループの親工程に逃がすルートを作る 
-
+        /// <summary>
+        /// Add child process as top priority 工程を追加。後に追加したものが高優先でOUTされる
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ChildProcesses_Added(object sender, ProcessSet.AddedEventArgs e)
+        {
             int no = 0;
-            foreach (var pkey in ChildProcessKeys)
+            foreach (var pkey in ChildProcesses.GetProcessKeys())
             {
                 procPriority[pkey] = ++no; // larger number is priority 数字が大きい方が、先にOUTされる
             }
         }
+
 
         /// <summary>
         /// change exit schedule depends on priorities of each child processes
@@ -47,9 +50,9 @@ namespace Tono.Jit
         /// <param name="work"></param>
         public override void AddAndAdjustExitTiming(JitStage.WorkEventQueue events, JitWork work)
         {
-            if (work.NextProcess != null)
+            if (work.Next != default)
             {
-                var sortList = events.FindAll(this, EventTypes.Out).ToList();
+                var sortList = events.FindAll((work.Subset, this), EventTypes.Out).ToList();
                 var tarDT = work.ExitTime;
                 if (sortList.Count > 0)
                 {
@@ -65,8 +68,8 @@ namespace Tono.Jit
                 sortList.Add(nn);
                 sortList.Sort(new QueueItemComparer
                 {
-                    Stage = work.Stage,
-                    ProcPriorities = procPriority,
+                    Subset = work.Subset,
+                    ProcPriorities = procPriority,  // Larger number is priority
                 }.Comparer);
 
                 foreach (var node in sortList)
@@ -78,7 +81,7 @@ namespace Tono.Jit
 
         private class QueueItemComparer
         {
-            public JitStage Stage { get; set; }
+            public JitSubset Subset { get; set; }
             public Dictionary<ProcessKey, int> ProcPriorities { get; set; }
 
             /// <summary>
@@ -91,7 +94,7 @@ namespace Tono.Jit
             public int Comparer(LinkedListNode<JitStage.WorkEventQueue.Item> a, LinkedListNode<JitStage.WorkEventQueue.Item> b)
             {
                 // 1st condition: priority of process 第１条件＝工程の優先順
-                int ret = GetProcPriority(a.Value.Work.PrevProcess) - GetProcPriority(b.Value.Work.PrevProcess);
+                int ret = GetProcPriority(JitWork.GetProcess(a.Value.Work.Previous)) - GetProcPriority(JitWork.GetProcess(b.Value.Work.Previous));
                 if (ret == 0)
                 {
                     // 2nd condition: enter time 第2条件＝進入時刻準（FIFO）
@@ -113,7 +116,7 @@ namespace Tono.Jit
                 {
                     return p2;
                 }
-                throw new JitException(JitException.FormatNoProcKey, $"{proc.Name} or {proc.ID}");
+                throw new JitException(JitException.NoProcKey, $"{proc.Name} or {proc.ID}");
             }
         }
     }

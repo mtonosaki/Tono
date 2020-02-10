@@ -65,10 +65,10 @@ namespace Tono.Jit
         /// <param name="ei"></param>
         private void ProcKanban(WorkEventQueue.Item ei)
         {
-            var usedKanban = ei.Kanban.Stage.Model.FindProcess(ei.Kanban.PullFromProcessKey).AddKanban(this, ei.Kanban, Now); // 工程にかんばんを投入して、処理を促す
+            var usedKanban = ei.Kanban.Subset.ChildProcesses.FindProcess(ei.Kanban.PullFromProcessKey).AddKanban(this, ei.Kanban, Now); // 工程にかんばんを投入して、処理を促す
             if (usedKanban != null)
             {
-                usedKanban.Work.CurrentProcess.AddAndAdjustExitTiming(Events, usedKanban.Work); // Eventキューに Outイベントを登録
+                usedKanban.Work.Current.Process.AddAndAdjustExitTiming(Events, usedKanban.Work); // Eventキューに Outイベントを登録
             }
         }
 
@@ -83,16 +83,16 @@ namespace Tono.Jit
         private void ProcOut(WorkEventQueue.Item ei)
         {
             ei.Work.Status = JitWorkStatus.Stopping;   // change status "STOP"
-            if (ei.Work.NextProcess == null)
+            if (ei.Work.Next == default)
             {
                 return;
             }
             // STEP1
-            if (ei.Work.NextProcess.CheckConstraints(ei.Work, Now, out var co) == false)   // no constraint 制約なしの状態
+            if (ei.Work.Next.Process.CheckConstraints(ei.Work, Now, out var co) == false)   // no constraint 制約なしの状態
             {
                 // STEP2
                 Events.Enqueue(Now, EventTypes.In, ei.Work);
-                ei.Work.NextProcess.RememberWorkWillBeIn(Now, ei);
+                ei.Work.Next.Process.RememberWorkWillBeIn(Now, ei);
             }
             else // next process : have constraint 次工程 制約ありの状態
             {
@@ -108,12 +108,12 @@ namespace Tono.Jit
         private void ProcIn(WorkEventQueue.Item ei)
         {
             ei.Work.Status = JitWorkStatus.Moving;
-            ei.Work.CurrentProcess?.Exit(ei.Work);
-            ei.Work.NextProcess.Enter(ei.Work, Now);
+            JitWork.GetProcess(ei.Work.Current)?.Exit(ei.Work);
+            JitWork.GetProcess(ei.Work.Next)?.Enter(ei.Work, Now);
             ei.Work.ExitTime = Now; // 後で、Co.Delayで上書きされる
 
-            ei.Work.CurrentProcess.ExecInCommands(ei.Work, Now);        // execute in-command コマンドを実行
-            ei.Work.CurrentProcess.AddAndAdjustExitTiming(Events, ei.Work); // put next event item status "Out" into event queu   Eventキューに Outイベントを登録
+            JitWork.GetProcess(ei.Work.Current)?.ExecInCommands(ei.Work, Now);        // execute in-command コマンドを実行
+            JitWork.GetProcess(ei.Work.Current)?.AddAndAdjustExitTiming(Events, ei.Work); // put next event item status "Out" into event queu   Eventキューに Outイベントを登録
         }
 
         /// <summary>

@@ -20,9 +20,10 @@ namespace Tono.Jit
         /// <remarks>
         /// Check(...)実行時に、work.NextProcessは nullにならない
         /// </remarks>
-        protected override JitProcess GetCheckTargetProcess(JitWork work)
+
+        protected override (JitSubset Subset, JitProcess Process) GetCheckTargetProcess(JitWork work)
         {
-            return work.NextProcess;
+            return work.Next;
         }
 
         /// <summary>

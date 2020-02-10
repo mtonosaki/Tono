@@ -18,14 +18,14 @@ namespace Tono.Jit
         public string ID { get; set; } = JacInterpreter.MakeID("Work");
 
         /// <summary>
-        /// Target Stage instance
+        /// Target Subset for this Work
         /// </summary>
-        public JitStage Stage { get; set; }
+        public JitSubset Subset { get; set; }
 
         /// <summary>
         /// Previous process (null = no previous)
         /// </summary>
-        public JitProcess PrevProcess { get; set; }
+        public (JitSubset Subset, JitProcess Process) Previous { get; set; }
 
         /// <summary>
         /// Current process
@@ -33,12 +33,12 @@ namespace Tono.Jit
         /// <remarks>
         /// If this work join to a parent work, CurrentProcess is set to null
         /// </remarks>
-        public JitProcess CurrentProcess { get; set; }
+        public (JitSubset Subset, JitProcess Process) Current { get; set; }
 
         /// <summary>
         /// Next process (null = no next)
         /// </summary>
-        public JitProcess NextProcess { get; set; }
+        public (JitSubset Subset, JitProcess Process) Next { get; set; }
 
         /// <summary>
         /// work status
@@ -76,6 +76,29 @@ namespace Tono.Jit
             ChildVriables["Cost"][JitVariable.From("Random")].Value = JitVariable.From(MathUtil.Rand0());  // ランダムコスト 0～0.99999999
         }
 
+        /// <summary>
+        /// Get process or null from tuple
+        /// </summary>
+        /// <param name="tar"></param>
+        /// <returns></returns>
+        public static JitProcess GetProcess((JitSubset Subset, JitProcess Process) tar)
+        {
+            if (tar == default)
+            {
+                return null;
+            }
+            else
+            {
+                return tar.Process;
+            }
+        }
+
+        public static bool Equals((JitSubset Subset, JitProcess Process) left, (JitSubset Subset, JitProcess Process) right)
+        {
+            if (left == default || right == default) return false;
+            return left == right;
+        }
+
         public override bool Equals(object obj)
         {
             if (obj is JitWork w)
@@ -95,7 +118,7 @@ namespace Tono.Jit
 
         public override string ToString()
         {
-            return $"{GetType().Name} {Name}@{CurrentProcess?.Name ?? "n/a"} → {NextProcess?.Name ?? "n/a"} ID={ID}";
+            return $"{GetType().Name} {Name}@{GetProcess(Current)?.Name ?? "n/a"} → {GetProcess(Next)?.Name ?? "n/a"} ID={ID}";
         }
     }
 

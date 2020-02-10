@@ -22,7 +22,7 @@ namespace Tono.Jit
 
         public int TestID { get => (int)(ChildVriables["TestID"].Value ?? int.MinValue); set => ChildVriables["TestID"] = JitVariable.From(value); }
 
-        public JitStage Stage { get; set; }
+        public JitSubset Subset { get; set; }
 
         /// <summary>
         /// The constuctor of this class
