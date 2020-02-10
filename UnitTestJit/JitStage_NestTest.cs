@@ -303,7 +303,7 @@ namespace UnitTestJit
                 Assert.IsTrue(CMP(dat[k++], "z1", EventTypes.Out, $"{t9[st]}:54", "D"));
             }
         }
-
+#if false
         [TestMethod]
         public void Test002()
         {
@@ -366,7 +366,7 @@ namespace UnitTestJit
             dat = st.Engine().Events.Peeks(99).ToList(); k = 0;
             Assert.AreEqual(dat.Count, 0);
         }
-
+#endif
         private bool CMP(JitStage.WorkEventQueue.Item ei, string name, EventTypes et, string time, string procName = null)
         {
             var ts = time.Split(':');
