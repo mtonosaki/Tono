@@ -3,7 +3,7 @@
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace TestTonoCore
+namespace UnitTestCore
 {
     [TestClass]
     public class ColorUtilTest

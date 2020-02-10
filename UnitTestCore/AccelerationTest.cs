@@ -4,7 +4,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Tono;
 
-namespace TestTonoCore
+namespace UnitTestCore
 {
     [TestClass]
     public class AccelerationTest

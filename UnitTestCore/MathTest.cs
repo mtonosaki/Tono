@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using Tono;
 
-namespace TestTonoCore
+namespace UnitTestCore
 {
     [TestClass]
     public class MathTest

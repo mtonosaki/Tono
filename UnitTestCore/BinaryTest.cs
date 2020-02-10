@@ -6,7 +6,7 @@ using System.Diagnostics;
 using System.Linq;
 using Tono;
 
-namespace TestTonoCore
+namespace UnitTestCore
 {
     [TestClass]
     public class BinaryTest

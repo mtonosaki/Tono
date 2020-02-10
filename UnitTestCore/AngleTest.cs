@@ -5,7 +5,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using Tono;
 
-namespace TestTonoCore
+namespace UnitTestCore
 {
     [TestClass]
     public class AngleTest

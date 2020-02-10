@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using Tono;
 
-namespace TestTonoCore
+namespace UnitTestCore
 {
     [TestClass]
     public class IdTest
