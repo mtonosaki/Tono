@@ -122,13 +122,13 @@ namespace UnitTestJit
 
             foreach (var st in new[] { st1, st2 })
             {
-                st.Model.Procs.Add(A);
-                st.Model.Procs.Add(B);
-                st.Model.Procs.Add(C);
-                st.Model.Procs.Add(Y);
-                st.Model.Procs.Add(Z);
-                st.Model.Procs.Add(SINK);
-                st.Model.Procs.Add(D);
+                st.Model.ChildProcesses.Add(A);
+                st.Model.ChildProcesses.Add(B);
+                st.Model.ChildProcesses.Add(C);
+                st.Model.ChildProcesses.Add(Y);
+                st.Model.ChildProcesses.Add(Z);
+                st.Model.ChildProcesses.Add(SINK);
+                st.Model.ChildProcesses.Add(D);
 
                 // çHíˆä‘ÉäÉìÉN
                 st.Model.AddProcessLink(A, B); // AÅ®B PushÅBíAÇµÅAB.Co.JoinFromÇ≈JoinÇ≈Ç´ÇÈÇ‹Ç≈ë“Ç¬

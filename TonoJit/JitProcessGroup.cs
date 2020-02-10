@@ -16,7 +16,7 @@ namespace Tono.Jit
         /// add child process as top priority
         /// </summary>
         /// <param name="procKey">Process Key(ID/Name)</param>
-        public virtual void Add(IJitStageModel model, ProcessKey procKey, bool isCheckNoInstanceError = true)
+        public virtual void Add(IJitSubset model, ProcessKey procKey, bool isCheckNoInstanceError = true)
         {
             procKeySeq.AddFirst(procKey);
             if (isCheckNoInstanceError)

@@ -24,7 +24,7 @@ namespace Tono.Jit
         /// <summary>
         /// Jit Sub Model
         /// </summary>
-        public IJitStageModel Model { get; set; }
+        public IJitSubset Model { get; set; }
 
         /// <summary>
         /// the constructor of this class
@@ -32,7 +32,7 @@ namespace Tono.Jit
         public JitStage() : base()
         {
             Classes.Add(":Stage");
-            Model = new JitStageModel();
+            Model = new JitSubset();
 
             // Prepare Master Engine
             var engine = new JitStageEngine();
@@ -74,7 +74,7 @@ namespace Tono.Jit
         {
             if (obj is JitProcess proc)
             {
-                Model.Procs.Add(proc);
+                Model.ChildProcesses.Add(proc);
             }
             else
             {
@@ -87,7 +87,7 @@ namespace Tono.Jit
         {
             if (obj is JitProcess proc)
             {
-                Model.Procs.Remove(proc);
+                Model.ChildProcesses.Remove(proc);
             }
             else
             {

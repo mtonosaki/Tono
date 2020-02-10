@@ -6,12 +6,12 @@ using static Tono.Jit.JitStage;
 
 namespace Tono.Jit
 {
-    public interface IJitStageModel
+    public interface IJitSubset
     {
         /// <summary>
         /// having processes
         /// </summary>
-        ProcessSet Procs { get; }
+        ProcessSet ChildProcesses { get; }
 
         JitProcess FindProcess(string processKey, bool isReturnNull = false);
 

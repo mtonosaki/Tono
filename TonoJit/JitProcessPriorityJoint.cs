@@ -26,7 +26,7 @@ namespace Tono.Jit
         /// add child process as top priority 工程を追加。後に追加したものが高優先でOUTされる
         /// </summary>
         /// <param name="processKey"></param>
-        public override void Add(IJitStageModel model, ProcessKey processKey, bool isCheckNoInstanceError = true)
+        public override void Add(IJitSubset model, ProcessKey processKey, bool isCheckNoInstanceError = true)
         {
             base.Add(model, processKey, isCheckNoInstanceError);
 

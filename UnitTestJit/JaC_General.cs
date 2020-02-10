@@ -74,12 +74,12 @@ namespace UnitTestJit
             jac.Exec(code);
             var st = jac["st"] as JitStage;
             Assert.IsNotNull(st);
-            Assert.AreEqual(st.Model.Procs.Count, 3);
-            Assert.AreEqual(st.Model.Procs[0], st.Model.Procs[0]);  // check Equals
-            Assert.AreEqual(st.Model.Procs[0].GetHashCode(), st.Model.Procs[0].GetHashCode());  // check GetHashCode
-            Assert.AreNotEqual(st.Model.Procs[0], st.Model.Procs[1]);
-            Assert.AreNotEqual(st.Model.Procs[0], st.Model.Procs[2]);
-            Assert.AreNotEqual(st.Model.Procs[1], st.Model.Procs[2]);
+            Assert.AreEqual(st.Model.ChildProcesses.Count, 3);
+            Assert.AreEqual(st.Model.ChildProcesses[0], st.Model.ChildProcesses[0]);  // check Equals
+            Assert.AreEqual(st.Model.ChildProcesses[0].GetHashCode(), st.Model.ChildProcesses[0].GetHashCode());  // check GetHashCode
+            Assert.AreNotEqual(st.Model.ChildProcesses[0], st.Model.ChildProcesses[1]);
+            Assert.AreNotEqual(st.Model.ChildProcesses[0], st.Model.ChildProcesses[2]);
+            Assert.AreNotEqual(st.Model.ChildProcesses[1], st.Model.ChildProcesses[2]);
         }
         [TestMethod]
         public void Test04()
@@ -119,11 +119,11 @@ namespace UnitTestJit
             code = $@"
                 st
                     Procs
-                        remove {st.Model.Procs[0].Name}
+                        remove {st.Model.ChildProcesses[0].Name}
             ";
             jac.Exec(code);
-            Assert.AreEqual(st.Model.Procs.Count, 1);
-            Assert.AreEqual(st.Model.Procs[0].Name, "IgnoreProcess");
+            Assert.AreEqual(st.Model.ChildProcesses.Count, 1);
+            Assert.AreEqual(st.Model.ChildProcesses[0].Name, "IgnoreProcess");
         }
         [TestMethod]
         public void Test06()
@@ -147,8 +147,8 @@ namespace UnitTestJit
                         remove    IgnoreProcess  // Can specify ID (Cannot specify 'IgnoreProcess' as string)
             ";
             jac.Exec(code);
-            Assert.AreEqual(jac.GetStage("st")?.Model.Procs.Count, 1);
-            Assert.AreNotEqual(jac.GetStage("st")?.Model.Procs[0].Name, "IgnoreProcess");
+            Assert.AreEqual(jac.GetStage("st")?.Model.ChildProcesses.Count, 1);
+            Assert.AreNotEqual(jac.GetStage("st")?.Model.ChildProcesses[0].Name, "IgnoreProcess");
             Assert.IsNull(jac.GetProcess("IgnoreProcess")); // removed from VarBuffer
             Assert.IsNull(jac.GetProcess(name));            // removed from InstanceBuffer
         }
@@ -172,7 +172,7 @@ namespace UnitTestJit
                         remove p2
             ";
             jac.Exec(code);
-            Assert.AreEqual(jac.GetStage("st")?.Model.Procs.Count, 0);
+            Assert.AreEqual(jac.GetStage("st")?.Model.ChildProcesses.Count, 0);
         }
         [TestMethod]
         public void Test08()
@@ -203,7 +203,7 @@ namespace UnitTestJit
             Assert.IsNotNull(MyStage);
             Assert.IsNotNull(MySweetStage);
             Assert.AreEqual(MyStage, MySweetStage);
-            Assert.AreEqual(MyStage.Model.Procs.Count, 1);
+            Assert.AreEqual(MyStage.Model.ChildProcesses.Count, 1);
         }
         [TestMethod]
         public void Test09()
@@ -226,7 +226,7 @@ namespace UnitTestJit
                         remove p2       // find JitProcess instance by variable
             ";
             jac.Exec(code);
-            Assert.AreEqual(jac.GetStage("MyStage")?.Model.Procs.Count, 0);
+            Assert.AreEqual(jac.GetStage("MyStage")?.Model.ChildProcesses.Count, 0);
         }
 
         [TestMethod]

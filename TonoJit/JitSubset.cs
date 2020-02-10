@@ -10,12 +10,12 @@ namespace Tono.Jit
     /// <summary>
     /// Jit Stage Model
     /// </summary>
-    public class JitStageModel : IJitStageModel
+    public class JitSubset : IJitSubset
     {
         /// <summary>
         /// having processes
         /// </summary>
-        public ProcessSet Procs { get; private set; }
+        public ProcessSet ChildProcesses { get; private set; }
 
         /// <summary>
         /// Process Push Links
@@ -25,9 +25,9 @@ namespace Tono.Jit
         /// <summary>
         /// The constructor
         /// </summary>
-        public JitStageModel()
+        public JitSubset()
         {
-            Procs = new ProcessSet();
+            ChildProcesses = new ProcessSet();
         }
 
         public JitProcess FindProcess(string processKey, bool isReturnNull = false)
@@ -43,7 +43,7 @@ namespace Tono.Jit
                     throw new JitException(JitException.FormatNoProcKey);
                 }
             }
-            var ret = Procs[processKey];
+            var ret = ChildProcesses[processKey];
             if (ret == null && isReturnNull == false)
             {
                 throw new JitException(JitException.FormatNoProcKey, processKey);
