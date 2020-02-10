@@ -19,7 +19,7 @@ namespace Tono.Jit
         /// <summary>
         /// Jit Sub Model
         /// </summary>
-        public JitSubset Model { get; set; }
+        public JitSubset Subset { get; set; }
 
         /// <summary>
         /// the constructor of this class
@@ -27,11 +27,11 @@ namespace Tono.Jit
         public JitStage() : base()
         {
             Classes.Add(":Stage");
-            Model = new JitSubset();
+            Subset = new JitSubset();
 
             // Prepare Master Engine
             var engine = new JitStageEngine();
-            Model.Engine = (() => engine);
+            Subset.Engine = (() => engine);
         }
 
         /// <summary>
@@ -69,7 +69,7 @@ namespace Tono.Jit
         {
             if (obj is JitProcess proc)
             {
-                Model.ChildProcesses.Add(proc);
+                Subset.ChildProcesses.Add(proc);
             }
             else
             {
@@ -82,7 +82,7 @@ namespace Tono.Jit
         {
             if (obj is JitProcess proc)
             {
-                Model.ChildProcesses.Remove(proc);
+                Subset.ChildProcesses.Remove(proc);
             }
             else
             {
@@ -101,7 +101,7 @@ namespace Tono.Jit
             {
                 var key1 = push.From is JitProcess p1 ? p1.Name : push.From?.ToString();
                 var key2 = push.To is JitProcess p2 ? p2.Name : push.To?.ToString();
-                Model.AddProcessLink(key1, key2);
+                Subset.AddProcessLink(key1, key2);
             }
             else
             {
@@ -120,7 +120,7 @@ namespace Tono.Jit
             {
                 var key1 = push.From is JitProcess p1 ? p1.ID : push.From?.ToString();
                 var key2 = push.To is JitProcess p2 ? p2.ID : push.To?.ToString();
-                Model.RemoveProcessLink(key1, key2);
+                Subset.RemoveProcessLink(key1, key2);
             }
             else
             {
