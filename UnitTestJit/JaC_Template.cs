@@ -7,7 +7,7 @@ using System.Linq;
 using Tono;
 using Tono.Jit;
 
-namespace TestTonoJit
+namespace UnitTestJit
 {
     [TestClass]
     public class JaC_Template
