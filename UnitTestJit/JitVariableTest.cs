@@ -5,10 +5,10 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Diagnostics;
 using Tono.Jit;
 
-namespace UnitTestProject1
+namespace TestTonoJit
 {
     [TestClass]
-    public class TonoJit_VariableTest
+    public class JitVariableTest
     {
         [TestMethod]
         public void Test004_Variable_Class_Inheritance()

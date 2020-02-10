@@ -1,6 +1,7 @@
 ﻿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 
@@ -8,6 +9,17 @@ namespace Tono.Logic
 {
     public abstract class TspResolverBase<TUnit>
     {
+        /// <summary>
+        /// Caluclation stage
+        /// </summary>
+        public enum CaluclationStage
+        {
+            InitCost,
+            Normal,
+            FinalCostFix,
+            FinalCostLoop,
+        }
+
         /// <summary>
         /// cost caluclator delegate method
         /// </summary>
@@ -19,7 +31,7 @@ namespace Tono.Logic
         public IList<TUnit> List = null;
         public GetCostMethod CostCaluclator = null;
 
-        protected abstract void Start();
+        public abstract void Start();
 
         /// <summary>
         /// calculation cost
@@ -73,19 +85,11 @@ namespace Tono.Logic
 
             } while (i < n);
 
-            Debug.WriteLine($"TspResolver Elapsed = {sw.Elapsed.TotalMilliseconds:0}[ms]");
+            if (sw.ElapsedMilliseconds >= 5000)
+            {
+                Debug.WriteLine($"TspResolver Elapsed = {sw.Elapsed.TotalMilliseconds:0}[ms]");
+            }
             return res;
-        }
-
-        /// <summary>
-        /// Caluclation stage
-        /// </summary>
-        public enum CaluclationStage
-        {
-            InitCost,
-            Normal,
-            FinalCostFix,
-            FinalCostLoop,
         }
     }
 }

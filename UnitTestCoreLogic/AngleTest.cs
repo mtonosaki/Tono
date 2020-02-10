@@ -5,10 +5,10 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using Tono;
 
-namespace UnitTestProject2
+namespace TestTonoCore
 {
     [TestClass]
-    public class TonoAngle
+    public class AngleTest
     {
         [TestMethod]
         public void Test001()

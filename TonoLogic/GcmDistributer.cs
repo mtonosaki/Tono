@@ -7,7 +7,7 @@ using System.Collections.Generic;
 namespace Tono.Logic
 {
     /// <summary>
-    /// distribute items with GCM algorithm
+    /// Distribute items with GCM(Goal Chasing Method) algorithm
     /// 目標追跡法(Goal Chasing Method)で 指定配分の発生率でキーを分散させる
     /// </summary>
     /// <example>
@@ -33,7 +33,7 @@ namespace Tono.Logic
     ///		}
     /// Result：AA : BB : AA : AA : BB : AA : CC : AA : BB : AA : AA : BB : AA : AA : BB : AA : CC : AA : BB : AA : ...... forever
     /// </example>
-    public class GcmDistributer : IEnumerable, IEnumerator
+    public class GcmDistributer : IEnumerable, IEnumerator, IEnumerable<object>
     {
         private double _totalValue = 0;
         private readonly Dictionary<object, double> _kn = new Dictionary<object, double>();
@@ -72,6 +72,19 @@ namespace Tono.Logic
                 _kn[key] = frequency;
             }
             _totalValue += frequency;
+        }
+
+        public double this[object key]
+        {
+            get
+            {
+                return _kn[key];
+            }
+            set
+            {
+                _totalValue = _totalValue - _kn.GetValueOrDefault(key, 0) + value;
+                _kn[key] = value;
+            }
         }
 
         #region IEnumerable member
@@ -127,6 +140,14 @@ namespace Tono.Logic
         {
             _res.Clear();
             _res = null;
+        }
+
+        IEnumerator<object> IEnumerable<object>.GetEnumerator()
+        {
+            foreach (var ret in this)
+            {
+                yield return ret;
+            }
         }
 
         #endregion

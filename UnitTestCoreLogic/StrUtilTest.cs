@@ -7,10 +7,10 @@ using System.Diagnostics;
 using System.Linq;
 using Tono;
 
-namespace UnitTestProject2
+namespace TestTonoCore
 {
     [TestClass]
-    public class TonoStrUtil
+    public class StrUtilTest
     {
         [TestMethod]
         public void Test001()

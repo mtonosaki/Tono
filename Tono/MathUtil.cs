@@ -12,6 +12,79 @@ namespace Tono
     public static class MathUtil
     {
         /// <summary>
+        /// Check then number is a prime number
+        /// </summary>
+        /// <param name="n"></param>
+        /// <returns></returns>
+        public static bool IsPrimeNumber(int n)
+        {
+            if (n < 2) return false;
+
+            return IsPrimeNumber((uint)n);
+        }
+
+        /// <summary>
+        /// Check then number is a prime number
+        /// </summary>
+        /// <param name="n"></param>
+        /// <returns></returns>
+        public static bool IsPrimeNumber(uint n)
+        {
+            if (n < 2) return false;
+            if (n == 2) return true;
+            if (n % 2 == 0) return false;
+
+            var limit = (uint)Math.Sqrt(n);
+            for (var i = 3u; i <= limit; i += 2)
+            {
+                if (n % i == 0)
+                    return false;
+            }
+            return true;
+        }
+
+        /// <summary>
+        /// Check then number is a prime number
+        /// </summary>
+        /// <param name="n"></param>
+        /// <returns></returns>
+        public static bool IsPrimeNumber(ulong n)
+        {
+            if (n < 2) return false;
+            if (n == 2) return true;
+            if (n % 2 == 0) return false;
+
+            var limit = (ulong)Math.Sqrt(n);
+            for (var i = 3ul; i <= limit; i += 2)
+            {
+                if (n % i == 0)
+                    return false;
+            }
+            return true;
+        }
+
+        /// <summary>
+        /// Horner's rule
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="a"></param>
+        /// <param name="n"></param>
+        /// <returns></returns>
+        /// <remarks>
+        /// f(x) = 5x^4 + 4x^3 + 3x^2 + 2x + 1
+        /// HornersRule(x, new[]{1.0, 2.0, 3.0, 4.0, 5.0}, 4)
+        /// </remarks>
+        public static double HornersRule(double x, double[] a, int n)
+        {
+            var p = a[n];
+            for (var i = n - 1; i >= 0; i--)
+            {
+                p = p * x + a[i];
+            }
+            return p;
+        }
+
+        /// <summary>
         /// Calc FNV Hash code
         /// </summary>
         /// <param name="str">input string</param>

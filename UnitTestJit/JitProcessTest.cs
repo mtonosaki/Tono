@@ -8,10 +8,10 @@ using System.Linq;
 using Tono;
 using Tono.Jit;
 
-namespace UnitTestProject1
+namespace TestTonoJit
 {
     [TestClass]
-    public class TonoJit_Process
+    public class JitProcessTest
     {
         [TestMethod]
         public void Test012_CiSwitchNextLink()

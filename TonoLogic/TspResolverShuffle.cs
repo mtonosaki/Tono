@@ -23,7 +23,7 @@ namespace Tono.Logic
     /// </example>
     public class TspResolverShuffle<TUnit> : TspResolverBase<TUnit>
     {
-        protected override void Start()
+        public override void Start()
         {
             var indexes = Collection.Seq(List.Count).ToArray();
             var buf = indexes.ToArray();

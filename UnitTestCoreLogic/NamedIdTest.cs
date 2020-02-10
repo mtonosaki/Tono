@@ -4,10 +4,10 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Tono;
 
-namespace UnitTestProject2
+namespace TestTonoCore
 {
     [TestClass]
-    public class TonoNamedId
+    public class NamedIdTest
     {
         [TestMethod]
         public void Test_AutoID()
