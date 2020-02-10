@@ -40,7 +40,7 @@ namespace Tono.Jit
         public override bool Check(JitWork work, DateTime now)
         {
             
-            return (now - work.Stage.Engine?.Invoke().GetLastInTime(this)) < Span;
+            return (now - work.Subset.Engine?.Invoke().GetLastInTime(this)) < Span;
         }
 
         /// <summary>

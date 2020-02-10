@@ -181,7 +181,7 @@ namespace Tono.Jit
             /// <param name="workclass"></param>
             /// <returns></returns>
             /// <remarks></remarks>
-            public virtual LinkedListNode<Item> Find(JitProcess proc, EventTypes etype, string workclass = JitVariable.Class.Object)
+            public virtual LinkedListNode<Item> Find((JitSubset Subset, JitProcess Process) proc, EventTypes etype, string workclass = JitVariable.Class.Object)
             {
                 for (var node = _dat.First; node != null; node = node.Next)
                 {
@@ -191,7 +191,7 @@ namespace Tono.Jit
                         continue;
                     }
                     var w = ei.Work;
-                    if ((w.CurrentProcess?.Equals(proc) ?? false) && ei.Type == etype && w.Is(workclass))
+                    if (JitWork.Equals(w.CurrentProcess, proc) && ei.Type == etype && w.Is(workclass))
                     {
                         return node;
                     }
@@ -208,7 +208,7 @@ namespace Tono.Jit
             /// <param name="workclass"></param>
             /// <returns></returns>
             /// <remarks></remarks>
-            public virtual IEnumerable<LinkedListNode<Item>> FindAll(JitProcess proc, EventTypes etype, string workclass = JitVariable.Class.Object)
+            public virtual IEnumerable<LinkedListNode<Item>> FindAll((JitSubset Subset, JitProcess Process) proc, EventTypes etype, string workclass = JitVariable.Class.Object)
             {
                 for (var node = _dat.First; node != null; node = node.Next)
                 {
@@ -218,7 +218,7 @@ namespace Tono.Jit
                         continue;
                     }
                     var w = ei.Work;
-                    if ((w.CurrentProcess?.Equals(proc) ?? false) && ei.Type == etype && w.Is(workclass))
+                    if (JitWork.Equals(w.CurrentProcess, proc) && ei.Type == etype && w.Is(workclass))
                     {
                         yield return node;
                     }

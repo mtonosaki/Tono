@@ -14,17 +14,12 @@ namespace Tono.Jit
     [JacTarget(Name = "Stage")]
     public partial class JitStage : JitVariable, IJitObjectID
     {
-        public string ID { get; set; } = JacInterpreter.MakeID("StageSubset");
-
-        /// <summary>
-        /// Stage runtime data
-        /// </summary>
-        public Func<IJitStageEngine> Engine { get; set; }
+        public string ID { get; set; } = JacInterpreter.MakeID("Stage");
 
         /// <summary>
         /// Jit Sub Model
         /// </summary>
-        public IJitSubset Model { get; set; }
+        public JitSubset Model { get; set; }
 
         /// <summary>
         /// the constructor of this class
@@ -36,7 +31,7 @@ namespace Tono.Jit
 
             // Prepare Master Engine
             var engine = new JitStageEngine();
-            Engine = (() => engine);
+            Model.Engine = (() => engine);
         }
 
         /// <summary>
@@ -104,8 +99,8 @@ namespace Tono.Jit
             }
             if (description is JacPushLinkDescription push)
             {
-                var key1 = push.From is JitProcess p1 ? p1.ID : push.From?.ToString();
-                var key2 = push.To is JitProcess p2 ? p2.ID : push.To?.ToString();
+                var key1 = push.From is JitProcess p1 ? p1.Name : push.From?.ToString();
+                var key2 = push.To is JitProcess p2 ? p2.Name : push.To?.ToString();
                 Model.AddProcessLink(key1, key2);
             }
             else

@@ -43,9 +43,9 @@ namespace Tono.Jit
         /// <returns>true=waiting</returns>
         public override bool Check(JitWork work, DateTime now)
         {
-            var wirs = work.Stage.Engine?.Invoke().GetWorksInReserve(this);
+            var wirs = work.Subset.Engine?.Invoke().GetWorksInReserve(this);
             var costs =
-                from w in work.Stage.Engine?.Invoke().GetWorks(GetCheckTargetProcess(work)).Select(wt => wt.Work).Concat(wirs)
+                from w in work.Subset.Engine().GetWorks(JitWork.GetProcess(GetCheckTargetProcess(work))).Select(wt => wt.Work).Concat(wirs)
                 let cost = w.ChildVriables.GetValueOrNull("Cost")
                 where cost != null
                 let varval = cost[ReferenceVarName]

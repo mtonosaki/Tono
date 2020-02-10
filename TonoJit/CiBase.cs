@@ -14,10 +14,11 @@ namespace Tono.Jit
         /// </summary>
         /// <param name="work"></param>
         /// <returns></returns>
-        protected override JitProcess GetCheckTargetProcess(JitWork work)
+        protected override (JitSubset Subset, JitProcess Process) GetCheckTargetProcess(JitWork work)
         {
             return work.CurrentProcess;
         }
+
 
         /// <summary>
         /// Execute in-command

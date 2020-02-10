@@ -14,9 +14,9 @@ namespace Tono.Jit
     {
         public const string NullValue = "EJIT1001: Null value is not acceptable for {0}";
         public const string NullProcKey = "EJIT1002: Cannot find the NULL Process";
-        public const string FormatNoProcKey = "EJIT1003: Cannot find the Process '{0}'";  // set ProcessKey(ID/Name)
+        public const string NoProcKey = "EJIT1003: Cannot find the Process {0}";  // set ProcessKey(ID/Name)
         public const string TypeMissmatch = "EJIT1004: Type miss match {0}";
-        public const string DoubleStage = "EJIT1005: Cannot add a Stage {0} instance to a Stage {1}.";
+        //public const string DoubleStage = "EJIT1005: Cannot add a Stage {0} instance to a Stage {1}.";
 
         public JitException() :  base()
         {

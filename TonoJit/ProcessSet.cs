@@ -1,6 +1,7 @@
 ﻿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,18 +9,35 @@ using ProcessKey = System.String;
 
 namespace Tono.Jit
 {
+    #region Dummy Process Object
+    public class JitProcessDummy : JitProcess
+    {
+        public override string ID { get; set; } = JacInterpreter.MakeID("ProcessDummy");
+        public override void AddAndAdjustExitTiming(JitStage.WorkEventQueue events, JitWork work) => throw new NotAllowErrorException();
+        public override JitKanban AddKanban(IJitStageEngine engine, JitKanban kanban, DateTime now) => throw new NotAllowErrorException();
+        public override void Enter(JitWork work, DateTime now) => throw new NotAllowErrorException();
+        public override void Exit(JitWork work) => throw new NotAllowErrorException();
+        public override JitWork ExitCollectedWork(JitSubset subset, DateTime now) => throw new NotAllowErrorException();
+    }
+    #endregion
+
     /// <summary>
-    /// Process Collection
+    /// Process INSTANCE Collection
     /// </summary>
     public class ProcessSet : IEnumerable<JitProcess>
     {
-        private Dictionary<string, JitProcess> _idProcs = new Dictionary<string, JitProcess>();
-        private readonly List<JitProcess> _procs = new List<JitProcess>();
+        public class AddedEventArgs : EventArgs
+        {
+            public JitProcess Process { get; set; }
+        }
+
+        public event EventHandler<AddedEventArgs> Added;
+        private readonly List<JitProcess> _procData = new List<JitProcess>();
 
         /// <summary>
         /// process count
         /// </summary>
-        public int Count => _procs.Count;
+        public int Count => _procData.Count;
 
         /// <summary>
         /// Add Process
@@ -27,8 +45,32 @@ namespace Tono.Jit
         /// <param name="proc"></param>
         public void Add(JitProcess proc)
         {
-            _idProcs[proc.ID] = proc;
-            _procs.Add(proc);
+            Remove(proc);
+            _procData.Add(proc);
+
+            Added?.Invoke(this, new AddedEventArgs
+            {
+                Process = proc,
+            });
+        }
+
+        /// <summary>
+        /// Reserve Process {Name or ID} as procKey
+        /// </summary>
+        /// <param name="procKey"></param>
+        public void Add(ProcessKey procKey)
+        {
+            Remove(procKey);
+
+            JitProcess proc;
+            _procData.Add(proc = new JitProcessDummy
+            {
+                Name = procKey,
+            });
+            Added?.Invoke(this, new AddedEventArgs
+            {
+                Process = proc,
+            });
         }
 
         /// <summary>
@@ -49,8 +91,21 @@ namespace Tono.Jit
         /// <param name="proc"></param>
         public void Remove(JitProcess proc)
         {
-            _idProcs.Remove(proc.ID);
-            _procs.Remove(proc);
+            Remove(proc.ID);
+            Remove(proc.Name);
+        }
+
+        /// <summary>
+        /// Remove the all process that have procKey in Name and ID
+        /// </summary>
+        /// <param name="procKey"></param>
+        public void Remove(ProcessKey procKey)
+        {
+            var dels = _procData.Where(a => a.ID == procKey || a.Name == procKey).ToArray();
+            foreach (var proc in dels)
+            {
+                _procData.Remove(proc);
+            }
         }
 
         /// <summary>
@@ -58,25 +113,22 @@ namespace Tono.Jit
         /// </summary>
         /// <param name="procKey"></param>
         /// <returns></returns>
-        public JitProcess Find(ProcessKey procKey)
+        public JitProcess FindProcess(ProcessKey procKey, bool isReturnNull = false)
         {
-            if (_idProcs.TryGetValue(procKey, out var ret))
+            if (procKey == null)
+            {
+                if (isReturnNull) return null; else throw new JitException(JitException.NullProcKey);
+            }
+            var ret = _procData.Where(a => a.ID == procKey).FirstOrDefault();
+            if (ret == null)
+            {
+                ret = _procData.Where(a => a.Name == procKey).FirstOrDefault();
+            }
+            if (ret != null || isReturnNull)
             {
                 return ret;
             }
-            else
-            {
-                var ret1 = _procs.Where(a => a.Name?.Equals(procKey) ?? false).FirstOrDefault();    // Concidering Process.Name is change/set later
-                if (ret1 == null)
-                {
-                    var ret2 = _procs.Where(a => a.ID?.Equals(procKey) ?? false).FirstOrDefault();
-                    return ret2;
-                }
-                else
-                {
-                    return ret1;
-                }
-            }
+            throw new JitException(JitException.NoProcKey, $"{procKey} in {this}");
         }
 
         /// <summary>
@@ -85,7 +137,7 @@ namespace Tono.Jit
         /// <returns></returns>
         public IEnumerator<JitProcess> GetEnumerator()
         {
-            return _procs.GetEnumerator();
+            return _procData.GetEnumerator();
         }
 
         /// <summary>
@@ -94,20 +146,30 @@ namespace Tono.Jit
         /// <returns></returns>
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return _procs.GetEnumerator();
+            return _procData.GetEnumerator();
         }
 
         /// <summary>
-        /// get process by Name/ID
-        /// 名前で子プロセスを検索。遅延評価はこのタイミングで行ったものを覚えておく
+        /// Get Process key list
         /// </summary>
-        /// <param name="procKey"></param>
         /// <returns></returns>
-        public JitProcess this[ProcessKey procKey]
+        public IEnumerable<ProcessKey> GetProcessKeys()
         {
-            get => Find(procKey);
+            foreach (var proc in _procData)
+            {
+                if (proc is JitProcessDummy)
+                {
+                    yield return proc.Name;
+                }
+                else
+                {
+                    yield return proc.ID;   // HACK: Need to know which is better ID or Name.
+                }
+            }
         }
 
-        public JitProcess this[int index] => _procs[index];
+        public JitProcess this[int index] => _procData[index];
+
+        public JitProcess this[ProcessKey procKey] => FindProcess(procKey);
     }
 }

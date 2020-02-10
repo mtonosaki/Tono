@@ -427,7 +427,7 @@ namespace UnitTestJit
             Assert.IsNotNull(i1);
             Assert.AreEqual(i1.Delay, TimeSpan.FromMinutes(1.5));
             Assert.AreEqual(i1.TargetWorkClass, ":Car");
-            Assert.AreEqual(st.Model.FindProcess(i1.DestProcessKey), jac.GetProcess("sink")); // check lazy method
+            Assert.AreEqual(st.Model.ChildProcesses.FindProcess(i1.DestProcessKey, true), jac.GetProcess("sink")); // check lazy method
 
             var i2 = jac["i2"] as CiDelay;
             Assert.IsNotNull(i2);
@@ -458,7 +458,7 @@ namespace UnitTestJit
 
             var i1 = jac["i1"] as CiPickTo;
             Assert.IsNotNull(i1);
-            var i1dest = st.Model.FindProcess("SUPERLAZY", isReturnNull: true);
+            var i1dest = st.Model.ChildProcesses.FindProcess("SUPERLAZY", isReturnNull: true);
             Assert.IsNull(i1dest);  // Expected Null because of no registered yet.
 
             var code2 = @"
@@ -468,11 +468,11 @@ namespace UnitTestJit
                             Name = 'SUPERLAZY'
             ";
             jac.Exec(code2);
-            i1dest = st.Model.FindProcess("SUPERLAZY", isReturnNull: true);
+            i1dest = st.Model.ChildProcesses.FindProcess("SUPERLAZY", isReturnNull: true);
             var p2 = jac.GetProcess("p2");
             Assert.AreEqual(i1dest, p2);  // Then FindProcess can find p2 named SUPERLAZY
 
-            i1dest = st.Model.FindProcess(p2.ID, isReturnNull: true);  // You can also find by ID 
+            i1dest = st.Model.ChildProcesses.FindProcess(p2.ID, isReturnNull: true);  // You can also find by ID 
             Assert.AreEqual(i1dest, p2);
         }
 
@@ -555,15 +555,15 @@ namespace UnitTestJit
 
             var code2 = @"
                 w1 = new Work
-                    Stage = st
+                    Subset = st.Model
                 w2 = new Work
-                    Stage = st
+                    Subset = st.Model
                 w3 = new Work
-                    Stage = st
+                    Subset = st.Model
             ";
             jac.Exec(code2);
             var w2 = jac.GetWork("w2");
-            Assert.AreEqual(st, w2.Stage);
+            Assert.AreEqual(st.Model, w2.Subset);
 
             var code3 = @"
                 o1
@@ -868,7 +868,7 @@ namespace UnitTestJit
             ";
             jac.Exec(code);
             var p1 = jac.GetProcess("p1");
-            var tos = st.Model.GetProcessLinks(p1).Select(key => st.Model.FindProcess(key)).ToArray();
+            var tos = st.Model.GetProcessLinks(p1).Select(key => st.Model.ChildProcesses.FindProcess(key)).ToArray();
             Assert.AreEqual(tos.Length, 1);
             Assert.AreEqual(tos[0], jac.GetProcess("p2"));
 
@@ -878,7 +878,7 @@ namespace UnitTestJit
                         add p1->'PROC3'      // try to confirm super lazy link by Name
             ";
             jac.Exec(code);
-            tos = st.Model.GetProcessLinks(p1).Select(key => st.Model.FindProcess(key)).ToArray();
+            tos = st.Model.GetProcessLinks(p1).Select(key => st.Model.ChildProcesses.FindProcess(key)).ToArray();
             Assert.AreEqual(tos.Length, 2);
             Assert.AreEqual(tos[0], jac.GetProcess("p2"));
             Assert.AreEqual(tos[1], jac.GetProcess("PROC3"));
@@ -890,7 +890,7 @@ namespace UnitTestJit
                         add p1 ->'PROCID4'    // try to confirm lazy link by ID
             ";
             jac.Exec(code);
-            tos = st.Model.GetProcessLinks(p1).Select(key => st.Model.FindProcess(key)).ToArray();
+            tos = st.Model.GetProcessLinks(p1).Select(key => st.Model.ChildProcesses.FindProcess(key)).ToArray();
             Assert.AreEqual(tos.Length, 3);
             Assert.AreEqual(tos[0], jac.GetProcess("p2"));
             Assert.AreEqual(tos[1], jac.GetProcess("PROC3"));
@@ -902,7 +902,7 @@ namespace UnitTestJit
                         remove p1 -> p2
             ";
             jac.Exec(code);
-            tos = st.Model.GetProcessLinks(p1).Select(key => st.Model.FindProcess(key)).ToArray();
+            tos = st.Model.GetProcessLinks(p1).Select(key => st.Model.ChildProcesses.FindProcess(key)).ToArray();
             Assert.AreEqual(tos.Length, 2);
             Assert.AreEqual(tos[0], jac.GetProcess("PROC3"));
             Assert.AreEqual(tos[1], jac.GetProcess("PROCID4"));
@@ -913,7 +913,7 @@ namespace UnitTestJit
                         remove p1->'PROC3'      // try to confirm super lazy link by Name
             ";
             jac.Exec(code);
-            tos = st.Model.GetProcessLinks(p1).Select(key => st.Model.FindProcess(key)).ToArray();
+            tos = st.Model.GetProcessLinks(p1).Select(key => st.Model.ChildProcesses.FindProcess(key)).ToArray();
             Assert.AreEqual(tos.Length, 1);
             Assert.AreEqual(tos[0], jac.GetProcess("PROCID4"));
 
@@ -923,7 +923,7 @@ namespace UnitTestJit
                         remove p1 ->'PROCID4'    // try to confirm lazy link by ID
             ";
             jac.Exec(code);
-            tos = st.Model.GetProcessLinks(p1).Select(key => st.Model.FindProcess(key)).ToArray();
+            tos = st.Model.GetProcessLinks(p1).Select(key => st.Model.ChildProcesses.FindProcess(key)).ToArray();
             Assert.AreEqual(tos.Length, 0);
 
             //--------------------------------------------------------------------------------------------
@@ -936,7 +936,7 @@ namespace UnitTestJit
             jac.Exec(code);
 
             var PROC3 = jac.GetProcess("PROC3");
-            tos = st.Model.GetProcessLinks(PROC3).Select(key => st.Model.FindProcess(key)).ToArray();
+            tos = st.Model.GetProcessLinks(PROC3).Select(key => st.Model.ChildProcesses.FindProcess(key)).ToArray();
             Assert.AreEqual(tos.Length, 1);
             Assert.AreEqual(tos[0], jac.GetProcess("p2"));
 
@@ -947,7 +947,7 @@ namespace UnitTestJit
             ";
             jac.Exec(code);
 
-            tos = st.Model.GetProcessLinks(PROC3).Select(key => st.Model.FindProcess(key)).ToArray();
+            tos = st.Model.GetProcessLinks(PROC3).Select(key => st.Model.ChildProcesses.FindProcess(key)).ToArray();
             Assert.AreEqual(tos.Length, 0);
 
             //--------------------------------------------------------------------------------------------
@@ -959,7 +959,7 @@ namespace UnitTestJit
             ";
             jac.Exec(code);
             var PROCID4 = jac.GetProcess("PROCID4");
-            tos = st.Model.GetProcessLinks(PROCID4).Select(key => st.Model.FindProcess(key)).ToArray();
+            tos = st.Model.GetProcessLinks(PROCID4).Select(key => st.Model.ChildProcesses.FindProcess(key)).ToArray();
             Assert.AreEqual(tos.Length, 1);
             Assert.AreEqual(tos[0], jac.GetProcess("p2"));
 
@@ -969,7 +969,7 @@ namespace UnitTestJit
                         remove 'PROCID4' ->p2
             ";
             jac.Exec(code);
-            tos = st.Model.GetProcessLinks(PROCID4).Select(key => st.Model.FindProcess(key)).ToArray();
+            tos = st.Model.GetProcessLinks(PROCID4).Select(key => st.Model.ChildProcesses.FindProcess(key)).ToArray();
             Assert.AreEqual(tos.Length, 0);
         }
     }
