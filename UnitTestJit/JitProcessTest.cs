@@ -159,21 +159,21 @@ namespace UnitTestJit
             {
                 Subset = st.Model,                
                 Name = $"w1",
-                NextProcess = (st.Model, A),
+                Next = (st.Model, A),
             });
             Assert.IsTrue(w1.Is(":Work"));
             st.Model.Engine().Events.Enqueue(TimeUtil.Set(today, hour: 9, minute: 0), EventTypes.Out, y1 = new JitWork
             {
                 Subset = st.Model,
                 Name = $"y1",
-                NextProcess = (st.Model, Y),
+                Next = (st.Model, Y),
                 Classes = JitVariable.ClassList.From(":iOS:Sumaho"),    // :Workに、クラス「追加」
             });
             st.Model.Engine().Events.Enqueue(TimeUtil.Set(today, hour: 9, minute: 2), EventTypes.Out, z1 = new JitWork
             {
                 Subset = st.Model,
                 Name = $"z1",
-                NextProcess = (st.Model, Z),
+                Next = (st.Model, Z),
                 Classes = JitVariable.ClassList.From(":Android:Sumaho"),    // :Workに、クラス「追加」
             });
             var k = 0;
@@ -373,19 +373,19 @@ namespace UnitTestJit
             {
                 Subset = st.Model,
                 Name = $"w1",
-                NextProcess = (st.Model, A),
+                Next = (st.Model, A),
             });
             st.Model.Engine().Events.Enqueue(TimeUtil.Set(today, hour: 9, minute: 0), EventTypes.Out, y1 = new JitWork
             {
                 Subset = st.Model,
                 Name = $"y1",
-                NextProcess = (st.Model, Y),
+                Next = (st.Model, Y),
             });
             st.Model.Engine().Events.Enqueue(TimeUtil.Set(today, hour: 9, minute: 2), EventTypes.Out, z1 = new JitWork
             {
                 Subset = st.Model,
                 Name = $"z1",
-                NextProcess = (st.Model, Z),
+                Next = (st.Model, Z),
             });
             var k = 0;
 
@@ -537,7 +537,7 @@ namespace UnitTestJit
                 {
                     Subset = st.Model,
                     Name = $"w{(i + 1):0}",
-                    NextProcess = (st.Model, X),
+                    Next = (st.Model, X),
                 });
             }
 
@@ -677,7 +677,7 @@ namespace UnitTestJit
                 {
                     Subset = st.Model,
                     Name = $"w{(i + 1):0}",
-                    NextProcess = (st.Model, X),
+                    Next = (st.Model, X),
                 });
             }
 
@@ -910,7 +910,7 @@ namespace UnitTestJit
                 {
                     Subset = st.Model,
                     Name = $"w{(i + 1):0}",
-                    NextProcess = (st.Model, X),
+                    Next = (st.Model, X),
                 });
             }
 
@@ -1396,7 +1396,7 @@ namespace UnitTestJit
                 {
                     Subset = st.Model,
                     Name = $"w{(i + 1):0}",
-                    NextProcess = (st.Model, X),
+                    Next = (st.Model, X),
                 });
             }
 
@@ -1697,7 +1697,7 @@ namespace UnitTestJit
                 {
                     Subset = st.Model,
                     Name = $"x{(i + 1):0}",
-                    NextProcess = (st.Model, X),
+                    Next = (st.Model, X),
                 });
             }
             for (var i = 0; i < 1; i++)
@@ -1706,7 +1706,7 @@ namespace UnitTestJit
                 {
                     Subset = st.Model,
                     Name = $"y{(i + 1):0}",
-                    NextProcess = (st.Model, Y),
+                    Next = (st.Model, Y),
                 });
             }
 
@@ -2147,7 +2147,7 @@ namespace UnitTestJit
                 {
                     Subset = st.Model,
                     Name = $"x{(i + 1):0}",
-                    NextProcess = (JP, X),
+                    Next = (JP, X),
                 });
             }
             for (var i = 0; i < 2; i++)
@@ -2156,7 +2156,7 @@ namespace UnitTestJit
                 {
                     Subset = st.Model,
                     Name = $"y{(i + 1):0}",
-                    NextProcess = (JP, Y),
+                    Next = (JP, Y),
                 });
             }
 
@@ -2552,7 +2552,7 @@ namespace UnitTestJit
                 {
                     Subset = st.Model,
                     Name = $"y{(i + 1):0}",
-                    NextProcess = (st.Model, Y),
+                    Next = (st.Model, Y),
                 });
             }
 
@@ -2733,19 +2733,19 @@ namespace UnitTestJit
             {
                 Subset = st.Model,
                 Name = "a",
-                NextProcess = (st.Model, X),
+                Next = (st.Model, X),
             });
             st.Model.Engine().Events.Enqueue(TimeUtil.Set(today, hour: 9, minute: 0), EventTypes.Out, b = new JitWork
             {
                 Subset = st.Model,
                 Name = "b",
-                NextProcess = (st.Model, X),
+                Next = (st.Model, X),
             });
             st.Model.Engine().Events.Enqueue(TimeUtil.Set(today, hour: 9, minute: 0), EventTypes.Out, c = new JitWork
             {
                 Subset = st.Model,
                 Name = "c",
-                NextProcess = (st.Model, X),
+                Next = (st.Model, X),
             });
 
             st.Model.Engine().DoNext();
@@ -2911,19 +2911,19 @@ namespace UnitTestJit
             {
                 Subset = st.Model,
                 Name = "a",
-                NextProcess = (st.Model, X),
+                Next = (st.Model, X),
             });
             st.Model.Engine().Events.Enqueue(TimeUtil.Set(today, hour: 9, minute: 1), EventTypes.Out, b = new JitWork
             {
                 Subset = st.Model,
                 Name = "b",
-                NextProcess = (st.Model, X),
+                Next = (st.Model, X),
             });
             st.Model.Engine().Events.Enqueue(TimeUtil.Set(today, hour: 9, minute: 2), EventTypes.Out, c = new JitWork
             {
                 Subset = st.Model,
                 Name = "c",
-                NextProcess = (st.Model, X),
+                Next = (st.Model, X),
             });
 
             //  1 a out->in
@@ -2937,7 +2937,7 @@ namespace UnitTestJit
             st.Model.Engine().DoNext();
             dat = st.Model.Engine().Events.Peeks(3).ToList();
             Assert.IsTrue(CMP(dat[0], "b", EventTypes.Out, "9:01"));
-            Assert.IsTrue(CMP(dat[1], "a", EventTypes.Out, "9:01")); Assert.IsTrue(dat[1].Work.CurrentProcess.Process.Name == "X");
+            Assert.IsTrue(CMP(dat[1], "a", EventTypes.Out, "9:01")); Assert.IsTrue(dat[1].Work.Current.Process.Name == "X");
             Assert.IsTrue(CMP(dat[2], "c", EventTypes.Out, "9:02"));
             Assert.IsTrue(st.Model.Engine().GetWorks(st.Model.ChildProcesses["X"]).Count() == 1);
 
@@ -2957,7 +2957,7 @@ namespace UnitTestJit
             dat = st.Model.Engine().Events.Peeks(3).ToList();
             Assert.IsTrue(CMP(dat[0], "c", EventTypes.Out, "9:02"));
             Assert.IsTrue(CMP(dat[1], "b", EventTypes.Out, "9:03"));
-            Assert.IsTrue(CMP(dat[2], "a", EventTypes.Out, "9:05")); Assert.IsTrue(dat[2].Work.CurrentProcess.Process.Name == "Y");
+            Assert.IsTrue(CMP(dat[2], "a", EventTypes.Out, "9:05")); Assert.IsTrue(dat[2].Work.Current.Process.Name == "Y");
             Assert.IsTrue(st.Model.Engine().GetWorks(st.Model.ChildProcesses["X"]).Count() == 0);
             Assert.IsTrue(st.Model.Engine().GetWorks(st.Model.ChildProcesses["Y"]).Count() == 1);
 
@@ -2981,7 +2981,7 @@ namespace UnitTestJit
 
             st.Model.Engine().DoNext();    //  9
             dat = st.Model.Engine().Events.Peeks(3).ToList();
-            Assert.IsTrue(CMP(dat[0], "b", EventTypes.Out, "9:04")); Assert.IsTrue(dat[0].Work.CurrentProcess.Process.Name == "X");
+            Assert.IsTrue(CMP(dat[0], "b", EventTypes.Out, "9:04")); Assert.IsTrue(dat[0].Work.Current.Process.Name == "X");
             Assert.IsTrue(CMP(dat[1], "a", EventTypes.Out, "9:05"));
             Assert.IsTrue(CMP(dat[2], "c", EventTypes.Out, "9:06"));
             Assert.IsTrue(st.Model.Engine().GetWorks(st.Model.ChildProcesses["X"]).Count() == 1);
@@ -3100,9 +3100,9 @@ namespace UnitTestJit
             {
                 if (ei.Work is JitWork work)
                 {
-                    if (work.CurrentProcess != default)
+                    if (work.Current != default)
                     {
-                        ret &= work.CurrentProcess.Process.Name == procName;
+                        ret &= work.Current.Process.Name == procName;
                     }
                 }
                 else

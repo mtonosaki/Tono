@@ -62,7 +62,7 @@ namespace Tono.Jit
         /// <returns></returns>
         public override TimeSpan GetWaitTime(IJitStageEngine engine, WorkEventQueue.Item ei, DateTime Now)
         {
-            var nextexit = engine.Events.Find(ei.Work.NextProcess, EventTypes.Out, ":Work");
+            var nextexit = engine.Events.Find(ei.Work.Next, EventTypes.Out, ":Work");
             if (nextexit != null)
             {
                 var ret = MathUtil.Min(TimeSpan.FromDays(999.9), nextexit.Value.Work.ExitTime - Now);

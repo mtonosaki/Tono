@@ -144,17 +144,17 @@ namespace Tono.Jit
 
             var model = work.Subset;
             work.Subset.Engine().EnterWorkToProcess(this, work, now);
-            work.PrevProcess = work.CurrentProcess;
-            work.CurrentProcess = work.NextProcess;
+            work.Previous = work.Current;
+            work.Current = work.Next;
 
             var nextproc = model.ChildProcesses.FindProcess(model.GetProcessLinks(this).FirstOrDefault(), isReturnNull: true);
             if (nextproc == null)
             {
-                work.NextProcess = default;
+                work.Next = default;
             }
             else
             {
-                work.NextProcess = (model, nextproc); // TODO: SubsetのConnector対応
+                work.Next = (model, nextproc); // TODO: SubsetのConnector対応
             }
             work.EnterTime = now;
             CheckAndAttachKanban(work.Subset.Engine(), now); // かんばんが有れば、NextProcessをかんばんで更新する
@@ -186,7 +186,7 @@ namespace Tono.Jit
         {
             var buf =
                 from wt in subset.Engine?.Invoke().GetWorks(this)
-                where wt.Work.NextProcess == default // work that have not next process
+                where wt.Work.Next == default // work that have not next process
                 where wt.Work.ExitTime <= now        // select work that exit time expired.
                 select new WorkEntery { Work = wt.Work, Enter = wt.EnterTime };
             var work = ExitWorkSelector.Invoke(buf);
@@ -194,9 +194,9 @@ namespace Tono.Jit
             {
                 Exit(work);
 
-                work.PrevProcess = (work.Subset, this);
-                work.CurrentProcess = default;
-                work.NextProcess = default;
+                work.Previous = (work.Subset, this);
+                work.Current = default;
+                work.Next = default;
             }
             return work;
         }
@@ -259,7 +259,7 @@ namespace Tono.Jit
         /// <param name="work"></param>
         public virtual void AddAndAdjustExitTiming(JitStage.WorkEventQueue events, JitWork work)
         {
-            if (work.NextProcess != default)
+            if (work.Next != default)
             {
                 events.Enqueue(work.ExitTime, EventTypes.Out, work);  // 退場予約
             }
@@ -303,7 +303,7 @@ namespace Tono.Jit
 
             var buf =
                 from w in engine.GetWorks(this)
-                where w.Work.NextProcess == default // 行先が無い
+                where w.Work.Next == default // 行先が無い
                 select new WorkEntery { Work = w.Work, Enter = w.EnterTime };
             var work = ExitWorkSelector.Invoke(buf);
 
@@ -313,7 +313,7 @@ namespace Tono.Jit
             }
 
             var sk = kanbanQueue.Dequeue();
-            work.NextProcess = (sk.Kanban.Stage.Model, sk.Kanban.Stage.Model.ChildProcesses.FindProcess(sk.Kanban.PullToProcessKey));
+            work.Next = (sk.Kanban.Stage.Model, sk.Kanban.Stage.Model.ChildProcesses.FindProcess(sk.Kanban.PullToProcessKey));
             work.Kanbans.Add(sk.Kanban);
             sk.Kanban.Work = work;
             if (work.ExitTime < now)

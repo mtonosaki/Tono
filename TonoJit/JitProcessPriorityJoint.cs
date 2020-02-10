@@ -50,7 +50,7 @@ namespace Tono.Jit
         /// <param name="work"></param>
         public override void AddAndAdjustExitTiming(JitStage.WorkEventQueue events, JitWork work)
         {
-            if (work.NextProcess != default)
+            if (work.Next != default)
             {
                 var sortList = events.FindAll((work.Subset, this), EventTypes.Out).ToList();
                 var tarDT = work.ExitTime;
@@ -94,7 +94,7 @@ namespace Tono.Jit
             public int Comparer(LinkedListNode<JitStage.WorkEventQueue.Item> a, LinkedListNode<JitStage.WorkEventQueue.Item> b)
             {
                 // 1st condition: priority of process 第１条件＝工程の優先順
-                int ret = GetProcPriority(JitWork.GetProcess(a.Value.Work.PrevProcess)) - GetProcPriority(JitWork.GetProcess(b.Value.Work.PrevProcess));
+                int ret = GetProcPriority(JitWork.GetProcess(a.Value.Work.Previous)) - GetProcPriority(JitWork.GetProcess(b.Value.Work.Previous));
                 if (ret == 0)
                 {
                     // 2nd condition: enter time 第2条件＝進入時刻準（FIFO）

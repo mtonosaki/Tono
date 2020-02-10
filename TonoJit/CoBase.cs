@@ -23,7 +23,7 @@ namespace Tono.Jit
 
         protected override (JitSubset Subset, JitProcess Process) GetCheckTargetProcess(JitWork work)
         {
-            return work.NextProcess;
+            return work.Next;
         }
 
         /// <summary>

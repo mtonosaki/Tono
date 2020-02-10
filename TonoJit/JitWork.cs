@@ -25,7 +25,7 @@ namespace Tono.Jit
         /// <summary>
         /// Previous process (null = no previous)
         /// </summary>
-        public (JitSubset Subset, JitProcess Process) PrevProcess { get; set; }
+        public (JitSubset Subset, JitProcess Process) Previous { get; set; }
 
         /// <summary>
         /// Current process
@@ -33,12 +33,12 @@ namespace Tono.Jit
         /// <remarks>
         /// If this work join to a parent work, CurrentProcess is set to null
         /// </remarks>
-        public (JitSubset Subset, JitProcess Process) CurrentProcess { get; set; }
+        public (JitSubset Subset, JitProcess Process) Current { get; set; }
 
         /// <summary>
         /// Next process (null = no next)
         /// </summary>
-        public (JitSubset Subset, JitProcess Process) NextProcess { get; set; }
+        public (JitSubset Subset, JitProcess Process) Next { get; set; }
 
         /// <summary>
         /// work status
@@ -118,7 +118,7 @@ namespace Tono.Jit
 
         public override string ToString()
         {
-            return $"{GetType().Name} {Name}@{GetProcess(CurrentProcess)?.Name ?? "n/a"} → {GetProcess(NextProcess)?.Name ?? "n/a"} ID={ID}";
+            return $"{GetType().Name} {Name}@{GetProcess(Current)?.Name ?? "n/a"} → {GetProcess(Next)?.Name ?? "n/a"} ID={ID}";
         }
     }
 

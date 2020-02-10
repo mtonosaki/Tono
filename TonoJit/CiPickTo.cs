@@ -51,8 +51,8 @@ namespace Tono.Jit
             foreach (string childWorkName in childworkNames.ToArray())
             {
                 var childWork = work.ChildWorks[childWorkName];
-                childWork.NextProcess = (work.Subset, work.Subset.ChildProcesses.FindProcess(DestProcessKey));
-                childWork.CurrentProcess = default; // 子Workであった事を default とする。
+                childWork.Next = (work.Subset, work.Subset.ChildProcesses.FindProcess(DestProcessKey));
+                childWork.Current = default; // 子Workであった事を default とする。
                                                     // childWork.PrevProcess = default; // workがAssyされた元工程を覚えておく
 
                 work.ChildWorks.Remove(childWorkName);  // Remove work from child works.  子ワークから外す

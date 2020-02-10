@@ -191,7 +191,7 @@ namespace Tono.Jit
                         continue;
                     }
                     var w = ei.Work;
-                    if (JitWork.Equals(w.CurrentProcess, proc) && ei.Type == etype && w.Is(workclass))
+                    if (JitWork.Equals(w.Current, proc) && ei.Type == etype && w.Is(workclass))
                     {
                         return node;
                     }
@@ -218,7 +218,7 @@ namespace Tono.Jit
                         continue;
                     }
                     var w = ei.Work;
-                    if (JitWork.Equals(w.CurrentProcess, proc) && ei.Type == etype && w.Is(workclass))
+                    if (JitWork.Equals(w.Current, proc) && ei.Type == etype && w.Is(workclass))
                     {
                         yield return node;
                     }

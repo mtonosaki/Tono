@@ -141,7 +141,7 @@ namespace UnitTestJit
                 {
                     Subset = st.Model,
                     Name = $"w1",
-                    NextProcess = (st.Model, A),
+                    Next = (st.Model, A),
                 });
                 Assert.IsTrue(tw[(st, "w1")].Is(":Work"));
 
@@ -149,7 +149,7 @@ namespace UnitTestJit
                 {
                     Subset = st.Model,
                     Name = $"y1",
-                    NextProcess = (st.Model, Y),
+                    Next = (st.Model, Y),
                     Classes = JitVariable.ClassList.From(":iOS:Sumaho"),    // :Workに、クラス「追加」
                 });
 
@@ -157,7 +157,7 @@ namespace UnitTestJit
                 {
                     Subset = st.Model,
                     Name = $"z1",
-                    NextProcess = (st.Model, Z),
+                    Next = (st.Model, Z),
                     Classes = JitVariable.ClassList.From(":Android:Sumaho"),    // :Workに、クラス「追加」
                 });
             }
@@ -336,7 +336,7 @@ namespace UnitTestJit
             {
                 Subset = st.Model,
                 Name = $"w1",
-                NextProcess = (st.Model, A),
+                Next = (st.Model, A),
             });
 #if false
 
@@ -381,7 +381,7 @@ namespace UnitTestJit
             {
                 if (ei.Work is JitWork work)
                 {
-                    ret &= (JitWork.GetProcess(work.CurrentProcess)?.Name ?? null) == procName;
+                    ret &= (JitWork.GetProcess(work.Current)?.Name ?? null) == procName;
                 }
                 else
                 {
