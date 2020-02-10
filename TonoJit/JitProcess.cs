@@ -313,7 +313,7 @@ namespace Tono.Jit
             }
 
             var sk = kanbanQueue.Dequeue();
-            work.Next = (sk.Kanban.Stage.Model, sk.Kanban.Stage.Model.ChildProcesses.FindProcess(sk.Kanban.PullToProcessKey));
+            work.Next = (sk.Kanban.Subset, sk.Kanban.Subset.ChildProcesses.FindProcess(sk.Kanban.PullToProcessKey));
             work.Kanbans.Add(sk.Kanban);
             sk.Kanban.Work = work;
             if (work.ExitTime < now)

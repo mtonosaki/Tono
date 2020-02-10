@@ -515,7 +515,7 @@ namespace UnitTestJit
             var testid = 0;
             st.Model.Engine().SendKanban(ka = new JitKanban
             {
-                Stage = st,
+                Subset = st.Model,
                 PullFromProcessKey = X.ID,  // You can set ID here
                 PullToProcessKey = Y.Name,  // You can also set Name here
                 TestID = ++testid,
@@ -524,7 +524,7 @@ namespace UnitTestJit
 
             st.Model.Engine().SendKanban(new JitKanban
             {
-                Stage = st,
+                Subset = st.Model,
                 PullFromProcessKey = "X",   // You can set Name here
                 PullToProcessKey = "Y",
                 TestID = ++testid,
@@ -664,7 +664,7 @@ namespace UnitTestJit
 
             st.Model.Engine().SendKanban(new JitKanban
             {
-                Stage = st,
+                Subset = st.Model,
                 PullFromProcessKey = "X",
                 PullToProcessKey = "Y",
                 TestID = 1,
@@ -971,7 +971,7 @@ namespace UnitTestJit
             var testid = 0;
             st.Model.Engine().SendKanban(TimeUtil.Set(today, hour: 9, minute: 30), new JitKanban   // かんばん送るも、工程Xにはワークが無いので、なにもしない
             {
-                Stage = st,
+                Subset = st.Model,
                 PullFromProcessKey = "X",
                 PullToProcessKey = Y.ID,
                 TestID = ++testid,
@@ -981,7 +981,7 @@ namespace UnitTestJit
 
             st.Model.Engine().SendKanban(TimeUtil.Set(today, hour: 9, minute: 30), new JitKanban   // かんばん送るも、工程Xにはワークが無いので、なにもしない
             {
-                Stage = st,
+                Subset = st.Model,
                 PullFromProcessKey = X.Name,
                 PullToProcessKey = "Y",
                 TestID = ++testid,
@@ -992,7 +992,7 @@ namespace UnitTestJit
 
             st.Model.Engine().SendKanban(TimeUtil.Set(today, hour: 9, minute: 32), new JitKanban   // かんばん送るも、工程Xにはワークが無いので、なにもしない
             {
-                Stage = st,
+                Subset = st.Model,
                 PullFromProcessKey = "X",
                 PullToProcessKey = "Y",
                 TestID = ++testid,
@@ -1126,7 +1126,7 @@ namespace UnitTestJit
             {
                 st.Model.Engine().SendKanban(TimeUtil.Set(today, hour: 12, minute: 00), new JitKanban   // かんばん送るも、工程Xにはワークが無いので、なにもしない
                 {
-                    Stage = st,
+                    Subset = st.Model,
                     PullFromProcessKey = "SINK",
                     PullToProcessKey = "Y",
                     TestID = ++testid,
@@ -1383,7 +1383,7 @@ namespace UnitTestJit
             int testid = 0;
             st.Model.Engine().SendKanban(TimeUtil.Set(today, hour: 8, minute: 0), new JitKanban   // かんばん送るも、工程Xにはワークが無いので、なにもしない
             {
-                Stage = st,
+                Subset = st.Model,
                 TestID = ++testid,
                 PullFromProcessKey = "X",
                 PullToProcessKey = "Y",
@@ -1468,7 +1468,7 @@ namespace UnitTestJit
             // Kanban2を Xに投入依頼
             st.Model.Engine().SendKanban(TimeUtil.Set(today, hour: 9, minute: 4), new JitKanban
             {
-                Stage = st,
+                Subset = st.Model,
                 TestID = ++testid,
                 PullFromProcessKey = "X",
                 PullToProcessKey = "Y",
@@ -1494,7 +1494,7 @@ namespace UnitTestJit
             // Kanban3を Xに投入依頼。w3のInに先立ち、入れとくテスト
             st.Model.Engine().SendKanban(new JitKanban
             {
-                Stage = st,
+                Subset = st.Model,
                 TestID = ++testid,
                 PullFromProcessKey = "X",
                 PullToProcessKey = "Y",
