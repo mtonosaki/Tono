@@ -43,9 +43,10 @@ namespace Tono.Jit
         /// <returns>true=waiting</returns>
         public override bool Check(JitWork work, DateTime now)
         {
-            var wirs = work.Subset.Engine?.Invoke().GetWorksInReserve(this);
+            var engine = work.Engine;
+            var wirs = engine.GetWorksInReserve(work.Current.Subset, this);
             var costs =
-                from w in work.Subset.Engine().GetWorks(JitWork.GetProcess(GetCheckTargetProcess(work))).Select(wt => wt.Work).Concat(wirs)
+                from w in engine.GetWorks(work.Current.Subset, JitWork.GetProcess(GetCheckTargetProcess(work))).Select(wt => wt.Work).Concat(wirs)
                 let cost = w.ChildVriables.GetValueOrNull("Cost")
                 where cost != null
                 let varval = cost[ReferenceVarName]
@@ -60,7 +61,7 @@ namespace Tono.Jit
         /// 制約中のワークに対し、待ち時間を計算する
         /// </summary>
         /// <returns></returns>
-        public override TimeSpan GetWaitTime(IJitStageEngine engine, WorkEventQueue.Item ei, DateTime Now)
+        public override TimeSpan GetWaitTime(IJitEngine engine, WorkEventQueue.Item ei, DateTime Now)
         {
             var nextexit = engine.Events.Find(ei.Work.Next, EventTypes.Out, ":Work");
             if (nextexit != null)

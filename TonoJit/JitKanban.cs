@@ -13,7 +13,7 @@ namespace Tono.Jit
     /// 1-Kanban can call 1-Work
     /// </remarks>
     [JacTarget(Name = "Kanban")]
-    public class JitKanban : JitVariable, IJitObjectID
+    public class JitKanban : JitVariable, IJitObjectID, IJieEngineReference
     {
         /// <summary>
         /// Kanvan instance ID (auto numbering)
@@ -21,6 +21,8 @@ namespace Tono.Jit
         public string ID { get; set; } = JacInterpreter.MakeID("Kanban");
 
         public int TestID { get => (int)(ChildVriables["TestID"].Value ?? int.MinValue); set => ChildVriables["TestID"] = JitVariable.From(value); }
+
+        public IJitEngine Engine { get; set; }
 
         public JitSubset Subset { get; set; }
 

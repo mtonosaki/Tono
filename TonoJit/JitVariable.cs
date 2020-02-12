@@ -20,12 +20,12 @@ namespace Tono.Jit
         /// <summary>
         /// instance name
         /// </summary>
-        public string Name { get; set; }
+        public virtual string Name { get; set; }
 
         /// <summary>
         /// parent object
         /// </summary>
-        public JitVariable Parent { get; set; }
+        public virtual JitVariable Parent { get; set; }
 
         private readonly ClassList classes = new ClassList();
 

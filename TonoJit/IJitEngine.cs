@@ -7,10 +7,15 @@ using static Tono.Jit.JitStage;
 
 namespace Tono.Jit
 {
+    public interface IJieEngineReference
+    {
+        IJitEngine Engine { get; set; }
+    }
+
     /// <summary>
     /// Interface of Jit Stage Engine
     /// </summary>
-    public interface IJitStageEngine
+    public interface IJitEngine
     {
         /// <summary>
         /// work event management queue
@@ -45,28 +50,28 @@ namespace Tono.Jit
         /// <param name="kanban"></param>
         void SendKanban(DateTime time, JitKanban kanban);
 
-        void AddWorkInReserve(CioBase cio, JitWork work);
+        void AddWorkInReserve(JitSubset subset, CioBase cio, JitWork work);
 
         /// <summary>
         /// Remove Work instance
         /// </summary>
         /// <param name="cio"></param>
         /// <param name="work"></param>
-        void RemoveWorkInReserve(CioBase cio, JitWork work);
+        void RemoveWorkInReserve(JitSubset subset, CioBase cio, JitWork work);
 
         /// <summary>
         /// Query works in reserve
         /// </summary>
         /// <param name="cio"></param>
         /// <returns></returns>
-        IEnumerable<JitWork> GetWorksInReserve(CioBase cio);
+        IEnumerable<JitWork> GetWorksInReserve(JitSubset subset, CioBase cio);
 
         /// <summary>
         /// Save Last Work enter time.
         /// </summary>
         /// <param name="cio"></param>
         /// <param name="now"></param>
-        void SetLastInTime(CioBase cio, DateTime now);
+        void SetLastInTime(JitSubset subset, CioBase cio, DateTime now);
 
         /// <summary>
         /// last work enter time 最後にINした時刻
@@ -77,27 +82,30 @@ namespace Tono.Jit
         /// This value will be set when out timing at previous process
         /// この値でSpanを評価。実際にProcessにINしたタイミングではなく、前ProcessでOutされた時にセットされる
         /// </remarks>
-        DateTime GetLastInTime(CioBase cio);
+        DateTime GetLastInTime(JitSubset subset, CioBase cio);
 
         /// <summary>
-        /// Save Work enter time.
+        /// Enter work to process
         /// </summary>
-        /// <param name="cio"></param>
+        /// <param name="subset"></param>
+        /// <param name="process"></param>
+        /// <param name="work"></param>
         /// <param name="now"></param>
-        void EnterWorkToProcess(JitProcess process, JitWork work, DateTime now);
+        void EnterWorkToProcess(JitSubset subset, JitProcess process, JitWork work, DateTime now);
 
         /// <summary>
-        /// Leave Work enter time.
+        /// Leave work from process
         /// </summary>
-        /// <param name="cio"></param>
-        /// <param name="now"></param>
-        void ExitWorkFromProcess(JitProcess process, JitWork work);
+        /// <param name="subset"></param>
+        /// <param name="process"></param>
+        /// <param name="work"></param>
+        void ExitWorkFromProcess(JitSubset subset, JitProcess process, JitWork work);
 
         /// <summary>
         /// Query Works in process
         /// </summary>
         /// <param name="process"></param>
         /// <returns></returns>
-        IEnumerable<(JitWork Work, DateTime EnterTime)> GetWorks(JitProcess process);
+        IEnumerable<(JitWork Work, DateTime EnterTime)> GetWorks(JitSubset subset,　JitProcess process);
     }
 }

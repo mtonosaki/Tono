@@ -12,9 +12,14 @@ namespace Tono.Jit
     /// 工程やワーク全体を動かす 根幹のオブジェクト
     /// </summary>
     [JacTarget(Name = "Stage")]
-    public partial class JitStage : JitVariable, IJitObjectID
+    public partial class JitStage : JitVariable, IJitObjectID, IJieEngineReference
     {
         public string ID { get; set; } = JacInterpreter.MakeID("Stage");
+
+        /// <summary>
+        /// Simulator Engine
+        /// </summary>
+        public IJitEngine Engine { get; set; }
 
         /// <summary>
         /// Jit Sub Model
@@ -27,11 +32,13 @@ namespace Tono.Jit
         public JitStage() : base()
         {
             Classes.Add(":Stage");
-            Subset = new JitSubset();
+            Subset = new JitSubset
+            {
+                Name = $"TheSubsetOf{ID}",
+            };
 
             // Prepare Master Engine
-            var engine = new JitStageEngine();
-            Subset.Engine = (() => engine);
+            Engine = new JitEngine();
         }
 
         /// <summary>
@@ -69,7 +76,7 @@ namespace Tono.Jit
         {
             if (obj is JitProcess proc)
             {
-                Subset.ChildProcesses.Add(proc);
+                Subset.AddChildProcess(proc);
             }
             else
             {

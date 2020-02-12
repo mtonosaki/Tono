@@ -555,15 +555,15 @@ namespace UnitTestJit
 
             var code2 = @"
                 w1 = new Work
-                    Subset = st.Subset
+                    Current = st.Subset:null
                 w2 = new Work
-                    Subset = st.Subset
+                    Current = st.Subset:null
                 w3 = new Work
-                    Subset = st.Subset
+                    Current = st.Subset:null
             ";
             jac.Exec(code2);
             var w2 = jac.GetWork("w2");
-            Assert.AreEqual(st.Subset, w2.Subset);
+            Assert.AreEqual(st.Subset, w2.Current.Subset);
 
             var code3 = @"
                 o1

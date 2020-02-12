@@ -57,7 +57,7 @@ namespace Tono.Jit
             {
                 work.Kanbans.Remove(kanban);
                 kanban.Work = null;
-                work.Subset.Engine?.Invoke().SendKanban(now + Delay, kanban);
+                work.Engine.SendKanban(now + Delay, kanban);
             }
         }
     }

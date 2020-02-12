@@ -12,8 +12,10 @@ namespace Tono.Jit
     /// <summary>
     /// Runtime Simulator Engine Data
     /// </summary>
-    public class JitStageEngine : IJitStageEngine
+    public class JitEngine : IJitEngine
     {
+        public string ID { get; set; } = JacInterpreter.MakeID("Engine");
+
         /// <summary>
         /// work event management queue
         /// </summary>
@@ -27,21 +29,41 @@ namespace Tono.Jit
         /// <summary>
         /// The constructor
         /// </summary>
-        public JitStageEngine()
+        public JitEngine()
         {
-            Events = new WorkEventQueue();
+            Events = new WorkEventQueue
+            {
+                Engine = this,
+            };
         }
-        
+
+        public override bool Equals(object obj)
+        {
+            if (obj is JitEngine eg)
+            {
+                return eg.ID == ID;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        public override int GetHashCode()
+        {
+            return ID.GetHashCode();
+        }
+        public override string ToString()
+        {
+            return $"{GetType().Name} ID={ID}";
+        }
+
         /// <summary>
         /// do next action (from event queue)
         /// </summary>
         public void DoNext()
         {
             var ei = Events.Dequeue();
-            if (ei == null)
-            {
-                return;
-            }
+            if (ei == null) return;
 
             Now = ei.DT;
 
@@ -65,7 +87,8 @@ namespace Tono.Jit
         /// <param name="ei"></param>
         private void ProcKanban(WorkEventQueue.Item ei)
         {
-            var usedKanban = ei.Kanban.Subset.ChildProcesses.FindProcess(ei.Kanban.PullFromProcessKey).AddKanban(this, ei.Kanban, Now); // 工程にかんばんを投入して、処理を促す
+            var tarProc = ei.Kanban.Subset.ChildProcesses.FindProcess(ei.Kanban.PullFromProcessKey);
+            var usedKanban = tarProc.AddKanban(this, ei.Kanban.Subset, ei.Kanban, Now); // 工程にかんばんを投入して、処理を促す
             if (usedKanban != null)
             {
                 usedKanban.Work.Current.Process.AddAndAdjustExitTiming(Events, usedKanban.Work); // Eventキューに Outイベントを登録
@@ -83,7 +106,7 @@ namespace Tono.Jit
         private void ProcOut(WorkEventQueue.Item ei)
         {
             ei.Work.Status = JitWorkStatus.Stopping;   // change status "STOP"
-            if (ei.Work.Next == default)
+            if (ei.Work.Next == default || ei.Work.Next.Process == null)
             {
                 return;
             }
@@ -141,11 +164,12 @@ namespace Tono.Jit
             Events.Enqueue(time, EventTypes.KanbanIn, kanban);
         }
 
-        private Dictionary<CioBase, Dictionary<JitWork, bool/*dummy*/>> _cioWorkCache = new Dictionary<CioBase, Dictionary<JitWork, bool>>();
+        private Dictionary<JitSubset, Dictionary<CioBase, Dictionary<JitWork, bool/*dummy*/>>> _cioWorkCache = new Dictionary<JitSubset, Dictionary<CioBase, Dictionary<JitWork, bool>>>();
 
-        public void AddWorkInReserve(CioBase cio, JitWork work)
+        public void AddWorkInReserve(JitSubset subset, CioBase cio, JitWork work)
         {
-            var works = _cioWorkCache.GetValueOrDefault(cio, true, a => new Dictionary<JitWork, bool>());
+            var dic = _cioWorkCache.GetValueOrDefault(subset, true, a => new Dictionary<CioBase, Dictionary<JitWork, bool/*dummy*/>>());
+            var works = dic.GetValueOrDefault(cio, true, a => new Dictionary<JitWork, bool>());
             works[work] = true;
         }
 
@@ -154,9 +178,10 @@ namespace Tono.Jit
         /// </summary>
         /// <param name="cio"></param>
         /// <param name="work"></param>
-        public void RemoveWorkInReserve(CioBase cio, JitWork work)
+        public void RemoveWorkInReserve(JitSubset subset, CioBase cio, JitWork work)
         {
-            var works = _cioWorkCache.GetValueOrDefault(cio, true, a => new Dictionary<JitWork, bool>());
+            var dic = _cioWorkCache.GetValueOrDefault(subset, true, a => new Dictionary<CioBase, Dictionary<JitWork, bool/*dummy*/>>());
+            var works = dic.GetValueOrDefault(cio, true, a => new Dictionary<JitWork, bool>());
             works.Remove(work);
         }
 
@@ -165,22 +190,25 @@ namespace Tono.Jit
         /// </summary>
         /// <param name="cio"></param>
         /// <returns></returns>
-        public IEnumerable<JitWork> GetWorksInReserve(CioBase cio)
+        public IEnumerable<JitWork> GetWorksInReserve(JitSubset subset, CioBase cio)
         {
-            var works = _cioWorkCache.GetValueOrDefault(cio, true, a => new Dictionary<JitWork, bool>());
+            var dic = _cioWorkCache.GetValueOrDefault(subset, true, a => new Dictionary<CioBase, Dictionary<JitWork, bool/*dummy*/>>());
+            var works = dic.GetValueOrDefault(cio, true, a => new Dictionary<JitWork, bool>());
             return works.Keys;
         }
 
-        private Dictionary<CioBase, DateTime> _lastInTimesCio = new Dictionary<CioBase, DateTime>();
+        private Dictionary<JitSubset, Dictionary<CioBase, DateTime>> _lastInTimesCio = new Dictionary<JitSubset, Dictionary<CioBase, DateTime>>();
+
 
         /// <summary>
         /// Save Last Work enter time.
         /// </summary>
         /// <param name="cio"></param>
         /// <param name="now"></param>
-        public void SetLastInTime(CioBase cio, DateTime now)
+        public void SetLastInTime(JitSubset subset, CioBase cio, DateTime now)
         {
-            _lastInTimesCio[cio] = now;
+            var dic = _lastInTimesCio.GetValueOrDefault(subset, true, a => new Dictionary<CioBase, DateTime>());
+            dic[cio] = now;
         }
 
         /// <summary>
@@ -192,21 +220,23 @@ namespace Tono.Jit
         /// This value will be set when out timing at previous process
         /// この値でSpanを評価。実際にProcessにINしたタイミングではなく、前ProcessでOutされた時にセットされる
         /// </remarks>
-        public DateTime GetLastInTime(CioBase cio)
+        public DateTime GetLastInTime(JitSubset subset, CioBase cio)
         {
-            return _lastInTimesCio.GetValueOrDefault(cio);
+            var dic = _lastInTimesCio.GetValueOrDefault(subset, true, a => new Dictionary<CioBase, DateTime>());
+            return dic.GetValueOrDefault(cio);
         }
 
-        private Dictionary<JitProcess, Dictionary<JitWork, DateTime/*Enter-Time*/>> _worksInProcess = new Dictionary<JitProcess, Dictionary<JitWork, DateTime>>();
+        private Dictionary<JitSubset, Dictionary<JitProcess, Dictionary<JitWork, DateTime/*Enter-Time*/>>> _worksInProcess = new Dictionary<JitSubset, Dictionary<JitProcess, Dictionary<JitWork, DateTime>>>();
 
         /// <summary>
         /// Save Work enter time.
         /// </summary>
         /// <param name="cio"></param>
         /// <param name="now"></param>
-        public void EnterWorkToProcess(JitProcess process, JitWork work, DateTime now)
+        public void EnterWorkToProcess(JitSubset subset, JitProcess process, JitWork work, DateTime now)
         {
-            var works = _worksInProcess.GetValueOrDefault(process, true, a => new Dictionary<JitWork, DateTime/*Enter-Time*/>());
+            var procworks = _worksInProcess.GetValueOrDefault(subset, true, a => new Dictionary<JitProcess, Dictionary<JitWork, DateTime/*Enter-Time*/>>());
+            var works = procworks.GetValueOrDefault(process, true, a => new Dictionary<JitWork, DateTime/*Enter-Time*/>());
             works[work] = now;
         }
 
@@ -215,9 +245,10 @@ namespace Tono.Jit
         /// </summary>
         /// <param name="cio"></param>
         /// <param name="now"></param>
-        public void ExitWorkFromProcess(JitProcess process, JitWork work)
+        public void ExitWorkFromProcess(JitSubset subset, JitProcess process, JitWork work)
         {
-            var works = _worksInProcess.GetValueOrDefault(process, true, a => new Dictionary<JitWork, DateTime/*Enter-Time*/>());
+            var procworks = _worksInProcess.GetValueOrDefault(subset, true, a => new Dictionary<JitProcess, Dictionary<JitWork, DateTime/*Enter-Time*/>>());
+            var works = procworks.GetValueOrDefault(process, true, a => new Dictionary<JitWork, DateTime/*Enter-Time*/>());
             works.Remove(work);
         }
 
@@ -226,9 +257,10 @@ namespace Tono.Jit
         /// </summary>
         /// <param name="process"></param>
         /// <returns></returns>
-        public IEnumerable<(JitWork Work, DateTime EnterTime)> GetWorks(JitProcess process)
+        public IEnumerable<(JitWork Work, DateTime EnterTime)> GetWorks(JitSubset subset, JitProcess process)
         {
-            var works = _worksInProcess.GetValueOrDefault(process, true, a => new Dictionary<JitWork, DateTime/*Enter-Time*/>());
+            var procworks = _worksInProcess.GetValueOrDefault(subset, true, a => new Dictionary<JitProcess, Dictionary<JitWork, DateTime/*Enter-Time*/>>());
+            var works = procworks.GetValueOrDefault(process, true, a => new Dictionary<JitWork, DateTime/*Enter-Time*/>());
             return works.Select(kv => (kv.Key, kv.Value));
         }
     }

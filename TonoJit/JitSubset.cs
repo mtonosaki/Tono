@@ -17,14 +17,18 @@ namespace Tono.Jit
         public override string ID { get; set; } = JacInterpreter.MakeID("Subset");
 
         /// <summary>
-        /// Simulator Engine
-        /// </summary>
-        public Func<IJitStageEngine> Engine { get; set; }
-
-        /// <summary>
         /// having processes
         /// </summary>
         public ProcessSet ChildProcesses { get; private set; }
+
+        public class ProcessAddedEventArgs : EventArgs
+        {
+            public JitSubset Target { get; set; }
+            public JitProcess Process { get; set; }
+        }
+
+        public event EventHandler<ProcessAddedEventArgs> ProcessAdded;
+
 
         /// <summary>
         /// Process key(ID/Name) of Connector In
@@ -47,8 +51,71 @@ namespace Tono.Jit
         public JitSubset()
         {
             Classes.Add(":Subset");
-            ChildProcesses = new ProcessSet();
+            ChildProcesses = new ProcessSet
+            {
+                DebugName = () => $"ProcessSet of {(ToString())}",
+            };
         }
+
+        public override string ToString()
+        {
+            return $"{GetType().Name} {(Name ?? "")} (ID={ID})";
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj is JitSubset ss)
+            {
+                return ss.ID.Equals(ID);
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public override int GetHashCode()
+        {
+            return ID.GetHashCode();
+        }
+
+        public void AddChildProcess(JitProcess proc)
+        {
+            ChildProcesses.Add(proc);
+            ProcessAdded?.Invoke(this, new ProcessAddedEventArgs
+            {
+                Target = this,
+                Process = proc,
+            });
+        }
+
+        public void AddChildProcess(ProcessKey prockey)
+        {
+            var proc = ChildProcesses.Add(prockey);
+            ProcessAdded?.Invoke(this, new ProcessAddedEventArgs
+            {
+                Target = this,
+                Process = proc,
+            });
+        }
+        public void AddChildProcess(IEnumerable<JitProcess> procs)
+        {
+            foreach (var proc in procs)
+            {
+                AddChildProcess(proc);
+            }
+        }
+
+
+        public void RemoveChildProcess(JitProcess proc)
+        {
+            ChildProcesses.Remove(proc);
+        }
+        public void RemoveChildProcess(ProcessKey prockey)
+        {
+            ChildProcesses.Remove(prockey);
+        }
+
 
         private JitProcess findNextProcess(JitProcess fromProc)
         {
