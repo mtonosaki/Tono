@@ -146,8 +146,8 @@ namespace Tono.Jit
             work.Subset.Engine().EnterWorkToProcess(this, work, now);
             work.Previous = work.Current;
             work.Current = work.Next;
-
-            var nextproc = model.ChildProcesses.FindProcess(model.GetProcessLinks(this).FirstOrDefault(), isReturnNull: true);
+            var proclinks = model.GetProcessLinks(this);
+            var nextproc = model.ChildProcesses.FindProcess(proclinks.FirstOrDefault(), isReturnNull: true);
             if (nextproc == null)
             {
                 work.Next = default;

@@ -34,6 +34,8 @@ namespace Tono.Jit
         /// <param name="e"></param>
         private void ChildProcesses_Added(object sender, ProcessSet.AddedEventArgs e)
         {
+            AddProcessLink(ProcessSet.GetProcessKey(e.Process), ProcessSet.GetProcessKey(this));    // Make the work leave route from child to parent
+
             int no = 0;
             foreach (var pkey in ChildProcesses.GetProcessKeys())
             {
