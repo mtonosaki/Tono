@@ -150,7 +150,7 @@ namespace Tono.Jit
 
             var nextProcs = work.Current.Subset.GetProcessLinks(this);
             var nextProcKey = nextProcs.FirstOrDefault();
-            var nextProc = work.Current.Subset.ChildProcesses.FindProcess(nextProcKey, isReturnNull: true);
+            var nextProc = work.Current.Subset.FindProcess(nextProcKey, isReturnNull: true);
             if (nextProc == null)
             {
                 work.Next = (work.Current.Subset, null);
@@ -318,7 +318,7 @@ namespace Tono.Jit
             }
 
             var sk = queue.Dequeue();
-            work.Next = (sk.Kanban.Subset, sk.Kanban.Subset.ChildProcesses.FindProcess(sk.Kanban.PullToProcessKey));
+            work.Next = (sk.Kanban.Subset, sk.Kanban.Subset.FindProcess(sk.Kanban.PullToProcessKey));
             work.Kanbans.Add(sk.Kanban);
             sk.Kanban.Work = work;
             if (work.ExitTime < now)

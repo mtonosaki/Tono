@@ -87,7 +87,7 @@ namespace Tono.Jit
         /// <param name="ei"></param>
         private void ProcKanban(WorkEventQueue.Item ei)
         {
-            var tarProc = ei.Kanban.Subset.ChildProcesses.FindProcess(ei.Kanban.PullFromProcessKey);
+            var tarProc = ei.Kanban.Subset.FindProcess(ei.Kanban.PullFromProcessKey);
             var usedKanban = tarProc.AddKanban(this, ei.Kanban.Subset, ei.Kanban, Now); // 工程にかんばんを投入して、処理を促す
             if (usedKanban != null)
             {

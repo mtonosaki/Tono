@@ -2481,8 +2481,11 @@ namespace UnitTestJit
         /// |JP:Subset |
         /// | +-+  +-+ |  +-+
         /// | |X||||Y| |--|Z|
-        /// | +-+  +-+ |  +-+
-        /// +----------+
+        /// | +++  +++ |  +-+
+        /// |  |    |  |
+        /// +--+----+--+
+        ///    |    |
+        ///    Å@   y1Å`y3
         /// </remarks>
         [TestMethod]
         public void Test003_JointProcess_No1()
@@ -2941,7 +2944,7 @@ namespace UnitTestJit
             Assert.IsTrue(CMP(dat[0], "b", EventTypes.Out, "9:01"));
             Assert.IsTrue(CMP(dat[1], "a", EventTypes.Out, "9:01")); Assert.IsTrue(dat[1].Work.Current.Process.Name == "X");
             Assert.IsTrue(CMP(dat[2], "c", EventTypes.Out, "9:02"));
-            Assert.IsTrue(st.Engine.GetWorks(st.Subset, st.Subset.ChildProcesses["X"]).Count() == 1);
+            Assert.IsTrue(st.Engine.GetWorks(st.Subset, st.Subset.FindProcess("X")).Count() == 1);
 
             st.Engine.DoNext();    //  3
             dat = st.Engine.Events.Peeks(3).ToList();
@@ -2960,8 +2963,8 @@ namespace UnitTestJit
             Assert.IsTrue(CMP(dat[0], "c", EventTypes.Out, "9:02"));
             Assert.IsTrue(CMP(dat[1], "b", EventTypes.Out, "9:03"));
             Assert.IsTrue(CMP(dat[2], "a", EventTypes.Out, "9:05")); Assert.IsTrue(dat[2].Work.Current.Process.Name == "Y");
-            Assert.IsTrue(st.Engine.GetWorks(st.Subset, st.Subset.ChildProcesses["X"]).Count() == 0);
-            Assert.IsTrue(st.Engine.GetWorks(st.Subset, st.Subset.ChildProcesses["Y"]).Count() == 1);
+            Assert.IsTrue(st.Engine.GetWorks(st.Subset, st.Subset.FindProcess("X")).Count() == 0);
+            Assert.IsTrue(st.Engine.GetWorks(st.Subset, st.Subset.FindProcess("Y")).Count() == 1);
 
             st.Engine.DoNext();    //  6
             dat = st.Engine.Events.Peeks(3).ToList();
@@ -2986,7 +2989,7 @@ namespace UnitTestJit
             Assert.IsTrue(CMP(dat[0], "b", EventTypes.Out, "9:04")); Assert.IsTrue(dat[0].Work.Current.Process.Name == "X");
             Assert.IsTrue(CMP(dat[1], "a", EventTypes.Out, "9:05"));
             Assert.IsTrue(CMP(dat[2], "c", EventTypes.Out, "9:06"));
-            Assert.IsTrue(st.Engine.GetWorks(st.Subset, st.Subset.ChildProcesses["X"]).Count() == 1);
+            Assert.IsTrue(st.Engine.GetWorks(st.Subset, st.Subset.FindProcess("X")).Count() == 1);
 
 
             st.Engine.DoNext();    // 10
@@ -3012,8 +3015,8 @@ namespace UnitTestJit
             Assert.IsTrue(dat.Count == 2, "a moved to Z. a have sunk because Z have not next process");
             Assert.IsTrue(CMP(dat[0], "b", EventTypes.Out, "9:05"));
             Assert.IsTrue(CMP(dat[1], "c", EventTypes.Out, "9:06"));
-            Assert.IsTrue(st.Engine.GetWorks(st.Subset, st.Subset.ChildProcesses["Y"]).Count() == 0);
-            Assert.IsTrue(st.Engine.GetWorks(st.Subset, st.Subset.ChildProcesses["Z"]).Count() == 1);
+            Assert.IsTrue(st.Engine.GetWorks(st.Subset, st.Subset.FindProcess("Y")).Count() == 0);
+            Assert.IsTrue(st.Engine.GetWorks(st.Subset, st.Subset.FindProcess("Z")).Count() == 1);
 
             st.Engine.DoNext();    // 14
             dat = st.Engine.Events.Peeks(3).ToList();
@@ -3024,9 +3027,9 @@ namespace UnitTestJit
             dat = st.Engine.Events.Peeks(3).ToList();
             Assert.IsTrue(CMP(dat[0], "c", EventTypes.Out, "9:06"));
             Assert.IsTrue(CMP(dat[1], "b", EventTypes.Out, "9:09"));
-            Assert.IsTrue(st.Engine.GetWorks(st.Subset, st.Subset.ChildProcesses["X"]).Count() == 0);
-            Assert.IsTrue(st.Engine.GetWorks(st.Subset, st.Subset.ChildProcesses["Y"]).Count() == 1);
-            Assert.IsTrue(st.Engine.GetWorks(st.Subset, st.Subset.ChildProcesses["Z"]).Count() == 1);
+            Assert.IsTrue(st.Engine.GetWorks(st.Subset, st.Subset.FindProcess("X")).Count() == 0);
+            Assert.IsTrue(st.Engine.GetWorks(st.Subset, st.Subset.FindProcess("Y")).Count() == 1);
+            Assert.IsTrue(st.Engine.GetWorks(st.Subset, st.Subset.FindProcess("Z")).Count() == 1);
 
             st.Engine.DoNext();    // 16
             dat = st.Engine.Events.Peeks(3).ToList();
@@ -3042,9 +3045,9 @@ namespace UnitTestJit
             dat = st.Engine.Events.Peeks(3).ToList();
             Assert.IsTrue(CMP(dat[0], "b", EventTypes.Out, "9:09"));
             Assert.IsTrue(CMP(dat[1], "c", EventTypes.Out, "9:09"));
-            Assert.IsTrue(st.Engine.GetWorks(st.Subset, st.Subset.ChildProcesses["X"]).Count() == 1);
-            Assert.IsTrue(st.Engine.GetWorks(st.Subset, st.Subset.ChildProcesses["Y"]).Count() == 1);
-            Assert.IsTrue(st.Engine.GetWorks(st.Subset, st.Subset.ChildProcesses["Z"]).Count() == 1);
+            Assert.IsTrue(st.Engine.GetWorks(st.Subset, st.Subset.FindProcess("X")).Count() == 1);
+            Assert.IsTrue(st.Engine.GetWorks(st.Subset, st.Subset.FindProcess("Y")).Count() == 1);
+            Assert.IsTrue(st.Engine.GetWorks(st.Subset, st.Subset.FindProcess("Z")).Count() == 1);
 
             st.Engine.DoNext();    // 19
             dat = st.Engine.Events.Peeks(3).ToList();
@@ -3060,9 +3063,9 @@ namespace UnitTestJit
             dat = st.Engine.Events.Peeks(3).ToList();
             Assert.IsTrue(dat.Count == 1, "b moved to Z then b have sunk because Z have not next process");
             Assert.IsTrue(CMP(dat[0], "c", EventTypes.Out, "9:09"));
-            Assert.IsTrue(st.Engine.GetWorks(st.Subset, st.Subset.ChildProcesses["X"]).Count() == 1);
-            Assert.IsTrue(st.Engine.GetWorks(st.Subset, st.Subset.ChildProcesses["Y"]).Count() == 0);
-            Assert.IsTrue(st.Engine.GetWorks(st.Subset, st.Subset.ChildProcesses["Z"]).Count() == 2);
+            Assert.IsTrue(st.Engine.GetWorks(st.Subset, st.Subset.FindProcess("X")).Count() == 1);
+            Assert.IsTrue(st.Engine.GetWorks(st.Subset, st.Subset.FindProcess("Y")).Count() == 0);
+            Assert.IsTrue(st.Engine.GetWorks(st.Subset, st.Subset.FindProcess("Z")).Count() == 2);
 
             st.Engine.DoNext();    // 22
             dat = st.Engine.Events.Peeks(3).ToList();
@@ -3079,9 +3082,9 @@ namespace UnitTestJit
             st.Engine.DoNext();    // 25
             dat = st.Engine.Events.Peeks(3).ToList();
             Assert.IsTrue(dat.Count == 0, "c moved to Z them c have sunk because Z have not next process");
-            Assert.IsTrue(st.Engine.GetWorks(st.Subset, st.Subset.ChildProcesses["X"]).Count() == 0);
-            Assert.IsTrue(st.Engine.GetWorks(st.Subset, st.Subset.ChildProcesses["Y"]).Count() == 0);
-            Assert.IsTrue(st.Engine.GetWorks(st.Subset, st.Subset.ChildProcesses["Z"]).Count() == 3);
+            Assert.IsTrue(st.Engine.GetWorks(st.Subset, st.Subset.FindProcess("X")).Count() == 0);
+            Assert.IsTrue(st.Engine.GetWorks(st.Subset, st.Subset.FindProcess("Y")).Count() == 0);
+            Assert.IsTrue(st.Engine.GetWorks(st.Subset, st.Subset.FindProcess("Z")).Count() == 3);
         }
 
         private bool CMP(JitStage.WorkEventQueue.Item ei, string name, EventTypes et, string time, string procName = null)

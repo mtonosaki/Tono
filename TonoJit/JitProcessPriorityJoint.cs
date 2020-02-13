@@ -35,10 +35,10 @@ namespace Tono.Jit
         /// <param name="e"></param>
         private void JitProcessPriorityJoint_ProcessAdded(object sender, ProcessAddedEventArgs e)
         {
-            AddProcessLink(ProcessSet.GetProcessKey(e.Process), ProcessSet.GetProcessKey(this));    // Make the work leave route from child to parent
+            AddProcessLink(GetProcessKey(e.Process), GetProcessKey(this));    // Make the work leave route from child to parent
 
             int no = 0;
-            foreach (var pkey in ChildProcesses.GetProcessKeys())
+            foreach (var pkey in GetProcessKeys())
             {
                 procPriority[pkey] = ++no; // larger number is priority 数字が大きい方が、先にOUTされる
             }

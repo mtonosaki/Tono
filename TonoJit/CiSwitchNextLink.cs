@@ -41,7 +41,7 @@ namespace Tono.Jit
                     var tarProc = JitWork.GetProcess(GetCheckTargetProcess(work));
                     var nexts = work.Current.Subset.GetProcessLinks(tarProc);
                     var key = nexts[nextLinkNo];
-                    work.Next = (work.Current.Subset, work.Current.Subset.ChildProcesses.FindProcess(key));
+                    work.Next = (work.Current.Subset, work.Current.Subset.FindProcess(key));
                 }
             }
         }

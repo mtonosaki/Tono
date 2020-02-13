@@ -78,6 +78,10 @@ namespace Tono.Jit
             {
                 Subset.AddChildProcess(proc);
             }
+            else if (obj is string prockey)
+            {
+                Subset.AddChildProcess(prockey);
+            }
             else
             {
                 throw new JacException(JacException.Codes.TypeMismatch, $"Procs.Add type mismatch arg type={(obj?.GetType().Name ?? "null")}");
@@ -89,7 +93,11 @@ namespace Tono.Jit
         {
             if (obj is JitProcess proc)
             {
-                Subset.ChildProcesses.Remove(proc);
+                Subset.RemoveChildProcess(proc);
+            }
+            else if (obj is string prockey)
+            {
+                Subset.RemoveChildProcess(prockey);
             }
             else
             {
