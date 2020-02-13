@@ -2,6 +2,7 @@
 // Licensed under the MIT license.
 
 using System;
+using static Tono.Jit.Utils;
 
 namespace Tono.Jit
 {
@@ -38,10 +39,10 @@ namespace Tono.Jit
                 int nextLinkNo = DbUtil.ToInt(work.ChildVriables.GetValueOrNull(NextLinkVarName.Value.ToString())?.Value, def: -1);
                 if (nextLinkNo >= 0)
                 {
-                    var tarProc = JitWork.GetProcess(GetCheckTargetProcess(work));
+                    var tarProc = GetProcess(GetCheckTargetProcess(work));
                     var nexts = work.Current.Subset.GetProcessLinks(tarProc);
                     var key = nexts[nextLinkNo];
-                    work.Next = (work.Current.Subset, work.Current.Subset.FindProcess(key));
+                    work.Next = (work.Current.Subset, work.Current.Subset.FindChildProcess(key));
                 }
             }
         }

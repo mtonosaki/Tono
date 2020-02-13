@@ -4,7 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using static Tono.Jit.JitStage;
+using static Tono.Jit.Utils;
 using ProcessKey = System.String;
 
 namespace Tono.Jit
@@ -163,12 +163,12 @@ namespace Tono.Jit
             }
         }
 
-        public IEnumerable<JitProcess> GetProcesses()
+        public IEnumerable<JitProcess> GetChildProcesses()
         {
             return _procData;
         }
 
-        public JitProcess GetProcess(int index)
+        public JitProcess GetChildProcess(int index)
         {
             return _procData[index];
         }
@@ -178,7 +178,7 @@ namespace Tono.Jit
         /// </summary>
         /// <param name="procKey"></param>
         /// <returns></returns>
-        public JitProcess FindProcess(ProcessKey procKey, bool isReturnNull = false)
+        public JitProcess FindChildProcess(ProcessKey procKey, bool isReturnNull = false)
         {
             if (procKey == null)
             {
@@ -201,33 +201,10 @@ namespace Tono.Jit
         {
             var links = GetProcessLinks(fromProc);
             var key = links.FirstOrDefault();
-            var ret = FindProcess(key, true);
+            var ret = FindChildProcess(key, true);
             return ret;
         }
 
-        /// <summary>
-        /// Get Process Key
-        /// </summary>
-        /// <param name="proc"></param>
-        /// <returns></returns>
-        public static ProcessKey GetProcessKey(JitProcess proc)
-        {
-            if (proc is JitProcessDummy dummy)
-            {
-                return dummy.ProcessKey;
-            }
-            else
-            {
-                if (proc.Name == null)
-                {
-                    return proc.ID;
-                }
-                else
-                {
-                    return proc.Name;
-                }
-            }
-        }
 
         /// <summary>
         /// Get Process key list
@@ -267,7 +244,7 @@ namespace Tono.Jit
             if (links != null)
             {
                 links.Remove(procKeyTo);
-                var pt = FindProcess(procKeyTo);
+                var pt = FindChildProcess(procKeyTo);
                 if (pt != null)
                 {
                     links.Remove(pt.ID);
@@ -294,7 +271,7 @@ namespace Tono.Jit
             {
                 return list;
             }
-            var proc = FindProcess(procKeyFrom, true);
+            var proc = FindChildProcess(procKeyFrom, true);
             if (proc != null)
             {
                 if (_processKeyLinks.TryGetValue(proc.ID, out var list2))

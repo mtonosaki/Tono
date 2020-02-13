@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using static Tono.Jit.Utils;
 using ProcessKey = System.String;
 
 namespace Tono.Jit
@@ -95,7 +96,7 @@ namespace Tono.Jit
             public int Comparer(LinkedListNode<JitStage.WorkEventQueue.Item> a, LinkedListNode<JitStage.WorkEventQueue.Item> b)
             {
                 // 1st condition: priority of process 第１条件＝工程の優先順
-                int ret = GetProcPriority(JitWork.GetProcess(a.Value.Work.Previous)) - GetProcPriority(JitWork.GetProcess(b.Value.Work.Previous));
+                int ret = GetProcPriority(GetProcess(a.Value.Work.Previous)) - GetProcPriority(GetProcess(b.Value.Work.Previous));
                 if (ret == 0)
                 {
                     // 2nd condition: enter time 第2条件＝進入時刻準（FIFO）

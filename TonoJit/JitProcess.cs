@@ -144,13 +144,13 @@ namespace Tono.Jit
                 engine.RemoveWorkInReserve(work.Current.Subset, cio, work);
             }
 
-            engine.EnterWorkToProcess(work.Next.Subset, this, work, now);
+            engine.SaveWorkToSubsetProcess(work.Next.Subset, this, work, now);
             work.Previous = work.Current;
             work.Current = work.Next;
 
             var nextProcs = work.Current.Subset.GetProcessLinks(this);
             var nextProcKey = nextProcs.FirstOrDefault();
-            var nextProc = work.Current.Subset.FindProcess(nextProcKey, isReturnNull: true);
+            var nextProc = work.Current.Subset.FindChildProcess(nextProcKey, isReturnNull: true);
             if (nextProc == null)
             {
                 work.Next = (work.Current.Subset, null);
@@ -170,7 +170,7 @@ namespace Tono.Jit
         /// <param name="now"></param>
         public virtual void Exit(JitWork work)
         {
-            work.Engine.ExitWorkFromProcess(work.Current.Subset, this, work);
+            work.Engine.RemoveWorkFromSubsetProcess(work.Current.Subset, this, work);
         }
 
         /// <summary>
@@ -318,7 +318,7 @@ namespace Tono.Jit
             }
 
             var sk = queue.Dequeue();
-            work.Next = (sk.Kanban.Subset, sk.Kanban.Subset.FindProcess(sk.Kanban.PullToProcessKey));
+            work.Next = (sk.Kanban.Subset, sk.Kanban.Subset.FindChildProcess(sk.Kanban.PullToProcessKey));
             work.Kanbans.Add(sk.Kanban);
             sk.Kanban.Work = work;
             if (work.ExitTime < now)
@@ -327,16 +327,6 @@ namespace Tono.Jit
             }
 
             return sk.Kanban;
-        }
-
-        public static bool Equals((JitSubset Subset, JitProcess Process) left, (JitSubset Subset, JitProcess Process) right)
-        {
-            if (left == default || right == default) return false;
-            if (left.Subset == right.Subset)
-            {
-                return left.Process == right.Process;
-            }
-            return false;
         }
     }
 }

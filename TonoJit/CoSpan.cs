@@ -2,6 +2,7 @@
 // Licensed under the MIT license.
 
 using System;
+using static Tono.Jit.Utils;
 
 namespace Tono.Jit
 {
@@ -28,7 +29,7 @@ namespace Tono.Jit
 
         public override string MakeShortValue()
         {
-            return $"{JacInterpreter.MakeTimeSpanString(Span)}";
+            return $"{MakeTimeSpanString(Span)}";
         }
 
         /// <summary>

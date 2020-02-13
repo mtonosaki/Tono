@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Tono;
 using Tono.Jit;
+using static Tono.Jit.Utils;
 
 namespace UnitTestJit
 {
@@ -381,7 +382,7 @@ namespace UnitTestJit
             {
                 if (ei.Work is JitWork work)
                 {
-                    ret &= (JitWork.GetProcess(work.Current)?.Name ?? null) == procName;
+                    ret &= (GetProcess(work.Current)?.Name ?? null) == procName;
                 }
                 else
                 {

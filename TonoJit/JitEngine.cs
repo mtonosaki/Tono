@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using static Tono.Jit.JitStage;
+using static Tono.Jit.Utils;
 
 namespace Tono.Jit
 {
@@ -19,7 +19,7 @@ namespace Tono.Jit
         /// <summary>
         /// work event management queue
         /// </summary>
-        public WorkEventQueue Events { get; private set; }
+        public JitStage.WorkEventQueue Events { get; private set; }
 
         /// <summary>
         /// simulation clock
@@ -31,7 +31,7 @@ namespace Tono.Jit
         /// </summary>
         public JitEngine()
         {
-            Events = new WorkEventQueue
+            Events = new JitStage.WorkEventQueue
             {
                 Engine = this,
             };
@@ -85,9 +85,9 @@ namespace Tono.Jit
         /// process kanban control
         /// </summary>
         /// <param name="ei"></param>
-        private void ProcKanban(WorkEventQueue.Item ei)
+        private void ProcKanban(JitStage.WorkEventQueue.Item ei)
         {
-            var tarProc = ei.Kanban.Subset.FindProcess(ei.Kanban.PullFromProcessKey);
+            var tarProc = ei.Kanban.Subset.FindChildProcess(ei.Kanban.PullFromProcessKey);
             var usedKanban = tarProc.AddKanban(this, ei.Kanban.Subset, ei.Kanban, Now); // 工程にかんばんを投入して、処理を促す
             if (usedKanban != null)
             {
@@ -103,7 +103,7 @@ namespace Tono.Jit
         /// STEP1：confirm out-constraint of next process 次工程のIN制約を確認
         /// STEP2：re-input event item as "IN" status. OKのItemを INステータスで イベントキューに再投入
         /// </remarks>
-        private void ProcOut(WorkEventQueue.Item ei)
+        private void ProcOut(JitStage.WorkEventQueue.Item ei)
         {
             ei.Work.Status = JitWorkStatus.Stopping;   // change status "STOP"
             if (ei.Work.Next == default || ei.Work.Next.Process == null)
@@ -128,15 +128,15 @@ namespace Tono.Jit
         /// work in process
         /// </summary>
         /// <param name="ei"></param>
-        private void ProcIn(WorkEventQueue.Item ei)
+        private void ProcIn(JitStage.WorkEventQueue.Item ei)
         {
             ei.Work.Status = JitWorkStatus.Moving;
-            JitWork.GetProcess(ei.Work.Current)?.Exit(ei.Work);
-            JitWork.GetProcess(ei.Work.Next)?.Enter(ei.Work, Now);
+            GetProcess(ei.Work.Current)?.Exit(ei.Work);
+            GetProcess(ei.Work.Next)?.Enter(ei.Work, Now);
             ei.Work.ExitTime = Now; // 後で、Co.Delayで上書きされる
 
-            JitWork.GetProcess(ei.Work.Current)?.ExecInCommands(ei.Work, Now);        // execute in-command コマンドを実行
-            JitWork.GetProcess(ei.Work.Current)?.AddAndAdjustExitTiming(Events, ei.Work); // put next event item status "Out" into event queu   Eventキューに Outイベントを登録
+            GetProcess(ei.Work.Current)?.ExecInCommands(ei.Work, Now);        // execute in-command コマンドを実行
+            GetProcess(ei.Work.Current)?.AddAndAdjustExitTiming(Events, ei.Work); // put next event item status "Out" into event queu   Eventキューに Outイベントを登録
         }
 
         /// <summary>
@@ -233,7 +233,7 @@ namespace Tono.Jit
         /// </summary>
         /// <param name="cio"></param>
         /// <param name="now"></param>
-        public void EnterWorkToProcess(JitSubset subset, JitProcess process, JitWork work, DateTime now)
+        public void SaveWorkToSubsetProcess(JitSubset subset, JitProcess process, JitWork work, DateTime now)
         {
             var procworks = _worksInProcess.GetValueOrDefault(subset, true, a => new Dictionary<JitProcess, Dictionary<JitWork, DateTime/*Enter-Time*/>>());
             var works = procworks.GetValueOrDefault(process, true, a => new Dictionary<JitWork, DateTime/*Enter-Time*/>());
@@ -245,7 +245,7 @@ namespace Tono.Jit
         /// </summary>
         /// <param name="cio"></param>
         /// <param name="now"></param>
-        public void ExitWorkFromProcess(JitSubset subset, JitProcess process, JitWork work)
+        public void RemoveWorkFromSubsetProcess(JitSubset subset, JitProcess process, JitWork work)
         {
             var procworks = _worksInProcess.GetValueOrDefault(subset, true, a => new Dictionary<JitProcess, Dictionary<JitWork, DateTime/*Enter-Time*/>>());
             var works = procworks.GetValueOrDefault(process, true, a => new Dictionary<JitWork, DateTime/*Enter-Time*/>());

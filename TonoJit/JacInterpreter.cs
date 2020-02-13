@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
+using static Tono.Jit.Utils;
 
 /// <summary>
 /// Just-in-time model as a Code interpreter
@@ -747,100 +748,6 @@ namespace Tono.Jit
 
             var reg = new Regex("^[A-Za-z][A-Za-z0-9]*$");
             return reg.IsMatch(name);
-        }
-
-        /// <summary>
-        /// Parse TimeSpan string (Time Units are Upper case)
-        /// </summary>
-        /// <param name="valuestr"></param>
-        /// <returns></returns>
-        public static TimeSpan ParseTimeSpan(string valuestr)
-        {
-            double val;
-            if (valuestr.StartsWith("0") && char.IsNumber(valuestr[valuestr.Length - 1]))
-            {
-                val = double.Parse(valuestr);
-                if (val == 0)
-                {
-                    return TimeSpan.Zero;
-                }
-            }
-            string unit;
-            if (valuestr.EndsWith("MS"))
-            {
-                unit = "MS";
-                val = double.Parse(valuestr.Substring(0, valuestr.Length - 2));
-            }
-            else
-            {
-                unit = StrUtil.Right(valuestr, 1);
-                val = double.Parse(valuestr.Substring(0, valuestr.Length - 1));
-            }
-            switch (unit)
-            {
-                case "MS":
-                    return TimeSpan.FromMilliseconds(val);
-                case "S":
-                    return TimeSpan.FromSeconds(val);
-                case "M":
-                    return TimeSpan.FromMinutes(val);
-                case "H":
-                    return TimeSpan.FromHours(val);
-                case "D":
-                    return TimeSpan.FromDays(val);
-                case "W":
-                    return TimeSpan.FromDays(val * 7);
-                default:
-                    throw new JacException(JacException.Codes.NotSupportedUnit, $"Unit '{unit}' is not supported.");
-            }
-        }
-
-        public static string MakeTimeSpanString(TimeSpan ts)
-        {
-            var sect = new[] { 0, 0.1, 0.2, 0.25, 0.3, 0.4, 0.5, 0.6, 0.7, 0.75, 0.8, 0.9 };
-            if (ts.TotalMilliseconds < 1)
-            {
-                return "0S";
-            }
-            if (ts.TotalSeconds < 1.0)
-            {
-                return $"{ts.TotalMilliseconds}MS";
-            }
-            if (ts.TotalSeconds < 60)
-            {
-                return $"{ts.TotalSeconds}S";
-            }
-            if (ts.TotalMinutes < 5)
-            {
-                if (sect.Contains(ts.TotalMinutes % 1.0))
-                {
-                    return $"{ts.TotalMinutes}M";
-                }
-                else
-                {
-                    return $"{ts.TotalSeconds}S";
-                }
-            }
-            if (ts.TotalMinutes < 60)
-            {
-                return $"{ts.TotalMinutes}M";
-            }
-            if (ts.TotalHours <= 3)
-            {
-                if (sect.Contains(ts.TotalHours % 1.0))
-                {
-                    return $"{ts.TotalHours}H";
-                }
-                else
-                {
-                    return $"{ts.TotalMinutes}M";
-                }
-            }
-            if (ts.TotalHours < 24)
-            {
-                return $"{ts.TotalHours}H";
-            }
-            return $"{ts.TotalDays}D";
         }
 
         /// <summary>

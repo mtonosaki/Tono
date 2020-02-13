@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using static Tono.Jit.Utils;
 
 namespace Tono.Jit
 {
@@ -74,23 +75,6 @@ namespace Tono.Jit
             Classes.Set(":Work");
             ChildVriables["Cost"][JitVariable.From("Count")].Value = JitVariable.From(1);  // カウントコスト
             ChildVriables["Cost"][JitVariable.From("Random")].Value = JitVariable.From(MathUtil.Rand0());  // ランダムコスト 0～0.99999999
-        }
-
-        /// <summary>
-        /// Get process or null from tuple
-        /// </summary>
-        /// <param name="tar"></param>
-        /// <returns></returns>
-        public static JitProcess GetProcess((JitSubset Subset, JitProcess Process) tar)
-        {
-            if (tar == default)
-            {
-                return null;
-            }
-            else
-            {
-                return tar.Process;
-            }
         }
 
         public override bool Equals(object obj)

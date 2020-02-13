@@ -91,7 +91,7 @@ namespace Tono.Jit
         /// <param name="process"></param>
         /// <param name="work"></param>
         /// <param name="now"></param>
-        void EnterWorkToProcess(JitSubset subset, JitProcess process, JitWork work, DateTime now);
+        void SaveWorkToSubsetProcess(JitSubset subset, JitProcess process, JitWork work, DateTime now);
 
         /// <summary>
         /// Leave work from process
@@ -99,7 +99,7 @@ namespace Tono.Jit
         /// <param name="subset"></param>
         /// <param name="process"></param>
         /// <param name="work"></param>
-        void ExitWorkFromProcess(JitSubset subset, JitProcess process, JitWork work);
+        void RemoveWorkFromSubsetProcess(JitSubset subset, JitProcess process, JitWork work);
 
         /// <summary>
         /// Query Works in process
