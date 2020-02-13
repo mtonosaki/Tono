@@ -13,11 +13,15 @@ namespace Tono.Jit
     public class JitProcessDummy : JitProcess
     {
         public override string ID { get; set; } = JacInterpreter.MakeID("ProcessDummy");
+
+        public ProcessKey ProcessKey { get; set; } // Possible Name or ID
+
+        public override string Name { get => throw new NotAllowErrorException(); set => throw new NotAllowErrorException(); }
         public override void AddAndAdjustExitTiming(JitStage.WorkEventQueue events, JitWork work) => throw new NotAllowErrorException();
-        public override JitKanban AddKanban(IJitStageEngine engine, JitKanban kanban, DateTime now) => throw new NotAllowErrorException();
+        public override JitKanban AddKanban(IJitEngine engine, JitSubset subset, JitKanban kanban, DateTime now) => throw new NotAllowErrorException();
         public override void Enter(JitWork work, DateTime now) => throw new NotAllowErrorException();
         public override void Exit(JitWork work) => throw new NotAllowErrorException();
-        public override JitWork ExitCollectedWork(JitSubset subset, DateTime now) => throw new NotAllowErrorException();
+        public override JitWork ExitCollectedWork(IJitEngine engine, JitSubset subset, DateTime now) => throw new NotAllowErrorException();
     }
     #endregion
 
@@ -26,12 +30,8 @@ namespace Tono.Jit
     /// </summary>
     public class ProcessSet : IEnumerable<JitProcess>
     {
-        public class AddedEventArgs : EventArgs
-        {
-            public JitProcess Process { get; set; }
-        }
+        public Func<string> DebugName { get; set; }    // for debug
 
-        public event EventHandler<AddedEventArgs> Added;
         private readonly List<JitProcess> _procData = new List<JitProcess>();
 
         /// <summary>
@@ -43,65 +43,65 @@ namespace Tono.Jit
         /// Add Process
         /// </summary>
         /// <param name="proc"></param>
-        public void Add(JitProcess proc)
+        internal JitProcess Add(JitProcess proc)
         {
             Remove(proc);
             _procData.Add(proc);
-
-            Added?.Invoke(this, new AddedEventArgs
-            {
-                Process = proc,
-            });
+            return proc;
         }
 
         /// <summary>
         /// Reserve Process {Name or ID} as procKey
         /// </summary>
         /// <param name="procKey"></param>
-        public void Add(ProcessKey procKey)
+        internal JitProcess Add(ProcessKey procKey)
         {
             Remove(procKey);
 
             JitProcess proc;
             _procData.Add(proc = new JitProcessDummy
             {
-                Name = procKey,
+                ProcessKey = procKey,
             });
-            Added?.Invoke(this, new AddedEventArgs
-            {
-                Process = proc,
-            });
-        }
-
-        /// <summary>
-        /// Add Range
-        /// </summary>
-        /// <param name="procs"></param>
-        public void Add(IEnumerable<JitProcess> procs)
-        {
-            foreach (var proc in procs)
-            {
-                Add(proc);
-            }
+            return proc;
         }
 
         /// <summary>
         /// Remove a process
         /// </summary>
         /// <param name="proc"></param>
-        public void Remove(JitProcess proc)
+        internal void Remove(JitProcess proc)
         {
+            if (proc is JitProcessDummy dummy)
+            {
+                Remove(dummy.ProcessKey);
+            }
+            else
+            {
+                Remove(proc.Name);
+            }
             Remove(proc.ID);
-            Remove(proc.Name);
         }
 
         /// <summary>
         /// Remove the all process that have procKey in Name and ID
         /// </summary>
         /// <param name="procKey"></param>
-        public void Remove(ProcessKey procKey)
+        internal void Remove(ProcessKey procKey)
         {
-            var dels = _procData.Where(a => a.ID == procKey || a.Name == procKey).ToArray();
+            var col1 =
+                from t in _procData
+                let dmy = t as JitProcessDummy
+                where dmy != null
+                where dmy.ProcessKey == procKey
+                select dmy;
+            var col2 =
+                from t in _procData
+                where t is JitProcessDummy == false
+                where t.ID == procKey || t.Name == procKey
+                select t;
+            var dels = col1.Concat(col2).ToArray();
+
             foreach (var proc in dels)
             {
                 _procData.Remove(proc);
@@ -168,9 +168,9 @@ namespace Tono.Jit
         /// <returns></returns>
         public static ProcessKey GetProcessKey(JitProcess proc)
         {
-            if (proc is JitProcessDummy)
+            if (proc is JitProcessDummy dummy)
             {
-                return proc.Name;
+                return dummy.ProcessKey;
             }
             else
             {

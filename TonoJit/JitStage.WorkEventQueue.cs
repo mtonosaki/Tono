@@ -78,6 +78,11 @@ namespace Tono.Jit
             private readonly Dictionary<DateTime, LinkedListNode<Item>> _sections = new Dictionary<DateTime, LinkedListNode<Item>>();    // 分毎のダミーアイテム. null=その時刻のデータは_datには無い
 
             /// <summary>
+            /// Parent Engine
+            /// </summary>
+            public IJitEngine Engine { get; internal set; }
+
+            /// <summary>
             /// remove the specified nodes 指定アイテムを全部消す
             /// </summary>
             /// <param name="nodes"></param>
@@ -107,6 +112,11 @@ namespace Tono.Jit
             public JitVariable Enqueue(DateTime dt, EventTypes type, JitVariable workOrKanban)
             {
                 PrepareDummyItems(dt);
+
+                if (workOrKanban is IJieEngineReference ejobj)
+                {
+                    ejobj.Engine = Engine;  // Change target Engine
+                }
 
                 LinkedListNode<Item> node;
                 if (_sections.TryGetValue(TimeUtil.ClearSeconds(dt), out var topnode) == false)    // 分毎にシーク位置をスキップできる

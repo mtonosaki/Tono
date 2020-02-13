@@ -40,7 +40,7 @@ namespace Tono.Jit
         public override bool Check(JitWork work, DateTime now)
         {
             
-            return (now - work.Subset.Engine?.Invoke().GetLastInTime(this)) < Span;
+            return (now - work.Engine.GetLastInTime(work.Current.Subset, this)) < Span;
         }
 
         /// <summary>
@@ -52,9 +52,12 @@ namespace Tono.Jit
         /// <param name="work"></param>
         /// <param name="Now"></param>
         /// <returns></returns>
-        public override TimeSpan GetWaitTime(IJitStageEngine engine, JitStage.WorkEventQueue.Item ei, DateTime Now)
+        public override TimeSpan GetWaitTime(IJitEngine engine, JitStage.WorkEventQueue.Item ei, DateTime Now)
         {
-            TimeSpan ret = MathUtil.Min(TimeSpan.FromDays(999.9), engine.GetLastInTime(this) + Span - Now);
+            var ret = MathUtil.Min(
+                TimeSpan.FromDays(999.9), 
+                engine.GetLastInTime(ei.Work.Current.Subset, this) + Span - Now
+            );
             if (ret < TimeSpan.FromSeconds(1))
             {
                 ret = PorlingSpan;

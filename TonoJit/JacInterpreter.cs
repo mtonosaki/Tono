@@ -110,7 +110,7 @@ namespace Tono.Jit
                     var line = Lines[iChunk][iLine];
                     var level = Levels[iChunk][iLine];
                     var isNextLine = iLine < Lines[iChunk].Count - 1;
-                    var blocks = StrUtil.SplitConsideringQuatationContainsSeparator(line, new[] { '=', '-', '>', ' ' }, true, true, false).ToList();
+                    var blocks = StrUtil.SplitConsideringQuatationContainsSeparator(line, new[] { '=', '-', '>', ':', ' ' }, true, true, false).ToList();
 
                     // PASS-1
                     for (var i = 0; i < blocks.Count - 1; i++)
@@ -129,7 +129,7 @@ namespace Tono.Jit
 
                     // PASS-2
                     var reg = new Regex(@"^[-+]?[0-9]+(\.[0-9]+)?[eE]$");
-                    for ( var i = 0; i < blocks.Count - 1; i++)
+                    for (var i = 0; i < blocks.Count - 1; i++)
                     {
                         if (reg.IsMatch(blocks[i]) && blocks[i + 1].StartsWith("-"))
                         {
@@ -146,6 +146,7 @@ namespace Tono.Jit
                         {
                             case "=":
                             case "->":
+                            case ":":
                             case "new":
                             case "add":
                             case "remove":
@@ -210,9 +211,11 @@ namespace Tono.Jit
                                     break;
                                 case "->":
                                 case "=>":
+                                case ":":
                                     opeStack.Pop();
                                     ProcPair(rpnStack, ope.Com);
                                     break;
+
                             }
                             if (isStackComsuming == false && opeStack.Count > 0)
                             {
@@ -355,6 +358,23 @@ namespace Tono.Jit
                 };
                 varBuf[obj.Name] = obj;
                 rpnStack.Push((left.Level, obj.Name));
+            }
+            if (ope == ":")
+            {
+                var name = MakeID("Tuple_");
+                var v1 = ParseValue(left.Com);
+                var v2 = ParseValue(right.Com);
+                object obj = null;
+                if (v1 is JitSubset && (v2 == null || v2 is JitProcess))
+                {
+                    obj = new ValueTuple<JitSubset, JitProcess>((JitSubset)v1, (JitProcess)v2);
+                }
+                else
+                {
+                    obj = (v1, v2);
+                }
+                varBuf[name] = obj;
+                rpnStack.Push((left.Level, name));
             }
         }
 
@@ -602,6 +622,10 @@ namespace Tono.Jit
         {
             if (value is string valuestr)
             {
+                if (valuestr == "null")
+                {
+                    return null;
+                }
                 if (chkDotValue.IsMatch(valuestr))
                 {
                     var dotid = valuestr.IndexOf('.');

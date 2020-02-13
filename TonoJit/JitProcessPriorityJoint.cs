@@ -24,7 +24,8 @@ namespace Tono.Jit
 
         public JitProcessPriorityJoint()
         {
-            ChildProcesses.Added += ChildProcesses_Added;
+            //ChildProcesses.Added += ChildProcesses_Added;
+            ProcessAdded += JitProcessPriorityJoint_ProcessAdded;
         }
 
         /// <summary>
@@ -32,7 +33,7 @@ namespace Tono.Jit
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void ChildProcesses_Added(object sender, ProcessSet.AddedEventArgs e)
+        private void JitProcessPriorityJoint_ProcessAdded(object sender, ProcessAddedEventArgs e)
         {
             AddProcessLink(ProcessSet.GetProcessKey(e.Process), ProcessSet.GetProcessKey(this));    // Make the work leave route from child to parent
 
@@ -52,9 +53,9 @@ namespace Tono.Jit
         /// <param name="work"></param>
         public override void AddAndAdjustExitTiming(JitStage.WorkEventQueue events, JitWork work)
         {
-            if (work.Next != default)
+            if (work.Next != default && work.Next.Process != null)
             {
-                var sortList = events.FindAll((work.Subset, this), EventTypes.Out).ToList();
+                var sortList = events.FindAll((work.Current.Subset, this), EventTypes.Out).ToList();
                 var tarDT = work.ExitTime;
                 if (sortList.Count > 0)
                 {
@@ -70,7 +71,6 @@ namespace Tono.Jit
                 sortList.Add(nn);
                 sortList.Sort(new QueueItemComparer
                 {
-                    Subset = work.Subset,
                     ProcPriorities = procPriority,  // Larger number is priority
                 }.Comparer);
 
@@ -83,7 +83,6 @@ namespace Tono.Jit
 
         private class QueueItemComparer
         {
-            public JitSubset Subset { get; set; }
             public Dictionary<ProcessKey, int> ProcPriorities { get; set; }
 
             /// <summary>

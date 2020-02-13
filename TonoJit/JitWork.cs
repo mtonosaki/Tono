@@ -13,14 +13,14 @@ namespace Tono.Jit
     /// Work is general item to make flow in just-in-time model that is not only physical item.
     /// </remarks>
     [JacTarget(Name = "Work")]
-    public class JitWork : JitVariable, IJitObjectID
+    public class JitWork : JitVariable, IJitObjectID, IJieEngineReference
     {
         public string ID { get; set; } = JacInterpreter.MakeID("Work");
 
         /// <summary>
-        /// Target Subset for this Work
+        /// Target Engine
         /// </summary>
-        public JitSubset Subset { get; set; }
+        public IJitEngine Engine { get; set; }
 
         /// <summary>
         /// Previous process (null = no previous)
@@ -91,12 +91,6 @@ namespace Tono.Jit
             {
                 return tar.Process;
             }
-        }
-
-        public static bool Equals((JitSubset Subset, JitProcess Process) left, (JitSubset Subset, JitProcess Process) right)
-        {
-            if (left == default || right == default) return false;
-            return left == right;
         }
 
         public override bool Equals(object obj)
