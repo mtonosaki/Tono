@@ -141,24 +141,24 @@ namespace UnitTestJit
                 st.Engine.Events.Enqueue(TimeUtil.Set(today, hour: tp[st], minute: 0), EventTypes.Out, tw[(st, "w1")] = new JitWork
                 {
                     Name = $"w1",
-                    Current = (st.Subset, null),
-                    Next = (st.Subset, A),
+                    Current = JitLocation.From(st.Subset, null),
+                    Next = JitLocation.From(st.Subset, A),
                 });
                 Assert.IsTrue(tw[(st, "w1")].Is(":Work"));
 
                 st.Engine.Events.Enqueue(TimeUtil.Set(today, hour: tp[st], minute: 0), EventTypes.Out, tw[(st, "y1")] = new JitWork
                 {
                     Name = $"y1",
-                    Current = (st.Subset, null),
-                    Next = (st.Subset, Y),
+                    Current = JitLocation.From(st.Subset, null),
+                    Next = JitLocation.From(st.Subset, Y),
                     Classes = JitVariable.ClassList.From(":iOS:Sumaho"),    // :Workに、クラス「追加」
                 });
 
                 st.Engine.Events.Enqueue(TimeUtil.Set(today, hour: tp[st], minute: 2), EventTypes.Out, tw[(st, "z1")] = new JitWork
                 {
                     Name = $"z1",
-                    Current = (st.Subset, null),
-                    Next = (st.Subset, Z),
+                    Current = JitLocation.From(st.Subset, null),
+                    Next = JitLocation.From(st.Subset, Z),
                     Classes = JitVariable.ClassList.From(":Android:Sumaho"),    // :Workに、クラス「追加」
                 });
             }
@@ -336,8 +336,8 @@ namespace UnitTestJit
             st.Engine.Events.Enqueue(TimeUtil.Set(today, hour: 9, minute: 0), EventTypes.Out, w1 = new JitWork
             {
                 Name = $"w1",
-                Current = (st.Subset, null),
-                Next = (st.Subset, A),
+                Current = JitLocation.From(st.Subset, null),
+                Next = JitLocation.From(st.Subset, A),
             });
 #if false
 
@@ -382,7 +382,7 @@ namespace UnitTestJit
             {
                 if (ei.Work is JitWork work)
                 {
-                    ret &= (GetProcess(work.Current)?.Name ?? null) == procName;
+                    ret &= work.Current?.Process?.Name == procName;
                 }
                 else
                 {

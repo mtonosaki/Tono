@@ -816,6 +816,23 @@ namespace Tono.Jit
         }
 
         /// <summary>
+        /// Get variable as a Location
+        /// </summary>
+        /// <param name="varname"></param>
+        /// <returns></returns>
+        public JitLocation GetLocation(string varname)
+        {
+            if (ParseValue(varname) is JitLocation ret)
+            {
+                return ret;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        /// <summary>
         /// Get variable as a Work object
         /// </summary>
         /// <param name="varname"></param>

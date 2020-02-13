@@ -5,6 +5,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using ProcessKey = System.String;
+
 
 namespace Tono.Jit
 {
@@ -151,14 +153,11 @@ namespace Tono.Jit
             var nextProcs = work.Current.Subset.GetProcessLinks(this);
             var nextProcKey = nextProcs.FirstOrDefault();
             var nextProc = work.Current.Subset.FindChildProcess(nextProcKey, isReturnNull: true);
-            if (nextProc == null)
+            work.Next = new JitLocation
             {
-                work.Next = (work.Current.Subset, null);
-            }
-            else
-            {
-                work.Next = (work.Current.Subset, nextProc); // TODO: SubsetのConnector対応
-            }
+                Subset = work.Current.Subset,
+                Process = nextProc,             // TODO: SubsetのConnector対応
+            };
             work.EnterTime = now;
             CheckAndAttachKanban(work.Engine, work.Current.Subset, now); // かんばんが有れば、NextProcessをかんばんで更新する
         }
@@ -197,9 +196,21 @@ namespace Tono.Jit
             {
                 Exit(work);
 
-                work.Previous = (work.Current.Subset, this);
-                work.Current = (work.Current.Subset, null);
-                work.Next = (work.Current.Subset, null);
+                work.Previous = new JitLocation
+                {
+                    Subset = work.Current.Subset,
+                    Process = this,
+                };
+                work.Current = new JitLocation
+                {
+                    Subset = work.Current.Subset,
+                    Process = null,
+                };
+                work.Next = new JitLocation
+                {
+                    Subset = work.Current.Subset,
+                    Process = null,
+                };
             }
             return work;
         }
@@ -318,7 +329,11 @@ namespace Tono.Jit
             }
 
             var sk = queue.Dequeue();
-            work.Next = (sk.Kanban.Subset, sk.Kanban.Subset.FindChildProcess(sk.Kanban.PullToProcessKey));
+            work.Next = new JitLocation
+            {
+                Subset = sk.Kanban.Subset,
+                Process = sk.Kanban.Subset.FindChildProcess(sk.Kanban.PullToProcessKey),
+            };
             work.Kanbans.Add(sk.Kanban);
             sk.Kanban.Work = work;
             if (work.ExitTime < now)
@@ -329,4 +344,21 @@ namespace Tono.Jit
             return sk.Kanban;
         }
     }
+
+    #region Dummy Process Object
+    public class JitProcessDummy : JitProcess
+    {
+        public override string ID { get; set; } = JacInterpreter.MakeID("ProcessDummy");
+
+        public ProcessKey ProcessKey { get; set; } // Possible Name or ID
+
+        public override string Name { get => throw new NotAllowErrorException(); set => throw new NotAllowErrorException(); }
+        public override void AddAndAdjustExitTiming(JitStage.WorkEventQueue events, JitWork work) => throw new NotAllowErrorException();
+        public override JitKanban AddKanban(IJitEngine engine, JitSubset subset, JitKanban kanban, DateTime now) => throw new NotAllowErrorException();
+        public override void Enter(JitWork work, DateTime now) => throw new NotAllowErrorException();
+        public override void Exit(JitWork work) => throw new NotAllowErrorException();
+        public override JitWork ExitCollectedWork(IJitEngine engine, JitSubset subset, DateTime now) => throw new NotAllowErrorException();
+    }
+    #endregion
+
 }

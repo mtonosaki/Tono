@@ -50,22 +50,6 @@ namespace Tono.Jit
         }
 
         /// <summary>
-        /// Get process or null from tuple
-        /// </summary>
-        /// <param name="tar"></param>
-        /// <returns></returns>
-        public static JitProcess GetProcess((JitSubset Subset, JitProcess Process) tar)
-        {
-            if (tar == default)
-            {
-                return null;
-            }
-            else
-            {
-                return tar.Process;
-            }
-        }
-        /// <summary>
         /// Parse TimeSpan string (Time Units are Upper case)
         /// </summary>
         /// <param name="valuestr"></param>

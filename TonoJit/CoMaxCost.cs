@@ -45,7 +45,9 @@ namespace Tono.Jit
             var engine = work.Engine;
             var wirs = engine.GetWorksInReserve(work.Current.Subset, this);
             var costs =
-                from w in engine.GetWorks(work.Current.Subset, GetProcess(GetCheckTargetProcess(work))).Select(wt => wt.Work).Concat(wirs)
+                from w in engine.GetWorks(work.Current.Subset, GetCheckTargetProcess(work).Process)
+                          .Select(wt => wt.Work)
+                          .Concat(wirs)
                 let cost = w.ChildVriables.GetValueOrNull("Cost")
                 where cost != null
                 let varval = cost[ReferenceVarName]

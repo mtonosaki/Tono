@@ -6,12 +6,14 @@ using System.Collections.Generic;
 using System.Linq;
 using static Tono.Jit.Utils;
 using ProcessKey = System.String;
+using ProcessKeyPath = System.String;
 
 namespace Tono.Jit
 {
     /// <summary>
     /// Jit Stage Model
     /// </summary>
+    [JacTarget(Name = "Subset")]
     public class JitSubset : JitProcess
     {
         public override string ID { get; set; } = JacInterpreter.MakeID("Subset");
@@ -23,7 +25,6 @@ namespace Tono.Jit
         }
 
         public event EventHandler<ProcessAddedEventArgs> ProcessAdded;
-
 
         /// <summary>
         /// Process key(ID/Name) of Connector In
@@ -43,7 +44,7 @@ namespace Tono.Jit
         /// <summary>
         /// Child Processes
         /// </summary>
-        private readonly List<JitProcess> _procData = new List<JitProcess>();
+        private readonly List<JitProcess> _childProcess = new List<JitProcess>();
 
         /// <summary>
         /// The constructor
@@ -81,7 +82,7 @@ namespace Tono.Jit
         public void AddChildProcess(JitProcess proc)
         {
             RemoveChildProcess(proc);
-            _procData.Add(proc);
+            _childProcess.Add(proc);
             ProcessAdded?.Invoke(this, new ProcessAddedEventArgs
             {
                 Target = this,
@@ -98,7 +99,7 @@ namespace Tono.Jit
             RemoveChildProcess(procKey);
 
             JitProcess proc;
-            _procData.Add(proc = new JitProcessDummy
+            _childProcess.Add(proc = new JitProcessDummy
             {
                 ProcessKey = procKey,
             });
@@ -145,13 +146,13 @@ namespace Tono.Jit
         public void RemoveChildProcess(ProcessKey procKey)
         {
             var col1 =
-                from t in _procData
+                from t in _childProcess
                 let dmy = t as JitProcessDummy
                 where dmy != null
                 where dmy.ProcessKey == procKey
                 select dmy;
             var col2 =
-                from t in _procData
+                from t in _childProcess
                 where t is JitProcessDummy == false
                 where t.ID == procKey || t.Name == procKey
                 select t;
@@ -159,18 +160,27 @@ namespace Tono.Jit
 
             foreach (var proc in dels)
             {
-                _procData.Remove(proc);
+                _childProcess.Remove(proc);
             }
         }
 
+        /// <summary>
+        /// Get child process enumerator
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<JitProcess> GetChildProcesses()
         {
-            return _procData;
+            return _childProcess;
         }
 
+        /// <summary>
+        /// Get child process of the index
+        /// </summary>
+        /// <param name="index"></param>
+        /// <returns></returns>
         public JitProcess GetChildProcess(int index)
         {
-            return _procData[index];
+            return _childProcess[index];
         }
 
         /// <summary>
@@ -184,10 +194,10 @@ namespace Tono.Jit
             {
                 if (isReturnNull) return null; else throw new JitException(JitException.NullProcKey);
             }
-            var ret = _procData.Where(a => a.ID == procKey).FirstOrDefault();
+            var ret = _childProcess.Where(a => a.ID == procKey).FirstOrDefault();
             if (ret == null)
             {
-                ret = _procData.Where(a => a.Name == procKey).FirstOrDefault();
+                ret = _childProcess.Where(a => a.Name == procKey).FirstOrDefault();
             }
             if (ret != null || isReturnNull)
             {
@@ -197,7 +207,12 @@ namespace Tono.Jit
         }
 
 
-        private JitProcess findNextProcess(JitProcess fromProc)
+        /// <summary>
+        /// Find next process of "fromProc"
+        /// </summary>
+        /// <param name="fromProc"></param>
+        /// <returns></returns>
+        private JitProcess FindNextProcess(JitProcess fromProc)
         {
             var links = GetProcessLinks(fromProc);
             var key = links.FirstOrDefault();
@@ -205,14 +220,13 @@ namespace Tono.Jit
             return ret;
         }
 
-
         /// <summary>
         /// Get Process key list
         /// </summary>
         /// <returns></returns>
         public IEnumerable<ProcessKey> GetProcessKeys()
         {
-            foreach (var proc in _procData)
+            foreach (var proc in _childProcess)
             {
                 yield return GetProcessKey(proc);
             }
@@ -221,30 +235,40 @@ namespace Tono.Jit
         /// <summary>
         /// Save Process link
         /// </summary>
-        /// <param name="procKey1"></param>
-        /// <param name="procKey2"></param>
-        public void AddProcessLink(ProcessKey procKeyFrom, ProcessKey procKeyTo)
+        /// <param name="procKey1">Process key of this subset</param>
+        /// <param name="procKey2">Process Key that have subset path</param>
+        public void AddProcessLink(ProcessKey procKeyFrom, ProcessKeyPath procKeyPathTo)
         {
             var links = _processKeyLinks.GetValueOrDefault(procKeyFrom, true, a => new List<string>());
-            if (links.Contains(procKeyTo) == false)
+            if (links.Contains(procKeyPathTo) == false)
             {
-                links.Add(procKeyTo);
+                links.Add(procKeyPathTo);
             }
         }
 
+        /// <summary>
+        /// Add Process Link in this subset
+        /// </summary>
+        /// <param name="from"></param>
+        /// <param name="to"></param>
         public void AddProcessLink(JitProcess from, JitProcess to)
         {
-            AddProcessLink(from.ID, to.ID);
+            AddProcessLink(GetProcessKey(from), GetProcessKey(to));
         }
 
-        public void RemoveProcessLink(ProcessKey procKeyFrom, ProcessKey procKeyTo)
+        /// <summary>
+        /// Remove process link by Process Key(ID/Name)
+        /// </summary>
+        /// <param name="procKeyFrom"></param>
+        /// <param name="procKeyPathTo"></param>
+        public void RemoveProcessLink(ProcessKey procKeyFrom, ProcessKeyPath procKeyPathTo)
         {
             var li = GetProcessLinks(procKeyFrom);
             var links = _processKeyLinks.Values.Where(a => ReferenceEquals(a, li)).FirstOrDefault();
             if (links != null)
             {
-                links.Remove(procKeyTo);
-                var pt = FindChildProcess(procKeyTo);
+                links.Remove(procKeyPathTo);
+                var pt = FindChildProcess(procKeyPathTo);
                 if (pt != null)
                 {
                     links.Remove(pt.ID);
@@ -255,6 +279,12 @@ namespace Tono.Jit
                 }
             }
         }
+
+        /// <summary>
+        /// Remove process link
+        /// </summary>
+        /// <param name="from"></param>
+        /// <param name="to"></param>
         public void RemoveProcessLink(JitProcess from, JitProcess to)
         {
             RemoveProcessLink(from.ID, to.ID);
@@ -289,24 +319,15 @@ namespace Tono.Jit
 
             return list4;
         }
+
+        /// <summary>
+        /// Get Process Link list
+        /// </summary>
+        /// <param name="proc"></param>
+        /// <returns></returns>
         public IReadOnlyList<ProcessKey> GetProcessLinks(JitProcess proc)
         {
             return GetProcessLinks(GetProcessKey(proc));
         }
     }
-    #region Dummy Process Object
-    public class JitProcessDummy : JitProcess
-    {
-        public override string ID { get; set; } = JacInterpreter.MakeID("ProcessDummy");
-
-        public ProcessKey ProcessKey { get; set; } // Possible Name or ID
-
-        public override string Name { get => throw new NotAllowErrorException(); set => throw new NotAllowErrorException(); }
-        public override void AddAndAdjustExitTiming(JitStage.WorkEventQueue events, JitWork work) => throw new NotAllowErrorException();
-        public override JitKanban AddKanban(IJitEngine engine, JitSubset subset, JitKanban kanban, DateTime now) => throw new NotAllowErrorException();
-        public override void Enter(JitWork work, DateTime now) => throw new NotAllowErrorException();
-        public override void Exit(JitWork work) => throw new NotAllowErrorException();
-        public override JitWork ExitCollectedWork(IJitEngine engine, JitSubset subset, DateTime now) => throw new NotAllowErrorException();
-    }
-    #endregion
 }

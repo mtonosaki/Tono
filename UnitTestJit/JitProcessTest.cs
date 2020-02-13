@@ -159,22 +159,22 @@ namespace UnitTestJit
             {
                 Engine = st.Engine,
                 Name = $"w1",
-                Current = (st.Subset, null),
-                Next = (st.Subset, A),
+                Current = JitLocation.From(st.Subset, null),
+                Next = JitLocation.From(st.Subset, A),
             });
             Assert.IsTrue(w1.Is(":Work"));
             st.Engine.Events.Enqueue(TimeUtil.Set(today, hour: 9, minute: 0), EventTypes.Out, y1 = new JitWork
             {
                 Name = $"y1",
-                Current = (st.Subset, null),
-                Next = (st.Subset, Y),
+                Current = JitLocation.From(st.Subset, null),
+                Next = JitLocation.From(st.Subset, Y),
                 Classes = JitVariable.ClassList.From(":iOS:Sumaho"),    // :Workに、クラス「追加」
             });
             st.Engine.Events.Enqueue(TimeUtil.Set(today, hour: 9, minute: 2), EventTypes.Out, z1 = new JitWork
             {
                 Name = $"z1",
-                Current = (st.Subset, null),
-                Next = (st.Subset, Z),
+                Current = JitLocation.From(st.Subset, null),
+                Next = JitLocation.From(st.Subset, Z),
                 Classes = JitVariable.ClassList.From(":Android:Sumaho"),    // :Workに、クラス「追加」
             });
             var k = 0;
@@ -373,20 +373,20 @@ namespace UnitTestJit
             st.Engine.Events.Enqueue(TimeUtil.Set(today, hour: 9, minute: 0), EventTypes.Out, w1 = new JitWork
             {
                 Name = $"w1",
-                Current = (st.Subset, null),
-                Next = (st.Subset, A),
+                Current = JitLocation.From(st.Subset, null),
+                Next = JitLocation.From(st.Subset, A),
             });
             st.Engine.Events.Enqueue(TimeUtil.Set(today, hour: 9, minute: 0), EventTypes.Out, y1 = new JitWork
             {
                 Name = $"y1",
-                Current = (st.Subset, null),
-                Next = (st.Subset, Y),
+                Current = JitLocation.From(st.Subset, null),
+                Next = JitLocation.From(st.Subset, Y),
             });
             st.Engine.Events.Enqueue(TimeUtil.Set(today, hour: 9, minute: 2), EventTypes.Out, z1 = new JitWork
             {
                 Name = $"z1",
-                Current = (st.Subset, null),
-                Next = (st.Subset, Z),
+                Current = JitLocation.From(st.Subset, null),
+                Next = JitLocation.From(st.Subset, Z),
             });
             var k = 0;
 
@@ -537,8 +537,8 @@ namespace UnitTestJit
                 st.Engine.Events.Enqueue(TimeUtil.Set(today, hour: 9, minute: i + 1), EventTypes.Out, new JitWork
                 {
                     Name = $"w{(i + 1):0}",
-                    Current = (st.Subset, null),
-                    Next = (st.Subset, X),
+                    Current = JitLocation.From(st.Subset, null),
+                    Next = JitLocation.From(st.Subset, X),
                 });
             }
 
@@ -677,8 +677,8 @@ namespace UnitTestJit
                 st.Engine.Events.Enqueue(TimeUtil.Set(today, hour: 9, minute: 0), EventTypes.Out, new JitWork
                 {
                     Name = $"w{(i + 1):0}",
-                    Current = (st.Subset, null),
-                    Next = (st.Subset, X),
+                    Current = JitLocation.From(st.Subset, null),
+                    Next = JitLocation.From(st.Subset, X),
                 });
             }
 
@@ -910,8 +910,8 @@ namespace UnitTestJit
                 st.Engine.Events.Enqueue(TimeUtil.Set(today, hour: 9, minute: 0), EventTypes.Out, new JitWork
                 {
                     Name = $"w{(i + 1):0}",
-                    Current = (st.Subset, null),
-                    Next = (st.Subset, X),
+                    Current = JitLocation.From(st.Subset, null),
+                    Next = JitLocation.From(st.Subset, X),
                 });
             }
 
@@ -1396,8 +1396,8 @@ namespace UnitTestJit
                 st.Engine.Events.Enqueue(TimeUtil.Set(today, hour: 9, minute: 0), EventTypes.Out, new JitWork
                 {
                     Name = $"w{(i + 1):0}",
-                    Current = (st.Subset, null),
-                    Next = (st.Subset, X),
+                    Current = JitLocation.From(st.Subset, null),
+                    Next = JitLocation.From(st.Subset, X),
                 });
             }
 
@@ -1697,8 +1697,8 @@ namespace UnitTestJit
                 st.Engine.Events.Enqueue(TimeUtil.Set(today, hour: 9, minute: 0), EventTypes.Out, new JitWork
                 {
                     Name = $"x{(i + 1):0}",
-                    Current = (st.Subset, null),
-                    Next = (st.Subset, X),
+                    Current = JitLocation.From(st.Subset, null),
+                    Next = JitLocation.From(st.Subset, X),
                 });
             }
             for (var i = 0; i < 1; i++)
@@ -1706,8 +1706,8 @@ namespace UnitTestJit
                 st.Engine.Events.Enqueue(TimeUtil.Set(today, hour: 9, minute: 5), EventTypes.Out, new JitWork
                 {
                     Name = $"y{(i + 1):0}",
-                    Current = (st.Subset, null),
-                    Next = (st.Subset, Y),
+                    Current = JitLocation.From(st.Subset, null),
+                    Next = JitLocation.From(st.Subset, Y),
                 });
             }
 
@@ -2147,8 +2147,8 @@ namespace UnitTestJit
                 st.Engine.Events.Enqueue(TimeUtil.Set(today, hour: 9, minute: 0), EventTypes.Out, new JitWork
                 {
                     Name = $"x{(i + 1):0}",
-                    Current = (JP, null),
-                    Next = (JP, X),
+                    Current = JitLocation.From(JP, null),
+                    Next = JitLocation.From(JP, X),
                 });
             }
             for (var i = 0; i < 2; i++)
@@ -2156,8 +2156,8 @@ namespace UnitTestJit
                 st.Engine.Events.Enqueue(TimeUtil.Set(today, hour: 9, minute: 0), EventTypes.Out, new JitWork
                 {
                     Name = $"y{(i + 1):0}",
-                    Current = (JP, null),
-                    Next = (JP, Y),
+                    Current = JitLocation.From(JP, null),
+                    Next = JitLocation.From(JP, Y),
                 });
             }
 
@@ -2554,8 +2554,8 @@ namespace UnitTestJit
             {
                 st.Engine.Events.Enqueue(TimeUtil.Set(today, hour: 9, minute: 0), EventTypes.Out, new JitWork
                 {
-                    Current = (JP, null),
-                    Next = (JP, Y),         // Next Subset, Process(class)
+                    Current = JitLocation.From(JP, null),
+                    Next = JitLocation.From(JP, Y),         // Next Subset, Process(class)
                     Name = $"y{(i + 1):0}", 
                 });
             }
@@ -2737,20 +2737,20 @@ namespace UnitTestJit
             st.Engine.Events.Enqueue(TimeUtil.Set(today, hour: 9, minute: 0), EventTypes.Out, a = new JitWork
             {
                 Name = "a",
-                Current = (st.Subset, null),
-                Next = (st.Subset, X),
+                Current = JitLocation.From(st.Subset, null),
+                Next = JitLocation.From(st.Subset, X),
             });
             st.Engine.Events.Enqueue(TimeUtil.Set(today, hour: 9, minute: 0), EventTypes.Out, b = new JitWork
             {
                 Name = "b",
-                Current = (st.Subset, null),
-                Next = (st.Subset, X),
+                Current = JitLocation.From(st.Subset, null),
+                Next = JitLocation.From(st.Subset, X),
             });
             st.Engine.Events.Enqueue(TimeUtil.Set(today, hour: 9, minute: 0), EventTypes.Out, c = new JitWork
             {
                 Name = "c",
-                Current = (st.Subset, null),
-                Next = (st.Subset, X),
+                Current = JitLocation.From(st.Subset, null),
+                Next = JitLocation.From(st.Subset, X),
             });
 
             st.Engine.DoNext();
@@ -2915,20 +2915,20 @@ namespace UnitTestJit
             st.Engine.Events.Enqueue(TimeUtil.Set(today, hour: 9, minute: 0), EventTypes.Out, a = new JitWork
             {
                 Name = "a",
-                Current = (st.Subset, null),
-                Next = (st.Subset, X),
+                Current = JitLocation.From(st.Subset, null),
+                Next = JitLocation.From(st.Subset, X),
             });
             st.Engine.Events.Enqueue(TimeUtil.Set(today, hour: 9, minute: 1), EventTypes.Out, b = new JitWork
             {
                 Name = "b",
-                Current = (st.Subset, null),
-                Next = (st.Subset, X),
+                Current = JitLocation.From(st.Subset, null),
+                Next = JitLocation.From(st.Subset, X),
             });
             st.Engine.Events.Enqueue(TimeUtil.Set(today, hour: 9, minute: 2), EventTypes.Out, c = new JitWork
             {
                 Name = "c",
-                Current = (st.Subset, null),
-                Next = (st.Subset, X),
+                Current = JitLocation.From(st.Subset, null),
+                Next = JitLocation.From(st.Subset, X),
             });
 
             //  1 a out->in

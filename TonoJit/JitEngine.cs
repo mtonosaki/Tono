@@ -131,12 +131,12 @@ namespace Tono.Jit
         private void ProcIn(JitStage.WorkEventQueue.Item ei)
         {
             ei.Work.Status = JitWorkStatus.Moving;
-            GetProcess(ei.Work.Current)?.Exit(ei.Work);
-            GetProcess(ei.Work.Next)?.Enter(ei.Work, Now);
+            ei.Work.Current?.Process?.Exit(ei.Work);
+            ei.Work.Next?.Process?.Enter(ei.Work, Now);
             ei.Work.ExitTime = Now; // 後で、Co.Delayで上書きされる
 
-            GetProcess(ei.Work.Current)?.ExecInCommands(ei.Work, Now);        // execute in-command コマンドを実行
-            GetProcess(ei.Work.Current)?.AddAndAdjustExitTiming(Events, ei.Work); // put next event item status "Out" into event queu   Eventキューに Outイベントを登録
+            ei.Work.Current?.Process?.ExecInCommands(ei.Work, Now);             // execute in-command コマンドを実行
+            ei.Work.Current?.Process?.AddAndAdjustExitTiming(Events, ei.Work);  // put next event item status "Out" into event queu   Eventキューに Outイベントを登録
         }
 
         /// <summary>

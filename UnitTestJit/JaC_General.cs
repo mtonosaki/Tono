@@ -552,18 +552,39 @@ namespace UnitTestJit
             var jac = new JacInterpreter();
             jac.Exec(code);
             var st = jac.GetStage("st");
+            Assert.AreEqual(jac.GetProcess("MyProc")?.Name, "MyProc");
+            Assert.AreEqual(jac.GetProcess("MyProc")?.Cios.Count(), 1);
 
             var code2 = @"
                 w1 = new Work
-                    Current = st.Subset:null
+                    Next = l1 = new Location
+                        Subset = st.Subset
+                        Process = p1 = new Process
                 w2 = new Work
-                    Current = st.Subset:null
+                    Current = w1.Next
                 w3 = new Work
-                    Current = st.Subset:null
+                    Previous = w2.Current
+                w4 = new Work
+                    Current = l1
             ";
             jac.Exec(code2);
+            var w1 = jac.GetWork("w1");
             var w2 = jac.GetWork("w2");
-            Assert.AreEqual(st.Subset, w2.Current.Subset);
+            var w3 = jac.GetWork("w3");
+            var w4 = jac.GetWork("w4");
+            var p1 = jac.GetProcess("p1");
+            var l1 = jac.GetLocation("l1");
+            Assert.IsNotNull(p1);
+            Assert.IsNull(w1.Previous);
+            Assert.IsNull(w1.Current);
+            Assert.AreEqual(w1.Next.Subset, st.Subset);
+            Assert.AreEqual(w1.Next.Process, p1);
+            Assert.AreEqual(w2.Current.Subset, w1.Next.Subset);
+            Assert.AreEqual(w2.Current.Subset, st.Subset);
+            Assert.AreEqual(w2.Current.Process, p1);
+            Assert.AreEqual(w3.Previous.Subset, st.Subset);
+            Assert.AreEqual(w3.Previous.Process, p1);
+            Assert.AreEqual(w4.Current, l1);
 
             var code3 = @"
                 o1
@@ -971,6 +992,26 @@ namespace UnitTestJit
             jac.Exec(code);
             tos = st.Subset.GetProcessLinks(PROCID4).Select(key => st.Subset.FindChildProcess(key)).ToArray();
             Assert.AreEqual(tos.Length, 0);
+        }
+
+        [TestMethod]
+        public void Test30()
+        {
+            var l1 = new JitLocation
+            {
+                Subset = new JitSubset(),
+                Process = new JitProcess(),
+            };
+            var l2 = new JitLocation
+            {
+                Subset = l1.Subset,
+                Process = l1.Process,
+            };
+            var b1 = l1.Equals(l2);
+            var b2 = l1 == l2;
+
+            Assert.IsTrue(b1);
+            Assert.IsTrue(b2);
         }
     }
 

@@ -191,7 +191,7 @@ namespace Tono.Jit
             /// <param name="workclass"></param>
             /// <returns></returns>
             /// <remarks></remarks>
-            public virtual LinkedListNode<Item> Find((JitSubset Subset, JitProcess Process) proc, EventTypes etype, string workclass = JitVariable.Class.Object)
+            public virtual LinkedListNode<Item> Find(JitLocation proc, EventTypes etype, string workclass = JitVariable.Class.Object)
             {
                 for (var node = _dat.First; node != null; node = node.Next)
                 {
@@ -201,7 +201,7 @@ namespace Tono.Jit
                         continue;
                     }
                     var w = ei.Work;
-                    if (JitWork.Equals(w.Current, proc) && ei.Type == etype && w.Is(workclass))
+                    if (w.Current == proc && ei.Type == etype && w.Is(workclass))
                     {
                         return node;
                     }

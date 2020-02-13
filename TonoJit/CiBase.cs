@@ -14,7 +14,7 @@ namespace Tono.Jit
         /// </summary>
         /// <param name="work"></param>
         /// <returns></returns>
-        protected override (JitSubset Subset, JitProcess Process) GetCheckTargetProcess(JitWork work)
+        protected override JitLocation GetCheckTargetProcess(JitWork work)
         {
             return work.Current;
         }
