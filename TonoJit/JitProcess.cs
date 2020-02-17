@@ -162,12 +162,12 @@ namespace Tono.Jit
             var stage = work.FindStage();
             stage.RemoveWorkFromSubsetProcess(work.Current, work);
 
-            var nextcios = work.Next?.Process?.Cios;
-            if(nextcios != null)
+            var currentcios = work.Current?.Process?.Cios;
+            if(currentcios != null)
             {
-                foreach (var cio in nextcios)
+                foreach (var cio in currentcios)
                 {
-                    stage.RemoveWorkInReserve(work.Next, cio, work);    // Remove work from JitStage._cioWorkCache
+                    stage.RemoveWorkInReserve(work.Current, cio, work);    // Remove work from JitStage._cioWorkCache
                 }
             }
         }

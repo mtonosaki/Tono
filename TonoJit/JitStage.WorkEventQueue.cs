@@ -229,7 +229,7 @@ namespace Tono.Jit
                         continue;
                     }
                     var workloc = ei.Work.Current;
-                    if (workloc.Process?.Equals(location.Process) ?? false)
+                    if (workloc.Equals(location))
                     {
                         if (ei.Type == etype && ei.Work.Is(workclass))
                         {
