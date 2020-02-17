@@ -10,6 +10,8 @@ namespace Tono.Jit
     /// </summary>
     public abstract class CioBase : IJitObjectID
     {
+        public static readonly CioBase[] ZeroCollection = new CioBase[] { };
+
         public string ID { get; set; } = JacInterpreter.MakeID("CIO");
 
         /// <summary>
