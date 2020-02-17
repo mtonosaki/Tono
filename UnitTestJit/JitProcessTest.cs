@@ -2549,7 +2549,8 @@ namespace UnitTestJit
             {
                 Delay = TimeSpan.FromMinutes(1),
             });
-            Y.Constraints.Add(new CoMaxCost
+            CoMaxCost Y_CoMaxCost;
+            Y.Constraints.Add(Y_CoMaxCost = new CoMaxCost
             {
                 ReferenceVarName = JitVariable.From("Count"),
                 Value = 1.0,
@@ -2573,9 +2574,10 @@ namespace UnitTestJit
             });
 
             var today = TimeUtil.ClearTime(DateTime.Now);
+            JitWork y1 = null;
             for (var i = 0; i < 3; i++)
             {
-                st.Events.Enqueue(TimeUtil.Set(today, hour: 9, minute: 0), EventTypes.Out, new JitWork
+                var work = new JitWork
                 {
                     Current = JitLocation.CreateRoot(st, null),
                     Next = new JitLocation // Next Subset, Process(class)
@@ -2585,8 +2587,13 @@ namespace UnitTestJit
                         Path = "\\JP",
                         Process = Y,
                     },
-                    Name = $"y{(i + 1):0}", 
-                });
+                    Name = $"y{(i + 1):0}",
+                };
+                st.Events.Enqueue(TimeUtil.Set(today, hour: 9, minute: 0), EventTypes.Out, work);
+                if( y1 == null)
+                {
+                    y1 = work;
+                }
             }
 
             var k = 0;
@@ -2618,12 +2625,12 @@ namespace UnitTestJit
             st.DoNext(); dat = st.Events.Peeks(99).ToList(); k = 0;
             Assert.IsTrue(CMP(dat[k++], "y2", EventTypes.Out, "9:00"));
             Assert.IsTrue(CMP(dat[k++], "y3", EventTypes.Out, "9:00"));
-            Assert.IsTrue(CMP(dat[k++], "y1", EventTypes.Out, "9:04", "Y"));
+            Assert.IsTrue(CMP(dat[k++], "y1", EventTypes.Out, "9:04", "Y"));    // y1 should add CoMaxCost count of Y
 
             st.DoNext(); dat = st.Events.Peeks(99).ToList(); k = 0;
             Assert.IsTrue(CMP(dat[k++], "y3", EventTypes.Out, "9:00"));
             Assert.IsTrue(CMP(dat[k++], "y1", EventTypes.Out, "9:04", "Y"));
-            Assert.IsTrue(CMP(dat[k++], "y2", EventTypes.Out, "9:04"));
+            Assert.IsTrue(CMP(dat[k++], "y2", EventTypes.Out, "9:04")); // y2 is in Out-Constraint of CoMaxCost = 1 @ Y
 
             st.DoNext(); dat = st.Events.Peeks(99).ToList(); k = 0;
             Assert.IsTrue(CMP(dat[k++], "y1", EventTypes.Out, "9:04", "Y"));

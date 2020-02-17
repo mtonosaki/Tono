@@ -36,7 +36,7 @@ namespace Tono.Jit
         /// <param name="e"></param>
         private void JitProcessPriorityJoint_ProcessAdded(object sender, ProcessAddedEventArgs e)
         {
-            AddProcessLink(GetProcessKey(e.Process), "..\\" + GetProcessKey(this));    // Make the work leave route from child to parent
+            AddProcessLink(GetProcessKey(e.Process), $".\\");    // Make the work leave route from child to parent subset(this class)
 
             int no = 0;
             foreach (var pkey in GetProcessKeys())

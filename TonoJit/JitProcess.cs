@@ -152,7 +152,7 @@ namespace Tono.Jit
 
             var nextProcs = work.Current.SubsetCache.GetProcessLinkPathes(this);    // TODO: Consider Global Path
             var nextProcKeyPath = nextProcs.FirstOrDefault();
-            work.Next =stage.FindSubsetProcess(work.Current, nextProcKeyPath, isReturnNull: true);   // TODO: SubsetのConnector対応
+            work.Next = stage.FindSubsetProcess(work.Current.ToEmptyProcess(), nextProcKeyPath, isReturnNull: true);   // TODO: SubsetのConnector対応
             work.EnterTime = now;
             CheckAndAttachKanban(work.Current, now); // かんばんが有れば、NextProcessをかんばんで更新する
         }
@@ -258,7 +258,7 @@ namespace Tono.Jit
         /// <param name="work"></param>
         public virtual void AddAndAdjustExitTiming(JitStage.WorkEventQueue events, JitWork work)
         {
-            if (work.Next != default && work.Next.Process != null)
+            if (work.Next?.Process != null)
             {
                 events.Enqueue(work.ExitTime, EventTypes.Out, work);  // 退場予約
             }
@@ -303,7 +303,7 @@ namespace Tono.Jit
             }
 
             var buf =
-                from w in location.Stage.GetWorks(location.Path, this)
+                from w in location.Stage.GetWorks(location.ToChangeProcess(this))
                 where w.Work.Next == default || w.Work.Next.Process == null // 行先が無い
                 select new WorkEntery { Work = w.Work, Enter = w.EnterTime };
             var work = ExitWorkSelector.Invoke(buf);

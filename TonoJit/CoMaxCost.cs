@@ -44,10 +44,10 @@ namespace Tono.Jit
         {
             var stage = work.FindStage();
             var wirs = stage.GetWorksInReserve(work.Current.Path, this);
+            var tarLocation = GetCheckTargetProcess(work);
+            var works = stage.GetWorks(tarLocation).Select(wt => wt.Work);
             var costs =
-                from w in stage.GetWorks(work.Current.Path, GetCheckTargetProcess(work).Process)
-                          .Select(wt => wt.Work)
-                          .Concat(wirs)
+                from w in works.Concat(wirs)
                 let cost = w.ChildVriables.GetValueOrNull("Cost")
                 where cost != null
                 let varval = cost[ReferenceVarName]

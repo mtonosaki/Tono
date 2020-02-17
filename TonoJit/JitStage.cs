@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using static Tono.Jit.Utils;
 using ProcessKeyPath = System.String;
 
 namespace Tono.Jit
@@ -160,7 +161,12 @@ namespace Tono.Jit
             {
                 goto Error;
             }
-            var path = JitLocation.CombinePath(currentLocation.Path, procKeyPath);
+            string path = currentLocation.Path;
+            if (currentLocation.Process != null)
+            {
+                path = JitLocation.CombinePath(path, GetProcessKey(currentLocation.Process));
+            }
+            path = JitLocation.CombinePath(path, procKeyPath);
             path = JitLocation.Normalize(path);
             if (path.StartsWith("\\") == false)
             {
@@ -402,6 +408,8 @@ Error:
             works.Remove(work);
         }
 
+        private readonly (JitWork Work, DateTime EnterTime)[] ZeroWorkCollection = new (JitWork Work, DateTime EnterTime)[] { };
+
         /// <summary>
         /// Query Works in process
         /// </summary>
@@ -409,9 +417,35 @@ Error:
         /// <returns></returns>
         public IEnumerable<(JitWork Work, DateTime EnterTime)> GetWorks(string locationPath, JitProcess process)
         {
-            var procworks = _worksInProcess.GetValueOrDefault(locationPath, true, a => new Dictionary<JitProcess, Dictionary<JitWork, DateTime/*Enter-Time*/>>());
-            var works = procworks.GetValueOrDefault(process, true, a => new Dictionary<JitWork, DateTime/*Enter-Time*/>());
-            return works.Select(kv => (kv.Key, kv.Value));
+            var procworks = _worksInProcess.GetValueOrDefault(locationPath);
+            if (procworks != null)
+            {
+                var works = procworks.GetValueOrDefault(process);
+                if( works != null)
+                {
+                    return works.Select(kv => (kv.Key, kv.Value));
+                }
+            }
+            return ZeroWorkCollection;
+        }
+
+        /// <summary>
+        /// Query Works in process
+        /// </summary>
+        /// <param name="location"></param>
+        /// <returns></returns>
+        public IEnumerable<(JitWork Work, DateTime EnterTime)> GetWorks(JitLocation location)
+        {
+            var procworks = _worksInProcess.GetValueOrDefault(location.Path);
+            if (procworks != null)
+            {
+                var works = procworks.GetValueOrDefault(location.Process);
+                if (works != null)
+                {
+                    return works.Select(kv => (kv.Key, kv.Value));
+                }
+            }
+            return ZeroWorkCollection;
         }
     }
 }
