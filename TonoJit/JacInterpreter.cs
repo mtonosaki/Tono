@@ -372,7 +372,7 @@ namespace Tono.Jit
                 }
                 else
                 {
-                    obj = (v1, v2);
+                    obj = new ValueTuple<object, object>(v1, v2);
                 }
                 varBuf[name] = obj;
                 rpnStack.Push((left.Level, name));

@@ -40,13 +40,9 @@ namespace Tono.Jit
                 if (nextLinkNo >= 0)
                 {
                     var tarProc = GetCheckTargetProcess(work)?.Process;
-                    var nexts = work.Current.Subset.GetProcessLinks(tarProc);
-                    var key = nexts[nextLinkNo];
-                    work.Next = new JitLocation
-                    {
-                        Subset = work.Current.Subset,
-                        Process = work.Current.Subset.FindChildProcess(key),
-                    };
+                    var nexts = work.Current.SubsetCache.GetProcessLinkPathes(tarProc);
+                    var pathkey = nexts[nextLinkNo];
+                    work.Next = work.FindStage().FindSubsetProcess(work.Current, pathkey, false);
                 }
             }
         }

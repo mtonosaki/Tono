@@ -43,7 +43,7 @@ namespace Tono.Jit
         /// <param name="work"></param>
         /// <param name="Now"></param>
         /// <returns></returns>
-        public virtual TimeSpan GetWaitTime(IJitEngine engine, WorkEventQueue.Item ei, DateTime Now)
+        public virtual TimeSpan GetWaitTime(WorkEventQueue.Item ei, DateTime Now)
         {
             return TimeSpan.FromDays(999.9);
         }

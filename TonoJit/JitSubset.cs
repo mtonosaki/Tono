@@ -39,7 +39,7 @@ namespace Tono.Jit
         /// <summary>
         /// Process Push Links
         /// </summary>
-        private Dictionary<ProcessKey, List<string>> _processKeyLinks = new Dictionary<ProcessKey, List<string>>();
+        private Dictionary<ProcessKey, List<ProcessKeyPath>> _processKeyLinks = new Dictionary<ProcessKey, List<ProcessKeyPath>>();
 
         /// <summary>
         /// Child Processes
@@ -83,11 +83,21 @@ namespace Tono.Jit
         {
             RemoveChildProcess(proc);
             _childProcess.Add(proc);
-            ProcessAdded?.Invoke(this, new ProcessAddedEventArgs
+
+            if (proc is JitSubset subset)
+            {
+                subset.ProcessAdded += Subset_ProcessAdded;
+            }
+            Subset_ProcessAdded(this, new ProcessAddedEventArgs
             {
                 Target = this,
                 Process = proc,
             });
+        }
+
+        private void Subset_ProcessAdded(object sender, ProcessAddedEventArgs e)
+        {
+            ProcessAdded?.Invoke(this, e);
         }
 
         /// <summary>
@@ -206,7 +216,6 @@ namespace Tono.Jit
             throw new JitException(JitException.NoProcKey, $"{procKey} in {this}");
         }
 
-
         /// <summary>
         /// Find next process of "fromProc"
         /// </summary>
@@ -214,7 +223,7 @@ namespace Tono.Jit
         /// <returns></returns>
         private JitProcess FindNextProcess(JitProcess fromProc)
         {
-            var links = GetProcessLinks(fromProc);
+            var links = GetProcessLinkPathes(fromProc);
             var key = links.FirstOrDefault();
             var ret = FindChildProcess(key, true);
             return ret;
@@ -263,7 +272,7 @@ namespace Tono.Jit
         /// <param name="procKeyPathTo"></param>
         public void RemoveProcessLink(ProcessKey procKeyFrom, ProcessKeyPath procKeyPathTo)
         {
-            var li = GetProcessLinks(procKeyFrom);
+            var li = GetProcessLinkPathes(procKeyFrom);
             var links = _processKeyLinks.Values.Where(a => ReferenceEquals(a, li)).FirstOrDefault();
             if (links != null)
             {
@@ -295,7 +304,7 @@ namespace Tono.Jit
         /// </summary>
         /// <param name="procKeyFrom"></param>
         /// <returns></returns>
-        public IReadOnlyList<ProcessKey> GetProcessLinks(ProcessKey procKeyFrom)
+        public IReadOnlyList<ProcessKeyPath> GetProcessLinkPathes(ProcessKey procKeyFrom)
         {
             if (_processKeyLinks.TryGetValue(procKeyFrom, out var list))
             {
@@ -314,7 +323,7 @@ namespace Tono.Jit
                 }
                 procKeyFrom = proc.ID;
             }
-            var list4 = new List<ProcessKey>();
+            var list4 = new List<ProcessKeyPath>();
             _processKeyLinks[procKeyFrom] = list4;
 
             return list4;
@@ -325,9 +334,9 @@ namespace Tono.Jit
         /// </summary>
         /// <param name="proc"></param>
         /// <returns></returns>
-        public IReadOnlyList<ProcessKey> GetProcessLinks(JitProcess proc)
+        public IReadOnlyList<ProcessKey> GetProcessLinkPathes(JitProcess proc)
         {
-            return GetProcessLinks(GetProcessKey(proc));
+            return GetProcessLinkPathes(GetProcessKey(proc));
         }
     }
 }

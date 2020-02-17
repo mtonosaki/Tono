@@ -45,8 +45,8 @@ namespace Tono.Jit
                 return false;   // already moved. すでにワークが付いているので制約なし（完了）
             }
 
-            var procPullFrom = parentWork.Current.Subset.FindChildProcess(PullFromProcessKey);
-            if (procPullFrom.ExitCollectedWork(parentWork.Engine, parentWork.Current.Subset, now) is JitWork sideWork)    // work at PullFrom process 横工程のワーク
+            var procPullFrom = parentWork.Current.FindSubsetProcess(PullFromProcessKey);   //.Subset.FindChildProcess(PullFromProcessKey);
+            if (procPullFrom.Process.ExitCollectedWork(parentWork.Current, now) is JitWork sideWork)    // work at PullFrom process 横工程のワーク
             {
                 parentWork.ChildWorks[ChildWorkKey] = sideWork;
                 return false;
@@ -62,7 +62,7 @@ namespace Tono.Jit
         /// <param name="ei"></param>
         /// <param name="Now"></param>
         /// <returns></returns>
-        public override TimeSpan GetWaitTime(IJitEngine engine, JitStage.WorkEventQueue.Item ei, DateTime Now)
+        public override TimeSpan GetWaitTime(JitStage.WorkEventQueue.Item ei, DateTime Now)
         {
             return PorlingSpan;
         }

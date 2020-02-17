@@ -14,14 +14,9 @@ namespace Tono.Jit
     /// Work is general item to make flow in just-in-time model that is not only physical item.
     /// </remarks>
     [JacTarget(Name = "Work")]
-    public class JitWork : JitVariable, IJitObjectID, IJieEngineReference
+    public class JitWork : JitVariable, IJitObjectID
     {
         public string ID { get; set; } = JacInterpreter.MakeID("Work");
-
-        /// <summary>
-        /// Target Engine
-        /// </summary>
-        public IJitEngine Engine { get; set; }
 
         /// <summary>
         /// Previous process (null = no previous)
@@ -75,6 +70,18 @@ namespace Tono.Jit
             Classes.Set(":Work");
             ChildVriables["Cost"][JitVariable.From("Count")].Value = JitVariable.From(1);  // カウントコスト
             ChildVriables["Cost"][JitVariable.From("Random")].Value = JitVariable.From(MathUtil.Rand0());  // ランダムコスト 0～0.99999999
+        }
+
+        /// <summary>
+        /// Find JitStage instance from Current, Previous and Next
+        /// </summary>
+        /// <returns></returns>
+        public JitStage FindStage()
+        {
+            if (Current.Stage != null) return Current.Stage;
+            if (Previous.Stage != null) return Previous.Stage;
+            if (Next.Stage != null) return Next.Stage;
+            return null;
         }
 
         public override bool Equals(object obj)

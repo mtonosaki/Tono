@@ -74,12 +74,12 @@ namespace UnitTestJit
             jac.Exec(code);
             var st = jac["st"] as JitStage;
             Assert.IsNotNull(st);
-            Assert.AreEqual(st.Subset.GetChildProcesses().Count(), 3);
-            Assert.AreEqual(st.Subset.GetChildProcess(0), st.Subset.GetChildProcess(0));  // check Equals
-            Assert.AreEqual(st.Subset.GetChildProcess(0).GetHashCode(), st.Subset.GetChildProcess(0).GetHashCode());  // check GetHashCode
-            Assert.AreNotEqual(st.Subset.GetChildProcess(0), st.Subset.GetChildProcess(1));
-            Assert.AreNotEqual(st.Subset.GetChildProcess(0), st.Subset.GetChildProcess(2));
-            Assert.AreNotEqual(st.Subset.GetChildProcess(1), st.Subset.GetChildProcess(2));
+            Assert.AreEqual(st.GetChildProcesses().Count(), 3);
+            Assert.AreEqual(st.GetChildProcess(0), st.GetChildProcess(0));  // check Equals
+            Assert.AreEqual(st.GetChildProcess(0).GetHashCode(), st.GetChildProcess(0).GetHashCode());  // check GetHashCode
+            Assert.AreNotEqual(st.GetChildProcess(0), st.GetChildProcess(1));
+            Assert.AreNotEqual(st.GetChildProcess(0), st.GetChildProcess(2));
+            Assert.AreNotEqual(st.GetChildProcess(1), st.GetChildProcess(2));
         }
         [TestMethod]
         public void Test04()
@@ -119,11 +119,11 @@ namespace UnitTestJit
             code = $@"
                 st
                     Procs
-                        remove '{st.Subset.GetChildProcess(0).Name}'
+                        remove '{st.GetChildProcess(0).Name}'
             ";
             jac.Exec(code);
-            Assert.AreEqual(st.Subset.GetChildProcesses().Count(), 1);
-            Assert.AreEqual(st.Subset.GetChildProcess(0).Name, "IgnoreProcess");
+            Assert.AreEqual(st.GetChildProcesses().Count(), 1);
+            Assert.AreEqual(st.GetChildProcess(0).Name, "IgnoreProcess");
         }
         [TestMethod]
         public void Test06()
@@ -147,8 +147,8 @@ namespace UnitTestJit
                         remove    IgnoreProcess  // Can specify ID (Cannot specify 'IgnoreProcess' as string)
             ";
             jac.Exec(code);
-            Assert.AreEqual(jac.GetStage("st")?.Subset.GetChildProcesses().Count(), 1);
-            Assert.AreNotEqual(jac.GetStage("st")?.Subset.GetChildProcess(0).Name, "IgnoreProcess");
+            Assert.AreEqual(jac.GetStage("st")?.GetChildProcesses().Count(), 1);
+            Assert.AreNotEqual(jac.GetStage("st")?.GetChildProcess(0).Name, "IgnoreProcess");
             Assert.IsNull(jac.GetProcess("IgnoreProcess")); // removed from VarBuffer
             Assert.IsNull(jac.GetProcess(name));            // removed from InstanceBuffer
         }
@@ -172,7 +172,7 @@ namespace UnitTestJit
                         remove p2
             ";
             jac.Exec(code);
-            Assert.AreEqual(jac.GetStage("st")?.Subset.GetChildProcesses().Count(), 0);
+            Assert.AreEqual(jac.GetStage("st")?.GetChildProcesses().Count(), 0);
         }
         [TestMethod]
         public void Test08()
@@ -203,7 +203,7 @@ namespace UnitTestJit
             Assert.IsNotNull(MyStage);
             Assert.IsNotNull(MySweetStage);
             Assert.AreEqual(MyStage, MySweetStage);
-            Assert.AreEqual(MyStage.Subset.GetChildProcesses().Count(), 1);
+            Assert.AreEqual(MyStage.GetChildProcesses().Count(), 1);
         }
         [TestMethod]
         public void Test09()
@@ -226,7 +226,7 @@ namespace UnitTestJit
                         remove p2       // find JitProcess instance by variable
             ";
             jac.Exec(code);
-            Assert.AreEqual(jac.GetStage("MyStage")?.Subset.GetChildProcesses().Count(), 0);
+            Assert.AreEqual(jac.GetStage("MyStage")?.GetChildProcesses().Count(), 0);
         }
 
         [TestMethod]
@@ -427,7 +427,7 @@ namespace UnitTestJit
             Assert.IsNotNull(i1);
             Assert.AreEqual(i1.Delay, TimeSpan.FromMinutes(1.5));
             Assert.AreEqual(i1.TargetWorkClass, ":Car");
-            Assert.AreEqual(st.Subset.FindChildProcess(i1.DestProcessKey, true), jac.GetProcess("sink")); // check lazy method
+            Assert.AreEqual(st.FindChildProcess(i1.DestProcessKey, true), jac.GetProcess("sink")); // check lazy method
 
             var i2 = jac["i2"] as CiDelay;
             Assert.IsNotNull(i2);
@@ -458,7 +458,7 @@ namespace UnitTestJit
 
             var i1 = jac["i1"] as CiPickTo;
             Assert.IsNotNull(i1);
-            var i1dest = st.Subset.FindChildProcess("SUPERLAZY", isReturnNull: true);
+            var i1dest = st.FindChildProcess("SUPERLAZY", isReturnNull: true);
             Assert.IsNull(i1dest);  // Expected Null because of no registered yet.
 
             var code2 = @"
@@ -468,11 +468,11 @@ namespace UnitTestJit
                             Name = 'SUPERLAZY'
             ";
             jac.Exec(code2);
-            i1dest = st.Subset.FindChildProcess("SUPERLAZY", isReturnNull: true);
+            i1dest = st.FindChildProcess("SUPERLAZY", isReturnNull: true);
             var p2 = jac.GetProcess("p2");
             Assert.AreEqual(i1dest, p2);  // Then FindProcess can find p2 named SUPERLAZY
 
-            i1dest = st.Subset.FindChildProcess(p2.ID, isReturnNull: true);  // You can also find by ID 
+            i1dest = st.FindChildProcess(p2.ID, isReturnNull: true);  // You can also find by ID 
             Assert.AreEqual(i1dest, p2);
         }
 
@@ -558,7 +558,9 @@ namespace UnitTestJit
             var code2 = @"
                 w1 = new Work
                     Next = l1 = new Location
-                        Subset = st.Subset
+                        Stage = st
+                        SubsetCache = st
+                        Path = '\'
                         Process = p1 = new Process
                 w2 = new Work
                     Current = w1.Next
@@ -577,12 +579,12 @@ namespace UnitTestJit
             Assert.IsNotNull(p1);
             Assert.IsNull(w1.Previous);
             Assert.IsNull(w1.Current);
-            Assert.AreEqual(w1.Next.Subset, st.Subset);
+            Assert.AreEqual(w1.Next.SubsetCache, st);
             Assert.AreEqual(w1.Next.Process, p1);
-            Assert.AreEqual(w2.Current.Subset, w1.Next.Subset);
-            Assert.AreEqual(w2.Current.Subset, st.Subset);
+            Assert.AreEqual(w2.Current.SubsetCache , w1.Next.SubsetCache );
+            Assert.AreEqual(w2.Current.SubsetCache , st);
             Assert.AreEqual(w2.Current.Process, p1);
-            Assert.AreEqual(w3.Previous.Subset, st.Subset);
+            Assert.AreEqual(w3.Previous.SubsetCache , st);
             Assert.AreEqual(w3.Previous.Process, p1);
             Assert.AreEqual(w4.Current, l1);
 
@@ -889,7 +891,7 @@ namespace UnitTestJit
             ";
             jac.Exec(code);
             var p1 = jac.GetProcess("p1");
-            var tos = st.Subset.GetProcessLinks(p1).Select(key => st.Subset.FindChildProcess(key)).ToArray();
+            var tos = st.GetProcessLinkPathes(p1).Select(key => st.FindChildProcess(key)).ToArray();
             Assert.AreEqual(tos.Length, 1);
             Assert.AreEqual(tos[0], jac.GetProcess("p2"));
 
@@ -899,7 +901,7 @@ namespace UnitTestJit
                         add p1->'PROC3'      // try to confirm super lazy link by Name
             ";
             jac.Exec(code);
-            tos = st.Subset.GetProcessLinks(p1).Select(key => st.Subset.FindChildProcess(key)).ToArray();
+            tos = st.GetProcessLinkPathes(p1).Select(key => st.FindChildProcess(key)).ToArray();
             Assert.AreEqual(tos.Length, 2);
             Assert.AreEqual(tos[0], jac.GetProcess("p2"));
             Assert.AreEqual(tos[1], jac.GetProcess("PROC3"));
@@ -911,7 +913,7 @@ namespace UnitTestJit
                         add p1 ->'PROCID4'    // try to confirm lazy link by ID
             ";
             jac.Exec(code);
-            tos = st.Subset.GetProcessLinks(p1).Select(key => st.Subset.FindChildProcess(key)).ToArray();
+            tos = st.GetProcessLinkPathes(p1).Select(key => st.FindChildProcess(key)).ToArray();
             Assert.AreEqual(tos.Length, 3);
             Assert.AreEqual(tos[0], jac.GetProcess("p2"));
             Assert.AreEqual(tos[1], jac.GetProcess("PROC3"));
@@ -923,7 +925,7 @@ namespace UnitTestJit
                         remove p1 -> p2
             ";
             jac.Exec(code);
-            tos = st.Subset.GetProcessLinks(p1).Select(key => st.Subset.FindChildProcess(key)).ToArray();
+            tos = st.GetProcessLinkPathes(p1).Select(key => st.FindChildProcess(key)).ToArray();
             Assert.AreEqual(tos.Length, 2);
             Assert.AreEqual(tos[0], jac.GetProcess("PROC3"));
             Assert.AreEqual(tos[1], jac.GetProcess("PROCID4"));
@@ -934,7 +936,7 @@ namespace UnitTestJit
                         remove p1->'PROC3'      // try to confirm super lazy link by Name
             ";
             jac.Exec(code);
-            tos = st.Subset.GetProcessLinks(p1).Select(key => st.Subset.FindChildProcess(key)).ToArray();
+            tos = st.GetProcessLinkPathes(p1).Select(key => st.FindChildProcess(key)).ToArray();
             Assert.AreEqual(tos.Length, 1);
             Assert.AreEqual(tos[0], jac.GetProcess("PROCID4"));
 
@@ -944,7 +946,7 @@ namespace UnitTestJit
                         remove p1 ->'PROCID4'    // try to confirm lazy link by ID
             ";
             jac.Exec(code);
-            tos = st.Subset.GetProcessLinks(p1).Select(key => st.Subset.FindChildProcess(key)).ToArray();
+            tos = st.GetProcessLinkPathes(p1).Select(key => st.FindChildProcess(key)).ToArray();
             Assert.AreEqual(tos.Length, 0);
 
             //--------------------------------------------------------------------------------------------
@@ -957,7 +959,7 @@ namespace UnitTestJit
             jac.Exec(code);
 
             var PROC3 = jac.GetProcess("PROC3");
-            tos = st.Subset.GetProcessLinks(PROC3).Select(key => st.Subset.FindChildProcess(key)).ToArray();
+            tos = st.GetProcessLinkPathes(PROC3).Select(key => st.FindChildProcess(key)).ToArray();
             Assert.AreEqual(tos.Length, 1);
             Assert.AreEqual(tos[0], jac.GetProcess("p2"));
 
@@ -968,7 +970,7 @@ namespace UnitTestJit
             ";
             jac.Exec(code);
 
-            tos = st.Subset.GetProcessLinks(PROC3).Select(key => st.Subset.FindChildProcess(key)).ToArray();
+            tos = st.GetProcessLinkPathes(PROC3).Select(key => st.FindChildProcess(key)).ToArray();
             Assert.AreEqual(tos.Length, 0);
 
             //--------------------------------------------------------------------------------------------
@@ -980,7 +982,7 @@ namespace UnitTestJit
             ";
             jac.Exec(code);
             var PROCID4 = jac.GetProcess("PROCID4");
-            tos = st.Subset.GetProcessLinks(PROCID4).Select(key => st.Subset.FindChildProcess(key)).ToArray();
+            tos = st.GetProcessLinkPathes(PROCID4).Select(key => st.FindChildProcess(key)).ToArray();
             Assert.AreEqual(tos.Length, 1);
             Assert.AreEqual(tos[0], jac.GetProcess("p2"));
 
@@ -990,21 +992,19 @@ namespace UnitTestJit
                         remove 'PROCID4' ->p2
             ";
             jac.Exec(code);
-            tos = st.Subset.GetProcessLinks(PROCID4).Select(key => st.Subset.FindChildProcess(key)).ToArray();
+            tos = st.GetProcessLinkPathes(PROCID4).Select(key => st.FindChildProcess(key)).ToArray();
             Assert.AreEqual(tos.Length, 0);
         }
 
         [TestMethod]
         public void Test30()
         {
-            var l1 = new JitLocation
-            {
-                Subset = new JitSubset(),
-                Process = new JitProcess(),
-            };
+            var l1 = JitLocation.CreateRoot(new JitStage(), new JitProcess());
             var l2 = new JitLocation
             {
-                Subset = l1.Subset,
+                Stage = l1.Stage,
+                SubsetCache = l1.Stage,
+                Path = "\\",
                 Process = l1.Process,
             };
             var b1 = l1.Equals(l2);
@@ -1012,6 +1012,35 @@ namespace UnitTestJit
 
             Assert.IsTrue(b1);
             Assert.IsTrue(b2);
+        }
+
+        [TestMethod]
+        public void Test31_TupleObject()
+        {
+            var code = @"
+                t1 = 'tono':'saki'
+                t2 = t1:'mana'
+                t3 = t1:t2
+            ";
+            var jac = new JacInterpreter();
+            jac.Exec(code);
+            var xt1 = jac["t1"];
+            var xt2 = jac["t2"];
+            var xt3 = jac["t3"];
+            Assert.AreEqual(xt1.GetType(), typeof(ValueTuple<object, object>));
+            Assert.AreEqual(xt2.GetType(), typeof(ValueTuple<object, object>));
+            Assert.AreEqual(xt3.GetType(), typeof(ValueTuple<object, object>));
+            var t1 = (ValueTuple<object, object>)xt1;
+            var t2 = (ValueTuple<object, object>)xt2;
+            var t3 = (ValueTuple<object, object>)xt3;
+            Assert.AreEqual(t1.Item1, "tono");
+            Assert.AreEqual(t1.Item2, "saki");
+            var t21 = (ValueTuple<object, object>)t2.Item1;
+            Assert.AreEqual(t21.Item1, "tono");
+            Assert.AreEqual(t21.Item2, "saki");
+            Assert.AreEqual(t2.Item2, "mana");
+            var t32 = (ValueTuple<object, object>)t3.Item2;
+            Assert.AreEqual(t32.Item2, "mana");
         }
     }
 

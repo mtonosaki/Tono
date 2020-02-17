@@ -78,9 +78,9 @@ namespace Tono.Jit
             private readonly Dictionary<DateTime, LinkedListNode<Item>> _sections = new Dictionary<DateTime, LinkedListNode<Item>>();    // 分毎のダミーアイテム. null=その時刻のデータは_datには無い
 
             /// <summary>
-            /// Parent Engine
+            /// Parent Stage
             /// </summary>
-            public IJitEngine Engine { get; internal set; }
+            public JitStage Stage { get; internal set; }
 
             /// <summary>
             /// remove the specified nodes 指定アイテムを全部消す
@@ -113,10 +113,11 @@ namespace Tono.Jit
             {
                 PrepareDummyItems(dt);
 
-                if (workOrKanban is IJieEngineReference ejobj)
-                {
-                    ejobj.Engine = Engine;  // Change target Engine
-                }
+                // TODO: Delete this comment
+                //if (workOrKanban is IJieEngineReference ejobj)
+                //{
+                //    ejobj.Engine = Engine;  // Change target Engine
+                //}
 
                 LinkedListNode<Item> node;
                 if (_sections.TryGetValue(TimeUtil.ClearSeconds(dt), out var topnode) == false)    // 分毎にシーク位置をスキップできる
@@ -218,7 +219,7 @@ namespace Tono.Jit
             /// <param name="workclass"></param>
             /// <returns></returns>
             /// <remarks></remarks>
-            public virtual IEnumerable<LinkedListNode<Item>> FindAll((JitSubset Subset, JitProcess Process) proc, EventTypes etype, string workclass = JitVariable.Class.Object)
+            public virtual IEnumerable<LinkedListNode<Item>> FindAll(JitLocation location, EventTypes etype, string workclass = JitVariable.Class.Object)
             {
                 for (var node = _dat.First; node != null; node = node.Next)
                 {
@@ -227,10 +228,13 @@ namespace Tono.Jit
                     {
                         continue;
                     }
-                    var w = ei.Work;
-                    if (JitWork.Equals(w.Current, proc) && ei.Type == etype && w.Is(workclass))
+                    var workloc = ei.Work.Current;
+                    if (workloc.Process?.Equals(location.Process) ?? false)
                     {
-                        yield return node;
+                        if (ei.Type == etype && ei.Work.Is(workclass))
+                        {
+                            yield return node;
+                        }
                     }
                 }
             }

@@ -46,7 +46,7 @@ namespace Tono.Jit
         public List<CoBase> Constraints { get; } = new List<CoBase>();
 
         [JacListAdd(PropertyName = "Cio")]
-        public void CioAdd(object obj)
+        public void AddCio(object obj)
         {
             if (obj is CiBase ci)
             {
@@ -65,7 +65,7 @@ namespace Tono.Jit
         }
 
         [JacListRemove(PropertyName = "Cio")]
-        public void CioRemove(object obj)
+        public void RemoveCio(object obj)
         {
             string id = "";
             if (obj is CioBase cio)
@@ -139,27 +139,22 @@ namespace Tono.Jit
         /// <param name="work"></param>
         public virtual void Enter(JitWork work, DateTime now)
         {
-            var engine = work.Engine;
+            var stage = work.FindStage();
 
             foreach (var cio in Cios)
             {
-                engine.RemoveWorkInReserve(work.Current.Subset, cio, work);
+                stage.RemoveWorkInReserve(work.Current.Path, cio, work);
             }
 
-            engine.SaveWorkToSubsetProcess(work.Next.Subset, this, work, now);
+            stage.SaveWorkToSubsetProcess(work.Next.Path, this, work, now);
             work.Previous = work.Current;
             work.Current = work.Next;
 
-            var nextProcs = work.Current.Subset.GetProcessLinks(this);
-            var nextProcKey = nextProcs.FirstOrDefault();
-            var nextProc = work.Current.Subset.FindChildProcess(nextProcKey, isReturnNull: true);
-            work.Next = new JitLocation
-            {
-                Subset = work.Current.Subset,
-                Process = nextProc,             // TODO: SubsetのConnector対応
-            };
+            var nextProcs = work.Current.SubsetCache.GetProcessLinkPathes(this);    // TODO: Consider Global Path
+            var nextProcKeyPath = nextProcs.FirstOrDefault();
+            work.Next =stage.FindSubsetProcess(work.Current, nextProcKeyPath, isReturnNull: true);   // TODO: SubsetのConnector対応
             work.EnterTime = now;
-            CheckAndAttachKanban(work.Engine, work.Current.Subset, now); // かんばんが有れば、NextProcessをかんばんで更新する
+            CheckAndAttachKanban(work.Current, now); // かんばんが有れば、NextProcessをかんばんで更新する
         }
 
         /// <summary>
@@ -169,7 +164,8 @@ namespace Tono.Jit
         /// <param name="now"></param>
         public virtual void Exit(JitWork work)
         {
-            work.Engine.RemoveWorkFromSubsetProcess(work.Current.Subset, this, work);
+            var stage = work.FindStage();
+            stage.RemoveWorkFromSubsetProcess(work.Current.Path, this, work);
         }
 
         /// <summary>
@@ -184,10 +180,10 @@ namespace Tono.Jit
         /// ret.NextProcess = null
         /// ret.CurrentProcess = null
         /// </remarks>
-        public virtual JitWork ExitCollectedWork(IJitEngine engine, JitSubset subset, DateTime now)
+        public virtual JitWork ExitCollectedWork(JitLocation location, DateTime now)
         {
             var buf =
-                from wt in engine.GetWorks(subset, this)
+                from wt in location.GetWorks(this)
                 where wt.Work.Next == default || wt.Work.Next.Process == null       // work that have not next process
                 where wt.Work.ExitTime <= now       // select work that exit time expired.
                 select new WorkEntery { Work = wt.Work, Enter = wt.EnterTime };
@@ -196,21 +192,9 @@ namespace Tono.Jit
             {
                 Exit(work);
 
-                work.Previous = new JitLocation
-                {
-                    Subset = work.Current.Subset,
-                    Process = this,
-                };
-                work.Current = new JitLocation
-                {
-                    Subset = work.Current.Subset,
-                    Process = null,
-                };
-                work.Next = new JitLocation
-                {
-                    Subset = work.Current.Subset,
-                    Process = null,
-                };
+                work.Previous = work.Current.ToChangeProcess(this);
+                work.Current = work.Current.ToEmptyProcess();
+                work.Next = work.Current.ToEmptyProcess();
             }
             return work;
         }
@@ -261,8 +245,9 @@ namespace Tono.Jit
         {
             foreach (var cio in Cios)
             {
-                ei.Work.Engine.SetLastInTime(ei.Work.Current.Subset, cio, now);  // save in-time (for Span constraint)
-                ei.Work.Engine.AddWorkInReserve(ei.Work.Current.Subset, cio, ei.Work);   // reserve work-in (for Max constraint)
+                var stage = ei.Work.FindStage();
+                stage.SetLastInTime(ei.Work.Current.Path, cio, now);  // save in-time (for Span constraint)
+                stage.AddWorkInReserve(ei.Work.Current.Path, cio, ei.Work);   // reserve work-in (for Max constraint)
             }
         }
 
@@ -288,37 +273,37 @@ namespace Tono.Jit
         /// <summary>
         /// Event queue kanban
         /// </summary>
-        private readonly Dictionary<IJitEngine, Queue<EventQueueKanban>> kanbanQueue = new Dictionary<IJitEngine, Queue<EventQueueKanban>>();
+        private readonly Dictionary<JitStage, Queue<EventQueueKanban>> kanbanQueue = new Dictionary<JitStage, Queue<EventQueueKanban>>();
 
         /// <summary>
         /// Add kanban
         /// </summary>
         /// <param name="kanban"></param>
-        public virtual JitKanban AddKanban(IJitEngine engine, JitSubset subset, JitKanban kanban, DateTime now)
+        public virtual JitKanban AddKanban(JitLocation location, JitKanban kanban, DateTime now)
         {
-            kanbanQueue.GetValueOrDefault(engine, true, a => new Queue<EventQueueKanban>()).Enqueue(new EventQueueKanban
+            kanbanQueue.GetValueOrDefault(location.Stage, true, a => new Queue<EventQueueKanban>()).Enqueue(new EventQueueKanban
             {
-                EventQueue = engine.Events,
+                EventQueue = location.Stage.Events,
                 Kanban = kanban,
             });
-            kanban.Subset = subset; // Update to new subset
-            return CheckAndAttachKanban(engine, subset, now);
+            kanban.Location = location; // Update to new subset
+            return CheckAndAttachKanban(location, now);
         }
 
         /// <summary>
         /// かんばんの目的地をワークに付ける（付け替える）
         /// </summary>
         /// <returns>処理されたかんばん</returns>
-        private JitKanban CheckAndAttachKanban(IJitEngine engine, JitSubset subset, DateTime now)
+        private JitKanban CheckAndAttachKanban(JitLocation location, DateTime now)
         {
-            var queue = kanbanQueue.GetValueOrDefault(engine, true, a => new Queue<EventQueueKanban>());
+            var queue = kanbanQueue.GetValueOrDefault(location.Stage, true, a => new Queue<EventQueueKanban>());
             if (queue.Count == 0)
             {
                 return null;
             }
 
             var buf =
-                from w in engine.GetWorks(subset, this)
+                from w in location.Stage.GetWorks(location.Path, this)
                 where w.Work.Next == default || w.Work.Next.Process == null // 行先が無い
                 select new WorkEntery { Work = w.Work, Enter = w.EnterTime };
             var work = ExitWorkSelector.Invoke(buf);
@@ -329,11 +314,8 @@ namespace Tono.Jit
             }
 
             var sk = queue.Dequeue();
-            work.Next = new JitLocation
-            {
-                Subset = sk.Kanban.Subset,
-                Process = sk.Kanban.Subset.FindChildProcess(sk.Kanban.PullToProcessKey),
-            };
+            var nextProc = sk.Kanban.Location.SubsetCache.FindChildProcess(sk.Kanban.PullToProcessKey);  // TODO: Consider Global Path
+            work.Next = sk.Kanban.Location.ToChangeProcess(nextProc);
             work.Kanbans.Add(sk.Kanban);
             sk.Kanban.Work = work;
             if (work.ExitTime < now)
@@ -354,10 +336,10 @@ namespace Tono.Jit
 
         public override string Name { get => throw new NotAllowErrorException(); set => throw new NotAllowErrorException(); }
         public override void AddAndAdjustExitTiming(JitStage.WorkEventQueue events, JitWork work) => throw new NotAllowErrorException();
-        public override JitKanban AddKanban(IJitEngine engine, JitSubset subset, JitKanban kanban, DateTime now) => throw new NotAllowErrorException();
+        public override JitKanban AddKanban(JitLocation location, JitKanban kanban, DateTime now) => throw new NotAllowErrorException();
         public override void Enter(JitWork work, DateTime now) => throw new NotAllowErrorException();
         public override void Exit(JitWork work) => throw new NotAllowErrorException();
-        public override JitWork ExitCollectedWork(IJitEngine engine, JitSubset subset, DateTime now) => throw new NotAllowErrorException();
+        public override JitWork ExitCollectedWork(JitLocation location, DateTime now) => throw new NotAllowErrorException();
     }
     #endregion
 

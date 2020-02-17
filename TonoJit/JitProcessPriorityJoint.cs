@@ -36,7 +36,7 @@ namespace Tono.Jit
         /// <param name="e"></param>
         private void JitProcessPriorityJoint_ProcessAdded(object sender, ProcessAddedEventArgs e)
         {
-            AddProcessLink(GetProcessKey(e.Process), GetProcessKey(this));    // Make the work leave route from child to parent
+            AddProcessLink(GetProcessKey(e.Process), "..\\" + GetProcessKey(this));    // Make the work leave route from child to parent
 
             int no = 0;
             foreach (var pkey in GetProcessKeys())
@@ -56,7 +56,7 @@ namespace Tono.Jit
         {
             if (work.Next != default && work.Next.Process != null)
             {
-                var sortList = events.FindAll((work.Current.Subset, this), EventTypes.Out).ToList();
+                var sortList = events.FindAll(work.Current.ToChangeProcess(this), EventTypes.Out).ToList();
                 var tarDT = work.ExitTime;
                 if (sortList.Count > 0)
                 {
