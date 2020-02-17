@@ -51,13 +51,10 @@ namespace Tono.Jit
             foreach (string childWorkName in childworkNames.ToArray())
             {
                 var childWork = work.ChildWorks[childWorkName];
-                var destProc = work.Current.Subset.ChildProcesses.FindProcess(DestProcessKey);
-                childWork.Next = (work.Current.Subset, destProc);
-                childWork.Current = (work.Current.Subset, null);    // 子Workであった事を default とする。
-                                                                    // childWork.PrevProcess = default; // workがAssyされた元工程を覚えておく
-
+                childWork.Next = work.Current.FindSubsetProcess(DestProcessKey, true);  //work.Current.Subset.FindChildProcess(DestProcessKey);
+                childWork.Current = work.Current.ToEmptyProcess();                      // 子Workであった事を Process = null とする。
                 work.ChildWorks.Remove(childWorkName);  // Remove work from child works.  子ワークから外す
-                work.Engine.Events.Enqueue(now + Delay, EventTypes.Out, childWork);   // Reserve destination of push move. 次工程にPUSH予約
+                work.FindStage().Events.Enqueue(now + Delay, EventTypes.Out, childWork);   // Reserve destination of push move. 次工程にPUSH予約
             }
         }
     }

@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Tono;
 using Tono.Jit;
+using static Tono.Jit.Utils;
 
 namespace UnitTestJit
 {
@@ -122,42 +123,42 @@ namespace UnitTestJit
 
             foreach (var st in new[] { st1, st2 })
             {
-                st.Subset.AddChildProcess(A);
-                st.Subset.AddChildProcess(B);
-                st.Subset.AddChildProcess(C);
-                st.Subset.AddChildProcess(Y);
-                st.Subset.AddChildProcess(Z);
-                st.Subset.AddChildProcess(SINK);
-                st.Subset.AddChildProcess(D);
+                st.AddChildProcess(A);
+                st.AddChildProcess(B);
+                st.AddChildProcess(C);
+                st.AddChildProcess(Y);
+                st.AddChildProcess(Z);
+                st.AddChildProcess(SINK);
+                st.AddChildProcess(D);
 
                 // çHíˆä‘ÉäÉìÉN
-                st.Subset.AddProcessLink(A, B); // AÅ®B PushÅBíAÇµÅAB.Co.JoinFromÇ≈JoinÇ≈Ç´ÇÈÇ‹Ç≈ë“Ç¬
-                st.Subset.AddProcessLink(B, C); // BÅ®C PushÅBï™äÚçHíˆÇ÷ÇÃà⁄ìÆ
-                st.Subset.AddProcessLink(C, SINK); // BÅ®SINK Push
-                st.Subset.AddProcessLink(D, SINK); // DÅ®SINK Push
+                st.AddProcessLink(A, B); // AÅ®B PushÅBíAÇµÅAB.Co.JoinFromÇ≈JoinÇ≈Ç´ÇÈÇ‹Ç≈ë“Ç¬
+                st.AddProcessLink(B, C); // BÅ®C PushÅBï™äÚçHíˆÇ÷ÇÃà⁄ìÆ
+                st.AddProcessLink(C, SINK); // BÅ®SINK Push
+                st.AddProcessLink(D, SINK); // DÅ®SINK Push
 
                 var today = TimeUtil.ClearTime(DateTime.Now);  // H:M:S:MSÇÇOÇ…Ç∑ÇÈ
-                st.Engine.Events.Enqueue(TimeUtil.Set(today, hour: tp[st], minute: 0), EventTypes.Out, tw[(st, "w1")] = new JitWork
+                st.Events.Enqueue(TimeUtil.Set(today, hour: tp[st], minute: 0), EventTypes.Out, tw[(st, "w1")] = new JitWork
                 {
                     Name = $"w1",
-                    Current = (st.Subset, null),
-                    Next = (st.Subset, A),
+                    Current = JitLocation.CreateRoot(st, null),
+                    Next = JitLocation.CreateRoot(st, A),
                 });
                 Assert.IsTrue(tw[(st, "w1")].Is(":Work"));
 
-                st.Engine.Events.Enqueue(TimeUtil.Set(today, hour: tp[st], minute: 0), EventTypes.Out, tw[(st, "y1")] = new JitWork
+                st.Events.Enqueue(TimeUtil.Set(today, hour: tp[st], minute: 0), EventTypes.Out, tw[(st, "y1")] = new JitWork
                 {
                     Name = $"y1",
-                    Current = (st.Subset, null),
-                    Next = (st.Subset, Y),
+                    Current = JitLocation.CreateRoot(st, null),
+                    Next = JitLocation.CreateRoot(st, Y),
                     Classes = JitVariable.ClassList.From(":iOS:Sumaho"),    // :WorkÇ…ÅAÉNÉâÉXÅuí«â¡Åv
                 });
 
-                st.Engine.Events.Enqueue(TimeUtil.Set(today, hour: tp[st], minute: 2), EventTypes.Out, tw[(st, "z1")] = new JitWork
+                st.Events.Enqueue(TimeUtil.Set(today, hour: tp[st], minute: 2), EventTypes.Out, tw[(st, "z1")] = new JitWork
                 {
                     Name = $"z1",
-                    Current = (st.Subset, null),
-                    Next = (st.Subset, Z),
+                    Current = JitLocation.CreateRoot(st, null),
+                    Next = JitLocation.CreateRoot(st, Z),
                     Classes = JitVariable.ClassList.From(":Android:Sumaho"),    // :WorkÇ…ÅAÉNÉâÉXÅuí«â¡Åv
                 });
             }
@@ -166,77 +167,77 @@ namespace UnitTestJit
             // èâä˙èÛë‘ÇÕéûä‘èáÇ…ï¿ÇÒÇ≈ÇÈ
             foreach (var st in new[] { st1, st2 })
             {
-                var dat = st.Engine.Events.Peeks(99).ToList(); k = 0;
+                var dat = st.Events.Peeks(99).ToList(); k = 0;
                 Assert.IsTrue(CMP(dat[k++], "w1", EventTypes.Out, $"{t8[st]}:00"));
                 Assert.IsTrue(CMP(dat[k++], "y1", EventTypes.Out, $"{t8[st]}:00"));
                 Assert.IsTrue(CMP(dat[k++], "z1", EventTypes.Out, $"{t8[st]}:02"));
             }
             foreach (var st in new[] { st1, st2 })
             {
-                st.Engine.DoNext();
-                var dat = st.Engine.Events.Peeks(99).ToList(); k = 0;
+                st.DoNext();
+                var dat = st.Events.Peeks(99).ToList(); k = 0;
                 Assert.IsTrue(CMP(dat[k++], "y1", EventTypes.Out, $"{t8[st]}:00"));
                 Assert.IsTrue(CMP(dat[k++], "w1", EventTypes.In, $"{t8[st]}:00"));
                 Assert.IsTrue(CMP(dat[k++], "z1", EventTypes.Out, $"{t8[st]}:02"));
             }
             foreach (var st in new[] { st1, st2 })
             {
-                st.Engine.DoNext();
-                var dat = st.Engine.Events.Peeks(99).ToList(); k = 0;
+                st.DoNext();
+                var dat = st.Events.Peeks(99).ToList(); k = 0;
                 Assert.IsTrue(CMP(dat[k++], "w1", EventTypes.In, $"{t8[st]}:00"));
                 Assert.IsTrue(CMP(dat[k++], "y1", EventTypes.In, $"{t8[st]}:00"));
                 Assert.IsTrue(CMP(dat[k++], "z1", EventTypes.Out, $"{t8[st]}:02"));
             }
             foreach (var st in new[] { st1, st2 })
             {
-                st.Engine.DoNext();
-                var dat = st.Engine.Events.Peeks(99).ToList(); k = 0;
+                st.DoNext();
+                var dat = st.Events.Peeks(99).ToList(); k = 0;
                 Assert.IsTrue(CMP(dat[k++], "y1", EventTypes.In, $"{t8[st]}:00"));
                 Assert.IsTrue(CMP(dat[k++], "z1", EventTypes.Out, $"{t8[st]}:02"));
                 Assert.IsTrue(CMP(dat[k++], "w1", EventTypes.Out, $"{t8[st]}:10", "A"));
 
-                st.Engine.DoNext();
-                dat = st.Engine.Events.Peeks(99).ToList(); k = 0;
+                st.DoNext();
+                dat = st.Events.Peeks(99).ToList(); k = 0;
                 Assert.IsTrue(CMP(dat[k++], "z1", EventTypes.Out, $"{t8[st]}:02"));
                 Assert.IsTrue(CMP(dat[k++], "w1", EventTypes.Out, $"{t8[st]}:10", "A"));
             }
             foreach (var st in new[] { st1, st2 })
             {
-                st.Engine.DoNext();
-                var dat = st.Engine.Events.Peeks(99).ToList(); k = 0;
+                st.DoNext();
+                var dat = st.Events.Peeks(99).ToList(); k = 0;
                 Assert.IsTrue(CMP(dat[k++], "z1", EventTypes.In, $"{t8[st]}:02"));
                 Assert.IsTrue(CMP(dat[k++], "w1", EventTypes.Out, $"{t8[st]}:10", "A"));
             }
             foreach (var st in new[] { st1, st2 })
             {
-                st.Engine.DoNext();
-                var dat = st.Engine.Events.Peeks(99).ToList(); k = 0;
+                st.DoNext();
+                var dat = st.Events.Peeks(99).ToList(); k = 0;
                 Assert.IsTrue(CMP(dat[k++], "w1", EventTypes.Out, $"{t8[st]}:10", "A"));
                 Assert.AreEqual(dat.Count, 1);
             }
             foreach (var st in new[] { st1, st2 })
             {
-                st.Engine.DoNext();
-                var dat = st.Engine.Events.Peeks(99).ToList(); k = 0;
+                st.DoNext();
+                var dat = st.Events.Peeks(99).ToList(); k = 0;
                 Assert.IsTrue(CMP(dat[k++], "w1", EventTypes.Out, $"{t8[st]}:20", "A"));
             }
             foreach (var st in new[] { st1, st2 })
             {
-                st.Engine.DoNext();
-                var dat = st.Engine.Events.Peeks(99).ToList(); k = 0;
+                st.DoNext();
+                var dat = st.Events.Peeks(99).ToList(); k = 0;
                 Assert.IsTrue(CMP(dat[k++], "w1", EventTypes.Out, $"{t8[st]}:30", "A"));
             }
             foreach (var st in new[] { st1, st2 })
             {
-                st.Engine.DoNext();
-                var dat = st.Engine.Events.Peeks(99).ToList(); k = 0;
+                st.DoNext();
+                var dat = st.Events.Peeks(99).ToList(); k = 0;
                 Assert.IsTrue(CMP(dat[k++], "w1", EventTypes.Out, $"{t8[st]}:40", "A"));
                 Assert.AreEqual(tw[(st, "w1")].ChildWorks[JFY.ChildWorkKey], tw[(st, "y1")]);
             }
             foreach (var st in new[] { st1, st2 })
             {
-                st.Engine.DoNext();
-                var dat = st.Engine.Events.Peeks(99).ToList(); k = 0;
+                st.DoNext();
+                var dat = st.Events.Peeks(99).ToList(); k = 0;
                 Assert.IsTrue(CMP(dat[k++], "w1", EventTypes.In, $"{t8[st]}:40", "A"));
                 Assert.AreEqual(tw[(st, "w1")].ChildWorks[JFY.ChildWorkKey], tw[(st, "y1")]);
                 Assert.AreEqual(tw[(st, "w1")].ChildWorks[JFZ.ChildWorkKey], tw[(st, "z1")]);
@@ -244,125 +245,171 @@ namespace UnitTestJit
             // BÇ…InOKÅBB.Ci.Delay=20
             foreach (var st in new[] { st1, st2 })
             {
-                st.Engine.DoNext();
-                var dat = st.Engine.Events.Peeks(99).ToList(); k = 0;
+                st.DoNext();
+                var dat = st.Events.Peeks(99).ToList(); k = 0;
                 Assert.IsTrue(CMP(dat[k++], "w1", EventTypes.Out, $"{t9[st]}:00", "B"));
             }
             foreach (var st in new[] { st1, st2 })
             {
-                st.Engine.DoNext();
-                var dat = st.Engine.Events.Peeks(99).ToList(); k = 0;
+                st.DoNext();
+                var dat = st.Events.Peeks(99).ToList(); k = 0;
                 Assert.IsTrue(CMP(dat[k++], "w1", EventTypes.In, $"{t9[st]}:00", "B"));
             }
             foreach (var st in new[] { st1, st2 })
             {
-                st.Engine.DoNext();
-                var dat = st.Engine.Events.Peeks(99).ToList(); k = 0;
+                st.DoNext();
+                var dat = st.Events.Peeks(99).ToList(); k = 0;
                 Assert.IsTrue(CMP(dat[k++], "y1", EventTypes.Out, $"{t9[st]}:01"));
                 Assert.IsTrue(CMP(dat[k++], "z1", EventTypes.Out, $"{t9[st]}:01"));
                 Assert.IsTrue(CMP(dat[k++], "w1", EventTypes.Out, $"{t9[st]}:08", "C"));
             }
             foreach (var st in new[] { st1, st2 })
             {
-                st.Engine.DoNext();
-                var dat = st.Engine.Events.Peeks(99).ToList(); k = 0;
+                st.DoNext();
+                var dat = st.Events.Peeks(99).ToList(); k = 0;
                 Assert.IsTrue(CMP(dat[k++], "z1", EventTypes.Out, $"{t9[st]}:01"));
                 Assert.IsTrue(CMP(dat[k++], "y1", EventTypes.In, $"{t9[st]}:01"));
                 Assert.IsTrue(CMP(dat[k++], "w1", EventTypes.Out, $"{t9[st]}:08", "C"));
             }
             foreach (var st in new[] { st1, st2 })
             {
-                st.Engine.DoNext();
-                var dat = st.Engine.Events.Peeks(99).ToList(); k = 0;
+                st.DoNext();
+                var dat = st.Events.Peeks(99).ToList(); k = 0;
                 Assert.IsTrue(CMP(dat[k++], "y1", EventTypes.In, $"{t9[st]}:01"));
                 Assert.IsTrue(CMP(dat[k++], "z1", EventTypes.Out, $"{t9[st]}:04"));    // D.Co.SpanêßñÒÇ≈3ïbâ¡éZÇ≥ÇÍÇΩ
                 Assert.IsTrue(CMP(dat[k++], "w1", EventTypes.Out, $"{t9[st]}:08", "C"));
             }
             foreach (var st in new[] { st1, st2 })
             {
-                st.Engine.DoNext();
-                var dat = st.Engine.Events.Peeks(99).ToList(); k = 0;
+                st.DoNext();
+                var dat = st.Events.Peeks(99).ToList(); k = 0;
                 Assert.IsTrue(CMP(dat[k++], "z1", EventTypes.Out, $"{t9[st]}:04"));
                 Assert.IsTrue(CMP(dat[k++], "w1", EventTypes.Out, $"{t9[st]}:08", "C"));
                 Assert.IsTrue(CMP(dat[k++], "y1", EventTypes.Out, $"{t9[st]}:51", "D"));   // inÇ≥ÇÍÇΩ
             }
             foreach (var st in new[] { st1, st2 })
             {
-                st.Engine.DoNext();
-                var dat = st.Engine.Events.Peeks(99).ToList(); k = 0;
+                st.DoNext();
+                var dat = st.Events.Peeks(99).ToList(); k = 0;
                 Assert.IsTrue(CMP(dat[k++], "z1", EventTypes.In, $"{t9[st]}:04"));
                 Assert.IsTrue(CMP(dat[k++], "w1", EventTypes.Out, $"{t9[st]}:08", "C"));
                 Assert.IsTrue(CMP(dat[k++], "y1", EventTypes.Out, $"{t9[st]}:51", "D"));
             }
             foreach (var st in new[] { st1, st2 })
             {
-                st.Engine.DoNext();
-                var dat = st.Engine.Events.Peeks(99).ToList(); k = 0;
+                st.DoNext();
+                var dat = st.Events.Peeks(99).ToList(); k = 0;
                 Assert.IsTrue(CMP(dat[k++], "w1", EventTypes.Out, $"{t9[st]}:08", "C"));
                 Assert.IsTrue(CMP(dat[k++], "y1", EventTypes.Out, $"{t9[st]}:51", "D"));
                 Assert.IsTrue(CMP(dat[k++], "z1", EventTypes.Out, $"{t9[st]}:54", "D"));
             }
         }
+
         [TestMethod]
         public void Test002()
         {
-            // Test case come from Jit Model Class Design.pptx
-            var X = new JitSubset();
-            X.AddProcessLink("A", "B");
-
-            JitProcess A, B;
-            X.AddChildProcess(A = new JitProcess  // First Process
+            JitProcess a, b, c, d, x;
+            JitSubset f, g, h;
+            var st = new JitStage
             {
-                Name = "A",
-            });
-            X.AddChildProcess(B = new JitProcess  // 2nd Process
+                Name = "st",
+            };
+            st.AddChildProcess(f = new JitSubset
             {
-                Name = "B",
+                Name = "f",
             });
-            A.InCommands.Add(new CiDelay
+            st.AddChildProcess(x = new JitProcess
             {
-                Delay = TimeSpan.FromSeconds(20),
+                Name = "x",
             });
-            B.InCommands.Add(new CiDelay
+            f.AddChildProcess(g = new JitSubset
             {
-                Delay = TimeSpan.FromSeconds(15),
+                Name = "g",
             });
-
-            var st = new JitStage();
-
-            JitWork w1;
-            var today = TimeUtil.ClearTime(DateTime.Now);  // H:M:S:MSÇÇOÇ…Ç∑ÇÈ
-            st.Engine.Events.Enqueue(TimeUtil.Set(today, hour: 9, minute: 0), EventTypes.Out, w1 = new JitWork
+            f.AddChildProcess(h = new JitSubset
             {
-                Name = $"w1",
-                Current = (st.Subset, null),
-                Next = (st.Subset, A),
+                Name = "h",
             });
-#if false
-
-            var k = 0;
-
-            // èâä˙èÛë‘ÇÕéûä‘èáÇ…ï¿ÇÒÇ≈ÇÈ
-            var dat = st.Model.Engine().Events.Peeks(99).ToList(); k = 0;
-            Assert.IsTrue(CMP(dat[k++], "w1", EventTypes.Out, "9:00"));
-
-            st.Model.Engine().DoNext();
-            dat = st.Model.Engine().Events.Peeks(99).ToList(); k = 0;
-            Assert.IsTrue(CMP(dat[k++], "w1", EventTypes.In, "9:00"));
-
-            st.Model.Engine().DoNext();
-            dat = st.Model.Engine().Events.Peeks(99).ToList(); k = 0;
-            Assert.IsTrue(CMP(dat[k++], "w1", EventTypes.Out, "9:20", "A"));
-
-            st.Model.Engine().DoNext();
-            dat = st.Model.Engine().Events.Peeks(99).ToList(); k = 0;
-            Assert.IsTrue(CMP(dat[k++], "w1", EventTypes.In, "9:20", "A"));
-
-            st.Model.Engine().DoNext();
-            dat = st.Model.Engine().Events.Peeks(99).ToList(); k = 0;
-            Assert.AreEqual(dat.Count, 0);
-#endif
+            g.AddChildProcess(a = new JitProcess
+            {
+                Name = "a",
+            });
+            g.AddChildProcess(b = new JitProcess
+            {
+                Name = "b",
+            });
+            h.AddChildProcess(c = new JitProcess
+            {
+                Name = "c",
+            });
+            h.AddChildProcess(g);
+            h.AddChildProcess(d = new JitProcess
+            {
+                Name = "d",
+            });
+            foreach (var proc in new[] { a, b, c, d, x })
+            {
+                proc.AddCio(new CiDelay
+                {
+                    Delay = TimeSpan.FromSeconds(60),
+                });
+            }
         }
+
+        [TestMethod]
+        public void Test003_JitLocationCompine()
+        {
+            Assert.AreEqual(JitLocation.CombinePath(""), "\\");
+            Assert.AreEqual(JitLocation.CombinePath("aaa"), "aaa");
+            Assert.AreEqual(JitLocation.CombinePath("aaa", "bbb"), "aaa\\bbb");
+            Assert.AreEqual(JitLocation.CombinePath("\\"), "\\");
+            Assert.AreEqual(JitLocation.CombinePath("\\aaa"), "\\aaa");
+            Assert.AreEqual(JitLocation.CombinePath("\\aaa"), "\\aaa");
+            Assert.AreEqual(JitLocation.CombinePath("\\aaa", "bbb"), "\\aaa\\bbb");
+            Assert.AreEqual(JitLocation.CombinePath("\\aaa\\", "bbb"), "\\aaa\\bbb");
+            Assert.AreEqual(JitLocation.CombinePath("\\aaa", "\\bbb"), "\\bbb");
+            Assert.AreEqual(JitLocation.CombinePath("\\aaa\\bbb", "\\ccc"), "\\ccc");
+            Assert.AreEqual(JitLocation.CombinePath("\\aaa\\bbb", "ccc"), "\\aaa\\bbb\\ccc");
+        }
+
+        [TestMethod]
+        public void Test004_JitLocationNormalize()
+        {
+            Assert.AreEqual(JitLocation.Normalize(""), "");
+            Assert.AreEqual(JitLocation.Normalize("\\"), "\\");
+            Assert.AreEqual(JitLocation.Normalize(".\\"), "\\");
+            Assert.AreEqual(JitLocation.Normalize(".\\aaa"), "aaa");
+            Assert.AreEqual(JitLocation.Normalize(".\\.\\."), "\\");
+            Assert.AreEqual(JitLocation.Normalize("\\aaa\\bbb\\ccc\\..\\ddd"), "\\aaa\\bbb\\ddd");
+            Assert.AreEqual(JitLocation.Normalize("\\aaa\\bbb\\ccc\\..\\..\\ddd"), "\\aaa\\ddd");
+            Assert.AreEqual(JitLocation.Normalize("\\aaa\\bbb\\ccc\\..\\..\\..\\ddd"), "\\ddd");
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() =>
+            {
+                JitLocation.Normalize("\\aaa\\bbb\\ccc\\..\\..\\..\\..\\ddd");
+            });
+            Assert.AreEqual(JitLocation.Normalize("aaa\\bbb\\ccc\\ddd"), "aaa\\bbb\\ccc\\ddd");
+            Assert.AreEqual(JitLocation.Normalize("aaa\\bbb\\ccc\\..\\ddd"), "aaa\\bbb\\ddd");
+            Assert.AreEqual(JitLocation.Normalize("aaa\\bbb\\ccc\\..\\..\\ddd"), "aaa\\ddd");
+            Assert.AreEqual(JitLocation.Normalize("aaa\\bbb\\ccc\\..\\..\\..\\ddd"), "ddd");
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() =>
+            {
+                JitLocation.Normalize("aaa\\bbb\\ccc\\..\\..\\..\\..\\ddd");
+            });
+            Assert.AreEqual(JitLocation.Normalize("\\aaa\\bbb\\ccc\\..\\ddd\\eee\\..\\..\\..\\fff"), "\\aaa\\fff");
+        }
+
+        [TestMethod]
+        public void Test005_JitLocationGetPath()
+        {
+            Assert.AreEqual(JitLocation.GetPath("\\aaa\\bbb"), "\\aaa");
+            Assert.AreEqual(JitLocation.GetPath("\\aaa\\bbb\\ccc"), "\\aaa\\bbb");
+            Assert.AreEqual(JitLocation.GetPath("\\aaa"), "\\");
+            Assert.AreEqual(JitLocation.GetPath("aaa"), "aaa");
+            Assert.AreEqual(JitLocation.GetPath("aaa\\bbb\\ccc"), "aaa\\bbb");
+            Assert.AreEqual(JitLocation.GetPath("aaa\\bbb"), "aaa");
+        }
+
+
         private bool CMP(JitStage.WorkEventQueue.Item ei, string name, EventTypes et, string time, string procName = null)
         {
             var ts = time.Split(':');
@@ -381,7 +428,7 @@ namespace UnitTestJit
             {
                 if (ei.Work is JitWork work)
                 {
-                    ret &= (JitWork.GetProcess(work.Current)?.Name ?? null) == procName;
+                    ret &= work.Current?.Process?.Name == procName;
                 }
                 else
                 {

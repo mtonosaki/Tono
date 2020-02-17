@@ -2,6 +2,7 @@
 // Licensed under the MIT license.
 
 using System;
+using static Tono.Jit.Utils;
 
 namespace Tono.Jit
 {
@@ -28,7 +29,7 @@ namespace Tono.Jit
 
         public override string MakeShortValue()
         {
-            return $"{JacInterpreter.MakeTimeSpanString(Span)}";
+            return $"{MakeTimeSpanString(Span)}";
         }
 
         /// <summary>
@@ -40,7 +41,7 @@ namespace Tono.Jit
         public override bool Check(JitWork work, DateTime now)
         {
             
-            return (now - work.Engine.GetLastInTime(work.Current.Subset, this)) < Span;
+            return (now - work.FindStage().GetLastInTime(work.Current.Path, this)) < Span;
         }
 
         /// <summary>
@@ -52,11 +53,11 @@ namespace Tono.Jit
         /// <param name="work"></param>
         /// <param name="Now"></param>
         /// <returns></returns>
-        public override TimeSpan GetWaitTime(IJitEngine engine, JitStage.WorkEventQueue.Item ei, DateTime Now)
+        public override TimeSpan GetWaitTime(JitStage.WorkEventQueue.Item ei, DateTime Now)
         {
             var ret = MathUtil.Min(
-                TimeSpan.FromDays(999.9), 
-                engine.GetLastInTime(ei.Work.Current.Subset, this) + Span - Now
+                TimeSpan.FromDays(999.9),
+                ei.Work.Current.Stage.GetLastInTime(ei.Work.Current.Path, this) + Span - Now
             );
             if (ret < TimeSpan.FromSeconds(1))
             {

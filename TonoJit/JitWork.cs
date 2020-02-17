@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using static Tono.Jit.Utils;
 
 namespace Tono.Jit
 {
@@ -13,19 +14,14 @@ namespace Tono.Jit
     /// Work is general item to make flow in just-in-time model that is not only physical item.
     /// </remarks>
     [JacTarget(Name = "Work")]
-    public class JitWork : JitVariable, IJitObjectID, IJieEngineReference
+    public class JitWork : JitVariable, IJitObjectID
     {
         public string ID { get; set; } = JacInterpreter.MakeID("Work");
 
         /// <summary>
-        /// Target Engine
-        /// </summary>
-        public IJitEngine Engine { get; set; }
-
-        /// <summary>
         /// Previous process (null = no previous)
         /// </summary>
-        public (JitSubset Subset, JitProcess Process) Previous { get; set; }
+        public JitLocation Previous { get; set; }
 
         /// <summary>
         /// Current process
@@ -33,12 +29,12 @@ namespace Tono.Jit
         /// <remarks>
         /// If this work join to a parent work, CurrentProcess is set to null
         /// </remarks>
-        public (JitSubset Subset, JitProcess Process) Current { get; set; }
+        public JitLocation Current { get; set; }
 
         /// <summary>
         /// Next process (null = no next)
         /// </summary>
-        public (JitSubset Subset, JitProcess Process) Next { get; set; }
+        public JitLocation Next { get; set; }
 
         /// <summary>
         /// work status
@@ -77,20 +73,15 @@ namespace Tono.Jit
         }
 
         /// <summary>
-        /// Get process or null from tuple
+        /// Find JitStage instance from Current, Previous and Next
         /// </summary>
-        /// <param name="tar"></param>
         /// <returns></returns>
-        public static JitProcess GetProcess((JitSubset Subset, JitProcess Process) tar)
+        public JitStage FindStage()
         {
-            if (tar == default)
-            {
-                return null;
-            }
-            else
-            {
-                return tar.Process;
-            }
+            if (Current.Stage != null) return Current.Stage;
+            if (Previous.Stage != null) return Previous.Stage;
+            if (Next.Stage != null) return Next.Stage;
+            return null;
         }
 
         public override bool Equals(object obj)
@@ -112,7 +103,7 @@ namespace Tono.Jit
 
         public override string ToString()
         {
-            return $"{GetType().Name} {Name}@{GetProcess(Current)?.Name ?? "n/a"} → {GetProcess(Next)?.Name ?? "n/a"} ID={ID}";
+            return $"{GetType().Name} {Name}@{(Current?.Process?.Name) ?? "n/a"} → {(Next?.Process?.Name) ?? "n/a"} ID={ID}";
         }
     }
 

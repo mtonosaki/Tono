@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using static Tono.Jit.Utils;
 using ProcessKey = System.String;
 
 namespace Tono.Jit
@@ -35,10 +36,10 @@ namespace Tono.Jit
         /// <param name="e"></param>
         private void JitProcessPriorityJoint_ProcessAdded(object sender, ProcessAddedEventArgs e)
         {
-            AddProcessLink(ProcessSet.GetProcessKey(e.Process), ProcessSet.GetProcessKey(this));    // Make the work leave route from child to parent
+            AddProcessLink(GetProcessKey(e.Process), "..\\" + GetProcessKey(this));    // Make the work leave route from child to parent
 
             int no = 0;
-            foreach (var pkey in ChildProcesses.GetProcessKeys())
+            foreach (var pkey in GetProcessKeys())
             {
                 procPriority[pkey] = ++no; // larger number is priority 数字が大きい方が、先にOUTされる
             }
@@ -55,7 +56,7 @@ namespace Tono.Jit
         {
             if (work.Next != default && work.Next.Process != null)
             {
-                var sortList = events.FindAll((work.Current.Subset, this), EventTypes.Out).ToList();
+                var sortList = events.FindAll(work.Current.ToChangeProcess(this), EventTypes.Out).ToList();
                 var tarDT = work.ExitTime;
                 if (sortList.Count > 0)
                 {
@@ -95,7 +96,7 @@ namespace Tono.Jit
             public int Comparer(LinkedListNode<JitStage.WorkEventQueue.Item> a, LinkedListNode<JitStage.WorkEventQueue.Item> b)
             {
                 // 1st condition: priority of process 第１条件＝工程の優先順
-                int ret = GetProcPriority(JitWork.GetProcess(a.Value.Work.Previous)) - GetProcPriority(JitWork.GetProcess(b.Value.Work.Previous));
+                int ret = GetProcPriority(a.Value.Work.Previous.Process) - GetProcPriority(b.Value.Work.Previous.Process);
                 if (ret == 0)
                 {
                     // 2nd condition: enter time 第2条件＝進入時刻準（FIFO）

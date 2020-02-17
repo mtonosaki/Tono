@@ -4,22 +4,19 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using static Tono.Jit.JitStage;
+using static Tono.Jit.Utils;
 using ProcessKey = System.String;
+using ProcessKeyPath = System.String;
 
 namespace Tono.Jit
 {
     /// <summary>
     /// Jit Stage Model
     /// </summary>
+    [JacTarget(Name = "Subset")]
     public class JitSubset : JitProcess
     {
         public override string ID { get; set; } = JacInterpreter.MakeID("Subset");
-
-        /// <summary>
-        /// having processes
-        /// </summary>
-        public ProcessSet ChildProcesses { get; private set; }
 
         public class ProcessAddedEventArgs : EventArgs
         {
@@ -28,7 +25,6 @@ namespace Tono.Jit
         }
 
         public event EventHandler<ProcessAddedEventArgs> ProcessAdded;
-
 
         /// <summary>
         /// Process key(ID/Name) of Connector In
@@ -43,7 +39,12 @@ namespace Tono.Jit
         /// <summary>
         /// Process Push Links
         /// </summary>
-        private Dictionary<ProcessKey, List<string>> _processKeyLinks = new Dictionary<ProcessKey, List<string>>();
+        private Dictionary<ProcessKey, List<ProcessKeyPath>> _processKeyLinks = new Dictionary<ProcessKey, List<ProcessKeyPath>>();
+
+        /// <summary>
+        /// Child Processes
+        /// </summary>
+        private readonly List<JitProcess> _childProcess = new List<JitProcess>();
 
         /// <summary>
         /// The constructor
@@ -51,10 +52,6 @@ namespace Tono.Jit
         public JitSubset()
         {
             Classes.Add(":Subset");
-            ChildProcesses = new ProcessSet
-            {
-                DebugName = () => $"ProcessSet of {(ToString())}",
-            };
         }
 
         public override string ToString()
@@ -73,15 +70,49 @@ namespace Tono.Jit
                 return false;
             }
         }
-
         public override int GetHashCode()
         {
             return ID.GetHashCode();
         }
 
+        /// <summary>
+        /// Add process
+        /// </summary>
+        /// <param name="proc"></param>
         public void AddChildProcess(JitProcess proc)
         {
-            ChildProcesses.Add(proc);
+            RemoveChildProcess(proc);
+            _childProcess.Add(proc);
+
+            if (proc is JitSubset subset)
+            {
+                subset.ProcessAdded += Subset_ProcessAdded;
+            }
+            Subset_ProcessAdded(this, new ProcessAddedEventArgs
+            {
+                Target = this,
+                Process = proc,
+            });
+        }
+
+        private void Subset_ProcessAdded(object sender, ProcessAddedEventArgs e)
+        {
+            ProcessAdded?.Invoke(this, e);
+        }
+
+        /// <summary>
+        /// Add dummy process
+        /// </summary>
+        /// <param name="procKey"></param>
+        public void AddChildProcess(ProcessKey procKey)
+        {
+            RemoveChildProcess(procKey);
+
+            JitProcess proc;
+            _childProcess.Add(proc = new JitProcessDummy
+            {
+                ProcessKey = procKey,
+            });
             ProcessAdded?.Invoke(this, new ProcessAddedEventArgs
             {
                 Target = this,
@@ -89,15 +120,10 @@ namespace Tono.Jit
             });
         }
 
-        public void AddChildProcess(ProcessKey prockey)
-        {
-            var proc = ChildProcesses.Add(prockey);
-            ProcessAdded?.Invoke(this, new ProcessAddedEventArgs
-            {
-                Target = this,
-                Process = proc,
-            });
-        }
+        /// <summary>
+        /// Add processes to this subset
+        /// </summary>
+        /// <param name="procs"></param>
         public void AddChildProcess(IEnumerable<JitProcess> procs)
         {
             foreach (var proc in procs)
@@ -106,52 +132,152 @@ namespace Tono.Jit
             }
         }
 
-
+        /// <summary>
+        /// Remove Process class from this subset
+        /// </summary>
+        /// <param name="proc"></param>
         public void RemoveChildProcess(JitProcess proc)
         {
-            ChildProcesses.Remove(proc);
-        }
-        public void RemoveChildProcess(ProcessKey prockey)
-        {
-            ChildProcesses.Remove(prockey);
+            if (proc is JitProcessDummy dummy)
+            {
+                RemoveChildProcess(dummy.ProcessKey);
+            }
+            else
+            {
+                RemoveChildProcess(proc.Name);
+            }
+            RemoveChildProcess(proc.ID);
         }
 
-
-        private JitProcess findNextProcess(JitProcess fromProc)
+        /// <summary>
+        /// Remove the all process that have procKey in Name and ID
+        /// </summary>
+        /// <param name="procKey"></param>
+        public void RemoveChildProcess(ProcessKey procKey)
         {
-            var links = GetProcessLinks(fromProc);
+            var col1 =
+                from t in _childProcess
+                let dmy = t as JitProcessDummy
+                where dmy != null
+                where dmy.ProcessKey == procKey
+                select dmy;
+            var col2 =
+                from t in _childProcess
+                where t is JitProcessDummy == false
+                where t.ID == procKey || t.Name == procKey
+                select t;
+            var dels = col1.Concat(col2).ToArray();
+
+            foreach (var proc in dels)
+            {
+                _childProcess.Remove(proc);
+            }
+        }
+
+        /// <summary>
+        /// Get child process enumerator
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<JitProcess> GetChildProcesses()
+        {
+            return _childProcess;
+        }
+
+        /// <summary>
+        /// Get child process of the index
+        /// </summary>
+        /// <param name="index"></param>
+        /// <returns></returns>
+        public JitProcess GetChildProcess(int index)
+        {
+            return _childProcess[index];
+        }
+
+        /// <summary>
+        /// Find Process Key(ID or Name of lazy connection)
+        /// </summary>
+        /// <param name="procKey"></param>
+        /// <returns></returns>
+        public JitProcess FindChildProcess(ProcessKey procKey, bool isReturnNull = false)
+        {
+            if (procKey == null)
+            {
+                if (isReturnNull) return null; else throw new JitException(JitException.NullProcKey);
+            }
+            var ret = _childProcess.Where(a => a.ID == procKey).FirstOrDefault();
+            if (ret == null)
+            {
+                ret = _childProcess.Where(a => a.Name == procKey).FirstOrDefault();
+            }
+            if (ret != null || isReturnNull)
+            {
+                return ret;
+            }
+            throw new JitException(JitException.NoProcKey, $"{procKey} in {this}");
+        }
+
+        /// <summary>
+        /// Find next process of "fromProc"
+        /// </summary>
+        /// <param name="fromProc"></param>
+        /// <returns></returns>
+        private JitProcess FindNextProcess(JitProcess fromProc)
+        {
+            var links = GetProcessLinkPathes(fromProc);
             var key = links.FirstOrDefault();
-            var ret = ChildProcesses.FindProcess(key, true);
+            var ret = FindChildProcess(key, true);
             return ret;
+        }
+
+        /// <summary>
+        /// Get Process key list
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<ProcessKey> GetProcessKeys()
+        {
+            foreach (var proc in _childProcess)
+            {
+                yield return GetProcessKey(proc);
+            }
         }
 
         /// <summary>
         /// Save Process link
         /// </summary>
-        /// <param name="procKey1"></param>
-        /// <param name="procKey2"></param>
-        public void AddProcessLink(ProcessKey procKeyFrom, ProcessKey procKeyTo)
+        /// <param name="procKey1">Process key of this subset</param>
+        /// <param name="procKey2">Process Key that have subset path</param>
+        public void AddProcessLink(ProcessKey procKeyFrom, ProcessKeyPath procKeyPathTo)
         {
             var links = _processKeyLinks.GetValueOrDefault(procKeyFrom, true, a => new List<string>());
-            if (links.Contains(procKeyTo) == false)
+            if (links.Contains(procKeyPathTo) == false)
             {
-                links.Add(procKeyTo);
+                links.Add(procKeyPathTo);
             }
         }
 
+        /// <summary>
+        /// Add Process Link in this subset
+        /// </summary>
+        /// <param name="from"></param>
+        /// <param name="to"></param>
         public void AddProcessLink(JitProcess from, JitProcess to)
         {
-            AddProcessLink(from.ID, to.ID);
+            AddProcessLink(GetProcessKey(from), GetProcessKey(to));
         }
 
-        public void RemoveProcessLink(ProcessKey procKeyFrom, ProcessKey procKeyTo)
+        /// <summary>
+        /// Remove process link by Process Key(ID/Name)
+        /// </summary>
+        /// <param name="procKeyFrom"></param>
+        /// <param name="procKeyPathTo"></param>
+        public void RemoveProcessLink(ProcessKey procKeyFrom, ProcessKeyPath procKeyPathTo)
         {
-            var li = GetProcessLinks(procKeyFrom);
+            var li = GetProcessLinkPathes(procKeyFrom);
             var links = _processKeyLinks.Values.Where(a => ReferenceEquals(a, li)).FirstOrDefault();
             if (links != null)
             {
-                links.Remove(procKeyTo);
-                var pt = ChildProcesses.FindProcess(procKeyTo);
+                links.Remove(procKeyPathTo);
+                var pt = FindChildProcess(procKeyPathTo);
                 if (pt != null)
                 {
                     links.Remove(pt.ID);
@@ -162,6 +288,12 @@ namespace Tono.Jit
                 }
             }
         }
+
+        /// <summary>
+        /// Remove process link
+        /// </summary>
+        /// <param name="from"></param>
+        /// <param name="to"></param>
         public void RemoveProcessLink(JitProcess from, JitProcess to)
         {
             RemoveProcessLink(from.ID, to.ID);
@@ -172,13 +304,13 @@ namespace Tono.Jit
         /// </summary>
         /// <param name="procKeyFrom"></param>
         /// <returns></returns>
-        public IReadOnlyList<ProcessKey> GetProcessLinks(ProcessKey procKeyFrom)
+        public IReadOnlyList<ProcessKeyPath> GetProcessLinkPathes(ProcessKey procKeyFrom)
         {
             if (_processKeyLinks.TryGetValue(procKeyFrom, out var list))
             {
                 return list;
             }
-            var proc = ChildProcesses.FindProcess(procKeyFrom, true);
+            var proc = FindChildProcess(procKeyFrom, true);
             if (proc != null)
             {
                 if (_processKeyLinks.TryGetValue(proc.ID, out var list2))
@@ -191,14 +323,20 @@ namespace Tono.Jit
                 }
                 procKeyFrom = proc.ID;
             }
-            var list4 = new List<ProcessKey>();
+            var list4 = new List<ProcessKeyPath>();
             _processKeyLinks[procKeyFrom] = list4;
 
             return list4;
         }
-        public IReadOnlyList<ProcessKey> GetProcessLinks(JitProcess proc)
+
+        /// <summary>
+        /// Get Process Link list
+        /// </summary>
+        /// <param name="proc"></param>
+        /// <returns></returns>
+        public IReadOnlyList<ProcessKey> GetProcessLinkPathes(JitProcess proc)
         {
-            return GetProcessLinks(ProcessSet.GetProcessKey(proc));
+            return GetProcessLinkPathes(GetProcessKey(proc));
         }
     }
 }

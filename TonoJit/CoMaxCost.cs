@@ -4,8 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using static Tono.Jit.CioBase;
-using static Tono.Jit.JitStage;
+using static Tono.Jit.Utils;
 
 namespace Tono.Jit
 {
@@ -43,10 +42,12 @@ namespace Tono.Jit
         /// <returns>true=waiting</returns>
         public override bool Check(JitWork work, DateTime now)
         {
-            var engine = work.Engine;
-            var wirs = engine.GetWorksInReserve(work.Current.Subset, this);
+            var stage = work.FindStage();
+            var wirs = stage.GetWorksInReserve(work.Current.Path, this);
             var costs =
-                from w in engine.GetWorks(work.Current.Subset, JitWork.GetProcess(GetCheckTargetProcess(work))).Select(wt => wt.Work).Concat(wirs)
+                from w in stage.GetWorks(work.Current.Path, GetCheckTargetProcess(work).Process)
+                          .Select(wt => wt.Work)
+                          .Concat(wirs)
                 let cost = w.ChildVriables.GetValueOrNull("Cost")
                 where cost != null
                 let varval = cost[ReferenceVarName]
@@ -61,9 +62,9 @@ namespace Tono.Jit
         /// 制約中のワークに対し、待ち時間を計算する
         /// </summary>
         /// <returns></returns>
-        public override TimeSpan GetWaitTime(IJitEngine engine, WorkEventQueue.Item ei, DateTime Now)
+        public override TimeSpan GetWaitTime(JitStage.WorkEventQueue.Item ei, DateTime Now)
         {
-            var nextexit = engine.Events.Find(ei.Work.Next, EventTypes.Out, ":Work");
+            var nextexit = ei.Work.FindStage().Events.Find(ei.Work.Next, EventTypes.Out, ":Work");
             if (nextexit != null)
             {
                 var ret = MathUtil.Min(TimeSpan.FromDays(999.9), nextexit.Value.Work.ExitTime - Now);
