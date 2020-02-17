@@ -1641,12 +1641,8 @@ namespace UnitTestJit
             {
                 Name = "Y",
             };
-            st.AddChildProcess(X);
-            JP.AddChildProcess(X.ID);
-
-            st.AddChildProcess(Y);
-            JP.AddChildProcess(Y.ID);
-
+            JP.AddChildProcess(X);
+            JP.AddChildProcess(Y);
             st.AddChildProcess(JP);
             st.AddChildProcess(Z = new JitProcess
             {
@@ -1697,7 +1693,13 @@ namespace UnitTestJit
                 {
                     Name = $"x{(i + 1):0}",
                     Current = JitLocation.CreateRoot(st, null),
-                    Next = JitLocation.CreateRoot(st, X),
+                    Next = new JitLocation
+                    {
+                        Stage = st,
+                        Path = "\\JP",
+                        SubsetCache = JP,
+                        Process = X,
+                    },
                 });
             }
             for (var i = 0; i < 1; i++)
@@ -1706,7 +1708,13 @@ namespace UnitTestJit
                 {
                     Name = $"y{(i + 1):0}",
                     Current = JitLocation.CreateRoot(st, null),
-                    Next = JitLocation.CreateRoot(st, Y),
+                    Next = new JitLocation
+                    {
+                        Stage = st,
+                        Path = "\\JP",
+                        SubsetCache = JP,
+                        Process = Y,
+                    },
                 });
             }
 
