@@ -141,18 +141,13 @@ namespace Tono.Jit
         {
             var stage = work.FindStage();
 
-            foreach (var cio in Cios)
-            {
-                stage.RemoveWorkInReserve(work.Current.Path, cio, work);
-            }
-
-            stage.SaveWorkToSubsetProcess(work.Next.Path, this, work, now);
+            stage.SaveWorkToSubsetProcess(work.Next, work, now);     // Add work to JitStage._worksInProcess
             work.Previous = work.Current;
             work.Current = work.Next;
 
             var nextProcs = work.Current.SubsetCache.GetProcessLinkPathes(this);    // TODO: Consider Global Path
             var nextProcKeyPath = nextProcs.FirstOrDefault();
-            work.Next =stage.FindSubsetProcess(work.Current, nextProcKeyPath, isReturnNull: true);   // TODO: SubsetのConnector対応
+            work.Next = stage.FindSubsetProcess(work.Current.ToEmptyProcess(), nextProcKeyPath, isReturnNull: true);   // TODO: SubsetのConnector対応
             work.EnterTime = now;
             CheckAndAttachKanban(work.Current, now); // かんばんが有れば、NextProcessをかんばんで更新する
         }
@@ -165,7 +160,16 @@ namespace Tono.Jit
         public virtual void Exit(JitWork work)
         {
             var stage = work.FindStage();
-            stage.RemoveWorkFromSubsetProcess(work.Current.Path, this, work);
+            stage.RemoveWorkFromSubsetProcess(work.Current, work);
+
+            var currentcios = work.Current?.Process?.Cios;
+            if(currentcios != null)
+            {
+                foreach (var cio in currentcios)
+                {
+                    stage.RemoveWorkInReserve(work.Current, cio, work);    // Remove work from JitStage._cioWorkCache
+                }
+            }
         }
 
         /// <summary>
@@ -184,7 +188,7 @@ namespace Tono.Jit
         {
             var buf =
                 from wt in location.GetWorks(this)
-                where wt.Work.Next == default || wt.Work.Next.Process == null       // work that have not next process
+                where wt.Work?.Next?.Process == null       // work that have not next process
                 where wt.Work.ExitTime <= now       // select work that exit time expired.
                 select new WorkEntery { Work = wt.Work, Enter = wt.EnterTime };
             var work = ExitWorkSelector.Invoke(buf);
@@ -246,8 +250,9 @@ namespace Tono.Jit
             foreach (var cio in Cios)
             {
                 var stage = ei.Work.FindStage();
-                stage.SetLastInTime(ei.Work.Current.Path, cio, now);  // save in-time (for Span constraint)
-                stage.AddWorkInReserve(ei.Work.Current.Path, cio, ei.Work);   // reserve work-in (for Max constraint)
+                stage.SetLastInTime(ei.Work.Next, cio, now);  // save in-time (for Span constraint)
+                stage.AddWorkInReserve(ei.Work.Next, cio, ei.Work);   // reserve work-in (for Max constraint) 
+                    // TODO: CHECK .Work.Next (Before .Current Why?)
             }
         }
 
@@ -258,7 +263,7 @@ namespace Tono.Jit
         /// <param name="work"></param>
         public virtual void AddAndAdjustExitTiming(JitStage.WorkEventQueue events, JitWork work)
         {
-            if (work.Next != default && work.Next.Process != null)
+            if (work.Next?.Process != null)
             {
                 events.Enqueue(work.ExitTime, EventTypes.Out, work);  // 退場予約
             }
@@ -303,7 +308,7 @@ namespace Tono.Jit
             }
 
             var buf =
-                from w in location.Stage.GetWorks(location.Path, this)
+                from w in location.Stage.GetWorks(location.ToChangeProcess(this))
                 where w.Work.Next == default || w.Work.Next.Process == null // 行先が無い
                 select new WorkEntery { Work = w.Work, Enter = w.EnterTime };
             var work = ExitWorkSelector.Invoke(buf);

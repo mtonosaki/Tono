@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using static Tono.Jit.Utils;
 using ProcessKeyPath = System.String;
 
 namespace Tono.Jit
@@ -24,6 +25,24 @@ namespace Tono.Jit
         /// Process Location ID of the target Stage (NOT include this JitLocation.Process name)
         /// </summary>
         public string Path { get; set; }
+
+        /// <summary>
+        /// Process Location ID of the target Stage (INCLUDE this JitLocation.Process name)
+        /// </summary>
+        public string FullPath
+        {
+            get
+            {
+                if (Process != null)
+                {
+                    return CombinePath(Path, GetProcessKey(Process));
+                }
+                else
+                {
+                    return Path;
+                }
+            }
+        }
 
         /// <summary>
         /// Subset of the Process
@@ -212,7 +231,7 @@ namespace Tono.Jit
         /// <returns></returns>
         public JitLocation FindSubsetProcess(ProcessKeyPath procKeyPath, bool isReturnNull = false)
         {
-            return Stage.FindSubsetProcess(this, procKeyPath, isReturnNull);
+            return Stage.FindSubsetProcess(this.ToEmptyProcess(), procKeyPath, isReturnNull);
         }
 
         /// <summary>
@@ -221,7 +240,7 @@ namespace Tono.Jit
         /// <returns></returns>
         public IEnumerable<(JitWork Work, DateTime EnterTime)> GetWorks()
         {
-            return Stage.GetWorks(Path, Process);
+            return Stage.GetWorks(this);
         }
 
         /// <summary>
@@ -230,7 +249,7 @@ namespace Tono.Jit
         /// <returns></returns>
         public IEnumerable<(JitWork Work, DateTime EnterTime)> GetWorks(JitProcess process)
         {
-            return Stage.GetWorks(Path, process);
+            return Stage.GetWorks(this.ToChangeProcess(process));
         }
     }
 }

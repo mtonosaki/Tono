@@ -40,8 +40,7 @@ namespace Tono.Jit
         /// <returns>true=waiting / false=Can Enter</returns>
         public override bool Check(JitWork work, DateTime now)
         {
-            
-            return (now - work.FindStage().GetLastInTime(work.Current.Path, this)) < Span;
+            return (now - work.FindStage().GetLastInTime(work.Next, this)) < Span;
         }
 
         /// <summary>
@@ -57,7 +56,7 @@ namespace Tono.Jit
         {
             var ret = MathUtil.Min(
                 TimeSpan.FromDays(999.9),
-                ei.Work.Current.Stage.GetLastInTime(ei.Work.Current.Path, this) + Span - Now
+                ei.Work.Current.Stage.GetLastInTime(ei.Work.Next, this) + Span - Now
             );
             if (ret < TimeSpan.FromSeconds(1))
             {

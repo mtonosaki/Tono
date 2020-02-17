@@ -3,7 +3,9 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using static Tono.Jit.Utils;
 using ProcessKeyPath = System.String;
 
 namespace Tono.Jit
@@ -160,7 +162,12 @@ namespace Tono.Jit
             {
                 goto Error;
             }
-            var path = JitLocation.CombinePath(currentLocation.Path, procKeyPath);
+            string path = currentLocation.Path;
+            if (currentLocation.Process != null)
+            {
+                path = JitLocation.CombinePath(path, GetProcessKey(currentLocation.Process));
+            }
+            path = JitLocation.CombinePath(path, procKeyPath);
             path = JitLocation.Normalize(path);
             if (path.StartsWith("\\") == false)
             {
@@ -316,9 +323,9 @@ Error:
 
         private Dictionary<string/*location path*/, Dictionary<CioBase, Dictionary<JitWork, bool/*dummy*/>>> _cioWorkCache = new Dictionary<string, Dictionary<CioBase, Dictionary<JitWork, bool>>>();
 
-        public void AddWorkInReserve(string locationPath, CioBase cio, JitWork work)
+        public void AddWorkInReserve(JitLocation location, CioBase cio, JitWork work)
         {
-            var dic = _cioWorkCache.GetValueOrDefault(locationPath, true, a => new Dictionary<CioBase, Dictionary<JitWork, bool/*dummy*/>>());
+            var dic = _cioWorkCache.GetValueOrDefault(location.FullPath, true, a => new Dictionary<CioBase, Dictionary<JitWork, bool/*dummy*/>>());
             var works = dic.GetValueOrDefault(cio, true, a => new Dictionary<JitWork, bool>());
             works[work] = true;
         }
@@ -328,9 +335,9 @@ Error:
         /// </summary>
         /// <param name="cio"></param>
         /// <param name="work"></param>
-        public void RemoveWorkInReserve(string locationPath, CioBase cio, JitWork work)
+        public void RemoveWorkInReserve(JitLocation location, CioBase cio, JitWork work)
         {
-            var dic = _cioWorkCache.GetValueOrDefault(locationPath, true, a => new Dictionary<CioBase, Dictionary<JitWork, bool/*dummy*/>>());
+            var dic = _cioWorkCache.GetValueOrDefault(location.FullPath, true, a => new Dictionary<CioBase, Dictionary<JitWork, bool/*dummy*/>>());
             var works = dic.GetValueOrDefault(cio, true, a => new Dictionary<JitWork, bool>());
             works.Remove(work);
         }
@@ -340,54 +347,56 @@ Error:
         /// </summary>
         /// <param name="cio"></param>
         /// <returns></returns>
-        public IEnumerable<JitWork> GetWorksInReserve(string locationPath, CioBase cio)
+        public IEnumerable<JitWork> GetWorksInReserve(JitLocation location, CioBase cio)
         {
-            var dic = _cioWorkCache.GetValueOrDefault(locationPath, true, a => new Dictionary<CioBase, Dictionary<JitWork, bool/*dummy*/>>());
+            var dic = _cioWorkCache.GetValueOrDefault(location.FullPath, true, a => new Dictionary<CioBase, Dictionary<JitWork, bool/*dummy*/>>());
             var works = dic.GetValueOrDefault(cio, true, a => new Dictionary<JitWork, bool>());
             return works.Keys;
         }
 
-        private Dictionary<string/*location Path*/, Dictionary<CioBase, DateTime>> _lastInTimesCio = new Dictionary<string, Dictionary<CioBase, DateTime>>();
+        private Dictionary<string/*location full Path*/, Dictionary<CioBase, DateTime>> _lastInTimesCio = new Dictionary<string, Dictionary<CioBase, DateTime>>();
 
 
         /// <summary>
         /// Save Last Work enter time.
         /// </summary>
+        /// <param name="locationPath"></param>
         /// <param name="cio"></param>
         /// <param name="now"></param>
-        public void SetLastInTime(string locationPath, CioBase cio, DateTime now)
+        public void SetLastInTime(JitLocation location, CioBase cio, DateTime now)
         {
-            var dic = _lastInTimesCio.GetValueOrDefault(locationPath, true, a => new Dictionary<CioBase, DateTime>());
+            var dic = _lastInTimesCio.GetValueOrDefault(location.FullPath, true, a => new Dictionary<CioBase, DateTime>());
             dic[cio] = now;
         }
 
         /// <summary>
-        /// last work enter time 最後にINした時刻
+        /// last work enter time 最後にINした時刻 
         /// </summary>
+        /// <param name="locationFullPath">JitLocation.FullPath</param>
         /// <param name="cio"></param>
         /// <returns></returns>
         /// <remarks>
         /// This value will be set when out timing at previous process
         /// この値でSpanを評価。実際にProcessにINしたタイミングではなく、前ProcessでOutされた時にセットされる
         /// </remarks>
-        public DateTime GetLastInTime(string locationPath, CioBase cio)
+        public DateTime GetLastInTime(JitLocation location, CioBase cio)
         {
-            var dic = _lastInTimesCio.GetValueOrDefault(locationPath, true, a => new Dictionary<CioBase, DateTime>());
+            var dic = _lastInTimesCio.GetValueOrDefault(location.FullPath, true, a => new Dictionary<CioBase, DateTime>());
             return dic.GetValueOrDefault(cio);
         }
 
-        private Dictionary<string/*location Path*/, Dictionary<JitProcess, Dictionary<JitWork, DateTime/*Enter-Time*/>>> _worksInProcess = new Dictionary<string, Dictionary<JitProcess, Dictionary<JitWork, DateTime>>>();
+        private Dictionary<string/*location Full Path*/, Dictionary<JitWork, DateTime/*Enter-Time*/>> _worksInProcess = new Dictionary<ProcessKeyPath, Dictionary<JitWork, DateTime>>();
 
         /// <summary>
         /// Save Work enter time.
         /// </summary>
         /// <param name="cio"></param>
         /// <param name="now"></param>
-        public void SaveWorkToSubsetProcess(string locationPath, JitProcess process, JitWork work, DateTime now)
+        public void SaveWorkToSubsetProcess(JitLocation location, JitWork work, DateTime now)
         {
-            var procworks = _worksInProcess.GetValueOrDefault(locationPath, true, a => new Dictionary<JitProcess, Dictionary<JitWork, DateTime/*Enter-Time*/>>());
-            var works = procworks.GetValueOrDefault(process, true, a => new Dictionary<JitWork, DateTime/*Enter-Time*/>());
-            works[work] = now;
+            Debug.Assert(location.Process != null);
+            var procworks = _worksInProcess.GetValueOrDefault(location.FullPath, true, a => new Dictionary<JitWork, DateTime/*Enter-Time*/>());
+            procworks[work] = now;
         }
 
         /// <summary>
@@ -395,23 +404,29 @@ Error:
         /// </summary>
         /// <param name="cio"></param>
         /// <param name="now"></param>
-        public void RemoveWorkFromSubsetProcess(string locationPath, JitProcess process, JitWork work)
+        public void RemoveWorkFromSubsetProcess(JitLocation location, JitWork work)
         {
-            var procworks = _worksInProcess.GetValueOrDefault(locationPath, true, a => new Dictionary<JitProcess, Dictionary<JitWork, DateTime/*Enter-Time*/>>());
-            var works = procworks.GetValueOrDefault(process, true, a => new Dictionary<JitWork, DateTime/*Enter-Time*/>());
-            works.Remove(work);
+            Debug.Assert(location.Process != null);
+            var procworks = _worksInProcess.GetValueOrDefault(location.FullPath, true, a => new Dictionary<JitWork, DateTime/*Enter-Time*/>());
+            procworks.Remove(work);
         }
+
+        private readonly (JitWork Work, DateTime EnterTime)[] ZeroWorkCollection = new (JitWork Work, DateTime EnterTime)[] { };
 
         /// <summary>
         /// Query Works in process
         /// </summary>
         /// <param name="process"></param>
         /// <returns></returns>
-        public IEnumerable<(JitWork Work, DateTime EnterTime)> GetWorks(string locationPath, JitProcess process)
+        public IEnumerable<(JitWork Work, DateTime EnterTime)> GetWorks(JitLocation location)
         {
-            var procworks = _worksInProcess.GetValueOrDefault(locationPath, true, a => new Dictionary<JitProcess, Dictionary<JitWork, DateTime/*Enter-Time*/>>());
-            var works = procworks.GetValueOrDefault(process, true, a => new Dictionary<JitWork, DateTime/*Enter-Time*/>());
-            return works.Select(kv => (kv.Key, kv.Value));
+            Debug.Assert(location.Process != null);
+            var procworks = _worksInProcess.GetValueOrDefault(location.FullPath, true, a => new Dictionary<JitWork, DateTime/*Enter-Time*/>());
+            if (procworks != null)
+            {
+                return procworks.Select(kv => (kv.Key, kv.Value));
+            }
+            return ZeroWorkCollection;
         }
     }
 }

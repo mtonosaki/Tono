@@ -45,7 +45,7 @@ namespace Tono.Jit
                 return false;   // already moved. すでにワークが付いているので制約なし（完了）
             }
 
-            var procPullFrom = parentWork.Current.FindSubsetProcess(PullFromProcessKey);   //.Subset.FindChildProcess(PullFromProcessKey);
+            var procPullFrom = parentWork.Next.FindSubsetProcess(PullFromProcessKey);
             if (procPullFrom.Process.ExitCollectedWork(parentWork.Current, now) is JitWork sideWork)    // work at PullFrom process 横工程のワーク
             {
                 parentWork.ChildWorks[ChildWorkKey] = sideWork;

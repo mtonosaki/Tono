@@ -464,12 +464,12 @@ namespace UnitTestJit
             st.DoNext();
             dat = st.Events.Peeks(99).ToList(); k = 0;
             Assert.IsTrue(CMP(dat[k++], "w1", EventTypes.In, "10:00", "B"));
-            Assert.AreEqual(st.GetWorks("\\", SINK).Count(), 0);
+            Assert.AreEqual(st.GetWorks(JitLocation.CreateRoot(st, SINK)).Count(), 0);
 
             st.DoNext();
             dat = st.Events.Peeks(99).ToList(); k = 0;
             Assert.AreEqual(dat.Count, 0);
-            Assert.AreEqual(st.GetWorks("\\", SINK).Count(), 1);
+            Assert.AreEqual(st.GetWorks(JitLocation.CreateRoot(st, SINK)).Count(), 1);
         }
 
         [TestMethod]
@@ -1641,12 +1641,8 @@ namespace UnitTestJit
             {
                 Name = "Y",
             };
-            st.AddChildProcess(X);
-            JP.AddChildProcess(X.ID);
-
-            st.AddChildProcess(Y);
-            JP.AddChildProcess(Y.ID);
-
+            JP.AddChildProcess(X);
+            JP.AddChildProcess(Y);
             st.AddChildProcess(JP);
             st.AddChildProcess(Z = new JitProcess
             {
@@ -1697,7 +1693,13 @@ namespace UnitTestJit
                 {
                     Name = $"x{(i + 1):0}",
                     Current = JitLocation.CreateRoot(st, null),
-                    Next = JitLocation.CreateRoot(st, X),
+                    Next = new JitLocation
+                    {
+                        Stage = st,
+                        Path = "\\JP",
+                        SubsetCache = JP,
+                        Process = X,
+                    },
                 });
             }
             for (var i = 0; i < 1; i++)
@@ -1706,7 +1708,13 @@ namespace UnitTestJit
                 {
                     Name = $"y{(i + 1):0}",
                     Current = JitLocation.CreateRoot(st, null),
-                    Next = JitLocation.CreateRoot(st, Y),
+                    Next = new JitLocation
+                    {
+                        Stage = st,
+                        Path = "\\JP",
+                        SubsetCache = JP,
+                        Process = Y,
+                    },
                 });
             }
 
@@ -2179,7 +2187,7 @@ namespace UnitTestJit
                         Stage = st,
                         SubsetCache = JP,
                         Path = "\\JP",
-                        Process = X,
+                        Process = Y,
                     },
                 });
             }
@@ -2549,7 +2557,8 @@ namespace UnitTestJit
             {
                 Delay = TimeSpan.FromMinutes(1),
             });
-            Y.Constraints.Add(new CoMaxCost
+            CoMaxCost Y_CoMaxCost;
+            Y.Constraints.Add(Y_CoMaxCost = new CoMaxCost
             {
                 ReferenceVarName = JitVariable.From("Count"),
                 Value = 1.0,
@@ -2573,9 +2582,10 @@ namespace UnitTestJit
             });
 
             var today = TimeUtil.ClearTime(DateTime.Now);
+            JitWork y1 = null;
             for (var i = 0; i < 3; i++)
             {
-                st.Events.Enqueue(TimeUtil.Set(today, hour: 9, minute: 0), EventTypes.Out, new JitWork
+                var work = new JitWork
                 {
                     Current = JitLocation.CreateRoot(st, null),
                     Next = new JitLocation // Next Subset, Process(class)
@@ -2585,8 +2595,13 @@ namespace UnitTestJit
                         Path = "\\JP",
                         Process = Y,
                     },
-                    Name = $"y{(i + 1):0}", 
-                });
+                    Name = $"y{(i + 1):0}",
+                };
+                st.Events.Enqueue(TimeUtil.Set(today, hour: 9, minute: 0), EventTypes.Out, work);
+                if( y1 == null)
+                {
+                    y1 = work;
+                }
             }
 
             var k = 0;
@@ -2618,12 +2633,12 @@ namespace UnitTestJit
             st.DoNext(); dat = st.Events.Peeks(99).ToList(); k = 0;
             Assert.IsTrue(CMP(dat[k++], "y2", EventTypes.Out, "9:00"));
             Assert.IsTrue(CMP(dat[k++], "y3", EventTypes.Out, "9:00"));
-            Assert.IsTrue(CMP(dat[k++], "y1", EventTypes.Out, "9:04", "Y"));
+            Assert.IsTrue(CMP(dat[k++], "y1", EventTypes.Out, "9:04", "Y"));    // y1 should add CoMaxCost count of Y
 
             st.DoNext(); dat = st.Events.Peeks(99).ToList(); k = 0;
             Assert.IsTrue(CMP(dat[k++], "y3", EventTypes.Out, "9:00"));
             Assert.IsTrue(CMP(dat[k++], "y1", EventTypes.Out, "9:04", "Y"));
-            Assert.IsTrue(CMP(dat[k++], "y2", EventTypes.Out, "9:04"));
+            Assert.IsTrue(CMP(dat[k++], "y2", EventTypes.Out, "9:04")); // y2 is in Out-Constraint of CoMaxCost = 1 @ Y
 
             st.DoNext(); dat = st.Events.Peeks(99).ToList(); k = 0;
             Assert.IsTrue(CMP(dat[k++], "y1", EventTypes.Out, "9:04", "Y"));
@@ -2971,19 +2986,19 @@ namespace UnitTestJit
             st.DoNext();
             dat = st.Events.Peeks(3).ToList();
             Assert.IsTrue(CMP(dat[0], "b", EventTypes.Out, "9:01"));
-            Assert.IsTrue(CMP(dat[1], "a", EventTypes.Out, "9:01")); Assert.IsTrue(dat[1].Work.Current.Process.Name == "X");
+            Assert.IsTrue(CMP(dat[1], "a", EventTypes.Out, "9:01", "X")); 
             Assert.IsTrue(CMP(dat[2], "c", EventTypes.Out, "9:02"));
-            Assert.IsTrue(st.GetWorks("\\", st.FindChildProcess("X")).Count() == 1);
+            Assert.IsTrue(st.GetWorks(JitLocation.CreateRoot(st, st.FindChildProcess("X"))).Count() == 1);
 
             st.DoNext();    //  3
             dat = st.Events.Peeks(3).ToList();
-            Assert.IsTrue(CMP(dat[0], "a", EventTypes.Out, "9:01"));
+            Assert.IsTrue(CMP(dat[0], "a", EventTypes.Out, "9:01", "X"));
             Assert.IsTrue(CMP(dat[1], "c", EventTypes.Out, "9:02"));
-            Assert.IsTrue(CMP(dat[2], "b", EventTypes.Out, "9:03"));
+            Assert.IsTrue(CMP(dat[2], "b", EventTypes.Out, "9:03"));    // b 9:01---9:03 by Span[a]
 
             st.DoNext();    //  4
             dat = st.Events.Peeks(3).ToList();
-            Assert.IsTrue(CMP(dat[0], "a", EventTypes.In, "9:01"));
+            Assert.IsTrue(CMP(dat[0], "a", EventTypes.In, "9:01", "X"));
             Assert.IsTrue(CMP(dat[1], "c", EventTypes.Out, "9:02"));
             Assert.IsTrue(CMP(dat[2], "b", EventTypes.Out, "9:03"));
 
@@ -2991,129 +3006,129 @@ namespace UnitTestJit
             dat = st.Events.Peeks(3).ToList();
             Assert.IsTrue(CMP(dat[0], "c", EventTypes.Out, "9:02"));
             Assert.IsTrue(CMP(dat[1], "b", EventTypes.Out, "9:03"));
-            Assert.IsTrue(CMP(dat[2], "a", EventTypes.Out, "9:05")); Assert.IsTrue(dat[2].Work.Current.Process.Name == "Y");
-            Assert.IsTrue(st.GetWorks("\\", st.FindChildProcess("X")).Count() == 0);
-            Assert.IsTrue(st.GetWorks("\\", st.FindChildProcess("Y")).Count() == 1);
+            Assert.IsTrue(CMP(dat[2], "a", EventTypes.Out, "9:05", "Y"));
+            Assert.IsTrue(st.GetWorks(JitLocation.CreateRoot(st, st.FindChildProcess("X"))).Count() == 0);
+            Assert.IsTrue(st.GetWorks(JitLocation.CreateRoot(st, st.FindChildProcess("Y"))).Count() == 1);
 
             st.DoNext();    //  6
             dat = st.Events.Peeks(3).ToList();
             Assert.IsTrue(CMP(dat[0], "b", EventTypes.Out, "9:03"));
-            Assert.IsTrue(CMP(dat[1], "c", EventTypes.Out, "9:03"));
-            Assert.IsTrue(CMP(dat[2], "a", EventTypes.Out, "9:05"));
+            Assert.IsTrue(CMP(dat[1], "c", EventTypes.Out, "9:03"));    // c 9:02---9:03 by Span[a]
+            Assert.IsTrue(CMP(dat[2], "a", EventTypes.Out, "9:05", "Y"));
 
             st.DoNext();    //  7
             dat = st.Events.Peeks(3).ToList();
             Assert.IsTrue(CMP(dat[0], "c", EventTypes.Out, "9:03"));
             Assert.IsTrue(CMP(dat[1], "b", EventTypes.In, "9:03"));
-            Assert.IsTrue(CMP(dat[2], "a", EventTypes.Out, "9:05"));
+            Assert.IsTrue(CMP(dat[2], "a", EventTypes.Out, "9:05", "Y"));
 
             st.DoNext();    //  8
             dat = st.Events.Peeks(3).ToList();
             Assert.IsTrue(CMP(dat[0], "b", EventTypes.In, "9:03"));
-            Assert.IsTrue(CMP(dat[1], "a", EventTypes.Out, "9:05"));
+            Assert.IsTrue(CMP(dat[1], "a", EventTypes.Out, "9:05", "Y"));
             Assert.IsTrue(CMP(dat[2], "c", EventTypes.Out, "9:06"));
 
             st.DoNext();    //  9
             dat = st.Events.Peeks(3).ToList();
-            Assert.IsTrue(CMP(dat[0], "b", EventTypes.Out, "9:04")); Assert.IsTrue(dat[0].Work.Current.Process.Name == "X");
-            Assert.IsTrue(CMP(dat[1], "a", EventTypes.Out, "9:05"));
+            Assert.IsTrue(CMP(dat[0], "b", EventTypes.Out, "9:04", "X"));
+            Assert.IsTrue(CMP(dat[1], "a", EventTypes.Out, "9:05", "Y"));
             Assert.IsTrue(CMP(dat[2], "c", EventTypes.Out, "9:06"));
-            Assert.IsTrue(st.GetWorks("\\", st.FindChildProcess("X")).Count() == 1);
+            Assert.IsTrue(st.GetWorks(JitLocation.CreateRoot(st, st.FindChildProcess("X"))).Count() == 1);
 
 
             st.DoNext();    // 10
             dat = st.Events.Peeks(3).ToList();
-            Assert.IsTrue(CMP(dat[0], "a", EventTypes.Out, "9:05"));
-            Assert.IsTrue(CMP(dat[1], "b", EventTypes.Out, "9:05"));
+            Assert.IsTrue(CMP(dat[0], "a", EventTypes.Out, "9:05", "Y"));
+            Assert.IsTrue(CMP(dat[1], "b", EventTypes.Out, "9:05", "X"));
             Assert.IsTrue(CMP(dat[2], "c", EventTypes.Out, "9:06"));
 
             st.DoNext();    // 11
             dat = st.Events.Peeks(3).ToList();
-            Assert.IsTrue(CMP(dat[0], "b", EventTypes.Out, "9:05"));
-            Assert.IsTrue(CMP(dat[1], "a", EventTypes.In, "9:05"));
+            Assert.IsTrue(CMP(dat[0], "b", EventTypes.Out, "9:05", "X"));
+            Assert.IsTrue(CMP(dat[1], "a", EventTypes.In, "9:05", "Y"));
             Assert.IsTrue(CMP(dat[2], "c", EventTypes.Out, "9:06"));
 
             st.DoNext();    // 12
             dat = st.Events.Peeks(3).ToList();
-            Assert.IsTrue(CMP(dat[0], "a", EventTypes.In, "9:05"));
-            Assert.IsTrue(CMP(dat[1], "b", EventTypes.Out, "9:05"));
+            Assert.IsTrue(CMP(dat[0], "a", EventTypes.In, "9:05", "Y"));
+            Assert.IsTrue(CMP(dat[1], "b", EventTypes.Out, "9:05", "X"));
             Assert.IsTrue(CMP(dat[2], "c", EventTypes.Out, "9:06"));
 
             st.DoNext();    // 13
             dat = st.Events.Peeks(3).ToList();
             Assert.IsTrue(dat.Count == 2, "a moved to Z. a have sunk because Z have not next process");
-            Assert.IsTrue(CMP(dat[0], "b", EventTypes.Out, "9:05"));
+            Assert.IsTrue(CMP(dat[0], "b", EventTypes.Out, "9:05", "X"));
             Assert.IsTrue(CMP(dat[1], "c", EventTypes.Out, "9:06"));
-            Assert.IsTrue(st.GetWorks("\\", st.FindChildProcess("Y")).Count() == 0);
-            Assert.IsTrue(st.GetWorks("\\", st.FindChildProcess("Z")).Count() == 1);
+            Assert.IsTrue(st.GetWorks(JitLocation.CreateRoot(st, st.FindChildProcess("Y"))).Count() == 0);
+            Assert.IsTrue(st.GetWorks(JitLocation.CreateRoot(st, st.FindChildProcess("Z"))).Count() == 1);
 
             st.DoNext();    // 14
             dat = st.Events.Peeks(3).ToList();
-            Assert.IsTrue(CMP(dat[0], "b", EventTypes.In, "9:05"));
+            Assert.IsTrue(CMP(dat[0], "b", EventTypes.In, "9:05", "X"));
             Assert.IsTrue(CMP(dat[1], "c", EventTypes.Out, "9:06"));
 
             st.DoNext();    // 15
             dat = st.Events.Peeks(3).ToList();
             Assert.IsTrue(CMP(dat[0], "c", EventTypes.Out, "9:06"));
-            Assert.IsTrue(CMP(dat[1], "b", EventTypes.Out, "9:09"));
-            Assert.IsTrue(st.GetWorks("\\", st.FindChildProcess("X")).Count() == 0);
-            Assert.IsTrue(st.GetWorks("\\", st.FindChildProcess("Y")).Count() == 1);
-            Assert.IsTrue(st.GetWorks("\\", st.FindChildProcess("Z")).Count() == 1);
+            Assert.IsTrue(CMP(dat[1], "b", EventTypes.Out, "9:09", "Y"));
+            Assert.IsTrue(st.GetWorks(JitLocation.CreateRoot(st, st.FindChildProcess("X"))).Count() == 0);
+            Assert.IsTrue(st.GetWorks(JitLocation.CreateRoot(st, st.FindChildProcess("Y"))).Count() == 1);
+            Assert.IsTrue(st.GetWorks(JitLocation.CreateRoot(st, st.FindChildProcess("Z"))).Count() == 1);
 
             st.DoNext();    // 16
             dat = st.Events.Peeks(3).ToList();
             Assert.IsTrue(CMP(dat[0], "c", EventTypes.In, "9:06"));
-            Assert.IsTrue(CMP(dat[1], "b", EventTypes.Out, "9:09"));
+            Assert.IsTrue(CMP(dat[1], "b", EventTypes.Out, "9:09", "Y"));
 
             st.DoNext();    // 17
             dat = st.Events.Peeks(3).ToList();
-            Assert.IsTrue(CMP(dat[0], "c", EventTypes.Out, "9:07"));
-            Assert.IsTrue(CMP(dat[1], "b", EventTypes.Out, "9:09"));
+            Assert.IsTrue(CMP(dat[0], "c", EventTypes.Out, "9:07", "X"));
+            Assert.IsTrue(CMP(dat[1], "b", EventTypes.Out, "9:09", "Y"));
 
             st.DoNext();    // 18
             dat = st.Events.Peeks(3).ToList();
-            Assert.IsTrue(CMP(dat[0], "b", EventTypes.Out, "9:09"));
-            Assert.IsTrue(CMP(dat[1], "c", EventTypes.Out, "9:09"));
-            Assert.IsTrue(st.GetWorks("\\", st.FindChildProcess("X")).Count() == 1);
-            Assert.IsTrue(st.GetWorks("\\", st.FindChildProcess("Y")).Count() == 1);
-            Assert.IsTrue(st.GetWorks("\\", st.FindChildProcess("Z")).Count() == 1);
+            Assert.IsTrue(CMP(dat[0], "b", EventTypes.Out, "9:09", "Y"));
+            Assert.IsTrue(CMP(dat[1], "c", EventTypes.Out, "9:09", "X"));
+            Assert.IsTrue(st.GetWorks(JitLocation.CreateRoot(st, st.FindChildProcess("X"))).Count() == 1);
+            Assert.IsTrue(st.GetWorks(JitLocation.CreateRoot(st, st.FindChildProcess("Y"))).Count() == 1);
+            Assert.IsTrue(st.GetWorks(JitLocation.CreateRoot(st, st.FindChildProcess("Z"))).Count() == 1);
 
             st.DoNext();    // 19
             dat = st.Events.Peeks(3).ToList();
-            Assert.IsTrue(CMP(dat[0], "c", EventTypes.Out, "9:09"));
-            Assert.IsTrue(CMP(dat[1], "b", EventTypes.In, "9:09"));
+            Assert.IsTrue(CMP(dat[0], "c", EventTypes.Out, "9:09", "X"));
+            Assert.IsTrue(CMP(dat[1], "b", EventTypes.In, "9:09", "Y"));
 
             st.DoNext();    // 20
             dat = st.Events.Peeks(3).ToList();
-            Assert.IsTrue(CMP(dat[0], "b", EventTypes.In, "9:09"));
-            Assert.IsTrue(CMP(dat[1], "c", EventTypes.Out, "9:09"));
+            Assert.IsTrue(CMP(dat[0], "b", EventTypes.In, "9:09", "Y"));
+            Assert.IsTrue(CMP(dat[1], "c", EventTypes.Out, "9:09", "X"));
 
             st.DoNext();    // 21
             dat = st.Events.Peeks(3).ToList();
             Assert.IsTrue(dat.Count == 1, "b moved to Z then b have sunk because Z have not next process");
-            Assert.IsTrue(CMP(dat[0], "c", EventTypes.Out, "9:09"));
-            Assert.IsTrue(st.GetWorks("\\", st.FindChildProcess("X")).Count() == 1);
-            Assert.IsTrue(st.GetWorks("\\", st.FindChildProcess("Y")).Count() == 0);
-            Assert.IsTrue(st.GetWorks("\\", st.FindChildProcess("Z")).Count() == 2);
+            Assert.IsTrue(CMP(dat[0], "c", EventTypes.Out, "9:09", "X"));
+            Assert.IsTrue(st.GetWorks(JitLocation.CreateRoot(st, st.FindChildProcess("X"))).Count() == 1);
+            Assert.IsTrue(st.GetWorks(JitLocation.CreateRoot(st, st.FindChildProcess("Y"))).Count() == 0);
+            Assert.IsTrue(st.GetWorks(JitLocation.CreateRoot(st, st.FindChildProcess("Z"))).Count() == 2);
 
             st.DoNext();    // 22
             dat = st.Events.Peeks(3).ToList();
-            Assert.IsTrue(CMP(dat[0], "c", EventTypes.In, "9:09"));
+            Assert.IsTrue(CMP(dat[0], "c", EventTypes.In, "9:09", "X"));
 
             st.DoNext();    // 23
             dat = st.Events.Peeks(3).ToList();
-            Assert.IsTrue(CMP(dat[0], "c", EventTypes.Out, "9:13"));
+            Assert.IsTrue(CMP(dat[0], "c", EventTypes.Out, "9:13", "Y"));
 
             st.DoNext();    // 23
             dat = st.Events.Peeks(3).ToList();
-            Assert.IsTrue(CMP(dat[0], "c", EventTypes.In, "9:13"));
+            Assert.IsTrue(CMP(dat[0], "c", EventTypes.In, "9:13", "Y"));
 
             st.DoNext();    // 25
             dat = st.Events.Peeks(3).ToList();
             Assert.IsTrue(dat.Count == 0, "c moved to Z them c have sunk because Z have not next process");
-            Assert.IsTrue(st.GetWorks("\\", st.FindChildProcess("X")).Count() == 0);
-            Assert.IsTrue(st.GetWorks("\\", st.FindChildProcess("Y")).Count() == 0);
-            Assert.IsTrue(st.GetWorks("\\", st.FindChildProcess("Z")).Count() == 3);
+            Assert.IsTrue(st.GetWorks(JitLocation.CreateRoot(st, st.FindChildProcess("X"))).Count() == 0);
+            Assert.IsTrue(st.GetWorks(JitLocation.CreateRoot(st, st.FindChildProcess("Y"))).Count() == 0);
+            Assert.IsTrue(st.GetWorks(JitLocation.CreateRoot(st, st.FindChildProcess("Z"))).Count() == 3);
         }
 
         private bool CMP(JitStage.WorkEventQueue.Item ei, string name, EventTypes et, string time, string procName = null)

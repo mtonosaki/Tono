@@ -43,11 +43,12 @@ namespace Tono.Jit
         public override bool Check(JitWork work, DateTime now)
         {
             var stage = work.FindStage();
-            var wirs = stage.GetWorksInReserve(work.Current.Path, this);
+            var wirs = stage.GetWorksInReserve(work.Next, this); // TODO: Before work.Current. Need to check the reason.
+            //var tarLocation = GetCheckTargetProcess(work);
+            //var works = stage.GetWorks(tarLocation).Select(wt => wt.Work);
+            //var tarloc = works.Concat(wirs).Distinct();
             var costs =
-                from w in stage.GetWorks(work.Current.Path, GetCheckTargetProcess(work).Process)
-                          .Select(wt => wt.Work)
-                          .Concat(wirs)
+                from w in wirs //tarloc
                 let cost = w.ChildVriables.GetValueOrNull("Cost")
                 where cost != null
                 let varval = cost[ReferenceVarName]
