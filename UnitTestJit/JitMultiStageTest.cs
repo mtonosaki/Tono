@@ -750,7 +750,7 @@ namespace UnitTestJit
 
             st.DoNext();
             dat = st.Events.Peeks(99).ToList(); k = 0;
-            Assert.IsTrue(CMP(dat[k++], "w2", EventTypes.Out, "9:30", "X"));
+            Assert.IsTrue(CMP(dat[k++], "w2", EventTypes.Out, "9:30", @"\A\X", true));
             Assert.IsTrue(CMP(dat[k++], "Kanban3", EventTypes.KanbanIn, "9:32"));
             Assert.IsTrue(CMP(dat[k++], "w1", EventTypes.Out, "9:40", "Y"));
 
@@ -758,77 +758,77 @@ namespace UnitTestJit
             dat = st.Events.Peeks(99).ToList(); k = 0;
             Assert.IsTrue(CMP(dat[k++], "Kanban3", EventTypes.KanbanIn, "9:32"));
             Assert.IsTrue(CMP(dat[k++], "w1", EventTypes.Out, "9:40", "Y"));
-            Assert.IsTrue(CMP(dat[k++], "w2", EventTypes.Out, "9:40", "X"));
+            Assert.IsTrue(CMP(dat[k++], "w2", EventTypes.Out, "9:40", @"\A\X", true));
 
             st.DoNext();
             dat = st.Events.Peeks(99).ToList(); k = 0;
-            Assert.IsTrue(CMP(dat[k++], "w3", EventTypes.Out, "9:32", "X"));
+            Assert.IsTrue(CMP(dat[k++], "w3", EventTypes.Out, "9:32", @"\A\X", true));
             Assert.IsTrue(CMP(dat[k++], "w1", EventTypes.Out, "9:40", "Y"));
-            Assert.IsTrue(CMP(dat[k++], "w2", EventTypes.Out, "9:40", "X"));
+            Assert.IsTrue(CMP(dat[k++], "w2", EventTypes.Out, "9:40", @"\A\X", true));
 
             st.DoNext();
             dat = st.Events.Peeks(99).ToList(); k = 0;
             Assert.IsTrue(CMP(dat[k++], "w1", EventTypes.Out, "9:40", "Y"));
-            Assert.IsTrue(CMP(dat[k++], "w2", EventTypes.Out, "9:40", "X"));
-            Assert.IsTrue(CMP(dat[k++], "w3", EventTypes.Out, "9:40", "X"));
+            Assert.IsTrue(CMP(dat[k++], "w2", EventTypes.Out, "9:40", @"\A\X", true));
+            Assert.IsTrue(CMP(dat[k++], "w3", EventTypes.Out, "9:40", @"\A\X", true));
 
             st.DoNext();
             dat = st.Events.Peeks(99).ToList(); k = 0;
-            Assert.IsTrue(CMP(dat[k++], "w2", EventTypes.Out, "9:40", "X"));
-            Assert.IsTrue(CMP(dat[k++], "w3", EventTypes.Out, "9:40", "X"));
+            Assert.IsTrue(CMP(dat[k++], "w2", EventTypes.Out, "9:40", @"\A\X", true));
+            Assert.IsTrue(CMP(dat[k++], "w3", EventTypes.Out, "9:40", @"\A\X", true));
             Assert.IsTrue(CMP(dat[k++], "w1", EventTypes.In, "9:40", "Y"));
             st.DoNext();
             dat = st.Events.Peeks(99).ToList(); k = 0;
-            Assert.IsTrue(CMP(dat[k++], "w3", EventTypes.Out, "9:40", "X"));
+            Assert.IsTrue(CMP(dat[k++], "w3", EventTypes.Out, "9:40", @"\A\X", true));
             Assert.IsTrue(CMP(dat[k++], "w1", EventTypes.In, "9:40", "Y"));
-            Assert.IsTrue(CMP(dat[k++], "w2", EventTypes.Out, "9:40", "X"));
+            Assert.IsTrue(CMP(dat[k++], "w2", EventTypes.Out, "9:40", @"\A\X", true));
             st.DoNext();
             dat = st.Events.Peeks(99).ToList(); k = 0;
             Assert.IsTrue(CMP(dat[k++], "w1", EventTypes.In, "9:40", "Y"));
-            Assert.IsTrue(CMP(dat[k++], "w2", EventTypes.Out, "9:40", "X"));
-            Assert.IsTrue(CMP(dat[k++], "w3", EventTypes.Out, "9:40", "X"));
+            Assert.IsTrue(CMP(dat[k++], "w2", EventTypes.Out, "9:40", @"\A\X", true));
+            Assert.IsTrue(CMP(dat[k++], "w3", EventTypes.Out, "9:40", @"\A\X", true));
             st.DoNext();
             dat = st.Events.Peeks(99).ToList(); k = 0;
-            Assert.IsTrue(CMP(dat[k++], "w2", EventTypes.Out, "9:40", "X"));
-            Assert.IsTrue(CMP(dat[k++], "w3", EventTypes.Out, "9:40", "X"));
+            Assert.IsTrue(CMP(dat[k++], "w2", EventTypes.Out, "9:40", @"\A\X", true));
+            Assert.IsTrue(CMP(dat[k++], "w3", EventTypes.Out, "9:40", @"\A\X", true));
 
             st.DoNext();
             dat = st.Events.Peeks(99).ToList(); k = 0;
-            Assert.IsTrue(CMP(dat[k++], "w3", EventTypes.Out, "9:40", "X"));
-            Assert.IsTrue(CMP(dat[k++], "w2", EventTypes.In, "9:40", "X"));
+            Assert.IsTrue(CMP(dat[k++], "w3", EventTypes.Out, "9:40", @"\A\X", true));
+            Assert.IsTrue(CMP(dat[k++], "w2", EventTypes.In, "9:40", @"\A\X", true));
 
             st.DoNext();
             dat = st.Events.Peeks(99).ToList(); k = 0;
-            Assert.IsTrue(CMP(dat[k++], "w2", EventTypes.In, "9:40", "X"));
-            Assert.IsTrue(CMP(dat[k++], "w3", EventTypes.Out, "9:40", "X"));
+            Assert.IsTrue(CMP(dat[k++], "w2", EventTypes.In, "9:40", @"\A\X", true));
+            Assert.IsTrue(CMP(dat[k++], "w3", EventTypes.Out, "9:40", @"\A\X", true));
 
             st.DoNext();
             dat = st.Events.Peeks(99).ToList(); k = 0;
-            Assert.IsTrue(CMP(dat[k++], "w3", EventTypes.Out, "9:40", "X"));
+            Assert.IsTrue(CMP(dat[k++], "w3", EventTypes.Out, "9:40", @"\A\X", true));
             Assert.IsTrue(CMP(dat[k++], "w2", EventTypes.Out, "9:50", "Y"));
 
             st.DoNext();
             dat = st.Events.Peeks(99).ToList(); k = 0;
             Assert.IsTrue(CMP(dat[k++], "w2", EventTypes.Out, "9:50", "Y"));
-            Assert.IsTrue(CMP(dat[k++], "w3", EventTypes.Out, "9:50", "X"));
+            Assert.IsTrue(CMP(dat[k++], "w3", EventTypes.Out, "9:50", @"\A\X", true));
 
             st.DoNext();
             dat = st.Events.Peeks(99).ToList(); k = 0;
-            Assert.IsTrue(CMP(dat[k++], "w3", EventTypes.Out, "9:50", "X"));
+            Assert.IsTrue(CMP(dat[k++], "w3", EventTypes.Out, "9:50", @"\A\X", true));
             Assert.IsTrue(CMP(dat[k++], "w2", EventTypes.In, "9:50", "Y"));
 
             st.DoNext();
             dat = st.Events.Peeks(99).ToList(); k = 0;
             Assert.IsTrue(CMP(dat[k++], "w2", EventTypes.In, "9:50", "Y"));
-            Assert.IsTrue(CMP(dat[k++], "w3", EventTypes.Out, "9:50", "X"));
+            Assert.IsTrue(CMP(dat[k++], "w3", EventTypes.Out, "9:50", @"\A\X", true));
 
             st.DoNext();
             dat = st.Events.Peeks(99).ToList(); k = 0;
-            Assert.IsTrue(CMP(dat[k++], "w3", EventTypes.Out, "9:50", "X"));
+            Assert.IsTrue(CMP(dat[k++], "w3", EventTypes.Out, "9:50", @"\A\X", true));
 
             st.DoNext();
             dat = st.Events.Peeks(99).ToList(); k = 0;
-            Assert.IsTrue(CMP(dat[k++], "w3", EventTypes.In, "9:50", "X"));
+            Assert.IsTrue(CMP(dat[k++], "w3", EventTypes.In, "9:50", @"\A\X", true));
 
             st.DoNext();
             dat = st.Events.Peeks(99).ToList(); k = 0;
@@ -1056,6 +1056,493 @@ namespace UnitTestJit
             Assert.IsTrue(dat.Count == 0);
         }
 
+
+        [TestMethod]
+        public void Test008_Kanban()
+        {
+            // st
+            //        +-----+
+            //        |  B  |
+            //   +-+  | +-+ | +----+
+            //   |X|  | |Y|-|-|SINK|
+            //   +-+  | +-+ | +----+
+            //        +-----+  
+            var st = new JitStage
+            {
+                Name = "st",
+            };
+            var B = new JitSubset
+            {
+                Name = "B",
+            };
+            st.AddChildProcess(B);
+
+            JitProcess X, Y, SINK;
+            st.AddChildProcess(X = new JitProcess
+            {
+                Name = "X",
+            });
+            B.AddChildProcess(Y = new JitProcess
+            {
+                Name = "Y",
+            });
+            st.AddChildProcess(SINK = new JitProcess
+            {
+                Name = "SINK",
+            });
+
+            // 工程間リンク
+            // st.Links.SetPushLink(X, Y);  // 後工程引き取りの場合は、PushLinkは設定しない。
+            st.AddProcessLink("\\B\\Y", "\\SINK");
+
+            // 工程に制約を付与
+            X.Constraints.Add(new CoSpan
+            {
+                Span = TimeSpan.FromMinutes(3),
+            });
+            X.InCommands.Add(new CiDelay
+            {
+                Delay = TimeSpan.FromMinutes(5),
+            });
+            Y.Constraints.Add(new CoMaxCost
+            {
+                ReferenceVarName = JitVariable.From("Count"),
+                Value = 1.0,
+            });
+            Y.InCommands.Add(new CiDelay
+            {
+                Delay = TimeSpan.FromMinutes(10),
+            });
+
+            var today = TimeUtil.ClearTime(DateTime.Now);  // H:M:S:MSを０にする
+
+            // テストワーク投入（Xに工程充足）
+            for (var i = 0; i < 3; i++)
+            {
+                st.Events.Enqueue(TimeUtil.Set(today, hour: 9, minute: 0), EventTypes.Out, new JitWork
+                {
+                    Name = $"w{(i + 1):0}",
+                    Current = JitLocation.CreateRoot(st, null),
+                    Next = JitLocation.Create(st, @"\", X),
+                });
+            }
+
+            var k = 0;
+
+            // 初期状態は時間順に並んでる
+            var dat = st.Events.Peeks(99).ToList(); k = 0;
+            Assert.IsTrue(CMP(dat[k++], "w1", EventTypes.Out, "9:00"));
+            Assert.IsTrue(CMP(dat[k++], "w2", EventTypes.Out, "9:00"));
+            Assert.IsTrue(CMP(dat[k++], "w3", EventTypes.Out, "9:00"));
+
+            st.DoNext();
+            dat = st.Events.Peeks(99).ToList(); k = 0;
+            Assert.IsTrue(CMP(dat[k++], "w2", EventTypes.Out, "9:00"));
+            Assert.IsTrue(CMP(dat[k++], "w3", EventTypes.Out, "9:00"));
+            Assert.IsTrue(CMP(dat[k++], "w1", EventTypes.In, "9:00"));
+
+            st.DoNext();
+            dat = st.Events.Peeks(99).ToList(); k = 0;
+            Assert.IsTrue(CMP(dat[k++], "w3", EventTypes.Out, "9:00"));
+            Assert.IsTrue(CMP(dat[k++], "w1", EventTypes.In, "9:00"));
+            Assert.IsTrue(CMP(dat[k++], "w2", EventTypes.Out, "9:03"));
+
+            st.DoNext();
+            dat = st.Events.Peeks(99).ToList(); k = 0;
+            Assert.IsTrue(CMP(dat[k++], "w1", EventTypes.In, "9:00"));
+            Assert.IsTrue(CMP(dat[k++], "w2", EventTypes.Out, "9:03"));
+            Assert.IsTrue(CMP(dat[k++], "w3", EventTypes.Out, "9:03"));
+
+            st.DoNext();
+            dat = st.Events.Peeks(99).ToList(); k = 0;
+            Assert.IsTrue(CMP(dat[k++], "w2", EventTypes.Out, "9:03"));
+            Assert.IsTrue(CMP(dat[k++], "w3", EventTypes.Out, "9:03"));
+
+            st.DoNext();
+            dat = st.Events.Peeks(99).ToList(); k = 0;
+            Assert.IsTrue(CMP(dat[k++], "w3", EventTypes.Out, "9:03"));
+            Assert.IsTrue(CMP(dat[k++], "w2", EventTypes.In, "9:03"));
+
+            st.DoNext();
+            dat = st.Events.Peeks(99).ToList(); k = 0;
+            Assert.IsTrue(CMP(dat[k++], "w2", EventTypes.In, "9:03"));
+            Assert.IsTrue(CMP(dat[k++], "w3", EventTypes.Out, "9:06"));
+
+            st.DoNext();
+            dat = st.Events.Peeks(99).ToList(); k = 0;
+            Assert.IsTrue(CMP(dat[k++], "w3", EventTypes.Out, "9:06"));
+
+            st.DoNext();
+            dat = st.Events.Peeks(99).ToList(); k = 0;
+            Assert.IsTrue(CMP(dat[k++], "w3", EventTypes.In, "9:06"));
+
+            st.DoNext();
+            dat = st.Events.Peeks(99).ToList(); k = 0;
+            Assert.IsTrue(dat.Count == 0);
+
+            // 初期かんばんを投入
+            var testid = 0;
+            st.SendKanban(TimeUtil.Set(today, hour: 9, minute: 30), new JitKanban   // かんばん送るも、工程Xにはワークが無いので、なにもしない
+            {
+                PullFrom = JitLocation.Create(st, "\\", X),
+                PullTo = JitLocation.Create(st, "\\B", Y),
+                TestID = ++testid,
+            });
+            dat = st.Events.Peeks(99).ToList(); k = 0;
+            Assert.IsTrue(CMP(dat[k++], "Kanban1", EventTypes.KanbanIn, "9:30"));
+
+            st.SendKanban(TimeUtil.Set(today, hour: 9, minute: 30), new JitKanban   // かんばん送るも、工程Xにはワークが無いので、なにもしない
+            {
+                PullFrom = JitLocation.Create(st, "\\", X),
+                PullTo = JitLocation.Create(st, "\\B", Y),
+                TestID = ++testid,
+            });
+            dat = st.Events.Peeks(99).ToList(); k = 0;
+            Assert.IsTrue(CMP(dat[k++], "Kanban1", EventTypes.KanbanIn, "9:30"));
+            Assert.IsTrue(CMP(dat[k++], "Kanban2", EventTypes.KanbanIn, "9:30"));
+
+            st.SendKanban(TimeUtil.Set(today, hour: 9, minute: 32), new JitKanban   // かんばん送るも、工程Xにはワークが無いので、なにもしない
+            {
+                PullFrom = JitLocation.Create(st, "\\", X),
+                PullTo = JitLocation.Create(st, "\\B", Y),
+                TestID = ++testid,
+            });
+            dat = st.Events.Peeks(99).ToList(); k = 0;
+            Assert.IsTrue(CMP(dat[k++], "Kanban1", EventTypes.KanbanIn, "9:30"));
+            Assert.IsTrue(CMP(dat[k++], "Kanban2", EventTypes.KanbanIn, "9:30"));
+            Assert.IsTrue(CMP(dat[k++], "Kanban3", EventTypes.KanbanIn, "9:32"));
+
+            st.DoNext();
+            dat = st.Events.Peeks(99).ToList(); k = 0;
+            Assert.IsTrue(CMP(dat[k++], "Kanban2", EventTypes.KanbanIn, "9:30"));
+            Assert.IsTrue(CMP(dat[k++], "w1", EventTypes.Out, "9:30", @"\X", true));
+            Assert.IsTrue(CMP(dat[k++], "Kanban3", EventTypes.KanbanIn, "9:32"));
+
+            st.DoNext();
+            dat = st.Events.Peeks(99).ToList(); k = 0;
+            Assert.IsTrue(CMP(dat[k++], "w1", EventTypes.Out, "9:30", @"\X", true));
+            Assert.IsTrue(CMP(dat[k++], "w2", EventTypes.Out, "9:30", @"\X", true));
+            Assert.IsTrue(CMP(dat[k++], "Kanban3", EventTypes.KanbanIn, "9:32"));
+
+            st.DoNext();
+            dat = st.Events.Peeks(99).ToList(); k = 0;
+            Assert.IsTrue(CMP(dat[k++], "w2", EventTypes.Out, "9:30", @"\X", true));
+            Assert.IsTrue(CMP(dat[k++], "w1", EventTypes.In, "9:30", @"\X", true));
+            Assert.IsTrue(CMP(dat[k++], "Kanban3", EventTypes.KanbanIn, "9:32"));
+
+            st.DoNext();
+            dat = st.Events.Peeks(99).ToList(); k = 0;
+            Assert.IsTrue(CMP(dat[k++], "w1", EventTypes.In, "9:30", @"\X", true));
+            Assert.IsTrue(CMP(dat[k++], "w2", EventTypes.Out, "9:30", @"\X", true));
+            Assert.IsTrue(CMP(dat[k++], "Kanban3", EventTypes.KanbanIn, "9:32"));
+
+            st.DoNext();
+            dat = st.Events.Peeks(99).ToList(); k = 0;
+            Assert.IsTrue(CMP(dat[k++], "w2", EventTypes.Out, "9:30", @"\X", true));
+            Assert.IsTrue(CMP(dat[k++], "Kanban3", EventTypes.KanbanIn, "9:32"));
+            Assert.IsTrue(CMP(dat[k++], "w1", EventTypes.Out, "9:40", @"\B\Y", true));
+
+            st.DoNext();
+            dat = st.Events.Peeks(99).ToList(); k = 0;
+            Assert.IsTrue(CMP(dat[k++], "Kanban3", EventTypes.KanbanIn, "9:32"));
+            Assert.IsTrue(CMP(dat[k++], "w1", EventTypes.Out, "9:40", @"\B\Y", true));
+            Assert.IsTrue(CMP(dat[k++], "w2", EventTypes.Out, "9:40", @"\X", true));
+
+            st.DoNext();
+            dat = st.Events.Peeks(99).ToList(); k = 0;
+            Assert.IsTrue(CMP(dat[k++], "w3", EventTypes.Out, "9:32", @"\X", true));
+            Assert.IsTrue(CMP(dat[k++], "w1", EventTypes.Out, "9:40", @"\B\Y", true));
+            Assert.IsTrue(CMP(dat[k++], "w2", EventTypes.Out, "9:40", @"\X", true));
+
+            st.DoNext();
+            dat = st.Events.Peeks(99).ToList(); k = 0;
+            Assert.IsTrue(CMP(dat[k++], "w1", EventTypes.Out, "9:40", @"\B\Y", true));
+            Assert.IsTrue(CMP(dat[k++], "w2", EventTypes.Out, "9:40", @"\X", true));
+            Assert.IsTrue(CMP(dat[k++], "w3", EventTypes.Out, "9:40", @"\X", true));
+
+            st.DoNext();
+            dat = st.Events.Peeks(99).ToList(); k = 0;
+            Assert.IsTrue(CMP(dat[k++], "w2", EventTypes.Out, "9:40", @"\X", true));
+            Assert.IsTrue(CMP(dat[k++], "w3", EventTypes.Out, "9:40", @"\X", true));
+            Assert.IsTrue(CMP(dat[k++], "w1", EventTypes.In, "9:40", @"\B\Y", true));
+            st.DoNext();
+            dat = st.Events.Peeks(99).ToList(); k = 0;
+            Assert.IsTrue(CMP(dat[k++], "w3", EventTypes.Out, "9:40", @"\X", true));
+            Assert.IsTrue(CMP(dat[k++], "w1", EventTypes.In, "9:40", @"\B\Y", true));
+            Assert.IsTrue(CMP(dat[k++], "w2", EventTypes.Out, "9:40", @"\X", true));
+            st.DoNext();
+            dat = st.Events.Peeks(99).ToList(); k = 0;
+            Assert.IsTrue(CMP(dat[k++], "w1", EventTypes.In, "9:40", @"\B\Y", true));
+            Assert.IsTrue(CMP(dat[k++], "w2", EventTypes.Out, "9:40", @"\X", true));
+            Assert.IsTrue(CMP(dat[k++], "w3", EventTypes.Out, "9:40", @"\X", true));
+            st.DoNext();
+            dat = st.Events.Peeks(99).ToList(); k = 0;
+            Assert.IsTrue(CMP(dat[k++], "w2", EventTypes.Out, "9:40", @"\X", true));
+            Assert.IsTrue(CMP(dat[k++], "w3", EventTypes.Out, "9:40", @"\X", true));
+
+            st.DoNext();
+            dat = st.Events.Peeks(99).ToList(); k = 0;
+            Assert.IsTrue(CMP(dat[k++], "w3", EventTypes.Out, "9:40", @"\X", true));
+            Assert.IsTrue(CMP(dat[k++], "w2", EventTypes.In, "9:40", @"\X", true));
+
+            st.DoNext();
+            dat = st.Events.Peeks(99).ToList(); k = 0;
+            Assert.IsTrue(CMP(dat[k++], "w2", EventTypes.In, "9:40", @"\X", true));
+            Assert.IsTrue(CMP(dat[k++], "w3", EventTypes.Out, "9:40", @"\X", true));
+
+            st.DoNext();
+            dat = st.Events.Peeks(99).ToList(); k = 0;
+            Assert.IsTrue(CMP(dat[k++], "w3", EventTypes.Out, "9:40", @"\X", true));
+            Assert.IsTrue(CMP(dat[k++], "w2", EventTypes.Out, "9:50", @"\B\Y", true));
+
+            st.DoNext();
+            dat = st.Events.Peeks(99).ToList(); k = 0;
+            Assert.IsTrue(CMP(dat[k++], "w2", EventTypes.Out, "9:50", @"\B\Y", true));
+            Assert.IsTrue(CMP(dat[k++], "w3", EventTypes.Out, "9:50", @"\X", true));
+
+            st.DoNext();
+            dat = st.Events.Peeks(99).ToList(); k = 0;
+            Assert.IsTrue(CMP(dat[k++], "w3", EventTypes.Out, "9:50", @"\X", true));
+            Assert.IsTrue(CMP(dat[k++], "w2", EventTypes.In, "9:50", @"\B\Y", true));
+
+            st.DoNext();
+            dat = st.Events.Peeks(99).ToList(); k = 0;
+            Assert.IsTrue(CMP(dat[k++], "w2", EventTypes.In, "9:50", @"\B\Y", true));
+            Assert.IsTrue(CMP(dat[k++], "w3", EventTypes.Out, "9:50", @"\X", true));
+
+            st.DoNext();
+            dat = st.Events.Peeks(99).ToList(); k = 0;
+            Assert.IsTrue(CMP(dat[k++], "w3", EventTypes.Out, "9:50", @"\X", true));
+
+            st.DoNext();
+            dat = st.Events.Peeks(99).ToList(); k = 0;
+            Assert.IsTrue(CMP(dat[k++], "w3", EventTypes.In, "9:50", @"\X", true));
+
+            st.DoNext();
+            dat = st.Events.Peeks(99).ToList(); k = 0;
+            Assert.IsTrue(CMP(dat[k++], "w3", EventTypes.Out, "10:00", @"\B\Y", true));
+
+            st.DoNext();
+            dat = st.Events.Peeks(99).ToList(); k = 0;
+            Assert.IsTrue(CMP(dat[k++], "w3", EventTypes.In, "10:00", @"\B\Y", true));
+
+            st.DoNext();
+            dat = st.Events.Peeks(99).ToList(); k = 0;
+            Assert.IsTrue(dat.Count == 0);
+
+
+            // Yから、SINKにPULL要求してみる
+            foreach (var nl in Collection.Rep(4))
+            {
+                st.SendKanban(TimeUtil.Set(today, hour: 12, minute: 00), new JitKanban   // かんばん送るも、工程Xにはワークが無いので、なにもしない
+                {
+                    PullFrom = JitLocation.Create(st, "\\", SINK),
+                    PullTo = JitLocation.Create(st, "\\B", Y),
+                    TestID = ++testid,
+                });
+            }
+
+            dat = st.Events.Peeks(99).ToList(); k = 0;
+            Assert.IsTrue(CMP(dat[k++], "Kanban4", EventTypes.KanbanIn, "12:00"));
+            Assert.IsTrue(CMP(dat[k++], "Kanban5", EventTypes.KanbanIn, "12:00"));
+            Assert.IsTrue(CMP(dat[k++], "Kanban6", EventTypes.KanbanIn, "12:00"));
+            Assert.IsTrue(CMP(dat[k++], "Kanban7", EventTypes.KanbanIn, "12:00"));
+
+            st.DoNext();
+            dat = st.Events.Peeks(99).ToList(); k = 0;
+            Assert.IsTrue(CMP(dat[k++], "Kanban5", EventTypes.KanbanIn, "12:00"));
+            Assert.IsTrue(CMP(dat[k++], "Kanban6", EventTypes.KanbanIn, "12:00"));
+            Assert.IsTrue(CMP(dat[k++], "Kanban7", EventTypes.KanbanIn, "12:00"));
+            Assert.IsTrue(CMP(dat[k++], "w1", EventTypes.Out, "12:00", "SINK"));
+
+            st.DoNext();
+            dat = st.Events.Peeks(99).ToList(); k = 0;
+            Assert.IsTrue(CMP(dat[k++], "Kanban6", EventTypes.KanbanIn, "12:00"));
+            Assert.IsTrue(CMP(dat[k++], "Kanban7", EventTypes.KanbanIn, "12:00"));
+            Assert.IsTrue(CMP(dat[k++], "w1", EventTypes.Out, "12:00", "SINK"));
+            Assert.IsTrue(CMP(dat[k++], "w2", EventTypes.Out, "12:00", "SINK"));
+
+            st.DoNext();
+            dat = st.Events.Peeks(99).ToList(); k = 0;
+            Assert.IsTrue(CMP(dat[k++], "Kanban7", EventTypes.KanbanIn, "12:00"));
+            Assert.IsTrue(CMP(dat[k++], "w1", EventTypes.Out, "12:00", "SINK"));
+            Assert.IsTrue(CMP(dat[k++], "w2", EventTypes.Out, "12:00", "SINK"));
+            Assert.IsTrue(CMP(dat[k++], "w3", EventTypes.Out, "12:00", "SINK"));
+
+            st.DoNext();
+            dat = st.Events.Peeks(99).ToList(); k = 0;
+            Assert.IsTrue(CMP(dat[k++], "w1", EventTypes.Out, "12:00", "SINK"));
+            Assert.IsTrue(CMP(dat[k++], "w2", EventTypes.Out, "12:00", "SINK"));
+            Assert.IsTrue(CMP(dat[k++], "w3", EventTypes.Out, "12:00", "SINK"));
+
+            st.DoNext();
+            dat = st.Events.Peeks(99).ToList(); k = 0;
+            Assert.IsTrue(CMP(dat[k++], "w2", EventTypes.Out, "12:00", "SINK"));
+            Assert.IsTrue(CMP(dat[k++], "w3", EventTypes.Out, "12:00", "SINK"));
+            Assert.IsTrue(CMP(dat[k++], "w1", EventTypes.In, "12:00", "SINK"));
+            st.DoNext();
+            dat = st.Events.Peeks(99).ToList(); k = 0;
+            Assert.IsTrue(CMP(dat[k++], "w3", EventTypes.Out, "12:00", "SINK"));
+            Assert.IsTrue(CMP(dat[k++], "w1", EventTypes.In, "12:00", "SINK"));
+            Assert.IsTrue(CMP(dat[k++], "w2", EventTypes.Out, "12:00", "SINK"));
+            st.DoNext();
+            dat = st.Events.Peeks(99).ToList(); k = 0;
+            Assert.IsTrue(CMP(dat[k++], "w1", EventTypes.In, "12:00", "SINK"));
+            Assert.IsTrue(CMP(dat[k++], "w2", EventTypes.Out, "12:00", "SINK"));
+            Assert.IsTrue(CMP(dat[k++], "w3", EventTypes.Out, "12:00", "SINK"));
+            st.DoNext();
+            dat = st.Events.Peeks(99).ToList(); k = 0;
+            Assert.IsTrue(CMP(dat[k++], "w2", EventTypes.Out, "12:00", "SINK"));
+            Assert.IsTrue(CMP(dat[k++], "w3", EventTypes.Out, "12:00", "SINK"));
+            Assert.IsTrue(CMP(dat[k++], "w1", EventTypes.Out, "12:10", @"\B\Y", true));
+
+            st.DoNext();
+            dat = st.Events.Peeks(99).ToList(); k = 0;
+            Assert.IsTrue(CMP(dat[k++], "w3", EventTypes.Out, "12:00", "SINK"));
+            Assert.IsTrue(CMP(dat[k++], "w1", EventTypes.Out, "12:10", @"\B\Y", true));
+            Assert.IsTrue(CMP(dat[k++], "w2", EventTypes.Out, "12:10", "SINK"));
+
+            st.DoNext();
+            dat = st.Events.Peeks(99).ToList(); k = 0;
+            Assert.IsTrue(CMP(dat[k++], "w1", EventTypes.Out, "12:10", @"\B\Y", true));
+            Assert.IsTrue(CMP(dat[k++], "w2", EventTypes.Out, "12:10", "SINK"));
+            Assert.IsTrue(CMP(dat[k++], "w3", EventTypes.Out, "12:10", "SINK"));
+
+            st.DoNext();
+            dat = st.Events.Peeks(99).ToList(); k = 0;
+            Assert.IsTrue(CMP(dat[k++], "w2", EventTypes.Out, "12:10", "SINK"));
+            Assert.IsTrue(CMP(dat[k++], "w3", EventTypes.Out, "12:10", "SINK"));
+            Assert.IsTrue(CMP(dat[k++], "w1", EventTypes.In, "12:10", @"\B\Y", true));
+
+            st.DoNext();
+            dat = st.Events.Peeks(99).ToList(); k = 0;
+            Assert.IsTrue(CMP(dat[k++], "w3", EventTypes.Out, "12:10", "SINK"));
+            Assert.IsTrue(CMP(dat[k++], "w1", EventTypes.In, "12:10", @"\B\Y", true));
+            Assert.IsTrue(CMP(dat[k++], "w2", EventTypes.Out, "12:10", "SINK"));
+
+            st.DoNext();
+            dat = st.Events.Peeks(99).ToList(); k = 0;
+            Assert.IsTrue(CMP(dat[k++], "w1", EventTypes.In, "12:10", @"\B\Y", true));
+            Assert.IsTrue(CMP(dat[k++], "w2", EventTypes.Out, "12:10", "SINK"));
+            Assert.IsTrue(CMP(dat[k++], "w3", EventTypes.Out, "12:10", "SINK"));
+
+            st.DoNext();
+            dat = st.Events.Peeks(99).ToList(); k = 0;
+            Assert.IsTrue(CMP(dat[k++], "w2", EventTypes.Out, "12:10", "SINK"));
+            Assert.IsTrue(CMP(dat[k++], "w3", EventTypes.Out, "12:10", "SINK"));
+            Assert.IsTrue(CMP(dat[k++], "w1", EventTypes.Out, "12:10", "SINK")); // Kanban7が、w1について、またSINK→Yが指示された
+
+            st.DoNext();
+            dat = st.Events.Peeks(99).ToList(); k = 0;
+            Assert.IsTrue(CMP(dat[k++], "w3", EventTypes.Out, "12:10", "SINK"));
+            Assert.IsTrue(CMP(dat[k++], "w1", EventTypes.Out, "12:10", "SINK"));
+            Assert.IsTrue(CMP(dat[k++], "w2", EventTypes.In, "12:10", "SINK"));
+
+            st.DoNext();
+            dat = st.Events.Peeks(99).ToList(); k = 0;
+            Assert.IsTrue(CMP(dat[k++], "w1", EventTypes.Out, "12:10", "SINK"));
+            Assert.IsTrue(CMP(dat[k++], "w2", EventTypes.In, "12:10", "SINK"));
+            Assert.IsTrue(CMP(dat[k++], "w3", EventTypes.Out, "12:10", "SINK"));
+
+            st.DoNext();
+            dat = st.Events.Peeks(99).ToList(); k = 0;
+            Assert.IsTrue(CMP(dat[k++], "w2", EventTypes.In, "12:10", "SINK"));
+            Assert.IsTrue(CMP(dat[k++], "w3", EventTypes.Out, "12:10", "SINK"));
+            Assert.IsTrue(CMP(dat[k++], "w1", EventTypes.Out, "12:10", "SINK"));
+
+            st.DoNext();
+            dat = st.Events.Peeks(99).ToList(); k = 0;
+            Assert.IsTrue(CMP(dat[k++], "w3", EventTypes.Out, "12:10", "SINK"));
+            Assert.IsTrue(CMP(dat[k++], "w1", EventTypes.Out, "12:10", "SINK"));
+            Assert.IsTrue(CMP(dat[k++], "w2", EventTypes.Out, "12:20", @"\B\Y", true));
+
+            st.DoNext();
+            dat = st.Events.Peeks(99).ToList(); k = 0;
+            Assert.IsTrue(CMP(dat[k++], "w1", EventTypes.Out, "12:10", "SINK"));
+            Assert.IsTrue(CMP(dat[k++], "w2", EventTypes.Out, "12:20", @"\B\Y", true));
+            Assert.IsTrue(CMP(dat[k++], "w3", EventTypes.Out, "12:20", "SINK"));
+
+            st.DoNext();
+            dat = st.Events.Peeks(99).ToList(); k = 0;
+            Assert.IsTrue(CMP(dat[k++], "w2", EventTypes.Out, "12:20", @"\B\Y", true));
+            Assert.IsTrue(CMP(dat[k++], "w3", EventTypes.Out, "12:20", "SINK"));
+            Assert.IsTrue(CMP(dat[k++], "w1", EventTypes.Out, "12:20", "SINK"));
+
+            st.DoNext();
+            dat = st.Events.Peeks(99).ToList(); k = 0;
+            Assert.IsTrue(CMP(dat[k++], "w3", EventTypes.Out, "12:20", "SINK"));
+            Assert.IsTrue(CMP(dat[k++], "w1", EventTypes.Out, "12:20", "SINK"));
+            Assert.IsTrue(CMP(dat[k++], "w2", EventTypes.In, "12:20", @"\B\Y", true));
+
+            st.DoNext();
+            dat = st.Events.Peeks(99).ToList(); k = 0;
+            Assert.IsTrue(CMP(dat[k++], "w1", EventTypes.Out, "12:20", "SINK"));
+            Assert.IsTrue(CMP(dat[k++], "w2", EventTypes.In, "12:20", @"\B\Y", true));
+            Assert.IsTrue(CMP(dat[k++], "w3", EventTypes.Out, "12:20", "SINK"));
+
+            st.DoNext();
+            dat = st.Events.Peeks(99).ToList(); k = 0;
+            Assert.IsTrue(CMP(dat[k++], "w2", EventTypes.In, "12:20", @"\B\Y", true));
+            Assert.IsTrue(CMP(dat[k++], "w3", EventTypes.Out, "12:20", "SINK"));
+            Assert.IsTrue(CMP(dat[k++], "w1", EventTypes.Out, "12:20", "SINK"));
+
+            st.DoNext();
+            dat = st.Events.Peeks(99).ToList(); k = 0;
+            Assert.IsTrue(CMP(dat[k++], "w3", EventTypes.Out, "12:20", "SINK"));
+            Assert.IsTrue(CMP(dat[k++], "w1", EventTypes.Out, "12:20", "SINK"));
+            Assert.IsTrue(dat.Count == 2); // もうかんばんが無いので、w2は、SINKで消滅
+
+            st.DoNext();
+            dat = st.Events.Peeks(99).ToList(); k = 0;
+            Assert.IsTrue(CMP(dat[k++], "w1", EventTypes.Out, "12:20", "SINK"));
+            Assert.IsTrue(CMP(dat[k++], "w3", EventTypes.In, "12:20", "SINK"));
+
+            st.DoNext();
+            dat = st.Events.Peeks(99).ToList(); k = 0;
+            Assert.IsTrue(CMP(dat[k++], "w3", EventTypes.In, "12:20", "SINK"));
+            Assert.IsTrue(CMP(dat[k++], "w1", EventTypes.Out, "12:20", "SINK"));
+
+            st.DoNext();
+            dat = st.Events.Peeks(99).ToList(); k = 0;
+            Assert.IsTrue(CMP(dat[k++], "w1", EventTypes.Out, "12:20", "SINK"));
+            Assert.IsTrue(CMP(dat[k++], "w3", EventTypes.Out, "12:30", @"\B\Y", true));
+
+            st.DoNext();
+            dat = st.Events.Peeks(99).ToList(); k = 0;
+            Assert.IsTrue(CMP(dat[k++], "w3", EventTypes.Out, "12:30", @"\B\Y", true));
+            Assert.IsTrue(CMP(dat[k++], "w1", EventTypes.Out, "12:30", "SINK"));
+
+            st.DoNext();
+            dat = st.Events.Peeks(99).ToList(); k = 0;
+            Assert.IsTrue(CMP(dat[k++], "w1", EventTypes.Out, "12:30", "SINK"));
+            Assert.IsTrue(CMP(dat[k++], "w3", EventTypes.In, "12:30", @"\B\Y", true));
+
+            st.DoNext();
+            dat = st.Events.Peeks(99).ToList(); k = 0;
+            Assert.IsTrue(CMP(dat[k++], "w3", EventTypes.In, "12:30", @"\B\Y", true));
+            Assert.IsTrue(CMP(dat[k++], "w1", EventTypes.Out, "12:30", "SINK"));
+
+            st.DoNext();
+            dat = st.Events.Peeks(99).ToList(); k = 0;
+            Assert.IsTrue(CMP(dat[k++], "w1", EventTypes.Out, "12:30", "SINK"));
+            Assert.IsTrue(dat.Count == 1); // もうかんばんが無いので、w3は、SINKで消滅
+
+            st.DoNext();
+            dat = st.Events.Peeks(99).ToList(); k = 0;
+            Assert.IsTrue(CMP(dat[k++], "w1", EventTypes.In, "12:30", "SINK"));
+
+            st.DoNext();
+            dat = st.Events.Peeks(99).ToList(); k = 0;
+            Assert.IsTrue(CMP(dat[k++], "w1", EventTypes.Out, "12:40", @"\B\Y", true));
+
+            st.DoNext();
+            dat = st.Events.Peeks(99).ToList(); k = 0;
+            Assert.IsTrue(CMP(dat[k++], "w1", EventTypes.In, "12:40", @"\B\Y", true));
+
+            st.DoNext();
+            dat = st.Events.Peeks(99).ToList(); k = 0;
+            Assert.IsTrue(dat.Count == 0);
+        }
 
         private bool CMP(JitStage.WorkEventQueue.Item ei, string name, EventTypes et, string time, string procName = null, bool isProcFullPath = false)
         {
