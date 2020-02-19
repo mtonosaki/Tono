@@ -113,7 +113,7 @@ namespace Tono.Jit
             {
                 ProcessKey = ip[ip.Length - 1], // note : JitProcessDummy.ProcessKey should not have Instance Name
             };
-            _childProcess.Add((ip[Math.Max(0, ip.Length - 2)], proc));
+            _childProcess.Add((ip.Length == 1 ? null : ip[0], proc));
 
             ProcessAdded?.Invoke(this, new ProcessAddedEventArgs
             {

@@ -103,7 +103,7 @@ namespace Tono.Jit
 
         public override string ToString()
         {
-            return $"{GetType().Name} {Name}@{(Current?.Process?.Name) ?? "n/a"} → {(Next?.Process?.Name) ?? "n/a"} ID={ID}";
+            return $"{GetType().Name} {Name}@\"{(Current?.FullPath) ?? "n/a"}\" → \"{(Next?.FullPath) ?? "n/a"}\" ID={ID}";
         }
     }
 
