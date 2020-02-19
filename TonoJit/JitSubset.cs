@@ -44,7 +44,7 @@ namespace Tono.Jit
         /// <summary>
         /// Child Processes
         /// </summary>
-        private readonly List<JitProcess> _childProcess = new List<JitProcess>();
+        private readonly List<(string InstanceName, JitProcess ClassObject)> _childProcess = new List<(ProcessKey InstanceName, JitProcess ClassObject)>();
 
         /// <summary>
         /// The constructor
@@ -79,10 +79,10 @@ namespace Tono.Jit
         /// Add process
         /// </summary>
         /// <param name="proc"></param>
-        public void AddChildProcess(JitProcess proc)
+        public void AddChildProcess(JitProcess proc, string instanceName = null)
         {
-            RemoveChildProcess(proc);
-            _childProcess.Add(proc);
+            RemoveChildProcess(proc, instanceName);
+            _childProcess.Add((instanceName, proc));
 
             if (proc is JitSubset subset)
             {
@@ -107,12 +107,14 @@ namespace Tono.Jit
         public void AddChildProcess(ProcessKey procKey)
         {
             RemoveChildProcess(procKey);
+            var ip = procKey.Split('@');
 
-            JitProcess proc;
-            _childProcess.Add(proc = new JitProcessDummy
+            var proc = new JitProcessDummy
             {
-                ProcessKey = procKey,
-            });
+                ProcessKey = ip[ip.Length - 1], // note : JitProcessDummy.ProcessKey should not have Instance Name
+            };
+            _childProcess.Add((ip.Length == 1 ? null : ip[0], proc));
+
             ProcessAdded?.Invoke(this, new ProcessAddedEventArgs
             {
                 Target = this,
@@ -121,32 +123,27 @@ namespace Tono.Jit
         }
 
         /// <summary>
-        /// Add processes to this subset
-        /// </summary>
-        /// <param name="procs"></param>
-        public void AddChildProcess(IEnumerable<JitProcess> procs)
-        {
-            foreach (var proc in procs)
-            {
-                AddChildProcess(proc);
-            }
-        }
-
-        /// <summary>
         /// Remove Process class from this subset
         /// </summary>
         /// <param name="proc"></param>
-        public void RemoveChildProcess(JitProcess proc)
+        public void RemoveChildProcess(JitProcess proc, string instanceName = null)
         {
+            if(instanceName != null)
+            {
+                instanceName = instanceName + "@";
+            } else
+            {
+                instanceName = "";
+            }
             if (proc is JitProcessDummy dummy)
             {
-                RemoveChildProcess(dummy.ProcessKey);
+                RemoveChildProcess(instanceName + dummy.ProcessKey);
             }
             else
             {
-                RemoveChildProcess(proc.Name);
+                RemoveChildProcess(instanceName +  proc.Name);
             }
-            RemoveChildProcess(proc.ID);
+            RemoveChildProcess(instanceName + proc.ID);
         }
 
         /// <summary>
@@ -155,19 +152,34 @@ namespace Tono.Jit
         /// <param name="procKey"></param>
         public void RemoveChildProcess(ProcessKey procKey)
         {
-            var col1 =
-                from t in _childProcess
-                let dmy = t as JitProcessDummy
-                where dmy != null
-                where dmy.ProcessKey == procKey
-                select dmy;
-            var col2 =
-                from t in _childProcess
-                where t is JitProcessDummy == false
-                where t.ID == procKey || t.Name == procKey
-                select t;
-            var dels = col1.Concat(col2).ToArray();
-
+            string instanceName = null;
+            var ipkey = procKey.Split('@');
+            if (ipkey.Length == 2)
+            {
+                instanceName = ipkey[0];
+                procKey = ipkey[1];
+            }
+            var dels = new List<(string InstanceName, JitProcess ClassObject)>();
+            foreach (var ip in _childProcess)
+            {
+                if (ip.InstanceName == null || ip.InstanceName == instanceName)
+                {
+                    if (ip.ClassObject is JitProcessDummy dmy)
+                    {
+                        if (dmy.ProcessKey == procKey)
+                        {
+                            dels.Add(ip);
+                        }
+                    }
+                    else
+                    {
+                        if (ip.ClassObject.ID == procKey || ip.ClassObject.Name == procKey)
+                        {
+                            dels.Add(ip);
+                        }
+                    }
+                }
+            }
             foreach (var proc in dels)
             {
                 _childProcess.Remove(proc);
@@ -180,7 +192,7 @@ namespace Tono.Jit
         /// <returns></returns>
         public IEnumerable<JitProcess> GetChildProcesses()
         {
-            return _childProcess;
+            return _childProcess.Select(ip => ip.ClassObject);
         }
 
         /// <summary>
@@ -190,7 +202,7 @@ namespace Tono.Jit
         /// <returns></returns>
         public JitProcess GetChildProcess(int index)
         {
-            return _childProcess[index];
+            return _childProcess[index].ClassObject;
         }
 
         /// <summary>
@@ -204,16 +216,31 @@ namespace Tono.Jit
             {
                 if (isReturnNull) return null; else throw new JitException(JitException.NullProcKey);
             }
-            var ret = _childProcess.Where(a => a.ID == procKey).FirstOrDefault();
-            if (ret == null)
+            var ipkey = procKey.Split('@');
+            if (ipkey.Length == 2)
             {
-                ret = _childProcess.Where(a => a.Name == procKey).FirstOrDefault();
+                procKey = ipkey[1];
             }
-            if (ret != null || isReturnNull)
+            var rets1 = _childProcess
+                .Where(a => a.ClassObject.ID == procKey);
+            var rets2 = _childProcess
+                .Where(a => a.ClassObject.Name == procKey);
+            var ret = rets1.Concat(rets2)
+                .Where(a => a.InstanceName == null || a.InstanceName == ipkey[0])
+                .FirstOrDefault();
+
+            if (ret != default)
             {
-                return ret;
+                return ret.ClassObject;
             }
-            throw new JitException(JitException.NoProcKey, $"{procKey} in {this}");
+            if (isReturnNull)
+            {
+                return null;
+            }
+            else
+            {
+                throw new JitException(JitException.NoProcKey, $"{procKey} in {this}");
+            }
         }
 
         /// <summary>
@@ -235,9 +262,17 @@ namespace Tono.Jit
         /// <returns></returns>
         public IEnumerable<ProcessKey> GetProcessKeys()
         {
-            foreach (var proc in _childProcess)
+            foreach (var ip in _childProcess)
             {
-                yield return GetProcessKey(proc);
+                var pkey = GetProcessKey(ip.ClassObject);
+                if (ip.InstanceName == null)
+                {
+                    yield return pkey;
+                }
+                else
+                {
+                    yield return $"{ip.InstanceName}@{pkey}";
+                }
             }
         }
 

@@ -2739,20 +2739,17 @@ namespace UnitTestJit
         {
             var st = new JitStage();
             JitProcess X, Y, Z;
-            st.AddChildProcess(new[]
+            st.AddChildProcess(X = new JitProcess
             {
-                X = new JitProcess
-                {
-                    Name = "X",
-                },
-                Y = new JitProcess
-                {
-                    Name = "Y",
-                },
-                Z = new JitProcess
-                {
-                    Name = "Z",
-                },
+                Name = "X",
+            });
+            st.AddChildProcess(Y = new JitProcess
+            {
+                Name = "Y",
+            });
+            st.AddChildProcess(Z = new JitProcess
+            {
+                Name = "Z",
             });
 
             X.Constraints.Add(new CoSpan
@@ -2915,20 +2912,17 @@ namespace UnitTestJit
             var st = new JitStage();
 
             JitProcess X, Y, Z;
-            st.AddChildProcess(new[]
+            st.AddChildProcess(X = new JitProcess
             {
-                X = new JitProcess
-                {
-                    Name = "X",
-                },
-                Y = new JitProcess
-                {
-                    Name = "Y",
-                },
-                Z = new JitProcess
-                {
-                    Name = "Z",
-                },
+                Name = "X",
+            });
+            st.AddChildProcess(Y = new JitProcess
+            {
+                Name = "Y",
+            });
+            st.AddChildProcess(Z = new JitProcess
+            {
+                Name = "Z",
             });
 
             Assert.IsTrue(X.Is(":Process"));
@@ -3151,7 +3145,7 @@ namespace UnitTestJit
                 {
                     if (work.Current != default)
                     {
-                        ret &= work.Current.Process.Name == procName;
+                        ret &= work.Current.Process?.Name == procName;
                     }
                 }
                 else

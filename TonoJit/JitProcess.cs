@@ -145,9 +145,15 @@ namespace Tono.Jit
             work.Previous = work.Current;
             work.Current = work.Next;
 
-            var nextProcs = work.Current.SubsetCache.GetProcessLinkPathes(this);    // TODO: Consider Global Path
-            var nextProcKeyPath = nextProcs.FirstOrDefault();
-            work.Next = stage.FindSubsetProcess(work.Current.ToEmptyProcess(), nextProcKeyPath, isReturnNull: true);   // TODO: SubsetのConnector対応
+            var nextProcs = stage.GetProcessLinkPathes(work.Current);
+            if (nextProcs != null && nextProcs.Count > 0)
+            {
+                work.Next = nextProcs[0].NextLocation;
+            }
+            else
+            {
+                work.Next = null;
+            }
             work.EnterTime = now;
             CheckAndAttachKanban(work.Current, now); // かんばんが有れば、NextProcessをかんばんで更新する
         }
@@ -163,7 +169,7 @@ namespace Tono.Jit
             stage.RemoveWorkFromSubsetProcess(work.Current, work);
 
             var currentcios = work.Current?.Process?.Cios;
-            if(currentcios != null)
+            if (currentcios != null)
             {
                 foreach (var cio in currentcios)
                 {
@@ -252,7 +258,7 @@ namespace Tono.Jit
                 var stage = ei.Work.FindStage();
                 stage.SetLastInTime(ei.Work.Next, cio, now);  // save in-time (for Span constraint)
                 stage.AddWorkInReserve(ei.Work.Next, cio, ei.Work);   // reserve work-in (for Max constraint) 
-                    // TODO: CHECK .Work.Next (Before .Current Why?)
+                                                                      // TODO: CHECK .Work.Next (Before .Current Why?)
             }
         }
 

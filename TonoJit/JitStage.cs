@@ -6,7 +6,9 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using static Tono.Jit.Utils;
+using ProcessKey = System.String;
 using ProcessKeyPath = System.String;
+
 
 namespace Tono.Jit
 {
@@ -158,7 +160,7 @@ namespace Tono.Jit
         /// <returns></returns>
         public JitLocation FindSubsetProcess(JitLocation currentLocation, ProcessKeyPath procKeyPath, bool isReturnNull = false)
         {
-            if(procKeyPath == null)
+            if (procKeyPath == null)
             {
                 goto Error;
             }
@@ -173,15 +175,11 @@ namespace Tono.Jit
             {
                 goto Error;
             }
-            var keys = path.Split('\\');
+            var keys = path.Split(new[] { '\\' }, StringSplitOptions.RemoveEmptyEntries);
             JitSubset subset = this;
             for (var i = 0; i < keys.Length - 1; i++)
             {
                 var prockey = keys[i];
-                if( string.IsNullOrEmpty(prockey) && i == 0)
-                {
-                    continue;
-                }
                 var ssproc = subset.FindChildProcess(prockey, true);
                 if (ssproc is JitSubset ss)
                 {
@@ -193,7 +191,7 @@ namespace Tono.Jit
                 }
             }
             var proc = subset.FindChildProcess(keys[keys.Length - 1], true);
-            if( proc != null)
+            if (proc != null)
             {
                 return new JitLocation
                 {
@@ -203,7 +201,7 @@ namespace Tono.Jit
                     Process = proc,
                 };
             }
-Error:
+        Error:
             if (isReturnNull)
             {
                 return currentLocation.ToEmptyProcess();
@@ -263,7 +261,7 @@ Error:
         private void ProcOut(WorkEventQueue.Item ei)
         {
             ei.Work.Status = JitWorkStatus.Stopping;   // change status "STOP"
-            if (ei.Work.Next?.Process == null )
+            if (ei.Work.Next?.Process == null)
             {
                 return;
             }
@@ -427,6 +425,59 @@ Error:
                 return procworks.Select(kv => (kv.Key, kv.Value));
             }
             return ZeroWorkCollection;
+        }
+
+        /// <summary>
+        /// Find Process Link of the target process location considering global path.
+        /// </summary>
+        /// <param name="tarProcessLocation"></param>
+        /// <returns></returns>
+        public IReadOnlyList<(JitLocation NextLocation, ProcessKey ProcKey)> GetProcessLinkPathes(JitLocation tarProcessLocation)
+        {
+            if (tarProcessLocation.Process == null)  // need to set Process
+            {
+                throw new JitException(JitException.NoProcess);
+            }
+            IReadOnlyList<ProcessKey> links = null;
+            JitLocation loc = null;
+            var stage = tarProcessLocation.Stage;
+            var root = JitLocation.CreateRoot(stage);
+            var pathes = tarProcessLocation.FullPath.Split(new[] { '\\' }, StringSplitOptions.RemoveEmptyEntries);
+            for (var i = pathes.Length; i > 0; i--)
+            {
+                var checkSubsetPath = string.Join("\\", pathes, 0, i);
+                loc = stage.FindSubsetProcess(root, checkSubsetPath, true);
+                if (loc == null)
+                {
+                    throw new JitException(JitException.IllegalPath, tarProcessLocation.FullPath);
+                }
+                for (var ii = pathes.Length - 1; ii >= 0; ii--)
+                {
+                    var checkPath = string.Join("\\", pathes, ii, pathes.Length - ii);
+                    links = loc.SubsetCache.GetProcessLinkPathes(checkPath);
+                    if ((links?.Count ?? 0) == 0 && ii == 0)
+                    {
+                        links = loc.SubsetCache.GetProcessLinkPathes("\\" + checkPath);
+                    }
+                    if (links?.Count == 0) links = null;
+                    if (links != null)
+                    {
+                        i = 0;
+                        break;
+                    }
+                }
+            }
+            if (links != null)
+            {
+                var ret = from pk in links
+                          let proc = loc.FindSubsetProcess(pk, true)
+                          select (proc, pk);
+                return ret.ToList();
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }

@@ -60,7 +60,7 @@ namespace Tono.Jit
         /// <param name="subset"></param>
         /// <param name="process"></param>
         /// <returns></returns>
-        public static JitLocation CreateRoot(JitStage stage, JitProcess process)
+        public static JitLocation CreateRoot(JitStage stage, JitProcess process = null)
         {
             return new JitLocation
             {
@@ -220,7 +220,7 @@ namespace Tono.Jit
         }
         public override string ToString()
         {
-            return $"{GetType().Name} Stage={(Stage?.ToString() ?? "n/a")}, Path={Path}, Process={(Process?.ToString() ?? "n/a")}";
+            return $"{GetType().Name} FullPath={FullPath}";
         }
 
         /// <summary>

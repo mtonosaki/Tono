@@ -12,7 +12,7 @@ using static Tono.Jit.Utils;
 namespace UnitTestJit
 {
     [TestClass]
-    public class JitStage_NestTest
+    public class JitMultiStageTest
     {
         [TestMethod]
         public void Test001()
@@ -409,8 +409,169 @@ namespace UnitTestJit
             Assert.AreEqual(JitLocation.GetPath("aaa\\bbb"), "aaa");
         }
 
+        [TestMethod]
+        public void Test006()
+        {
+            var ps = new List<JitProcess>();
+            for (var i = 0; i < 5; i++)
+            {
+                var p = new JitProcess
+                {
+                    Name = ((char)('A' + i)).ToString(),
+                };
+                p.AddCio(new CiDelay
+                {
+                    Delay = TimeSpan.FromMinutes(1),
+                });
+                ps.Add(p);
+            }
+            var C = ps[2];
+            var E = ps[4];
 
-        private bool CMP(JitStage.WorkEventQueue.Item ei, string name, EventTypes et, string time, string procName = null)
+            //---------------------------------------------------------------------
+            var X = new JitSubset   // X = Class name
+            {
+                Name = "X",
+            };
+            var A = ps[0];  // A...D are class names.
+            var B = ps[1];
+            X.AddChildProcess(A);
+            X.AddChildProcess(B);
+            X.AddProcessLink("A", "B");
+            //---------------------------------------------------------------------
+            //---------------------------------------------------------------------
+            var Y = new JitSubset   // X = Class name
+            {
+                Name = "Y",
+            };
+            var Z = new JitSubset
+            {
+                Name = "Z",
+            };
+            var D = ps[3];
+            Z.AddChildProcess("D");             // make name only process for testing.
+            Z.AddChildProcess(D);               // then set the actual instance (will override the named one)
+            Y.AddChildProcess("z1@Z");          // make name only process first
+            Y.AddChildProcess($"z2@{Z.ID}");
+            Y.AddChildProcess(Z, "z1");         // then set the actual instance
+            Y.AddChildProcess(Z, "z2");
+            Assert.AreEqual(Y.GetChildProcesses().Count(), 2);
+            foreach (var proc in Y.GetChildProcesses())
+            {
+                Assert.AreEqual(proc, Z);       // Both proc is referenced to the same Z
+            }
+            //---------------------------------------------------------------------
+
+            var st = new JitStage
+            {
+                Name = "st",
+            };
+            st.AddChildProcess(C);
+            st.AddChildProcess("x1@X");     // name instance
+            st.AddChildProcess(X, "x1");    // Actual instance
+            st.AddChildProcess(Y);
+            st.AddChildProcess(X, "x2");
+            st.AddChildProcess(E);
+            Assert.AreEqual(st.GetChildProcesses().Count(), 5);
+
+            st.AddProcessLink("C", "\\x1@X\\A");
+            st.AddProcessLink("\\x1@X\\B", "Y\\z1@Z\\D");
+            Y.AddProcessLink("z1@Z\\D", "z2@Z\\D");
+            Y.AddProcessLink("z2@Z\\D", "\\x2@X\\A");
+            st.AddProcessLink("\\x2@X\\B", "E");
+
+            // st                 +-------------------+
+            //                    |         Y         |   
+            //      +---------+   | +-----+   +-----+ |   +---------+
+            //      |  x1@X   |   | |z1@Z |   |z2@Z | |   |   x2@X  |
+            // +-+  | +-+ +-+ |   | | +-+ |   | +-+ | |   | +-+ +-+ |  +-+
+            // |C|--+-|A|-|B|-+---+-+-|D|-+---+-|D|-+-+---+-|A|-|B|-+--|E|
+            // +-+  | +-+ +-+ |   | | +-+ |   | +-+ | |   | +-+ +-+ |  +-+
+            //      +---------+   | +-----+   +-----+ |   +---------+
+            //                    +-------------------+ 
+
+            var today = TimeUtil.ClearTime(DateTime.Now);
+            JitWork w1;
+            st.Events.Enqueue(TimeUtil.Set(today, hour: 9, minute: 0), EventTypes.Out, w1 = new JitWork
+            {
+                Name = "w1",
+                Current = JitLocation.CreateRoot(st, null),
+                Next = JitLocation.CreateRoot(st, C),
+            });
+
+            var dat = st.Events.Peeks(3).ToList();
+            Assert.IsTrue(CMP(dat[0], "w1", EventTypes.Out, "9:00"));
+
+            var k = 0;
+            st.DoNext();
+            dat = st.Events.Peeks(3).ToList(); k = 0;
+            Assert.IsTrue(CMP(dat[k++], "w1", EventTypes.In, "9:00"));
+
+            st.DoNext();
+            dat = st.Events.Peeks(3).ToList(); k = 0;
+            Assert.IsTrue(CMP(dat[k++], "w1", EventTypes.Out, "9:01", @"\C", true));
+
+            st.DoNext();
+            dat = st.Events.Peeks(3).ToList(); k = 0;
+            Assert.IsTrue(CMP(dat[k++], "w1", EventTypes.In, "9:01", @"\C", true));
+
+            st.DoNext();
+            dat = st.Events.Peeks(3).ToList(); k = 0;
+            Assert.IsTrue(CMP(dat[k++], "w1", EventTypes.Out, "9:02", @"\x1@X\A", true));
+
+            st.DoNext();
+            dat = st.Events.Peeks(3).ToList(); k = 0;
+            Assert.IsTrue(CMP(dat[k++], "w1", EventTypes.In, "9:02", @"\x1@X\A", true));
+
+            st.DoNext();
+            dat = st.Events.Peeks(3).ToList(); k = 0;
+            Assert.IsTrue(CMP(dat[k++], "w1", EventTypes.Out, "9:03", @"\x1@X\B", true));
+
+            st.DoNext();
+            dat = st.Events.Peeks(3).ToList(); k = 0;
+            Assert.IsTrue(CMP(dat[k++], "w1", EventTypes.In, "9:03", @"\x1@X\B", true));
+
+
+            st.DoNext();
+            dat = st.Events.Peeks(3).ToList(); k = 0;
+            Assert.IsTrue(CMP(dat[k++], "w1", EventTypes.Out, "9:04", @"\Y\z1@Z\D", true));
+
+            st.DoNext();
+            dat = st.Events.Peeks(3).ToList(); k = 0;
+            Assert.IsTrue(CMP(dat[k++], "w1", EventTypes.In, "9:04", @"\Y\z1@Z\D", true));
+
+            st.DoNext();
+            dat = st.Events.Peeks(3).ToList(); k = 0;
+            Assert.IsTrue(CMP(dat[k++], "w1", EventTypes.Out, "9:05", @"\Y\z2@Z\D", true));
+
+            st.DoNext();
+            dat = st.Events.Peeks(3).ToList(); k = 0;
+            Assert.IsTrue(CMP(dat[k++], "w1", EventTypes.In, "9:05", @"\Y\z2@Z\D", true));
+
+            st.DoNext();
+            dat = st.Events.Peeks(3).ToList(); k = 0;
+            Assert.IsTrue(CMP(dat[k++], "w1", EventTypes.Out, "9:06", @"\x2@X\A", true));
+
+            st.DoNext();
+            dat = st.Events.Peeks(3).ToList(); k = 0;
+            Assert.IsTrue(CMP(dat[k++], "w1", EventTypes.In, "9:06", @"\x2@X\A", true));
+
+            st.DoNext();
+            dat = st.Events.Peeks(3).ToList(); k = 0;
+            Assert.IsTrue(CMP(dat[k++], "w1", EventTypes.Out, "9:07", @"\x2@X\B", true));
+
+            st.DoNext();
+            dat = st.Events.Peeks(3).ToList(); k = 0;
+            Assert.IsTrue(CMP(dat[k++], "w1", EventTypes.In, "9:07", @"\x2@X\B", true));
+
+            st.DoNext();
+            dat = st.Events.Peeks(3).ToList(); k = 0;
+            Assert.AreEqual(dat.Count, 0);
+        }
+
+
+
+        private bool CMP(JitStage.WorkEventQueue.Item ei, string name, EventTypes et, string time, string procName = null, bool isProcFullPath = false)
         {
             var ts = time.Split(':');
             var h = int.Parse(ts[0]);
@@ -428,7 +589,14 @@ namespace UnitTestJit
             {
                 if (ei.Work is JitWork work)
                 {
-                    ret &= work.Current?.Process?.Name == procName;
+                    if (isProcFullPath)
+                    {
+                        ret &= work.Current?.FullPath == procName;
+                    }
+                    else
+                    {
+                        ret &= work.Current?.Process?.Name == procName;
+                    }
                 }
                 else
                 {
