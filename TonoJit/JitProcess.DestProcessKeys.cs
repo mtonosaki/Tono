@@ -1,10 +1,8 @@
 ﻿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using ProcessKey = System.String;
 
 namespace Tono.Jit

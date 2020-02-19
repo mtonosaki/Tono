@@ -3,7 +3,6 @@
 
 using System;
 using System.Collections.Generic;
-using static Tono.Jit.Utils;
 
 namespace Tono.Jit
 {

@@ -1,8 +1,6 @@
 ﻿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
-using System;
-
 namespace Tono.Jit
 {
     /// <summary> 

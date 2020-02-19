@@ -2,9 +2,7 @@
 // Licensed under the MIT license.
 
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using static Tono.Jit.Utils;
 
 namespace Tono.Jit
 {
@@ -43,10 +41,7 @@ namespace Tono.Jit
         public override bool Check(JitWork work, DateTime now)
         {
             var stage = work.FindStage();
-            var wirs = stage.GetWorksInReserve(work.Next, this); // TODO: Before work.Current. Need to check the reason.
-            //var tarLocation = GetCheckTargetProcess(work);
-            //var works = stage.GetWorks(tarLocation).Select(wt => wt.Work);
-            //var tarloc = works.Concat(wirs).Distinct();
+            var wirs = stage.GetWorksInReserve(work.Next, this);
             var costs =
                 from w in wirs //tarloc
                 let cost = w.ChildVriables.GetValueOrNull("Cost")

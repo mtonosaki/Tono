@@ -2,7 +2,6 @@
 // Licensed under the MIT license.
 
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using ProcessKey = System.String;
@@ -258,7 +257,6 @@ namespace Tono.Jit
                 var stage = ei.Work.FindStage();
                 stage.SetLastInTime(ei.Work.Next, cio, now);  // save in-time (for Span constraint)
                 stage.AddWorkInReserve(ei.Work.Next, cio, ei.Work);   // reserve work-in (for Max constraint) 
-                                                                      // TODO: CHECK .Work.Next (Before .Current Why?)
             }
         }
 
@@ -319,7 +317,7 @@ namespace Tono.Jit
                 from we in location.Stage.GetWorks(location.ToChangeProcess(this))
                 where we.Work?.Next?.Process == null  // No Next work
                 select new WorkEntery { Work = we.Work, Enter = we.EnterTime };
-            
+
             var work = ExitWorkSelector.Invoke(buf);
             if (work == null)
             {
