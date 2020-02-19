@@ -67,7 +67,7 @@ namespace Tono.Jit
 
         public override string ToString()
         {
-            return $"{GetType().Name} ID={ID} From=\"{PullFrom?.FullPath ?? "null"}\" To={PullTo?.FullPath ?? "null"}";
+            return $"{GetType().Name} ID={ID} From=\"{PullFrom?.FullPath ?? "null"}\" To=\"{PullTo?.FullPath ?? "null"}\"";
         }
 
         /// <summary>

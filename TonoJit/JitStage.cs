@@ -244,10 +244,7 @@ namespace Tono.Jit
         {
             var tarProc = ei.Kanban.PullFrom;
             var usedKanban = tarProc.Process.AddKanban(ei.Kanban, Now); // Set Kanban for Jit process. 工程にかんばんを投入して、処理を促す
-            if (usedKanban != null)
-            {
-                usedKanban.Work.Current.Process.AddAndAdjustExitTiming(Events, usedKanban.Work); // Enqueue out event.  (Eventキューに Outイベントを登録)
-            }
+            usedKanban?.Work.Current.Process.AddAndAdjustExitTiming(Events, usedKanban.Work); // Enqueue out event.  (Eventキューに Outイベントを登録)
         }
 
         /// <summary>

@@ -298,7 +298,7 @@ namespace Tono.Jit
                 EventQueue = stage.Events,
                 Kanban = kanban,
             });
-            return CheckAndAttachKanban(kanban.PullTo, now);    // TODO: Check PullTo is OK.
+            return CheckAndAttachKanban(kanban.PullFrom, now);
         }
 
         /// <summary>
