@@ -242,11 +242,11 @@ namespace Tono.Jit
         /// <param name="ei"></param>
         private void ProcKanban(WorkEventQueue.Item ei)
         {
-            var tarProc = ei.Kanban.Location.SubsetCache.FindChildProcess(ei.Kanban.PullFromProcessKey); // TODO: Consider Global Path
-            var usedKanban = tarProc.AddKanban(ei.Kanban.Location, ei.Kanban, Now); // 工程にかんばんを投入して、処理を促す
+            var tarProc = ei.Kanban.PullFrom;
+            var usedKanban = tarProc.Process.AddKanban(ei.Kanban, Now); // Set Kanban for Jit process. 工程にかんばんを投入して、処理を促す
             if (usedKanban != null)
             {
-                usedKanban.Work.Current.Process.AddAndAdjustExitTiming(Events, usedKanban.Work); // Eventキューに Outイベントを登録
+                usedKanban.Work.Current.Process.AddAndAdjustExitTiming(Events, usedKanban.Work); // Enqueue out event.  (Eventキューに Outイベントを登録)
             }
         }
 

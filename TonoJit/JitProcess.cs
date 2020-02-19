@@ -290,21 +290,23 @@ namespace Tono.Jit
         /// Add kanban
         /// </summary>
         /// <param name="kanban"></param>
-        public virtual JitKanban AddKanban(JitLocation location, JitKanban kanban, DateTime now)
+        public virtual JitKanban AddKanban(JitKanban kanban, DateTime now)
         {
-            kanbanQueue.GetValueOrDefault(location.Stage, true, a => new Queue<EventQueueKanban>()).Enqueue(new EventQueueKanban
+            var stage = kanban.FindStage();
+            kanbanQueue.GetValueOrDefault(stage, true, a => new Queue<EventQueueKanban>()).Enqueue(new EventQueueKanban
             {
-                EventQueue = location.Stage.Events,
+                EventQueue = stage.Events,
                 Kanban = kanban,
             });
-            kanban.Location = location; // Update to new subset
-            return CheckAndAttachKanban(location, now);
+            return CheckAndAttachKanban(kanban.PullTo, now);    // TODO: Check PullTo is OK.
         }
 
         /// <summary>
+        /// Set work next location from Kanban information
         /// かんばんの目的地をワークに付ける（付け替える）
         /// </summary>
-        /// <returns>処理されたかんばん</returns>
+        /// <param name="location">target location of this Process instance</param>
+        /// <returns>Kanban that is attached to a work</returns>
         private JitKanban CheckAndAttachKanban(JitLocation location, DateTime now)
         {
             var queue = kanbanQueue.GetValueOrDefault(location.Stage, true, a => new Queue<EventQueueKanban>());
@@ -314,26 +316,23 @@ namespace Tono.Jit
             }
 
             var buf =
-                from w in location.Stage.GetWorks(location.ToChangeProcess(this))
-                where w.Work.Next == default || w.Work.Next.Process == null // 行先が無い
-                select new WorkEntery { Work = w.Work, Enter = w.EnterTime };
+                from we in location.Stage.GetWorks(location.ToChangeProcess(this))
+                where we.Work?.Next?.Process == null  // No Next work
+                select new WorkEntery { Work = we.Work, Enter = we.EnterTime };
+            
             var work = ExitWorkSelector.Invoke(buf);
-
             if (work == null)
             {
                 return null;
             }
-
             var sk = queue.Dequeue();
-            var nextProc = sk.Kanban.Location.SubsetCache.FindChildProcess(sk.Kanban.PullToProcessKey);  // TODO: Consider Global Path
-            work.Next = sk.Kanban.Location.ToChangeProcess(nextProc);
+            work.Next = sk.Kanban.PullTo;
             work.Kanbans.Add(sk.Kanban);
             sk.Kanban.Work = work;
             if (work.ExitTime < now)
             {
-                work.ExitTime = now;    // かんばんを待っていたので、現在時刻が進んだときは、現在時刻でExitしたいこととする。
+                work.ExitTime = now;  // Because the work should be waiting kanban to exit from this process. かんばんを待っていたので、現在時刻が進んだときは、現在時刻でExitしたいこととする。
             }
-
             return sk.Kanban;
         }
     }
@@ -347,7 +346,7 @@ namespace Tono.Jit
 
         public override string Name { get => throw new NotAllowErrorException(); set => throw new NotAllowErrorException(); }
         public override void AddAndAdjustExitTiming(JitStage.WorkEventQueue events, JitWork work) => throw new NotAllowErrorException();
-        public override JitKanban AddKanban(JitLocation location, JitKanban kanban, DateTime now) => throw new NotAllowErrorException();
+        public override JitKanban AddKanban(JitKanban kanban, DateTime now) => throw new NotAllowErrorException();
         public override void Enter(JitWork work, DateTime now) => throw new NotAllowErrorException();
         public override void Exit(JitWork work) => throw new NotAllowErrorException();
         public override JitWork ExitCollectedWork(JitLocation location, DateTime now) => throw new NotAllowErrorException();
