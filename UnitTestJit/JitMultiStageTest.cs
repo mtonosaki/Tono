@@ -450,7 +450,7 @@ namespace UnitTestJit
             };
             var D = ps[3];
             Z.AddChildProcess("D");             // make name only process for testing.
-            Z.AddChildProcess(D);               // then set the actual instance
+            Z.AddChildProcess(D);               // then set the actual instance (will override the named one)
             Y.AddChildProcess("z1@Z");          // make name only process first
             Y.AddChildProcess($"z2@{Z.ID}");
             Y.AddChildProcess(Z, "z1");         // then set the actual instance
