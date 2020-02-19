@@ -626,16 +626,27 @@ namespace UnitTestJit
         public void Test20()
         {
             var code = @"
+                st = new Stage
+                    Name = 'st'
                 p1 = new Process
+                    Name = 'p1'
                 p2 = new Process
+                    Name = 'p2'
                 w1 = new Work
                 k1 = new Kanban
-                    PullFromProcessKey = p1.ID
-                    PullToProcessKey = p2.ID
+                    PullFrom = new Location
+                        Stage = st
+                        Path = '\'
+                        Process = p1
+                    PullTo = new Location
+                        Stage = st
+                        Path = '\'
+                        Process = p2
                     Work = w1
             ";
             var jac = new JacInterpreter();
             jac.Exec(code);
+            var st = jac.GetStage("st");
             var k1 = jac.GetKanban("k1");
             var p1 = jac.GetProcess("p1");
             var p2 = jac.GetProcess("p2");
@@ -644,8 +655,9 @@ namespace UnitTestJit
             Assert.IsNotNull(p1);
             Assert.IsNotNull(p2);
             Assert.IsNotNull(w1);
-            Assert.AreEqual(k1.PullFromProcessKey, p1.ID);
-            Assert.AreEqual(k1.PullToProcessKey, p2.ID);
+            Assert.AreEqual(k1.PullFrom.Stage, st);
+            Assert.AreEqual(k1.PullFrom.Process.ID, p1.ID);
+            Assert.AreEqual(k1.PullTo.Process.ID, p2.ID);
             Assert.AreEqual(k1.Work, w1);
         }
 

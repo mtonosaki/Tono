@@ -515,18 +515,16 @@ namespace UnitTestJit
             var testid = 0;
             st.SendKanban(ka = new JitKanban
             {
-                Location = JitLocation.CreateRoot(st, null),
-                PullFromProcessKey = X.ID,  // You can set ID here
-                PullToProcessKey = Y.Name,  // You can also set Name here
+                PullFrom = JitLocation.CreateRoot(st, X),
+                PullTo = JitLocation.CreateRoot(st, Y),
                 TestID = ++testid,
             }).Classes.Add(":Dog");
             Assert.IsTrue(ka.Is(":Kanban"));
 
             st.SendKanban(new JitKanban
             {
-                Location = JitLocation.CreateRoot(st, null),
-                PullFromProcessKey = "X",   // You can set Name here
-                PullToProcessKey = "Y",
+                PullFrom = JitLocation.CreateRoot(st, X),
+                PullTo = JitLocation.CreateRoot(st, Y),
                 TestID = ++testid,
             }).Classes.Add(":Cat");
 
@@ -664,9 +662,8 @@ namespace UnitTestJit
 
             st.SendKanban(new JitKanban
             {
-                Location = JitLocation.CreateRoot(st, null),
-                PullFromProcessKey = "X",
-                PullToProcessKey = "Y",
+                PullFrom = JitLocation.CreateRoot(st, X),
+                PullTo = JitLocation.CreateRoot(st, Y),
                 TestID = 1,
             });
 
@@ -971,9 +968,8 @@ namespace UnitTestJit
             var testid = 0;
             st.SendKanban(TimeUtil.Set(today, hour: 9, minute: 30), new JitKanban   // かんばん送るも、工程Xにはワークが無いので、なにもしない
             {
-                Location = JitLocation.CreateRoot(st, null),
-                PullFromProcessKey = "X",
-                PullToProcessKey = Y.ID,
+                PullFrom = JitLocation.CreateRoot(st, X),
+                PullTo = JitLocation.CreateRoot(st, Y),
                 TestID = ++testid,
             });
             dat = st.Events.Peeks(99).ToList(); k = 0;
@@ -981,9 +977,8 @@ namespace UnitTestJit
 
             st.SendKanban(TimeUtil.Set(today, hour: 9, minute: 30), new JitKanban   // かんばん送るも、工程Xにはワークが無いので、なにもしない
             {
-                Location = JitLocation.CreateRoot(st, null),
-                PullFromProcessKey = X.Name,
-                PullToProcessKey = "Y",
+                PullFrom = JitLocation.CreateRoot(st, X),
+                PullTo = JitLocation.CreateRoot(st, Y),
                 TestID = ++testid,
             });
             dat = st.Events.Peeks(99).ToList(); k = 0;
@@ -992,9 +987,8 @@ namespace UnitTestJit
 
             st.SendKanban(TimeUtil.Set(today, hour: 9, minute: 32), new JitKanban   // かんばん送るも、工程Xにはワークが無いので、なにもしない
             {
-                Location = JitLocation.CreateRoot(st, null),
-                PullFromProcessKey = "X",
-                PullToProcessKey = "Y",
+                PullFrom = JitLocation.CreateRoot(st, X),
+                PullTo = JitLocation.CreateRoot(st, Y),
                 TestID = ++testid,
             });
             dat = st.Events.Peeks(99).ToList(); k = 0;
@@ -1126,9 +1120,8 @@ namespace UnitTestJit
             {
                 st.SendKanban(TimeUtil.Set(today, hour: 12, minute: 00), new JitKanban   // かんばん送るも、工程Xにはワークが無いので、なにもしない
                 {
-                    Location = JitLocation.CreateRoot(st, null),
-                    PullFromProcessKey = "SINK",
-                    PullToProcessKey = "Y",
+                    PullFrom = JitLocation.CreateRoot(st, SINK),
+                    PullTo = JitLocation.CreateRoot(st, Y),
                     TestID = ++testid,
                 });
             }
@@ -1383,10 +1376,9 @@ namespace UnitTestJit
             int testid = 0;
             st.SendKanban(TimeUtil.Set(today, hour: 8, minute: 0), new JitKanban   // かんばん送るも、工程Xにはワークが無いので、なにもしない
             {
-                Location = JitLocation.CreateRoot(st, null),
+                PullFrom = JitLocation.CreateRoot(st, X),
+                PullTo = JitLocation.CreateRoot(st, Y),
                 TestID = ++testid,
-                PullFromProcessKey = "X",
-                PullToProcessKey = "Y",
             });
 
             // テストワーク投入（Xに工程充足）
@@ -1468,10 +1460,9 @@ namespace UnitTestJit
             // Kanban2を Xに投入依頼
             st.SendKanban(TimeUtil.Set(today, hour: 9, minute: 4), new JitKanban
             {
-                Location = JitLocation.CreateRoot(st, null),
+                PullFrom = JitLocation.CreateRoot(st, X),
+                PullTo = JitLocation.CreateRoot(st, Y),
                 TestID = ++testid,
-                PullFromProcessKey = "X",
-                PullToProcessKey = "Y",
             });
             dat = st.Events.Peeks(99).ToList(); k = 0;
             Assert.IsTrue(CMP(dat[k++], "Kanban2", EventTypes.KanbanIn, "9:04"));
@@ -1494,10 +1485,9 @@ namespace UnitTestJit
             // Kanban3を Xに投入依頼。w3のInに先立ち、入れとくテスト
             st.SendKanban(new JitKanban
             {
-                Location = JitLocation.CreateRoot(st, null),
+                PullFrom = JitLocation.CreateRoot(st, X),
+                PullTo = JitLocation.CreateRoot(st, Y),
                 TestID = ++testid,
-                PullFromProcessKey = "X",
-                PullToProcessKey = "Y",
             });
 
             // Kanban3 In待ち

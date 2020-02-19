@@ -71,6 +71,26 @@ namespace Tono.Jit
             };
         }
 
+        public static JitLocation Create(JitStage stage, string pathFromStage, JitProcess process = null)
+        {
+            JitLocation loc;
+            if (pathFromStage == "\\")
+            {
+                return CreateRoot(stage, process);
+            }
+            else
+            {
+                loc = stage.FindSubsetProcess(CreateRoot(stage), pathFromStage);
+                return new JitLocation
+                {
+                    Stage = stage,
+                    SubsetCache = loc?.Process as JitSubset,
+                    Path = pathFromStage,
+                    Process = process,
+                };
+            }
+        }
+
         public static string CombinePath(params string[] pathes)
         {
             var sb = new StringBuilder();
