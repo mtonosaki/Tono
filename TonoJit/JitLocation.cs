@@ -131,7 +131,7 @@ namespace Tono.Jit
                         break;
                     case "..":
                         pathes.RemoveAt(i--);
-                        if (pathes[i] != "")
+                        if (string.IsNullOrEmpty(pathes[i]) == false)
                         {
                             pathes.RemoveAt(i--);
                         }
@@ -161,7 +161,7 @@ namespace Tono.Jit
             if (id >= 0)
             {
                 var ret = fullPath.Substring(0, id);
-                if (ret == "")
+                if (string.IsNullOrEmpty(ret))
                 {
                     return "\\";
                 }

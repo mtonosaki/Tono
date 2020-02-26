@@ -187,6 +187,45 @@ namespace Tono
         }
 
         /// <summary>
+        /// Get X,Y position of inscribed square in a circle
+        /// </summary>
+        /// <param name="angle"></param>
+        /// <returns></returns>
+        public static (double X, double Y) GetLocationOfInscribedSquareInCircle(Angle angle)
+        {
+            const double cos45 = 0.7071067811865297; // Cos(45deg)
+
+            if (angle.Deg >= 360 - 45 || angle.Deg < 45.0)
+            {
+                var a = Math.Sin(angle.Rad) / Math.Cos(angle.Rad);
+                var x = cos45;
+                var y = a * x;
+                return (x, y);
+            }
+            else if (angle.Deg >= 45.0 && angle.Deg < 135.0)
+            {
+                var a = Math.Cos(angle.Rad) / Math.Sin(angle.Rad);
+                var y = cos45;
+                var x = a * y;
+                return (x, y);
+            }
+            else if (angle.Deg >= 135.0 && angle.Deg < 225.0)
+            {
+                var a = Math.Sin(angle.Rad) / Math.Cos(angle.Rad);
+                var x = -cos45;
+                var y = a * x;
+                return (x, y);
+            }
+            else
+            {
+                var a = Math.Cos(angle.Rad) / Math.Sin(angle.Rad);
+                var y = -cos45;
+                var x = a * y;
+                return (x, y);
+            }
+        }
+
+        /// <summary>
         /// Calculate the intersection of a circle and a straight line
         /// </summary>
         /// <param name="center">center position of circle</param>

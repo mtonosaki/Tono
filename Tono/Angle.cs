@@ -32,6 +32,24 @@ namespace Tono
             get => Rad * 180 / PI;
             set => Rad = value * PI / 180;
         }
+
+        /// <summary>
+        /// Get Normalized instance 0-360 Deg
+        /// </summary>
+        public Angle Normalized
+        {
+            get
+            {
+                var d = Deg;
+                d = d % 360.0;
+                if( d < 0)
+                {
+                    d = 360.0 - d;
+                }
+                return Angle.FromDeg(d);
+            }
+        }
+
         /// <summary>
         /// Create an instance from degree
         /// </summary>
