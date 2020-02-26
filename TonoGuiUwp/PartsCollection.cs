@@ -22,6 +22,7 @@ namespace Tono.Gui.Uwp
     {
         private readonly Dictionary<NamedId/*LayerNo*/, Dictionary<string/*name of IDrawArea*/, List<IPartsDraw>>> _dat = new Dictionary<NamedId, Dictionary<string, List<IPartsDraw>>>();
         private readonly Dictionary<IDrawArea, string/*name of IDrawArea*/> _danames = new Dictionary<IDrawArea, string>();
+        private readonly Queue<(IDrawArea pane, IPartsDraw parts, NamedId layer)> _delQueue  = new Queue<(IDrawArea pane, IPartsDraw parts, NamedId layer)>();
 
         private static int _nonamecounter = 0;
 
@@ -29,8 +30,6 @@ namespace Tono.Gui.Uwp
         /// gui sheared assets
         /// </summary>
         public GuiAssets Assets { get; internal set; }
-        public Queue<(IDrawArea pane, IPartsDraw parts, NamedId layer)> Dels { get => Dels1; set => Dels1 = value; }
-        public Queue<(IDrawArea pane, IPartsDraw parts, NamedId layer)> Dels1 { get => _dels; set => _dels = value; }
 
         /// <summary>
         /// make layer key
@@ -58,8 +57,6 @@ namespace Tono.Gui.Uwp
             return name;
         }
 
-        private Queue<(IDrawArea pane, IPartsDraw parts, NamedId layer)> _dels = new Queue<(IDrawArea pane, IPartsDraw parts, NamedId layer)>();
-
         /// <summary>
         /// remove parts request
         /// </summary>
@@ -68,7 +65,23 @@ namespace Tono.Gui.Uwp
         /// <param name="layer">0=lower</param>
         public void Remove(IDrawArea pane, IPartsDraw pt, NamedId layer)
         {
-            Dels.Enqueue((pane, pt, layer));
+            _delQueue.Enqueue((pane, pt, layer));
+        }
+
+        /// <summary>
+        /// Remove the all layer parts
+        /// </summary>
+        /// <param name="pane"></param>
+        /// <param name="layers"></param>
+        public void RemoveLayereParts(IDrawArea pane, params NamedId[] layers)
+        {
+            lock (_dat)
+            {
+                foreach (var layer in layers)
+                {
+                    _dat[layer][GetName(pane)].Clear();
+                }
+            }
         }
 
         /// <summary>
@@ -283,13 +296,13 @@ namespace Tono.Gui.Uwp
             // do remove request here.
             lock (_dat)
             {
-                while (Dels.Count() > 0)
+                while (_delQueue.Count() > 0)
                 {
-                    var (pane, parts, layer) = Dels.Dequeue();
+                    var (pane, parts, layer) = _delQueue.Dequeue();
                     _dat[layer][GetName(pane)].Remove(parts);
                 }
             }
-            Dels.Clear();
+            _delQueue.Clear();
 
             // draw
             var tarPaneName = GetName(tarPane);

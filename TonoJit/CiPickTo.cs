@@ -32,7 +32,7 @@ namespace Tono.Jit
         public TimeSpan Delay { get; set; } = TimeSpan.FromSeconds(0);
 
         /// <summary>
-        /// destination prosess of push operation
+        /// destination prosess of push operation (in Same Subset)
         /// </summary>
         public ProcessKey DestProcessKey { get; set; }
 

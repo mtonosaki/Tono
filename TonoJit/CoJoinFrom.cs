@@ -16,7 +16,7 @@ namespace Tono.Jit
         public static readonly Type Type = typeof(CoJoinFrom);
 
         /// <summary>
-        /// PULLする工程
+        /// Pull Process key(ID/Name) in the same subset.
         /// </summary>
         public ProcessKey PullFromProcessKey { get; set; }
 

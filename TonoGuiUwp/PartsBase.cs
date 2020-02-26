@@ -81,6 +81,31 @@ namespace Tono.Gui.Uwp
         }
 
         /// <summary>
+        /// Calc Layout position from Parts.Location
+        /// </summary>
+        /// <returns></returns>
+        public LayoutPos GetLayoutPos()
+        {
+            return GetLayoutPos(Location);
+        }
+
+        /// <summary>
+        /// Calc Layout position
+        /// </summary>
+        /// <param name="codepos"></param>
+        /// <returns></returns>
+        public virtual LayoutPos GetLayoutPos(CodePos<TCX, TCY> codepos)
+        {
+            var lpos = new LayoutPos
+            {
+                X = PositionerX(codepos.X, codepos.Y),
+                Y = PositionerY(codepos.X, codepos.Y),
+            };
+            return lpos;
+        }
+
+
+        /// <summary>
         /// caluclate the maximum screen rectangle of the all specified partsset
         /// </summary>
         /// <param name="pane"></param>

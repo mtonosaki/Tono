@@ -2,8 +2,6 @@
 // Licensed under the MIT license.
 
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Tono.Jit
 {
@@ -20,7 +18,7 @@ namespace Tono.Jit
         public const string IllegalPath = "EJIT1006: Illegal path --- {0}";
         public const string NoProcess = "EJIT1007: Need to specify Process";
 
-        public JitException() :  base()
+        public JitException() : base()
         {
         }
 

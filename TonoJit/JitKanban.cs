@@ -1,9 +1,6 @@
 ﻿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
-using System;
-using ProcessKey = System.String;
-
 namespace Tono.Jit
 {
     /// <summary>
@@ -81,5 +78,5 @@ namespace Tono.Jit
             return null;
         }
 
-}
+    }
 }

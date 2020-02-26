@@ -1,4 +1,4 @@
-﻿// (c) 2019 Manabu Tonosaki
+﻿// (c) 2020 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System;
@@ -131,7 +131,7 @@ namespace Tono.Jit
                         break;
                     case "..":
                         pathes.RemoveAt(i--);
-                        if (pathes[i] != "")
+                        if (string.IsNullOrEmpty(pathes[i]) == false)
                         {
                             pathes.RemoveAt(i--);
                         }
@@ -161,7 +161,7 @@ namespace Tono.Jit
             if (id >= 0)
             {
                 var ret = fullPath.Substring(0, id);
-                if (ret == "")
+                if (string.IsNullOrEmpty(ret))
                 {
                     return "\\";
                 }

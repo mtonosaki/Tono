@@ -2,7 +2,6 @@
 // Licensed under the MIT license.
 
 using System;
-using static Tono.Jit.Utils;
 
 namespace Tono.Jit
 {

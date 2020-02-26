@@ -113,12 +113,6 @@ namespace Tono.Jit
             {
                 PrepareDummyItems(dt);
 
-                // TODO: Delete this comment
-                //if (workOrKanban is IJieEngineReference ejobj)
-                //{
-                //    ejobj.Engine = Engine;  // Change target Engine
-                //}
-
                 LinkedListNode<Item> node;
                 if (_sections.TryGetValue(TimeUtil.ClearSeconds(dt), out var topnode) == false)    // 分毎にシーク位置をスキップできる
                 {

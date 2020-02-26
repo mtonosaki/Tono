@@ -128,10 +128,11 @@ namespace Tono.Jit
         /// <param name="proc"></param>
         public void RemoveChildProcess(JitProcess proc, string instanceName = null)
         {
-            if(instanceName != null)
+            if (instanceName != null)
             {
                 instanceName = instanceName + "@";
-            } else
+            }
+            else
             {
                 instanceName = "";
             }
@@ -141,7 +142,7 @@ namespace Tono.Jit
             }
             else
             {
-                RemoveChildProcess(instanceName +  proc.Name);
+                RemoveChildProcess(instanceName + proc.Name);
             }
             RemoveChildProcess(instanceName + proc.ID);
         }
