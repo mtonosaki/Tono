@@ -14,12 +14,12 @@
     <PackageIconUrl></PackageIconUrl>
     <PackageIcon>\content\TonoLogicIcon.png</PackageIcon>
     <PackageReleaseNotes>Continuous Kaizen</PackageReleaseNotes>
-    <Version>1.0.6</Version>
+    <Version>1.0.7</Version>
     <PackageTags>Tono, Gui, Logic</PackageTags>
     <RepositoryUrl>https://github.com/mtonosaki/Tono.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <AssemblyVersion>1.0.6.0</AssemblyVersion>
-    <FileVersion>1.0.6.0</FileVersion>
+    <AssemblyVersion>1.0.7.0</AssemblyVersion>
+    <FileVersion>1.0.7.0</FileVersion>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>TonoLogic.snk</AssemblyOriginatorKeyFile>
     <ApplicationIcon>TonoLogic.ico</ApplicationIcon>
@@ -34,7 +34,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Tono.Core" Version="1.0.12" />
+    <PackageReference Include="Tono.Core" Version="1.0.13" />
   </ItemGroup>
 
 </Project>
