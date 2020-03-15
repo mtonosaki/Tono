@@ -64,6 +64,11 @@ namespace Tono.Gui.Uwp
         public NamedId TargetLayer { get; set; } = NamedId.Nothing;
 
         /// <summary>
+        /// Prohibit to start masking from the IgnoreLayers parts
+        /// </summary>
+        public NamedId[] IgnoreLayers { get; set; }
+
+        /// <summary>
         /// Lazy evaluation to select parts instance in TargetLayer
         /// </summary>
         public Func<ISelectableParts, bool> PartsFilter { get; set; } = (a => true);
@@ -140,16 +145,28 @@ namespace Tono.Gui.Uwp
             }
 
             FirstState.Clear();
-            foreach (var pt in Parts.GetParts(TargetLayer, PartsFilter))
+            foreach (var layer in checkingTargetLayers())
             {
-                if (pt.SelectingScore(Pane.Target, po.Position) <= 1.0f)
+                foreach (var pt in Parts.GetParts(layer, layer.Equals(TargetLayer) ? PartsFilter : (dummy => true)))
                 {
-                    Mask.Visible = false;
-                    return;
+                    if (pt.SelectingScore(Pane.Target, po.Position) <= 1.0f)
+                    {
+                        Mask.Visible = false;
+                        return;
+                    }
+                    FirstState[pt] = pt.IsSelected;
                 }
-                FirstState[pt] = pt.IsSelected;
             }
             IsSelectingBox = true;
+        }
+
+        private IEnumerable<NamedId> checkingTargetLayers()
+        {
+            yield return TargetLayer;
+            foreach (var layer in IgnoreLayers)
+            {
+                yield return layer;
+            }
         }
 
         public void OnPointerHold(PointerState po)

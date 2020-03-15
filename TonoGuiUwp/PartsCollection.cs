@@ -79,7 +79,7 @@ namespace Tono.Gui.Uwp
             {
                 foreach (var layer in layers)
                 {
-                    _dat[layer][GetName(pane)].Clear();
+                    _dat.GetValueOrDefault(layer)?.GetValueOrDefault(GetName(pane))?.Clear();
                 }
             }
         }
