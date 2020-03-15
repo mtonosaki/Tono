@@ -39,6 +39,11 @@ namespace Tono.Gui.Uwp
         public const string PartsMoved = "PartsMoved";
 
         /// <summary>
+        /// parts moving event
+        /// </summary>
+        public const string PartsMoving = "PartsMoving";
+
+        /// <summary>
         /// parts selection state changed event
         /// </summary>
         public const string PartsSelectChanged = "PartsSelectChanged";

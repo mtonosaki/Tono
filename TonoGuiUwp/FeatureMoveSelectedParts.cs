@@ -111,17 +111,24 @@ namespace Tono.Gui.Uwp
                 OnPointerReleased(po);
                 return;
             }
-            var nMoved = 0;
+            var tokenParts = new List<IMovableParts>();
             foreach (var pt in moving)
             {
                 if (po.PositionDelta.Width != 0 || po.PositionDelta.Height != 0)
                 {
                     pt.Move(Pane.Target, po.PositionDelta);
-                    nMoved++;
+                    tokenParts.Add(pt);
                 }
             }
-            if (nMoved > 0)
+            if (tokenParts.Count > 0)
             {
+                Token.Link(po, new EventTokenPartsMovingTrigger
+                {
+                    TokenID = TokensGeneral.PartsMoving,
+                    PartsSet = tokenParts,
+                    Sender = this,
+                    Remarks = "PartsMoving@FeatureMoveSelectedParts",
+                });
                 Redraw();
             }
         }
@@ -137,9 +144,9 @@ namespace Tono.Gui.Uwp
                     Token.Link(po, new EventTokenPartsMovedTrigger
                     {
                         TokenID = TokensGeneral.PartsMoved,
-                        Parts = moved,
+                        PartsSet = moved,
                         Sender = this,
-                        Remarks = "FinishMoveParts@fcMoveSelectedParts",
+                        Remarks = "FinishedMoveParts@FeatureMoveSelectedParts",
                     });
                 }
                 moving = null;

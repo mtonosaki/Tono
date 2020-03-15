@@ -148,6 +148,7 @@
     <Compile Include="FeatureNothing.cs" />
     <Compile Include="FeaturePartsSelectOnRect.cs" />
     <Compile Include="FeatureScrollDrag.cs" />
+    <Compile Include="FeatureSelectHoverParts.cs" />
     <Compile Include="FeatureSelectParts.cs" />
     <Compile Include="FeatureZoomButton.cs" />
     <Compile Include="FeatureZoomDrag.cs" />

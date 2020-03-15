@@ -163,9 +163,13 @@ namespace Tono.Gui.Uwp
         private IEnumerable<NamedId> checkingTargetLayers()
         {
             yield return TargetLayer;
-            foreach (var layer in IgnoreLayers)
+
+            if (IgnoreLayers != null)
             {
-                yield return layer;
+                foreach (var layer in IgnoreLayers)
+                {
+                    yield return layer;
+                }
             }
         }
 
