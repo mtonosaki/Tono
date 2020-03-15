@@ -11,6 +11,11 @@ namespace Tono
     /// </summary>
     public static class MathUtil
     {
+        public const double Root2 = 1.414213562373095048801688724209;
+        public const double RRoot2 = 1.0/1.414213562373095048801688724209;
+        public const double Root3 = 1.732050807568877293527446341505;
+        public const double RRoot3 = 1.0/1.732050807568877293527446341505;
+
         /// <summary>
         /// Check then number is a prime number
         /// </summary>
