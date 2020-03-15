@@ -1,6 +1,8 @@
 ﻿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
+using System.Collections.Generic;
+
 namespace Tono.Gui.Uwp
 {
     /// <summary>
@@ -20,6 +22,6 @@ namespace Tono.Gui.Uwp
         /// <summary>
         /// parts moving flag（fcMoveSelectedParts）
         /// </summary>
-        public bool IsPartsMoving { get; set; }
+        public Dictionary<FeatureBase, bool> IsPartsMoving { get; } = new Dictionary<FeatureBase, bool>();
     }
 }
