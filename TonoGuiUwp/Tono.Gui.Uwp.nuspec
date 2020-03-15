@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
   <metadata>
     <id>Tono.Gui.Uwp</id>
-    <version>1.0.21</version>
+    <version>1.0.22</version>
     <authors>Manabu Tonosaki</authors>
     <owners>Manabu Tonosaki</owners>
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
@@ -16,7 +16,7 @@
     <repository type="git" url="https://github.com/mtonosaki/Tono.git" />
     <dependencies>
       <group targetFramework="uap">
-        <dependency id="Tono.Gui" version="1.0.16" exclude="Build,Analyzers" />
+        <dependency id="Tono.Gui" version="1.0.17" exclude="Build,Analyzers" />
         <dependency id="Win2D.uwp" version="1.24.0" exclude="Build,Analyzers" />
         <dependency id="Microsoft.NETCore.UniversalWindowsPlatform" version="6.2.9" exclude="Build,Analyzers" />
       </group>
