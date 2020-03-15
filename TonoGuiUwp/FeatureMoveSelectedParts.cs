@@ -63,17 +63,17 @@ namespace Tono.Gui.Uwp
             {
                 return;
             }
-            DataHot.IsPartsMoving = false;
+            DataHot.IsPartsMoving[this] = false;
             var selcheck = Parts.GetParts(po.Position, Pane.Target, TargetLayer, p => p is IMovableParts).ToArray();
             foreach (var pt in selcheck)
             {
                 if (pt.IsSelected)
                 {
-                    DataHot.IsPartsMoving = true;
+                    DataHot.IsPartsMoving[this] = true;
                     break;
                 }
             }
-            if (DataHot.IsPartsMoving)
+            if (DataHot.IsPartsMoving.GetValueOrDefault(this))
             {
                 var pts = Parts.GetParts(TargetLayer, p =>
                 {
@@ -101,7 +101,7 @@ namespace Tono.Gui.Uwp
 
         public void OnPointerMoved(PointerState po)
         {
-            if (DataHot.IsPartsMoving == false)
+            if (DataHot.IsPartsMoving.GetValueOrDefault(this) == false || moving is null)
             {
                 return;
             }
@@ -128,7 +128,7 @@ namespace Tono.Gui.Uwp
 
         public void OnPointerReleased(PointerState po)
         {
-            DataHot.IsPartsMoving = false;
+            DataHot.IsPartsMoving[this] = false;
             if (moving?.Count() > 0)
             {
                 var moved = (from pt in moving where pt.IsMoved() select pt).ToArray();
