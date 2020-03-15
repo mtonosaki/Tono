@@ -263,12 +263,48 @@ namespace UnitTestCore
             };
             var c1 = 0;
             var c2 = 0;
+            var c3 = 0;
+            var c4 = 0;
             foreach (var item in LoopUtil<KeyValuePair<int,string>>.From(dat, out var cu))
             {
-                cu.DoFirstOneTime(() =>
+                cu.DoFirstTime(() =>
                 {
                     Assert.AreEqual($"S-10", item.Value);
                     c1++;
+                });
+                cu.DoFirstTime(() =>
+                {
+                    Assert.AreEqual($"S-10", item.Value);   // Can do twice
+                });
+                cu.DoSecondTimesAndSubsequent(() =>
+                {
+                    switch(c3++)
+                    {
+                        case 0:
+                            Assert.AreEqual($"S-20", item.Value);
+                            break;
+                        case 1:
+                            Assert.AreEqual($"S-30", item.Value);
+                            break;
+                        case 2:
+                            Assert.AreEqual($"S-40", item.Value);
+                            break;
+                    }
+                });
+                cu.DoSecondTimesAndSubsequent(() => // Can do twice
+                {
+                    switch (c4++)
+                    {
+                        case 0:
+                            Assert.AreEqual($"S-20", item.Value);
+                            break;
+                        case 1:
+                            Assert.AreEqual($"S-30", item.Value);
+                            break;
+                        case 2:
+                            Assert.AreEqual($"S-40", item.Value);
+                            break;
+                    }
                 });
                 cu.DoLastOneTime(() =>
                 {
@@ -279,6 +315,8 @@ namespace UnitTestCore
             }
             Assert.AreEqual(1, c1);
             Assert.AreEqual(1, c2);
+            Assert.IsTrue(c3 > 2);
+            Assert.IsTrue(c4 > 2);
         }
         public void Test103m()
         {
@@ -298,12 +336,12 @@ namespace UnitTestCore
             var c2 = 0;
             foreach (var item in LoopUtil<KeyValuePair<int, string>>.From(dat, out var cu))
             {
-                cu.DoFirstOneTime(() =>
+                cu.DoFirstTime(() =>
                 {
                     Assert.AreEqual($"S-10", item.Value);
                     c1++;
                 });
-                cu.DoFirstOneTime(() =>
+                cu.DoFirstTime(() =>
                 {
                     Assert.Fail("EXPECTING NOT EXEC Because of not 'first'");
                     c1++;
