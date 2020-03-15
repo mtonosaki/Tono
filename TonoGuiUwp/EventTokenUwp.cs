@@ -101,7 +101,7 @@ namespace Tono.Gui.Uwp
     /// </summary>
     public class EventTokenPartsMovedTrigger : EventTokenTrigger
     {
-        public IEnumerable<IMovableParts> Parts { get; set; }
+        public IEnumerable<IMovableParts> PartsSet { get; set; }
 
         public static void Select(EventToken token, Action<EventTokenPartsMovedTrigger> func)
         {
@@ -113,6 +113,29 @@ namespace Tono.Gui.Uwp
         public static void Select(EventToken token, string tokenID, Action<EventTokenPartsMovedTrigger> func)
         {
             if (token is EventTokenPartsMovedTrigger tt)
+            {
+                if (tt.TokenID.Equals(tokenID))
+                {
+                    func(tt);
+                }
+            }
+        }
+    }
+
+    public class EventTokenPartsMovingTrigger : EventTokenTrigger
+    {
+        public IEnumerable<IMovableParts> PartsSet { get; set; }
+
+        public static void Select(EventToken token, Action<EventTokenPartsMovingTrigger> func)
+        {
+            if (token is EventTokenPartsMovingTrigger tt)
+            {
+                func(tt);
+            }
+        }
+        public static void Select(EventToken token, string tokenID, Action<EventTokenPartsMovingTrigger> func)
+        {
+            if (token is EventTokenPartsMovingTrigger tt)
             {
                 if (tt.TokenID.Equals(tokenID))
                 {
