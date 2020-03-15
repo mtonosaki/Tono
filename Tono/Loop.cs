@@ -20,9 +20,9 @@ namespace Tono
     /// </remarks>
     public class LoopUtil<T> : IEnumerable<T>, IEnumerator<T>
     {
-        private IEnumerable<T> Collection;
         private IEnumerator<T> Enumerator;
         private bool IsFirstExec = false;
+        private bool RequestSetFirstExecFlag = false;
         private Action LastAction = null;
 
         public int CurrentIndex { get; private set; } = -1;
@@ -33,7 +33,6 @@ namespace Tono
         {
             instance = new LoopUtil<T>
             {
-                Collection = col,
                 Enumerator = col.GetEnumerator(),
             };
             return instance;
@@ -57,6 +56,11 @@ namespace Tono
 
         public bool MoveNext()
         {
+            if (RequestSetFirstExecFlag)
+            {
+                IsFirstExec = true;
+                RequestSetFirstExecFlag = false;
+            }
             var ret = Enumerator.MoveNext();
             if (ret)
             {
@@ -73,6 +77,7 @@ namespace Tono
         {
             CurrentIndex = -1;
             IsFirstExec = false;
+            RequestSetFirstExecFlag = false;
             LastAction = null;
             Enumerator.Reset();
         }
@@ -81,13 +86,36 @@ namespace Tono
         /// Exec the first 
         /// </summary>
         /// <param name="action"></param>
-        /// <returns></returns>
-        public void DoFirstOneTime(Action action)
+        /// <returns>true = Execed / false = not the first time</returns>
+        public bool DoFirstTime(Action action)
         {
             if (IsFirstExec == false)
             {
-                IsFirstExec = true;
+                RequestSetFirstExecFlag = true;
                 action?.Invoke();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Exec the second times and the subsequent 
+        /// </summary>
+        /// <param name="action"></param>
+        /// <returns></returns>
+        public bool DoSecondTimesAndSubsequent(Action action)
+        {
+            if (IsFirstExec)
+            {
+                action?.Invoke();
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
 
