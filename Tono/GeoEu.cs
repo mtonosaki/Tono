@@ -166,6 +166,39 @@ namespace Tono
         }
 
         /// <summary>
+        /// Check (px,py) is on line (x0,y0)-(x1,y1)
+        /// </summary>
+        /// <param name="x0"></param>
+        /// <param name="y0"></param>
+        /// <param name="x1"></param>
+        /// <param name="y1"></param>
+        /// <param name="px"></param>
+        /// <param name="py"></param>
+        /// <param name="width"></param>
+        /// <returns>true=ON</returns>
+        public static bool IsOnline(double x0, double y0, double x1, double y1, double px, double py, double width = 1.0)
+        {
+            var R = Length(x0, y0, x1, y1);
+            var A = Angle(x0, y0, x1, y1);
+            var l = Length(x0, y0, px, py);
+            var a = Angle(x0, y0, px, py);
+            Position(0, 0, a - A, l, out var mpx, out var mpy);
+            var T = -width / 2;
+            var B = +width / 2;
+            return 0.0 <= mpx && R >= mpx && T <= mpy && B >= mpy;
+        }
+
+        /// <summary>
+        /// Check pos is on line p0-p1
+        /// </summary>
+        /// <param name="p0"></param>
+        /// <param name="p1"></param>
+        /// <param name="pos"></param>
+        /// <param name="width"></param>
+        /// <returns></returns>
+        public static bool IsOnline((double X, double Y) p0, (double X, double Y) p1, (double X, double Y) pos, double width = 1.0) => IsOnline(p0.X, p0.Y, p1.X, p1.Y, pos.X, pos.Y, width);
+
+        /// <summary>
         /// Result mode when the coordinates of the straight line are inside the circle
         /// </summary>
         public enum IntersectionResultMode

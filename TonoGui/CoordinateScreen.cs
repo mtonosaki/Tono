@@ -499,6 +499,23 @@ namespace Tono.Gui
         }
 
         /// <summary>
+        /// calculate distance from p0 to p
+        /// </summary>
+        /// <param name="p0"></param>
+        /// <param name="p"></param>
+        /// <returns></returns>
+        public double LengthTo(ScreenPos p) => Math.Sqrt((p.X.Sx - X.Sx) * (p.X.Sx - X.Sx) + (p.Y.Sy - Y.Sy) * (p.Y.Sy - Y.Sy));
+
+        /// <summary>
+        /// IsOnline for Screen coodinate
+        /// </summary>
+        /// <param name="line0"></param>
+        /// <param name="line1"></param>
+        /// <param name="width"></param>
+        /// <returns></returns>
+        public bool IsOnline(ScreenPos line0, ScreenPos line1, double width = 1.0) => GeoEu.IsOnline(line0.X.Sx, line0.Y.Sy, line1.X.Sx, line1.Y.Sy, X.Sx, Y.Sy, width);
+
+        /// <summary>
         /// auto cast to Vestor2 for a lot of Graphics functions
         /// </summary>
         /// <param name="pos"></param>
@@ -509,6 +526,17 @@ namespace Tono.Gui
                 X = pos.X,
                 Y = pos.Y,
             };
+        }
+
+        /// <summary>
+        /// make angle from s0 to s1
+        /// </summary>
+        /// <param name="s0"></param>
+        /// <param name="s1"></param>
+        /// <returns></returns>
+        public Angle AngleTo(ScreenPos s1)
+        {
+            return GeoEu.Angle(X.Sx, Y.Sy, s1.X.Sx, s1.Y.Sy);
         }
 
         /// <summary>
@@ -958,7 +986,6 @@ namespace Tono.Gui
             var h2 = Height.GetHashCode();
             return h1 ^ h2;
         }
-
 
         public static ScreenSize operator +(ScreenSize v1, ScreenSize v2)
         {

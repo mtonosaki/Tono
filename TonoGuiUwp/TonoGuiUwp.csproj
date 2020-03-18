@@ -192,7 +192,7 @@
       <Version>6.2.9</Version>
     </PackageReference>
     <PackageReference Include="Tono.Gui">
-      <Version>1.0.17</Version>
+      <Version>1.0.18</Version>
     </PackageReference>
     <PackageReference Include="Win2D.uwp">
       <Version>1.24.0</Version>
