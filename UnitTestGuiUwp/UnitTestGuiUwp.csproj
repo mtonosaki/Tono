@@ -122,6 +122,9 @@
     <Compile Include="DataCold.cs" />
     <Compile Include="DataHot.cs" />
     <Compile Include="FeatureTestGeneral.cs" />
+    <Compile Include="FeatureTokenTesterA.cs" />
+    <Compile Include="FeatureTokenTesterC.cs" />
+    <Compile Include="FeatureTokenTesterB.cs" />
     <Compile Include="LAYER.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>

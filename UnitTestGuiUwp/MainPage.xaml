@@ -26,6 +26,9 @@
             <tg:FeatureMoveSelectedParts TargetLayer="{x:Bind local:LAYER.SampleLayer}" />
             <tg:FeaturePartsSelectOnRect TargetLayer="{x:Bind local:LAYER.SampleLayer}" MaskLayer="{x:Bind local:LAYER.SampleSelectMaskLayer}" />
             <local:FeatureTestGeneral />
+            <local:FeatureTokenTesterA />
+            <local:FeatureTokenTesterB />
+            <local:FeatureTokenTesterC />
         </tg:TGuiView.Features>
         <tg:TPane Name="LogPanel" Height="300" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignBottomWithPanel="True" RelativePanel.AlignRightWithPanel="True" />
     </tg:TGuiView>

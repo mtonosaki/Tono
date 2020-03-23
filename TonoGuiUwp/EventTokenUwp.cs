@@ -11,7 +11,7 @@ namespace Tono.Gui.Uwp
     /// <summary>
     /// TokenID interface
     /// </summary>
-    internal interface ITokenIDKey
+    public interface ITokenIDKey
     {
         string TokenID { get; set; }
     }
@@ -19,7 +19,7 @@ namespace Tono.Gui.Uwp
     /// <summary>
     /// Token Name interface
     /// </summary>
-    internal interface ITokenNameKey
+    public interface ITokenNameKey
     {
         string Name { get; set; }
     }
