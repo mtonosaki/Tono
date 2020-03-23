@@ -163,6 +163,20 @@ namespace Tono.Gui.Uwp
                 select sp;
             return ret;
         }
+        public IEnumerable<ISelectableParts> GetParts(ScreenPos pos, IDrawArea pane, IEnumerable<NamedId> layers, Func<ISelectableParts, bool> filter = null)
+        {
+            var ret =
+                from layer in layers
+                from pt in GetParts(layer)
+                let sp = pt as ISelectableParts
+                where sp != null
+                where filter == null || filter?.Invoke(sp) == true
+                let score = sp.SelectingScore(pane, pos)
+                where score < 1 && score >= 0
+                orderby score
+                select sp;
+            return ret;
+        }
 
         /// <summary>
         /// get parts set

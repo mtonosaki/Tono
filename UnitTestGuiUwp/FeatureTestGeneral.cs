@@ -27,7 +27,14 @@ namespace UnitTestGuiUwp
                     CoderX = MyCoderX,
                     CoderY = MyCoderY,
                 };
-                Parts.Add(Pane.Target, parts, LAYER.SampleLayer);
+                if (a.Deg < 180)
+                {
+                    Parts.Add(Pane.Target, parts, LAYER.SampleLayer1);
+                }
+                else
+                {
+                    Parts.Add(Pane.Target, parts, LAYER.SampleLayer2);
+                }
             }
         }
 

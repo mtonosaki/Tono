@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Windows.System;
 using Windows.UI;
 using static Tono.Gui.Uwp.CastUtil;
@@ -59,9 +60,14 @@ namespace Tono.Gui.Uwp
         public NamedId MaskLayer { get; set; } = NamedId.From("MaskLayerDefault", Id.From(99999));
 
         /// <summary>
-        /// Select target parts layer (Mandatory)
+        /// Select target parts layer (Selecting mandatory with TargetLayers)
         /// </summary>
         public NamedId TargetLayer { get; set; } = NamedId.Nothing;
+
+        /// <summary>
+        /// Selected target parts layer (Selecting mandatory with TargetLayer)
+        /// </summary>
+        public NamedId[] TargetLayers { get; set; }
 
         /// <summary>
         /// Prohibit to start masking from the IgnoreLayers parts
@@ -102,6 +108,19 @@ namespace Tono.Gui.Uwp
             base.OnInitialInstance();
 
             Status["IsEnableSelectingBox"].AddBooleanValues(true);  // Prepare runtime feature enable control
+
+            // Make TargetLayers
+            var ls = new Dictionary<NamedId, NamedId>
+            {
+                [TargetLayer] = TargetLayer
+            };
+            foreach (var l in TargetLayers ?? Array.Empty<NamedId>())
+            {
+                ls[l] = l;
+            }
+            ls.Remove(NamedId.Nothing);
+            TargetLayers = ls.Keys.ToArray();
+            TargetLayer = null;
 
             Pane.Target = TargetPaneName == null ? Pane.Main : Pane[TargetPaneName];
 
@@ -147,7 +166,7 @@ namespace Tono.Gui.Uwp
             FirstState.Clear();
             foreach (var layer in checkingTargetLayers())
             {
-                foreach (var pt in Parts.GetParts(layer, layer.Equals(TargetLayer) ? PartsFilter : (dummy => true)))
+                foreach (var pt in Parts.GetParts(layer, TargetLayers.Contains(layer) ? PartsFilter : (dummy => true)))
                 {
                     if (pt.SelectingScore(Pane.Target, po.Position) <= 1.0f)
                     {
@@ -162,7 +181,10 @@ namespace Tono.Gui.Uwp
 
         private IEnumerable<NamedId> checkingTargetLayers()
         {
-            yield return TargetLayer;
+            foreach (var layer in TargetLayers)
+            {
+                yield return layer;
+            }
 
             if (IgnoreLayers != null)
             {
@@ -196,22 +218,25 @@ namespace Tono.Gui.Uwp
                 Mask.Bottom = CodeY<ScreenY>.From(sr.B);
                 Mask.Visible = true;
 
-                foreach (var pt in Parts.GetParts(TargetLayer, PartsFilter))
+                foreach (var layer in TargetLayers)
                 {
-                    var sw = pt.IsIn(Pane.Target, sr);
-                    if (po.IsKeyShift == false)
+                    foreach (var pt in Parts.GetParts(layer, PartsFilter))
                     {
-                        pt.IsSelected = sw;
-                    }
-                    else
-                    {
-                        if (sw)
+                        var sw = pt.IsIn(Pane.Target, sr);
+                        if (po.IsKeyShift == false)
                         {
-                            pt.IsSelected = !FirstState[pt];
+                            pt.IsSelected = sw;
                         }
                         else
                         {
-                            pt.IsSelected = FirstState[pt];
+                            if (sw)
+                            {
+                                pt.IsSelected = !FirstState[pt];
+                            }
+                            else
+                            {
+                                pt.IsSelected = FirstState[pt];
+                            }
                         }
                     }
                 }

@@ -1,6 +1,7 @@
 ﻿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -15,7 +16,10 @@ namespace Tono.Gui.Uwp
         /// <summary>
         /// target parts layer
         /// </summary>
-        public NamedId TargetLayer { get; set; }
+        public NamedId TargetLayer { get; set; } = NamedId.Nothing;
+
+        public NamedId[] TargetLayers { get; set; }
+
 
         /// <summary>
         /// target pane name
@@ -36,6 +40,19 @@ namespace Tono.Gui.Uwp
             {
                 Pane.Target = Pane.Main;
             }
+
+            // Make TargetLayers
+            var ls = new Dictionary<NamedId, NamedId>
+            {
+                [TargetLayer] = TargetLayer
+            };
+            foreach (var l in TargetLayers ?? Array.Empty<NamedId>())
+            {
+                ls[l] = l;
+            }
+            ls.Remove(NamedId.Nothing);
+            TargetLayers = ls.Keys.ToArray();
+            TargetLayer = null;
         }
 
         protected virtual bool isTrigger(PointerState po)
@@ -64,7 +81,7 @@ namespace Tono.Gui.Uwp
                 return;
             }
             DataHot.IsPartsMoving[this] = false;
-            var selcheck = Parts.GetParts(po.Position, Pane.Target, TargetLayer, p => p is IMovableParts).ToArray();
+            var selcheck = Parts.GetParts(po.Position, Pane.Target, TargetLayers, p => p is IMovableParts).ToArray();
             foreach (var pt in selcheck)
             {
                 if (pt.IsSelected)
@@ -75,7 +92,7 @@ namespace Tono.Gui.Uwp
             }
             if (DataHot.IsPartsMoving.GetValueOrDefault(this))
             {
-                var pts = Parts.GetParts(TargetLayer, p =>
+                var pts = Parts.GetParts(TargetLayers, p =>
                 {
                     if (p is IMovableParts)
                     {

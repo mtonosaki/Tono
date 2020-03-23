@@ -22,9 +22,9 @@
             <tg:FeatureLogOpenAsText ListeningButtonNames="OpenLogText" />
             <tg:FeatureScrollDrag />
             <tg:FeatureZoomDrag />
-            <tg:FeatureSelectParts TargetLayer="{x:Bind local:LAYER.SampleLayer}" />
-            <tg:FeatureMoveSelectedParts TargetLayer="{x:Bind local:LAYER.SampleLayer}" />
-            <tg:FeaturePartsSelectOnRect TargetLayer="{x:Bind local:LAYER.SampleLayer}" MaskLayer="{x:Bind local:LAYER.SampleSelectMaskLayer}" />
+            <tg:FeatureSelectParts TargetLayers="{x:Bind local:LAYER.SampleLayers}" />
+            <tg:FeatureMoveSelectedParts TargetLayers="{x:Bind local:LAYER.SampleLayers}" />
+            <tg:FeaturePartsSelectOnRect TargetLayers="{x:Bind local:LAYER.SampleLayers}" MaskLayer="{x:Bind local:LAYER.SampleSelectMaskLayer}" />
             <local:FeatureTestGeneral />
             <local:FeatureTokenTesterA />
             <local:FeatureTokenTesterB />
