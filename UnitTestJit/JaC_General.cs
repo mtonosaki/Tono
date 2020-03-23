@@ -1054,7 +1054,160 @@ namespace UnitTestJit
             var t32 = (ValueTuple<object, object>)t3.Item2;
             Assert.AreEqual(t32.Item2, "mana");
         }
+
+        private bool CMP(JitStage.WorkEventQueue.Item ei, string name, EventTypes et, string time, string procName = null)
+        {
+            var ts = time.Split(':');
+            var h = int.Parse(ts[0]);
+            var m = int.Parse(ts[1]);
+            var ret = ei.Type == et && ei.DT.Hour == h && ei.DT.Minute == m;
+            if (ei.Work != null)
+            {
+                ret &= name == ei.Work.Name;
+            }
+            if (ei.Kanban != null)
+            {
+                ret &= name == ("Kanban" + ei.Kanban.TestID.ToString());
+            }
+            if (procName != null)
+            {
+                if (ei.Work is JitWork work)
+                {
+                    if (work.Current != default)
+                    {
+                        ret &= work.Current.Process?.Name == procName;
+                    }
+                }
+                else
+                {
+                    ret = false;
+                }
+            }
+            return ret;
+        }
+
+
+        [TestMethod]
+        public void Test32_DateTime()
+        {
+            Assert.AreEqual(DateTime.Parse("2020/7/31 13:45:56"), JacInterpreter.ParseDateTime(@"datetime('2020/7/31 13:45:56')"));
+            Assert.AreEqual(DateTime.Parse("2020/7/31 13:45:56"), JacInterpreter.ParseDateTime(@"datetime ( '2020/7/31 13:45:56' )"));
+            Assert.AreEqual(DateTime.Parse("2020/7/31 13:45:56"), JacInterpreter.ParseDateTime(@"'2020/7/31 13:45:56'"));
+            Assert.AreEqual(DateTime.Parse("2020/7/31 13:45:56"), JacInterpreter.ParseDateTime(@"2020/7/31 13:45:56"));
+            Assert.AreEqual(DateTime.Parse("2020/7/31 13:45:56.321"), JacInterpreter.ParseDateTime(@"2020/7/31 13:45:56.321"));
+            Assert.AreNotEqual(DateTime.Parse("2020/7/31 13:45:56.322"), JacInterpreter.ParseDateTime(@"2020/7/31 13:45:56.321"));
+        }
+
+        /// <summary>
+        /// Test Work Add to stage
+        /// </summary>
+        [TestMethod]
+        public void Test33_1()
+        {
+            var code = @"
+                st = new Stage
+                w1 = new Work
+                    Name = 'Work1'
+            ";
+            var jac = new JacInterpreter();
+            jac.Exec(code);
+            var st = jac.GetStage("st");
+
+            code = @"
+                dt = datetime('2020/7/31 9:00:00')
+                st
+                    Works
+                        add dt:w1
+            ";
+            jac.Exec(code);
+            var dat = st.Events.Peeks(99).ToList();
+            Assert.IsTrue(CMP(dat[0], "Work1", EventTypes.Out, $"9:00"));
+        }
+        [TestMethod]
+        public void Test33_2()
+        {
+            var code = @"
+                st = new Stage
+                w1 = new Work
+                    Name = 'Work1'
+            ";
+            var jac = new JacInterpreter();
+            jac.Exec(code);
+            var st = jac.GetStage("st");
+
+            code = @"
+                dt = datetime('2020/7/31 9:00:00')
+                st
+                    Works
+                        add dt:Work1
+            ";
+            jac.Exec(code);
+            var dat = st.Events.Peeks(99).ToList();
+            Assert.IsTrue(CMP(dat[0], "Work1", EventTypes.Out, $"9:00"));
+        }
+        [TestMethod]
+        public void Test33_3()
+        {
+            var code = @"
+                st = new Stage
+                w1 = new Work
+                    Name = 'Work1'
+            ";
+            var jac = new JacInterpreter();
+            jac.Exec(code);
+            var st = jac.GetStage("st");
+
+            code = @"
+                st
+                    Works
+                        add datetime('2020/7/31 9:00:00'):Work1
+            ";
+            jac.Exec(code);
+            var dat = st.Events.Peeks(99).ToList();
+            Assert.IsTrue(CMP(dat[0], "Work1", EventTypes.Out, $"9:00"));
+        }
+        [TestMethod]
+        public void Test33_4()
+        {
+            var code = @"
+                st = new Stage
+                    Works
+                        add datetime('2020/7/31 9:00:00'):new Work
+                            Name = 'Work1'
+            ";
+            var jac = new JacInterpreter();
+            jac.Exec(code);
+            var st = jac.GetStage("st");
+            var dat = st.Events.Peeks(99).ToList();
+            Assert.IsTrue(CMP(dat[0], "Work1", EventTypes.Out, $"9:00"));
+        }
+
+        [TestMethod]
+        public void Test34()
+        {
+            var code = @"
+                st = new Stage
+                    Works
+                        add datetime('2020/7/31 9:00:00'):new Work
+                            Name = 'Work1'
+            ";
+            var jac = new JacInterpreter();
+            jac.Exec(code);
+            var st = jac.GetStage("st");
+            var dat = st.Events.Peeks(99).ToList();
+            Assert.IsTrue(CMP(dat[0], "Work1", EventTypes.Out, $"9:00"));
+
+            code = @"
+                st
+                    Works
+                        remove Work1    // remove command is for GUI(undo) only.
+            ";
+            jac.Exec(code);
+            dat = st.Events.Peeks(99).ToList();
+            Assert.AreEqual(0, dat.Count);
+        }
     }
+
 
     [JacTarget(Name = "TestJitClass")]
     public class TestJitClass

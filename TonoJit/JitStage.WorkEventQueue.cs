@@ -205,6 +205,29 @@ namespace Tono.Jit
             }
 
             /// <summary>
+            /// Find list node
+            /// </summary>
+            /// <param name="workOrKanban"></param>
+            /// <returns></returns>
+            public LinkedListNode<Item> Find(JitVariable workOrKanban)
+            {
+                for (var node = _dat.First; node != null; node = node.Next)
+                {
+                    var ei = node.Value;
+                    if (ei is DummyItem || ei.Work is JitWork == false)
+                    {
+                        continue;
+                    }
+                    var w = ei.Work;
+                    if (w.Equals(workOrKanban))
+                    {
+                        return node;
+                    }
+                }
+                return null;
+            }
+
+            /// <summary>
             /// find the all filtered work order by exit time sequence
             /// 退出する順番に、指定する属性のワークを すべて 検索する
             /// </summary>
