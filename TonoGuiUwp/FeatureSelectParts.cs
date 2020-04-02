@@ -1,6 +1,7 @@
 ﻿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -20,7 +21,9 @@ namespace Tono.Gui.Uwp
         /// <summary>
         /// target parts layere
         /// </summary>
-        public NamedId TargetLayer { get; set; }
+        public NamedId TargetLayer { get; set; } = NamedId.Nothing;
+
+        public NamedId[] TargetLayers { get; set; }
 
         /// <summary>
         /// target pane name
@@ -37,6 +40,20 @@ namespace Tono.Gui.Uwp
             {
                 Pane.Target = Pane.Main;
             }
+
+            // Make TargetLayers
+            var ls = new Dictionary<NamedId, NamedId>
+            {
+                [TargetLayer] = TargetLayer
+            };
+            foreach (var l in TargetLayers ?? Array.Empty<NamedId>())
+            {
+                ls[l] = l;
+            }
+            ls.Remove(NamedId.Nothing);
+            TargetLayers = ls.Keys.ToArray();
+            TargetLayer = null;
+
         }
 
         protected virtual bool isTrigger(PointerState po)
@@ -77,12 +94,12 @@ namespace Tono.Gui.Uwp
 
             isTriggered = false;
             IEnumerable<(ISelectableParts parts, bool sw)> selchanges = new (ISelectableParts, bool)[] { };
-            var pts = Parts.GetParts(po.Position, Pane.Target, TargetLayer);
+            var pts = Parts.GetParts(po.Position, Pane.Target, TargetLayers);
 
             if (po.DeviceType != PointerState.DeviceTypes.Mouse || (po.DeviceType == PointerState.DeviceTypes.Mouse && po.IsKeyShift == false))
             {
                 var offs =
-                    from pt in Parts.GetParts(TargetLayer)
+                    from pt in Parts.GetParts(TargetLayers)
                     let sp = pt as ISelectableParts
                     where sp != null
                     where sp.IsSelected

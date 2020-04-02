@@ -152,6 +152,45 @@ namespace Tono.Jit
             }
         }
 
+        [JacListAdd(PropertyName = "Works")]
+        public void AddJacWorks(object description)
+        {
+            if (description is JitWork work)
+            {
+                Events.Enqueue(Now, EventTypes.Out, work);
+            }
+            else if (description is ValueTuple<object, object> tpl && tpl.Item1 is DateTime dt && tpl.Item2 is JitWork work2)
+            {
+                Events.Enqueue(dt, EventTypes.Out, work2);
+            }
+            else
+            {
+                throw new JitException(JitException.TypeMissmatch, $"Type {description.GetType().Name} is not support to AddJacWorks");
+            }
+        }
+
+        [JacListRemove(PropertyName = "Works")]
+        public void RemoveJacWorks(object description)
+        {
+            if (description is JitWork work)
+            {
+                var node = Events.Find(work);
+                if (node != null)
+                {
+                    Events.Remove(node);
+                }
+                else
+                {
+                    throw new JitException(JitException.ItemNotFound, $"Work.ID = {work.ID}");
+                }
+            }
+            else
+            {
+                throw new JitException(JitException.TypeMissmatch, $"Type {description.GetType().Name} is not support to AddJacWorks");
+            }
+        }
+
+
         /// <summary>
         /// Find Process by Key(path includes)
         /// </summary>

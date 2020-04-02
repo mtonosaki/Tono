@@ -613,6 +613,7 @@ namespace Tono.Jit
         private static readonly Regex chkDouble = new Regex(@"^-?[0-9]+(\.[0-9]*)?([eE][-+]?[0-9]+)?%?$");
         private static readonly Regex chkDotValue = new Regex(@"^[a-z,A-Z]+[a-z,A-Z,0-9]*\.[a-z,A-Z]+[a-z,A-Z,0-9]*$");
         private static readonly Regex chkBoolean = new Regex(@"^([Tt][Rr][Uu][Ee]|[Ff][Aa][Ll][Ss][Ee])$");
+        private static readonly Regex chkDateTimeFunction = new Regex(@"^datetime\s*\(\s*'[12][0-9]{3}/[0-9]{1,2}/[0-9]{1,2}\s+[0-9]{1,2}:[0-9]{1,2}:[0-9]{1,2}(\.[0-9]{1,9})?'\s*\)$");
 
         /// <summary>
         /// Get value managed instance name, variable, string and some object parsing.
@@ -676,6 +677,10 @@ namespace Tono.Jit
                 {
                     return DbUtil.ToBoolean(valuestr);
                 }
+                if (chkDateTimeFunction.IsMatch(valuestr))
+                {
+                    return ParseDateTime(valuestr);
+                }
                 if (valuestr.StartsWith("'") && valuestr.EndsWith("'") || valuestr.StartsWith("\"") && valuestr.EndsWith("\""))
                 {
                     return valuestr.Substring(1, valuestr.Length - 2);
@@ -696,6 +701,27 @@ namespace Tono.Jit
             else
             {
                 return null;
+            }
+        }
+
+        public static DateTime ParseDateTime(string valuestr)
+        {
+            if (valuestr.StartsWith("datetime"))
+            {
+                var sl = StrUtil.MidSkip(valuestr, @"^datetime\s*\(\s*'");
+                valuestr = StrUtil.LeftBefore(sl, @"'\s*\)$");
+            }
+            else if (valuestr.StartsWith("'") && valuestr.EndsWith("'"))
+            {
+                valuestr = valuestr.Substring(1, valuestr.Length - 2).Trim();
+            }
+            try
+            {
+                return DateTime.Parse(valuestr);
+            }
+            catch
+            {
+                throw new JitException(JitException.IllegalFormat, $"ParseDateTime");
             }
         }
 
