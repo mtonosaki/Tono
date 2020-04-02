@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System;
@@ -8,32 +8,32 @@ using System.Windows.Forms;
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// ƒRƒ“ƒgƒ[ƒ‹‚Ì‰æ‘œ‚ğƒrƒbƒgƒ}ƒbƒv‚É•Û‘¶‚·‚é
+    /// ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã®ç”»åƒã‚’ãƒ“ãƒƒãƒˆãƒãƒƒãƒ—ã«ä¿å­˜ã™ã‚‹
     /// </summary>
     public class ControlSnapshot
     {
-        #region GDI32‚Ìg—p
+        #region GDI32ã®ä½¿ç”¨
         [System.Runtime.InteropServices.DllImport("gdi32.dll")]
         private static extern bool BitBlt(IntPtr hdcDest, int nXDest, int nYDest, int nWidth, int nHeight, IntPtr hdcSrc, int nXSrc, int nYSrc, int dwRop);
         #endregion
 
-        //ƒtƒH[ƒ€‚ÌƒCƒ[ƒW‚ğ•Û‘¶‚·‚é•Ï”
+        //ãƒ•ã‚©ãƒ¼ãƒ ã®ã‚¤ãƒ¡ãƒ¼ã‚¸ã‚’ä¿å­˜ã™ã‚‹å¤‰æ•°
         private Bitmap _imageBuffer;
 
-        /// <summary>ƒ^[ƒQƒbƒg‚Æ‚È‚éƒRƒ“ƒgƒ[ƒ‹</summary>
+        /// <summary>ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã¨ãªã‚‹ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«</summary>
         private readonly Control _target;
 
         /// <summary>
-        /// \’zq
+        /// æ§‹ç¯‰å­
         /// </summary>
-        /// <param name="target">‘ÎÛƒRƒ“ƒgƒ[ƒ‹</param>
+        /// <param name="target">å¯¾è±¡ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«</param>
         public ControlSnapshot(Control target)
         {
             _target = target;
         }
 
         /// <summary>
-        /// Œ»İ‚Ìó‘Ô‚ÌƒXƒiƒbƒvƒVƒ‡ƒbƒg‚ğ‹L˜^‚·‚é
+        /// ç¾åœ¨ã®çŠ¶æ…‹ã®ã‚¹ãƒŠãƒƒãƒ—ã‚·ãƒ§ãƒƒãƒˆã‚’è¨˜éŒ²ã™ã‚‹
         /// </summary>
         public void Snapshot()
         {
@@ -48,17 +48,17 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// Œ»İ‚Ìó‘Ô‚Ìƒrƒbƒgƒ}ƒbƒv
+        /// ç¾åœ¨ã®çŠ¶æ…‹ã®ãƒ“ãƒƒãƒˆãƒãƒƒãƒ—
         /// </summary>
         public Image Image => _imageBuffer;
 
         /// <summary>
-        /// ‘ÎÛ‚ÌƒRƒ“ƒgƒ[ƒ‹
+        /// å¯¾è±¡ã®ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«
         /// </summary>
         public Control Control => _target;
 
 
-        //ƒtƒH[ƒ€‚ÌƒCƒ[ƒW‚ğæ“¾‚·‚é
+        //ãƒ•ã‚©ãƒ¼ãƒ ã®ã‚¤ãƒ¡ãƒ¼ã‚¸ã‚’å–å¾—ã™ã‚‹
         private void captureScreen(Control c)
         {
             var ctrlG = c.CreateGraphics();

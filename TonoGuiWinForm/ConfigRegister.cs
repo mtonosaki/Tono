@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System;
@@ -13,7 +13,7 @@ namespace Tono.GuiWinForm
     public class ConfigRegister
     {
         /// <summary>
-        /// ƒ‹[ƒgƒL[
+        /// ãƒ«ãƒ¼ãƒˆã‚­ãƒ¼
         /// </summary>
         private readonly string _root;
         private static ConfigRegister _current = null;
@@ -25,7 +25,7 @@ namespace Tono.GuiWinForm
         #endregion
 
         /// <summary>
-        /// ƒOƒ[ƒoƒ‹ƒL[‚ğæ“¾‚·‚é
+        /// ã‚°ãƒ­ãƒ¼ãƒãƒ«ã‚­ãƒ¼ã‚’å–å¾—ã™ã‚‹
         /// </summary>
         public static ConfigRegister Current
         {
@@ -57,9 +57,9 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// w’èƒL[ˆÈ‰º‚ğ‚·‚×‚Äíœ‚·‚é
+        /// æŒ‡å®šã‚­ãƒ¼ä»¥ä¸‹ã‚’ã™ã¹ã¦å‰Šé™¤ã™ã‚‹
         /// uConfig X = new uConfig("AAA\\BBB");
-        /// X.Delete()  ‚Æ‚·‚é‚ÆABBB ‚ÌŠK‘wˆÈ‰º‚ªíœ‚³‚ê‚é
+        /// X.Delete()  ã¨ã™ã‚‹ã¨ã€BBB ã®éšå±¤ä»¥ä¸‹ãŒå‰Šé™¤ã•ã‚Œã‚‹
         /// </summary>
         public void Delete()
         {
@@ -77,8 +77,8 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒpƒ‰ƒ[ƒ^‚Ì“Ç‚İ‘‚«‚ğs‚¤
-        /// OBJ[ƒL[•¶š—ñ]
+        /// ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã®èª­ã¿æ›¸ãã‚’è¡Œã†
+        /// OBJ[ã‚­ãƒ¼æ–‡å­—åˆ—]
         /// </summary>
         public object this[string keystr]
         {
@@ -139,8 +139,8 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒpƒ‰ƒ[ƒ^‚Ì“Ç‚İ‘‚«‚ğs‚¤
-        /// OBJ[ƒL[•¶š—ñ,ƒfƒtƒHƒ‹ƒg’l]
+        /// ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã®èª­ã¿æ›¸ãã‚’è¡Œã†
+        /// OBJ[ã‚­ãƒ¼æ–‡å­—åˆ—,ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆå€¤]
         /// </summary>
         public object this[string keystr, object defValue]
         {
@@ -149,7 +149,7 @@ namespace Tono.GuiWinForm
                 var ret = this[keystr];
                 if (ret == null)
                 {
-                    this[keystr] = defValue;    // ƒfƒtƒHƒ‹ƒg’l‚ğ•Û‘¶‚µ‚Ä‚¨‚­
+                    this[keystr] = defValue;    // ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆå€¤ã‚’ä¿å­˜ã—ã¦ãŠã
                     return defValue;
                 }
                 return ret;

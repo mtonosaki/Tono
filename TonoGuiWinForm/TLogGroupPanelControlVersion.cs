@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System;
@@ -15,7 +15,7 @@ namespace Tono.GuiWinForm
 	public partial class TLogGroupPanelControlVersion : UserControl
     {
         /// <summary>
-        /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+        /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
         /// </summary>
         public TLogGroupPanelControlVersion()
         {
@@ -24,7 +24,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒƒOƒNƒŠƒAŒã‚Ìˆ——v‹
+        /// ãƒ­ã‚°ã‚¯ãƒªã‚¢å¾Œã®å‡¦ç†è¦æ±‚
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -34,7 +34,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒƒO•\¦XVƒ^ƒCƒ}[
+        /// ãƒ­ã‚°è¡¨ç¤ºæ›´æ–°ã‚¿ã‚¤ãƒãƒ¼
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -82,7 +82,7 @@ namespace Tono.GuiWinForm
 
                     lu = lu.Previous;
 
-                    if (listViewLogView.Items.Count > 10000)    // ‘½‚·‚¬‚éƒƒO‚ÍA‰ß‹‚©‚çÁ‚µ‚Äs‚­
+                    if (listViewLogView.Items.Count > 10000)    // å¤šã™ãã‚‹ãƒ­ã‚°ã¯ã€éå»ã‹ã‚‰æ¶ˆã—ã¦è¡Œã
                     {
                         listViewLogView.Items.RemoveAt(0);
                     }

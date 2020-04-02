@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System;
@@ -9,13 +9,13 @@ using System.Windows.Forms;
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// ƒJ[ƒ\ƒ‹‚ğ‘Ò‚¿‚Éİ’è‚·‚é
-    /// ƒXƒŒƒbƒhƒZ[ƒtİŒv
+    /// ã‚«ãƒ¼ã‚½ãƒ«ã‚’å¾…ã¡ã«è¨­å®šã™ã‚‹
+    /// ã‚¹ãƒ¬ãƒƒãƒ‰ã‚»ãƒ¼ãƒ•è¨­è¨ˆ
     /// </summary>
     /// <example>
     /// using(new WaitCursor(this))
     /// {
-    ///		‚È‚ª‚¢ˆ—
+    ///		ãªãŒã„å‡¦ç†
     /// }
     /// </example>
     public class WaitCursor : IDisposable
@@ -43,7 +43,7 @@ namespace Tono.GuiWinForm
             Dispose();
         }
 
-        #region IDisposable ƒƒ“ƒo
+        #region IDisposable ãƒ¡ãƒ³ãƒ
 
         public void Dispose()
         {

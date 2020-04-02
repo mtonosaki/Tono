@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System;
@@ -8,27 +8,27 @@ using System;
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// ƒp[ƒc‘I‘ğ’†AƒJ[ƒ\ƒ‹‚ğƒy[ƒ“‚Ì’[‚Éƒhƒ‰ƒbƒOó‘Ô‚Å‚Í‚İo‚µ‚½A©“®“I‚ÉƒXƒNƒ[ƒ‹‚·‚é
+    /// ãƒ‘ãƒ¼ãƒ„é¸æŠä¸­ã€ã‚«ãƒ¼ã‚½ãƒ«ã‚’ãƒšãƒ¼ãƒ³ã®ç«¯ã«ãƒ‰ãƒ©ãƒƒã‚°çŠ¶æ…‹ã§ã¯ã¿å‡ºã—ãŸæ™‚ã€è‡ªå‹•çš„ã«ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ã™ã‚‹
     /// </summary>
     public class FeatureAutoEdgeScroll : FeatureControlBridgeBase, IMouseListener
     {
-        /// <summary>ƒp[ƒcˆÊ’uŠÇ—ƒIƒuƒWƒFƒNƒg</summary>
+        /// <summary>ãƒ‘ãƒ¼ãƒ„ä½ç½®ç®¡ç†ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ</summary>
         protected PartsPositionManager _pos;
         private GuiTimer.Handle _timer = null;
         private IRichPane _tarPane;
 
         /// <summary>
-        /// ‰Šú‰»
+        /// åˆæœŸåŒ–
         /// </summary>
         public override void OnInitInstance()
         {
             base.OnInitInstance();
-            _pos = (PartsPositionManager)Share.Get("MovingParts", typeof(PartsPositionManager));    // ˆÚ“®’†‚Ìƒp[ƒcˆê——
+            _pos = (PartsPositionManager)Share.Get("MovingParts", typeof(PartsPositionManager));    // ç§»å‹•ä¸­ã®ãƒ‘ãƒ¼ãƒ„ä¸€è¦§
             _tarPane = Pane.GetPane("Resource");
         }
 
         /// <summary>
-        /// ƒI[ƒgƒXƒNƒ[ƒ‹‚·‚é
+        /// ã‚ªãƒ¼ãƒˆã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ã™ã‚‹
         /// </summary>
         public void autoScroll()
         {
@@ -70,7 +70,7 @@ namespace Tono.GuiWinForm
         }
 
 
-        #region IMouseListener ƒƒ“ƒo
+        #region IMouseListener ãƒ¡ãƒ³ãƒ
 
         public void OnMouseMove(MouseState e)
         {

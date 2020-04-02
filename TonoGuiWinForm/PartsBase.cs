@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System;
@@ -12,20 +12,20 @@ using System.Runtime.Serialization;
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// •`‰æ‚É•K—v‚ÈŠî–{“I‚È‹@”\‚ğ’ñ‹Ÿ‚·‚é’ŠÛƒNƒ‰ƒX
+    /// æç”»ã«å¿…è¦ãªåŸºæœ¬çš„ãªæ©Ÿèƒ½ã‚’æä¾›ã™ã‚‹æŠ½è±¡ã‚¯ãƒ©ã‚¹
     /// dp = Draw Parts
     /// </summary>
     [Serializable]
     public abstract class PartsBase : ICloneable, IDisposable
     {
-        #region ƒR[ƒ_Eƒ|ƒWƒVƒ‡ƒiŠÖ˜A
+        #region ã‚³ãƒ¼ãƒ€ãƒ»ãƒã‚¸ã‚·ãƒ§ãƒŠé–¢é€£
 
         private static readonly Hashtable _positionerBufK2I = new Hashtable();
         private static readonly Hashtable _positionerBufI2K = new Hashtable();
         private static readonly Hashtable _coderBufK2I = new Hashtable();
         private static readonly Hashtable _coderBufI2K = new Hashtable();
 
-        /// <summary>ˆÊ’u‚ğ•ÏŠ·‚·‚é‚½‚ß‚Ìˆ—‚ª–¾¦‚Å‚«‚é</summary>
+        /// <summary>ä½ç½®ã‚’å¤‰æ›ã™ã‚‹ãŸã‚ã®å‡¦ç†ãŒæ˜ç¤ºã§ãã‚‹</summary>
         public delegate LayoutRect PositionerMethod(CodeRect code, PartsBase target);
         /// <summary>
         /// 
@@ -39,39 +39,39 @@ namespace Tono.GuiWinForm
         private string _coderKeyForSave = null;
 
         #endregion
-        #region ¶¬—p
+        #region ç”Ÿæˆç”¨
         [NonSerialized]
         private static int _idCounter = 0;
         #endregion
-        #region		‘®«(ƒVƒŠƒAƒ‰ƒCƒY‚·‚é)
+        #region		å±æ€§(ã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºã™ã‚‹)
 
-        /// <summary>ƒp[ƒc‚É•t—^‚³‚ê‚½ƒ†ƒj[ƒN‚ÈID</summary>
+        /// <summary>ãƒ‘ãƒ¼ãƒ„ã«ä»˜ä¸ã•ã‚ŒãŸãƒ¦ãƒ‹ãƒ¼ã‚¯ãªID</summary>
         private Id _partsID = new Id { Value = _idCounter++ };
 
-        /** <summary>‹éŒ`—Ìˆæ‚Ìî•ñ</summary> */
+        /** <summary>çŸ©å½¢é ˜åŸŸã®æƒ…å ±</summary> */
         private CodeRect _Pos = CodeRect.FromLTRB(0, 0, 0, 0);
 
-        /** <summary>ƒeƒLƒXƒg</summary> */
+        /** <summary>ãƒ†ã‚­ã‚¹ãƒˆ</summary> */
         private string _Text = "";
         private Mes.Format _textFormat = null;
 
         #endregion
-        #region		‘®«(ƒVƒŠƒAƒ‰ƒCƒY‚µ‚È‚¢)
+        #region		å±æ€§(ã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºã—ãªã„)
 
-        /// <summary>“Á‚Éƒ}ƒXƒN‚ğw’è‚·‚éê‡‚Ìƒy[ƒ“</summary>
+        /// <summary>ç‰¹ã«ãƒã‚¹ã‚¯ã‚’æŒ‡å®šã™ã‚‹å ´åˆã®ãƒšãƒ¼ãƒ³</summary>
         [NonSerialized]
         private ArrayList _specifiedMaskPane = null;
 
-        /// <summary>ˆÊ’u‚ğ•ÏŠ·‚·‚é‚½‚ß‚Ìˆ—‚ª–¾¦‚Å‚«‚é</summary>
+        /// <summary>ä½ç½®ã‚’å¤‰æ›ã™ã‚‹ãŸã‚ã®å‡¦ç†ãŒæ˜ç¤ºã§ãã‚‹</summary>
         [NonSerialized]
         private PositionerMethod _partsPositioner = null;
 
-        /// <summary>ƒp[ƒcÀ•W‚ğ•„†‰»‚·‚é‚½‚ß‚Ìˆ—‚ª–¾¦‚Å‚«‚é</summary>
+        /// <summary>ãƒ‘ãƒ¼ãƒ„åº§æ¨™ã‚’ç¬¦å·åŒ–ã™ã‚‹ãŸã‚ã®å‡¦ç†ãŒæ˜ç¤ºã§ãã‚‹</summary>
         [NonSerialized]
         private PosCoderMethod _partsCoder = null;
 
         #endregion
-        #region IDisposable ƒƒ“ƒo
+        #region IDisposable ãƒ¡ãƒ³ãƒ
 
         public virtual void Dispose()
         {
@@ -80,7 +80,7 @@ namespace Tono.GuiWinForm
         #endregion
 
         /// <summary>
-        /// •¶š—ñ‰»
+        /// æ–‡å­—åˆ—åŒ–
         /// </summary>
         /// <returns></returns>
         public override string ToString()
@@ -97,7 +97,7 @@ namespace Tono.GuiWinForm
 
 
         /// <summary>
-        /// ƒtƒH[ƒ}ƒbƒg‚Ì“à—e‚É]‚Á‚ÄATextƒvƒƒpƒeƒB‚ğƒŠƒZƒbƒg‚·‚é
+        /// ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆã®å†…å®¹ã«å¾“ã£ã¦ã€Textãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ã‚’ãƒªã‚»ãƒƒãƒˆã™ã‚‹
         /// </summary>
         public void ResetTextByFormat()
         {
@@ -108,7 +108,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// Œ¾ŒêØ‚è‘Ö‚¦‚É©“®‘Î‰‚·‚éƒeƒLƒXƒgƒtƒH[ƒ}ƒbƒg‚ğw’è‚·‚é
+        /// è¨€èªåˆ‡ã‚Šæ›¿ãˆã«è‡ªå‹•å¯¾å¿œã™ã‚‹ãƒ†ã‚­ã‚¹ãƒˆãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆã‚’æŒ‡å®šã™ã‚‹
         /// </summary>
         public Mes.Format TextFormat
         {
@@ -120,18 +120,18 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒp[ƒcŠî–{ƒNƒ‰ƒX‚ÌƒfƒtƒHƒ‹ƒgƒRƒ“ƒXƒgƒ‰ƒNƒ^
+        /// ãƒ‘ãƒ¼ãƒ„åŸºæœ¬ã‚¯ãƒ©ã‚¹ã®ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
         /// </summary>
         protected PartsBase()
         {
         }
 
         /// <summary>
-        /// ƒp[ƒc‚ÌID
+        /// ãƒ‘ãƒ¼ãƒ„ã®ID
         /// </summary>
         public Id ID => _partsID;
 
-        #region ICloneable ƒƒ“ƒo
+        #region ICloneable ãƒ¡ãƒ³ãƒ
 
         /// <summary>
         /// 
@@ -150,7 +150,7 @@ namespace Tono.GuiWinForm
 
         #endregion
 
-        #region ISerializable ƒƒ“ƒo
+        #region ISerializable ãƒ¡ãƒ³ãƒ
 
         /// <summary>
         /// 
@@ -175,7 +175,7 @@ namespace Tono.GuiWinForm
         #endregion
 
         /// <summary>
-        /// ID‚ğƒnƒbƒVƒ…ƒR[ƒh‚Æ‚·‚é
+        /// IDã‚’ãƒãƒƒã‚·ãƒ¥ã‚³ãƒ¼ãƒ‰ã¨ã™ã‚‹
         /// </summary>
         /// <returns></returns>
         public override int GetHashCode()
@@ -184,7 +184,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ID‚Å”äŠr‚·‚é
+        /// IDã§æ¯”è¼ƒã™ã‚‹
         /// </summary>
         /// <param name="obj"></param>
         /// <returns></returns>
@@ -198,11 +198,11 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// w’èÀ•W‚ª•`‰æƒNƒŠƒbƒv“à‚©‚Ç‚¤‚©¯•Ê‚·‚é
+        /// æŒ‡å®šåº§æ¨™ãŒæç”»ã‚¯ãƒªãƒƒãƒ—å†…ã‹ã©ã†ã‹è­˜åˆ¥ã™ã‚‹
         /// </summary>
-        /// <param name="rp">ƒy[ƒ“</param>
-        /// <param name="rect">’²¸”ÍˆÍ</param>
-        /// <returns>true = ’²¸”ÍˆÍ‚ª•`‰æƒNƒŠƒbƒv“à / false = ‚»‚¤‚Å‚È‚¢</returns>
+        /// <param name="rp">ãƒšãƒ¼ãƒ³</param>
+        /// <param name="rect">èª¿æŸ»ç¯„å›²</param>
+        /// <returns>true = èª¿æŸ»ç¯„å›²ãŒæç”»ã‚¯ãƒªãƒƒãƒ—å†… / false = ãã†ã§ãªã„</returns>
         //[DebuggerStepThrough]
         protected bool isInClip(IRichPane rp, ScreenRect rect0)
         {
@@ -227,10 +227,10 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// w’èÀ•W‚ª•`‰æƒNƒŠƒbƒv“à‚©‚Ç‚¤‚©¯•Ê‚·‚é
+        /// æŒ‡å®šåº§æ¨™ãŒæç”»ã‚¯ãƒªãƒƒãƒ—å†…ã‹ã©ã†ã‹è­˜åˆ¥ã™ã‚‹
         /// </summary>
-        /// <param name="rp">ƒy[ƒ“</param>
-        /// <returns>true = ’²¸”ÍˆÍ‚ª•`‰æƒNƒŠƒbƒv“à / false = ‚»‚¤‚Å‚È‚¢</returns>
+        /// <param name="rp">ãƒšãƒ¼ãƒ³</param>
+        /// <returns>true = èª¿æŸ»ç¯„å›²ãŒæç”»ã‚¯ãƒªãƒƒãƒ—å†… / false = ãã†ã§ãªã„</returns>
         public bool isInClip(IRichPane rp)
         {
             var rect = GetScRect(rp, Rect);
@@ -239,8 +239,8 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// PartsPositioner‚ğƒRƒs[‚·‚é
-        /// iŒ³‚ÌPartsPositioner‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‚ªDispose‚³‚ê‚Ä‚¢‚é‚©‚à‚µ‚ê‚È‚¢‚Ì‚Å’ˆÓ‚·‚éj
+        /// PartsPositionerã‚’ã‚³ãƒ”ãƒ¼ã™ã‚‹
+        /// ï¼ˆå…ƒã®PartsPositionerã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ãŒDisposeã•ã‚Œã¦ã„ã‚‹ã‹ã‚‚ã—ã‚Œãªã„ã®ã§æ³¨æ„ã™ã‚‹ï¼‰
         /// </summary>
         /// <param name="org"></param>
         public void SetPositionerFrom(PartsBase org)
@@ -249,8 +249,8 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// PartsPositionCorder‚ğƒRƒs[‚·‚é
-        /// iŒ³‚ÌPartsPositionCorder‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‚ªDispose‚³‚ê‚Ä‚¢‚é‚©‚à‚µ‚ê‚È‚¢‚Ì‚Å’ˆÓ‚·‚éj
+        /// PartsPositionCorderã‚’ã‚³ãƒ”ãƒ¼ã™ã‚‹
+        /// ï¼ˆå…ƒã®PartsPositionCorderã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ãŒDisposeã•ã‚Œã¦ã„ã‚‹ã‹ã‚‚ã—ã‚Œãªã„ã®ã§æ³¨æ„ã™ã‚‹ï¼‰
         /// </summary>
         /// <param name="org"></param>
         public void SetPositionCorderFrom(PartsBase org)
@@ -260,7 +260,7 @@ namespace Tono.GuiWinForm
 
 
         /// <summary>
-        /// ˆÊ’u‚ğ•ÏŠ·‚·‚éˆ—‚ª“o˜^‚Å‚«‚é
+        /// ä½ç½®ã‚’å¤‰æ›ã™ã‚‹å‡¦ç†ãŒç™»éŒ²ã§ãã‚‹
         /// </summary>
         public PositionerMethod PartsPositioner
         {
@@ -284,7 +284,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒ|ƒWƒVƒ‡ƒi[‚Ì–¼‘Oi•¶š—ñj‚ğæ“¾‚·‚é
+        /// ãƒã‚¸ã‚·ãƒ§ãƒŠãƒ¼ã®åå‰ï¼ˆæ–‡å­—åˆ—ï¼‰ã‚’å–å¾—ã™ã‚‹
         /// </summary>
         public void SetPartsPositionerName(bool sw)
         {
@@ -299,7 +299,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒ|ƒWƒVƒ‡ƒi[‚Ì–¼‘Oi•¶š—ñj‚ğƒCƒ“ƒXƒ^ƒ“ƒX‚É“K—p‚·‚é
+        /// ãƒã‚¸ã‚·ãƒ§ãƒŠãƒ¼ã®åå‰ï¼ˆæ–‡å­—åˆ—ï¼‰ã‚’ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã«é©ç”¨ã™ã‚‹
         /// </summary>
         public void InstanciatePartsPositioner()
         {
@@ -308,7 +308,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ˆÊ’u‚ğ•„†‰»‚·‚éˆ—‚ª“o˜^‚Å‚«‚é
+        /// ä½ç½®ã‚’ç¬¦å·åŒ–ã™ã‚‹å‡¦ç†ãŒç™»éŒ²ã§ãã‚‹
         /// </summary>
         public PosCoderMethod PartsPositionCorder
         {
@@ -316,7 +316,7 @@ namespace Tono.GuiWinForm
             {
                 _partsCoder = value;
                 string key;
-                if (value.Target == null)   // static ƒƒ\ƒbƒh
+                if (value.Target == null)   // static ãƒ¡ã‚½ãƒƒãƒ‰
                 {
                     key = "(static)." + value.Method.Name;
                 }
@@ -331,7 +331,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒR[ƒ_[‚Ì–¼‘Oi•¶š—ñj‚ğæ“¾‚·‚é
+        /// ã‚³ãƒ¼ãƒ€ãƒ¼ã®åå‰ï¼ˆæ–‡å­—åˆ—ï¼‰ã‚’å–å¾—ã™ã‚‹
         /// </summary>
         public void SetPartsPositionCorderName(bool sw)
         {
@@ -345,7 +345,7 @@ namespace Tono.GuiWinForm
             }
         }
         /// <summary>
-        /// ƒ|ƒWƒVƒ‡ƒi[‚Ì–¼‘Oi•¶š—ñj‚ğƒCƒ“ƒXƒ^ƒ“ƒX‚É“K—p‚·‚é
+        /// ãƒã‚¸ã‚·ãƒ§ãƒŠãƒ¼ã®åå‰ï¼ˆæ–‡å­—åˆ—ï¼‰ã‚’ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã«é©ç”¨ã™ã‚‹
         /// </summary>
         public void InstanciatePartsPositionCorderName()
         {
@@ -354,7 +354,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒ}ƒXƒN—Ìˆæ‚ğ“Á’è‚·‚é
+        /// ãƒã‚¹ã‚¯é ˜åŸŸã‚’ç‰¹å®šã™ã‚‹
         /// </summary>
         /// <param name="pane"></param>
         [DebuggerStepThrough]
@@ -368,17 +368,17 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// •\¦—p‚ÌƒXƒNƒŠ[ƒ“À•W‚ğæ“¾‚·‚é
+        /// è¡¨ç¤ºç”¨ã®ã‚¹ã‚¯ãƒªãƒ¼ãƒ³åº§æ¨™ã‚’å–å¾—ã™ã‚‹
         /// </summary>
-        /// <param name="rp">ŒvZ‚É—p‚¢‚éƒŠƒbƒ`ƒy[ƒ“</param>
-        /// <returns>ƒXƒNƒŠ[ƒ“À•W</returns>
+        /// <param name="rp">è¨ˆç®—ã«ç”¨ã„ã‚‹ãƒªãƒƒãƒãƒšãƒ¼ãƒ³</param>
+        /// <returns>ã‚¹ã‚¯ãƒªãƒ¼ãƒ³åº§æ¨™</returns>
         public virtual ScreenRect GetScRect(IRichPane rp)
         {
             return GetScRect(rp, Rect);
         }
 
         /// <summary>
-        /// ƒp[ƒcÀ•W‚ğæ“¾‚·‚é
+        /// ãƒ‘ãƒ¼ãƒ„åº§æ¨™ã‚’å–å¾—ã™ã‚‹
         /// </summary>
         /// <returns></returns>
         public virtual LayoutRect GetPtRect()
@@ -387,7 +387,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒp[ƒcÀ•W‚ğæ“¾‚·‚é
+        /// ãƒ‘ãƒ¼ãƒ„åº§æ¨™ã‚’å–å¾—ã™ã‚‹
         /// </summary>
         /// <returns></returns>
         public virtual LayoutRect GetPtRect(CodeRect rect)
@@ -400,11 +400,11 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// •\¦—p‚ÌƒXƒNƒŠ[ƒ“À•W‚ğæ“¾‚·‚é
+        /// è¡¨ç¤ºç”¨ã®ã‚¹ã‚¯ãƒªãƒ¼ãƒ³åº§æ¨™ã‚’å–å¾—ã™ã‚‹
         /// </summary>
-        /// <param name="rp">ŒvZ‚É—p‚¢‚éƒŠƒbƒ`ƒy[ƒ“</param>
+        /// <param name="rp">è¨ˆç®—ã«ç”¨ã„ã‚‹ãƒªãƒƒãƒãƒšãƒ¼ãƒ³</param>
         /// <param name="rect"></param>
-        /// <returns>ƒXƒNƒŠ[ƒ“À•W</returns>
+        /// <returns>ã‚¹ã‚¯ãƒªãƒ¼ãƒ³åº§æ¨™</returns>
         public virtual ScreenRect GetScRect(IRichPane rp, CodeRect rect)
         {
             if (_partsPositioner != null)
@@ -415,11 +415,11 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// •\¦—p‚ÌƒXƒNƒŠ[ƒ“À•W‚ğæ“¾‚·‚é
+        /// è¡¨ç¤ºç”¨ã®ã‚¹ã‚¯ãƒªãƒ¼ãƒ³åº§æ¨™ã‚’å–å¾—ã™ã‚‹
         /// </summary>
-        /// <param name="rp">ŒvZ‚É—p‚¢‚éƒŠƒbƒ`ƒy[ƒ“</param>
+        /// <param name="rp">è¨ˆç®—ã«ç”¨ã„ã‚‹ãƒªãƒƒãƒãƒšãƒ¼ãƒ³</param>
         /// <param name="code"></param>
-        /// <returns>ƒXƒNƒŠ[ƒ“À•W</returns>
+        /// <returns>ã‚¹ã‚¯ãƒªãƒ¼ãƒ³åº§æ¨™</returns>
         [DebuggerStepThrough]
         public ScreenPos GetZoomed(IRichPane rp, CodePos code)
         {
@@ -432,11 +432,11 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// w’èƒXƒNƒŠ[ƒ“À•W‚ğƒp[ƒcÀ•Wi•„†‰»j‚É•ÏŠ·‚·‚é
+        /// æŒ‡å®šã‚¹ã‚¯ãƒªãƒ¼ãƒ³åº§æ¨™ã‚’ãƒ‘ãƒ¼ãƒ„åº§æ¨™ï¼ˆç¬¦å·åŒ–ï¼‰ã«å¤‰æ›ã™ã‚‹
         /// </summary>
-        /// <param name="rp">ƒy[ƒ“</param>
-        /// <param name="rect">ƒXƒNƒŠ[ƒ“À•W</param>
-        /// <returns>ƒp[ƒcÀ•W</returns>
+        /// <param name="rp">ãƒšãƒ¼ãƒ³</param>
+        /// <param name="rect">ã‚¹ã‚¯ãƒªãƒ¼ãƒ³åº§æ¨™</param>
+        /// <returns>ãƒ‘ãƒ¼ãƒ„åº§æ¨™</returns>
         [DebuggerStepThrough]
         public CodeRect GetCdRect(IRichPane rp, ScreenRect rect)
         {
@@ -449,11 +449,11 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// w’èƒXƒNƒŠ[ƒ“À•W‚ğƒp[ƒcÀ•Wi•„†‰»j‚É•ÏŠ·‚·‚é
+        /// æŒ‡å®šã‚¹ã‚¯ãƒªãƒ¼ãƒ³åº§æ¨™ã‚’ãƒ‘ãƒ¼ãƒ„åº§æ¨™ï¼ˆç¬¦å·åŒ–ï¼‰ã«å¤‰æ›ã™ã‚‹
         /// </summary>
-        /// <param name="rp">ƒy[ƒ“</param>
-        /// <param name="pos">ƒXƒNƒŠ[ƒ“À•W</param>
-        /// <returns>ƒp[ƒcÀ•W</returns>
+        /// <param name="rp">ãƒšãƒ¼ãƒ³</param>
+        /// <param name="pos">ã‚¹ã‚¯ãƒªãƒ¼ãƒ³åº§æ¨™</param>
+        /// <returns>ãƒ‘ãƒ¼ãƒ„åº§æ¨™</returns>
         [DebuggerStepThrough]
         public CodePos GetCdPos(IRichPane rp, ScreenPos pos)
         {
@@ -471,7 +471,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒ}ƒXƒN‚Ìí—Ş
+        /// ãƒã‚¹ã‚¯ã®ç¨®é¡
         /// </summary>
         protected enum MaskType
         {
@@ -494,10 +494,10 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒy[ƒ“‚Åƒ}ƒXƒN‚·‚é
+        /// ãƒšãƒ¼ãƒ³ã§ãƒã‚¹ã‚¯ã™ã‚‹
         /// </summary>
-        /// <param name="rp">ŒvZ‚É—p‚¢‚éƒŠƒbƒ`ƒy[ƒ“</param>
-        /// <returns>’¼‘O‚Ìƒ}ƒXƒN—Ìˆæ</returns>
+        /// <param name="rp">è¨ˆç®—ã«ç”¨ã„ã‚‹ãƒªãƒƒãƒãƒšãƒ¼ãƒ³</param>
+        /// <returns>ç›´å‰ã®ãƒã‚¹ã‚¯é ˜åŸŸ</returns>
         public static Region Mask(IRichPane rp)
         {
             var ret = rp.Graphics.Clip;
@@ -506,11 +506,11 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// •`‰æ—Ìˆæ‚ğƒ}ƒXƒN‚·‚é
+        /// æç”»é ˜åŸŸã‚’ãƒã‚¹ã‚¯ã™ã‚‹
         /// </summary>
-        /// <param name="rp">•`‰æ‚ğs‚¤—§’nƒy[ƒ“</param>
-        /// <param name="type">ƒ}ƒXƒN‚Ìƒ^ƒCƒv</param>
-        /// <returns>’¼‘O‚Ìƒ}ƒXƒN—Ìˆæ</returns>
+        /// <param name="rp">æç”»ã‚’è¡Œã†ç«‹åœ°ãƒšãƒ¼ãƒ³</param>
+        /// <param name="type">ãƒã‚¹ã‚¯ã®ã‚¿ã‚¤ãƒ—</param>
+        /// <returns>ç›´å‰ã®ãƒã‚¹ã‚¯é ˜åŸŸ</returns>
         [DebuggerStepThrough]
         protected Region Mask(IRichPane rp, MaskType type)
         {
@@ -550,16 +550,16 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// •`‰æ
+        /// æç”»
         /// </summary>
-        /// <param name="rp">ƒŠƒbƒ`ƒy[ƒ“</param>
-        /// <returns>false = •`‰æ‚Å‚«‚È‚©‚Á‚½</returns>
+        /// <param name="rp">ãƒªãƒƒãƒãƒšãƒ¼ãƒ³</param>
+        /// <returns>false = æç”»ã§ããªã‹ã£ãŸ</returns>
         public abstract bool Draw(IRichPane rp);
 
         /// <summary>
-        /// ‘I‘ğó‘Ô‚Ì•W€À‘•iŠeDraw‚ÅƒR[ƒ‹‚·‚é‚©A“Æ©‚É‘I‘ğó‘Ô‚ğÀ‘•‚·‚é‚±‚Æj
+        /// é¸æŠçŠ¶æ…‹ã®æ¨™æº–å®Ÿè£…ï¼ˆå„Drawã§ã‚³ãƒ¼ãƒ«ã™ã‚‹ã‹ã€ç‹¬è‡ªã«é¸æŠçŠ¶æ…‹ã‚’å®Ÿè£…ã™ã‚‹ã“ã¨ï¼‰
         /// </summary>
-        /// <param name="rp">ƒŠƒbƒ`ƒy[ƒ“</param>
+        /// <param name="rp">ãƒªãƒƒãƒãƒšãƒ¼ãƒ³</param>
         protected virtual void drawSelected(IRichPane rp)
         {
             if (this is IPartsSelectable)
@@ -572,42 +572,42 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// IsOn‚Ì–ß‚è’l
+        /// IsOnã®æˆ»ã‚Šå€¤
         /// </summary>
         [Flags]
         public enum PointType
         {
-            /// —ÌˆæŠO
+            /// é ˜åŸŸå¤–
             Outside = 0,
-            /// —Ìˆæ“à
+            /// é ˜åŸŸå†…
             Inside = 0x10,
-            /// ‹«ŠEãi¶’[j
+            /// å¢ƒç•Œä¸Šï¼ˆå·¦ç«¯ï¼‰
             OnLeft = 0x01,
-            /// ‹«ŠEãiã’[j
+            /// å¢ƒç•Œä¸Šï¼ˆä¸Šç«¯ï¼‰
             OnTop = 0x04,
-            /// ‹«ŠEãi‰E’[j
+            /// å¢ƒç•Œä¸Šï¼ˆå³ç«¯ï¼‰
             OnRight = 0x02,
-            /// ‹«ŠEãi‰º’[j
+            /// å¢ƒç•Œä¸Šï¼ˆä¸‹ç«¯ï¼‰
             OnBottom = 0x08
         }
 
         /// <summary>
-        /// w’èƒXƒNƒŠ[ƒ“À•W‚ª‹éŒ`—Ìˆæ“à‚©’²¸‚·‚é
+        /// æŒ‡å®šã‚¹ã‚¯ãƒªãƒ¼ãƒ³åº§æ¨™ãŒçŸ©å½¢é ˜åŸŸå†…ã‹èª¿æŸ»ã™ã‚‹
         /// </summary>
-        /// <param name="sp">ƒXƒNƒŠ[ƒ“À•W‚Å‚ÌˆÊ’u</param>
-        /// <param name="rp">ƒŠƒbƒ`ƒy[ƒ“</param>
-        /// <returns>Œ‹‰Ê</returns>
+        /// <param name="sp">ã‚¹ã‚¯ãƒªãƒ¼ãƒ³åº§æ¨™ã§ã®ä½ç½®</param>
+        /// <param name="rp">ãƒªãƒƒãƒãƒšãƒ¼ãƒ³</param>
+        /// <returns>çµæœ</returns>
         public virtual PointType IsOn(ScreenPos sp, IRichPane rp)
         {
             return IsOn(sp, rp, PointType.OnBottom | PointType.OnLeft | PointType.OnRight | PointType.OnTop | PointType.Outside | PointType.Inside);
         }
 
         /// <summary>
-        /// w’èƒXƒNƒŠ[ƒ“À•W‚ª‹éŒ`—Ìˆæ“à‚©’²¸‚·‚é
+        /// æŒ‡å®šã‚¹ã‚¯ãƒªãƒ¼ãƒ³åº§æ¨™ãŒçŸ©å½¢é ˜åŸŸå†…ã‹èª¿æŸ»ã™ã‚‹
         /// </summary>
-        /// <param name="sp">ƒXƒNƒŠ[ƒ“À•Wiƒ}ƒEƒX‚ÌÀ•Wj</param>
-        /// <param name="rp">ƒŠƒbƒ`ƒy[ƒ“</param>
-        /// <param name="check">ƒ`ƒFƒbƒN‘ÎÛ‚Ì—ñ‹“iƒtƒ‰ƒOj</param>
+        /// <param name="sp">ã‚¹ã‚¯ãƒªãƒ¼ãƒ³åº§æ¨™ï¼ˆãƒã‚¦ã‚¹ã®åº§æ¨™ï¼‰</param>
+        /// <param name="rp">ãƒªãƒƒãƒãƒšãƒ¼ãƒ³</param>
+        /// <param name="check">ãƒã‚§ãƒƒã‚¯å¯¾è±¡ã®åˆ—æŒ™ï¼ˆãƒ•ãƒ©ã‚°ï¼‰</param>
         public virtual PointType IsOn(ScreenPos sp, IRichPane rp, PointType check)
         {
             var r = GetScRect(rp);
@@ -615,7 +615,7 @@ namespace Tono.GuiWinForm
             {
                 return PointType.Outside;
             }
-            var w = 3;  // ‹«ŠEü‚ğ”»’f‚·‚é‚½‚ß‚Ì•
+            var w = 3;  // å¢ƒç•Œç·šã‚’åˆ¤æ–­ã™ã‚‹ãŸã‚ã®å¹…
 
             if (r.IsIn(sp))
             {
@@ -669,18 +669,18 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// •„†À•W‚ğ—^‚¦‚ÄAƒp[ƒc“à‘¤‚©‚Ç‚¤‚©‚ğ”»’è‚·‚é
-        /// iIsOn(uScPosEEE‚Æˆá‚¢A‚‘¬‚Éˆ—‚ª‚Å‚«‚éj
+        /// ç¬¦å·åº§æ¨™ã‚’ä¸ãˆã¦ã€ãƒ‘ãƒ¼ãƒ„å†…å´ã‹ã©ã†ã‹ã‚’åˆ¤å®šã™ã‚‹
+        /// ï¼ˆIsOn(uScPosãƒ»ãƒ»ãƒ»ã¨é•ã„ã€é«˜é€Ÿã«å‡¦ç†ãŒã§ãã‚‹ï¼‰
         /// </summary>
-        /// <param name="cp">•„†À•W</param>
-        /// <returns>Inside = “à‘¤ / Outside = ŠO‘¤</returns>
+        /// <param name="cp">ç¬¦å·åº§æ¨™</param>
+        /// <returns>Inside = å†…å´ / Outside = å¤–å´</returns>
         public virtual PointType IsOn(CodePos cp)
         {
             return Rect.IsIn(cp) ? PointType.Inside : PointType.Outside;
         }
 
         /// <summary>
-        /// ‹éŒ`—Ìˆæ‚Ìæ“¾/İ’è
+        /// çŸ©å½¢é ˜åŸŸã®å–å¾—/è¨­å®š
         /// </summary>
         public virtual CodeRect Rect
         {
@@ -691,7 +691,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒeƒLƒXƒg‚Ìæ“¾/İ’è
+        /// ãƒ†ã‚­ã‚¹ãƒˆã®å–å¾—/è¨­å®š
         /// </summary>
         public virtual string Text
         {

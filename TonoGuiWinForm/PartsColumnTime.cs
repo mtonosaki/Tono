@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System;
@@ -10,35 +10,35 @@ using System.Drawing;
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// dpColumnTime ‚ÌŠT—v‚Ìà–¾‚Å‚·B
+    /// dpColumnTime ã®æ¦‚è¦ã®èª¬æ˜ã§ã™ã€‚
     /// </summary>
     public class PartsColumnTime : PartsBase
     {
-        /** <summary>–Ú·‚è•\¦‚Ì‰ğ‘œ“x 1.0=ˆêŠÔˆê–{•\¦ / 0.5=“ñ–{•\¦	</summary> */
+        /** <summary>ç›®ç››ã‚Šè¡¨ç¤ºã®è§£åƒåº¦ 1.0=ä¸€æ™‚é–“ä¸€æœ¬è¡¨ç¤º / 0.5=äºŒæœ¬è¡¨ç¤º	</summary> */
         private readonly double _reshval = 0.5;
-        /// <summary>ˆêŠÔ•ª‚ğ•\Œ»‚·‚é‚Ì‚É•K—v‚Èƒhƒbƒg”iƒp[ƒcÀ•Wj</summary>
+        /// <summary>ä¸€æ™‚é–“åˆ†ã‚’è¡¨ç¾ã™ã‚‹ã®ã«å¿…è¦ãªãƒ‰ãƒƒãƒˆæ•°ï¼ˆãƒ‘ãƒ¼ãƒ„åº§æ¨™ï¼‰</summary>
         private readonly LayoutPos _dph = LayoutPos.FromInt(200, 0);
-        /** <summary>ü‚ÌF												</summary> */
+        /** <summary>ç·šã®è‰²												</summary> */
         private Pen _lc1 = new Pen(Color.LightGray);
-        /** <summary>ü‚ÌF												</summary> */
+        /** <summary>ç·šã®è‰²												</summary> */
         private SolidBrush _bc = new SolidBrush(Color.DimGray);
-        /** <summary>•¶š‚ÌF											</summary> */
+        /** <summary>æ–‡å­—ã®è‰²											</summary> */
         protected SolidBrush _tc = new SolidBrush(Color.White);
-        /// <summary>ƒtƒHƒ“ƒg</summary>
+        /// <summary>ãƒ•ã‚©ãƒ³ãƒˆ</summary>
         protected Font _font = new Font("Arial", 8);
 
-        /** <summary>[ƒY[ƒ€]”{—¦‚Æ•\¦‚·‚éŠÔ‚Ì—±“x‚Ì‘Î‰•\				</summary> */
+        /** <summary>[ã‚ºãƒ¼ãƒ ]å€ç‡ã¨è¡¨ç¤ºã™ã‚‹æ™‚é–“ã®ç²’åº¦ã®å¯¾å¿œè¡¨				</summary> */
         private readonly double[] _zmRes = { 0.3, 0.15, 0.07, 0.04, 0.02 };
-        /** <summary>ƒY[ƒ€”{—¦‚Æ[•\¦‚·‚éŠÔ‚Ì—±“x]‚Ì‘Î‰•\				</summary> */
+        /** <summary>ã‚ºãƒ¼ãƒ å€ç‡ã¨[è¡¨ç¤ºã™ã‚‹æ™‚é–“ã®ç²’åº¦]ã®å¯¾å¿œè¡¨				</summary> */
         private readonly double[] _tmRes = { 1, 2, 4, 8, 24 };
         /// <summary>
-        /// T•\¦‚ÌŒÅ’èiƒJƒXƒ^ƒ}ƒCƒYj
+        /// é€±è¡¨ç¤ºã®å›ºå®šï¼ˆã‚«ã‚¹ã‚¿ãƒã‚¤ã‚ºï¼‰
         /// </summary>
         protected string[] _strDays = null;
 
 
         /// <summary>
-        /// GDIŠJ•ú
+        /// GDIé–‹æ”¾
         /// </summary>
         public override void Dispose()
         {
@@ -53,7 +53,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// “ú‚Ì•¶š—ñ‚ğƒJƒXƒ^ƒ}ƒCƒY‚·‚é
+        /// æ—¥ã®æ–‡å­—åˆ—ã‚’ã‚«ã‚¹ã‚¿ãƒã‚¤ã‚ºã™ã‚‹
         /// </summary>
         public ICollection StringDays
         {
@@ -83,12 +83,12 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ˆêŠÔ•ª‚ğ•\Œ»‚·‚é‚Ì‚É•K—v‚Èƒhƒbƒg”iƒp[ƒcÀ•WjDots Per Hour
+        /// ä¸€æ™‚é–“åˆ†ã‚’è¡¨ç¾ã™ã‚‹ã®ã«å¿…è¦ãªãƒ‰ãƒƒãƒˆæ•°ï¼ˆãƒ‘ãƒ¼ãƒ„åº§æ¨™ï¼‰Dots Per Hour
         /// </summary>
         public LayoutPos DPH => _dph;
 
         /// <summary>
-        /// ”wŒiF
+        /// èƒŒæ™¯è‰²
         /// </summary>
         public Color BackColor
         {
@@ -97,7 +97,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ü‚ÌF
+        /// ç·šã®è‰²
         /// </summary>
         public Color LineColor
         {
@@ -106,7 +106,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ”wŒiF
+        /// èƒŒæ™¯è‰²
         /// </summary>
         public Color TextColor
         {
@@ -116,9 +116,9 @@ namespace Tono.GuiWinForm
 
 
         /// <summary>
-        /// •`‰æ
+        /// æç”»
         /// </summary>
-        /// <param name="sp">•`‰æ§Œäƒnƒ“ƒhƒ‹</param>
+        /// <param name="sp">æç”»åˆ¶å¾¡ãƒãƒ³ãƒ‰ãƒ«</param>
         public override bool Draw(IRichPane rp)
         {
             if (Rect.Width <= 1)
@@ -134,21 +134,21 @@ namespace Tono.GuiWinForm
             RectangleF b = rp.GetPaneRect();
             rp.Graphics.FillRectangle(_bc, b);
 
-            var mv0 = -org.X / (zx * _dph.X);    // •\¦ŠJnˆÊ’u‚ÌÅ“K‰» mv[]
+            var mv0 = -org.X / (zx * _dph.X);    // è¡¨ç¤ºé–‹å§‹ä½ç½®ã®æœ€é©åŒ– mv[æ™‚]
             var mv = mv0;
-            mv += (_reshval - mv % _reshval) - _reshval;    // 0.5ŠÔ–ß‚µ‚½ˆÊ’u‚©‚ç•`‰æ‚Í‚¶‚ß‚é
-            var mvx = (b.Right - org.X) / (zx * _dph.X); // •\¦I—¹ˆÊ’u‚ÌÅ“K‰» mvx[]
+            mv += (_reshval - mv % _reshval) - _reshval;    // 0.5æ™‚é–“æˆ»ã—ãŸä½ç½®ã‹ã‚‰æç”»ã¯ã˜ã‚ã‚‹
+            var mvx = (b.Right - org.X) / (zx * _dph.X); // è¡¨ç¤ºçµ‚äº†ä½ç½®ã®æœ€é©åŒ– mvx[æ™‚]
 
             var preDs = "";
             var isFirst = true;
             var isLeftWeek = false;
 
-            // •\¦
-            for (var t2 = mv/*[]*/; t2 <= mvx; t2 += _reshval)
+            // è¡¨ç¤º
+            for (var t2 = mv/*[æ™‚]*/; t2 <= mvx; t2 += _reshval)
             {
                 var t = t2 + (1.0 / 7200);
 
-                // ‚Ì•\¦
+                // æ™‚åˆ»ã®è¡¨ç¤º
                 string s;
                 var x = org.X + t * _dph.X * zx;
                 if (t >= 0)
@@ -181,8 +181,8 @@ namespace Tono.GuiWinForm
 
                 if (isDrawTime)
                 {
-                    rp.Graphics.DrawString(s, _font, _tc, (float)x - 14 + b.Left, b.Bottom - 22);   //‚Ì•`‰æ
-                    rp.Graphics.DrawLine(pen, (float)x + b.Left, b.Bottom - 9, (float)x + b.Left, b.Bottom - 1);    //ü‚Ì•`‰æiƒeƒLƒXƒg‚ª‚ ‚éêŠj
+                    rp.Graphics.DrawString(s, _font, _tc, (float)x - 14 + b.Left, b.Bottom - 22);   //æ™‚åˆ»ã®æç”»
+                    rp.Graphics.DrawLine(pen, (float)x + b.Left, b.Bottom - 9, (float)x + b.Left, b.Bottom - 1);    //ç·šã®æç”»ï¼ˆãƒ†ã‚­ã‚¹ãƒˆãŒã‚ã‚‹å ´æ‰€ï¼‰
                 }
                 else
                 {
@@ -190,15 +190,15 @@ namespace Tono.GuiWinForm
                     {
                         if (t - Math.Floor(t) > 0.4)
                         {
-                            rp.Graphics.DrawLine(pen, (float)(x + b.Left), b.Bottom - 5, (float)(x + b.Left), b.Bottom - 1);    //ü‚Ì•`‰æi30•ª’PˆÊjƒeƒLƒXƒg‚ª‚È‚­‚ÄO\•ª’PˆÊ
+                            rp.Graphics.DrawLine(pen, (float)(x + b.Left), b.Bottom - 5, (float)(x + b.Left), b.Bottom - 1);    //ç·šã®æç”»ï¼ˆ30åˆ†å˜ä½ï¼‰ãƒ†ã‚­ã‚¹ãƒˆãŒãªãã¦ä¸‰ååˆ†å˜ä½
                         }
                         else
                         {
-                            rp.Graphics.DrawLine(pen, (float)(x + b.Left), b.Bottom - 5, (float)(x + b.Left), b.Bottom - 1);    //ü‚Ì•`‰æi1ŠÔˆÈã’PˆÊjƒeƒLƒXƒg‚ª‚È‚¢êŠ
+                            rp.Graphics.DrawLine(pen, (float)(x + b.Left), b.Bottom - 5, (float)(x + b.Left), b.Bottom - 1);    //ç·šã®æç”»ï¼ˆ1æ™‚é–“ä»¥ä¸Šå˜ä½ï¼‰ãƒ†ã‚­ã‚¹ãƒˆãŒãªã„å ´æ‰€
                         }
                     }
                 }
-                // —j“ú‚Ì•\¦
+                // æ›œæ—¥ã®è¡¨ç¤º
                 if (((int)Math.Floor(t * 60) % 1440) == 0)
                 {
                     var day = (((int)t2) / 24 + 7000);
@@ -228,7 +228,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// —j“ú‚Ì•¶š—ñ‚ğ•`‰æ‚·‚é
+        /// æ›œæ—¥ã®æ–‡å­—åˆ—ã‚’æç”»ã™ã‚‹
         /// </summary>
         /// <param name="rp"></param>
         /// <param name="x"></param>
@@ -237,7 +237,7 @@ namespace Tono.GuiWinForm
         protected virtual string drawDayString(IRichPane rp, double x, double y, int day)
         {
             var ds = _strDays != null ? _strDays[day % _strDays.Length] : DateTimeEx.GetDayString(day % 7);
-            rp.Graphics.DrawString(ds, _font, _tc, (float)x, (float)y); //‚Ì•`‰æ
+            rp.Graphics.DrawString(ds, _font, _tc, (float)x, (float)y); //æ™‚åˆ»ã®æç”»
             return ds;
         }
     }

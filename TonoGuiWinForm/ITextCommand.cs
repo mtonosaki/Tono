@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 #pragma warning disable 1591, 1572, 1573
@@ -6,7 +6,7 @@
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// ƒeƒLƒXƒg‚ÅƒRƒ}ƒ“ƒhÀs‚·‚éd‘g‚İ‚ğƒTƒ|[ƒg‚·‚é
+    /// ãƒ†ã‚­ã‚¹ãƒˆã§ã‚³ãƒãƒ³ãƒ‰å®Ÿè¡Œã™ã‚‹ä»•çµ„ã¿ã‚’ã‚µãƒãƒ¼ãƒˆã™ã‚‹
     /// </summary>
     public interface ITextCommand
     {

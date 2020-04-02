@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System.Windows.Forms;
@@ -8,16 +8,16 @@ using System.Windows.Forms;
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// FeatureMousePosLabel ‚ÌŠT—v‚Ìà–¾‚Å‚·B
-    /// w’è‚µ‚½ƒRƒ“ƒgƒ[ƒ‹‚ÉAƒ}ƒEƒX‚ÌÀ•W‚ğ•\¦‚·‚éƒtƒB[ƒ`ƒƒ[ƒNƒ‰ƒX
-    /// ‚±‚ê‚ğg—p‚·‚é‚±‚Æ‚ÅAƒŠƒAƒ‹ƒ^ƒCƒ€‚Éƒ}ƒEƒXÀ•W‚ğ’m‚é‚±‚Æ‚ª‚Å‚«‚é
+    /// FeatureMousePosLabel ã®æ¦‚è¦ã®èª¬æ˜ã§ã™ã€‚
+    /// æŒ‡å®šã—ãŸã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã«ã€ãƒã‚¦ã‚¹ã®åº§æ¨™ã‚’è¡¨ç¤ºã™ã‚‹ãƒ•ã‚£ãƒ¼ãƒãƒ£ãƒ¼ã‚¯ãƒ©ã‚¹
+    /// ã“ã‚Œã‚’ä½¿ç”¨ã™ã‚‹ã“ã¨ã§ã€ãƒªã‚¢ãƒ«ã‚¿ã‚¤ãƒ ã«ãƒã‚¦ã‚¹åº§æ¨™ã‚’çŸ¥ã‚‹ã“ã¨ãŒã§ãã‚‹
     /// </summary>
     public class FeatureMousePosLabel : FeatureBase, IMouseListener
     {
         private Control _mousePosLabel;
 
         /// <summary>
-        /// ƒRƒ“ƒgƒ[ƒ‹‚ğæ“¾Aİ’è‚·‚é
+        /// ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã‚’å–å¾—ã€è¨­å®šã™ã‚‹
         /// </summary>
         public Control TargetControl
         {
@@ -26,27 +26,27 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒ}ƒEƒXˆÚ“®‚ÌƒCƒxƒ“ƒg
+        /// ãƒã‚¦ã‚¹ç§»å‹•æ™‚ã®ã‚¤ãƒ™ãƒ³ãƒˆ
         /// </summary>
         public void OnMouseMove(MouseState e)
         {
             _mousePosLabel.Text = e.Pos.Y + "," + e.Pos.X;
         }
 
-        #region IMouseListener ƒƒ“ƒo
+        #region IMouseListener ãƒ¡ãƒ³ãƒ
         public void OnMouseDown(MouseState e)
         {
-            // –¢g—p
+            // æœªä½¿ç”¨
         }
 
         public void OnMouseUp(MouseState e)
         {
-            // –¢g—p
+            // æœªä½¿ç”¨
         }
 
         public void OnMouseWheel(MouseState e)
         {
-            // –¢g—p
+            // æœªä½¿ç”¨
         }
 
 

@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System;
@@ -9,16 +9,16 @@ using System.Reflection;
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// Feature Group Root ‚ÌŠT—v‚Ìà–¾‚Å‚·B
-    /// ƒ‹[ƒg‚ÌƒtƒB[ƒ`ƒƒ[ƒOƒ‹[ƒv
-    /// ‘¼‚Ì‚·‚×‚Ä‚ÌƒtƒB[ƒ`ƒƒ[ƒOƒ‹[ƒv‚ÍA‚±‚ÌqƒtƒB[ƒ`ƒƒ[ƒOƒ‹[ƒv‚Æ‚È‚é
+    /// Feature Group Root ã®æ¦‚è¦ã®èª¬æ˜ã§ã™ã€‚
+    /// ãƒ«ãƒ¼ãƒˆã®ãƒ•ã‚£ãƒ¼ãƒãƒ£ãƒ¼ã‚°ãƒ«ãƒ¼ãƒ—
+    /// ä»–ã®ã™ã¹ã¦ã®ãƒ•ã‚£ãƒ¼ãƒãƒ£ãƒ¼ã‚°ãƒ«ãƒ¼ãƒ—ã¯ã€ã“ã®å­ãƒ•ã‚£ãƒ¼ãƒãƒ£ãƒ¼ã‚°ãƒ«ãƒ¼ãƒ—ã¨ãªã‚‹
     /// </summary>
     public sealed class FeatureGroupRoot : FeatureGroupBase, IDisposable
     {
-        #region ‘®«iƒVƒŠƒAƒ‰ƒCƒY‚·‚éj
+        #region å±æ€§ï¼ˆã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºã™ã‚‹ï¼‰
 
         #endregion
-        #region ‘®«iƒVƒŠƒAƒ‰ƒCƒY‚µ‚È‚¢j
+        #region å±æ€§ï¼ˆã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºã—ãªã„ï¼‰
         private FeatureLoaderBase _loader;
         private readonly TGuiView _motherPane;
         private readonly DataSharingManager.Int _isApplicationQuitting;
@@ -26,9 +26,9 @@ namespace Tono.GuiWinForm
         #endregion
 
         /// <summary>
-        /// ƒfƒtƒHƒ‹ƒgƒRƒ“ƒXƒgƒ‰ƒNƒ^
+        /// ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
         /// </summary>
-        /// <param name="motherPane">‚±‚ÌƒtƒB[ƒ`ƒƒ[ƒ‹[ƒg‚Åg—p‚·‚éåÃƒy[ƒ“</param>
+        /// <param name="motherPane">ã“ã®ãƒ•ã‚£ãƒ¼ãƒãƒ£ãƒ¼ãƒ«ãƒ¼ãƒˆã§ä½¿ç”¨ã™ã‚‹ä¸»å‚¬ãƒšãƒ¼ãƒ³</param>
         public FeatureGroupRoot(TGuiView motherPane)
         {
             _motherPane = motherPane;
@@ -38,17 +38,17 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// w’èƒtƒB[ƒ`ƒƒ[‚Éƒg[ƒNƒ“‚ğƒZƒbƒg‚·‚é
+        /// æŒ‡å®šãƒ•ã‚£ãƒ¼ãƒãƒ£ãƒ¼ã«ãƒˆãƒ¼ã‚¯ãƒ³ã‚’ã‚»ãƒƒãƒˆã™ã‚‹
         /// </summary>
-        /// <param name="feature">ƒtƒB[ƒ`ƒƒ[</param>
-        /// <param name="tokenID">ƒg[ƒNƒ“ID</param>
+        /// <param name="feature">ãƒ•ã‚£ãƒ¼ãƒãƒ£ãƒ¼</param>
+        /// <param name="tokenID">ãƒˆãƒ¼ã‚¯ãƒ³ID</param>
         public void RequestStartup(Type feature, NamedId tokenID)
         {
             requestStartup(this, feature, tokenID);
         }
 
         /// <summary>
-        /// ƒAƒvƒŠƒP[ƒVƒ‡ƒ“I—¹—v‹‚ª‚½‚Á‚Ä‚¢‚é‚©‚Ç‚¤‚©‚ğ’²‚×‚é
+        /// ã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³çµ‚äº†è¦æ±‚ãŒãŸã£ã¦ã„ã‚‹ã‹ã©ã†ã‹ã‚’èª¿ã¹ã‚‹
         /// </summary>
         public bool IsApplicationQuitting
         {
@@ -57,7 +57,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒ}ƒU[ƒy[ƒ“‚ğ•Ô‚·iŠî–{‚Æ‚È‚éƒtƒB[ƒ`ƒƒ[ƒŠƒbƒ`ƒRƒ“ƒ|[ƒlƒ“ƒgj
+        /// ãƒã‚¶ãƒ¼ãƒšãƒ¼ãƒ³ã‚’è¿”ã™ï¼ˆåŸºæœ¬ã¨ãªã‚‹ãƒ•ã‚£ãƒ¼ãƒãƒ£ãƒ¼ãƒªãƒƒãƒã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆï¼‰
         /// </summary>
         /// <returns></returns>
         public TGuiView GetFeatureRich()
@@ -66,9 +66,9 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒtƒH[ƒ€‚ÌOnLoad‚ÅÀs‚·‚éƒRƒ}ƒ“ƒh
+        /// ãƒ•ã‚©ãƒ¼ãƒ ã®OnLoadã§å®Ÿè¡Œã™ã‚‹ã‚³ãƒãƒ³ãƒ‰
         /// </summary>
-        /// <param name="featureLoader">uFeatureLoaderƒVƒŠ[ƒY‚Ìƒ^ƒCƒv</param>
+        /// <param name="featureLoader">uFeatureLoaderã‚·ãƒªãƒ¼ã‚ºã®ã‚¿ã‚¤ãƒ—</param>
         public void Initialize(Type featureLoader)
         {
             if (featureLoader != null)
@@ -79,9 +79,9 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒtƒ@ƒCƒ‹–¼‚ğw’è‚µ‚ÄƒtƒH[ƒ€‚ÌOnLoad‚ğÀs‚·‚éƒRƒ}ƒ“ƒh
+        /// ãƒ•ã‚¡ã‚¤ãƒ«åã‚’æŒ‡å®šã—ã¦ãƒ•ã‚©ãƒ¼ãƒ ã®OnLoadã‚’å®Ÿè¡Œã™ã‚‹ã‚³ãƒãƒ³ãƒ‰
         /// </summary>
-        /// <param name="featureLoader">uFeatureLoaderƒVƒŠ[ƒY‚Ìƒ^ƒCƒv</param>
+        /// <param name="featureLoader">uFeatureLoaderã‚·ãƒªãƒ¼ã‚ºã®ã‚¿ã‚¤ãƒ—</param>
         public void Initialize(Type featureLoader, string file)
         {
             if (featureLoader != null)
@@ -91,7 +91,7 @@ namespace Tono.GuiWinForm
             }
         }
 
-        #region IDisposable ƒƒ“ƒo
+        #region IDisposable ãƒ¡ãƒ³ãƒ
 
         public override void Dispose()
         {
@@ -103,18 +103,18 @@ namespace Tono.GuiWinForm
         #endregion
 
         /// <summary>
-        /// ƒf[ƒ^‚ğŠ„‚è“–‚Ä‚é
+        /// ãƒ‡ãƒ¼ã‚¿ã‚’å‰²ã‚Šå½“ã¦ã‚‹
         /// </summary>
-        /// <param name="value">Š„‚è“–‚ÄiQÆj‚³‚ê‚éƒf[ƒ^‚ÌƒCƒ“ƒXƒ^ƒ“ƒX</param>
+        /// <param name="value">å‰²ã‚Šå½“ã¦ï¼ˆå‚ç…§ï¼‰ã•ã‚Œã‚‹ãƒ‡ãƒ¼ã‚¿ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹</param>
         public void AssignAppData(DataHotBase value)
         {
             setAppData(value);
         }
 
         /// <summary>
-        /// ƒŠƒ“ƒNƒIƒuƒWƒFƒNƒg‚ğŠ„‚è“–‚Ä‚é
+        /// ãƒªãƒ³ã‚¯ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’å‰²ã‚Šå½“ã¦ã‚‹
         /// </summary>
-        /// <param name="value">ƒŠƒ“ƒN</param>
+        /// <param name="value">ãƒªãƒ³ã‚¯</param>
         public void AssignLink(DataLinkBase value)
         {
             setLink(value);
@@ -122,7 +122,7 @@ namespace Tono.GuiWinForm
 
 
         /// <summary>
-        /// ƒp[ƒcƒZƒbƒg‚ğŠ„‚è“–‚Ä‚é
+        /// ãƒ‘ãƒ¼ãƒ„ã‚»ãƒƒãƒˆã‚’å‰²ã‚Šå½“ã¦ã‚‹
         /// </summary>
         /// <param name="value"></param>
         public void AssignPartsSet(PartsCollectionBase value)
@@ -131,7 +131,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// Share‚ğparent‚©‚çˆø‚«Œp‚®
+        /// Shareã‚’parentã‹ã‚‰å¼•ãç¶™ã
         /// </summary>
         /// <param name="parent"></param>
         public void LinkShare(DataSharingManager parent)
@@ -140,32 +140,32 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒf[ƒ^‚ğæ“¾‚·‚é
+        /// ãƒ‡ãƒ¼ã‚¿ã‚’å–å¾—ã™ã‚‹
         /// </summary>
         /// <returns></returns>
         public PartsCollectionBase GetPartsSet()
         {
-            System.Diagnostics.Debug.WriteLineIf(Parts == null, "PartsSet‚ğg—p‚·‚é‘O‚É AssignData‚ğÀs‚µ‚Ä‚¨‚­‚æ‚¤‚ÉƒvƒƒOƒ‰ƒ€‚µ‚Ä‚­‚¾‚³‚¢");
+            System.Diagnostics.Debug.WriteLineIf(Parts == null, "PartsSetã‚’ä½¿ç”¨ã™ã‚‹å‰ã« AssignDataã‚’å®Ÿè¡Œã—ã¦ãŠãã‚ˆã†ã«ãƒ—ãƒ­ã‚°ãƒ©ãƒ ã—ã¦ãã ã•ã„");
             return Parts;
         }
 
         /// <summary>
-        /// ƒf[ƒ^‚ğæ“¾‚·‚é
+        /// ãƒ‡ãƒ¼ã‚¿ã‚’å–å¾—ã™ã‚‹
         /// </summary>
         /// <returns></returns>
         public DataHotBase GetData()
         {
-            System.Diagnostics.Debug.WriteLineIf(Data == null, "Data‚ğg—p‚·‚é‘O‚É AssignData‚ğÀs‚µ‚Ä‚¨‚­‚æ‚¤‚ÉƒvƒƒOƒ‰ƒ€‚µ‚Ä‚­‚¾‚³‚¢");
+            System.Diagnostics.Debug.WriteLineIf(Data == null, "Dataã‚’ä½¿ç”¨ã™ã‚‹å‰ã« AssignDataã‚’å®Ÿè¡Œã—ã¦ãŠãã‚ˆã†ã«ãƒ—ãƒ­ã‚°ãƒ©ãƒ ã—ã¦ãã ã•ã„");
             return Data;
         }
 
         /// <summary>
-        /// ƒf[ƒ^‚ğæ“¾‚·‚é
+        /// ãƒ‡ãƒ¼ã‚¿ã‚’å–å¾—ã™ã‚‹
         /// </summary>
         /// <returns></returns>
         public DataSharingManager GetShare()
         {
-            //Debug.WriteLineIf(Share == null, "Share‚ğg—p‚·‚é‘O‚É AssignData‚ğÀs‚µ‚Ä‚¨‚­‚æ‚¤‚ÉƒvƒƒOƒ‰ƒ€‚µ‚Ä‚­‚¾‚³‚¢");
+            //Debug.WriteLineIf(Share == null, "Shareã‚’ä½¿ç”¨ã™ã‚‹å‰ã« AssignDataã‚’å®Ÿè¡Œã—ã¦ãŠãã‚ˆã†ã«ãƒ—ãƒ­ã‚°ãƒ©ãƒ ã—ã¦ãã ã•ã„");
             return Share;
         }
 

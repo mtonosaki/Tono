@@ -1,23 +1,23 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// IKeyListener ‚ÌŠT—v‚Ìà–¾‚Å‚·B
+    /// IKeyListener ã®æ¦‚è¦ã®èª¬æ˜ã§ã™ã€‚
     /// </summary>
     public interface IKeyListener
     {
         /// <summary>
-        /// ƒL[ƒ_ƒEƒ“ƒCƒxƒ“ƒg
+        /// ã‚­ãƒ¼ãƒ€ã‚¦ãƒ³ã‚¤ãƒ™ãƒ³ãƒˆ
         /// </summary>
-        /// <param name="e">ƒL[ó‘Ô</param>
+        /// <param name="e">ã‚­ãƒ¼çŠ¶æ…‹</param>
         void OnKeyDown(KeyState e);
 
         /// <summary>
-        /// ƒL[ƒAƒbƒvƒCƒxƒ“ƒg
+        /// ã‚­ãƒ¼ã‚¢ãƒƒãƒ—ã‚¤ãƒ™ãƒ³ãƒˆ
         /// </summary>
-        /// <param name="e">ƒL[ó‘Ô</param>
+        /// <param name="e">ã‚­ãƒ¼çŠ¶æ…‹</param>
         void OnKeyUp(KeyState e);
 
     }

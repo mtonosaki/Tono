@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System;
@@ -11,47 +11,47 @@ using System.Runtime.Serialization.Formatters.Binary;
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// ƒL[‚Æ’l‚ÌƒLƒƒƒbƒVƒ…
+    /// ã‚­ãƒ¼ã¨å€¤ã®ã‚­ãƒ£ãƒƒã‚·ãƒ¥
     /// </summary>
     public class KeyValueCache<TKEY, TVALUE> : IDisposable
     {
         /// <summary>
-        /// ƒLƒƒƒbƒVƒ…ƒtƒ@ƒCƒ‹
+        /// ã‚­ãƒ£ãƒƒã‚·ãƒ¥ãƒ•ã‚¡ã‚¤ãƒ«
         /// </summary>
         private readonly string _filepath = "";
 
         /// <summary>
-        /// ƒo[ƒWƒ‡ƒ“î•ñ
+        /// ãƒãƒ¼ã‚¸ãƒ§ãƒ³æƒ…å ±
         /// </summary>
         private readonly string _version = "NO_VER_INFO";
 
         /// <summary>
-        /// ƒLƒƒƒbƒVƒ…ƒf[ƒ^
+        /// ã‚­ãƒ£ãƒƒã‚·ãƒ¥ãƒ‡ãƒ¼ã‚¿
         /// </summary>
         private readonly Dictionary<TKEY, TVALUE> _dat = new Dictionary<TKEY, TVALUE>();
 
         /// <summary>
-        /// ’Ç‰Á‚³‚ê‚½ƒL[
+        /// è¿½åŠ ã•ã‚ŒãŸã‚­ãƒ¼
         /// </summary>
         private readonly List<TKEY> _addKeys = new List<TKEY>();
 
         /// <summary>
-        /// ’lXV‚È‚Ì‚ÅA’Ç‹L‚Å‚«‚È‚¢
+        /// å€¤æ›´æ–°ãªã®ã§ã€è¿½è¨˜ã§ããªã„
         /// </summary>
         private bool _isResetRequested = false;
 
         /// <summary>
-        /// ’Ç‰Á‚³‚ê‚½ƒL[
+        /// è¿½åŠ ã•ã‚ŒãŸã‚­ãƒ¼
         /// </summary>
         private readonly List<TVALUE> _addValues = new List<TVALUE>();
 
         /// <summary>
-        /// ƒo[ƒWƒ‡ƒ“ˆá‚¢‚©H
+        /// ãƒãƒ¼ã‚¸ãƒ§ãƒ³é•ã„ã‹ï¼Ÿ
         /// </summary>
         private bool _isNotMatchVersion = false;
 
         /// <summary>
-        /// \’zq
+        /// æ§‹ç¯‰å­
         /// </summary>
         /// <param name="fullpath"></param>
         public KeyValueCache(string fullpath, string version)
@@ -62,7 +62,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒ[ƒh‚µ‚È‚¢‚ÅƒCƒ“ƒXƒ^ƒ“ƒXì¬
+        /// ãƒ­ãƒ¼ãƒ‰ã—ãªã„ã§ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ä½œæˆ
         /// </summary>
         /// <param name="fullpath"></param>
         private KeyValueCache(string fullpath, string version, bool isLoad)
@@ -76,11 +76,11 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// “Ç‚İ‚İ‚µ‚½ƒtƒ@ƒCƒ‹ƒo[ƒWƒ‡ƒ“‚ªˆá‚Á‚Ä‚¢‚½‚©H
+        /// èª­ã¿è¾¼ã¿ã—ãŸãƒ•ã‚¡ã‚¤ãƒ«ãƒãƒ¼ã‚¸ãƒ§ãƒ³ãŒé•ã£ã¦ã„ãŸã‹ï¼Ÿ
         /// </summary>
         public bool IsNotMatchVersionLoad => _isNotMatchVersion;
 
-        #region IDisposable ƒƒ“ƒo
+        #region IDisposable ãƒ¡ãƒ³ãƒ
 
         public void Dispose()
         {
@@ -91,7 +91,7 @@ namespace Tono.GuiWinForm
         #endregion
 
         /// <summary>
-        /// ƒNƒŠƒA
+        /// ã‚¯ãƒªã‚¢
         /// </summary>
         public void Clear()
         {
@@ -101,7 +101,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒLƒƒƒbƒVƒ…‚©‚çæ“¾
+        /// ã‚­ãƒ£ãƒƒã‚·ãƒ¥ã‹ã‚‰å–å¾—
         /// </summary>
         /// <param name="key"></param>
         /// <returns></returns>
@@ -132,7 +132,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒL[‚Ì“o˜^—L–³‚ğŠm”F
+        /// ã‚­ãƒ¼ã®ç™»éŒ²æœ‰ç„¡ã‚’ç¢ºèª
         /// </summary>
         /// <param name="key"></param>
         /// <returns></returns>
@@ -142,10 +142,10 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒ[ƒh‚·‚é
+        /// ãƒ­ãƒ¼ãƒ‰ã™ã‚‹
         /// </summary>
         /// <returns>
-        /// true=OK / false=ƒo[ƒWƒ‡ƒ“ˆá‚¢‚Å“Ç‚İ‚İ‚È‚µ
+        /// true=OK / false=ãƒãƒ¼ã‚¸ãƒ§ãƒ³é•ã„ã§èª­ã¿è¾¼ã¿ãªã—
         /// </returns>
         private void load()
         {
@@ -156,7 +156,7 @@ namespace Tono.GuiWinForm
                 fst = new FileStream(_filepath, FileMode.Open);
                 var bf = new BinaryFormatter();
 
-                string fileversion; // ƒtƒ@ƒCƒ‹ƒo[ƒWƒ‡ƒ“
+                string fileversion; // ãƒ•ã‚¡ã‚¤ãƒ«ãƒãƒ¼ã‚¸ãƒ§ãƒ³
                 fileversion = (string)bf.Deserialize(fst);
 
                 if (_version.Equals(fileversion))
@@ -170,7 +170,7 @@ namespace Tono.GuiWinForm
                 }
                 else
                 {
-                    _isResetRequested = true;   // ƒo[ƒWƒ‡ƒ“ˆá‚¢‚Í©“®XV
+                    _isResetRequested = true;   // ãƒãƒ¼ã‚¸ãƒ§ãƒ³é•ã„ã¯è‡ªå‹•æ›´æ–°
                     _isNotMatchVersion = true;
                 }
             }
@@ -184,7 +184,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ‹L‰¯‚µ‚Ä‚ ‚Á‚½V‹Kƒf[ƒ^‚ğƒtƒ@ƒCƒ‹‚É•Û‘¶‚·‚é
+        /// è¨˜æ†¶ã—ã¦ã‚ã£ãŸæ–°è¦ãƒ‡ãƒ¼ã‚¿ã‚’ãƒ•ã‚¡ã‚¤ãƒ«ã«ä¿å­˜ã™ã‚‹
         /// </summary>
         public void Flush()
         {
@@ -237,7 +237,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ’l‚Ìæ“¾‚ğ‚İ‚é
+        /// å€¤ã®å–å¾—ã‚’è©¦ã¿ã‚‹
         /// </summary>
         /// <param name="strorg"></param>
         /// <param name="str"></param>
@@ -247,7 +247,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ‹ó‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‚ğì¬‚·‚é
+        /// ç©ºã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ä½œæˆã™ã‚‹
         /// </summary>
         /// <param name="_synonymCacheFilename"></param>
         /// <returns></returns>

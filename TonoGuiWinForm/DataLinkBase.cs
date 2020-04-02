@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System.Collections;
@@ -9,8 +9,8 @@ using System.Collections.Generic;
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// ƒfƒtƒHƒ‹ƒgƒŠƒ“ƒN
-    /// ƒŠƒ“ƒN‚ª•s—v‚Èê‡‚Ég—p‚µ‚Ä‚­‚¾‚³‚¢
+    /// ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆãƒªãƒ³ã‚¯
+    /// ãƒªãƒ³ã‚¯ãŒä¸è¦ãªå ´åˆã«ä½¿ç”¨ã—ã¦ãã ã•ã„
     /// </summary>
     public sealed class DataLinkDefault : DataLinkBase
     {
@@ -38,18 +38,18 @@ namespace Tono.GuiWinForm
     }
 
     /// <summary>
-    /// daLinkBase ‚ÌŠT—v‚Ìà–¾‚Å‚·B
-    /// Parts‚ÆAppData‚ğŒ‹‚Ñ‚Â‚¯‚éî•ñ‚ğŠÇ—‚·‚éŠî–{ƒNƒ‰ƒX
+    /// daLinkBase ã®æ¦‚è¦ã®èª¬æ˜ã§ã™ã€‚
+    /// Partsã¨AppDataã‚’çµã³ã¤ã‘ã‚‹æƒ…å ±ã‚’ç®¡ç†ã™ã‚‹åŸºæœ¬ã‚¯ãƒ©ã‚¹
     /// </summary>
     public abstract class DataLinkBase
     {
-        /// <summary>ƒŒƒR[ƒh‚©‚çƒp[ƒc‚É’l•ÏŠ·‚·‚éƒfƒŠƒQ[ƒg</summary>
+        /// <summary>ãƒ¬ã‚³ãƒ¼ãƒ‰ã‹ã‚‰ãƒ‘ãƒ¼ãƒ„ã«å€¤å¤‰æ›ã™ã‚‹ãƒ‡ãƒªã‚²ãƒ¼ãƒˆ</summary>
         public delegate void RPAdapter(RecordBase fromValue, PartsBase toValue);
 
-        /// <summary>ƒp[ƒc‚©‚çƒŒƒR[ƒh‚É’l•ÏŠ·‚·‚éƒfƒŠƒQ[ƒg</summary>
+        /// <summary>ãƒ‘ãƒ¼ãƒ„ã‹ã‚‰ãƒ¬ã‚³ãƒ¼ãƒ‰ã«å€¤å¤‰æ›ã™ã‚‹ãƒ‡ãƒªã‚²ãƒ¼ãƒˆ</summary>
         public delegate void PRAdapter(PartsBase fromValue, RecordBase toValue);
 
-        #region ‘®«iƒVƒŠƒAƒ‰ƒCƒY‚·‚éj
+        #region å±æ€§ï¼ˆã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºã™ã‚‹ï¼‰
 
         private readonly IList<RPAdapter> _adapterRtoPs = new List<RPAdapter>();
         private readonly IList<PRAdapter> _adapterPtoRs = new List<PRAdapter>();
@@ -58,16 +58,16 @@ namespace Tono.GuiWinForm
 
 
         /// <summary>
-        /// ƒŒƒR[ƒh¨ƒp[ƒc ’l“]‘—ƒfƒŠƒQ[ƒg‚ğw’è‚·‚é
+        /// ãƒ¬ã‚³ãƒ¼ãƒ‰â†’ãƒ‘ãƒ¼ãƒ„ å€¤è»¢é€ãƒ‡ãƒªã‚²ãƒ¼ãƒˆã‚’æŒ‡å®šã™ã‚‹
         /// </summary>
-        /// <param name="value">ƒfƒŠƒQ[ƒg</param>
+        /// <param name="value">ãƒ‡ãƒªã‚²ãƒ¼ãƒˆ</param>
         public void SetRPAdapter(RPAdapter value)
         {
             _adapterRtoPs.Add(value);
         }
 
         /// <summary>
-        /// ƒp[ƒc¨ƒŒƒR[ƒh@’l“]‘—ƒfƒŠƒQ[ƒg‚ğw’è‚·‚é
+        /// ãƒ‘ãƒ¼ãƒ„â†’ãƒ¬ã‚³ãƒ¼ãƒ‰ã€€å€¤è»¢é€ãƒ‡ãƒªã‚²ãƒ¼ãƒˆã‚’æŒ‡å®šã™ã‚‹
         /// </summary>
         /// <param name="value"></param>
         public void SetPRAdapter(PRAdapter value)
@@ -76,14 +76,14 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// •ÏX‚³‚ê‚½ƒŒƒR[ƒh‚Ì’l‚ğƒp[ƒc‚É”½‰f‚³‚¹‚é
-        /// i‚±‚Ìƒƒ\ƒbƒh‚ğs‚¤“x‚ÉUNDO‘ÎÛ‚Æ‚·‚é‚©‚Ç‚¤‚©‚ÍAIsAutoChunkState‚Åw’è‚·‚éjj
+        /// å¤‰æ›´ã•ã‚ŒãŸãƒ¬ã‚³ãƒ¼ãƒ‰ã®å€¤ã‚’ãƒ‘ãƒ¼ãƒ„ã«åæ˜ ã•ã›ã‚‹
+        /// ï¼ˆã“ã®ãƒ¡ã‚½ãƒƒãƒ‰ã‚’è¡Œã†åº¦ã«UNDOå¯¾è±¡ã¨ã™ã‚‹ã‹ã©ã†ã‹ã¯ã€IsAutoChunkStateã§æŒ‡å®šã™ã‚‹ï¼‰ï¼‰
         /// </summary>
-        /// <param name="record">V‚µ‚­‚È‚Á‚½ƒŒƒR[ƒh</param>
-        /// <returns>”½‰fŒãƒp[ƒcQÆiQlj</returns>
+        /// <param name="record">æ–°ã—ããªã£ãŸãƒ¬ã‚³ãƒ¼ãƒ‰</param>
+        /// <returns>åæ˜ å¾Œãƒ‘ãƒ¼ãƒ„å‚ç…§ï¼ˆå‚è€ƒï¼‰</returns>
         public ICollection Equalization(RecordBase record)
         {
-            System.Diagnostics.Debug.Assert(_adapterRtoPs.Count > 0, "Equalization‚·‚é‚É‚ÍA‚Ü‚¸SetRPAdapter‚ÅƒAƒ_ƒvƒ^[‚ğw’è‚·‚é•K—v‚ª‚ ‚è‚Ü‚·");
+            System.Diagnostics.Debug.Assert(_adapterRtoPs.Count > 0, "Equalizationã™ã‚‹ã«ã¯ã€ã¾ãšSetRPAdapterã§ã‚¢ãƒ€ãƒ—ã‚¿ãƒ¼ã‚’æŒ‡å®šã™ã‚‹å¿…è¦ãŒã‚ã‚Šã¾ã™");
             var partsset = GetPartsset(record);
             if (partsset.Count > 0)
             {
@@ -91,7 +91,7 @@ namespace Tono.GuiWinForm
                 {
                     foreach (var rpa in _adapterRtoPs)
                     {
-                        // ƒŒƒR[ƒh‚Ì’l‚ğƒp[ƒc‚É”½‰f
+                        // ãƒ¬ã‚³ãƒ¼ãƒ‰ã®å€¤ã‚’ãƒ‘ãƒ¼ãƒ„ã«åæ˜ 
                         rpa(record, parts);
                     }
                 }
@@ -100,14 +100,14 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// •ÏX‚³‚ê‚½ƒp[ƒc‚Ì’l‚ğƒŒƒR[ƒh‚É”½‰f‚³‚¹‚é
-        /// i‚±‚Ìƒƒ\ƒbƒh‚ğs‚¤“x‚ÉUNDO‘ÎÛ‚Æ‚·‚é‚©‚Ç‚¤‚©‚ÍAIsAutoChunkState‚Åw’è‚·‚éjj
+        /// å¤‰æ›´ã•ã‚ŒãŸãƒ‘ãƒ¼ãƒ„ã®å€¤ã‚’ãƒ¬ã‚³ãƒ¼ãƒ‰ã«åæ˜ ã•ã›ã‚‹
+        /// ï¼ˆã“ã®ãƒ¡ã‚½ãƒƒãƒ‰ã‚’è¡Œã†åº¦ã«UNDOå¯¾è±¡ã¨ã™ã‚‹ã‹ã©ã†ã‹ã¯ã€IsAutoChunkStateã§æŒ‡å®šã™ã‚‹ï¼‰ï¼‰
         /// </summary>
-        /// <param name="parts">V‚µ‚­‚È‚Á‚½ƒp[ƒc</param>
-        /// <returns>”½‰fŒãƒŒƒR[ƒhQÆiQlj</returns>
+        /// <param name="parts">æ–°ã—ããªã£ãŸãƒ‘ãƒ¼ãƒ„</param>
+        /// <returns>åæ˜ å¾Œãƒ¬ã‚³ãƒ¼ãƒ‰å‚ç…§ï¼ˆå‚è€ƒï¼‰</returns>
         public ICollection Equalization(PartsBase parts)
         {
-            System.Diagnostics.Debug.Assert(_adapterPtoRs.Count >= 0, "Equalization‚·‚é‚É‚ÍA‚Ü‚¸SetPRAdapter‚ÅƒAƒ_ƒvƒ^[‚ğw’è‚·‚é•K—v‚ª‚ ‚è‚Ü‚·");
+            System.Diagnostics.Debug.Assert(_adapterPtoRs.Count >= 0, "Equalizationã™ã‚‹ã«ã¯ã€ã¾ãšSetPRAdapterã§ã‚¢ãƒ€ãƒ—ã‚¿ãƒ¼ã‚’æŒ‡å®šã™ã‚‹å¿…è¦ãŒã‚ã‚Šã¾ã™");
             var records = GetRecordset(parts);
             if (records.Count > 0)
             {
@@ -115,7 +115,7 @@ namespace Tono.GuiWinForm
                 {
                     foreach (var pra in _adapterPtoRs)
                     {
-                        // ƒp[ƒc‚Ì’l‚ğƒŒƒR[ƒh‚É”½‰f
+                        // ãƒ‘ãƒ¼ãƒ„ã®å€¤ã‚’ãƒ¬ã‚³ãƒ¼ãƒ‰ã«åæ˜ 
                         pra(parts, record);
                     }
                 }
@@ -123,35 +123,35 @@ namespace Tono.GuiWinForm
             return records;
         }
 
-        /// ‚±‚Ìƒƒ\ƒbƒh‚ÍÁ‚µ‚Ä‚­‚¾‚³‚¢ by Tono ƒ`ƒFƒbƒNƒAƒEƒg‚Å‚«‚È‚©‚Á‚½‚Ì‚ÅAb’è
+        /// ã“ã®ãƒ¡ã‚½ãƒƒãƒ‰ã¯æ¶ˆã—ã¦ãã ã•ã„ by Tono ãƒã‚§ãƒƒã‚¯ã‚¢ã‚¦ãƒˆã§ããªã‹ã£ãŸã®ã§ã€æš«å®š
         public ICollection Equalization(PartsBase parts, bool dummy)
         {
             return Equalization(parts);
         }
 
         /// <summary>
-        /// ƒŠƒ“ƒN‚ğ‚·‚×‚ÄƒNƒŠƒA‚·‚é
+        /// ãƒªãƒ³ã‚¯ã‚’ã™ã¹ã¦ã‚¯ãƒªã‚¢ã™ã‚‹
         /// </summary>
         public abstract void Clear();
 
         /// <summary>
-        /// ƒf[ƒ^‚ÌƒŠƒ“ƒNî•ñ‚ğ•Û‘¶‚·‚é
+        /// ãƒ‡ãƒ¼ã‚¿ã®ãƒªãƒ³ã‚¯æƒ…å ±ã‚’ä¿å­˜ã™ã‚‹
         /// </summary>
-        /// <param name="record">ƒe[ƒuƒ‹‚ÌƒŒƒR[ƒh</param>
-        /// <param name="parts">ƒp[ƒc</param>
+        /// <param name="record">ãƒ†ãƒ¼ãƒ–ãƒ«ã®ãƒ¬ã‚³ãƒ¼ãƒ‰</param>
+        /// <param name="parts">ãƒ‘ãƒ¼ãƒ„</param>
         public abstract void SetEquivalent(RecordBase record, PartsBase parts);
 
         /// <summary>
-        /// ƒp[ƒc‚ğw’è‚µ‚ÄƒŠƒ“ƒNî•ñ‚ğíœ‚·‚é
+        /// ãƒ‘ãƒ¼ãƒ„ã‚’æŒ‡å®šã—ã¦ãƒªãƒ³ã‚¯æƒ…å ±ã‚’å‰Šé™¤ã™ã‚‹
         /// </summary>
-        /// <param name="parts">íœ‚·‚éƒp[ƒc</param>
+        /// <param name="parts">å‰Šé™¤ã™ã‚‹ãƒ‘ãƒ¼ãƒ„</param>
         public abstract void RemoveEquivalent(PartsBase parts);
 
         /// <summary>
-        /// ƒp[ƒcw’è‚µ‚ÄƒŒƒR[ƒh‚ğæ“¾‚·‚éiNULL‚ğ‹–‰Â‚·‚éj
+        /// ãƒ‘ãƒ¼ãƒ„æŒ‡å®šã—ã¦ãƒ¬ã‚³ãƒ¼ãƒ‰ã‚’å–å¾—ã™ã‚‹ï¼ˆNULLã‚’è¨±å¯ã™ã‚‹ï¼‰
         /// </summary>
-        /// <param name="key">ƒp[ƒc</param>
-        /// <returns>ƒŒƒR[ƒh</returns>
+        /// <param name="key">ãƒ‘ãƒ¼ãƒ„</param>
+        /// <returns>ãƒ¬ã‚³ãƒ¼ãƒ‰</returns>
         public RecordBase GetRecordOrNull(PartsBase key)
         {
             var rs = GetRecordset(key);
@@ -165,29 +165,29 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒp[ƒcw’è‚µ‚ÄƒŒƒR[ƒh‚ğæ“¾‚·‚é
+        /// ãƒ‘ãƒ¼ãƒ„æŒ‡å®šã—ã¦ãƒ¬ã‚³ãƒ¼ãƒ‰ã‚’å–å¾—ã™ã‚‹
         /// </summary>
-        /// <param name="key">ƒp[ƒc</param>
-        /// <returns>ƒŒƒR[ƒh</returns>
+        /// <param name="key">ãƒ‘ãƒ¼ãƒ„</param>
+        /// <returns>ãƒ¬ã‚³ãƒ¼ãƒ‰</returns>
         public RecordBase GetRecord(PartsBase key)
         {
             var ret = GetRecordOrNull(key);
-            System.Diagnostics.Debug.Assert(ret != null, "ƒŠƒ“ƒNî•ñ‚ª‚ ‚è‚Ü‚¹‚ñ");
+            System.Diagnostics.Debug.Assert(ret != null, "ãƒªãƒ³ã‚¯æƒ…å ±ãŒã‚ã‚Šã¾ã›ã‚“");
             return ret;
         }
 
         /// <summary>
-        /// ƒp[ƒcw’è‚µ‚ÄƒŒƒR[ƒh‚ğæ“¾‚·‚é
+        /// ãƒ‘ãƒ¼ãƒ„æŒ‡å®šã—ã¦ãƒ¬ã‚³ãƒ¼ãƒ‰ã‚’å–å¾—ã™ã‚‹
         /// </summary>
-        /// <param name="key">ƒp[ƒc</param>
-        /// <returns>ƒŒƒR[ƒh‚ÌƒRƒŒƒNƒVƒ‡ƒ“</returns>
+        /// <param name="key">ãƒ‘ãƒ¼ãƒ„</param>
+        /// <returns>ãƒ¬ã‚³ãƒ¼ãƒ‰ã®ã‚³ãƒ¬ã‚¯ã‚·ãƒ§ãƒ³</returns>
         public abstract ICollection GetRecordset(PartsBase key);
 
         /// <summary>
-        /// ƒŒƒR[ƒh‚ğw’è‚µ‚Äƒp[ƒc‚ğæ“¾‚·‚é
+        /// ãƒ¬ã‚³ãƒ¼ãƒ‰ã‚’æŒ‡å®šã—ã¦ãƒ‘ãƒ¼ãƒ„ã‚’å–å¾—ã™ã‚‹
         /// </summary>
-        /// <param name="key">ƒŒƒR[ƒh</param>
-        /// <returns>ƒp[ƒc</returns>
+        /// <param name="key">ãƒ¬ã‚³ãƒ¼ãƒ‰</param>
+        /// <returns>ãƒ‘ãƒ¼ãƒ„</returns>
         public PartsBase GetParts(RecordBase key)
         {
             var rs = GetPartsset(key);
@@ -203,10 +203,10 @@ namespace Tono.GuiWinForm
             }
         }
         /// <summary>
-        /// ƒŒƒR[ƒh‚ğw’è‚µ‚Äƒp[ƒc‚ğæ“¾‚·‚é
+        /// ãƒ¬ã‚³ãƒ¼ãƒ‰ã‚’æŒ‡å®šã—ã¦ãƒ‘ãƒ¼ãƒ„ã‚’å–å¾—ã™ã‚‹
         /// </summary>
-        /// <param name="key">ƒŒƒR[ƒh</param>
-        /// <returns>ƒp[ƒc</returns>
+        /// <param name="key">ãƒ¬ã‚³ãƒ¼ãƒ‰</param>
+        /// <returns>ãƒ‘ãƒ¼ãƒ„</returns>
         public abstract ICollection GetPartsset(RecordBase key);
     }
 }

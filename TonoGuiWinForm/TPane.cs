@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System;
@@ -11,29 +11,29 @@ using System.Windows.Forms;
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// TPane ‚ÌŠT—v‚Ìà–¾‚Å‚·B
+    /// TPane ã®æ¦‚è¦ã®èª¬æ˜ã§ã™ã€‚
     /// </summary>
     public class TPane : Control, IRichPane, IControlUI
     {
-        /// <summary>ƒfƒUƒCƒ“‚Å¯•Ê‚µ‚â‚·‚­‚·‚é–¼Ì</summary>
+        /// <summary>ãƒ‡ã‚¶ã‚¤ãƒ³ã§è­˜åˆ¥ã—ã‚„ã™ãã™ã‚‹åç§°</summary>
         private string _name = "";
-        /// <summary>•K—v‚ÈƒfƒUƒCƒi•Ï”‚Å‚·B</summary>
+        /// <summary>å¿…è¦ãªãƒ‡ã‚¶ã‚¤ãƒŠå¤‰æ•°ã§ã™ã€‚</summary>
         private readonly System.ComponentModel.Container components = null;
-        /// <summary>ƒY[ƒ€’l</summary>
+        /// <summary>ã‚ºãƒ¼ãƒ å€¤</summary>
         private XyBase _zoom = XyBase.FromInt(1000, 1000);
-        /// <summary>ƒXƒNƒ[ƒ‹—ÊB{‚ª‰E‰º•ûŒü</summary>
+        /// <summary>ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«é‡ã€‚ï¼‹ãŒå³ä¸‹æ–¹å‘</summary>
         private ScreenPos _scroll = ScreenPos.FromInt(0, 0);
-        /// <summary>X•ûŒüƒY[ƒ€‚µ‚È‚¢ = true</summary>
+        /// <summary>Xæ–¹å‘ã‚ºãƒ¼ãƒ ã—ãªã„ = true</summary>
         private bool _isZoomLockX = false;
-        /// <summary>Y•ûŒüƒY[ƒ€‚µ‚È‚¢ = true</summary>
+        /// <summary>Yæ–¹å‘ã‚ºãƒ¼ãƒ ã—ãªã„ = true</summary>
         private bool _isZoomLockY = false;
-        /// <summary>X•ûŒüƒXƒNƒ[ƒ‹‚µ‚È‚¢ = true</summary>
+        /// <summary>Xæ–¹å‘ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ã—ãªã„ = true</summary>
         private bool _isScrollLockX = false;
-        /// <summary>Y•ûŒüƒXƒNƒ[ƒ‹‚µ‚È‚¢ = true</summary>
+        /// <summary>Yæ–¹å‘ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ã—ãªã„ = true</summary>
         private bool _isScrollLockY = false;
 
         /// <summary>
-        /// ƒfƒtƒHƒ‹ƒgƒRƒ“ƒXƒgƒ‰ƒNƒ^
+        /// ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
         /// </summary>
         public TPane()
         {
@@ -43,9 +43,9 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// X•ûŒü‚ÌƒXƒNƒ[ƒ‹EƒY[ƒ€‚µ‚È‚¢
+        /// Xæ–¹å‘ã®ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ãƒ»ã‚ºãƒ¼ãƒ ã—ãªã„
         /// </summary>
-        [Description("X•ûŒü‚ÌƒY[ƒ€‚µ‚È‚¢ = true")]
+        [Description("Xæ–¹å‘ã®ã‚ºãƒ¼ãƒ ã—ãªã„ = true")]
         [Category("Tono.GuiWinForm")]
         public bool IsZoomLockX
         {
@@ -56,9 +56,9 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// Y•ûŒü‚ÌƒXƒNƒ[ƒ‹EƒY[ƒ€‚µ‚È‚¢
+        /// Yæ–¹å‘ã®ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ãƒ»ã‚ºãƒ¼ãƒ ã—ãªã„
         /// </summary>
-        [Description("Y•ûŒü‚ÌƒY[ƒ€‚µ‚È‚¢ = true")]
+        [Description("Yæ–¹å‘ã®ã‚ºãƒ¼ãƒ ã—ãªã„ = true")]
         [Category("Tono.GuiWinForm")]
         public bool IsZoomLockY
         {
@@ -69,9 +69,9 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// X•ûŒü‚ÌƒXƒNƒ[ƒ‹‚µ‚È‚¢
+        /// Xæ–¹å‘ã®ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ã—ãªã„
         /// </summary>
-        [Description("X•ûŒü‚ÌƒXƒNƒ[ƒ‹‚µ‚È‚¢ = true")]
+        [Description("Xæ–¹å‘ã®ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ã—ãªã„ = true")]
         [Category("Tono.GuiWinForm")]
         public bool IsScrollLockX
         {
@@ -82,9 +82,9 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// Y•ûŒü‚ÌƒXƒNƒ[ƒ‹‚µ‚È‚¢
+        /// Yæ–¹å‘ã®ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ã—ãªã„
         /// </summary>
-        [Description("Y•ûŒü‚ÌƒXƒNƒ[ƒ‹‚µ‚È‚¢ = true")]
+        [Description("Yæ–¹å‘ã®ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ã—ãªã„ = true")]
         [Category("Tono.GuiWinForm")]
         public bool IsScrollLockY
         {
@@ -95,7 +95,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// g—p‚³‚ê‚Ä‚¢‚éƒŠƒ\[ƒX‚ÉŒãˆ—‚ğÀs‚µ‚Ü‚·B
+        /// ä½¿ç”¨ã•ã‚Œã¦ã„ã‚‹ãƒªã‚½ãƒ¼ã‚¹ã«å¾Œå‡¦ç†ã‚’å®Ÿè¡Œã—ã¾ã™ã€‚
         /// </summary>
         protected override void Dispose(bool disposing)
         {
@@ -111,8 +111,8 @@ namespace Tono.GuiWinForm
 
         #region Component Designer generated code
         /// <summary>
-        /// ƒfƒUƒCƒi ƒTƒ|[ƒg‚É•K—v‚Èƒƒ\ƒbƒh‚Å‚·B‚±‚Ìƒƒ\ƒbƒh‚Ì“à—e‚ğ
-        /// ƒR[ƒh ƒGƒfƒBƒ^‚Å•ÏX‚µ‚È‚¢‚Å‚­‚¾‚³‚¢B
+        /// ãƒ‡ã‚¶ã‚¤ãƒŠ ã‚µãƒãƒ¼ãƒˆã«å¿…è¦ãªãƒ¡ã‚½ãƒƒãƒ‰ã§ã™ã€‚ã“ã®ãƒ¡ã‚½ãƒƒãƒ‰ã®å†…å®¹ã‚’
+        /// ã‚³ãƒ¼ãƒ‰ ã‚¨ãƒ‡ã‚£ã‚¿ã§å¤‰æ›´ã—ãªã„ã§ãã ã•ã„ã€‚
         /// </summary>
         private void InitializeComponent()
         {
@@ -127,9 +127,9 @@ namespace Tono.GuiWinForm
 
 
         /// <summary>
-        /// —Ìˆæ‚ğ•Ô‚·
+        /// é ˜åŸŸã‚’è¿”ã™
         /// </summary>
-        /// <returns>—Ìˆæ‚ğ•\‚·‹éŒ`</returns>
+        /// <returns>é ˜åŸŸã‚’è¡¨ã™çŸ©å½¢</returns>
 
         public ScreenRect GetPaneRect()
         {
@@ -137,7 +137,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// •¶š—ñ¶¬
+        /// æ–‡å­—åˆ—ç”Ÿæˆ
         /// </summary>
         /// <returns></returns>
         public override string ToString()
@@ -146,7 +146,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ”wŒi•`‰æƒCƒxƒ“ƒgˆ—
+        /// èƒŒæ™¯æç”»ã‚¤ãƒ™ãƒ³ãƒˆå‡¦ç†
         /// </summary>
         protected override void OnPaintBackground(System.Windows.Forms.PaintEventArgs pevent)
         {
@@ -157,7 +157,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// •`‰æƒCƒxƒ“ƒgˆ—
+        /// æç”»ã‚¤ãƒ™ãƒ³ãƒˆå‡¦ç†
         /// </summary>
         protected override void OnPaint(System.Windows.Forms.PaintEventArgs e)
         {
@@ -169,7 +169,7 @@ namespace Tono.GuiWinForm
                     string s;
                     if (string.IsNullOrEmpty(_name))
                     {
-                        s = "(–¼Ì–¢İ’è)";
+                        s = "(åç§°æœªè¨­å®š)";
                     }
                     else
                     {
@@ -184,7 +184,7 @@ namespace Tono.GuiWinForm
                 }
 
 
-                // ƒAƒ“ƒJ[‚ğ•\¦
+                // ã‚¢ãƒ³ã‚«ãƒ¼ã‚’è¡¨ç¤º
                 Brush brush = new SolidBrush(Color.FromArgb(80, 0, 0, 0));
                 var ap = new Pen(brush, 1)
                 {
@@ -216,9 +216,9 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒfƒUƒCƒ“‚É¯•Ê‚µ‚â‚·‚­‚·‚éF‚ğw’è‚·‚éiƒAƒvƒŠ‚Ì“®ì‚É‚Í‰e‹¿‚µ‚È‚¢j
+        /// ãƒ‡ã‚¶ã‚¤ãƒ³æ™‚ã«è­˜åˆ¥ã—ã‚„ã™ãã™ã‚‹è‰²ã‚’æŒ‡å®šã™ã‚‹ï¼ˆã‚¢ãƒ—ãƒªã®å‹•ä½œã«ã¯å½±éŸ¿ã—ãªã„ï¼‰
         /// </summary>
-        [Description("ƒfƒUƒCƒ“‚É¯•Ê‚µ‚â‚·‚­‚·‚éFiƒAƒvƒŠ‚Ì“®ì‚É‚Í‰e‹¿‚µ‚È‚¢j")]
+        [Description("ãƒ‡ã‚¶ã‚¤ãƒ³æ™‚ã«è­˜åˆ¥ã—ã‚„ã™ãã™ã‚‹è‰²ï¼ˆã‚¢ãƒ—ãƒªã®å‹•ä½œã«ã¯å½±éŸ¿ã—ãªã„ï¼‰")]
         [ParenthesizePropertyName(true)]
         [Category("Design")]
         public Color IdColor
@@ -230,9 +230,9 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒy[ƒ“‚ğ“Á’è‚·‚éƒ†ƒj[ƒN‚ÈƒeƒLƒXƒg
+        /// ãƒšãƒ¼ãƒ³ã‚’ç‰¹å®šã™ã‚‹ãƒ¦ãƒ‹ãƒ¼ã‚¯ãªãƒ†ã‚­ã‚¹ãƒˆ
         /// </summary>
-        [Description("ƒy[ƒ“‚ğ“Á’è‚·‚éƒ†ƒj[ƒN‚ÈƒeƒLƒXƒg")]
+        [Description("ãƒšãƒ¼ãƒ³ã‚’ç‰¹å®šã™ã‚‹ãƒ¦ãƒ‹ãƒ¼ã‚¯ãªãƒ†ã‚­ã‚¹ãƒˆ")]
         [ParenthesizePropertyName(true)]
         [Category("Design")]
         public string IdText
@@ -255,7 +255,7 @@ namespace Tono.GuiWinForm
             }
         }
 
-        #region ƒvƒƒpƒeƒB‚Ì•\¦‚ğ‰B‚·
+        #region ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ã®è¡¨ç¤ºã‚’éš ã™
         [Browsable(false)]
         public new string Text
         {
@@ -394,7 +394,7 @@ namespace Tono.GuiWinForm
         #endregion
 
         /// <summary>
-        /// ƒAƒ“ƒJ[•ÏXˆ—‚ğƒI[ƒo[ƒ‰ƒCƒh‚·‚é
+        /// ã‚¢ãƒ³ã‚«ãƒ¼å¤‰æ›´å‡¦ç†ã‚’ã‚ªãƒ¼ãƒãƒ¼ãƒ©ã‚¤ãƒ‰ã™ã‚‹
         /// </summary>
         public override AnchorStyles Anchor
         {
@@ -409,7 +409,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒTƒCƒY•ÏXƒCƒxƒ“ƒg‚ğˆ—‚·‚é
+        /// ã‚µã‚¤ã‚ºå¤‰æ›´ã‚¤ãƒ™ãƒ³ãƒˆã‚’å‡¦ç†ã™ã‚‹
         /// </summary>
         protected override void OnSizeChanged(EventArgs e)
         {
@@ -421,15 +421,15 @@ namespace Tono.GuiWinForm
             Invalidate();
             base.OnSizeChanged(e);
         }
-        #region IRichPane ƒƒ“ƒo
+        #region IRichPane ãƒ¡ãƒ³ãƒ
 
         /// <summary>
-        /// ©•ª‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‚ğControlŒ^‚Å•Ô‚·
+        /// è‡ªåˆ†ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’Controlå‹ã§è¿”ã™
         /// </summary>
         public Control Control => this;
 
         /// <summary>
-        /// eƒy[ƒ“‚ğæ“¾‚·‚é
+        /// è¦ªãƒšãƒ¼ãƒ³ã‚’å–å¾—ã™ã‚‹
         /// </summary>
         /// <returns></returns>
 
@@ -443,9 +443,9 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ’¼‹ß‚ÌcFeatureRich‚ğ•Ô‚·
+        /// ç›´è¿‘ã®cFeatureRichã‚’è¿”ã™
         /// </summary>
-        /// <returns>cFeatureRich‚ÌQÆ / null = –³‚¢</returns>
+        /// <returns>cFeatureRichã®å‚ç…§ / null = ç„¡ã„</returns>
 
         public TGuiView GetFeatureRich()
         {
@@ -460,11 +460,11 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// –¼‘O‚Åƒy[ƒ“‚ğŒŸõ‚·‚é
+        /// åå‰ã§ãƒšãƒ¼ãƒ³ã‚’æ¤œç´¢ã™ã‚‹
         /// </summary>
-        /// <param name="tar">ŒŸõƒy[ƒ“‚ÌŠK‘wŒ»İˆÊ’u</param>
-        /// <param name="name">ŒŸõName</param>
-        /// <returns>Œ©‚Â‚©‚Á‚½ƒy[ƒ“ / null = ‚»‚ÌŠK‘w‚É‚ÍŒ©‚Â‚©‚ç‚È‚©‚Á‚½</returns>
+        /// <param name="tar">æ¤œç´¢ãƒšãƒ¼ãƒ³ã®éšå±¤ç¾åœ¨ä½ç½®</param>
+        /// <param name="name">æ¤œç´¢Name</param>
+        /// <returns>è¦‹ã¤ã‹ã£ãŸãƒšãƒ¼ãƒ³ / null = ãã®éšå±¤ã«ã¯è¦‹ã¤ã‹ã‚‰ãªã‹ã£ãŸ</returns>
         private IRichPane _findPaneByIdText(Control tar, string IdText)
         {
             foreach (Control c in tar.Controls)
@@ -486,10 +486,10 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒy[ƒ“‚ğIdText‚ÅŒŸõ‚·‚é
+        /// ãƒšãƒ¼ãƒ³ã‚’IdTextã§æ¤œç´¢ã™ã‚‹
         /// </summary>
-        /// <param name="IdText">Œ©‚Â‚¯‚½‚¢ƒy[ƒ“‚ÌIdText</param>
-        /// <returns>Œ©‚Â‚©‚Á‚½ƒy[ƒ“ / null = ‚»‚ÌIdText‚Ìƒy[ƒ“‚Í–³‚¢</returns>
+        /// <param name="IdText">è¦‹ã¤ã‘ãŸã„ãƒšãƒ¼ãƒ³ã®IdText</param>
+        /// <returns>è¦‹ã¤ã‹ã£ãŸãƒšãƒ¼ãƒ³ / null = ãã®IdTextã®ãƒšãƒ¼ãƒ³ã¯ç„¡ã„</returns>
         public IRichPane GetPane(string IdText)
         {
             IRichPane root;
@@ -559,7 +559,7 @@ namespace Tono.GuiWinForm
                     {
                         _zoom = value;
                     }
-                    // ƒY[ƒ€ƒCƒxƒ“ƒg‚ğ‘—M‚·‚é
+                    // ã‚ºãƒ¼ãƒ ã‚¤ãƒ™ãƒ³ãƒˆã‚’é€ä¿¡ã™ã‚‹
                     var rp = GetFeatureRich();
                     if (rp != null)
                     {
@@ -592,7 +592,7 @@ namespace Tono.GuiWinForm
                     }
 
                     _scroll = value;
-                    // ƒXƒNƒ[ƒ‹ƒCƒxƒ“ƒg‚ğ‘—M‚·‚é
+                    // ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ã‚¤ãƒ™ãƒ³ãƒˆã‚’é€ä¿¡ã™ã‚‹
                     var rp = GetFeatureRich();
                     if (rp != null)
                     {
@@ -607,14 +607,14 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒOƒ‰ƒtƒBƒbƒNƒIƒuƒWƒFƒNƒg
+        /// ã‚°ãƒ©ãƒ•ã‚£ãƒƒã‚¯ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
         /// </summary>
         public System.Drawing.Graphics Graphics => ((TGuiView)Parent).GetCurrentGraphics();
 
         /// <summary>
-        /// •`‰æ‚ª•K—v‚È—Ìˆæ‚ğ•Ô‚·ƒCƒ“ƒ^[ƒtƒF[ƒX
+        /// æç”»ãŒå¿…è¦ãªé ˜åŸŸã‚’è¿”ã™ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ãƒ¼ã‚¹
         /// </summary>
-        /// <returns>—Ìˆæ</returns>
+        /// <returns>é ˜åŸŸ</returns>
 
         public ScreenRect GetPaintClipRect()
         {
@@ -622,12 +622,12 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ‰æ–Ê‚ğÄ•`‰æ‚·‚é
+        /// ç”»é¢ã‚’å†æç”»ã™ã‚‹
         /// </summary>
-        /// <param name="rect">Ä•`‰æ‚·‚é”ÍˆÍ</param>
+        /// <param name="rect">å†æç”»ã™ã‚‹ç¯„å›²</param>
         public void Invalidate(ScreenRect rect)
         {
-            ((TGuiView)Parent).Invalidate(rect); // cFeatureRich‚ÌInvalidate‚ğÀs‚·‚é(’¼ÚControl‚ÌInvalidate‚ğÀs‚µ‚È‚¢j
+            ((TGuiView)Parent).Invalidate(rect); // cFeatureRichã®Invalidateã‚’å®Ÿè¡Œã™ã‚‹(ç›´æ¥Controlã®Invalidateã‚’å®Ÿè¡Œã—ãªã„ï¼‰
         }
 
 
@@ -642,7 +642,7 @@ namespace Tono.GuiWinForm
 
             base.OnKeyDown(e);
         }
-        #region IControlUI ƒƒ“ƒo
+        #region IControlUI ãƒ¡ãƒ³ãƒ
 
         Cursor Tono.GuiWinForm.IControlUI.Cursor
         {

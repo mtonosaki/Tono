@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System;
@@ -15,12 +15,12 @@ namespace Tono.GuiWinForm
     public static class ComparerUtil
     {
         /// <summary>
-        /// ‘å•¶š¬•¶š–³‹‚µ‚Ä”äŠr‚·‚éƒNƒ‰ƒX
+        /// å¤§æ–‡å­—å°æ–‡å­—ç„¡è¦–ã—ã¦æ¯”è¼ƒã™ã‚‹ã‚¯ãƒ©ã‚¹
         /// </summary>
         /// <typeparam name="T"></typeparam>
         public class IgnoreCaseEquality<T> : IEqualityComparer<T>
         {
-            #region IEqualityComparer<T> ƒƒ“ƒo
+            #region IEqualityComparer<T> ãƒ¡ãƒ³ãƒ
 
             public bool Equals(T x, T y)
             {
@@ -39,7 +39,7 @@ namespace Tono.GuiWinForm
         {
             return new listViewString(columnNo);
         }
-        #region	ŠeŒ^‚É‰‚¶‚½Comparer
+        #region	å„å‹ã«å¿œã˜ãŸComparer
         private class listViewString : IComparer
         {
             private readonly int _colNo;
@@ -49,7 +49,7 @@ namespace Tono.GuiWinForm
                 _colNo = columnNo;
             }
 
-            #region IComparer ƒƒ“ƒo
+            #region IComparer ãƒ¡ãƒ³ãƒ
 
             public int Compare(object x, object y)
             {
@@ -60,12 +60,12 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// longŒ^‚Ì”äŠr
+        /// longå‹ã®æ¯”è¼ƒ
         /// </summary>
         public static readonly IComparer LongComparer = new longComparer();
         private class longComparer : IComparer
         {
-            #region IComparer ƒƒ“ƒo
+            #region IComparer ãƒ¡ãƒ³ãƒ
 
             public int Compare(object x, object y)
             {
@@ -76,11 +76,11 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// stringŒ^‚Ì”äŠr
+        /// stringå‹ã®æ¯”è¼ƒ
         /// </summary>
         public static readonly IComparer StringComparer = new stringComparer();
         /// <summary>
-        /// stringŒ^‚Ì”äŠr
+        /// stringå‹ã®æ¯”è¼ƒ
         /// </summary>
         private class stringComparer : IComparer
         {
@@ -93,11 +93,11 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// intŒ^‚Ì”äŠr
+        /// intå‹ã®æ¯”è¼ƒ
         /// </summary>
         public static readonly IComparer IntComparer = new intComparer();
         /// <summary>
-        /// intŒ^‚Ì”äŠr
+        /// intå‹ã®æ¯”è¼ƒ
         /// </summary>
         private class intComparer : IComparer
         {
@@ -110,11 +110,11 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// doubleŒ^‚Ì”äŠr
+        /// doubleå‹ã®æ¯”è¼ƒ
         /// </summary>
         public static readonly IComparer DoubleComparer = new doubleComparer();
         /// <summary>
-        /// doubleŒ^‚Ì”äŠr
+        /// doubleå‹ã®æ¯”è¼ƒ
         /// </summary>
         private class doubleComparer : IComparer
         {
@@ -127,11 +127,11 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ITimeSpanŒ^‚ÌStart”äŠr
+        /// ITimeSpanå‹ã®Startæ¯”è¼ƒ
         /// </summary>
         public static readonly IComparer TimeSpanStartComparer = new timeSpanStartComparer();
         /// <summary>
-        /// ITimeSpanŒ^‚ÌStart”äŠr
+        /// ITimeSpanå‹ã®Startæ¯”è¼ƒ
         /// </summary>
         private class timeSpanStartComparer : IComparer
         {
@@ -144,11 +144,11 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ITimeSpanŒ^‚ÌEnd”äŠr
+        /// ITimeSpanå‹ã®Endæ¯”è¼ƒ
         /// </summary>
         public static readonly IComparer TimeSpanEndComparer = new timeSpanEndComparer();
         /// <summary>
-        /// ITimeSpanŒ^‚ÌEnd”äŠr
+        /// ITimeSpanå‹ã®Endæ¯”è¼ƒ
         /// </summary>
         private class timeSpanEndComparer : IComparer
         {
@@ -161,11 +161,11 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// uCdRectŒ^‚Ì¶’[‚ÌXÀ•W‚Ì”äŠr
+        /// uCdRectå‹ã®å·¦ç«¯ã®Xåº§æ¨™ã®æ¯”è¼ƒ
         /// </summary>
         public static readonly IComparer CdRectLComparer = new cdRectLComparer();
         /// <summary>
-        /// uCdRectŒ^‚Ì¶’[‚ÌXÀ•W‚Ì”äŠr
+        /// uCdRectå‹ã®å·¦ç«¯ã®Xåº§æ¨™ã®æ¯”è¼ƒ
         /// </summary>
         private class cdRectLComparer : IComparer
         {
@@ -178,19 +178,19 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// T‚Ì•¶š M, T, W, R, F, A, S‚ğl—¶‚µ‚½”äŠr‰‰Z
+        /// é€±ã®æ–‡å­— M, T, W, R, F, A, Sã‚’è€ƒæ…®ã—ãŸæ¯”è¼ƒæ¼”ç®—
         /// </summary>
         public static readonly IComparer WeekStrComparer = new weekStrComparer();
         /// <summary>
-        /// T‚Ì•¶š M, T, W, R, F, A, S‚ğl—¶‚µ‚½”äŠr‰‰Z
+        /// é€±ã®æ–‡å­— M, T, W, R, F, A, Sã‚’è€ƒæ…®ã—ãŸæ¯”è¼ƒæ¼”ç®—
         /// </summary>
         public static readonly IComparer<string> WeekStrComparerT = new weekStrComparer();
         /// <summary>
-        /// T‚Ì•¶š M, T, W, R, F, A, S‚ğl—¶‚µ‚½”äŠr‰‰Z
+        /// é€±ã®æ–‡å­— M, T, W, R, F, A, Sã‚’è€ƒæ…®ã—ãŸæ¯”è¼ƒæ¼”ç®—
         /// </summary>
         private class weekStrComparer : IComparer, IComparer<string>
         {
-            #region IComparer ƒƒ“ƒo
+            #region IComparer ãƒ¡ãƒ³ãƒ
 
             public int Compare(object x, object y)
             {
@@ -243,7 +243,7 @@ namespace Tono.GuiWinForm
                 }
             }
 
-            #region IComparer<string> ƒƒ“ƒo
+            #region IComparer<string> ãƒ¡ãƒ³ãƒ
 
             public int Compare(string x, string y)
             {
@@ -255,7 +255,7 @@ namespace Tono.GuiWinForm
 
         #endregion
 
-        #region	ŠeŒ^‚É‰‚¶‚½Comparer
+        #region	å„å‹ã«å¿œã˜ãŸComparer
         public class CompareListViewString : IComparer
         {
             private readonly int _colNo;
@@ -265,7 +265,7 @@ namespace Tono.GuiWinForm
                 _colNo = columnNo;
             }
 
-            #region IComparer ƒƒ“ƒo
+            #region IComparer ãƒ¡ãƒ³ãƒ
 
             public int Compare(object x, object y)
             {
@@ -277,7 +277,7 @@ namespace Tono.GuiWinForm
 
         public class ComparerLong : IComparer
         {
-            #region IComparer ƒƒ“ƒo
+            #region IComparer ãƒ¡ãƒ³ãƒ
 
             public int Compare(object x, object y)
             {
@@ -288,7 +288,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// stringŒ^‚Ì”äŠr
+        /// stringå‹ã®æ¯”è¼ƒ
         /// </summary>
         public class ComparerString : IComparer
         {
@@ -301,7 +301,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// intŒ^‚Ì”äŠr
+        /// intå‹ã®æ¯”è¼ƒ
         /// </summary>
         public class ComparerInt : IComparer
         {
@@ -314,7 +314,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// doubleŒ^‚Ì”äŠr
+        /// doubleå‹ã®æ¯”è¼ƒ
         /// </summary>
         public class ComparerDouble : IComparer
         {
@@ -327,7 +327,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ITimeSpanŒ^‚ÌStart”äŠr
+        /// ITimeSpanå‹ã®Startæ¯”è¼ƒ
         /// </summary>
         public class ComparerTimeSpanStart : IComparer
         {
@@ -340,7 +340,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ITimeSpanŒ^‚ÌEnd”äŠr
+        /// ITimeSpanå‹ã®Endæ¯”è¼ƒ
         /// </summary>
         public class ComparerTimeSpanEnd : IComparer
         {
@@ -353,7 +353,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// uCdRectŒ^‚Ì¶’[‚ÌXÀ•W‚Ì”äŠr
+        /// uCdRectå‹ã®å·¦ç«¯ã®Xåº§æ¨™ã®æ¯”è¼ƒ
         /// </summary>
         public class ComparerCdRectL : IComparer
         {
@@ -366,13 +366,13 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// LinkedList‚ÉA‘}“ü‰ÓŠ‚ğ’²‚×‚È‚ª‚ç‘}“ü‚·‚é
+        /// LinkedListã«ã€æŒ¿å…¥ç®‡æ‰€ã‚’èª¿ã¹ãªãŒã‚‰æŒ¿å…¥ã™ã‚‹
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="list"></param>
         /// <param name="item"></param>
         /// <param name="comparer"></param>
-        /// <param name="isFrontput">true=“¯’l‚ÍƒLƒ…[‚Ì‘O•û / false=Œã•û</param>
+        /// <param name="isFrontput">true=åŒå€¤ã¯ã‚­ãƒ¥ãƒ¼ã®å‰æ–¹ / false=å¾Œæ–¹</param>
         public static void AddAfterComparedItem<T>(LinkedList<T> list, T item, Func<T, T, int> comparer)
         {
             var node = list.Last;
@@ -389,13 +389,13 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// LinkedList‚ÉA‘}“ü‰ÓŠ‚ğ’²‚×‚È‚ª‚ç‘}“ü‚·‚é
+        /// LinkedListã«ã€æŒ¿å…¥ç®‡æ‰€ã‚’èª¿ã¹ãªãŒã‚‰æŒ¿å…¥ã™ã‚‹
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="list"></param>
         /// <param name="item"></param>
         /// <param name="comparer"></param>
-        /// <param name="isFrontput">true=“¯’l‚ÍƒLƒ…[‚Ì‘O•û / false=Œã•û</param>
+        /// <param name="isFrontput">true=åŒå€¤ã¯ã‚­ãƒ¥ãƒ¼ã®å‰æ–¹ / false=å¾Œæ–¹</param>
         public static void AddBeforeComparedItem<T>(LinkedList<T> list, T item, Func<T, T, int> comparer)
         {
             var node = list.First;
@@ -412,9 +412,9 @@ namespace Tono.GuiWinForm
         }
 
         #endregion
-        #region	‘®«(ƒVƒŠƒAƒ‰ƒCƒY‚·‚é)
+        #region	å±æ€§(ã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºã™ã‚‹)
         #endregion
-        #region	‘®«(ƒVƒŠƒAƒ‰ƒCƒY‚µ‚È‚¢)
+        #region	å±æ€§(ã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºã—ãªã„)
         #endregion
     }
 }

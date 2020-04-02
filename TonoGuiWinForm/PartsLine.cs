@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System.Drawing;
@@ -6,43 +6,43 @@ using System.Drawing;
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// ’¼ü‚Ì•`‰æƒIƒuƒWƒFƒNƒg
+    /// ç›´ç·šã®æç”»ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
     /// </summary>
     public class PartsLine : PartsBase
     {
-        #region		‘®«(ƒVƒŠƒAƒ‰ƒCƒY‚·‚é)
-        // ƒyƒ“ƒIƒuƒWƒFƒNƒg
+        #region		å±æ€§(ã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºã™ã‚‹)
+        // ãƒšãƒ³ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
         private Pen _pen = new Pen(Color.FromArgb(255, 96, 128));
         #endregion
-        #region		‘®«(ƒVƒŠƒAƒ‰ƒCƒY‚µ‚È‚¢)
+        #region		å±æ€§(ã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºã—ãªã„)
         #endregion
 
         /// <summary>
-        /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+        /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
         /// </summary>
         public PartsLine()
         {
         }
 
         /// <summary>
-        /// •`‰æ
+        /// æç”»
         /// </summary>
         /// <param name="rp"></param>
         public override bool Draw(IRichPane rp)
         {
-            var pos = GetScRect(rp);        // ˆÊ’u‚ğæ“¾‚·‚é
-                                            // InClip‚ğ‚·‚é‚Æ‰E‰º‚ª‚è‚Ìü‚µ‚©•`‰æ‚Å‚«‚È‚¢ˆ×AInClip‚Í‚â‚ç‚È‚¢
-                                            //if( isInClip(rp, pos) == false )	// •`‰æ•s—v‚Å‚ ‚ê‚ÎA‚È‚É‚à‚µ‚È‚¢
+            var pos = GetScRect(rp);        // ä½ç½®ã‚’å–å¾—ã™ã‚‹
+                                            // InClipã‚’ã™ã‚‹ã¨å³ä¸‹ãŒã‚Šã®ç·šã—ã‹æç”»ã§ããªã„ç‚ºã€InClipã¯ã‚„ã‚‰ãªã„
+                                            //if( isInClip(rp, pos) == false )	// æç”»ä¸è¦ã§ã‚ã‚Œã°ã€ãªã«ã‚‚ã—ãªã„
                                             //{
                                             //	return false;
                                             //}
-                                            //Mask(rp, eMask.Specification);	// “Á’èƒ}ƒXƒN‚Ì‚İ‚Å•\¦
+                                            //Mask(rp, eMask.Specification);	// ç‰¹å®šãƒã‚¹ã‚¯ã®ã¿ã§è¡¨ç¤º
             rp.Graphics.DrawLine(_pen, pos.LT, pos.RB);
             return true;
         }
 
         /// <summary>
-        /// ƒyƒ“ƒIƒuƒWƒFƒNƒgiSET‚·‚éê‡AŒ³‚ÌPen‚ğDispose‚·‚é‚±‚Æj
+        /// ãƒšãƒ³ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆï¼ˆSETã™ã‚‹å ´åˆã€å…ƒã®Penã‚’Disposeã™ã‚‹ã“ã¨ï¼‰
         /// </summary>
         public Pen Style
         {
@@ -51,7 +51,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ü‚Ì‘¾‚³‚Ìæ“¾/İ’è
+        /// ç·šã®å¤ªã•ã®å–å¾—/è¨­å®š
         /// </summary>
         public float LineWidth
         {
@@ -60,7 +60,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ü‚ÌF‚Ìæ“¾/İ’è
+        /// ç·šã®è‰²ã®å–å¾—/è¨­å®š
         /// </summary>
         public virtual Color LineColor
         {
@@ -69,7 +69,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒyƒ“‚Ìü‚ÌƒXƒ^ƒCƒ‹‚ğæ“¾/İ’è
+        /// ãƒšãƒ³ã®ç·šã®ã‚¹ã‚¿ã‚¤ãƒ«ã‚’å–å¾—/è¨­å®š
         /// </summary>
         public System.Drawing.Drawing2D.DashStyle DashStyle
         {
@@ -78,7 +78,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒyƒ“‚ÉI’[‚ÌƒXƒ^ƒCƒ‹‚Ìæ“¾/İ’è
+        /// ãƒšãƒ³ã«çµ‚ç«¯ã®ã‚¹ã‚¿ã‚¤ãƒ«ã®å–å¾—/è¨­å®š
         /// </summary>
         public System.Drawing.Drawing2D.LineCap EndCap
         {
@@ -87,7 +87,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒyƒ“‚Ìn’[‚ÌƒXƒ^ƒCƒ‹‚Ìæ“¾/İ’è
+        /// ãƒšãƒ³ã®å§‹ç«¯ã®ã‚¹ã‚¿ã‚¤ãƒ«ã®å–å¾—/è¨­å®š
         /// </summary>
         public System.Drawing.Drawing2D.LineCap StartCap
         {

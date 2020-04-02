@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System.Collections.Generic;
@@ -12,7 +12,7 @@ namespace Tono.GuiWinForm
         private readonly Dictionary<TKey1, Dictionary<TKey2, Dictionary<TKey3, TVAL>>> dat = new Dictionary<TKey1, Dictionary<TKey2, Dictionary<TKey3, TVAL>>>();
 
         /// <summary>
-        /// ƒNƒŠƒA
+        /// ã‚¯ãƒªã‚¢
         /// </summary>
         public void Clear()
         {
@@ -20,7 +20,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒL[i‚PŸŒ³–Új
+        /// ã‚­ãƒ¼ï¼ˆï¼‘æ¬¡å…ƒç›®ï¼‰
         /// </summary>
         public IEnumerable<TKey1> GetKey1s()
         {
@@ -52,7 +52,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// w’èƒL[‚ª“o˜^‚³‚ê‚Ä‚¢‚é‚©ƒ`ƒFƒbƒN
+        /// æŒ‡å®šã‚­ãƒ¼ãŒç™»éŒ²ã•ã‚Œã¦ã„ã‚‹ã‹ãƒã‚§ãƒƒã‚¯
         /// </summary>
         /// <param name="key1"></param>
         /// <param name="key2"></param>
@@ -71,7 +71,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// “ñŸŒ³ƒe[ƒuƒ‹‚Ìƒf[ƒ^ƒAƒNƒZƒX
+        /// äºŒæ¬¡å…ƒãƒ†ãƒ¼ãƒ–ãƒ«ã®ãƒ‡ãƒ¼ã‚¿ã‚¢ã‚¯ã‚»ã‚¹
         /// </summary>
         public TVAL this[TKey1 key1, TKey2 key2, TKey3 key3]
         {

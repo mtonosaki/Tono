@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System;
@@ -8,22 +8,22 @@ using System.Text;
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// ƒGƒNƒZƒ‹‚Ì—ñ–¼Œ`®‚Å•¶š‚Æ”š‚Ì•ÏŠ·‚ğƒTƒ|[ƒg‚·‚é
+    /// ã‚¨ã‚¯ã‚»ãƒ«ã®åˆ—åå½¢å¼ã§æ–‡å­—ã¨æ•°å­—ã®å¤‰æ›ã‚’ã‚µãƒãƒ¼ãƒˆã™ã‚‹
     /// </summary>
     public class StringNumberExcel
     {
         /// <summary>
-        /// ExcelƒJƒ‰ƒ€–¼
+        /// Excelã‚«ãƒ©ãƒ å
         /// </summary>
         public static readonly StringNumberExcel Col = new StringNumberExcel();
 
         /// <summary>
-        /// —áŠO
+        /// ä¾‹å¤–
         /// </summary>
         public class StrUtilNumberBadCharacterException : Exception
         {
             /// <summary>
-            /// •¶š—ñƒGƒ‰[
+            /// æ–‡å­—åˆ—ã‚¨ãƒ©ãƒ¼
             /// </summary>
             /// <param name="bad"></param>
             public StrUtilNumberBadCharacterException(char bad) : base(string.Format("Bad character error '{0}'", bad))
@@ -33,12 +33,12 @@ namespace Tono.GuiWinForm
 
 
         /// <summary>
-        /// è‡’l•Û‘¶i‚‘¬‰»j
+        /// é–¾å€¤ä¿å­˜ï¼ˆé«˜é€ŸåŒ–ï¼‰
         /// </summary>
         private static readonly List<int> _threshold = new List<int>();
 
         /// <summary>
-        /// è‡’l¶¬ˆ—
+        /// é–¾å€¤ç”Ÿæˆå‡¦ç†
         /// </summary>
         static StringNumberExcel()
         {
@@ -52,7 +52,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// •¶š—ñ‚©‚çƒGƒNƒZƒ‹ƒwƒbƒ_Œ`®‚Ì”š‚ğ•Ô‚·
+        /// æ–‡å­—åˆ—ã‹ã‚‰ã‚¨ã‚¯ã‚»ãƒ«ãƒ˜ãƒƒãƒ€å½¢å¼ã®æ•°å­—ã‚’è¿”ã™
         /// A=1, Z=26, AA=27
         /// </summary>
         /// <param name="val"></param>
@@ -81,7 +81,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ”š‚©‚çAƒGƒNƒZƒ‹ƒwƒbƒ_Œ`®‚Ì•¶š—ñ‚ğì¬‚·‚é
+        /// æ•°å­—ã‹ã‚‰ã€ã‚¨ã‚¯ã‚»ãƒ«ãƒ˜ãƒƒãƒ€å½¢å¼ã®æ–‡å­—åˆ—ã‚’ä½œæˆã™ã‚‹
         /// </summary>
         /// <param name="val"></param>
         /// <returns></returns>

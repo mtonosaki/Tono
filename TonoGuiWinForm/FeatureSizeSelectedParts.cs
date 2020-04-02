@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 #pragma warning disable 1591, 1572, 1573
@@ -6,17 +6,17 @@
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// ‘I‘ğ‚³‚ê‚Ä‚¢‚éƒp[ƒc‚ğˆÚ“®‚³‚¹‚é
+    /// é¸æŠã•ã‚Œã¦ã„ã‚‹ãƒ‘ãƒ¼ãƒ„ã‚’ç§»å‹•ã•ã›ã‚‹
     /// </summary>
     public class FeatureSizeSelectedParts : FeatureMoveSelectedParts
     {
-        #region	‘®«(ƒVƒŠƒAƒ‰ƒCƒY‚·‚é)
+        #region	å±æ€§(ã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºã™ã‚‹)
         #endregion
-        #region	‘®«(ƒVƒŠƒAƒ‰ƒCƒY‚µ‚È‚¢)
+        #region	å±æ€§(ã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºã—ãªã„)
         #endregion
 
         /// <summary>
-        /// ƒfƒtƒHƒ‹ƒgƒRƒ“ƒXƒgƒ‰ƒNƒ^
+        /// ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
         /// </summary>
         public FeatureSizeSelectedParts() : base()
         {
@@ -24,7 +24,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒ}ƒEƒXƒ_ƒEƒ“ˆ—‚ÌÅIŒˆ’è
+        /// ãƒã‚¦ã‚¹ãƒ€ã‚¦ãƒ³å‡¦ç†ã®æœ€çµ‚æ±ºå®š
         /// </summary>
         protected virtual void finalMouseDownPart4Size()
         {
@@ -56,12 +56,12 @@ namespace Tono.GuiWinForm
 
         public override void Start(NamedId who)
         {
-            // MouseDownƒg[ƒNƒ“
+            // MouseDownãƒˆãƒ¼ã‚¯ãƒ³
             if (who.Equals(_tokens[0]))
             {
-                Finalizers.Add(new FinalizeManager.Finalize(finalMouseDownPart4Size));  // SezeSelectedEEE‚àŒp³‚µ‚Ä‚¢‚é‚Ì‚ÅAID•sw’è
+                Finalizers.Add(new FinalizeManager.Finalize(finalMouseDownPart4Size));  // SezeSelectedãƒ»ãƒ»ãƒ»ã‚‚ç¶™æ‰¿ã—ã¦ã„ã‚‹ã®ã§ã€IDä¸æŒ‡å®š
             }
-            // MouseMoveƒg[ƒNƒ“
+            // MouseMoveãƒˆãƒ¼ã‚¯ãƒ³
             if (who.Equals(_tokens[1]))
             {
                 OnMouseMove(null);

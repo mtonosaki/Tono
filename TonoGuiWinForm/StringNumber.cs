@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System;
@@ -10,31 +10,31 @@ using System.Text;
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// •¶š‚ğ”š‚Æ‚µ‚Äæ‚èˆµ‚¤
+    /// æ–‡å­—ã‚’æ•°å­—ã¨ã—ã¦å–ã‚Šæ‰±ã†
     /// </summary>
     public class StringNumber
     {
-        #region ‚æ‚­g‚¤ƒCƒ“ƒXƒ^ƒ“ƒX
+        #region ã‚ˆãä½¿ã†ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹
         /// <summary>
-        /// 0-1‚Å•\Œ»‚·‚é2i”
+        /// 0-1ã§è¡¨ç¾ã™ã‚‹2é€²æ•°
         /// </summary>
         public static readonly StringNumber D2 = new StringNumber('0', '1');
         /// <summary>
-        /// 0-7‚Å•\Œ»‚·‚é8i”
+        /// 0-7ã§è¡¨ç¾ã™ã‚‹8é€²æ•°
         /// </summary>
         public static readonly StringNumber D8 = new StringNumber('0', '1', '2', '3', '4', '5', '6', '7');
         /// <summary>
-        /// 0-9‚Å•\Œ»‚·‚é10i”
+        /// 0-9ã§è¡¨ç¾ã™ã‚‹10é€²æ•°
         /// </summary>
         public static readonly StringNumber D10 = new StringNumber('0', '1', '2', '3', '4', '5', '6', '7', '8', '9');
         /// <summary>
-        /// 0-9, A-Z‚Å•\Œ»‚·‚é36i”
+        /// 0-9, A-Zã§è¡¨ç¾ã™ã‚‹36é€²æ•°
         /// </summary>
         public static readonly StringNumber A36 = new StringNumber('0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z');
         #endregion
 
         /// <summary>
-        /// —áŠO
+        /// ä¾‹å¤–
         /// </summary>
         public class StrNumberBadCharacterExceltion : Exception
         {
@@ -45,18 +45,18 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ŠeŒ…‚Ì’l
+        /// å„æ¡ã®å€¤
         /// </summary>
         private readonly Dictionary<char, int> _cv = new Dictionary<char, int>();
         /// <summary>
-        /// ŠeŒ…‚Ì’l
+        /// å„æ¡ã®å€¤
         /// </summary>
         private readonly Dictionary<int, char> _vc = new Dictionary<int, char>();
 
         /// <summary>
-        /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+        /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
         /// </summary>
-        /// <param name="digits">Å‰‚ªƒ[ƒ‚É‘Š“–‚·‚éƒLƒƒƒ‰ƒNƒ^</param>
+        /// <param name="digits">æœ€åˆãŒã‚¼ãƒ­ã«ç›¸å½“ã™ã‚‹ã‚­ãƒ£ãƒ©ã‚¯ã‚¿</param>
         public StringNumber(params char[] digits)
         {
             for (var i = 0; i < digits.Length; i++)
@@ -67,10 +67,10 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+        /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
         /// </summary>
-        /// <param name="digits">Å‰‚ªƒ[ƒ‚É‘Š“–‚·‚éƒLƒƒƒ‰ƒNƒ^</param>
-        /// <param name="isSeq">true=˜”ƒ‚[ƒh / false=—Ê”ƒ‚[ƒh</param>
+        /// <param name="digits">æœ€åˆãŒã‚¼ãƒ­ã«ç›¸å½“ã™ã‚‹ã‚­ãƒ£ãƒ©ã‚¯ã‚¿</param>
+        /// <param name="isSeq">true=åºæ•°ãƒ¢ãƒ¼ãƒ‰ / false=é‡æ•°ãƒ¢ãƒ¼ãƒ‰</param>
         public StringNumber(bool isSeq, params char[] digits)
         {
             for (var i = 0; i < digits.Length; i++)
@@ -81,12 +81,12 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// Œ…”
+        /// æ¡æ•°
         /// </summary>
         public int Figures => _cv.Count;
 
         /// <summary>
-        /// ’læ“¾
+        /// å€¤å–å¾—
         /// </summary>
         /// <param name="val"></param>
         /// <returns></returns>
@@ -94,7 +94,7 @@ namespace Tono.GuiWinForm
         {
             get
             {
-                // •„†
+                // ç¬¦å·
                 var sb = new StringBuilder();
                 if (val < 0)
                 {
@@ -119,7 +119,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ’l•¶š—ñì¬
+        /// å€¤æ–‡å­—åˆ—ä½œæˆ
         /// </summary>
         /// <param name="val"></param>
         /// <returns></returns>

@@ -1,11 +1,11 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// FeatureGanttColPane ‚ÌŠT—v‚Ìà–¾‚Å‚·B
-    /// ƒKƒ“ƒgƒ`ƒƒ[ƒg‚ÌƒJƒ‰ƒ€ƒwƒbƒ_•”‚Ì•\¦AƒXƒP[ƒŠƒ“ƒOŠÇ—
+    /// FeatureGanttColPane ã®æ¦‚è¦ã®èª¬æ˜ã§ã™ã€‚
+    /// ã‚¬ãƒ³ãƒˆãƒãƒ£ãƒ¼ãƒˆã®ã‚«ãƒ©ãƒ ãƒ˜ãƒƒãƒ€éƒ¨ã®è¡¨ç¤ºã€ã‚¹ã‚±ãƒ¼ãƒªãƒ³ã‚°ç®¡ç†
     /// </summary>
     public class FeatureGanttColPane : FeatureBase
     {

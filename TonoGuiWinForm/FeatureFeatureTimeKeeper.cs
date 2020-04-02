@@ -1,22 +1,22 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// ƒtƒB[ƒ`ƒƒ[‚Ì‘¬“x‚ğ•]‰¿‚·‚é•\¦ì¬
+    /// ãƒ•ã‚£ãƒ¼ãƒãƒ£ãƒ¼ã®é€Ÿåº¦ã‚’è©•ä¾¡ã™ã‚‹è¡¨ç¤ºä½œæˆ
     /// </summary>
     public class FeatureFeatureTimeKeeper : FeatureControlBridgeBase
     {
         private FormFeatureTimeKeeper _fo = null;
 
         /// <summary>
-        /// ƒƒjƒ…[‹N“®‚Å‚«‚é‚©ƒ`ƒFƒbƒN
+        /// ãƒ¡ãƒ‹ãƒ¥ãƒ¼èµ·å‹•ã§ãã‚‹ã‹ãƒã‚§ãƒƒã‚¯
         /// </summary>
         public override bool CanStart => _fo == null;
 
         /// <summary>
-        /// ƒXƒ^[ƒg
+        /// ã‚¹ã‚¿ãƒ¼ãƒˆ
         /// </summary>
         /// <param name="who"></param>
         public override void Start(NamedId who)
@@ -30,7 +30,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒtƒH[ƒ€‚ªƒNƒ[ƒY‚µ‚½‚çAŸ‚ÉŠJ‚¯‚é‚æ‚¤‚É€”õ‚·‚é
+        /// ãƒ•ã‚©ãƒ¼ãƒ ãŒã‚¯ãƒ­ãƒ¼ã‚ºã—ãŸã‚‰ã€æ¬¡ã«é–‹ã‘ã‚‹ã‚ˆã†ã«æº–å‚™ã™ã‚‹
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>

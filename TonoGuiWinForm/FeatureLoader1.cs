@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System;
@@ -11,8 +11,8 @@ using System.Xml;
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// FeatureLoader1 ‚ÌŠT—v‚Ìà–¾‚Å‚·B
-    /// .NET Framework 1.1—pAMenuItem‚É‘Î‚·‚éƒ[ƒ_
+    /// FeatureLoader1 ã®æ¦‚è¦ã®èª¬æ˜ã§ã™ã€‚
+    /// .NET Framework 1.1ç”¨ã€MenuItemã«å¯¾ã™ã‚‹ãƒ­ãƒ¼ãƒ€
     /// </summary>
     public class FeatureLoader1 : FeatureLoaderBase
     {
@@ -24,9 +24,9 @@ namespace Tono.GuiWinForm
 
 
         /// <summary>
-        /// g—p’†‚ÌƒAƒZƒ“ƒuƒŠ‚ªŠÜ‚Ü‚ê‚éƒNƒ‰ƒX‚ğw’è‚·‚é
+        /// ä½¿ç”¨ä¸­ã®ã‚¢ã‚»ãƒ³ãƒ–ãƒªãŒå«ã¾ã‚Œã‚‹ã‚¯ãƒ©ã‚¹ã‚’æŒ‡å®šã™ã‚‹
         /// </summary>
-        /// <param name="t">ƒNƒ‰ƒX</param>
+        /// <param name="t">ã‚¯ãƒ©ã‚¹</param>
         public static void SetUsingClass(Type t)
         {
             if (_assemblyList == null)
@@ -42,7 +42,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// “ÇŠJn
+        /// èª­è¾¼é–‹å§‹
         /// </summary>
         public override void Load(FeatureGroupRoot root, string fname)
         {
@@ -53,12 +53,12 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒtƒ@ƒCƒ‹‚©‚çî•ñ‚ğ“Ç‚İ‚İƒtƒB[ƒ`ƒƒ[‚ğ\’z‚·‚é
+        /// ãƒ•ã‚¡ã‚¤ãƒ«ã‹ã‚‰æƒ…å ±ã‚’èª­ã¿è¾¼ã¿ãƒ•ã‚£ãƒ¼ãƒãƒ£ãƒ¼ã‚’æ§‹ç¯‰ã™ã‚‹
         /// </summary>
-        /// <param name="fullpath">ƒtƒ‹ƒpƒX</param>
+        /// <param name="fullpath">ãƒ•ãƒ«ãƒ‘ã‚¹</param>
         private void load(string fullpath)
         {
-            // ƒtƒH[ƒ€‚ğæ“¾‚·‚é
+            // ãƒ•ã‚©ãƒ¼ãƒ ã‚’å–å¾—ã™ã‚‹
             Control c;
             for (c = _root.GetFeatureRich(); c is Form == false; c = c.Parent)
             {
@@ -67,7 +67,7 @@ namespace Tono.GuiWinForm
 
             _form = (Form)c;
 
-            // “Ç‚İ‚İˆ—
+            // èª­ã¿è¾¼ã¿å‡¦ç†
             var xd = new XmlDocument();
             xd.Load(fullpath);
 
@@ -77,17 +77,17 @@ namespace Tono.GuiWinForm
                 loopProc(node);
             }
 
-            // ƒƒjƒ…[ƒI[ƒ_[‚ª•t‚¢‚Ä‚¢‚È‚¢ƒƒjƒ…[‚ÉƒI[ƒ_[”Ô†‚ğ‚Â‚¯‚é
+            // ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã‚ªãƒ¼ãƒ€ãƒ¼ãŒä»˜ã„ã¦ã„ãªã„ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã«ã‚ªãƒ¼ãƒ€ãƒ¼ç•ªå·ã‚’ã¤ã‘ã‚‹
             if (_form.Menu != null)
             {
                 menuSetOrderLoopProc(_form.Menu.MenuItems);
 
-                // ƒI[ƒ_[‚É‚µ‚½‚ª‚Á‚Äƒ\[ƒg‚·‚é
+                // ã‚ªãƒ¼ãƒ€ãƒ¼ã«ã—ãŸãŒã£ã¦ã‚½ãƒ¼ãƒˆã™ã‚‹
                 menuSortLoop(_form.Menu.MenuItems);
             }
         }
 
-        #region ƒƒjƒ…[ƒI[ƒ_[‚É]‚Á‚Ä”äŠr‚·‚é
+        #region ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã‚ªãƒ¼ãƒ€ãƒ¼ã«å¾“ã£ã¦æ¯”è¼ƒã™ã‚‹
         private class Sorter : IComparer
         {
             private readonly IDictionary _order;
@@ -95,7 +95,7 @@ namespace Tono.GuiWinForm
             {
                 _order = orderbuf;
             }
-            #region IComparer ƒƒ“ƒo
+            #region IComparer ãƒ¡ãƒ³ãƒ
 
             public int Compare(object x, object y)
             {
@@ -164,7 +164,7 @@ namespace Tono.GuiWinForm
             var tag = current.Name.ToLower();
             if (tag == "group")
             {
-                //_group.Push(((fgBase)_group.Peek()).AddChildGroup());	‚±‚ÌƒRƒƒ“ƒg‚ÅAƒOƒ‹[ƒv‚ğg—p‚µ‚È‚¢‚æ‚¤‚É‚µ‚Ä‚¢‚éBby Tono
+                //_group.Push(((fgBase)_group.Peek()).AddChildGroup());	ã“ã®ã‚³ãƒ¡ãƒ³ãƒˆã§ã€ã‚°ãƒ«ãƒ¼ãƒ—ã‚’ä½¿ç”¨ã—ãªã„ã‚ˆã†ã«ã—ã¦ã„ã‚‹ã€‚by Tono
                 foreach (XmlNode child in current.ChildNodes)
                 {
                     loopProc(child);
@@ -222,7 +222,7 @@ namespace Tono.GuiWinForm
                 {
                     if (i == mss.Length - 1)
                     {
-                        // ƒtƒB[ƒ`ƒƒ[‹N“®—p‚Ìƒƒjƒ…[‚ğì¬
+                        // ãƒ•ã‚£ãƒ¼ãƒãƒ£ãƒ¼èµ·å‹•ç”¨ã®ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã‚’ä½œæˆ
                         MenuItem mi;
                         if (feature != null)
                         {
@@ -242,7 +242,7 @@ namespace Tono.GuiWinForm
                             mcol.Add(mi);
                         }
 
-                        // ƒVƒ‡[ƒgƒJƒbƒg‚ğÀ‘•
+                        // ã‚·ãƒ§ãƒ¼ãƒˆã‚«ãƒƒãƒˆã‚’å®Ÿè£…
                         try
                         {
                             var scs = node.Attributes["shortcut"].Value;
@@ -253,7 +253,7 @@ namespace Tono.GuiWinForm
                         catch (Exception)
                         {
                         }
-                        // ƒƒjƒ…[ƒI[ƒ_[i‡”Ôj‚ğ‹L˜^
+                        // ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã‚ªãƒ¼ãƒ€ãƒ¼ï¼ˆé †ç•ªï¼‰ã‚’è¨˜éŒ²
                         try
                         {
                             var mo = node.Attributes["menuorder"].Value;
@@ -265,7 +265,7 @@ namespace Tono.GuiWinForm
                     }
                     else
                     {
-                        // ƒ|ƒbƒvƒAƒbƒvƒƒjƒ…[‚ğì¬
+                        // ãƒãƒƒãƒ—ã‚¢ãƒƒãƒ—ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã‚’ä½œæˆ
                         var mi = new MenuItem
                         {
                             Text = mss[i]
@@ -274,7 +274,7 @@ namespace Tono.GuiWinForm
                         mcol = mi.MenuItems;
                     }
                 }
-                // ƒRƒ“ƒgƒ[ƒ‹‚ÆƒŠƒ“ƒN‚µ‚Ä‚¢‚éƒtƒB[ƒ`ƒƒ[‚È‚Ç‚ÍACanStart‚ÅAƒRƒ“ƒgƒ[ƒ‹‚ÌEnable‚ğ‘€ì‚·‚é‚Ì‚Å‚±‚±‚Åˆê“xs‚Á‚Ä‚¨‚­
+                // ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã¨ãƒªãƒ³ã‚¯ã—ã¦ã„ã‚‹ãƒ•ã‚£ãƒ¼ãƒãƒ£ãƒ¼ãªã©ã¯ã€CanStartã§ã€ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã®Enableã‚’æ“ä½œã™ã‚‹ã®ã§ã“ã“ã§ä¸€åº¦è¡Œã£ã¦ãŠã
                 var dummy = feature.CanStart;
             }
             catch (Exception)
@@ -297,17 +297,17 @@ namespace Tono.GuiWinForm
             }
             catch (Exception e)
             {
-                System.Diagnostics.Debug.WriteLine("Feature Loader Error —áŠO : '" + e.Message + "'");
+                System.Diagnostics.Debug.WriteLine("Feature Loader Error ä¾‹å¤– : '" + e.Message + "'");
             }
         }
 
         /// <summary>
-        /// ƒXƒLƒƒƒ“‚·‚éƒAƒZƒ“ƒuƒŠ
+        /// ã‚¹ã‚­ãƒ£ãƒ³ã™ã‚‹ã‚¢ã‚»ãƒ³ãƒ–ãƒª
         /// </summary>
         private static IDictionary namespaces = null;
 
         /// <summary>
-        /// ƒAƒZƒ“ƒuƒŠ‚ğ’´‚¦‚ÄŒ^‚ğæ“¾‚·‚é
+        /// ã‚¢ã‚»ãƒ³ãƒ–ãƒªã‚’è¶…ãˆã¦å‹ã‚’å–å¾—ã™ã‚‹
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
@@ -381,7 +381,7 @@ namespace Tono.GuiWinForm
                     catch (Exception)
                     {
                     }
-                    // ƒtƒB[ƒ`ƒƒ[‚Éˆø”‚ğŠ„‚è“–‚Ä‚é
+                    // ãƒ•ã‚£ãƒ¼ãƒãƒ£ãƒ¼ã«å¼•æ•°ã‚’å‰²ã‚Šå½“ã¦ã‚‹
                     try
                     {
                         if (string.IsNullOrEmpty(node.InnerText) == false)
@@ -393,35 +393,35 @@ namespace Tono.GuiWinForm
                     catch (Exception)
                     {
                     }
-                    // ƒƒjƒ…[î•ñ
+                    // ãƒ¡ãƒ‹ãƒ¥ãƒ¼æƒ…å ±
                     procMenuItem(node, feature);
                 }
                 else
                 {
-                    System.Diagnostics.Debug.WriteLine("Feature Loader Error : '" + nameAtt.Value + "'‚ÍÀ‘•‚³‚ê‚Ä‚¢‚È‚¢ƒtƒB[ƒ`ƒƒ[‚Å‚·");
+                    System.Diagnostics.Debug.WriteLine("Feature Loader Error : '" + nameAtt.Value + "'ã¯å®Ÿè£…ã•ã‚Œã¦ã„ãªã„ãƒ•ã‚£ãƒ¼ãƒãƒ£ãƒ¼ã§ã™");
                 }
             }
             catch (Exception e)
             {
-                System.Diagnostics.Debug.WriteLine("Feature Loader Error —áŠO : '" + e.Message + "'");
+                System.Diagnostics.Debug.WriteLine("Feature Loader Error ä¾‹å¤– : '" + e.Message + "'");
             }
         }
 
         /// <summary>
-        /// uFeatureLoader—p‚Ìƒtƒ@ƒCƒ‹–¼‚ğì¬‚·‚é
+        /// uFeatureLoaderç”¨ã®ãƒ•ã‚¡ã‚¤ãƒ«åã‚’ä½œæˆã™ã‚‹
         /// </summary>
-        /// <param name="filename">Šg’£q‚àŠÜ‚ß‚½ƒtƒ@ƒCƒ‹–¼</param>
-        /// <returns>ƒtƒ@ƒCƒ‹–¼iƒtƒ‹ƒpƒXj</returns>
+        /// <param name="filename">æ‹¡å¼µå­ã‚‚å«ã‚ãŸãƒ•ã‚¡ã‚¤ãƒ«å</param>
+        /// <returns>ãƒ•ã‚¡ã‚¤ãƒ«åï¼ˆãƒ•ãƒ«ãƒ‘ã‚¹ï¼‰</returns>
         private static string makeMesFilename(string filename)
         {
             return FileUtil.MakeMesFilename(filename);
         }
 
         /// <summary>
-        /// w’è‚µ‚½uFeatureLoader—pƒtƒ@ƒCƒ‹‚ª‘¶İ‚·‚é‚©ŒŸ¸‚·‚é
+        /// æŒ‡å®šã—ãŸuFeatureLoaderç”¨ãƒ•ã‚¡ã‚¤ãƒ«ãŒå­˜åœ¨ã™ã‚‹ã‹æ¤œæŸ»ã™ã‚‹
         /// </summary>
-        /// <param name="file">ŒŸ¸‚·‚éƒtƒ@ƒCƒ‹–¼</param>
-        /// <returns>ŒŸõŒ‹‰Ê True:İ‚è / False:–³‚µ</returns>
+        /// <param name="file">æ¤œæŸ»ã™ã‚‹ãƒ•ã‚¡ã‚¤ãƒ«å</param>
+        /// <returns>æ¤œç´¢çµæœ True:åœ¨ã‚Š / False:ç„¡ã—</returns>
         public static bool FileExists(string file)
         {
             var fname = FileUtil.MakeMesFilename(file);

@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System;
@@ -8,25 +8,25 @@ using System.Windows.Forms;
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// ƒJ[ƒ\ƒ‹ƒZƒbƒg‚ğ’S“–‚·‚é
-    /// ƒL[‰Ÿ‰º‚É‚æ‚éƒ}ƒEƒXƒJ[ƒ\ƒ‹‚Ì•ÏX
+    /// ã‚«ãƒ¼ã‚½ãƒ«ã‚»ãƒƒãƒˆã‚’æ‹…å½“ã™ã‚‹
+    /// ã‚­ãƒ¼æŠ¼ä¸‹ã«ã‚ˆã‚‹ãƒã‚¦ã‚¹ã‚«ãƒ¼ã‚½ãƒ«ã®å¤‰æ›´
     /// </summary>
     public class FeatureCursorProviderKey : Tono.GuiWinForm.FeatureBase, IKeyListener, IMouseListener
     {
         /// <summary>
-        /// ƒJ[ƒ\ƒ‹‚ğ•ÏX‚·‚éğŒAƒJ[ƒ\ƒ‹•ÏX—\–ñƒIƒuƒWƒFƒNƒg
+        /// ã‚«ãƒ¼ã‚½ãƒ«ã‚’å¤‰æ›´ã™ã‚‹æ¡ä»¶ã€ã‚«ãƒ¼ã‚½ãƒ«å¤‰æ›´äºˆç´„ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
         /// </summary>
         public class Reserve
         {
-            #region ‘®«iƒVƒŠƒAƒ‰ƒCƒY‚·‚éj
+            #region å±æ€§ï¼ˆã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºã™ã‚‹ï¼‰
 
-            /// <summary>ƒJ[ƒ\ƒ‹•ÏX‚·‚éğŒ</summary>
+            /// <summary>ã‚«ãƒ¼ã‚½ãƒ«å¤‰æ›´ã™ã‚‹æ¡ä»¶</summary>
             public MouseState.Buttons Buttons;
 
-            /// <summary>ğŒ‚É’B‚µ‚½Û‚Ég—p‚·‚éƒJ[ƒ\ƒ‹</summary>
+            /// <summary>æ¡ä»¶ã«é”ã—ãŸéš›ã«ä½¿ç”¨ã™ã‚‹ã‚«ãƒ¼ã‚½ãƒ«</summary>
             public Cursor Cursor;
 
-            /// <summary>ğŒ‚É‘Î‚·‚éƒƒbƒZ[ƒW</summary>
+            /// <summary>æ¡ä»¶ã«å¯¾ã™ã‚‹ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸</summary>
             public string Message = string.Empty;
 
             /// <summary>
@@ -37,11 +37,11 @@ namespace Tono.GuiWinForm
             #endregion
 
             /// <summary>
-            /// ‰Šú‰»ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+            /// åˆæœŸåŒ–ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
             /// </summary>
-            /// <param name="buttons">•\¦ğŒ‚Æ‚È‚éƒ{ƒ^ƒ“‚Ìó‘Ô</param>
-            /// <param name="cursor">‚»‚ÌğŒ‚Å•\¦‚µ‚½‚¢ƒJ[ƒ\ƒ‹</param>
-            /// <param name="mes">ƒJ[ƒ\ƒ‹‚Ö‚Æ“±‚­ƒƒbƒZ[ƒW</param>
+            /// <param name="buttons">è¡¨ç¤ºæ¡ä»¶ã¨ãªã‚‹ãƒœã‚¿ãƒ³ã®çŠ¶æ…‹</param>
+            /// <param name="cursor">ãã®æ¡ä»¶ã§è¡¨ç¤ºã—ãŸã„ã‚«ãƒ¼ã‚½ãƒ«</param>
+            /// <param name="mes">ã‚«ãƒ¼ã‚½ãƒ«ã¸ã¨å°ããƒ¡ãƒƒã‚»ãƒ¼ã‚¸</param>
             public Reserve(MouseState.Buttons buttons, Cursor cursor, string mes)
             {
                 Buttons = buttons;
@@ -50,12 +50,12 @@ namespace Tono.GuiWinForm
             }
 
             /// <summary>
-            /// ‰Šú‰»ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+            /// åˆæœŸåŒ–ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
             /// </summary>
-            /// <param name="previous">ƒJ[ƒ\ƒ‹‚ğ—LŒø‚Æ‚·‚é’¼‘O‚Ìó‘Ô‚ğ“Á’è‚·‚éB‚»‚êˆÈŠO‚Ìƒ{ƒ^ƒ“‚©‚ç‚±‚Ìó‘Ô‚É‚È‚Á‚Ä‚àƒJ[ƒ\ƒ‹‚ğ•ÏX‚µ‚È‚¢</param>
-            /// <param name="buttons">•\¦ğŒ‚Æ‚È‚éƒ{ƒ^ƒ“‚Ìó‘Ô</param>
-            /// <param name="cursor">‚»‚ÌğŒ‚Å•\¦‚µ‚½‚¢ƒJ[ƒ\ƒ‹</param>
-            /// <param name="mes">ƒJ[ƒ\ƒ‹‚Ö‚Æ“±‚­ƒƒbƒZ[ƒW</param>
+            /// <param name="previous">ã‚«ãƒ¼ã‚½ãƒ«ã‚’æœ‰åŠ¹ã¨ã™ã‚‹ç›´å‰ã®çŠ¶æ…‹ã‚’ç‰¹å®šã™ã‚‹ã€‚ãã‚Œä»¥å¤–ã®ãƒœã‚¿ãƒ³ã‹ã‚‰ã“ã®çŠ¶æ…‹ã«ãªã£ã¦ã‚‚ã‚«ãƒ¼ã‚½ãƒ«ã‚’å¤‰æ›´ã—ãªã„</param>
+            /// <param name="buttons">è¡¨ç¤ºæ¡ä»¶ã¨ãªã‚‹ãƒœã‚¿ãƒ³ã®çŠ¶æ…‹</param>
+            /// <param name="cursor">ãã®æ¡ä»¶ã§è¡¨ç¤ºã—ãŸã„ã‚«ãƒ¼ã‚½ãƒ«</param>
+            /// <param name="mes">ã‚«ãƒ¼ã‚½ãƒ«ã¸ã¨å°ããƒ¡ãƒƒã‚»ãƒ¼ã‚¸</param>
             public Reserve(MouseState.Buttons previous, MouseState.Buttons buttons, Cursor cursor, string mes)
             {
                 Buttons = buttons;
@@ -67,36 +67,36 @@ namespace Tono.GuiWinForm
         }
 
 
-        #region ‘®«iƒVƒŠƒAƒ‰ƒCƒY‚·‚éj
+        #region å±æ€§ï¼ˆã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºã™ã‚‹ï¼‰
 
-        /// <summary>’ÊíƒJ[ƒ\ƒ‹‚ğ‹L‰¯‚·‚é</summary>
+        /// <summary>é€šå¸¸ã‚«ãƒ¼ã‚½ãƒ«ã‚’è¨˜æ†¶ã™ã‚‹</summary>
         private readonly Hashtable /*<uMouseState.Buttons, Reserve>*/ _resData = new Hashtable();
 
         #endregion
-        #region ‘®«iƒVƒŠƒAƒ‰ƒCƒY‚µ‚È‚¢j
+        #region å±æ€§ï¼ˆã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºã—ãªã„ï¼‰
 
-        /// <summary>’ÊíƒJ[ƒ\ƒ‹‚ğ‹L‰¯‚·‚é</summary>
+        /// <summary>é€šå¸¸ã‚«ãƒ¼ã‚½ãƒ«ã‚’è¨˜æ†¶ã™ã‚‹</summary>
         private Cursor _normalCursor;
 
-        /// <summary>Œ»İ‚ÌƒL[‚Ìó‘Ô‚ğ‹L‰¯</summary>
+        /// <summary>ç¾åœ¨ã®ã‚­ãƒ¼ã®çŠ¶æ…‹ã‚’è¨˜æ†¶</summary>
         private MouseState _ms = new MouseState();
 
         private MouseState _prev = new MouseState();
 
-        /// <summary>—v‹‚·‚éƒJ[ƒ\ƒ‹iŒã‚Åİ’è‚·‚é‚à‚Ìj</summary>
+        /// <summary>è¦æ±‚ã™ã‚‹ã‚«ãƒ¼ã‚½ãƒ«ï¼ˆå¾Œã§è¨­å®šã™ã‚‹ã‚‚ã®ï¼‰</summary>
         private Cursor _requestedCursor = null;
 
-        /// <summary>ƒJ[ƒ\ƒ‹•\¦ó‘Ôi‹¤—L•Ï”j</summary>
+        /// <summary>ã‚«ãƒ¼ã‚½ãƒ«è¡¨ç¤ºçŠ¶æ…‹ï¼ˆå…±æœ‰å¤‰æ•°ï¼‰</summary>
         private DataSharingManager.Int _state;
 
-        /// <summary>ƒJ[ƒ\ƒ‹ƒZƒbƒgó‹µ‚ğ•Û‘¶‚·‚é‚½‚ß‚ÌID</summary>
+        /// <summary>ã‚«ãƒ¼ã‚½ãƒ«ã‚»ãƒƒãƒˆçŠ¶æ³ã‚’ä¿å­˜ã™ã‚‹ãŸã‚ã®ID</summary>
         private NamedId _cursorSet;
 
         #endregion
 
 
         /// <summary>
-        /// ‰Šú‰»ˆ—
+        /// åˆæœŸåŒ–å‡¦ç†
         /// </summary>
         public override void OnInitInstance()
         {
@@ -110,29 +110,29 @@ namespace Tono.GuiWinForm
             }
             else
             {
-                throw new NotSupportedException("FeatureCursorProvider‚ÍAIControlUI‚ğÀ‘•‚µ‚Ä‚¢‚éPane‚É‚Ì‚İg—p‚Å‚«‚Ü‚·");
+                throw new NotSupportedException("FeatureCursorProviderã¯ã€IControlUIã‚’å®Ÿè£…ã—ã¦ã„ã‚‹Paneã«ã®ã¿ä½¿ç”¨ã§ãã¾ã™");
             }
 
-            // ƒXƒe[ƒ^ƒX“¯Šú
+            // ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹åŒæœŸ
             _state = (DataSharingManager.Int)Share.Get("CursorProviderStatus", typeof(DataSharingManager.Int));
         }
 
         /// <summary>
-        /// ƒJ[ƒ\ƒ‹ƒŠƒU[ƒu‚ğ“o˜^‚·‚éi•\¦ğŒ‚Æ‚»‚ÌƒJ[ƒ\ƒ‹‚ÌƒZƒbƒgƒŠƒU[ƒuj
+        /// ã‚«ãƒ¼ã‚½ãƒ«ãƒªã‚¶ãƒ¼ãƒ–ã‚’ç™»éŒ²ã™ã‚‹ï¼ˆè¡¨ç¤ºæ¡ä»¶ã¨ãã®ã‚«ãƒ¼ã‚½ãƒ«ã®ã‚»ãƒƒãƒˆï¼ãƒªã‚¶ãƒ¼ãƒ–ï¼‰
         /// </summary>
-        /// <param name="value">“o˜^‚·‚éƒŠƒU[ƒu‚ÌƒCƒ“ƒXƒ^ƒ“ƒX</param>
+        /// <param name="value">ç™»éŒ²ã™ã‚‹ãƒªã‚¶ãƒ¼ãƒ–ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹</param>
         public void Add(Reserve value)
         {
             _resData.Add(value.Buttons, value);
         }
 
         /// <summary>
-        /// ğŒ”»’f‚µ‚ÄƒJ[ƒ\ƒ‹‚ğ•ÏX‚·‚é
+        /// æ¡ä»¶åˆ¤æ–­ã—ã¦ã‚«ãƒ¼ã‚½ãƒ«ã‚’å¤‰æ›´ã™ã‚‹
         /// </summary>
-        /// <param name="ms">Œ»İ‚ÌƒL[ó‘Ô</param>
+        /// <param name="ms">ç¾åœ¨ã®ã‚­ãƒ¼çŠ¶æ…‹</param>
         private void proc(MouseState ms)
         {
-            // ‚»‚Ì‚Ü‚Ü•]‰¿‚·‚é
+            // ãã®ã¾ã¾è©•ä¾¡ã™ã‚‹
             for (var de = _resData.GetEnumerator(); de.MoveNext();)
             {
                 if (((MouseState.Buttons)de.Key).Equals(ms.Attr))
@@ -154,7 +154,7 @@ namespace Tono.GuiWinForm
                     return;
                 }
             }
-            // ƒJ[ƒ\ƒ‹‚ğ–ß‚·‚Ìˆ—
+            // ã‚«ãƒ¼ã‚½ãƒ«ã‚’æˆ»ã™æ™‚ã®å‡¦ç†
             if (Finalizers.Contains(_cursorSet) == false)
             {
                 _requestedCursor = _normalCursor;
@@ -165,7 +165,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒJ[ƒ\ƒ‹‚ğƒZƒbƒg‚·‚éiƒtƒ@ƒCƒiƒ‰ƒCƒYj
+        /// ã‚«ãƒ¼ã‚½ãƒ«ã‚’ã‚»ãƒƒãƒˆã™ã‚‹ï¼ˆãƒ•ã‚¡ã‚¤ãƒŠãƒ©ã‚¤ã‚ºï¼‰
         /// </summary>
         private void onCursorSet()
         {
@@ -177,7 +177,7 @@ namespace Tono.GuiWinForm
 
         //int aa = 0;
 
-        #region IKeyListener ƒƒ“ƒo
+        #region IKeyListener ãƒ¡ãƒ³ãƒ
 
         /// <summary>
         /// 
@@ -203,7 +203,7 @@ namespace Tono.GuiWinForm
 
         #endregion
 
-        #region IMouseListener ƒƒ“ƒo
+        #region IMouseListener ãƒ¡ãƒ³ãƒ
 
         /// <summary>
         /// 

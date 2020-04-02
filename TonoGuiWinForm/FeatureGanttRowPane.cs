@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System.Collections;
@@ -9,15 +9,15 @@ using System.Collections.Specialized;
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// FeatureGanttRowPane ‚ÌŠT—v‚Ìà–¾‚Å‚·B
-    /// ƒKƒ“ƒgƒ`ƒƒ[ƒg‚Ìsƒwƒbƒ_‚Ì•\¦EŠÇ—
+    /// FeatureGanttRowPane ã®æ¦‚è¦ã®èª¬æ˜ã§ã™ã€‚
+    /// ã‚¬ãƒ³ãƒˆãƒãƒ£ãƒ¼ãƒˆã®è¡Œãƒ˜ãƒƒãƒ€ã®è¡¨ç¤ºãƒ»ç®¡ç†
     /// </summary>
     public class FeatureGanttRowPane : FeatureBase
     {
-        #region êŠ‚ğŒŸõ‚·‚é‚½‚ß‚ÌƒNƒ‰ƒX
+        #region å ´æ‰€ã‚’æ¤œç´¢ã™ã‚‹ãŸã‚ã®ã‚¯ãƒ©ã‚¹
 
         /// <summary>
-        /// s‚ğ“Á’è‚·‚é‚½‚ß‚ÌŒŸõ‘•’u
+        /// è¡Œã‚’ç‰¹å®šã™ã‚‹ãŸã‚ã®æ¤œç´¢è£…ç½®
         /// </summary>
         public class RowManager
         {
@@ -25,7 +25,7 @@ namespace Tono.GuiWinForm
             private readonly IDictionary _posid = new HybridDictionary();
 
             /// <summary>
-            /// ƒ‰ƒCƒ“”
+            /// ãƒ©ã‚¤ãƒ³æ•°
             /// </summary>
             /// <returns></returns>
             public int GetLineN()
@@ -34,16 +34,16 @@ namespace Tono.GuiWinForm
             }
 
             /// <summary>
-            /// ƒf[ƒ^‚ªŒ©“–‚½‚ç‚È‚¢ê‡‚Ì’l
+            /// ãƒ‡ãƒ¼ã‚¿ãŒè¦‹å½“ãŸã‚‰ãªã„å ´åˆã®å€¤
             /// NA
             /// </summary>
             public static int NA => int.MinValue + 100;
 
             /// <summary>
-            /// ƒf[ƒ^‚ğ“o˜^‚·‚é
+            /// ãƒ‡ãƒ¼ã‚¿ã‚’ç™»éŒ²ã™ã‚‹
             /// </summary>
-            /// <param name="id">ŒŸõƒL[</param>
-            /// <param name="ptpos">ƒp[ƒcÀ•W</param>
+            /// <param name="id">æ¤œç´¢ã‚­ãƒ¼</param>
+            /// <param name="ptpos">ãƒ‘ãƒ¼ãƒ„åº§æ¨™</param>
             public void Add(Id rowid, int ptpos)
             {
                 _idpos[rowid.Value] = ptpos;
@@ -51,7 +51,7 @@ namespace Tono.GuiWinForm
             }
 
             /// <summary>
-            /// ‘S‚Ä“o˜^Ï‚İ‚ÌIDPOSŠÖ˜A‚ğíœ‚·‚é
+            /// å…¨ã¦ç™»éŒ²æ¸ˆã¿ã®IDPOSé–¢é€£ã‚’å‰Šé™¤ã™ã‚‹
             /// </summary>
             public void Clear()
             {
@@ -60,8 +60,8 @@ namespace Tono.GuiWinForm
             }
 
             /// <summary>
-            /// sID‚ğw’è‚µ‚Äƒp[ƒcÀ•W‚ğ•Ô‚·
-            /// “o˜^‚³‚ê‚Ä‚¢‚È‚¢ê‡‚ÍNA‚ğ•Ô‚·
+            /// è¡ŒIDã‚’æŒ‡å®šã—ã¦ãƒ‘ãƒ¼ãƒ„åº§æ¨™ã‚’è¿”ã™
+            /// ç™»éŒ²ã•ã‚Œã¦ã„ãªã„å ´åˆã¯NAã‚’è¿”ã™
             /// </summary>
             public int this[Id rowid]
             {
@@ -77,8 +77,8 @@ namespace Tono.GuiWinForm
             }
 
             /// <summary>
-            /// ƒp[ƒcÀ•W‚ğw’è‚µ‚ÄsID‚ğ•Ô‚·
-            /// “o˜^‚³‚ê‚Ä‚¢‚È‚¢ê‡‚ÍNA‚ğ•Ô‚·
+            /// ãƒ‘ãƒ¼ãƒ„åº§æ¨™ã‚’æŒ‡å®šã—ã¦è¡ŒIDã‚’è¿”ã™
+            /// ç™»éŒ²ã•ã‚Œã¦ã„ãªã„å ´åˆã¯NAã‚’è¿”ã™
             /// </summary>
             public Id this[int ptpos]
             {
@@ -94,25 +94,25 @@ namespace Tono.GuiWinForm
             }
 
             /// <summary>
-            /// ID‚ÌƒRƒŒƒNƒVƒ‡ƒ“‚ğ•Ô‚·
+            /// IDã®ã‚³ãƒ¬ã‚¯ã‚·ãƒ§ãƒ³ã‚’è¿”ã™
             /// </summary>
-            /// <returns>IDˆê——</returns>
+            /// <returns>IDä¸€è¦§</returns>
             public ICollection GetIDs()
             {
                 return _idpos.Keys;
             }
 
             /// <summary>
-            /// ƒp[ƒcÀ•W‚ÌƒRƒŒƒNƒVƒ‡ƒ“‚ğ•Ô‚·
+            /// ãƒ‘ãƒ¼ãƒ„åº§æ¨™ã®ã‚³ãƒ¬ã‚¯ã‚·ãƒ§ãƒ³ã‚’è¿”ã™
             /// </summary>
-            /// <returns>ƒp[ƒcÀ•Wˆê——</returns>
+            /// <returns>ãƒ‘ãƒ¼ãƒ„åº§æ¨™ä¸€è¦§</returns>
             public ICollection GetPartsPositions()
             {
                 return _posid.Keys;
             }
 
             /// <summary>
-            /// Key=ID / Value=Pos‚ÌDictionaryEnumerator‚ğæ“¾‚·‚é
+            /// Key=ID / Value=Posã®DictionaryEnumeratorã‚’å–å¾—ã™ã‚‹
             /// </summary>
             /// <returns>IDictionaryEnumerator</returns>
             public IDictionaryEnumerator GetIDPosEnumerator()

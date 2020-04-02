@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System;
@@ -26,7 +26,7 @@ namespace Tono.GuiWinForm
                 return;
             }
 
-            // ƒo[ƒWƒ‡ƒ“î•ñ‚ğûW‚·‚é
+            // ãƒãƒ¼ã‚¸ãƒ§ãƒ³æƒ…å ±ã‚’åé›†ã™ã‚‹
             var ass = new object[3];
             ass[0] = Assembly.GetEntryAssembly();
             ass[1] = Assembly.GetCallingAssembly();

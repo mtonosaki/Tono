@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System;
@@ -10,35 +10,35 @@ using System.Collections.Specialized;
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// ƒp[ƒc‚ÌˆÊ’u‚ÌˆÚ“®‚ğŠÇ—‚·‚é
+    /// ãƒ‘ãƒ¼ãƒ„ã®ä½ç½®ã®ç§»å‹•ã‚’ç®¡ç†ã™ã‚‹
     /// Key = dpBase
     /// Value = Pos3
     /// </summary>
     public class PartsPositionManager : HybridDictionary
     {
         /// <summary>
-        /// ƒp[ƒcÀ•W•ÏXƒ^ƒCƒv
+        /// ãƒ‘ãƒ¼ãƒ„åº§æ¨™å¤‰æ›´ã‚¿ã‚¤ãƒ—
         /// </summary>
         [Flags]
         public enum DevelopType
         {
-            Unknown = 0,                // –¢İ’è
-            Move = 1,                   // ˆÚ“®
-            SizeFlag = 0x80,            // ƒTƒCƒY•ÏXƒtƒ‰ƒO
-            SizeLeft = SizeFlag | 1,        // ¶’[‚ÌƒTƒCƒY•ÏX
-            SizeRight = SizeFlag | 2,       // ‰E’[‚ÌƒTƒCƒY•ÏX
-            SizeTop = SizeFlag | 4,         // ã’[‚ÌƒTƒCƒY•ÏX
-            SizeBottom = SizeFlag | 8,      // ‰º’[‚ÌƒTƒCƒY•ÏX
+            Unknown = 0,                // æœªè¨­å®š
+            Move = 1,                   // ç§»å‹•
+            SizeFlag = 0x80,            // ã‚µã‚¤ã‚ºå¤‰æ›´ãƒ•ãƒ©ã‚°
+            SizeLeft = SizeFlag | 1,        // å·¦ç«¯ã®ã‚µã‚¤ã‚ºå¤‰æ›´
+            SizeRight = SizeFlag | 2,       // å³ç«¯ã®ã‚µã‚¤ã‚ºå¤‰æ›´
+            SizeTop = SizeFlag | 4,         // ä¸Šç«¯ã®ã‚µã‚¤ã‚ºå¤‰æ›´
+            SizeBottom = SizeFlag | 8,      // ä¸‹ç«¯ã®ã‚µã‚¤ã‚ºå¤‰æ›´
         }
 
-        #region	‘®«(ƒVƒŠƒAƒ‰ƒCƒY‚·‚é)
+        #region	å±æ€§(ã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºã™ã‚‹)
         #endregion
-        #region	‘®«(ƒVƒŠƒAƒ‰ƒCƒY‚µ‚È‚¢)
-        /// <summary>‘I‘ğó‘Ô</summary>
+        #region	å±æ€§(ã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºã—ãªã„)
+        /// <summary>é¸æŠçŠ¶æ…‹</summary>
         private DevelopType dev = DevelopType.Move;
 
         /// <summary>
-        /// “®ìƒ^ƒCƒv‚ğw’è‚·‚é
+        /// å‹•ä½œã‚¿ã‚¤ãƒ—ã‚’æŒ‡å®šã™ã‚‹
         /// </summary>
         /// <param name="value"></param>
         public void SetDevelop(DevelopType value)
@@ -49,21 +49,21 @@ namespace Tono.GuiWinForm
         #endregion
 
         /// <summary>
-        /// ƒp[ƒcÀ•W‚ÌŠÇ—
+        /// ãƒ‘ãƒ¼ãƒ„åº§æ¨™ã®ç®¡ç†
         /// </summary>
         public class Pos3
         {
-            /// <summary>ŠY“–ƒy[ƒ“</summary>
+            /// <summary>è©²å½“ãƒšãƒ¼ãƒ³</summary>
             public IRichPane OrgPane;
-            /// <summary>ŠY“–ƒy[ƒ“</summary>
+            /// <summary>è©²å½“ãƒšãƒ¼ãƒ³</summary>
             public IRichPane NowPane;
-            /// <summary>ˆÚ“®ƒhƒ‰ƒbƒO‘O‚ÌˆÊ’ui•„†‰»À•W‚Ìê‡A•„†‚Ì’lj</summary>
+            /// <summary>ç§»å‹•ãƒ‰ãƒ©ãƒƒã‚°å‰ã®ä½ç½®ï¼ˆç¬¦å·åŒ–åº§æ¨™ã®å ´åˆã€ç¬¦å·ã®å€¤ï¼‰</summary>
             public CodeRect Org;
-            /// <summary>’¼‘O‚ÌˆÊ’ui•„†‰»À•W‚Ìê‡A•„†‚Ì’lj</summary>
+            /// <summary>ç›´å‰ã®ä½ç½®ï¼ˆç¬¦å·åŒ–åº§æ¨™ã®å ´åˆã€ç¬¦å·ã®å€¤ï¼‰</summary>
             public CodeRect Pre;
-            /// <summary>Œ»İ‚ÌˆÊ’ui•„†‰»À•W‚Ìê‡A•„†‚Ì’lj</summary>
+            /// <summary>ç¾åœ¨ã®ä½ç½®ï¼ˆç¬¦å·åŒ–åº§æ¨™ã®å ´åˆã€ç¬¦å·ã®å€¤ï¼‰</summary>
             public CodeRect Now;
-            /// <summary>“r’†‚©‚çƒp[ƒc‚ª’Ç‰Á‚³‚ê‚½ê‡‚É’Ç‰Á‚³‚ê‚½‚ÌˆÚ“®•ª</summary>
+            /// <summary>é€”ä¸­ã‹ã‚‰ãƒ‘ãƒ¼ãƒ„ãŒè¿½åŠ ã•ã‚ŒãŸå ´åˆã«è¿½åŠ ã•ã‚ŒãŸæ™‚ã®ç§»å‹•åˆ†</summary>
             public CodePos Offset = new CodePos();
 
             public override string ToString()
@@ -92,7 +92,7 @@ namespace Tono.GuiWinForm
             }
 
             /// <summary>
-            /// Œ³‚ÌˆÊ’u‚©‚Ç‚¤‚©’²‚×‚é
+            /// å…ƒã®ä½ç½®ã‹ã©ã†ã‹èª¿ã¹ã‚‹
             /// </summary>
             public bool IsStanding
             {
@@ -108,10 +108,10 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒCƒ“ƒXƒ^ƒ“ƒX‚ğ‰Šú‰»‚·‚é
+        /// ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’åˆæœŸåŒ–ã™ã‚‹
         /// </summary>
-        /// <param name="with">Šî€ˆÊ’u‚Æƒp[ƒc‚Ìí—Ş‚ÌŒ³î•ñ</param>
-        /// <param name="pane">Šî€ˆÊ’u‚ÌƒXƒNƒ[ƒ‹‚ÆƒY[ƒ€’l‚ğ‹L‰¯‚·‚é‚½‚ß‚ÌƒCƒ“ƒvƒbƒg</param>
+        /// <param name="with">åŸºæº–ä½ç½®ã¨ãƒ‘ãƒ¼ãƒ„ã®ç¨®é¡ã®å…ƒæƒ…å ±</param>
+        /// <param name="pane">åŸºæº–ä½ç½®ã®ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ã¨ã‚ºãƒ¼ãƒ å€¤ã‚’è¨˜æ†¶ã™ã‚‹ãŸã‚ã®ã‚¤ãƒ³ãƒ—ãƒƒãƒˆ</param>
         public void Initialize(PartsCollectionBase with)
         {
             Clear();
@@ -124,9 +124,9 @@ namespace Tono.GuiWinForm
                 {
                     OrgPane = RichPaneBinder.CreateCopyComplete(pe.Pane),
                     NowPane = pe.Pane,
-                    Org = (CodeRect)pe.Parts.Rect.Clone(), // •„†‰»‚ÌÀ•Wi•„†‚µ‚È‚¢ê‡A’P‚È‚éƒp[ƒcÀ•Wj
-                    Pre = (CodeRect)pe.Parts.Rect.Clone(), // •„†‰»‚ÌÀ•Wi•„†‚µ‚È‚¢ê‡A’P‚È‚éƒp[ƒcÀ•Wj
-                    Now = (CodeRect)pe.Parts.Rect.Clone(), // •„†‰»‚ÌÀ•Wi•„†‚µ‚È‚¢ê‡A’P‚È‚éƒp[ƒcÀ•Wj
+                    Org = (CodeRect)pe.Parts.Rect.Clone(), // ç¬¦å·åŒ–ã®åº§æ¨™ï¼ˆç¬¦å·ã—ãªã„å ´åˆã€å˜ãªã‚‹ãƒ‘ãƒ¼ãƒ„åº§æ¨™ï¼‰
+                    Pre = (CodeRect)pe.Parts.Rect.Clone(), // ç¬¦å·åŒ–ã®åº§æ¨™ï¼ˆç¬¦å·ã—ãªã„å ´åˆã€å˜ãªã‚‹ãƒ‘ãƒ¼ãƒ„åº§æ¨™ï¼‰
+                    Now = (CodeRect)pe.Parts.Rect.Clone(), // ç¬¦å·åŒ–ã®åº§æ¨™ï¼ˆç¬¦å·ã—ãªã„å ´åˆã€å˜ãªã‚‹ãƒ‘ãƒ¼ãƒ„åº§æ¨™ï¼‰
                     Offset = CodePos.FromInt(0, 0)
                 };
                 base[pe.Parts] = p;
@@ -134,7 +134,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒp[ƒc‚ğw’è‚µ‚ÄƒCƒ“ƒXƒ^ƒ“ƒX‚ğ‰Šú‰»‚·‚é
+        /// ãƒ‘ãƒ¼ãƒ„ã‚’æŒ‡å®šã—ã¦ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’åˆæœŸåŒ–ã™ã‚‹
         /// </summary>
         /// <param name="parts"></param>
         /// <param name="pane"></param>
@@ -146,26 +146,26 @@ namespace Tono.GuiWinForm
             {
                 OrgPane = RichPaneBinder.CreateCopyComplete(pane),
                 NowPane = pane,
-                Org = (CodeRect)parts.Rect.Clone(), // •„†‰»‚ÌÀ•Wi•„†‚µ‚È‚¢ê‡A’P‚È‚éƒp[ƒcÀ•Wj
-                                                    //p.Org = (uCdRect)parts.Rect.Clone() - parts.GetCdPos(pane, _prevShift); // •„†‰»‚ÌÀ•Wi•„†‚µ‚È‚¢ê‡A’P‚È‚éƒp[ƒcÀ•Wj
-                Pre = (CodeRect)parts.Rect.Clone(), // •„†‰»‚ÌÀ•Wi•„†‚µ‚È‚¢ê‡A’P‚È‚éƒp[ƒcÀ•Wj
-                Now = (CodeRect)parts.Rect.Clone(), // •„†‰»‚ÌÀ•Wi•„†‚µ‚È‚¢ê‡A’P‚È‚éƒp[ƒcÀ•Wj
+                Org = (CodeRect)parts.Rect.Clone(), // ç¬¦å·åŒ–ã®åº§æ¨™ï¼ˆç¬¦å·ã—ãªã„å ´åˆã€å˜ãªã‚‹ãƒ‘ãƒ¼ãƒ„åº§æ¨™ï¼‰
+                                                    //p.Org = (uCdRect)parts.Rect.Clone() - parts.GetCdPos(pane, _prevShift); // ç¬¦å·åŒ–ã®åº§æ¨™ï¼ˆç¬¦å·ã—ãªã„å ´åˆã€å˜ãªã‚‹ãƒ‘ãƒ¼ãƒ„åº§æ¨™ï¼‰
+                Pre = (CodeRect)parts.Rect.Clone(), // ç¬¦å·åŒ–ã®åº§æ¨™ï¼ˆç¬¦å·ã—ãªã„å ´åˆã€å˜ãªã‚‹ãƒ‘ãƒ¼ãƒ„åº§æ¨™ï¼‰
+                Now = (CodeRect)parts.Rect.Clone(), // ç¬¦å·åŒ–ã®åº§æ¨™ï¼ˆç¬¦å·ã—ãªã„å ´åˆã€å˜ãªã‚‹ãƒ‘ãƒ¼ãƒ„åº§æ¨™ï¼‰
                 Offset = (CodePos)offset.Clone()
             };
             base[parts] = p;
         }
 
         /// <summary>
-        /// ƒp[ƒc‚ğw’è‚µ‚Ä POS‚ğ“¾‚é
+        /// ãƒ‘ãƒ¼ãƒ„ã‚’æŒ‡å®šã—ã¦ POSã‚’å¾—ã‚‹
         /// </summary>
         /// <param name="key"></param>
         /// <returns></returns>
         public Pos3 this[PartsBase key] => (Pos3)base[key];
 
         /// <summary>
-        /// ƒp[ƒc‚ÌÀ•W‚ğÀÛ‚É‘‚«Š·‚¦‚é
+        /// ãƒ‘ãƒ¼ãƒ„ã®åº§æ¨™ã‚’å®Ÿéš›ã«æ›¸ãæ›ãˆã‚‹
         /// </summary>
-        /// <param name="partsCollection">ƒp[ƒc—Ìˆæ‚Ì•`‰æXV‚ğ‚·‚éê‡APartsƒCƒ“ƒXƒ^ƒ“ƒX‚ğw’è‚·‚é</param>
+        /// <param name="partsCollection">ãƒ‘ãƒ¼ãƒ„é ˜åŸŸã®æç”»æ›´æ–°ã‚’ã™ã‚‹å ´åˆã€Partsã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’æŒ‡å®šã™ã‚‹</param>
         public void SetNowPositionsToParts(PartsCollectionBase partsCollection)
         {
             foreach (DictionaryEntry de in this)
@@ -175,44 +175,44 @@ namespace Tono.GuiWinForm
 
                 if (partsCollection != null)
                 {
-                    partsCollection.Invalidate(parts, pos.NowPane); // ˆÚ“®‘O‚ÌInvalidate
+                    partsCollection.Invalidate(parts, pos.NowPane); // ç§»å‹•å‰ã®Invalidate
                 }
-                parts.Rect = pos.Now;                           // ˆÊ’u‚ğ’²®‚·‚é
+                parts.Rect = pos.Now;                           // ä½ç½®ã‚’èª¿æ•´ã™ã‚‹
                 if (partsCollection != null)
                 {
-                    partsCollection.Invalidate(parts, pos.NowPane); // ˆÚ“®Œã‚ÌInvalidate
+                    partsCollection.Invalidate(parts, pos.NowPane); // ç§»å‹•å¾Œã®Invalidate
                 }
             }
         }
 
 
         /// <summary>
-        /// ÅŒã‚ÉDevelopÀs‚µ‚½‚ÌˆÊ’u•ÏX•û–@
+        /// æœ€å¾Œã«Developå®Ÿè¡Œã—ãŸæ™‚ã®ä½ç½®å¤‰æ›´æ–¹æ³•
         /// </summary>
         public DevelopType LastDevelop => _lastDevelpType;
         private DevelopType _lastDevelpType = DevelopType.Unknown;
         private ScreenPos _prevShift = ScreenPos.FromInt(0, 0);
 
         /// <summary>
-        /// ˆÚ“®î•ñ‚ğXV‚·‚é
-        /// ’ˆÓF‚¢‚Á‚½‚ñƒXƒNƒŠ[ƒ“À•W‚É•ÏŠ·‚µ‚ÄˆÚ“®‚·‚é‚Ì‚ÅAƒR[ƒhÀ•W‚É•ÏŠ·Œë·‚ª¶‚¶‚é‰Â”\«‚ª‚ ‚éB
+        /// ç§»å‹•æƒ…å ±ã‚’æ›´æ–°ã™ã‚‹
+        /// æ³¨æ„ï¼šã„ã£ãŸã‚“ã‚¹ã‚¯ãƒªãƒ¼ãƒ³åº§æ¨™ã«å¤‰æ›ã—ã¦ç§»å‹•ã™ã‚‹ã®ã§ã€ã‚³ãƒ¼ãƒ‰åº§æ¨™ã«å¤‰æ›èª¤å·®ãŒç”Ÿã˜ã‚‹å¯èƒ½æ€§ãŒã‚ã‚‹ã€‚
         /// </summary>
-        /// <param name="dragStartPos">ˆÚ“®ŠJn‚Ìƒ}ƒEƒXÀ•Wiƒhƒ‰ƒbƒOŠJn“_j</param>
-        /// <param name="currentPos">Œ»İ‚Ìƒ}ƒEƒXÀ•W</param>
-        /// <param name="type">À•W•ÏXƒ^ƒCƒv</param>
+        /// <param name="dragStartPos">ç§»å‹•é–‹å§‹æ™‚ã®ãƒã‚¦ã‚¹åº§æ¨™ï¼ˆãƒ‰ãƒ©ãƒƒã‚°é–‹å§‹ç‚¹ï¼‰</param>
+        /// <param name="currentPos">ç¾åœ¨ã®ãƒã‚¦ã‚¹åº§æ¨™</param>
+        /// <param name="type">åº§æ¨™å¤‰æ›´ã‚¿ã‚¤ãƒ—</param>
         public void Develop(ScreenPos dragStartPos, ScreenPos currentPos, DevelopType type)
         {
             _lastDevelpType = type;
-            var sdelta = currentPos - dragStartPos;     // ƒ}ƒEƒX‚ÌˆÚ“®—Ê
+            var sdelta = currentPos - dragStartPos;     // ãƒã‚¦ã‚¹ã®ç§»å‹•é‡
             _prevShift = sdelta;
 
-            foreach (DictionaryEntry de in this)            // ‘I‘ğ’†‘Sƒp[ƒc‚É‘Î‚µ‚Äs‚¤
+            foreach (DictionaryEntry de in this)            // é¸æŠä¸­å…¨ãƒ‘ãƒ¼ãƒ„ã«å¯¾ã—ã¦è¡Œã†
             {
                 var p3 = (Pos3)de.Value;
                 var target = (PartsBase)de.Key;
-                p3.Pre = p3.Now;                            // ‚Ğ‚Æ‚Â‘O‚ÌÀ•W‚É‹L‰¯
-                p3.Now = (CodeRect)p3.Now.Clone();           // ƒTƒCƒYŒn‚Ìˆ—‚ª³‚µ‚­“®ì‚·‚é‚½‚ß‚É•K—v
-                var virtualPos = target.GetCdRect(p3.NowPane, target.GetScRect(p3.OrgPane, p3.Org) + sdelta); // ˆÚ“®Œã‚ÌˆÊ’u‚ğŒvZ
+                p3.Pre = p3.Now;                            // ã²ã¨ã¤å‰ã®åº§æ¨™ã«è¨˜æ†¶
+                p3.Now = (CodeRect)p3.Now.Clone();           // ã‚µã‚¤ã‚ºç³»ã®å‡¦ç†ãŒæ­£ã—ãå‹•ä½œã™ã‚‹ãŸã‚ã«å¿…è¦
+                var virtualPos = target.GetCdRect(p3.NowPane, target.GetScRect(p3.OrgPane, p3.Org) + sdelta); // ç§»å‹•å¾Œã®ä½ç½®ã‚’è¨ˆç®—
                 var d = target.GetCdPos(p3.NowPane, sdelta);
                 //Debug.WriteLine( string.Format( "[{0}] Delta[{1}]:Offset[{2}]", i, d, p3.Offset) );
 
@@ -224,7 +224,7 @@ namespace Tono.GuiWinForm
                         p3.Now = virtualPos;
                         if (p3.Now.Width != p3.Org.Width)
                         {
-                            p3.Now.RB.X = p3.Now.LT.X + p3.Org.Width - 1;   // •‚ª•Ï‚í‚ç‚È‚¢‚æ‚¤‚É‚·‚é
+                            p3.Now.RB.X = p3.Now.LT.X + p3.Org.Width - 1;   // å¹…ãŒå¤‰ã‚ã‚‰ãªã„ã‚ˆã†ã«ã™ã‚‹
                         }
                         break;
                     case DevelopType.SizeRight:
@@ -244,16 +244,16 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// w’è‚µ‚½ƒL[‚ÌˆÚ“®î•ñ‚ğíœ‚·‚é
+        /// æŒ‡å®šã—ãŸã‚­ãƒ¼ã®ç§»å‹•æƒ…å ±ã‚’å‰Šé™¤ã™ã‚‹
         /// </summary>
-        /// <param name="key">íœ‚·‚éˆÊ’uî•ñ‚Ìƒp[ƒc</param>
+        /// <param name="key">å‰Šé™¤ã™ã‚‹ä½ç½®æƒ…å ±ã®ãƒ‘ãƒ¼ãƒ„</param>
         public void Remove(PartsBase key)
         {
             base.Remove(key);
         }
 
         /// <summary>
-        /// ‘S•ÒWƒp[ƒc‚ª“®‚¢‚Ä‚¢‚È‚¢‚±‚Æ‚ğŠm”F
+        /// å…¨ç·¨é›†ãƒ‘ãƒ¼ãƒ„ãŒå‹•ã„ã¦ã„ãªã„ã“ã¨ã‚’ç¢ºèª
         /// </summary>
         public bool IsStanding
         {

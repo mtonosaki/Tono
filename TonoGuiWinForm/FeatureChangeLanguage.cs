@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 #pragma warning disable 1591, 1572, 1573
@@ -6,7 +6,7 @@
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// ƒƒjƒ…[‹N“®‚ÌŒ¾ŒêØ‚è‘Ö‚¦iƒg[ƒNƒ“‚Å‹N“®‚·‚éê‡A"TokenChangeLanguageTo_??"‚ğ“Š‚°‚é??‚Ì•”•ª‚ÍAŒ¾ŒêƒR[ƒhj
+    /// ãƒ¡ãƒ‹ãƒ¥ãƒ¼èµ·å‹•ã®è¨€èªåˆ‡ã‚Šæ›¿ãˆï¼ˆãƒˆãƒ¼ã‚¯ãƒ³ã§èµ·å‹•ã™ã‚‹å ´åˆã€"TokenChangeLanguageTo_??"ã‚’æŠ•ã’ã‚‹??ã®éƒ¨åˆ†ã¯ã€è¨€èªã‚³ãƒ¼ãƒ‰ï¼‰
     /// </summary>
     public class FeatureChangeLanguage : FeatureBase, ITokenListener
     {
@@ -14,7 +14,7 @@ namespace Tono.GuiWinForm
         private NamedId _tokenTrigger = null;
 
         /// <summary>
-        /// ƒg[ƒNƒ“‹N“®‚ÌID
+        /// ãƒˆãƒ¼ã‚¯ãƒ³èµ·å‹•ã®ID
         /// </summary>
         protected NamedId tokenTrigger => _tokenTrigger;
 
@@ -44,7 +44,7 @@ namespace Tono.GuiWinForm
             Pane.Invalidate(null);
         }
 
-        #region ITokenListener ƒƒ“ƒo
+        #region ITokenListener ãƒ¡ãƒ³ãƒ
 
         public NamedId TokenTriggerID => _tokenTrigger;
 

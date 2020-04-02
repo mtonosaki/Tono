@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System;
@@ -10,30 +10,30 @@ using System.Collections.Specialized;
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// Finalizer Manager ‚ÌŠT—v‚Ìà–¾‚Å‚·B
+    /// Finalizer Manager ã®æ¦‚è¦ã®èª¬æ˜ã§ã™ã€‚
     /// </summary>
     public class FinalizeManager
     {
         /// <summary>
-        /// ƒtƒ@ƒCƒiƒ‰ƒCƒY‚Ì‚½‚ß‚ÉƒfƒŠƒQ[ƒgŒ^
+        /// ãƒ•ã‚¡ã‚¤ãƒŠãƒ©ã‚¤ã‚ºã®ãŸã‚ã«ãƒ‡ãƒªã‚²ãƒ¼ãƒˆå‹
         /// </summary>
         public delegate void Finalize();
 
-        #region ‘®«iƒVƒŠƒAƒ‰ƒCƒY‚µ‚È‚¢j
+        #region å±æ€§ï¼ˆã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºã—ãªã„ï¼‰
         private readonly Finalize _func = null;
         #endregion
 
         /// <summary>
-        /// —Bˆê‚ÌƒRƒ“ƒXƒgƒ‰ƒNƒ^
+        /// å”¯ä¸€ã®ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
         /// </summary>
-        /// <param name="function">ƒtƒ@ƒCƒiƒ‰ƒCƒY‚·‚é‚ÉÀs‚·‚éƒfƒŠƒQ[ƒgƒƒ\ƒbƒh</param>
+        /// <param name="function">ãƒ•ã‚¡ã‚¤ãƒŠãƒ©ã‚¤ã‚ºã™ã‚‹æ™‚ã«å®Ÿè¡Œã™ã‚‹ãƒ‡ãƒªã‚²ãƒ¼ãƒˆãƒ¡ã‚½ãƒƒãƒ‰</param>
         public FinalizeManager(Finalize function)
         {
             _func = function;
         }
 
         /// <summary>
-        /// ƒfƒŠƒQ[ƒg‚µ‚½ƒƒ\ƒbƒh‚ğÀs‚·‚é
+        /// ãƒ‡ãƒªã‚²ãƒ¼ãƒˆã—ãŸãƒ¡ã‚½ãƒƒãƒ‰ã‚’å®Ÿè¡Œã™ã‚‹
         /// </summary>
         public bool Invoke()
         {
@@ -50,7 +50,7 @@ namespace Tono.GuiWinForm
     }
 
     /// <summary>
-    /// ƒtƒ@ƒCƒiƒ‰ƒCƒY‚ğ•Û‘¶‚·‚é
+    /// ãƒ•ã‚¡ã‚¤ãƒŠãƒ©ã‚¤ã‚ºã‚’ä¿å­˜ã™ã‚‹
     /// </summary>
     public class FinalizeManageBuffer : IEnumerable
     {
@@ -68,7 +68,7 @@ namespace Tono.GuiWinForm
                 Reset();
             }
 
-            #region IEnumerator ƒƒ“ƒo
+            #region IEnumerator ãƒ¡ãƒ³ãƒ
 
             public void Reset()
             {
@@ -96,44 +96,44 @@ namespace Tono.GuiWinForm
             #endregion
 
         }
-        #region ‘®«iƒVƒŠƒAƒ‰ƒCƒY‚µ‚È‚¢j
-        /// <summary>ƒOƒ‹[ƒvŠÇ—‚·‚éƒtƒ@ƒCƒiƒ‰ƒCƒU</summary>
+        #region å±æ€§ï¼ˆã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºã—ãªã„ï¼‰
+        /// <summary>ã‚°ãƒ«ãƒ¼ãƒ—ç®¡ç†ã™ã‚‹ãƒ•ã‚¡ã‚¤ãƒŠãƒ©ã‚¤ã‚¶</summary>
         private readonly IDictionary _dat1 = new HybridDictionary();
 
-        /// <summary>ƒOƒ‹[ƒvŠÇ—‚µ‚È‚¢ƒtƒ@ƒCƒiƒ‰ƒCƒU</summary>
+        /// <summary>ã‚°ãƒ«ãƒ¼ãƒ—ç®¡ç†ã—ãªã„ãƒ•ã‚¡ã‚¤ãƒŠãƒ©ã‚¤ã‚¶</summary>
         private readonly IList _dat2 = new ArrayList();
         #endregion
 
         /// <summary>
-        /// ƒtƒ@ƒCƒiƒ‰ƒCƒU‚ğ“o˜^‚·‚é
+        /// ãƒ•ã‚¡ã‚¤ãƒŠãƒ©ã‚¤ã‚¶ã‚’ç™»éŒ²ã™ã‚‹
         /// </summary>
-        /// <param name="key">ƒtƒ@ƒCƒiƒ‰ƒCƒYƒOƒ‹[ƒvIDiId‚©‚çæ“¾‚·‚é‚Æ•Ö—˜j</param>
-        /// <param name="value">ƒtƒ@ƒCƒiƒ‰ƒCƒU</param>
+        /// <param name="key">ãƒ•ã‚¡ã‚¤ãƒŠãƒ©ã‚¤ã‚ºã‚°ãƒ«ãƒ¼ãƒ—IDï¼ˆIdã‹ã‚‰å–å¾—ã™ã‚‹ã¨ä¾¿åˆ©ï¼‰</param>
+        /// <param name="value">ãƒ•ã‚¡ã‚¤ãƒŠãƒ©ã‚¤ã‚¶</param>
         public void Add(NamedId key, FinalizeManager.Finalize value)
         {
             _dat1[key] = new FinalizeManager(value);
         }
         /// <summary>
-        /// ƒtƒ@ƒCƒiƒ‰ƒCƒU‚ğ“o˜^‚·‚éiID‚È‚µ‚Ìƒtƒ@ƒCƒiƒ‰ƒCƒU‚Íæ‚ÉÀs‚³‚ê‚éj
+        /// ãƒ•ã‚¡ã‚¤ãƒŠãƒ©ã‚¤ã‚¶ã‚’ç™»éŒ²ã™ã‚‹ï¼ˆIDãªã—ã®ãƒ•ã‚¡ã‚¤ãƒŠãƒ©ã‚¤ã‚¶ã¯å…ˆã«å®Ÿè¡Œã•ã‚Œã‚‹ï¼‰
         /// </summary>
-        /// <param name="value">ƒtƒ@ƒCƒiƒ‰ƒCƒU</param>
+        /// <param name="value">ãƒ•ã‚¡ã‚¤ãƒŠãƒ©ã‚¤ã‚¶</param>
         public void Add(FinalizeManager.Finalize value)
         {
             _dat2.Add(new FinalizeManager(value));
         }
 
         /// <summary>
-        /// w’èƒOƒ‹[ƒv‚Ìƒtƒ@ƒCƒiƒ‰ƒCƒU‚ª“o˜^‚³‚ê‚Ä‚¢‚é‚©’²¸‚·‚é
+        /// æŒ‡å®šã‚°ãƒ«ãƒ¼ãƒ—ã®ãƒ•ã‚¡ã‚¤ãƒŠãƒ©ã‚¤ã‚¶ãŒç™»éŒ²ã•ã‚Œã¦ã„ã‚‹ã‹èª¿æŸ»ã™ã‚‹
         /// </summary>
-        /// <param name="key">ƒOƒ‹[ƒv”Ô†</param>
-        /// <returns>true = “o˜^‚³‚ê‚Ä‚¢‚é / false = “o˜^‚³‚ê‚Ä‚¢‚È‚¢</returns>
+        /// <param name="key">ã‚°ãƒ«ãƒ¼ãƒ—ç•ªå·</param>
+        /// <returns>true = ç™»éŒ²ã•ã‚Œã¦ã„ã‚‹ / false = ç™»éŒ²ã•ã‚Œã¦ã„ãªã„</returns>
         public bool Contains(NamedId key)
         {
             return _dat1.Contains(key);
         }
 
         /// <summary>
-        /// “o˜^Ï‚İ‚Ìƒtƒ@ƒCƒiƒ‰ƒCƒU‚ğÀs‚µ‚È‚¢‚Åíœ‚·‚é
+        /// ç™»éŒ²æ¸ˆã¿ã®ãƒ•ã‚¡ã‚¤ãƒŠãƒ©ã‚¤ã‚¶ã‚’å®Ÿè¡Œã—ãªã„ã§å‰Šé™¤ã™ã‚‹
         /// </summary>
         public void Clear()
         {
@@ -142,7 +142,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// “o˜^‚µ‚Ä‚¢‚éƒtƒ@ƒCƒiƒ‰ƒCƒU‚ğ‚·‚×‚ÄÀs‚·‚é
+        /// ç™»éŒ²ã—ã¦ã„ã‚‹ãƒ•ã‚¡ã‚¤ãƒŠãƒ©ã‚¤ã‚¶ã‚’ã™ã¹ã¦å®Ÿè¡Œã™ã‚‹
         /// </summary>
         public bool Flush()
         {
@@ -166,7 +166,7 @@ namespace Tono.GuiWinForm
             return cnt > 0;
         }
 
-        #region IEnumerable ƒƒ“ƒo
+        #region IEnumerable ãƒ¡ãƒ³ãƒ
 
         public IEnumerator GetEnumerator()
         {

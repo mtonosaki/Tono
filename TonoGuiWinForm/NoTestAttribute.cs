@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System;
@@ -17,8 +17,8 @@ namespace Tono.GuiWinForm
     }
 
     /// <summary>
-    /// NoTestClass‚ÌƒAƒgƒŠƒrƒ…[ƒg
-    /// ƒeƒXƒg‚ğs‚í‚È‚­‚Ä—Ç‚¢ƒNƒ‰ƒX‚É‚Â‚¯‚é‘®«
+    /// NoTestClassã®ã‚¢ãƒˆãƒªãƒ“ãƒ¥ãƒ¼ãƒˆ
+    /// ãƒ†ã‚¹ãƒˆã‚’è¡Œã‚ãªãã¦è‰¯ã„ã‚¯ãƒ©ã‚¹ã«ã¤ã‘ã‚‹å±æ€§
     /// </summary>
     [NoTestClass]
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Method, AllowMultiple = false)]

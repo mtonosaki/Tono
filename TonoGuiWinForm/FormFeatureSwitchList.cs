@@ -11,7 +11,7 @@ using System.Windows.Forms;
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// FormFeatureSwitchList ‚ÌŠT—v‚Ìà–¾‚Å‚·B
+    /// FormFeatureSwitchList ã®æ¦‚è¦ã®èª¬æ˜ã§ã™ã€‚
     /// </summary>
     public class FormFeatureSwitchList : System.Windows.Forms.Form
     {
@@ -34,13 +34,13 @@ namespace Tono.GuiWinForm
         public FormFeatureSwitchList()
         {
             //
-            // Windows ƒtƒH[ƒ€ ƒfƒUƒCƒi ƒTƒ|[ƒg‚É•K—v‚Å‚·B
+            // Windows ãƒ•ã‚©ãƒ¼ãƒ  ãƒ‡ã‚¶ã‚¤ãƒŠ ã‚µãƒãƒ¼ãƒˆã«å¿…è¦ã§ã™ã€‚
             //
             InitializeComponent();
         }
 
         /// <summary>
-        /// ƒ‹[ƒgƒOƒ‹[ƒv‚ğw’è‚·‚é
+        /// ãƒ«ãƒ¼ãƒˆã‚°ãƒ«ãƒ¼ãƒ—ã‚’æŒ‡å®šã™ã‚‹
         /// </summary>
         public void SetFeatureRootGroup(FeatureGroupBase root)
         {
@@ -48,7 +48,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// g—p‚³‚ê‚Ä‚¢‚éƒŠƒ\[ƒX‚ÉŒãˆ—‚ğÀs‚µ‚Ü‚·B
+        /// ä½¿ç”¨ã•ã‚Œã¦ã„ã‚‹ãƒªã‚½ãƒ¼ã‚¹ã«å¾Œå‡¦ç†ã‚’å®Ÿè¡Œã—ã¾ã™ã€‚
         /// </summary>
         protected override void Dispose(bool disposing)
         {
@@ -66,8 +66,8 @@ namespace Tono.GuiWinForm
         {
             base.OnLoad(e);
 
-            // ƒtƒH[ƒ€‚ÉƒtƒB[ƒ`ƒƒ[‚Ìî•ñ‚ğ•\¦‚³‚¹‚é
-            System.Diagnostics.Debug.Assert(_root != null, "—\‚ßSetFeatureRootGroup‚ğÀs‚µ‚Ä‚©‚çShow‚·‚é•K—v‚ª‚ ‚éƒtƒH[ƒ€‚Å‚·");
+            // ãƒ•ã‚©ãƒ¼ãƒ ã«ãƒ•ã‚£ãƒ¼ãƒãƒ£ãƒ¼ã®æƒ…å ±ã‚’è¡¨ç¤ºã•ã›ã‚‹
+            System.Diagnostics.Debug.Assert(_root != null, "äºˆã‚SetFeatureRootGroupã‚’å®Ÿè¡Œã—ã¦ã‹ã‚‰Showã™ã‚‹å¿…è¦ãŒã‚ã‚‹ãƒ•ã‚©ãƒ¼ãƒ ã§ã™");
             IDictionary regfc = new Hashtable();
 
             var fcs = _root.GetChildFeatureInstance();
@@ -94,14 +94,14 @@ namespace Tono.GuiWinForm
             }
             lvFeatureSwitchList.Items.AddRange(lvs);
 
-            // –¢g—pƒtƒB[ƒ`ƒƒ[‚ÌƒŠƒXƒg‚ğì¬‚·‚é
-            // ŠÖŒW‚·‚éƒAƒZƒ“ƒuƒŠ‚ğ—ñ‹“‚·‚é
+            // æœªä½¿ç”¨ãƒ•ã‚£ãƒ¼ãƒãƒ£ãƒ¼ã®ãƒªã‚¹ãƒˆã‚’ä½œæˆã™ã‚‹
+            // é–¢ä¿‚ã™ã‚‹ã‚¢ã‚»ãƒ³ãƒ–ãƒªã‚’åˆ—æŒ™ã™ã‚‹
             var eaa = Assembly.GetEntryAssembly();
             var eac = Assembly.GetCallingAssembly();
             var eab = Assembly.GetExecutingAssembly();
             Assembly[] ass = { eaa, eab, eac };
 
-            // ƒNƒ‰ƒX‚ğ‹L‰¯‚·‚é
+            // ã‚¯ãƒ©ã‚¹ã‚’è¨˜æ†¶ã™ã‚‹
             var classes = new Hashtable();
             foreach (var ea in ass)
             {
@@ -141,10 +141,10 @@ namespace Tono.GuiWinForm
         }
 
 
-        #region Windows ƒtƒH[ƒ€ ƒfƒUƒCƒi‚Å¶¬‚³‚ê‚½ƒR[ƒh 
+        #region Windows ãƒ•ã‚©ãƒ¼ãƒ  ãƒ‡ã‚¶ã‚¤ãƒŠã§ç”Ÿæˆã•ã‚ŒãŸã‚³ãƒ¼ãƒ‰ 
         /// <summary>
-        /// ƒfƒUƒCƒi ƒTƒ|[ƒg‚É•K—v‚Èƒƒ\ƒbƒh‚Å‚·B‚±‚Ìƒƒ\ƒbƒh‚Ì“à—e‚ğ
-        /// ƒR[ƒh ƒGƒfƒBƒ^‚Å•ÏX‚µ‚È‚¢‚Å‚­‚¾‚³‚¢B
+        /// ãƒ‡ã‚¶ã‚¤ãƒŠ ã‚µãƒãƒ¼ãƒˆã«å¿…è¦ãªãƒ¡ã‚½ãƒƒãƒ‰ã§ã™ã€‚ã“ã®ãƒ¡ã‚½ãƒƒãƒ‰ã®å†…å®¹ã‚’
+        /// ã‚³ãƒ¼ãƒ‰ ã‚¨ãƒ‡ã‚£ã‚¿ã§å¤‰æ›´ã—ãªã„ã§ãã ã•ã„ã€‚
         /// </summary>
         private void InitializeComponent()
         {
@@ -320,7 +320,7 @@ namespace Tono.GuiWinForm
             fc.Enabled = (e.NewValue == CheckState.Checked ? true : false);
             var dummy = fc.CanStart;
 
-            // FeatureFeatureSwitchList‚ªˆê‚Â‚Í•K—v
+            // FeatureFeatureSwitchListãŒä¸€ã¤ã¯å¿…è¦
             var id = -1;
             foreach (ListViewItem l in ((ListView)sender).Items)
             {

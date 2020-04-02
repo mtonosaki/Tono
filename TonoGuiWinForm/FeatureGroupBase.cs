@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System;
@@ -11,35 +11,35 @@ using System.Reflection;
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// Feature Group Base ‚ÌŠT—v‚Ìà–¾‚Å‚·B
+    /// Feature Group Base ã®æ¦‚è¦ã®èª¬æ˜ã§ã™ã€‚
     /// fg : Feature Group
-    /// •¡”‚ÌƒtƒB[ƒ`ƒƒ[‚ğ‚Ğ‚Æ‚Â‚ÌƒpƒbƒP[ƒW‚Æ‚µ‚ÄŠÇ—‚·‚é‚½‚ß‚ÌŠî–{ƒNƒ‰ƒX
+    /// è¤‡æ•°ã®ãƒ•ã‚£ãƒ¼ãƒãƒ£ãƒ¼ã‚’ã²ã¨ã¤ã®ãƒ‘ãƒƒã‚±ãƒ¼ã‚¸ã¨ã—ã¦ç®¡ç†ã™ã‚‹ãŸã‚ã®åŸºæœ¬ã‚¯ãƒ©ã‚¹
     /// </summary>
     public abstract class FeatureGroupBase : DataLinkManager, IMouseListener, IKeyListener, IDisposable
     {
-        #region	‘®«(ƒVƒŠƒAƒ‰ƒCƒY‚·‚é)
-        /// <summary>qƒtƒB[ƒ`ƒƒ[ƒOƒ‹[ƒv‚ğŠÇ—‚·‚é”z—ñ</summary>
-        private readonly IList /*<fgBase ‚Ü‚½‚Í FeatureBase>*/ _children = new ArrayList();
+        #region	å±æ€§(ã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºã™ã‚‹)
+        /// <summary>å­ãƒ•ã‚£ãƒ¼ãƒãƒ£ãƒ¼ã‚°ãƒ«ãƒ¼ãƒ—ã‚’ç®¡ç†ã™ã‚‹é…åˆ—</summary>
+        private readonly IList /*<fgBase ã¾ãŸã¯ FeatureBase>*/ _children = new ArrayList();
         #endregion
-        #region ‘®«(ƒVƒŠƒAƒ‰ƒCƒY‚µ‚È‚¢)
-        /// <summary>ƒ}ƒEƒX‚ÌƒNƒŠƒbƒNˆÊ’u‚ğ•Û‘¶‚·‚é‹¤—L•Ï”</summary>
+        #region å±æ€§(ã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºã—ãªã„)
+        /// <summary>ãƒã‚¦ã‚¹ã®ã‚¯ãƒªãƒƒã‚¯ä½ç½®ã‚’ä¿å­˜ã™ã‚‹å…±æœ‰å¤‰æ•°</summary>
         private MouseState _clickPos = null;
         #endregion
 
         /// <summary>
-        /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+        /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
         /// </summary>
         protected FeatureGroupBase()
         {
         }
-        #region IDisposable ƒƒ“ƒo
+        #region IDisposable ãƒ¡ãƒ³ãƒ
 
         public virtual void Dispose()
         {
-            // ’ˆÓF‚±‚±‚ÅffDataLinkBase‚ÌDispose‚ÍÀ{‚µ‚È‚¢B‚·‚ê‚ÎATimerObject‚È‚Ç‚ªg—p‚Å‚«‚È‚­‚È‚é
-            //        ‚»‚ÌDispose‚Íƒ‹[ƒgƒOƒ‹[ƒv‚©‚çÀs‚³‚ê‚Ü‚·
+            // æ³¨æ„ï¼šã“ã“ã§ffDataLinkBaseã®Disposeã¯å®Ÿæ–½ã—ãªã„ã€‚ã™ã‚Œã°ã€TimerObjectãªã©ãŒä½¿ç”¨ã§ããªããªã‚‹
+            //        ãã®Disposeã¯ãƒ«ãƒ¼ãƒˆã‚°ãƒ«ãƒ¼ãƒ—ã‹ã‚‰å®Ÿè¡Œã•ã‚Œã¾ã™
 
-            // q‹Ÿ‚ÌDispose‚ğƒR[ƒ‹‚·‚é
+            // å­ä¾›ã®Disposeã‚’ã‚³ãƒ¼ãƒ«ã™ã‚‹
             foreach (var lb in _children)
             {
                 if (lb is IDisposable)
@@ -53,7 +53,7 @@ namespace Tono.GuiWinForm
         #endregion
 
         /// <summary>
-        /// ©•ªˆÈ‰º‚ÌƒtƒB[ƒ`ƒƒ[‚ğ‘S‚Äæ“¾‚·‚éiqƒOƒ‹[ƒv‚àŠÜ‚Şj
+        /// è‡ªåˆ†ä»¥ä¸‹ã®ãƒ•ã‚£ãƒ¼ãƒãƒ£ãƒ¼ã‚’å…¨ã¦å–å¾—ã™ã‚‹ï¼ˆå­ã‚°ãƒ«ãƒ¼ãƒ—ã‚‚å«ã‚€ï¼‰
         /// </summary>
         /// <returns></returns>
         public ICollection GetChildFeatureInstance()
@@ -64,13 +64,13 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// GetChildFeatureInstance‚Åg—p‚·‚éÄ‹AŠÖ”
+        /// GetChildFeatureInstanceã§ä½¿ç”¨ã™ã‚‹å†å¸°é–¢æ•°
         /// </summary>
-        /// <param name="buf">Œ‹‰Ê‚ğû‚ß‚é”z—ñ</param>
-        /// <param name="fg">ŒŸõŠJn‚·‚éƒtƒB[ƒ`ƒƒ[ƒOƒ‹[ƒv</param>
+        /// <param name="buf">çµæœã‚’åã‚ã‚‹é…åˆ—</param>
+        /// <param name="fg">æ¤œç´¢é–‹å§‹ã™ã‚‹ãƒ•ã‚£ãƒ¼ãƒãƒ£ãƒ¼ã‚°ãƒ«ãƒ¼ãƒ—</param>
         private void _getChildFeatureInstances(IList buf, FeatureGroupBase fg)
         {
-            //lock(fg._children.SyncRoot)	// “r’†‚ÅAddChild‚µ‚È‚¢‚Ì‚ÅAƒXƒŒƒbƒhƒZ[ƒtB“r’†‚ÅAddChild‚µ‚Ä‚µ‚Ü‚¤‚Æ‰º‚Ìƒ‹[ƒv‚ÅAssert‚³‚ê‚é
+            //lock(fg._children.SyncRoot)	// é€”ä¸­ã§AddChildã—ãªã„ã®ã§ã€ã‚¹ãƒ¬ãƒƒãƒ‰ã‚»ãƒ¼ãƒ•ã€‚é€”ä¸­ã§AddChildã—ã¦ã—ã¾ã†ã¨ä¸‹ã®ãƒ«ãƒ¼ãƒ—ã§Assertã•ã‚Œã‚‹
             {
                 foreach (var cg in fg._children)
                 {
@@ -87,13 +87,13 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// w’èƒtƒB[ƒ`ƒƒ[‚Éƒg[ƒNƒ“‚ğƒZƒbƒg‚·‚é
+        /// æŒ‡å®šãƒ•ã‚£ãƒ¼ãƒãƒ£ãƒ¼ã«ãƒˆãƒ¼ã‚¯ãƒ³ã‚’ã‚»ãƒƒãƒˆã™ã‚‹
         /// </summary>
-        /// <param name="feature">ƒtƒB[ƒ`ƒƒ[</param>
-        /// <param name="tokenID">ƒg[ƒNƒ“ID</param>
+        /// <param name="feature">ãƒ•ã‚£ãƒ¼ãƒãƒ£ãƒ¼</param>
+        /// <param name="tokenID">ãƒˆãƒ¼ã‚¯ãƒ³ID</param>
         protected void requestStartup(FeatureGroupBase group, Type feature, NamedId tokenID)
         {
-            //lock(_children.SyncRoot)	// “r’†‚ÅAddChild‚µ‚È‚¢‚Ì‚ÅAƒXƒŒƒbƒhƒZ[ƒtB“r’†‚ÅAddChild‚µ‚Ä‚µ‚Ü‚¤‚Æ‰º‚Ìƒ‹[ƒv‚ÅAssert‚³‚ê‚é
+            //lock(_children.SyncRoot)	// é€”ä¸­ã§AddChildã—ãªã„ã®ã§ã€ã‚¹ãƒ¬ãƒƒãƒ‰ã‚»ãƒ¼ãƒ•ã€‚é€”ä¸­ã§AddChildã—ã¦ã—ã¾ã†ã¨ä¸‹ã®ãƒ«ãƒ¼ãƒ—ã§Assertã•ã‚Œã‚‹
             {
                 foreach (var cg in _children)
                 {
@@ -118,13 +118,13 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// qƒtƒB[ƒ`ƒƒ[ƒOƒ‹[ƒv‚ğ’Ç‰Á‚·‚é
+        /// å­ãƒ•ã‚£ãƒ¼ãƒãƒ£ãƒ¼ã‚°ãƒ«ãƒ¼ãƒ—ã‚’è¿½åŠ ã™ã‚‹
         /// </summary>
         public FeatureGroupBase AddChildGroup()
         {
             FeatureGroupBase ret = new FeatureGroupChild();
             linkDataTo(ret);
-            //lock(_children.SyncRoot)	// ƒg[ƒNƒ“Às’†‚¢AddChild‚µ‚½‚¢‚Ì‚ÅAƒfƒbƒhƒƒbƒN‚µ‚È‚¢‚æ‚¤‚ÉLock‚µ‚È‚¢B
+            //lock(_children.SyncRoot)	// ãƒˆãƒ¼ã‚¯ãƒ³å®Ÿè¡Œä¸­ã„AddChildã—ãŸã„ã®ã§ã€ãƒ‡ãƒƒãƒ‰ãƒ­ãƒƒã‚¯ã—ãªã„ã‚ˆã†ã«Lockã—ãªã„ã€‚
             {
                 _children.Add(ret);
             }
@@ -132,7 +132,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// qƒtƒB[ƒ`ƒƒ[‚ğ’Ç‰Á‚·‚éi–¼‘O‚ğ‚Â‚¯‚éj
+        /// å­ãƒ•ã‚£ãƒ¼ãƒãƒ£ãƒ¼ã‚’è¿½åŠ ã™ã‚‹ï¼ˆåå‰ã‚’ã¤ã‘ã‚‹ï¼‰
         /// </summary>
         /// <param name="child"></param>
         /// <param name="name"></param>
@@ -145,17 +145,17 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// qƒtƒB[ƒ`ƒƒ[ƒNƒ‰ƒX‚ğ’Ç‰Á‚·‚é
+        /// å­ãƒ•ã‚£ãƒ¼ãƒãƒ£ãƒ¼ã‚¯ãƒ©ã‚¹ã‚’è¿½åŠ ã™ã‚‹
         /// </summary>
-        /// <param name="child">ƒtƒB[ƒ`ƒƒ[ƒNƒ‰ƒX‚ÌŒ^</param>
+        /// <param name="child">ãƒ•ã‚£ãƒ¼ãƒãƒ£ãƒ¼ã‚¯ãƒ©ã‚¹ã®å‹</param>
         public FeatureBase AddChildFeature(Type child)
         {
-            System.Diagnostics.Debug.Assert(child.IsSubclassOf(typeof(FeatureBase)), "AddChildFeature‚É“o˜^‚Å‚«‚é‚Ì‚ÍAFeatureBase‚ğŒp³‚µ‚½ƒNƒ‰ƒX‚Ì‚İ‚Å‚·");
+            System.Diagnostics.Debug.Assert(child.IsSubclassOf(typeof(FeatureBase)), "AddChildFeatureã«ç™»éŒ²ã§ãã‚‹ã®ã¯ã€FeatureBaseã‚’ç¶™æ‰¿ã—ãŸã‚¯ãƒ©ã‚¹ã®ã¿ã§ã™");
             try
             {
                 var ret = (FeatureBase)Activator.CreateInstance(child, true);
                 linkDataTo(ret);
-                //lock(_children.SyncRoot)	// ƒg[ƒNƒ“Às’†‚ÉAddChild‚µ‚½‚¢‚Ì‚ÅAƒfƒbƒhƒƒbƒN–h~‚Ålock‚µ‚È‚¢B
+                //lock(_children.SyncRoot)	// ãƒˆãƒ¼ã‚¯ãƒ³å®Ÿè¡Œä¸­ã«AddChildã—ãŸã„ã®ã§ã€ãƒ‡ãƒƒãƒ‰ãƒ­ãƒƒã‚¯é˜²æ­¢ã§lockã—ãªã„ã€‚
                 {
                     _children.Add(ret);
                 }
@@ -193,12 +193,12 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// w’è‚µ‚½ƒtƒB[ƒ`ƒƒ[ƒCƒ“ƒXƒ^ƒ“ƒX‚ğœ‹‚·‚é
+        /// æŒ‡å®šã—ãŸãƒ•ã‚£ãƒ¼ãƒãƒ£ãƒ¼ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’é™¤å»ã™ã‚‹
         /// </summary>
-        /// <param name="value">œ‹‚·‚éƒtƒB[ƒ`ƒƒ[</param>
+        /// <param name="value">é™¤å»ã™ã‚‹ãƒ•ã‚£ãƒ¼ãƒãƒ£ãƒ¼</param>
         public void Remove(DataLinkManager value)
         {
-            //lock(_children.SyncRoot)	// ƒg[ƒNƒ“Às’†‚ÉRemove‚µ‚½‚¢‚Ì‚ÅAƒfƒbƒhƒƒbƒN–h~‚Ålock‚µ‚È‚¢
+            //lock(_children.SyncRoot)	// ãƒˆãƒ¼ã‚¯ãƒ³å®Ÿè¡Œä¸­ã«Removeã—ãŸã„ã®ã§ã€ãƒ‡ãƒƒãƒ‰ãƒ­ãƒƒã‚¯é˜²æ­¢ã§lockã—ãªã„
             {
                 _children.Remove(value);
             }
@@ -213,7 +213,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ‘SƒtƒB[ƒ`ƒƒ[‚ğíœ‚·‚é
+        /// å…¨ãƒ•ã‚£ãƒ¼ãƒãƒ£ãƒ¼ã‚’å‰Šé™¤ã™ã‚‹
         /// </summary>
         public void RemoveAllFeatures()
         {
@@ -230,9 +230,9 @@ namespace Tono.GuiWinForm
         private static readonly FieldInfo _fiTokenInvokedChecker = typeof(TokenTray).GetField("TokenInvokedChecker", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
 
         /// <summary>
-        /// ƒg[ƒNƒ“‚ª–³‚­‚È‚é‚Ü‚Åƒ‹[ƒv‚µ‚ÄAŠeƒtƒB[ƒ`ƒƒ[‚ÌStart‚ğÀs‚·‚é
+        /// ãƒˆãƒ¼ã‚¯ãƒ³ãŒç„¡ããªã‚‹ã¾ã§ãƒ«ãƒ¼ãƒ—ã—ã¦ã€å„ãƒ•ã‚£ãƒ¼ãƒãƒ£ãƒ¼ã®Startã‚’å®Ÿè¡Œã™ã‚‹
         /// </summary>
-        /// <returns>true=ˆ—‚³‚ê‚½ / false=ˆ—‚Í–³‚©‚Á‚½</returns>
+        /// <returns>true=å‡¦ç†ã•ã‚ŒãŸ / false=å‡¦ç†ã¯ç„¡ã‹ã£ãŸ</returns>
         private bool invokeStartupToken()
         {
             var root = (FeatureGroupRoot)GetRoot();
@@ -246,7 +246,7 @@ namespace Tono.GuiWinForm
             var retryMax = 1000;
             while (Token.Count > 0)
             {
-                System.Diagnostics.Debug.Assert(retryMax-- >= 0, "InvokeStartupToken‚Å–³ŒÀƒ‹[ƒv‚ğŒŸ’m‚µ‚Ü‚µ‚½");
+                System.Diagnostics.Debug.Assert(retryMax-- >= 0, "InvokeStartupTokenã§ç„¡é™ãƒ«ãƒ¼ãƒ—ã‚’æ¤œçŸ¥ã—ã¾ã—ãŸ");
                 var cnt = 0;
                 root.startupLoop(dupChecker, ref cnt);
                 if (cnt == 0)
@@ -261,10 +261,10 @@ namespace Tono.GuiWinForm
             Token._clear();
             dupChecker.Clear();
 
-            // ƒAƒvƒŠI—¹—v‹‚ª‚ ‚ê‚ÎƒNƒ[ƒY‚·‚é
+            // ã‚¢ãƒ—ãƒªçµ‚äº†è¦æ±‚ãŒã‚ã‚Œã°ã‚¯ãƒ­ãƒ¼ã‚ºã™ã‚‹
             if (root.IsApplicationQuitting)
             {
-                // ƒtƒH[ƒ€‚ğæ“¾‚·‚é
+                // ãƒ•ã‚©ãƒ¼ãƒ ã‚’å–å¾—ã™ã‚‹
                 System.Windows.Forms.Control c;
                 for (c = root.GetFeatureRich(); c is System.Windows.Forms.Form == false; c = c.Parent)
                 {
@@ -278,14 +278,14 @@ namespace Tono.GuiWinForm
         private static readonly MethodInfo _mi_control_bredge_event = typeof(FeatureControlBridgeBase).GetMethod("_event", BindingFlags.Instance | BindingFlags.NonPublic);
 
         /// <summary>
-        /// w’èƒRƒ“ƒgƒ[ƒ‹‚ÉƒCƒxƒ“ƒg‚ğ”­s‚·‚é
+        /// æŒ‡å®šã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã«ã‚¤ãƒ™ãƒ³ãƒˆã‚’ç™ºè¡Œã™ã‚‹
         /// </summary>
         /// <param name="featureID"></param>
         /// <param name="target"></param>
         /// <param name="eventName"></param>
         public void FireEvent(Id featureID, System.Windows.Forms.Control target, string eventName)
         {
-            //lock(_children.SyncRoot)	// “r’†‚ÅAddChild‚µ‚È‚¢‚Ì‚ÅAƒXƒŒƒbƒhƒZ[ƒtB“r’†‚ÅAddChild‚µ‚Ä‚µ‚Ü‚¤‚Æ‰º‚Ìƒ‹[ƒv‚ÅAssert‚³‚ê‚é
+            //lock(_children.SyncRoot)	// é€”ä¸­ã§AddChildã—ãªã„ã®ã§ã€ã‚¹ãƒ¬ãƒƒãƒ‰ã‚»ãƒ¼ãƒ•ã€‚é€”ä¸­ã§AddChildã—ã¦ã—ã¾ã†ã¨ä¸‹ã®ãƒ«ãƒ¼ãƒ—ã§Assertã•ã‚Œã‚‹
             {
                 foreach (var c in _children)
                 {
@@ -310,11 +310,11 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ‹Ù‹}ƒg[ƒNƒ“ˆ—Ä‹Aƒ‹[ƒv
+        /// ç·Šæ€¥ãƒˆãƒ¼ã‚¯ãƒ³å‡¦ç†å†å¸°ãƒ«ãƒ¼ãƒ—
         /// </summary>
         private void invokeUrgentTokenLoop(NamedId id, NamedId who, object param, FeatureGroupBase tar)
         {
-            //lock(_children.SyncRoot)	// “r’†‚ÅAddChild‚µ‚È‚¢‚Ì‚ÅAƒXƒŒƒbƒhƒZ[ƒtB“r’†‚ÅAddChild‚µ‚Ä‚µ‚Ü‚¤‚Æ‰º‚Ìƒ‹[ƒv‚ÅAssert‚³‚ê‚é
+            //lock(_children.SyncRoot)	// é€”ä¸­ã§AddChildã—ãªã„ã®ã§ã€ã‚¹ãƒ¬ãƒƒãƒ‰ã‚»ãƒ¼ãƒ•ã€‚é€”ä¸­ã§AddChildã—ã¦ã—ã¾ã†ã¨ä¸‹ã®ãƒ«ãƒ¼ãƒ—ã§Assertã•ã‚Œã‚‹
             {
                 foreach (var c in _children)
                 {
@@ -345,7 +345,7 @@ namespace Tono.GuiWinForm
 
         private void paramloop(FeatureGroupBase tar, List<FeatureBase> fcs)
         {
-            //lock(_children.SyncRoot)	// “r’†‚ÅAddChild‚µ‚È‚¢‚Ì‚ÅAƒXƒŒƒbƒhƒZ[ƒtB“r’†‚ÅAddChild‚µ‚Ä‚µ‚Ü‚¤‚Æ‰º‚Ìƒ‹[ƒv‚ÅAssert‚³‚ê‚é
+            //lock(_children.SyncRoot)	// é€”ä¸­ã§AddChildã—ãªã„ã®ã§ã€ã‚¹ãƒ¬ãƒƒãƒ‰ã‚»ãƒ¼ãƒ•ã€‚é€”ä¸­ã§AddChildã—ã¦ã—ã¾ã†ã¨ä¸‹ã®ãƒ«ãƒ¼ãƒ—ã§Assertã•ã‚Œã‚‹
             {
                 foreach (var c in _children)
                 {
@@ -365,14 +365,14 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒRƒ}ƒ“ƒhƒ‰ƒCƒ“‚ğ‰ğÍ‚µ‚ÄÀs‚·‚é
+        /// ã‚³ãƒãƒ³ãƒ‰ãƒ©ã‚¤ãƒ³ã‚’è§£æã—ã¦å®Ÿè¡Œã™ã‚‹
         /// </summary>
         /// <param name="v"></param>
         public void ParseCommandLineParameter(string[] args)
         {
             var fcs = new List<FeatureBase>();
             paramloop(this, fcs);
-            fcs.Sort((x, y) => x.CommandParameter?.Length ?? 0 - y.CommandParameter?.Length ?? 0);  // StartWith‚Å“–‚Ä‚é‚Ì‚ÅA’·‚¢•û‚©‚çˆ—‚·‚é
+            fcs.Sort((x, y) => x.CommandParameter?.Length ?? 0 - y.CommandParameter?.Length ?? 0);  // StartWithã§å½“ã¦ã‚‹ã®ã§ã€é•·ã„æ–¹ã‹ã‚‰å‡¦ç†ã™ã‚‹
 
             for (var i = 1; i < args.Length; i++)
             {
@@ -388,7 +388,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒtƒ@ƒCƒiƒ‰ƒCƒU[‚âƒg[ƒNƒ“‚ğ‚·‚×‚ÄÁ”ï‚·‚é
+        /// ãƒ•ã‚¡ã‚¤ãƒŠãƒ©ã‚¤ã‚¶ãƒ¼ã‚„ãƒˆãƒ¼ã‚¯ãƒ³ã‚’ã™ã¹ã¦æ¶ˆè²»ã™ã‚‹
         /// </summary>
         public void FlushFeatureTriggers()
         {
@@ -400,24 +400,24 @@ namespace Tono.GuiWinForm
                 {
                     break;
                 }
-                System.Diagnostics.Debug.Assert(cnt < 100, "ƒtƒ@ƒCƒiƒ‰ƒCƒU‚Æƒg[ƒNƒ“‚ÅzŠÂQÆ‚ª”­¶‚µ‚Ä‚¢‚é‚©‚à‚µ‚ê‚Ü‚¹‚ñ");
+                System.Diagnostics.Debug.Assert(cnt < 100, "ãƒ•ã‚¡ã‚¤ãƒŠãƒ©ã‚¤ã‚¶ã¨ãƒˆãƒ¼ã‚¯ãƒ³ã§å¾ªç’°å‚ç…§ãŒç™ºç”Ÿã—ã¦ã„ã‚‹ã‹ã‚‚ã—ã‚Œã¾ã›ã‚“");
             }
-            // ƒp[ƒcíœƒCƒxƒ“ƒg
+            // ãƒ‘ãƒ¼ãƒ„å‰Šé™¤ã‚¤ãƒ™ãƒ³ãƒˆ
             checkAndFireDataChanged();
 
-            // ‘Sƒg[ƒNƒ“I—¹ƒCƒxƒ“ƒg
+            // å…¨ãƒˆãƒ¼ã‚¯ãƒ³çµ‚äº†ã‚¤ãƒ™ãƒ³ãƒˆ
             checkAndFireAllTokenCompleted();
         }
 
         /// <summary>
-        /// –¼‘O‚ÅqƒtƒB[ƒ`ƒƒ[‚ğŒŸõ‚·‚éi‘·‚àŒŸõ‚·‚éj
+        /// åå‰ã§å­ãƒ•ã‚£ãƒ¼ãƒãƒ£ãƒ¼ã‚’æ¤œç´¢ã™ã‚‹ï¼ˆå­«ã‚‚æ¤œç´¢ã™ã‚‹ï¼‰
         /// </summary>
-        /// <param name="name">ŒŸõ‚·‚é–¼‘Oi‘å•¶š¬•¶š‚Ì‹æ•Ê—L‚èj</param>
-        /// <returns>Œ©‚Â‚©‚Á‚½ƒtƒB[ƒ`ƒƒ[ˆê——</returns>
+        /// <param name="name">æ¤œç´¢ã™ã‚‹åå‰ï¼ˆå¤§æ–‡å­—å°æ–‡å­—ã®åŒºåˆ¥æœ‰ã‚Šï¼‰</param>
+        /// <returns>è¦‹ã¤ã‹ã£ãŸãƒ•ã‚£ãƒ¼ãƒãƒ£ãƒ¼ä¸€è¦§</returns>
         public IList<FeatureBase> FindChildFeatures(string name)
         {
             var ret = new List<FeatureBase>();
-            //lock(_children.SyncRoot)	// “r’†‚ÅAddChild‚µ‚È‚¢‚Ì‚ÅAƒXƒŒƒbƒhƒZ[ƒtB“r’†‚ÅAddChild‚µ‚Ä‚µ‚Ü‚¤‚Æ‰º‚Ìƒ‹[ƒv‚ÅAssert‚³‚ê‚é
+            //lock(_children.SyncRoot)	// é€”ä¸­ã§AddChildã—ãªã„ã®ã§ã€ã‚¹ãƒ¬ãƒƒãƒ‰ã‚»ãƒ¼ãƒ•ã€‚é€”ä¸­ã§AddChildã—ã¦ã—ã¾ã†ã¨ä¸‹ã®ãƒ«ãƒ¼ãƒ—ã§Assertã•ã‚Œã‚‹
             {
                 foreach (var c in _children)
                 {
@@ -439,14 +439,14 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// w’èƒ^ƒCƒv‚ğŒp³‚µ‚Ä‚¢‚éƒtƒB[ƒ`ƒƒ[‚ğŒŸõ‚·‚é
+        /// æŒ‡å®šã‚¿ã‚¤ãƒ—ã‚’ç¶™æ‰¿ã—ã¦ã„ã‚‹ãƒ•ã‚£ãƒ¼ãƒãƒ£ãƒ¼ã‚’æ¤œç´¢ã™ã‚‹
         /// </summary>
         /// <param name="interfaceType"></param>
         /// <returns></returns>
         public IList<FeatureBase> FindChildFeatures(Type interfaceType)
         {
             var ret = new List<FeatureBase>();
-            //lock(_children.SyncRoot)	// “r’†‚ÅAddChild‚µ‚È‚¢‚Ì‚ÅAƒXƒŒƒbƒhƒZ[ƒtB“r’†‚ÅAddChild‚µ‚Ä‚µ‚Ü‚¤‚Æ‰º‚Ìƒ‹[ƒv‚ÅAssert‚³‚ê‚é
+            //lock(_children.SyncRoot)	// é€”ä¸­ã§AddChildã—ãªã„ã®ã§ã€ã‚¹ãƒ¬ãƒƒãƒ‰ã‚»ãƒ¼ãƒ•ã€‚é€”ä¸­ã§AddChildã—ã¦ã—ã¾ã†ã¨ä¸‹ã®ãƒ«ãƒ¼ãƒ—ã§Assertã•ã‚Œã‚‹
             {
                 foreach (var c in _children)
                 {
@@ -468,11 +468,11 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ‘Sƒg[ƒNƒ“I—¹ƒCƒxƒ“ƒgˆ—
+        /// å…¨ãƒˆãƒ¼ã‚¯ãƒ³çµ‚äº†ã‚¤ãƒ™ãƒ³ãƒˆå‡¦ç†
         /// </summary>
         private void checkAndFireAllTokenCompleted()
         {
-            //lock(_children.SyncRoot)	// “r’†‚ÅAddChild‚µ‚È‚¢‚Ì‚ÅAƒXƒŒƒbƒhƒZ[ƒtB“r’†‚ÅAddChild‚µ‚Ä‚µ‚Ü‚¤‚Æ‰º‚Ìƒ‹[ƒv‚ÅAssert‚³‚ê‚é
+            //lock(_children.SyncRoot)	// é€”ä¸­ã§AddChildã—ãªã„ã®ã§ã€ã‚¹ãƒ¬ãƒƒãƒ‰ã‚»ãƒ¼ãƒ•ã€‚é€”ä¸­ã§AddChildã—ã¦ã—ã¾ã†ã¨ä¸‹ã®ãƒ«ãƒ¼ãƒ—ã§Assertã•ã‚Œã‚‹
             {
                 foreach (var c in _children)
                 {
@@ -492,7 +492,7 @@ namespace Tono.GuiWinForm
         private static readonly FieldInfo _fiAddedPartsOfData = typeof(PartsCollectionBase).GetField("_addedParts", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
 
         /// <summary>
-        /// ƒp[ƒcíœ‚ğŒŸo‚µ‚½‚çAƒCƒxƒ“ƒg‚ğ”ò‚Î‚·
+        /// ãƒ‘ãƒ¼ãƒ„å‰Šé™¤ã‚’æ¤œå‡ºã—ãŸã‚‰ã€ã‚¤ãƒ™ãƒ³ãƒˆã‚’é£›ã°ã™
         /// </summary>
         private void checkAndFireDataChanged()
         {
@@ -501,7 +501,7 @@ namespace Tono.GuiWinForm
                 return;
             }
 
-            // íœƒf[ƒ^‚ğæ“¾‚·‚é
+            // å‰Šé™¤ãƒ‡ãƒ¼ã‚¿ã‚’å–å¾—ã™ã‚‹
             var removed = (IList)_fiRemovedPartsOfData.GetValue(Parts);
             var added = (IList)_fiAddedPartsOfData.GetValue(Parts);
             if (removed.Count > 0 || added.Count > 0)
@@ -513,12 +513,12 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// íœƒCƒxƒ“ƒg‚ÌƒCƒ“ƒ^[ƒtƒF[ƒX‚ğÀ‘•‚µ‚Ä‚¢‚éƒtƒB[ƒ`ƒƒ[‚ÉƒCƒxƒ“ƒg‚ğ”ò‚Î‚·
+        /// å‰Šé™¤ã‚¤ãƒ™ãƒ³ãƒˆã®ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ãƒ¼ã‚¹ã‚’å®Ÿè£…ã—ã¦ã„ã‚‹ãƒ•ã‚£ãƒ¼ãƒãƒ£ãƒ¼ã«ã‚¤ãƒ™ãƒ³ãƒˆã‚’é£›ã°ã™
         /// </summary>
         /// <param name="removed"></param>
         private void _dataChangedEventLoop(ICollection removed, ICollection added)
         {
-            //lock(_children.SyncRoot)	// “r’†‚ÅAddChild‚µ‚È‚¢‚Ì‚ÅAƒXƒŒƒbƒhƒZ[ƒtB“r’†‚ÅAddChild‚µ‚Ä‚µ‚Ü‚¤‚Æ‰º‚Ìƒ‹[ƒv‚ÅAssert‚³‚ê‚é
+            //lock(_children.SyncRoot)	// é€”ä¸­ã§AddChildã—ãªã„ã®ã§ã€ã‚¹ãƒ¬ãƒƒãƒ‰ã‚»ãƒ¼ãƒ•ã€‚é€”ä¸­ã§AddChildã—ã¦ã—ã¾ã†ã¨ä¸‹ã®ãƒ«ãƒ¼ãƒ—ã§Assertã•ã‚Œã‚‹
             {
                 foreach (var c in _children)
                 {
@@ -539,25 +539,25 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ‹Ù‹}ƒg[ƒNƒ“‚ğ”­s‚·‚éi‚·‚×‚Ä‚Ìƒg[ƒNƒ“‚æ‚èæ‚ÉÀs‚·‚éj
+        /// ç·Šæ€¥ãƒˆãƒ¼ã‚¯ãƒ³ã‚’ç™ºè¡Œã™ã‚‹ï¼ˆã™ã¹ã¦ã®ãƒˆãƒ¼ã‚¯ãƒ³ã‚ˆã‚Šå…ˆã«å®Ÿè¡Œã™ã‚‹ï¼‰
         /// </summary>
-        /// <param name="id">TokenListener‚É“o˜^‚³‚ê‚Ä‚¢‚éID</param>
-        /// <param name="who">FeatureBase.Start(who)‚É“`‚¦‚éID</param>
-        /// <param name="param">ƒpƒ‰ƒ[ƒ^•t‚«Start‚É“n‚·ƒpƒ‰ƒ[ƒ^</param>
+        /// <param name="id">TokenListenerã«ç™»éŒ²ã•ã‚Œã¦ã„ã‚‹ID</param>
+        /// <param name="who">FeatureBase.Start(who)ã«ä¼ãˆã‚‹ID</param>
+        /// <param name="param">ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ä»˜ãStartã«æ¸¡ã™ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿</param>
         public void SetUrgentToken(NamedId id, NamedId who, object param)
         {
             invokeUrgentTokenLoop(id, who, param, GetRoot());
-            checkAndFireDataChanged();  // ƒp[ƒcíœƒCƒxƒ“ƒg
+            checkAndFireDataChanged();  // ãƒ‘ãƒ¼ãƒ„å‰Šé™¤ã‚¤ãƒ™ãƒ³ãƒˆ
         }
 
         /// <summary>
-        /// ƒCƒxƒ“ƒg‹N“®
+        /// ã‚¤ãƒ™ãƒ³ãƒˆèµ·å‹•
         /// </summary>
         private void startupLoop(IDictionary dupChecker, ref int cnt)
         {
-            //lock(_children.SyncRoot)	// “r’†‚ÅAddChild‚·‚é‚Ì‚ÅAƒfƒbƒhƒƒbƒN–h~‚Ì‚½‚ßƒXƒŒƒbƒhƒZ[ƒt
+            //lock(_children.SyncRoot)	// é€”ä¸­ã§AddChildã™ã‚‹ã®ã§ã€ãƒ‡ãƒƒãƒ‰ãƒ­ãƒƒã‚¯é˜²æ­¢ã®ãŸã‚ã‚¹ãƒ¬ãƒƒãƒ‰ã‚»ãƒ¼ãƒ•
             {
-                foreach (var c in new ArrayList(_children))  // “r’†‚ÅAddChild‚·‚é‚Ì‚ÅA_children‚ª•ÏX‚³‚ê‚é–‚É‘Î‰
+                foreach (var c in new ArrayList(_children))  // é€”ä¸­ã§AddChildã™ã‚‹ã®ã§ã€_childrenãŒå¤‰æ›´ã•ã‚Œã‚‹äº‹ã«å¯¾å¿œ
                 {
                     if (c is FeatureGroupBase)
                     {
@@ -588,12 +588,12 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒY[ƒ€•ÏXƒCƒxƒ“ƒg“]‘—
+        /// ã‚ºãƒ¼ãƒ å¤‰æ›´ã‚¤ãƒ™ãƒ³ãƒˆè»¢é€
         /// </summary>
         /// <param name="target"></param>
         public virtual void ZoomChanged(IRichPane target)
         {
-            //lock(_children.SyncRoot)	// “r’†‚ÅAddChild‚µ‚È‚¢‚Ì‚ÅAƒXƒŒƒbƒhƒZ[ƒtB“r’†‚ÅAddChild‚µ‚Ä‚µ‚Ü‚¤‚Æ‰º‚Ìƒ‹[ƒv‚ÅAssert‚³‚ê‚é
+            //lock(_children.SyncRoot)	// é€”ä¸­ã§AddChildã—ãªã„ã®ã§ã€ã‚¹ãƒ¬ãƒƒãƒ‰ã‚»ãƒ¼ãƒ•ã€‚é€”ä¸­ã§AddChildã—ã¦ã—ã¾ã†ã¨ä¸‹ã®ãƒ«ãƒ¼ãƒ—ã§Assertã•ã‚Œã‚‹
             {
                 foreach (var c in _children)
                 {
@@ -637,16 +637,16 @@ namespace Tono.GuiWinForm
                     }
                 }
             }
-            checkAndFireDataChanged();  // ƒp[ƒcíœƒCƒxƒ“ƒg
+            checkAndFireDataChanged();  // ãƒ‘ãƒ¼ãƒ„å‰Šé™¤ã‚¤ãƒ™ãƒ³ãƒˆ
         }
 
         /// <summary>
-        /// ƒXƒNƒ[ƒ‹•ÏXƒCƒxƒ“ƒg“]‘—
+        /// ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«å¤‰æ›´ã‚¤ãƒ™ãƒ³ãƒˆè»¢é€
         /// </summary>
         /// <param name="target"></param>
         public virtual void ScrollChanged(IRichPane target)
         {
-            //lock(_children.SyncRoot)	// “r’†‚ÅAddChild‚µ‚È‚¢‚Ì‚ÅAƒXƒŒƒbƒhƒZ[ƒtB“r’†‚ÅAddChild‚µ‚Ä‚µ‚Ü‚¤‚Æ‰º‚Ìƒ‹[ƒv‚ÅAssert‚³‚ê‚é
+            //lock(_children.SyncRoot)	// é€”ä¸­ã§AddChildã—ãªã„ã®ã§ã€ã‚¹ãƒ¬ãƒƒãƒ‰ã‚»ãƒ¼ãƒ•ã€‚é€”ä¸­ã§AddChildã—ã¦ã—ã¾ã†ã¨ä¸‹ã®ãƒ«ãƒ¼ãƒ—ã§Assertã•ã‚Œã‚‹
             {
                 foreach (var c in _children)
                 {
@@ -690,16 +690,16 @@ namespace Tono.GuiWinForm
                     }
                 }
             }
-            checkAndFireDataChanged();  // ƒp[ƒcíœƒCƒxƒ“ƒg
+            checkAndFireDataChanged();  // ãƒ‘ãƒ¼ãƒ„å‰Šé™¤ã‚¤ãƒ™ãƒ³ãƒˆ
         }
 
 
         /// <summary>
-        /// ƒ}ƒEƒXˆÚ“®ƒCƒxƒ“ƒg“]‘—
+        /// ãƒã‚¦ã‚¹ç§»å‹•ã‚¤ãƒ™ãƒ³ãƒˆè»¢é€
         /// </summary>
         public virtual void OnMouseMove(Tono.GuiWinForm.MouseState e)
         {
-            //lock(_children.SyncRoot)	// “r’†‚ÅAddChild‚µ‚È‚¢‚Ì‚ÅAƒXƒŒƒbƒhƒZ[ƒtB“r’†‚ÅAddChild‚µ‚Ä‚µ‚Ü‚¤‚Æ‰º‚Ìƒ‹[ƒv‚ÅAssert‚³‚ê‚é
+            //lock(_children.SyncRoot)	// é€”ä¸­ã§AddChildã—ãªã„ã®ã§ã€ã‚¹ãƒ¬ãƒƒãƒ‰ã‚»ãƒ¼ãƒ•ã€‚é€”ä¸­ã§AddChildã—ã¦ã—ã¾ã†ã¨ä¸‹ã®ãƒ«ãƒ¼ãƒ—ã§Assertã•ã‚Œã‚‹
             {
                 foreach (var c in _children)
                 {
@@ -737,17 +737,17 @@ namespace Tono.GuiWinForm
                     }
                 }
             }
-            checkAndFireDataChanged();  // ƒp[ƒcíœƒCƒxƒ“ƒg
+            checkAndFireDataChanged();  // ãƒ‘ãƒ¼ãƒ„å‰Šé™¤ã‚¤ãƒ™ãƒ³ãƒˆ
         }
 
 
         /// <summary>
-        /// ƒeƒLƒXƒgƒRƒ}ƒ“ƒh‚ğŠeƒtƒB[ƒ`ƒƒ[‚É“]‘—‚·‚é
+        /// ãƒ†ã‚­ã‚¹ãƒˆã‚³ãƒãƒ³ãƒ‰ã‚’å„ãƒ•ã‚£ãƒ¼ãƒãƒ£ãƒ¼ã«è»¢é€ã™ã‚‹
         /// </summary>
         /// <param name="tc"></param>
         public void PlayTextCommand(CommandBase tc)
         {
-            //lock(_children.SyncRoot)	// “r’†‚ÅAddChild‚µ‚È‚¢‚Ì‚ÅAƒXƒŒƒbƒhƒZ[ƒtB“r’†‚ÅAddChild‚µ‚Ä‚µ‚Ü‚¤‚Æ‰º‚Ìƒ‹[ƒv‚ÅAssert‚³‚ê‚é
+            //lock(_children.SyncRoot)	// é€”ä¸­ã§AddChildã—ãªã„ã®ã§ã€ã‚¹ãƒ¬ãƒƒãƒ‰ã‚»ãƒ¼ãƒ•ã€‚é€”ä¸­ã§AddChildã—ã¦ã—ã¾ã†ã¨ä¸‹ã®ãƒ«ãƒ¼ãƒ—ã§Assertã•ã‚Œã‚‹
             {
                 foreach (var c in _children)
                 {
@@ -776,11 +776,11 @@ namespace Tono.GuiWinForm
                     }
                 }
             }
-            checkAndFireDataChanged();  // ƒp[ƒcíœƒCƒxƒ“ƒg
+            checkAndFireDataChanged();  // ãƒ‘ãƒ¼ãƒ„å‰Šé™¤ã‚¤ãƒ™ãƒ³ãƒˆ
         }
 
         /// <summary>
-        /// ƒ}ƒEƒXƒ_ƒEƒ“ƒCƒxƒ“ƒg“]‘—
+        /// ãƒã‚¦ã‚¹ãƒ€ã‚¦ãƒ³ã‚¤ãƒ™ãƒ³ãƒˆè»¢é€
         /// </summary>
         public virtual void OnMouseDown(Tono.GuiWinForm.MouseState e)
         {
@@ -791,15 +791,15 @@ namespace Tono.GuiWinForm
 
             if (_clickPos == null)
             {
-                _clickPos = (MouseState)Share.Get("ClickPosition", typeof(MouseState));   // ˆÚ“®’†‚Ìƒp[ƒcˆê——
+                _clickPos = (MouseState)Share.Get("ClickPosition", typeof(MouseState));   // ç§»å‹•ä¸­ã®ãƒ‘ãƒ¼ãƒ„ä¸€è¦§
             }
             SerializerEx.CopyObject(_clickPos, e);
 
-            // ƒp[ƒc‚ğæ“¾‚·‚é
+            // ãƒ‘ãƒ¼ãƒ„ã‚’å–å¾—ã™ã‚‹
             ClickParts = Parts.GetPartsAt(e.Pos, true, out var clickPane);
             ClickPane = clickPane;
 
-            //lock(_children.SyncRoot)	// “r’†‚ÅAddChild‚µ‚È‚¢‚Ì‚ÅAƒXƒŒƒbƒhƒZ[ƒtB“r’†‚ÅAddChild‚µ‚Ä‚µ‚Ü‚¤‚Æ‰º‚Ìƒ‹[ƒv‚ÅAssert‚³‚ê‚é
+            //lock(_children.SyncRoot)	// é€”ä¸­ã§AddChildã—ãªã„ã®ã§ã€ã‚¹ãƒ¬ãƒƒãƒ‰ã‚»ãƒ¼ãƒ•ã€‚é€”ä¸­ã§AddChildã—ã¦ã—ã¾ã†ã¨ä¸‹ã®ãƒ«ãƒ¼ãƒ—ã§Assertã•ã‚Œã‚‹
             {
                 foreach (var c in _children)
                 {
@@ -837,15 +837,15 @@ namespace Tono.GuiWinForm
                     }
                 }
             }
-            checkAndFireDataChanged();  // ƒp[ƒcíœƒCƒxƒ“ƒg
+            checkAndFireDataChanged();  // ãƒ‘ãƒ¼ãƒ„å‰Šé™¤ã‚¤ãƒ™ãƒ³ãƒˆ
         }
 
         /// <summary>
-        /// ƒ}ƒEƒXƒAƒbƒvƒCƒxƒ“ƒg“]‘—
+        /// ãƒã‚¦ã‚¹ã‚¢ãƒƒãƒ—ã‚¤ãƒ™ãƒ³ãƒˆè»¢é€
         /// </summary>
         public virtual void OnMouseUp(Tono.GuiWinForm.MouseState e)
         {
-            //lock(_children.SyncRoot)	// “r’†‚ÅAddChild‚µ‚È‚¢‚Ì‚ÅAƒXƒŒƒbƒhƒZ[ƒtB“r’†‚ÅAddChild‚µ‚Ä‚µ‚Ü‚¤‚Æ‰º‚Ìƒ‹[ƒv‚ÅAssert‚³‚ê‚é
+            //lock(_children.SyncRoot)	// é€”ä¸­ã§AddChildã—ãªã„ã®ã§ã€ã‚¹ãƒ¬ãƒƒãƒ‰ã‚»ãƒ¼ãƒ•ã€‚é€”ä¸­ã§AddChildã—ã¦ã—ã¾ã†ã¨ä¸‹ã®ãƒ«ãƒ¼ãƒ—ã§Assertã•ã‚Œã‚‹
             {
                 foreach (var c in _children)
                 {
@@ -883,16 +883,16 @@ namespace Tono.GuiWinForm
                     }
                 }
             }
-            checkAndFireDataChanged();  // ƒp[ƒcíœƒCƒxƒ“ƒg
+            checkAndFireDataChanged();  // ãƒ‘ãƒ¼ãƒ„å‰Šé™¤ã‚¤ãƒ™ãƒ³ãƒˆ
         }
 
         /// <summary>
-        /// ƒ}ƒEƒXƒzƒC[ƒ‹ƒCƒxƒ“ƒg‚Ì“]‘—
+        /// ãƒã‚¦ã‚¹ãƒ›ã‚¤ãƒ¼ãƒ«ã‚¤ãƒ™ãƒ³ãƒˆã®è»¢é€
         /// </summary>
         /// <param name="e"></param>
         public virtual void OnMouseWheel(MouseState e)
         {
-            //lock(_children.SyncRoot)	// “r’†‚ÅAddChild‚µ‚È‚¢‚Ì‚ÅAƒXƒŒƒbƒhƒZ[ƒtB“r’†‚ÅAddChild‚µ‚Ä‚µ‚Ü‚¤‚Æ‰º‚Ìƒ‹[ƒv‚ÅAssert‚³‚ê‚é
+            //lock(_children.SyncRoot)	// é€”ä¸­ã§AddChildã—ãªã„ã®ã§ã€ã‚¹ãƒ¬ãƒƒãƒ‰ã‚»ãƒ¼ãƒ•ã€‚é€”ä¸­ã§AddChildã—ã¦ã—ã¾ã†ã¨ä¸‹ã®ãƒ«ãƒ¼ãƒ—ã§Assertã•ã‚Œã‚‹
             {
                 foreach (var c in _children)
                 {
@@ -930,16 +930,16 @@ namespace Tono.GuiWinForm
                     }
                 }
             }
-            checkAndFireDataChanged();  // ƒp[ƒcíœƒCƒxƒ“ƒg
+            checkAndFireDataChanged();  // ãƒ‘ãƒ¼ãƒ„å‰Šé™¤ã‚¤ãƒ™ãƒ³ãƒˆ
         }
 
         /// <summary>
-        /// ƒAƒCƒeƒ€‚ÌƒhƒƒbƒvƒCƒxƒ“ƒg‚Ì“]‘—
+        /// ã‚¢ã‚¤ãƒ†ãƒ ã®ãƒ‰ãƒ­ãƒƒãƒ—ã‚¤ãƒ™ãƒ³ãƒˆã®è»¢é€
         /// </summary>
         /// <param name="e"></param>
         public virtual void OnDragDrop(Tono.GuiWinForm.DragState e)
         {
-            //lock(_children.SyncRoot)	// “r’†‚ÅAddChild‚µ‚È‚¢‚Ì‚ÅAƒXƒŒƒbƒhƒZ[ƒtB“r’†‚ÅAddChild‚µ‚Ä‚µ‚Ü‚¤‚Æ‰º‚Ìƒ‹[ƒv‚ÅAssert‚³‚ê‚é
+            //lock(_children.SyncRoot)	// é€”ä¸­ã§AddChildã—ãªã„ã®ã§ã€ã‚¹ãƒ¬ãƒƒãƒ‰ã‚»ãƒ¼ãƒ•ã€‚é€”ä¸­ã§AddChildã—ã¦ã—ã¾ã†ã¨ä¸‹ã®ãƒ«ãƒ¼ãƒ—ã§Assertã•ã‚Œã‚‹
             {
                 foreach (var c in _children)
                 {
@@ -977,15 +977,15 @@ namespace Tono.GuiWinForm
                     }
                 }
             }
-            checkAndFireDataChanged();  // ƒp[ƒcíœƒCƒxƒ“ƒg
+            checkAndFireDataChanged();  // ãƒ‘ãƒ¼ãƒ„å‰Šé™¤ã‚¤ãƒ™ãƒ³ãƒˆ
         }
 
         /// <summary>
-        /// ƒL[ƒ_ƒEƒ“ƒCƒxƒ“ƒg“]‘—
+        /// ã‚­ãƒ¼ãƒ€ã‚¦ãƒ³ã‚¤ãƒ™ãƒ³ãƒˆè»¢é€
         /// </summary>
         public virtual void OnKeyDown(KeyState e)
         {
-            //lock(_children.SyncRoot)	// “r’†‚ÅAddChild‚µ‚È‚¢‚Ì‚ÅAƒXƒŒƒbƒhƒZ[ƒtB“r’†‚ÅAddChild‚µ‚Ä‚µ‚Ü‚¤‚Æ‰º‚Ìƒ‹[ƒv‚ÅAssert‚³‚ê‚é
+            //lock(_children.SyncRoot)	// é€”ä¸­ã§AddChildã—ãªã„ã®ã§ã€ã‚¹ãƒ¬ãƒƒãƒ‰ã‚»ãƒ¼ãƒ•ã€‚é€”ä¸­ã§AddChildã—ã¦ã—ã¾ã†ã¨ä¸‹ã®ãƒ«ãƒ¼ãƒ—ã§Assertã•ã‚Œã‚‹
             {
                 foreach (var c in _children)
                 {
@@ -1023,16 +1023,16 @@ namespace Tono.GuiWinForm
                     }
                 }
             }
-            checkAndFireDataChanged();  // ƒp[ƒcíœƒCƒxƒ“ƒg
+            checkAndFireDataChanged();  // ãƒ‘ãƒ¼ãƒ„å‰Šé™¤ã‚¤ãƒ™ãƒ³ãƒˆ
         }
 
         /// <summary>
-        /// ƒL[ƒAƒbƒvƒCƒxƒ“ƒg“]‘—
+        /// ã‚­ãƒ¼ã‚¢ãƒƒãƒ—ã‚¤ãƒ™ãƒ³ãƒˆè»¢é€
         /// </summary>
         /// <param name="e"></param>
         public virtual void OnKeyUp(KeyState e)
         {
-            //lock(_children.SyncRoot)	// “r’†‚ÅAddChild‚µ‚È‚¢‚Ì‚ÅAƒXƒŒƒbƒhƒZ[ƒtB“r’†‚ÅAddChild‚µ‚Ä‚µ‚Ü‚¤‚Æ‰º‚Ìƒ‹[ƒv‚ÅAssert‚³‚ê‚é
+            //lock(_children.SyncRoot)	// é€”ä¸­ã§AddChildã—ãªã„ã®ã§ã€ã‚¹ãƒ¬ãƒƒãƒ‰ã‚»ãƒ¼ãƒ•ã€‚é€”ä¸­ã§AddChildã—ã¦ã—ã¾ã†ã¨ä¸‹ã®ãƒ«ãƒ¼ãƒ—ã§Assertã•ã‚Œã‚‹
             {
                 foreach (var c in _children)
                 {
@@ -1070,7 +1070,7 @@ namespace Tono.GuiWinForm
                     }
                 }
             }
-            checkAndFireDataChanged();  // ƒp[ƒcíœƒCƒxƒ“ƒg
+            checkAndFireDataChanged();  // ãƒ‘ãƒ¼ãƒ„å‰Šé™¤ã‚¤ãƒ™ãƒ³ãƒˆ
         }
     }
 }

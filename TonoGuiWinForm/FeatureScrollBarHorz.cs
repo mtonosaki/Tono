@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System;
@@ -11,8 +11,8 @@ using System.Drawing;
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// …•½ƒXƒNƒ[ƒ‹ƒo[
-    /// Parameter‚Ì—á
+    /// æ°´å¹³ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ãƒãƒ¼
+    /// Parameterã®ä¾‹
     /// Pane=Resource;Speed=0.8
     /// </summary>
     public class FeatureScrollBarHorz : FeatureBase, IMouseListener, IPartsRemoveListener
@@ -21,23 +21,23 @@ namespace Tono.GuiWinForm
 #endif
     {
         /// <summary>
-        /// ƒXƒNƒ[ƒ‹ƒo[‚ª”z’u‚³‚ê‚éƒy[ƒ“
+        /// ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ãƒãƒ¼ãŒé…ç½®ã•ã‚Œã‚‹ãƒšãƒ¼ãƒ³
         /// </summary>
         private IRichPane _tarPane = null;
 
         /// <summary>
-        /// ƒXƒs[ƒh
+        /// ã‚¹ãƒ”ãƒ¼ãƒ‰
         /// </summary>
         private double _speed = 1.0;
 
         /// <summary>
-        /// ƒp[ƒci’S“–feature‚ª‚ ‚é‚Æ‚«Aí‚É‘¶İ‚·‚éƒCƒ“ƒXƒ^ƒ“ƒXj
+        /// ãƒ‘ãƒ¼ãƒ„ï¼ˆæ‹…å½“featureãŒã‚ã‚‹ã¨ãã€å¸¸ã«å­˜åœ¨ã™ã‚‹ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ï¼‰
         /// </summary>
         private PartsScrollbarH _bar = null;
 
         /// <summary>
-        /// g—p‚·‚éƒy[ƒ“‚ğw’è‚·‚é
-        /// ‹Lq—á:  Pane=Resource
+        /// ä½¿ç”¨ã™ã‚‹ãƒšãƒ¼ãƒ³ã‚’æŒ‡å®šã™ã‚‹
+        /// è¨˜è¿°ä¾‹:  Pane=Resource
         /// </summary>
         /// <param name="param"></param>
         public override void ParseParameter(string param)
@@ -74,7 +74,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒXƒNƒ[ƒ‹ƒo[‚Ìƒp[ƒcƒCƒ“ƒXƒ^ƒ“ƒXì¬
+        /// ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ãƒãƒ¼ã®ãƒ‘ãƒ¼ãƒ„ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ä½œæˆ
         /// </summary>
         /// <returns></returns>
         protected virtual PartsScrollbarH createScrollBarPart()
@@ -83,23 +83,23 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒtƒB[ƒ`ƒƒ[‰Šú‰»
+        /// ãƒ•ã‚£ãƒ¼ãƒãƒ£ãƒ¼åˆæœŸåŒ–
         /// </summary>
         public override void OnInitInstance()
         {
             base.OnInitInstance();
-            _tarPane = Pane.GetPane("Resource");	// ƒfƒtƒHƒ‹ƒgBParseParameter‚Åw’è‚µ‚Ä‚­‚¾‚³‚¢
+            _tarPane = Pane.GetPane("Resource");	// ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã€‚ParseParameterã§æŒ‡å®šã—ã¦ãã ã•ã„
             _bar = createScrollBarPart();
             Parts.Add(_tarPane, _bar, Const.Layer.StaticLayers.ScrollBarH);
         }
 
-        #region IMouseListener ƒƒ“ƒo
+        #region IMouseListener ãƒ¡ãƒ³ãƒ
 
         public void OnMouseMove(MouseState e)
         {
             _bar.MouseNow = e;
 
-            // ƒo[‚ÌˆÊ’u‚¾‚¯Ä•`‰æ
+            // ãƒãƒ¼ã®ä½ç½®ã ã‘å†æç”»
             var br = _tarPane.GetPaneRect();
             br.LT.Y = br.RB.Y - PartsScrollbarH.Height;
             Pane.Invalidate(br);
@@ -110,7 +110,7 @@ namespace Tono.GuiWinForm
                 k *= _speed * _bar.Acc;
 
                 var lx = (_downPos.X - e.Pos.X) * k;
-                lx = Math.Pow(Math.Abs(lx), 1.25) * (lx > 0 ? 1 : -1);  // ‚½‚­‚³‚ñˆÚ“®‚µ‚½‚çA‰Á‘¬“x“I‚ÉˆÚ“®‚·‚é
+                lx = Math.Pow(Math.Abs(lx), 1.25) * (lx > 0 ? 1 : -1);  // ãŸãã•ã‚“ç§»å‹•ã—ãŸã‚‰ã€åŠ é€Ÿåº¦çš„ã«ç§»å‹•ã™ã‚‹
                 Pane.Scroll = ScreenPos.FromInt(_downScroll.X + (int)lx, Pane.Scroll.Y);
                 _bar.SetHighlight(false);
                 Pane.Invalidate(null);
@@ -133,7 +133,7 @@ namespace Tono.GuiWinForm
                 return;
             }
 
-            // ˆê“x‚¾‚¯AƒNƒŠƒbƒN•sŠ´‘Ñ‚ğ“o˜^
+            // ä¸€åº¦ã ã‘ã€ã‚¯ãƒªãƒƒã‚¯ä¸æ„Ÿå¸¯ã‚’ç™»éŒ²
             if (_skipzone == null)
             {
                 var pr = _tarPane.GetPaneRect();
@@ -141,7 +141,7 @@ namespace Tono.GuiWinForm
                 Parts.AddSkipZone(_skipzone);
             }
 
-            // ƒNƒŠƒbƒN‘€ì
+            // ã‚¯ãƒªãƒƒã‚¯æ“ä½œ
             _bar.SetOn(true, true);
             _bar.SetHighlight(false);
             _downPos = (ScreenPos)e.Pos.Clone();
@@ -182,10 +182,10 @@ namespace Tono.GuiWinForm
 
         #endregion
 
-        #region IPartsRemoveListener ƒƒ“ƒo
+        #region IPartsRemoveListener ãƒ¡ãƒ³ãƒ
 
         /// <summary>
-        /// _bar‚ªÁ‚¦‚½‚çÄ“o˜^
+        /// _barãŒæ¶ˆãˆãŸã‚‰å†ç™»éŒ²
         /// </summary>
         /// <param name="removedPartsSet"></param>
         public void OnPartsRemoved(System.Collections.ICollection removedPartsSet)
@@ -203,12 +203,12 @@ namespace Tono.GuiWinForm
     }
 
     /// <summary>
-    /// ƒXƒNƒ[ƒ‹ƒo[‚Ìƒp[ƒc
+    /// ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ãƒãƒ¼ã®ãƒ‘ãƒ¼ãƒ„
     /// </summary>
     public class PartsScrollbarH : PartsBase, IPartsVisible
     {
         /// <summary>
-        /// ƒp[ƒc‚Ì‚‚³
+        /// ãƒ‘ãƒ¼ãƒ„ã®é«˜ã•
         /// </summary>
         public static readonly int Height = 16;
         protected static readonly Brush _bgOn = new SolidBrush(Color.FromArgb(192, 128, 128, 128));
@@ -220,12 +220,12 @@ namespace Tono.GuiWinForm
         protected static readonly Pen _offD = new Pen(Color.FromArgb(32, 0, 0, 0));
 
         /// <summary>
-        /// ‰Á‘¬‚Ì•\¦—p 1=’Êí‘¬“x
+        /// åŠ é€Ÿã®è¡¨ç¤ºç”¨ 1=é€šå¸¸é€Ÿåº¦
         /// </summary>
         private float _acc = 1;
 
         /// <summary>
-        /// ‰Á‘¬“x•\¦‚Ì’l
+        /// åŠ é€Ÿåº¦è¡¨ç¤ºã®å€¤
         /// </summary>
         public float Acc
         {
@@ -235,7 +235,7 @@ namespace Tono.GuiWinForm
 
         private bool _isOn = false;
         /// <summary>
-        /// ON/OFF•\¦‚Ìİ’è
+        /// ON/OFFè¡¨ç¤ºã®è¨­å®š
         /// </summary>
         public new bool IsOn => _isOn;
 
@@ -275,12 +275,12 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒJ[ƒ\ƒ‹‚ÌˆÊ’u
+        /// ã‚«ãƒ¼ã‚½ãƒ«ã®ä½ç½®
         /// </summary>
         private ScreenRect _scm = ScreenRect.FromLTWH(0, 0, 0, 0);
 
         /// <summary>
-        /// •`‰æ
+        /// æç”»
         /// </summary>
         /// <param name="rp"></param>
         /// <returns></returns>
@@ -315,25 +315,25 @@ namespace Tono.GuiWinForm
                 bgcur = _bgCurOff;
             }
 
-            // ƒJ[ƒ\ƒ‹
+            // ã‚«ãƒ¼ã‚½ãƒ«
             rp.Graphics.FillRectangle(bgcur, _scm);
             rp.Graphics.DrawLine(_offL, _scm.LT.X, _scm.LT.Y, _scm.RB.X, _scm.LT.Y);
             rp.Graphics.DrawLine(_offD, _scm.RB.X, _scm.LT.Y, _scm.RB.X, _scm.RB.Y);
             rp.Graphics.DrawLine(_offD, _scm.RB.X, _scm.RB.Y, _scm.LT.X, _scm.RB.Y);
             rp.Graphics.DrawLine(_offL, _scm.LT.X, _scm.RB.Y, _scm.LT.X, _scm.LT.Y);
-            // –îˆó©
+            // çŸ¢å°â†
             var cy = (_scm.LT.Y + _scm.RB.Y) / 2;
             rp.Graphics.DrawLine(_offL, _scm.LT.X, cy, _scm.LT.X - 24 * (float)Math.Sqrt(_acc), cy);
             rp.Graphics.DrawLine(_offL, _scm.LT.X - 24 * (float)Math.Sqrt(_acc), cy, _scm.LT.X - (24 * (float)Math.Sqrt(_acc) - 6), cy - 4);
             rp.Graphics.DrawLine(_offL, _scm.LT.X - 24 * (float)Math.Sqrt(_acc), cy, _scm.LT.X - (24 * (float)Math.Sqrt(_acc) - 6), cy + 4);
-            // –îˆó¨
+            // çŸ¢å°â†’
             rp.Graphics.DrawLine(_offL, _scm.RB.X, cy, _scm.RB.X + 24 * (float)Math.Sqrt(_acc), cy);
             rp.Graphics.DrawLine(_offL, _scm.RB.X + 24 * (float)Math.Sqrt(_acc), cy, _scm.RB.X + (24 * (float)Math.Sqrt(_acc) - 6), cy - 4);
             rp.Graphics.DrawLine(_offL, _scm.RB.X + 24 * (float)Math.Sqrt(_acc), cy, _scm.RB.X + (24 * (float)Math.Sqrt(_acc) - 6), cy + 4);
             return true;
         }
 
-        #region IPartsVisible ƒƒ“ƒo
+        #region IPartsVisible ãƒ¡ãƒ³ãƒ
 
         private bool _isVisible = true;
         public bool Visible

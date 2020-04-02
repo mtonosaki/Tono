@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System;
@@ -9,7 +9,7 @@ using System.Windows.Forms;
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// FeatureCursorProviderOnParts ‚ÌŠT—v‚Ìà–¾‚Å‚·B
+    /// FeatureCursorProviderOnParts ã®æ¦‚è¦ã®èª¬æ˜ã§ã™ã€‚
     /// </summary>
     public class FeatureCursorProviderOnParts : FeatureBase, IKeyListener, IMouseListener
     {
@@ -22,31 +22,31 @@ namespace Tono.GuiWinForm
         private IRichPane _filterPane = null;
         private int _filterLayer = int.MinValue;
 
-        #region ‘®«iƒVƒŠƒAƒ‰ƒCƒY‚µ‚È‚¢j
+        #region å±æ€§ï¼ˆã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºã—ãªã„ï¼‰
 
-        /// <summary>’ÊíƒJ[ƒ\ƒ‹‚ğ‹L‰¯‚·‚é</summary>
+        /// <summary>é€šå¸¸ã‚«ãƒ¼ã‚½ãƒ«ã‚’è¨˜æ†¶ã™ã‚‹</summary>
         private Cursor _normalCursor;
 
-        /// <summary>Œ»İ‚ÌƒL[‚Ìó‘Ô‚ğ‹L‰¯</summary>
+        /// <summary>ç¾åœ¨ã®ã‚­ãƒ¼ã®çŠ¶æ…‹ã‚’è¨˜æ†¶</summary>
         private MouseState _ms = new MouseState();
 
-        /// <summary>—v‹‚·‚éƒJ[ƒ\ƒ‹iŒã‚Åİ’è‚·‚é‚à‚Ìj</summary>
+        /// <summary>è¦æ±‚ã™ã‚‹ã‚«ãƒ¼ã‚½ãƒ«ï¼ˆå¾Œã§è¨­å®šã™ã‚‹ã‚‚ã®ï¼‰</summary>
         private Cursor _requestedCursor = null;
 
-        /// <summary>ƒJ[ƒ\ƒ‹•\¦ó‘Ôi‹¤—L•Ï”j</summary>
+        /// <summary>ã‚«ãƒ¼ã‚½ãƒ«è¡¨ç¤ºçŠ¶æ…‹ï¼ˆå…±æœ‰å¤‰æ•°ï¼‰</summary>
         private DataSharingManager.Int _state;
 
-        /// <summary>ƒp[ƒcˆÊ’uŠÇ—ƒIƒuƒWƒFƒNƒg</summary>
+        /// <summary>ãƒ‘ãƒ¼ãƒ„ä½ç½®ç®¡ç†ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ</summary>
         protected PartsPositionManager _pos;
 
-        /// <summary>‚‘¬‰»i’x‰„ˆ—‚Ìƒ^ƒCƒ}[ƒnƒ“ƒhƒ‹j</summary>
+        /// <summary>é«˜é€ŸåŒ–ï¼ˆé…å»¶å‡¦ç†ã®ã‚¿ã‚¤ãƒãƒ¼ãƒãƒ³ãƒ‰ãƒ«ï¼‰</summary>
         private GuiTimer.Handle _th = null;
 
         #endregion
 
-        #region ‰ğÍ
+        #region è§£æ
         /// <summary>
-        /// ƒpƒ‰ƒ[ƒ^‰ğÍ
+        /// ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿è§£æ
         /// </summary>
         /// <param name="param"></param>
         public override void ParseParameter(string param)
@@ -104,7 +104,7 @@ namespace Tono.GuiWinForm
         #endregion
 
         /// <summary>
-        /// ‰Šú‰»ˆ—
+        /// åˆæœŸåŒ–å‡¦ç†
         /// </summary>
         public override void OnInitInstance()
         {
@@ -116,16 +116,16 @@ namespace Tono.GuiWinForm
             }
             else
             {
-                throw new NotSupportedException("FeatureCursorProvider‚ÍAIControlUI‚ğÀ‘•‚µ‚Ä‚¢‚éPane‚É‚Ì‚İg—p‚Å‚«‚Ü‚·");
+                throw new NotSupportedException("FeatureCursorProviderã¯ã€IControlUIã‚’å®Ÿè£…ã—ã¦ã„ã‚‹Paneã«ã®ã¿ä½¿ç”¨ã§ãã¾ã™");
             }
 
-            // ƒXƒe[ƒ^ƒX“¯Šú
+            // ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹åŒæœŸ
             _state = (DataSharingManager.Int)Share.Get("CursorProviderStatus", typeof(DataSharingManager.Int));
-            _pos = (PartsPositionManager)Share.Get("MovingParts", typeof(PartsPositionManager));    // ˆÚ“®’†‚Ìƒp[ƒcˆê——
+            _pos = (PartsPositionManager)Share.Get("MovingParts", typeof(PartsPositionManager));    // ç§»å‹•ä¸­ã®ãƒ‘ãƒ¼ãƒ„ä¸€è¦§
         }
 
         /// <summary>
-        /// ƒJ[ƒ\ƒ‹‚ğƒZƒbƒg‚·‚éiƒtƒ@ƒCƒiƒ‰ƒCƒYj
+        /// ã‚«ãƒ¼ã‚½ãƒ«ã‚’ã‚»ãƒƒãƒˆã™ã‚‹ï¼ˆãƒ•ã‚¡ã‚¤ãƒŠãƒ©ã‚¤ã‚ºï¼‰
         /// </summary>
         private delegate void SetCursorCallback();
 
@@ -145,8 +145,8 @@ namespace Tono.GuiWinForm
             }
         }
 
-        /// <summary>ƒ}ƒEƒXƒJ[ƒ\ƒ‹•ÏX’x‰„ˆ—(‚‘¬‰»)</summary>
-        /// <param name="param">ƒ}ƒEƒXÀ•W</param>
+        /// <summary>ãƒã‚¦ã‚¹ã‚«ãƒ¼ã‚½ãƒ«å¤‰æ›´é…å»¶å‡¦ç†(é«˜é€ŸåŒ–)</summary>
+        /// <param name="param">ãƒã‚¦ã‚¹åº§æ¨™</param>
         private void proc(object param)
         {
             var e = (MouseState)param;
@@ -165,7 +165,7 @@ namespace Tono.GuiWinForm
             _requestedCursor = _isMove ? _normalCursor : null;
             if (parts != null)
             {
-                // ‹«ŠEü‚Ìƒ`ƒFƒbƒN‘ÎÛ‚ği‚é
+                // å¢ƒç•Œç·šã®ãƒã‚§ãƒƒã‚¯å¯¾è±¡ã‚’çµã‚‹
                 var check = PartsBase.PointType.Inside | PartsBase.PointType.Outside;
                 if (_isLeft)
                 {
@@ -187,7 +187,7 @@ namespace Tono.GuiWinForm
                     check |= PartsBase.PointType.OnBottom;
                 }
 
-                // ‹«ŠEüã‚È‚Ç‚ğƒ`ƒFƒbƒN
+                // å¢ƒç•Œç·šä¸Šãªã©ã‚’ãƒã‚§ãƒƒã‚¯
                 switch (parts.IsOn(_ms.Pos, tarPane, check))
                 {
                     case PartsBase.PointType.Inside:
@@ -210,7 +210,7 @@ namespace Tono.GuiWinForm
             onCursorSet();
         }
 
-        #region IKeyListener ƒƒ“ƒo
+        #region IKeyListener ãƒ¡ãƒ³ãƒ
 
         public void OnKeyDown(KeyState e)
         {
@@ -224,12 +224,12 @@ namespace Tono.GuiWinForm
 
         #endregion
 
-        #region IMouseListener ƒƒ“ƒo
+        #region IMouseListener ãƒ¡ãƒ³ãƒ
 
         public void OnMouseMove(MouseState e)
         {
             Timer.Stop(_th);
-            if (_state.value == 0)  // FeatureCursorProviderKey ‚ÅƒJ[ƒ\ƒ‹•ÏX‚µ‚Ä‚¢‚È‚¢ó‘Ô‚Ì‚Ì‚İAˆ—‚ğs‚¢‚½‚¢
+            if (_state.value == 0)  // FeatureCursorProviderKey ã§ã‚«ãƒ¼ã‚½ãƒ«å¤‰æ›´ã—ã¦ã„ãªã„çŠ¶æ…‹ã®æ™‚ã®ã¿ã€å‡¦ç†ã‚’è¡Œã„ãŸã„
             {
                 if (_pos.Count == 0)
                 {

@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System;
@@ -7,33 +7,33 @@ using System.Windows.Forms;
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// ƒJƒ‰ƒ€ƒwƒbƒ_[‚ÌŠg’£ƒNƒ‰ƒX
+    /// ã‚«ãƒ©ãƒ ãƒ˜ãƒƒãƒ€ãƒ¼ã®æ‹¡å¼µã‚¯ãƒ©ã‚¹
     /// </summary>
     public class TColumnHeader : System.Windows.Forms.ColumnHeader
     {
-        #region	‘®«(ƒVƒŠƒAƒ‰ƒCƒY‚·‚é)
-        /// <summary>©ƒJƒ‰ƒ€‚ÉŠi”[‰Â”\‚Èƒf[ƒ^‚ÌŒ^</summary>
+        #region	å±æ€§(ã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºã™ã‚‹)
+        /// <summary>è‡ªã‚«ãƒ©ãƒ ã«æ ¼ç´å¯èƒ½ãªãƒ‡ãƒ¼ã‚¿ã®å‹</summary>
         private Type _datType = typeof(object);
         #endregion
-        #region	‘®«(ƒVƒŠƒAƒ‰ƒCƒY‚µ‚È‚¢)
-        /// <summary>•À‚Ñ‘Ö‚¦‚ÌŒ`®ƒtƒ‰ƒO</summary>
+        #region	å±æ€§(ã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºã—ãªã„)
+        /// <summary>ä¸¦ã³æ›¿ãˆã®å½¢å¼ãƒ•ãƒ©ã‚°</summary>
         public int SortType = 0;
         #endregion
 
         /// <summary>
-        /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+        /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
         /// </summary>
         public TColumnHeader() : base()
         {
         }
 
         /// <summary>
-        /// ‰Šú‰»ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+        /// åˆæœŸåŒ–ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
         /// </summary>
-        /// <param name="str">ƒwƒbƒ_[ƒeƒLƒXƒg</param>
-        /// <param name="width">ƒJƒ‰ƒ€‚Ì•</param>
-        /// <param name="textAlign">ƒeƒLƒXƒg‚Ì•\¦ˆÊ’u</param>
-        /// <param name="type">Ši”[‰Â”\ƒf[ƒ^‚ÌŒ^</param>
+        /// <param name="str">ãƒ˜ãƒƒãƒ€ãƒ¼ãƒ†ã‚­ã‚¹ãƒˆ</param>
+        /// <param name="width">ã‚«ãƒ©ãƒ ã®å¹…</param>
+        /// <param name="textAlign">ãƒ†ã‚­ã‚¹ãƒˆã®è¡¨ç¤ºä½ç½®</param>
+        /// <param name="type">æ ¼ç´å¯èƒ½ãƒ‡ãƒ¼ã‚¿ã®å‹</param>
         public TColumnHeader(string str, int width, HorizontalAlignment textAlign, Type type)
         {
             base.Text = str;
@@ -43,7 +43,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// Ši”[ƒf[ƒ^‚Ìƒ^ƒCƒv‚Ìæ“¾/İ’è
+        /// æ ¼ç´ãƒ‡ãƒ¼ã‚¿ã®ã‚¿ã‚¤ãƒ—ã®å–å¾—/è¨­å®š
         /// </summary>
         public Type DataType
         {

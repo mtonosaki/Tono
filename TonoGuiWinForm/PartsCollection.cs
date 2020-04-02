@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System;
@@ -7,21 +7,21 @@ using System.Collections.Generic;
 using System.Drawing;
 
 using Illustios = System.Collections.Generic.List<Tono.GuiWinForm.PartsIllusionProjector>;
-using Layers = System.Collections.Generic.Dictionary<int/*ƒŒƒCƒ„ID*/, System.Collections.Generic.List<Tono.GuiWinForm.PartsBase>>;
+using Layers = System.Collections.Generic.Dictionary<int/*ãƒ¬ã‚¤ãƒ¤ID*/, System.Collections.Generic.List<Tono.GuiWinForm.PartsBase>>;
 
 #pragma warning disable 1591, 1572, 1573
 
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// daPartsset ‚ÌŠT—v‚Ìà–¾‚Å‚·B
-    /// •¡”‚Ìƒp[ƒc‚ğŠÇ—‚·‚éƒNƒ‰ƒX
+    /// daPartsset ã®æ¦‚è¦ã®èª¬æ˜ã§ã™ã€‚
+    /// è¤‡æ•°ã®ãƒ‘ãƒ¼ãƒ„ã‚’ç®¡ç†ã™ã‚‹ã‚¯ãƒ©ã‚¹
     /// </summary>
     public class PartsCollection : PartsCollectionBase
     {
-        #region ‘Sƒp[ƒc—ñ‹“—pƒNƒ‰ƒX
+        #region å…¨ãƒ‘ãƒ¼ãƒ„åˆ—æŒ™ç”¨ã‚¯ãƒ©ã‚¹
         /// <summary>
-        /// ƒp[ƒc—ñ‹“§Œä
+        /// ãƒ‘ãƒ¼ãƒ„åˆ—æŒ™åˆ¶å¾¡
         /// </summary>
         private class PartsEnumerator : IPartsEnumerator
         {
@@ -36,7 +36,7 @@ namespace Tono.GuiWinForm
                 Reset();
             }
 
-            #region IPartsEnumerator ƒƒ“ƒo
+            #region IPartsEnumerator ãƒ¡ãƒ³ãƒ
 
             public PartsBase Parts => null;
 
@@ -44,7 +44,7 @@ namespace Tono.GuiWinForm
 
             #endregion
 
-            #region IEnumerator ƒƒ“ƒo
+            #region IEnumerator ãƒ¡ãƒ³ãƒ
 
             public void Reset()
             {
@@ -104,44 +104,44 @@ namespace Tono.GuiWinForm
         }
 
         #endregion
-        #region ‘®«iƒVƒŠƒAƒ‰ƒCƒY‚·‚éj
+        #region å±æ€§ï¼ˆã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºã™ã‚‹ï¼‰
 
         /// <summary>
-        /// ƒf[ƒ^‚ğŠÇ—‚·‚é”z—ñ
+        /// ãƒ‡ãƒ¼ã‚¿ã‚’ç®¡ç†ã™ã‚‹é…åˆ—
         /// </summary>
         protected Dictionary<IRichPane, Layers> _data = new Dictionary<IRichPane, Layers>();  /*<IRichPane, ArrayList<dpBase>>*/
 
         /// <summary>
-        /// ƒŒƒCƒ„[”Ô†ƒ\[ƒg—p
+        /// ãƒ¬ã‚¤ãƒ¤ãƒ¼ç•ªå·ã‚½ãƒ¼ãƒˆç”¨
         /// </summary>
         protected Dictionary<IRichPane, List<int>> _layerNos = new Dictionary<IRichPane, List<int>>();
 
         /// <summary>
-        /// ƒŒƒCƒ„[•\¦ƒXƒCƒbƒ` true=•\¦
+        /// ãƒ¬ã‚¤ãƒ¤ãƒ¼è¡¨ç¤ºã‚¹ã‚¤ãƒƒãƒ true=è¡¨ç¤º
         /// </summary>
         protected Dictionary<int, bool> _layerVisibleSwitch = new Dictionary<int, bool>();
 
         /// <summary>
-        /// g—p‚·‚éƒCƒŠƒ…[ƒWƒ‡ƒ“
+        /// ä½¿ç”¨ã™ã‚‹ã‚¤ãƒªãƒ¥ãƒ¼ã‚¸ãƒ§ãƒ³
         /// </summary>
         protected Dictionary<IRichPane, Illustios> _projectors = new Dictionary<IRichPane, Illustios>();    /*<IRichPane, ArrayIllustios>*/
 
         /// <summary>
-        /// ƒCƒŠƒ…[ƒWƒ‡ƒ“ƒXƒNƒŠ[ƒ“‚©‚çƒIƒŠƒWƒiƒ‹‚ğŒŸõ‚·‚éƒL[
+        /// ã‚¤ãƒªãƒ¥ãƒ¼ã‚¸ãƒ§ãƒ³ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ã‹ã‚‰ã‚ªãƒªã‚¸ãƒŠãƒ«ã‚’æ¤œç´¢ã™ã‚‹ã‚­ãƒ¼
         /// </summary>
         protected Dictionary<IRichPane, IRichPane> _projectorsRevKey = new Dictionary<IRichPane, IRichPane>();
 
         #endregion
 
         /// <summary>
-        /// ƒfƒtƒHƒ‹ƒgƒRƒ“ƒXƒgƒ‰ƒNƒ^
+        /// ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
         /// </summary>
         public PartsCollection() : base()
         {
         }
 
         /// <summary>
-        /// ‰Šú‰»ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+        /// åˆæœŸåŒ–ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
         /// </summary>
         public PartsCollection(IRichPane pane, ICollection tars) : base()
         {
@@ -152,7 +152,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ‰Šú‰»ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+        /// åˆæœŸåŒ–ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
         /// </summary>
         public PartsCollection(IRichPane pane, ICollection<PartsBase> tars) : base()
         {
@@ -163,7 +163,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// •\¦ƒXƒCƒbƒ`
+        /// è¡¨ç¤ºã‚¹ã‚¤ãƒƒãƒ
         /// </summary>
         /// <param name="layerlevel"></param>
         /// <param name="sw"></param>
@@ -173,8 +173,8 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒŒƒCƒ„[‚ğw’è‚µ‚Äƒp[ƒc‚ğæ“¾‚·‚é
-        /// iÅ‰‚ÉŒ©‚Â‚©‚Á‚½ƒy[ƒ“‚Ì‚İj
+        /// ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚’æŒ‡å®šã—ã¦ãƒ‘ãƒ¼ãƒ„ã‚’å–å¾—ã™ã‚‹
+        /// ï¼ˆæœ€åˆã«è¦‹ã¤ã‹ã£ãŸãƒšãƒ¼ãƒ³ã®ã¿ï¼‰
         /// </summary>
         /// <param name="layer"></param>
         /// <returns></returns>
@@ -191,7 +191,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒŒƒCƒ„[‚ğ•ÏX‚·‚é
+        /// ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚’å¤‰æ›´ã™ã‚‹
         /// </summary>
         /// <param name="pane"></param>
         /// <param name="layer_from"></param>
@@ -214,12 +214,12 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒŒƒCƒ„[‚ğw’è‚µ‚Äƒp[ƒc‚ğæ“¾‚·‚é
-        /// iÅ‰‚É‚İ‚Â‚©‚Á‚½ƒy[ƒ“‚Ì‚İj
+        /// ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚’æŒ‡å®šã—ã¦ãƒ‘ãƒ¼ãƒ„ã‚’å–å¾—ã™ã‚‹
+        /// ï¼ˆæœ€åˆã«ã¿ã¤ã‹ã£ãŸãƒšãƒ¼ãƒ³ã®ã¿ï¼‰
         /// </summary>
         /// <param name="layer"></param>
-        /// <param name="retPane">w’èƒŒƒCƒ„[‚ª‘®‚·‚éƒy[ƒ“‚ª•Ô‚é</param>
-        /// <returns>ƒp[ƒcƒRƒŒƒNƒVƒ‡ƒ“</returns>
+        /// <param name="retPane">æŒ‡å®šãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒå±ã™ã‚‹ãƒšãƒ¼ãƒ³ãŒè¿”ã‚‹</param>
+        /// <returns>ãƒ‘ãƒ¼ãƒ„ã‚³ãƒ¬ã‚¯ã‚·ãƒ§ãƒ³</returns>
         public virtual IList<PartsBase> GetLayerParts(int layer, out IRichPane retPane)
         {
 
@@ -237,10 +237,10 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒŒƒCƒ„[‚ğw’è‚µ‚Äƒp[ƒc‚ğæ“¾‚·‚é
+        /// ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚’æŒ‡å®šã—ã¦ãƒ‘ãƒ¼ãƒ„ã‚’å–å¾—ã™ã‚‹
         /// </summary>
-        /// <param name="layer">w’èƒŒƒCƒ„[</param>
-        /// <param name="pane">w’èƒy[ƒ“</param>
+        /// <param name="layer">æŒ‡å®šãƒ¬ã‚¤ãƒ¤ãƒ¼</param>
+        /// <param name="pane">æŒ‡å®šãƒšãƒ¼ãƒ³</param>
         /// <returns></returns>
         public virtual IList<PartsBase> GetLayerParts(int layer, IRichPane pane)
         {
@@ -253,10 +253,10 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// w’èIDi’Êí‚ÍuRowKeyj‚ğw’è‚µ‚ÄAdpBase.LT.Y == pos.ID ‚Ìs‚ğ‚·‚×‚Ä‚ğ–ß‚·
+        /// æŒ‡å®šIDï¼ˆé€šå¸¸ã¯uRowKeyï¼‰ã‚’æŒ‡å®šã—ã¦ã€dpBase.LT.Y == pos.ID ã®è¡Œã‚’ã™ã¹ã¦ã‚’æˆ»ã™
         /// </summary>
-        /// <param name="pos">ŒŸõƒL[</param>
-        /// <returns>w’èƒL[‚É‡’v‚·‚éƒp[ƒcŒQ</returns>
+        /// <param name="pos">æ¤œç´¢ã‚­ãƒ¼</param>
+        /// <returns>æŒ‡å®šã‚­ãƒ¼ã«åˆè‡´ã™ã‚‹ãƒ‘ãƒ¼ãƒ„ç¾¤</returns>
         public override IList<PartsBase> GetPartsByLocationID(Id pos)
         {
             var ret = new List<PartsBase>();
@@ -278,12 +278,12 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒy[ƒ“‚ğw’è‚µ‚ÄAw’èIDi’Êí‚ÍuRowKeyj‚ğw’è‚µ‚ÄA
-        /// dpBase.LT.Y == pos.ID ‚Ìs‚Ìw’èƒy[ƒ“‚Ì•`‰æ—Ìˆæ“à‚É‚ ‚éƒp[ƒc‚ğ–ß‚·
+        /// ãƒšãƒ¼ãƒ³ã‚’æŒ‡å®šã—ã¦ã€æŒ‡å®šIDï¼ˆé€šå¸¸ã¯uRowKeyï¼‰ã‚’æŒ‡å®šã—ã¦ã€
+        /// dpBase.LT.Y == pos.ID ã®è¡Œã®æŒ‡å®šãƒšãƒ¼ãƒ³ã®æç”»é ˜åŸŸå†…ã«ã‚ã‚‹ãƒ‘ãƒ¼ãƒ„ã‚’æˆ»ã™
         /// </summary>
-        /// <param name="rp">•`‰æ‘ÎÛƒy[ƒ“</param>
-        /// <param name="pos">ŒŸõƒL[</param>
-        /// <returns>w’èƒL[‚É‡’v‚·‚éƒp[ƒcŒQ</returns>
+        /// <param name="rp">æç”»å¯¾è±¡ãƒšãƒ¼ãƒ³</param>
+        /// <param name="pos">æ¤œç´¢ã‚­ãƒ¼</param>
+        /// <returns>æŒ‡å®šã‚­ãƒ¼ã«åˆè‡´ã™ã‚‹ãƒ‘ãƒ¼ãƒ„ç¾¤</returns>
         public override IList<PartsBase> GetPartsByLocationID(IRichPane rp, Id pos)
         {
             // HACK: Slow GetPartsByLocationID method
@@ -306,13 +306,13 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// w’èƒp[ƒc‚Æd‚È‚Á‚Ä‚¢‚éƒp[ƒc‚ğ‚·‚×‚Äæ“¾‚·‚é
+        /// æŒ‡å®šãƒ‘ãƒ¼ãƒ„ã¨é‡ãªã£ã¦ã„ã‚‹ãƒ‘ãƒ¼ãƒ„ã‚’ã™ã¹ã¦å–å¾—ã™ã‚‹
         /// </summary>
-        /// <param name="partsClass">ƒp[ƒc‚ÌƒNƒ‰ƒXƒ^ƒCƒv typeof(object)‚Å‘S‚Ä</param>
-        /// <param name="tar">æ“¾‘ÎÛ</param>
-        /// <param name="rp">ƒy[ƒ“</param>
+        /// <param name="partsClass">ãƒ‘ãƒ¼ãƒ„ã®ã‚¯ãƒ©ã‚¹ã‚¿ã‚¤ãƒ— typeof(object)ã§å…¨ã¦</param>
+        /// <param name="tar">å–å¾—å¯¾è±¡</param>
+        /// <param name="rp">ãƒšãƒ¼ãƒ³</param>
         /// <param name="checkIllustion"></param>
-        /// <returns>ƒp[ƒc‚ÌƒRƒŒƒNƒVƒ‡ƒ“</returns>
+        /// <returns>ãƒ‘ãƒ¼ãƒ„ã®ã‚³ãƒ¬ã‚¯ã‚·ãƒ§ãƒ³</returns>
         public override ICollection<PartsBase> GetOverlappedParts(Type partsClass, PartsBase tar, IRichPane rp, bool checkIllustion)
         {
             //HACK: Slow GetOverlappedParts method
@@ -345,9 +345,9 @@ namespace Tono.GuiWinForm
 
 
         /// <summary>
-        /// ƒCƒŠƒ…[ƒWƒ‡ƒ“ƒvƒƒWƒFƒNƒ^‚ğ“o˜^‚·‚é
+        /// ã‚¤ãƒªãƒ¥ãƒ¼ã‚¸ãƒ§ãƒ³ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ã‚¿ã‚’ç™»éŒ²ã™ã‚‹
         /// </summary>
-        /// <param name="original">“Š‰eŒ³</param>
+        /// <param name="original">æŠ•å½±å…ƒ</param>
         /// <param name="idtext"></param>
         /// <returns></returns>
         public PartsIllusionProjector AddIllusionProjector(IRichPane original, string idtext)
@@ -363,9 +363,9 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// w’è‚µ‚½ƒp[ƒc‚ğƒy[ƒ““àAƒŒƒCƒ„[‚È‚¢‚ÅÅã‚ÉˆÚ“®‚·‚é
+        /// æŒ‡å®šã—ãŸãƒ‘ãƒ¼ãƒ„ã‚’ãƒšãƒ¼ãƒ³å†…ã€ãƒ¬ã‚¤ãƒ¤ãƒ¼ãªã„ã§æœ€ä¸Šã«ç§»å‹•ã™ã‚‹
         /// </summary>
-        /// <param name="tar">ˆÚ“®‚³‚¹‚éƒp[ƒc</param>
+        /// <param name="tar">ç§»å‹•ã•ã›ã‚‹ãƒ‘ãƒ¼ãƒ„</param>
         public virtual void MovePartsZOrderToTop(PartsBase tar)
         {
             foreach (var layers in _data.Values)
@@ -383,7 +383,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ’Ç‰Áˆ—
+        /// è¿½åŠ å‡¦ç†
         /// </summary>
         /// <param name="target"></param>
         /// <param name="value"></param>
@@ -395,14 +395,14 @@ namespace Tono.GuiWinForm
 
                 if (!_data.TryGetValue(target, out var layers))
                 {
-                    // ƒy[ƒ“‚ğ“o˜^
+                    // ãƒšãƒ¼ãƒ³ã‚’ç™»éŒ²
                     _data.Add(target, new Layers());    // TONO
                     _addProc(target, value, layerLevel);
                     return;
                 }
                 if (!layers.TryGetValue(layerLevel, out var ps))
                 {
-                    // ƒŒƒCƒ„[‚ğ“o˜^
+                    // ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚’ç™»éŒ²
                     makeNewLayer(target, layerLevel, layers);
                     _addProc(target, value, layerLevel);
                     return;
@@ -417,7 +417,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// V‚µ‚¢ƒŒƒCƒ„[‚ğì‚é
+        /// æ–°ã—ã„ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚’ä½œã‚‹
         /// </summary>
         /// <param name="target"></param>
         /// <param name="layerLevel"></param>
@@ -443,34 +443,34 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒp[ƒc‚ğ’Ç‰Á‚·‚é
+        /// ãƒ‘ãƒ¼ãƒ„ã‚’è¿½åŠ ã™ã‚‹
         /// </summary>
         /// <param name="target"></param>
-        /// <param name="value">’Ç‰Á‚·‚éƒp[ƒc</param>
+        /// <param name="value">è¿½åŠ ã™ã‚‹ãƒ‘ãƒ¼ãƒ„</param>
         /// <param name="layerLevel"></param>
         public override void Add(IRichPane target, PartsBase value, int layerLevel)
         {
             lock (_data)
             {
-                base.Add(target, value, layerLevel);    // •K{
+                base.Add(target, value, layerLevel);    // å¿…é ˆ
 
                 _addProc(target, value, layerLevel);
             }
         }
 
         /// <summary>
-        /// w’èƒy[ƒ“‚ÌEnable‚ÈƒvƒƒWƒFƒNƒ^ƒŠƒXƒg‚ğæ“¾‚·‚é
-        /// ‚±‚ÌŠÖ”‚ÍARichPaneBinder‚ğw’è‚µ‚½Û‚ÉAƒIƒŠƒWƒiƒ‹‚ğ•Ô‚·H•v‚ğs‚¤
-        /// ‚±‚ê‚É‚æ‚èA_projectors[ƒy[ƒ“]‚ª‰Â”\‚Æ‚È‚é
+        /// æŒ‡å®šãƒšãƒ¼ãƒ³ã®Enableãªãƒ—ãƒ­ã‚¸ã‚§ã‚¯ã‚¿ãƒªã‚¹ãƒˆã‚’å–å¾—ã™ã‚‹
+        /// ã“ã®é–¢æ•°ã¯ã€RichPaneBinderã‚’æŒ‡å®šã—ãŸéš›ã«ã€ã‚ªãƒªã‚¸ãƒŠãƒ«ã‚’è¿”ã™å·¥å¤«ã‚’è¡Œã†
+        /// ã“ã‚Œã«ã‚ˆã‚Šã€_projectors[ãƒšãƒ¼ãƒ³]ãŒå¯èƒ½ã¨ãªã‚‹
         /// </summary>
-        /// <param name="tar">ƒŠƒXƒg‚ğæ“¾‚·‚é‚½‚ß‚ÌƒL[‚Æ‚È‚éƒy[ƒ“</param>
-        /// <param name="isAll">true=Enabled=false‚à‘ÎÛ‚ÉŠÜ‚ß‚é2011.3.8</param>
-        /// <returns>ƒvƒƒWƒFƒNƒ^ƒŠƒXƒg</returns>
+        /// <param name="tar">ãƒªã‚¹ãƒˆã‚’å–å¾—ã™ã‚‹ãŸã‚ã®ã‚­ãƒ¼ã¨ãªã‚‹ãƒšãƒ¼ãƒ³</param>
+        /// <param name="isAll">true=Enabled=falseã‚‚å¯¾è±¡ã«å«ã‚ã‚‹2011.3.8</param>
+        /// <returns>ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ã‚¿ãƒªã‚¹ãƒˆ</returns>
         protected Illustios getProjectors(IRichPane tar, bool isAll)
         {
             if (tar is RichPaneBinder)
             {
-                // ’l‚Æ‚È‚éƒy[ƒ“‚©‚çƒŠƒXƒg‚ğæ“¾
+                // å€¤ã¨ãªã‚‹ãƒšãƒ¼ãƒ³ã‹ã‚‰ãƒªã‚¹ãƒˆã‚’å–å¾—
                 if (_projectorsRevKey.TryGetValue(tar, out var key))
                 {
                     if (_projectors.TryGetValue(key, out var ret))
@@ -491,7 +491,7 @@ namespace Tono.GuiWinForm
                     }
                 }
             }
-            // ƒL[‚Æ‚È‚éƒy[ƒ“‚©‚çƒŠƒXƒg‚ğæ“¾
+            // ã‚­ãƒ¼ã¨ãªã‚‹ãƒšãƒ¼ãƒ³ã‹ã‚‰ãƒªã‚¹ãƒˆã‚’å–å¾—
             if (_projectors.TryGetValue(tar, out var ret2))
             {
                 var cpy = new Illustios();
@@ -511,12 +511,12 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// w’è‚µ‚½“ñ‚Â‚Ìƒp[ƒc‚Ìd‚È‚è”»’è‚ğ‚·‚é
+        /// æŒ‡å®šã—ãŸäºŒã¤ã®ãƒ‘ãƒ¼ãƒ„ã®é‡ãªã‚Šåˆ¤å®šã‚’ã™ã‚‹
         /// </summary>
-        /// <param name="p1">ƒp[ƒc‚P</param>
-        /// <param name="p2">ƒp[ƒc‚Q</param>
-        /// <param name="isIllusionCheck">true = ƒCƒŠƒ…[ƒWƒ‡ƒ“‚ğl—¶‚·‚é</param>
-        /// <returns>true = d‚È‚Á‚Ä‚¢‚é / false = d‚È‚Á‚Ä‚¢‚È‚¢</returns>
+        /// <param name="p1">ãƒ‘ãƒ¼ãƒ„ï¼‘</param>
+        /// <param name="p2">ãƒ‘ãƒ¼ãƒ„ï¼’</param>
+        /// <param name="isIllusionCheck">true = ã‚¤ãƒªãƒ¥ãƒ¼ã‚¸ãƒ§ãƒ³ã‚’è€ƒæ…®ã™ã‚‹</param>
+        /// <returns>true = é‡ãªã£ã¦ã„ã‚‹ / false = é‡ãªã£ã¦ã„ãªã„</returns>
         public override bool IsOverlapped(IRichPane pane1, PartsBase parts1, IRichPane pane2, PartsBase parts2, bool isIllusionCheck)
         {
             try
@@ -555,13 +555,13 @@ namespace Tono.GuiWinForm
             }
             catch (Exception e)
             {
-                System.Diagnostics.Debug.WriteLine("IsOverlapped‚ÍŸ‚Ì—áŠO‚ÅƒLƒƒƒ“ƒZƒ‹; " + e.Message);
+                System.Diagnostics.Debug.WriteLine("IsOverlappedã¯æ¬¡ã®ä¾‹å¤–ã§ã‚­ãƒ£ãƒ³ã‚»ãƒ«; " + e.Message);
             }
             return false;
         }
 
         /// <summary>
-        /// •`‰æ‚³‚¹‚éiPaintƒCƒxƒ“ƒg‚©‚çÀs‚³‚ê‚é‚½‚ßAƒ†[ƒU[‚ÍÀs‹Ö~
+        /// æç”»ã•ã›ã‚‹ï¼ˆPaintã‚¤ãƒ™ãƒ³ãƒˆã‹ã‚‰å®Ÿè¡Œã•ã‚Œã‚‹ãŸã‚ã€ãƒ¦ãƒ¼ã‚¶ãƒ¼ã¯å®Ÿè¡Œç¦æ­¢
         /// </summary>
         public override void ProvideDrawFunction()
         {
@@ -572,18 +572,18 @@ namespace Tono.GuiWinForm
                     var pane = (IRichPane)de.Key;
                     pane.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
 
-                    // ‘S‘Ì‚É‰e‹¿‚·‚é•`‰æˆ—
+                    // å…¨ä½“ã«å½±éŸ¿ã™ã‚‹æç”»å‡¦ç†
                     var clipRect = pane.GetPaintClipRect() & pane.GetPaneRect();
-                    if (clipRect != null)   // ƒNƒŠƒbƒv‚ÆƒyƒCƒ“ƒg‚Ì—Ìˆæ“à‚Ì‚İ•`‰æ‚·‚é
+                    if (clipRect != null)   // ã‚¯ãƒªãƒƒãƒ—ã¨ãƒšã‚¤ãƒ³ãƒˆã®é ˜åŸŸå†…ã®ã¿æç”»ã™ã‚‹
                     {
-                        PartsBase.Mask(pane); // ƒy[ƒ“—Ìˆæ‚ğƒ}ƒXƒN‚·‚é
+                        PartsBase.Mask(pane); // ãƒšãƒ¼ãƒ³é ˜åŸŸã‚’ãƒã‚¹ã‚¯ã™ã‚‹
                                               //System.Diagnostics.Debug.WriteLine(clipRect.ToString());
                         using (Brush brush = new SolidBrush(pane.Control.BackColor))
                         {
-                            pane.Graphics.FillRectangle(brush, clipRect); // ”wŒi‚ğ•`‰æ
+                            pane.Graphics.FillRectangle(brush, clipRect); // èƒŒæ™¯ã‚’æç”»
                         }
 
-                        // ƒŒƒCƒ„[‚Åƒ‹[ƒv‚·‚é
+                        // ãƒ¬ã‚¤ãƒ¤ãƒ¼ã§ãƒ«ãƒ¼ãƒ—ã™ã‚‹
                         var layers = (Layers)de.Value;
                         var lnos = _layerNos[pane];
                         for (var layerid = 0; layerid < lnos.Count; layerid++)
@@ -591,7 +591,7 @@ namespace Tono.GuiWinForm
                             if (_layerVisibleSwitch[lnos[layerid]])
                             {
                                 IEnumerable<PartsBase> pts = layers[lnos[layerid]];
-                                // •`‰æ‚·‚é
+                                // æç”»ã™ã‚‹
                                 drawLayer(pane, lnos[layerid], pts);
                             }
                         }
@@ -600,15 +600,15 @@ namespace Tono.GuiWinForm
             }
             catch (Exception e)
             {
-                System.Diagnostics.Debug.WriteLine("•`‰æ’†‚É—áŠOG" + e.Message);
+                System.Diagnostics.Debug.WriteLine("æç”»ä¸­ã«ä¾‹å¤–ï¼›" + e.Message);
             }
         }
 
         /// <summary>
-        /// ƒŒƒCƒ„[‚ğ•`‰æ
+        /// ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚’æç”»
         /// </summary>
-        /// <param name="pane">•`‰æ‚·‚éƒy[ƒ“</param>
-        /// <param name="pts">•`‰æ‚·‚éƒp[ƒc</param>
+        /// <param name="pane">æç”»ã™ã‚‹ãƒšãƒ¼ãƒ³</param>
+        /// <param name="pts">æç”»ã™ã‚‹ãƒ‘ãƒ¼ãƒ„</param>
         protected virtual void drawLayer(IRichPane pane, int layerid, IEnumerable<PartsBase> pts)
         {
             foreach (var dp in pts)
@@ -623,7 +623,7 @@ namespace Tono.GuiWinForm
                     catch (Exception ex)
                     {
                         LOG.WriteLineException(ex);
-                        //throw exinner;	// ‚±‚±‚ÉƒuƒŒ[ƒNƒ|ƒCƒ“ƒg‚ğİ‚¯‚é‚ÆA‚Ç‚Ìƒp[ƒc‚Å—áŠO”­¶‚µ‚½‚©“Á’è‚Å‚«‚é
+                        //throw exinner;	// ã“ã“ã«ãƒ–ãƒ¬ãƒ¼ã‚¯ãƒã‚¤ãƒ³ãƒˆã‚’è¨­ã‘ã‚‹ã¨ã€ã©ã®ãƒ‘ãƒ¼ãƒ„ã§ä¾‹å¤–ç™ºç”Ÿã—ãŸã‹ç‰¹å®šã§ãã‚‹
                     }
 #else
                     dp.Draw(pp);
@@ -633,13 +633,13 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// w’è‚µ‚½ƒp[ƒcƒRƒŒƒNƒVƒ‡ƒ“‚©‚çAŠY“–‚·‚éƒp[ƒc‚ğŒŸõ‚·‚é
+        /// æŒ‡å®šã—ãŸãƒ‘ãƒ¼ãƒ„ã‚³ãƒ¬ã‚¯ã‚·ãƒ§ãƒ³ã‹ã‚‰ã€è©²å½“ã™ã‚‹ãƒ‘ãƒ¼ãƒ„ã‚’æ¤œç´¢ã™ã‚‹
         /// </summary>
         /// <param name="pos"></param>
         /// <param name="pane"></param>
         /// <param name="isSelectableOnly"></param>
         /// <param name="pcol"></param>
-        /// <param name="rp">ƒy[ƒ“‚ğ•Ô‚·iƒCƒŠƒ…[ƒWƒ‡ƒ“ƒvƒƒWƒFƒNƒ^‚Ìƒy[ƒ“‚ª•Ô‚é‚Ì‚ÅApane‚ÆˆÙ‚È‚éê‡‚ª‚ ‚éj</param>
+        /// <param name="rp">ãƒšãƒ¼ãƒ³ã‚’è¿”ã™ï¼ˆã‚¤ãƒªãƒ¥ãƒ¼ã‚¸ãƒ§ãƒ³ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ã‚¿ã®ãƒšãƒ¼ãƒ³ãŒè¿”ã‚‹ã®ã§ã€paneã¨ç•°ãªã‚‹å ´åˆãŒã‚ã‚‹ï¼‰</param>
         /// <returns></returns>
         private PartsBase getparts(ScreenPos pos, IRichPane pane, bool isSelectableOnly, IList pcol, out IRichPane rp)
         {
@@ -661,7 +661,7 @@ namespace Tono.GuiWinForm
                         continue;
                     }
                 }
-                // ƒvƒƒWƒFƒNƒ^‚ğ’Ê‚µ‚ÄAƒp[ƒcÀ•W‚ğ’²¸‚·‚é
+                // ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ã‚¿ã‚’é€šã—ã¦ã€ãƒ‘ãƒ¼ãƒ„åº§æ¨™ã‚’èª¿æŸ»ã™ã‚‹
                 foreach (IRichPane pp in PartsIllusionProjector.GetEnumerator(pane, getProjectors(pane, false), dp))
                 {
                     if (dp.IsOn(pos, pp) != PartsBase.PointType.Outside)
@@ -676,13 +676,13 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// w’è—Ìˆæ‚©‚ç“Á’èˆÊ’u‚Ìƒp[ƒc‚ğ’T‚·
+        /// æŒ‡å®šé ˜åŸŸã‹ã‚‰ç‰¹å®šä½ç½®ã®ãƒ‘ãƒ¼ãƒ„ã‚’æ¢ã™
         /// </summary>
-        /// <param name="pos">ˆÊ’u</param>
-        /// <param name="pane">ŒŸõƒy[ƒ“</param>
-        /// <param name="layer">ŒŸõƒŒƒCƒ„[</param>
-        /// <param name="isSelectableOnly">‘I‘ğ‰Â”\‚Ì‚İ</param>
-        /// <returns>æ“¾‚Å‚«‚½ƒp[ƒc / null=‚È‚µ</returns>
+        /// <param name="pos">ä½ç½®</param>
+        /// <param name="pane">æ¤œç´¢ãƒšãƒ¼ãƒ³</param>
+        /// <param name="layer">æ¤œç´¢ãƒ¬ã‚¤ãƒ¤ãƒ¼</param>
+        /// <param name="isSelectableOnly">é¸æŠå¯èƒ½ã®ã¿</param>
+        /// <returns>å–å¾—ã§ããŸãƒ‘ãƒ¼ãƒ„ / null=ãªã—</returns>
         public override PartsBase GetPartsAt(ScreenPos pos, IRichPane pane, int layer, bool isSelectableOnly)
         {
             PartsBase ret = null;
@@ -697,10 +697,10 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// w’èƒ}ƒEƒXÀ•W‚Ìƒp[ƒc‚ğ‚Ğ‚Æ‚Âæ“¾‚·‚é
+        /// æŒ‡å®šãƒã‚¦ã‚¹åº§æ¨™ã®ãƒ‘ãƒ¼ãƒ„ã‚’ã²ã¨ã¤å–å¾—ã™ã‚‹
         /// </summary>
-        /// <param name="pos">ƒp[ƒcÀ•W</param>
-        /// <returns>æ“¾‚Å‚«‚½ƒp[ƒc / null=‚È‚µ</returns>
+        /// <param name="pos">ãƒ‘ãƒ¼ãƒ„åº§æ¨™</param>
+        /// <returns>å–å¾—ã§ããŸãƒ‘ãƒ¼ãƒ„ / null=ãªã—</returns>
         public override PartsBase GetPartsAt(ScreenPos pos, bool isSelectableOnly, out IRichPane rp)
         {
             rp = null;
@@ -709,7 +709,7 @@ namespace Tono.GuiWinForm
                 return null;
             }
 
-            // ƒŠƒbƒ`ƒy[ƒ“‚É‚æ‚éƒ‹[ƒv
+            // ãƒªãƒƒãƒãƒšãƒ¼ãƒ³ã«ã‚ˆã‚‹ãƒ«ãƒ¼ãƒ—
             for (IDictionaryEnumerator de = _data.GetEnumerator(); de.MoveNext();)
             {
                 var pane = (IRichPane)de.Key;
@@ -719,13 +719,13 @@ namespace Tono.GuiWinForm
                     continue;
                 }
 
-                // ƒŒƒCƒ„[‚É‚æ‚éƒ‹[ƒv
+                // ãƒ¬ã‚¤ãƒ¤ãƒ¼ã«ã‚ˆã‚‹ãƒ«ãƒ¼ãƒ—
                 for (var layerde = ((IDictionary)de.Value).GetEnumerator(); layerde.MoveNext();)
                 {
                     if (_layerVisibleSwitch[(int)layerde.Key])
                     {
-                        // ‚·‚×‚Ä‚Ìƒp[ƒc‚ğ‡‚É’²¸‚·‚éA’á‘¬‚Ìˆ—B‹C‚É“ü‚ç‚È‚¯‚ê‚Î‹@”\‚ğƒI[ƒo[ƒ‰ƒCƒh‚µ‚Ä‚­‚¾‚³‚¢
-                        // ‚½‚¾‚µAˆÈ‰º‚ÌƒvƒƒWƒFƒNƒ^‚ğl—¶‚µ‚½ì‚è‚É‚·‚é•K—v‚ª‚ ‚è‚Ü‚·B
+                        // ã™ã¹ã¦ã®ãƒ‘ãƒ¼ãƒ„ã‚’é †ã«èª¿æŸ»ã™ã‚‹ã€ä½é€Ÿã®å‡¦ç†ã€‚æ°—ã«å…¥ã‚‰ãªã‘ã‚Œã°æ©Ÿèƒ½ã‚’ã‚ªãƒ¼ãƒãƒ¼ãƒ©ã‚¤ãƒ‰ã—ã¦ãã ã•ã„
+                        // ãŸã ã—ã€ä»¥ä¸‹ã®ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ã‚¿ã‚’è€ƒæ…®ã—ãŸä½œã‚Šã«ã™ã‚‹å¿…è¦ãŒã‚ã‚Šã¾ã™ã€‚
                         var pcol = (IList)layerde.Value;
                         var ret = getparts(pos, pane, isSelectableOnly, pcol, out rp);
                         if (ret != null)
@@ -739,7 +739,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒp[ƒc‚ğ—ñ‹“‚·‚é‚½‚ß‚ÌIEnumerator‚ğæ“¾‚·‚é
+        /// ãƒ‘ãƒ¼ãƒ„ã‚’åˆ—æŒ™ã™ã‚‹ãŸã‚ã®IEnumeratorã‚’å–å¾—ã™ã‚‹
         /// </summary>
         /// <returns>IEnumerator</returns>
         public override IPartsEnumerator GetEnumerator()
@@ -748,7 +748,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ‘Sƒy[ƒ“‚É“o˜^‚³‚ê‚Ä‚¢‚éƒp[ƒc‚Ì”‚ğ‡Œv‚·‚é
+        /// å…¨ãƒšãƒ¼ãƒ³ã«ç™»éŒ²ã•ã‚Œã¦ã„ã‚‹ãƒ‘ãƒ¼ãƒ„ã®æ•°ã‚’åˆè¨ˆã™ã‚‹
         /// </summary>
         public override int Count
         {
@@ -767,12 +767,12 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// w’èƒp[ƒc‚ğíœ‚·‚é
+        /// æŒ‡å®šãƒ‘ãƒ¼ãƒ„ã‚’å‰Šé™¤ã™ã‚‹
         /// </summary>
         /// <param name="value"></param>
         public override void Remove(PartsBase value)
         {
-            base.Remove(value); // •K{
+            base.Remove(value); // å¿…é ˆ
 
             foreach (var layers in _data.Values)
             {
@@ -788,7 +788,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ‚·‚×‚Ä‚ğíœ‚·‚é
+        /// ã™ã¹ã¦ã‚’å‰Šé™¤ã™ã‚‹
         /// </summary>
         public override void Clear()
         {
@@ -796,7 +796,7 @@ namespace Tono.GuiWinForm
             {
                 foreach (var de in _data.Keys)
                 {
-                    de.Invalidate(de.GetPaneRect());    // ƒp[ƒc‚Ì—Ìˆæ‚ğÄ•`‰æ‚·‚é
+                    de.Invalidate(de.GetPaneRect());    // ãƒ‘ãƒ¼ãƒ„ã®é ˜åŸŸã‚’å†æç”»ã™ã‚‹
                 }
                 _data.Clear();
                 _layerVisibleSwitch.Clear();
@@ -805,7 +805,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// w’è‚µ‚½Œ^‚ğíœ‚·‚é
+        /// æŒ‡å®šã—ãŸå‹ã‚’å‰Šé™¤ã™ã‚‹
         /// </summary>
         /// <param name="type"></param>
         public override int Clear(Type type)
@@ -837,7 +837,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// w’èƒy[ƒ“‚Ìƒp[ƒc‚ğíœ‚·‚é
+        /// æŒ‡å®šãƒšãƒ¼ãƒ³ã®ãƒ‘ãƒ¼ãƒ„ã‚’å‰Šé™¤ã™ã‚‹
         /// </summary>
         public override void Clear(IRichPane targetPane)
         {
@@ -846,13 +846,13 @@ namespace Tono.GuiWinForm
                 if (_data.TryGetValue(targetPane, out var ls))
                 {
                     ls.Clear();
-                    targetPane.Invalidate(targetPane.GetPaneRect());    // íœ‚µ‚½—lq‚ğÄ•`‰æ
+                    targetPane.Invalidate(targetPane.GetPaneRect());    // å‰Šé™¤ã—ãŸæ§˜å­ã‚’å†æç”»
                 }
             }
         }
 
         /// <summary>
-        /// w’èƒy[ƒ“‚Åw’èƒŒƒCƒ„[‚Ìƒp[ƒc‚ğíœ‚·‚é
+        /// æŒ‡å®šãƒšãƒ¼ãƒ³ã§æŒ‡å®šãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ãƒ‘ãƒ¼ãƒ„ã‚’å‰Šé™¤ã™ã‚‹
         /// </summary>
         public override void Clear(IRichPane targetPane, int layerLevel)
         {
@@ -863,15 +863,15 @@ namespace Tono.GuiWinForm
                     if (ls.TryGetValue(layerLevel, out var ps))
                     {
                         ps.Clear();
-                        targetPane.Invalidate(targetPane.GetPaneRect());    // íœ‚µ‚½—lq‚ğÄ•`‰æ
+                        targetPane.Invalidate(targetPane.GetPaneRect());    // å‰Šé™¤ã—ãŸæ§˜å­ã‚’å†æç”»
                     }
                 }
             }
         }
 
         /// <summary>
-        /// ‘S—v‘f‚ğƒRƒs[‚·‚éiƒRƒs[æ‚ÍƒRƒs[Œ³‚Æ‘S‚­“¯‚¶‚É‚È‚éj
-        /// Še—v‘fiƒp[ƒcj‚ÍClone‚³‚ê‚È‚¢‚ÅQÆ‚Æ‚È‚é
+        /// å…¨è¦ç´ ã‚’ã‚³ãƒ”ãƒ¼ã™ã‚‹ï¼ˆã‚³ãƒ”ãƒ¼å…ˆã¯ã‚³ãƒ”ãƒ¼å…ƒã¨å…¨ãåŒã˜ã«ãªã‚‹ï¼‰
+        /// å„è¦ç´ ï¼ˆãƒ‘ãƒ¼ãƒ„ï¼‰ã¯Cloneã•ã‚Œãªã„ã§å‚ç…§ã¨ãªã‚‹
         /// </summary>
         public override object Clone()
         {
@@ -888,10 +888,10 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// —ÌˆæXV‚ğ—\–ñ‚·‚éiƒvƒƒWƒFƒNƒ^‚ğƒTƒ|[ƒg‚µ‚Ä‚¢‚é‚Ì‚ÅA‚±‚ê‚ğg—p‚µ‚Ä‚­‚¾‚³‚¢j
+        /// é ˜åŸŸæ›´æ–°ã‚’äºˆç´„ã™ã‚‹ï¼ˆãƒ—ãƒ­ã‚¸ã‚§ã‚¯ã‚¿ã‚’ã‚µãƒãƒ¼ãƒˆã—ã¦ã„ã‚‹ã®ã§ã€ã“ã‚Œã‚’ä½¿ç”¨ã—ã¦ãã ã•ã„ï¼‰
         /// </summary>
-        /// <param name="parts">XV‚·‚éƒp[ƒc</param>
-        /// <param name="rp">g—p‚·‚éƒy[ƒ“</param>
+        /// <param name="parts">æ›´æ–°ã™ã‚‹ãƒ‘ãƒ¼ãƒ„</param>
+        /// <param name="rp">ä½¿ç”¨ã™ã‚‹ãƒšãƒ¼ãƒ³</param>
         public override void Invalidate(PartsBase parts, IRichPane rp)
         {
             try
@@ -908,11 +908,11 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// w’èƒy[ƒ“‚É‚ ‚éw’èŒ^‚Ìƒp[ƒc‚ğ‚Ğ‚Æ‚Âæ“¾‚·‚é
+        /// æŒ‡å®šãƒšãƒ¼ãƒ³ã«ã‚ã‚‹æŒ‡å®šå‹ã®ãƒ‘ãƒ¼ãƒ„ã‚’ã²ã¨ã¤å–å¾—ã™ã‚‹
         /// </summary>
-        /// <param name="rp">ƒy[ƒ“</param>
-        /// <param name="dpType">Œ^</param>
-        /// <returns>ƒp[ƒc‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‚ÌQÆ / null = Œ©‚Â‚©‚ç‚È‚©‚Á‚½</returns>
+        /// <param name="rp">ãƒšãƒ¼ãƒ³</param>
+        /// <param name="dpType">å‹</param>
+        /// <returns>ãƒ‘ãƒ¼ãƒ„ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã®å‚ç…§ / null = è¦‹ã¤ã‹ã‚‰ãªã‹ã£ãŸ</returns>
         public override PartsBase GetSample(IRichPane rp, Type dpType)
         {
             lock (_data)
@@ -935,11 +935,11 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// w’èƒy[ƒ“‚É‚ ‚éw’èŒ^‚Ìƒp[ƒc‚ğ‚Ğ‚Æ‚Âæ“¾‚·‚é
+        /// æŒ‡å®šãƒšãƒ¼ãƒ³ã«ã‚ã‚‹æŒ‡å®šå‹ã®ãƒ‘ãƒ¼ãƒ„ã‚’ã²ã¨ã¤å–å¾—ã™ã‚‹
         /// </summary>
-        /// <param name="rp">ƒy[ƒ“</param>
-        /// <param name="dpType">Œ^</param>
-        /// <returns>ƒp[ƒc‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‚ÌQÆ / null = Œ©‚Â‚©‚ç‚È‚©‚Á‚½</returns>
+        /// <param name="rp">ãƒšãƒ¼ãƒ³</param>
+        /// <param name="dpType">å‹</param>
+        /// <returns>ãƒ‘ãƒ¼ãƒ„ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã®å‚ç…§ / null = è¦‹ã¤ã‹ã‚‰ãªã‹ã£ãŸ</returns>
         public override PartsBase GetSample()
         {
             lock (_data)

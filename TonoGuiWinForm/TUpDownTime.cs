@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System.Drawing;
@@ -7,13 +7,13 @@ using System.Windows.Forms;
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// TUpDownTime ‚ÌŠT—v‚Ìà–¾‚Å‚·B
+    /// TUpDownTime ã®æ¦‚è¦ã®èª¬æ˜ã§ã™ã€‚
     /// </summary>
     public class TUpDownTime : System.Windows.Forms.UserControl
     {
-        #region	‘®«(ƒVƒŠƒAƒ‰ƒCƒY‚·‚é)
+        #region	å±æ€§(ã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºã™ã‚‹)
         #endregion
-        #region	‘®«(ƒVƒŠƒAƒ‰ƒCƒY‚µ‚È‚¢)
+        #region	å±æ€§(ã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºã—ãªã„)
         #endregion
 
         private TTextBoxTimeMask TiemText;
@@ -21,16 +21,16 @@ namespace Tono.GuiWinForm
         private System.Windows.Forms.ComboBox comboBox_Day;
 
         /// <summary>
-        /// •K—v‚ÈƒfƒUƒCƒi•Ï”‚Å‚·B
+        /// å¿…è¦ãªãƒ‡ã‚¶ã‚¤ãƒŠå¤‰æ•°ã§ã™ã€‚
         /// </summary>
         private readonly System.ComponentModel.Container components = null;
 
         /// <summary>
-        /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+        /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
         /// </summary>
         public TUpDownTime()
         {
-            // ‚±‚ÌŒÄ‚Ño‚µ‚ÍAWindows.Forms ƒtƒH[ƒ€ ƒfƒUƒCƒi‚Å•K—v‚Å‚·B
+            // ã“ã®å‘¼ã³å‡ºã—ã¯ã€Windows.Forms ãƒ•ã‚©ãƒ¼ãƒ  ãƒ‡ã‚¶ã‚¤ãƒŠã§å¿…è¦ã§ã™ã€‚
             InitializeComponent();
 
             for (var i = 0; i < 7; i++)
@@ -40,7 +40,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// g—p‚³‚ê‚Ä‚¢‚éƒŠƒ\[ƒX‚ÉŒãˆ—‚ğÀs‚µ‚Ü‚·B
+        /// ä½¿ç”¨ã•ã‚Œã¦ã„ã‚‹ãƒªã‚½ãƒ¼ã‚¹ã«å¾Œå‡¦ç†ã‚’å®Ÿè¡Œã—ã¾ã™ã€‚
         /// </summary>
         protected override void Dispose(bool disposing)
         {
@@ -54,10 +54,10 @@ namespace Tono.GuiWinForm
             base.Dispose(disposing);
         }
 
-        #region ƒRƒ“ƒ|[ƒlƒ“ƒg ƒfƒUƒCƒi‚Å¶¬‚³‚ê‚½ƒR[ƒh 
+        #region ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆ ãƒ‡ã‚¶ã‚¤ãƒŠã§ç”Ÿæˆã•ã‚ŒãŸã‚³ãƒ¼ãƒ‰ 
         /// <summary>
-        /// ƒfƒUƒCƒi ƒTƒ|[ƒg‚É•K—v‚Èƒƒ\ƒbƒh‚Å‚·B‚±‚Ìƒƒ\ƒbƒh‚Ì“à—e‚ğ
-        /// ƒR[ƒh ƒGƒfƒBƒ^‚Å•ÏX‚µ‚È‚¢‚Å‚­‚¾‚³‚¢B
+        /// ãƒ‡ã‚¶ã‚¤ãƒŠ ã‚µãƒãƒ¼ãƒˆã«å¿…è¦ãªãƒ¡ã‚½ãƒƒãƒ‰ã§ã™ã€‚ã“ã®ãƒ¡ã‚½ãƒƒãƒ‰ã®å†…å®¹ã‚’
+        /// ã‚³ãƒ¼ãƒ‰ ã‚¨ãƒ‡ã‚£ã‚¿ã§å¤‰æ›´ã—ãªã„ã§ãã ã•ã„ã€‚
         /// </summary>
         private void InitializeComponent()
         {
@@ -91,7 +91,7 @@ namespace Tono.GuiWinForm
             comboBox_Day.Anchor = System.Windows.Forms.AnchorStyles.Left;
             comboBox_Day.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             comboBox_Day.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            comboBox_Day.Font = new System.Drawing.Font("HGP‘n‰pŠpºŞ¼¯¸UB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 128);
+            comboBox_Day.Font = new System.Drawing.Font("HGPå‰µè‹±è§’ï½ºï¾ï½¼ï½¯ï½¸UB", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 128);
             comboBox_Day.ImeMode = System.Windows.Forms.ImeMode.Off;
             comboBox_Day.ItemHeight = 24;
             comboBox_Day.Location = new System.Drawing.Point(0, 1);
@@ -114,7 +114,7 @@ namespace Tono.GuiWinForm
         #endregion
 
         /// <summary>
-        /// ƒeƒLƒXƒg‚Ìæ“¾/İ’è
+        /// ãƒ†ã‚­ã‚¹ãƒˆã®å–å¾—/è¨­å®š
         /// </summary>
         public override string Text
         {
@@ -123,7 +123,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// •\¦‚Ìæ“¾
+        /// è¡¨ç¤ºæ™‚åˆ»ã®å–å¾—
         /// </summary>
         public DateTimeEx GetTime()
         {
@@ -131,9 +131,9 @@ namespace Tono.GuiWinForm
             return DateTimeEx.FromDHMS(comboBox_Day.SelectedIndex, t.Hour, t.Minute, t.Second);
         }
         /// <summary>
-        /// •\¦‚Ìİ’è
+        /// è¡¨ç¤ºæ™‚åˆ»ã®è¨­å®š
         /// </summary>
-        /// <param name="value">•\¦‚·‚é</param>
+        /// <param name="value">è¡¨ç¤ºã™ã‚‹æ™‚åˆ»</param>
         public void SetTime(DateTimeEx value)
         {
             comboBox_Day.SelectedIndex = value.Day;
@@ -141,7 +141,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒXƒNƒ[ƒ‹ƒo[‚ÌƒCƒxƒ“ƒg
+        /// ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ãƒãƒ¼ã®ã‚¤ãƒ™ãƒ³ãƒˆ
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -157,25 +157,25 @@ namespace Tono.GuiWinForm
             {
                 case 0:
                 case 1:
-                case 2: Delta = 60 * 60; break; // 
+                case 2: Delta = 60 * 60; break; // æ™‚
                 case 3:
                 case 4:
-                case 5: Delta = 60; break;      // •ª
+                case 5: Delta = 60; break;      // åˆ†
                 case 6:
                 case 7:
-                case 8: Delta = 1; break;       // •b
+                case 8: Delta = 1; break;       // ç§’
                 default: break;
             }
             var t = TiemText.GetTime();
             if (e.Type == System.Windows.Forms.ScrollEventType.LargeDecrement ||
                 e.Type == System.Windows.Forms.ScrollEventType.SmallDecrement)
-            {   // ŠÔ‚ğ{‚·‚é
+            {   // æ™‚é–“ã‚’ï¼‹ã™ã‚‹
                 t.TotalSeconds += Delta;
             }
             else
                 if (e.Type == System.Windows.Forms.ScrollEventType.LargeIncrement ||
                 e.Type == System.Windows.Forms.ScrollEventType.SmallIncrement)
-            {   // ŠÔ‚ğ|‚·‚é
+            {   // æ™‚é–“ã‚’ï¼ã™ã‚‹
                 t.TotalSeconds -= Delta;
             }
             TiemText.SetTime(t);

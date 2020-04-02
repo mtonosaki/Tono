@@ -1,15 +1,15 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// ƒƒO‚ğƒNƒŠƒA‚·‚é
+    /// ãƒ­ã‚°ã‚’ã‚¯ãƒªã‚¢ã™ã‚‹
     /// </summary>
     public class FeatureLogClear : FeatureBase
     {
         /// <summary>
-        /// ƒƒOƒNƒŠƒA
+        /// ãƒ­ã‚°ã‚¯ãƒªã‚¢
         /// </summary>
         /// <param name="who"></param>
         public override void Start(NamedId who)

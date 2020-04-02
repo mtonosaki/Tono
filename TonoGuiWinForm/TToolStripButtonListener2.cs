@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System;
@@ -10,23 +10,23 @@ using System.Windows.Forms;
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// TToolStripButton2 ‚ÌŠT—v‚Ìà–¾‚Å‚·B
-    /// ƒƒjƒ…[‚ÌÀs‚Å‹N“®‚·‚éƒtƒB[ƒ`ƒƒ[‹N“®ƒ^ƒCƒ~ƒ“ƒOŠÄ‹ƒNƒ‰ƒX
+    /// TToolStripButton2 ã®æ¦‚è¦ã®èª¬æ˜ã§ã™ã€‚
+    /// ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã®å®Ÿè¡Œã§èµ·å‹•ã™ã‚‹ãƒ•ã‚£ãƒ¼ãƒãƒ£ãƒ¼èµ·å‹•ã‚¿ã‚¤ãƒŸãƒ³ã‚°ç›£è¦–ã‚¯ãƒ©ã‚¹
     /// </summary>
     public class TToolStripButton2 : System.Windows.Forms.ToolStripButton, IFeatureEventListener
     {
-        #region ‘®«iƒVƒŠƒAƒ‰ƒCƒY‚·‚éj
+        #region å±æ€§ï¼ˆã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºã™ã‚‹ï¼‰
 
-        /// <summary>ƒCƒxƒ“ƒg“]‘—æƒtƒB[ƒ`ƒƒ[</summary>
+        /// <summary>ã‚¤ãƒ™ãƒ³ãƒˆè»¢é€å…ˆãƒ•ã‚£ãƒ¼ãƒãƒ£ãƒ¼</summary>
         private FeatureBase _target = null;
 
-        /// <summary>UI‚©‚çƒCƒxƒ“ƒg”­s‚É–¾¦‚Å‚«‚éIDi–¾¦‚µ‚È‚­‚Ä‚àOKj</summary>
+        /// <summary>UIã‹ã‚‰ã‚¤ãƒ™ãƒ³ãƒˆç™ºè¡Œæ™‚ã«æ˜ç¤ºã§ãã‚‹IDï¼ˆæ˜ç¤ºã—ãªãã¦ã‚‚OKï¼‰</summary>
         private NamedId _triggerTokenID = null;
 
         #endregion
 
         /// <summary>
-        /// ƒfƒtƒHƒ‹ƒgƒRƒ“ƒXƒgƒ‰ƒNƒ^
+        /// ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
         /// </summary>
         public TToolStripButton2()
         {
@@ -72,7 +72,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒgƒŠƒK[ƒg[ƒNƒ“ID‚ğ“Á‚Éw’è‚·‚é–‚ª‚Å‚«‚é
+        /// ãƒˆãƒªã‚¬ãƒ¼ãƒˆãƒ¼ã‚¯ãƒ³IDã‚’ç‰¹ã«æŒ‡å®šã™ã‚‹äº‹ãŒã§ãã‚‹
         /// </summary>
         public NamedId ID
         {
@@ -80,14 +80,14 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒCƒxƒ“ƒg‚Ì“]‘—æ‚Æ‚È‚éƒtƒB[ƒ`ƒƒ[ƒNƒ‰ƒX‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‚ğw’è‚·‚é
+        /// ã‚¤ãƒ™ãƒ³ãƒˆã®è»¢é€å…ˆã¨ãªã‚‹ãƒ•ã‚£ãƒ¼ãƒãƒ£ãƒ¼ã‚¯ãƒ©ã‚¹ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’æŒ‡å®šã™ã‚‹
         /// </summary>
-        /// <param name="target">ƒtƒB[ƒ`ƒƒ[ƒNƒ‰ƒX‚ÌƒCƒ“ƒXƒ^ƒ“ƒX</param>
+        /// <param name="target">ãƒ•ã‚£ãƒ¼ãƒãƒ£ãƒ¼ã‚¯ãƒ©ã‚¹ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹</param>
         public void LinkFeature(FeatureBase target)
         {
             _target = target;
             base.Visible = true;
-            //			this.Owner.Click += new EventHandler(onOpenMenuItem);	// .NET2.0‰»
+            //			this.Owner.Click += new EventHandler(onOpenMenuItem);	// .NET2.0åŒ–
             //if( OwnerItem.GetType().IsDefined(typeof(ToolStripDropDown), true))
             //{
             //    ((ToolStripDropDown)OwnerItem).DropDownOpening += new EventHandler(onOpenMenuItem);
@@ -95,7 +95,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒƒjƒ…[‚Ìƒ|ƒbƒvƒAƒbƒvƒCƒxƒ“ƒg
+        /// ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã®ãƒãƒƒãƒ—ã‚¢ãƒƒãƒ—ã‚¤ãƒ™ãƒ³ãƒˆ
         /// </summary>
         private void onOpenMenuItem(object sender, EventArgs e)
         {
@@ -104,7 +104,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒNƒŠƒbƒNƒCƒxƒ“ƒgˆ—
+        /// ã‚¯ãƒªãƒƒã‚¯ã‚¤ãƒ™ãƒ³ãƒˆå‡¦ç†
         /// </summary>
         protected override void OnClick(System.EventArgs e)
         {
@@ -112,17 +112,17 @@ namespace Tono.GuiWinForm
             {
                 _target.RequestStartup(_triggerTokenID);
 
-                // ƒVƒ‡[ƒgƒJƒbƒgƒL[‚ÅƒtƒH[ƒJƒX‚ª’D‚í‚ê‚½ê‡A‚Æ‚è‚ ‚¦‚¸‘SUpƒCƒxƒ“ƒg‚ğ”ò‚Î‚·
+                // ã‚·ãƒ§ãƒ¼ãƒˆã‚«ãƒƒãƒˆã‚­ãƒ¼ã§ãƒ•ã‚©ãƒ¼ã‚«ã‚¹ãŒå¥ªã‚ã‚ŒãŸå ´åˆã€ã¨ã‚Šã‚ãˆãšå…¨Upã‚¤ãƒ™ãƒ³ãƒˆã‚’é£›ã°ã™
                 //_keyEventReset(GetMainMenu().GetForm());
             }
         }
         /// <summary>
-        /// ‚·‚×‚Ä‚ÌcFeatureRich‚ÉƒL[ƒCƒxƒ“ƒgÄ\’z‚ğ—v¿‚·‚é
+        /// ã™ã¹ã¦ã®cFeatureRichã«ã‚­ãƒ¼ã‚¤ãƒ™ãƒ³ãƒˆå†æ§‹ç¯‰ã‚’è¦è«‹ã™ã‚‹
         /// </summary>
         /// <param name="cnt"></param>
         private void _keyEventReset(Control cnt)
         {
-            if (cnt == null)    // ƒtƒH[ƒ€‚ÍI—¹‚³‚ê‚Ä‚¢‚é
+            if (cnt == null)    // ãƒ•ã‚©ãƒ¼ãƒ ã¯çµ‚äº†ã•ã‚Œã¦ã„ã‚‹
             {
                 return;
             }

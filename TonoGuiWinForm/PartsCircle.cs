@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System;
@@ -12,13 +12,13 @@ namespace Tono.GuiWinForm
     [Serializable]
     public class PartsCircle : PartsBase
     {
-        #region		‘®«(ƒVƒŠƒAƒ‰ƒCƒY‚·‚é)
-        /** <summary>ü‚ÌF</summary> */
+        #region		å±æ€§(ã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºã™ã‚‹)
+        /** <summary>ç·šã®è‰²</summary> */
         private Color _color = Color.Blue;
         #endregion
 
         /// <summary>
-        /// “h‚è‚Â‚Ô‚µ‚ÌF
+        /// å¡—ã‚Šã¤ã¶ã—ã®è‰²
         /// </summary>
         public Color BackColor
         {
@@ -27,14 +27,14 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// •`‰æˆ—
+        /// æç”»å‡¦ç†
         /// </summary>
         public override bool Draw(IRichPane rp)
         {
             var spos = GetScRect(rp);
             spos.Normalize();
 
-            // ‰~‚É‚·‚é
+            // å††ã«ã™ã‚‹
             if (spos.Width < spos.Height)
             {
                 var d = (spos.Height - spos.Width) / 2;
@@ -48,13 +48,13 @@ namespace Tono.GuiWinForm
                 spos.RB.X -= d;
             }
 
-            if (isInClip(rp, spos) == false)    // •`‰æ•s—v‚Å‚ ‚ê‚ÎA‚È‚É‚à‚µ‚È‚¢
+            if (isInClip(rp, spos) == false)    // æç”»ä¸è¦ã§ã‚ã‚Œã°ã€ãªã«ã‚‚ã—ãªã„
             {
                 return false;
             }
             using (Brush brush = new SolidBrush(_color))
             {
-                rp.Graphics.FillEllipse(brush, spos.LT.X, spos.LT.Y, spos.Width, spos.Height); // ‘È‰~‚ğ•`‰æ
+                rp.Graphics.FillEllipse(brush, spos.LT.X, spos.LT.Y, spos.Width, spos.Height); // æ¥•å††ã‚’æç”»
             }
             return true;
         }

@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System;
@@ -10,7 +10,7 @@ using System.Runtime.Serialization;
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// ‘½Œ¾Œê‚ğƒTƒ|[ƒg‚·‚é•¶š—ñ
+    /// å¤šè¨€èªã‚’ã‚µãƒãƒ¼ãƒˆã™ã‚‹æ–‡å­—åˆ—
     /// </summary>
     /// <remarks>
     /// StrUtilingw = utility class, String, Worldwide
@@ -20,7 +20,7 @@ namespace Tono.GuiWinForm
     {
         private Dictionary<string, string> _dat = new Dictionary<string, string>();
 
-        #region ICloneable ƒƒ“ƒo
+        #region ICloneable ãƒ¡ãƒ³ãƒ
 
         public object Clone()
         {
@@ -58,7 +58,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^‚Í‚È‚¢B•¶š—ñ‚©‚ç‚ÌƒLƒƒƒXƒg‚ÌƒI[ƒo[ƒ‰ƒCƒh‚ğg‚Á‚Ä‚­‚¾‚³‚¢
+        /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ã¯ãªã„ã€‚æ–‡å­—åˆ—ã‹ã‚‰ã®ã‚­ãƒ£ã‚¹ãƒˆã®ã‚ªãƒ¼ãƒãƒ¼ãƒ©ã‚¤ãƒ‰ã‚’ä½¿ã£ã¦ãã ã•ã„
         /// </summary>
         private StringWorld()
         {
@@ -70,7 +70,7 @@ namespace Tono.GuiWinForm
             Mes.Current.CodeChanged += new Mes.CodeChangedEventHandler(Current_CodeChanged);
         }
 
-        #region ISerializable ƒƒ“ƒo
+        #region ISerializable ãƒ¡ãƒ³ãƒ
 
         protected StringWorld(SerializationInfo info, StreamingContext context)
         {
@@ -91,7 +91,7 @@ namespace Tono.GuiWinForm
         #endregion
 
         /// <summary>
-        /// Œ»İ‚ÌŒ¾Œê‚ÉƒeƒLƒXƒg‚ğƒZƒbƒg‚·‚éB‘¼‚ÌŒ¾Œê‚ÍÁ‹‚·‚é
+        /// ç¾åœ¨ã®è¨€èªã«ãƒ†ã‚­ã‚¹ãƒˆã‚’ã‚»ãƒƒãƒˆã™ã‚‹ã€‚ä»–ã®è¨€èªã¯æ¶ˆå»ã™ã‚‹
         /// </summary>
         /// <param name="s"></param>
         public void SetToAllLanguage(string s)
@@ -101,7 +101,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// Œ¾Œê‚ª•Ï‚í‚Á‚½‚Æ‚«A‘OŒ¾Œê‚Ì’l‚ğ‚»‚Ì‚Ü‚Üg‚¦‚é‚æ‚¤‚É‚·‚é
+        /// è¨€èªãŒå¤‰ã‚ã£ãŸã¨ãã€å‰è¨€èªã®å€¤ã‚’ãã®ã¾ã¾ä½¿ãˆã‚‹ã‚ˆã†ã«ã™ã‚‹
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -114,7 +114,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// Œ¾ŒêƒR[ƒh‚ğw’è‚µ‚½•¶š—ñ
+        /// è¨€èªã‚³ãƒ¼ãƒ‰ã‚’æŒ‡å®šã—ãŸæ–‡å­—åˆ—
         /// </summary>
         /// <param name="key"></param>
         /// <returns></returns>
@@ -144,7 +144,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// •W€•¶š—ñ‚ğ—p‚¢‚Ä•Ô‚·
+        /// æ¨™æº–æ–‡å­—åˆ—ã‚’ç”¨ã„ã¦è¿”ã™
         /// </summary>
         /// <param name="tar"></param>
         /// <returns></returns>
@@ -154,7 +154,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// •¶š—ñ‚©‚çƒCƒ“ƒXƒ^ƒ“ƒX‚ğì‚é
+        /// æ–‡å­—åˆ—ã‹ã‚‰ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ä½œã‚‹
         /// </summary>
         /// <param name="tar"></param>
         /// <returns></returns>
@@ -165,7 +165,7 @@ namespace Tono.GuiWinForm
             return ret;
         }
 
-        #region IDisposable ƒƒ“ƒo
+        #region IDisposable ãƒ¡ãƒ³ãƒ
 
         public void Dispose()
         {

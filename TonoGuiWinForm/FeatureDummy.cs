@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 #pragma warning disable 1591, 1572, 1573
@@ -6,7 +6,7 @@
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// ‰½‚à‚µ‚È‚¢ƒtƒB[ƒ`ƒƒ[
+    /// ä½•ã‚‚ã—ãªã„ãƒ•ã‚£ãƒ¼ãƒãƒ£ãƒ¼
     /// </summary>
     public class FeatureDummy : FeatureBase
     {

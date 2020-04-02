@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System;
@@ -7,39 +7,39 @@ using System.Drawing;
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// XyBase ‚ÌŠT—v‚Ìà–¾‚Å‚·B
+    /// XyBase ã®æ¦‚è¦ã®èª¬æ˜ã§ã™ã€‚
     /// </summary>
     [Serializable]
     public class XyBase : ValueCouple
     {
         /// <summary>
-        /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+        /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
         /// </summary>
 
         public XyBase()
         {
         }
 
-        /// <summary>‰‰Zq‚ÌƒI[ƒo[ƒ[ƒh</summary>
+        /// <summary>æ¼”ç®—å­ã®ã‚ªãƒ¼ãƒãƒ¼ãƒ­ãƒ¼ãƒ‰</summary>
         public static XyBase operator +(XyBase v1, ValueCouple v2) { return (XyBase)((ValueCouple)v1 + v2); }
-        /// <summary>‰‰Zq‚ÌƒI[ƒo[ƒ[ƒh</summary>
+        /// <summary>æ¼”ç®—å­ã®ã‚ªãƒ¼ãƒãƒ¼ãƒ­ãƒ¼ãƒ‰</summary>
         public static XyBase operator +(XyBase v1, int v2) { return (XyBase)((ValueCouple)v1 + v2); }
-        /// <summary>‰‰Zq‚ÌƒI[ƒo[ƒ[ƒh</summary>
+        /// <summary>æ¼”ç®—å­ã®ã‚ªãƒ¼ãƒãƒ¼ãƒ­ãƒ¼ãƒ‰</summary>
         public static XyBase operator -(XyBase v1, ValueCouple v2) { return (XyBase)((ValueCouple)v1 - v2); }
-        /// <summary>‰‰Zq‚ÌƒI[ƒo[ƒ[ƒh</summary>
+        /// <summary>æ¼”ç®—å­ã®ã‚ªãƒ¼ãƒãƒ¼ãƒ­ãƒ¼ãƒ‰</summary>
         public static XyBase operator *(XyBase v1, ValueCouple v2) { return (XyBase)((ValueCouple)v1 * v2); }
-        /// <summary>‰‰Zq‚ÌƒI[ƒo[ƒ[ƒh</summary>
+        /// <summary>æ¼”ç®—å­ã®ã‚ªãƒ¼ãƒãƒ¼ãƒ­ãƒ¼ãƒ‰</summary>
         public static XyBase operator *(XyBase v1, int v2) { return (XyBase)((ValueCouple)v1 * v2); }
-        /// <summary>‰‰Zq‚ÌƒI[ƒo[ƒ[ƒh</summary>
+        /// <summary>æ¼”ç®—å­ã®ã‚ªãƒ¼ãƒãƒ¼ãƒ­ãƒ¼ãƒ‰</summary>
         public static XyBase operator /(XyBase v1, ValueCouple v2) { return (XyBase)((ValueCouple)v1 / v2); }
-        /// <summary>‰‰Zq‚ÌƒI[ƒo[ƒ[ƒh</summary>
+        /// <summary>æ¼”ç®—å­ã®ã‚ªãƒ¼ãƒãƒ¼ãƒ­ãƒ¼ãƒ‰</summary>
         public static XyBase operator /(XyBase v1, int v2) { return (XyBase)((ValueCouple)v1 / v2); }
 
         /// <summary>
-        /// ƒCƒ“ƒXƒ^ƒ“ƒX‚ğ•ÏŠ·‚·‚é
+        /// ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’å¤‰æ›ã™ã‚‹
         /// </summary>
-        /// <param name="xy">•ÏŠ·‘ÎÛ</param>
-        /// <returns>PointFŒ^‚ÌƒCƒ“ƒXƒ^ƒ“ƒX</returns>
+        /// <param name="xy">å¤‰æ›å¯¾è±¡</param>
+        /// <returns>PointFå‹ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹</returns>
 
         public static implicit operator PointF(XyBase xy)
         {
@@ -47,7 +47,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ©“®Œ^•ÏŠ·
+        /// è‡ªå‹•å‹å¤‰æ›
         /// </summary>
         public static implicit operator System.Drawing.Point(XyBase pos)
         {
@@ -60,11 +60,11 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ’l‚ğw’è‚µ‚ÄƒCƒ“ƒXƒ^ƒ“ƒX‚ğì‚é
+        /// å€¤ã‚’æŒ‡å®šã—ã¦ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ä½œã‚‹
         /// </summary>
-        /// <param name="v1">’l‚P</param>
-        /// <param name="v2">’l‚Q</param>
-        /// <returns>ƒCƒ“ƒXƒ^ƒ“ƒX</returns>
+        /// <param name="v1">å€¤ï¼‘</param>
+        /// <param name="v2">å€¤ï¼’</param>
+        /// <returns>ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹</returns>
 
         public static new XyBase FromInt(int v1, int v2)
         {
@@ -78,7 +78,7 @@ namespace Tono.GuiWinForm
 
 
         /// <summary>
-        /// XÀ•W
+        /// Xåº§æ¨™
         /// </summary>
         public int X
         {
@@ -89,7 +89,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// YÀ•W
+        /// Yåº§æ¨™
         /// </summary>
         public int Y
         {

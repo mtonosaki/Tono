@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 #if false
@@ -11,16 +11,16 @@ using System.Threading;
 namespace DS
 {
 	/// <summary>
-	/// GuiTimer ‚ÌŠT—v‚Ìà–¾‚Å‚·B
-	/// ƒtƒB[ƒ`ƒƒ[‚Éƒ^ƒCƒ}[‹@”\‚ğ’Ç‰Á‚·‚éê‡‚Ég—p‚·‚éB
-	/// FeatureTripSelector‚ğQÆ
+	/// GuiTimer ã®æ¦‚è¦ã®èª¬æ˜ã§ã™ã€‚
+	/// ãƒ•ã‚£ãƒ¼ãƒãƒ£ãƒ¼ã«ã‚¿ã‚¤ãƒãƒ¼æ©Ÿèƒ½ã‚’è¿½åŠ ã™ã‚‹å ´åˆã«ä½¿ç”¨ã™ã‚‹ã€‚
+	/// FeatureTripSelectorã‚’å‚ç…§
 	/// </summary>
 	public class GuiTimer : IDisposable
 	{
-#region ƒ^ƒCƒ}[ƒnƒ“ƒhƒ‰
+#region ã‚¿ã‚¤ãƒãƒ¼ãƒãƒ³ãƒ‰ãƒ©
 
 		/// <summary>
-		/// ƒ^ƒCƒ}[’â~—pƒnƒ“ƒhƒ‰
+		/// ã‚¿ã‚¤ãƒãƒ¼åœæ­¢ç”¨ãƒãƒ³ãƒ‰ãƒ©
 		/// </summary>
 		public class Handle
 		{
@@ -30,11 +30,11 @@ namespace DS
 			object[] _args;
 
 			/// <summary>
-			/// —Bˆê‚ÌƒRƒ“ƒXƒgƒ‰ƒNƒ^iƒAƒZƒ“ƒuƒŠ‚©‚ç’¼ÚƒR[ƒ‹‚³‚ê‚éGƒ†[ƒU[Às‹Ö~j
+			/// å”¯ä¸€ã®ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ï¼ˆã‚¢ã‚»ãƒ³ãƒ–ãƒªã‹ã‚‰ç›´æ¥ã‚³ãƒ¼ãƒ«ã•ã‚Œã‚‹ï¼›ãƒ¦ãƒ¼ã‚¶ãƒ¼å®Ÿè¡Œç¦æ­¢ï¼‰
 			/// </summary>
-			/// <param name="ms">ƒ^ƒCƒ}[‚Ìƒ~ƒŠ•b”</param>
-			/// <param name="function">ƒ^ƒCƒ}[‹N“®ƒIƒuƒWƒFƒNƒg</param>
-			/// <param name="args">ƒ^ƒCƒ}[‹N“®‚Ìˆø”</param>
+			/// <param name="ms">ã‚¿ã‚¤ãƒãƒ¼ã®ãƒŸãƒªç§’æ•°</param>
+			/// <param name="function">ã‚¿ã‚¤ãƒãƒ¼èµ·å‹•ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ</param>
+			/// <param name="args">ã‚¿ã‚¤ãƒãƒ¼èµ·å‹•æ™‚ã®å¼•æ•°</param>
 			private Handle(int ms, object function, object[] args)
 			{
 				_setms = ms;
@@ -44,7 +44,7 @@ namespace DS
 			}
 
 			/// <summary>
-			/// ƒ^ƒCƒ}[‚Éİ’è‚³‚ê‚Ä‚¢‚éƒRƒ}ƒ“ƒh‚ğÀs‚·‚é
+			/// ã‚¿ã‚¤ãƒãƒ¼ã«è¨­å®šã•ã‚Œã¦ã„ã‚‹ã‚³ãƒãƒ³ãƒ‰ã‚’å®Ÿè¡Œã™ã‚‹
 			/// </summary>
 			public void Invoke()
 			{
@@ -63,7 +63,7 @@ namespace DS
 			}
 
 			/// <summary>
-			/// ƒ^ƒCƒ}[‚ª‹N“®‚·‚é‚Æ‚«‚ÌDateTime.Ticks
+			/// ã‚¿ã‚¤ãƒãƒ¼ãŒèµ·å‹•ã™ã‚‹ã¨ãã®DateTime.Ticks
 			/// </summary>
 			public long SignalTicks
 			{
@@ -79,20 +79,20 @@ namespace DS
 		}
 #endregion
 
-#region ŠÖ”Œ^
+#region é–¢æ•°å‹
 
-		/// <summary>ˆø”‚È‚µŠÖ”Œ^</summary>
+		/// <summary>å¼•æ•°ãªã—é–¢æ•°å‹</summary>
 		public delegate void Proc0();
 
-		/// <summary>ˆø”‚Ğ‚Æ‚ÂŠÖ”Œ^</summary>
+		/// <summary>å¼•æ•°ã²ã¨ã¤é–¢æ•°å‹</summary>
 		public delegate void Proc1(object arg);
 
-		/// <summary>ˆø”ƒ}ƒ‹ƒ`ŠÖ”Œ^</summary>
+		/// <summary>å¼•æ•°ãƒãƒ«ãƒé–¢æ•°å‹</summary>
 		public delegate void ProcN(object[] args);
 
 #endregion
 
-#region ‘®«iƒVƒŠƒAƒ‰ƒCƒY‚µ‚È‚¢j
+#region å±æ€§ï¼ˆã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºã—ãªã„ï¼‰
 
 		private static int _counter = 0;
 		private SortedList _dat = new SortedList(new uSorter.IComparerLong());
@@ -101,7 +101,7 @@ namespace DS
 
 #endregion
 
-#region IDisposable ƒƒ“ƒo
+#region IDisposable ãƒ¡ãƒ³ãƒ
 
 		public virtual void Dispose()
 		{
@@ -117,14 +117,14 @@ namespace DS
 #endregion
 
 		/// <summary>
-		/// ƒ^ƒCƒ}[ƒIƒuƒWƒFƒNƒg‚ÌƒƒCƒ“ˆ—
+		/// ã‚¿ã‚¤ãƒãƒ¼ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ãƒ¡ã‚¤ãƒ³å‡¦ç†
 		/// </summary>
 		public GuiTimer()
 		{
 		}
 
 		/// <summary>
-		/// ƒXƒŒƒbƒh‚Åƒ^ƒCƒ}[ƒLƒbƒN‚ğŠÄ‹EÀs‚·‚é
+		/// ã‚¹ãƒ¬ãƒƒãƒ‰ã§ã‚¿ã‚¤ãƒãƒ¼ã‚­ãƒƒã‚¯ã‚’ç›£è¦–ãƒ»å®Ÿè¡Œã™ã‚‹
 		/// </summary>
 		private void timerThread()
 		{
@@ -144,9 +144,9 @@ namespace DS
 		}
 
 		/// <summary>
-		/// Handle‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‚ğ¶¬‚·‚é
+		/// Handleã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ç”Ÿæˆã™ã‚‹
 		/// </summary>
-		/// <returns>V‚µ‚¢Handle</returns>
+		/// <returns>æ–°ã—ã„Handle</returns>
 		private Handle _createHandle(int ms, object function, object[] args)
 		{
 			const BindingFlags flags = BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic;
@@ -164,7 +164,7 @@ namespace DS
 				_current = h;
 			}
 
-			// ƒ^ƒCƒ}[‚ğg—p‚·‚éê‡ƒXƒŒƒbƒh‚ğ‹N“®‚·‚é
+			// ã‚¿ã‚¤ãƒãƒ¼ã‚’ä½¿ç”¨ã™ã‚‹å ´åˆã‚¹ãƒ¬ãƒƒãƒ‰ã‚’èµ·å‹•ã™ã‚‹
 			if( _hThread == null )
 			{
 				_hThread = new Thread(new ThreadStart(timerThread));
@@ -177,7 +177,7 @@ namespace DS
 		}
 
 		/// <summary>
-		/// ƒ^ƒCƒ}[‚ğíœ‚·‚é
+		/// ã‚¿ã‚¤ãƒãƒ¼ã‚’å‰Šé™¤ã™ã‚‹
 		/// </summary>
 		/// <param name="h"></param>
 		public void Stop(Handle h)
@@ -201,10 +201,10 @@ namespace DS
 		}
 
 		/// <summary>
-		/// ˆø”‚È‚µ‚Ìƒ^ƒCƒ}[ŠÖ”‚ğ“o˜^‚·‚é
+		/// å¼•æ•°ãªã—ã®ã‚¿ã‚¤ãƒãƒ¼é–¢æ•°ã‚’ç™»éŒ²ã™ã‚‹
 		/// </summary>
-		/// <param name="delay_ms">‹N“®ƒ~ƒŠ•b</param>
-		/// <param name="function">‹N“®‚·‚éŠÖ”</param>
+		/// <param name="delay_ms">èµ·å‹•ãƒŸãƒªç§’</param>
+		/// <param name="function">èµ·å‹•ã™ã‚‹é–¢æ•°</param>
 		public Handle AddTrigger(int delay_ms, Proc0 function)
 		{
 			Handle ret = _createHandle(delay_ms, function, null);
@@ -212,21 +212,21 @@ namespace DS
 		}
 
 		/// <summary>
-		/// ˆø”‚È‚µ‚Ìƒ^ƒCƒ}[ŠÖ”‚ğ“o˜^‚·‚é
+		/// å¼•æ•°ãªã—ã®ã‚¿ã‚¤ãƒãƒ¼é–¢æ•°ã‚’ç™»éŒ²ã™ã‚‹
 		/// </summary>
-		/// <param name="delayTime">‹N“®ŠÔ</param>
-		/// <param name="function">‹N“®‚·‚éŠÖ”</param>
+		/// <param name="delayTime">èµ·å‹•æ™‚é–“</param>
+		/// <param name="function">èµ·å‹•ã™ã‚‹é–¢æ•°</param>
 		public Handle AddTrigger(uTime delayTime, Proc0 function)
 		{
 			return AddTrigger(delayTime.TotalSeconds * 1000, function);
 		}
 
 		/// <summary>
-		/// ˆø”•t‚«‚Ìƒ^ƒCƒ}[ŠÖ”‚ğ“o˜^‚·‚é
+		/// å¼•æ•°ä»˜ãã®ã‚¿ã‚¤ãƒãƒ¼é–¢æ•°ã‚’ç™»éŒ²ã™ã‚‹
 		/// </summary>
-		/// <param name="id">óM‚Ìˆø”</param>
-		/// <param name="delay_ms">‹N“®ƒ~ƒŠ•b</param>
-		/// <param name="function">‹N“®‚·‚éŠÖ”</param>
+		/// <param name="id">å—ä¿¡æ™‚ã®å¼•æ•°</param>
+		/// <param name="delay_ms">èµ·å‹•ãƒŸãƒªç§’</param>
+		/// <param name="function">èµ·å‹•ã™ã‚‹é–¢æ•°</param>
 		public Handle AddTrigger(object arg, int delay_ms, Proc1 function)
 		{
 			Handle ret = _createHandle(delay_ms, function, new object[]{arg});
@@ -234,22 +234,22 @@ namespace DS
 		}
 
 		/// <summary>
-		/// ˆø”•t‚«‚Ìƒ^ƒCƒ}[ŠÖ”‚ğ“o˜^‚·‚é
+		/// å¼•æ•°ä»˜ãã®ã‚¿ã‚¤ãƒãƒ¼é–¢æ•°ã‚’ç™»éŒ²ã™ã‚‹
 		/// </summary>
-		/// <param name="id">óM‚Ìˆø”</param>
-		/// <param name="delayTime">‹N“®ŠÔ</param>
-		/// <param name="function">‹N“®‚·‚éŠÖ”</param>
+		/// <param name="id">å—ä¿¡æ™‚ã®å¼•æ•°</param>
+		/// <param name="delayTime">èµ·å‹•æ™‚é–“</param>
+		/// <param name="function">èµ·å‹•ã™ã‚‹é–¢æ•°</param>
 		public Handle AddTrigger(object arg, uTime delayTime, Proc1 function)
 		{
 			return AddTrigger(arg, delayTime.TotalSeconds * 1000, function);
 		}
 
 		/// <summary>
-		/// ˆø”•t‚«‚Ìƒ^ƒCƒ}[ŠÖ”‚ğ“o˜^‚·‚é
+		/// å¼•æ•°ä»˜ãã®ã‚¿ã‚¤ãƒãƒ¼é–¢æ•°ã‚’ç™»éŒ²ã™ã‚‹
 		/// </summary>
-		/// <param name="id">óM‚Ìˆø”</param>
-		/// <param name="delay_ms">‹N“®ƒ~ƒŠ•b</param>
-		/// <param name="function">‹N“®‚·‚éŠÖ”</param>
+		/// <param name="id">å—ä¿¡æ™‚ã®å¼•æ•°</param>
+		/// <param name="delay_ms">èµ·å‹•ãƒŸãƒªç§’</param>
+		/// <param name="function">èµ·å‹•ã™ã‚‹é–¢æ•°</param>
 		public Handle AddTrigger(object[] args, int delay_ms, ProcN function)
 		{
 			Handle ret = _createHandle(delay_ms, function, args);
@@ -257,11 +257,11 @@ namespace DS
 		}
 
 		/// <summary>
-		/// ˆø”•t‚«‚Ìƒ^ƒCƒ}[ŠÖ”‚ğ“o˜^‚·‚é
+		/// å¼•æ•°ä»˜ãã®ã‚¿ã‚¤ãƒãƒ¼é–¢æ•°ã‚’ç™»éŒ²ã™ã‚‹
 		/// </summary>
-		/// <param name="id">óM‚Ìˆø”</param>
-		/// <param name="delayTime">‹N“®ŠÔ</param>
-		/// <param name="function">‹N“®‚·‚éŠÖ”</param>
+		/// <param name="id">å—ä¿¡æ™‚ã®å¼•æ•°</param>
+		/// <param name="delayTime">èµ·å‹•æ™‚é–“</param>
+		/// <param name="function">èµ·å‹•ã™ã‚‹é–¢æ•°</param>
 		public Handle AddTrigger(object[] args, uTime delayTime, ProcN function)
 		{
 			return AddTrigger(args, delayTime.TotalSeconds * 1000, function);

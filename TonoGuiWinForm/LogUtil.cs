@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System;
@@ -11,7 +11,7 @@ using System.IO;
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// uLog ‚ÌŠT—v‚Ìà–¾‚Å‚·B
+    /// uLog ã®æ¦‚è¦ã®èª¬æ˜ã§ã™ã€‚
     /// </summary>
     public class LogUtil : IDisposable
     {
@@ -20,27 +20,27 @@ namespace Tono.GuiWinForm
             Unknown, File, EventLogInfo, EventLogError, DebugConsole,
         }
 
-        /// <summary>—š—ğ•Û‘¶ˆêƒtƒ@ƒCƒ‹</summary>
+        /// <summary>å±¥æ­´ä¿å­˜ä¸€æ™‚ãƒ•ã‚¡ã‚¤ãƒ«</summary>
         protected StreamWriter _stream = null;
-        /// <summary>ƒtƒ@ƒCƒ‹–¼</summary>
+        /// <summary>ãƒ•ã‚¡ã‚¤ãƒ«å</summary>
         private readonly string _filename = string.Empty;
         private logmode _mode = logmode.Unknown;
 
-        /// <summary>d•¡•¶š—ñ•Û‘¶–h~</summary>
+        /// <summary>é‡è¤‡æ–‡å­—åˆ—ä¿å­˜é˜²æ­¢</summary>
         private readonly IDictionary _noDupCheck = new Hashtable();
 
         /// <summary>
-        /// ƒVƒ“ƒOƒ‹ƒgƒ“
+        /// ã‚·ãƒ³ã‚°ãƒ«ãƒˆãƒ³
         /// </summary>
         private static LogUtil _std = null;
         private static LogUtil _elInfo = null;
         private static LogUtil _elError = null;
         private static LogUtil _debugOut = null;
 
-        #region ƒCƒxƒ“ƒgƒƒO
+        #region ã‚¤ãƒ™ãƒ³ãƒˆãƒ­ã‚°
 
         /// <summary>
-        /// ƒCƒxƒ“ƒgƒƒO‚Éî•ñi³íj‚ğo—Í‚·‚é
+        /// ã‚¤ãƒ™ãƒ³ãƒˆãƒ­ã‚°ã«æƒ…å ±ï¼ˆæ­£å¸¸ï¼‰ã‚’å‡ºåŠ›ã™ã‚‹
         /// </summary>
         /// <param name="s"></param>
         private static void elInfo(string s)
@@ -55,7 +55,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒCƒxƒ“ƒgƒƒO‚Éî•ñiƒGƒ‰[j‚ğo—Í‚·‚é
+        /// ã‚¤ãƒ™ãƒ³ãƒˆãƒ­ã‚°ã«æƒ…å ±ï¼ˆã‚¨ãƒ©ãƒ¼ï¼‰ã‚’å‡ºåŠ›ã™ã‚‹
         /// </summary>
         /// <param name="s"></param>
         private static void elErr(string s)
@@ -71,7 +71,7 @@ namespace Tono.GuiWinForm
         #endregion
 
         /// <summary>
-        /// VisualƒXƒ^ƒWƒI‚Ìo—Í
+        /// Visualã‚¹ã‚¿ã‚¸ã‚ªã®å‡ºåŠ›
         /// </summary>
         public static LogUtil VSOut
         {
@@ -89,7 +89,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒCƒxƒ“ƒgƒƒOiî•ñj
+        /// ã‚¤ãƒ™ãƒ³ãƒˆãƒ­ã‚°ï¼ˆæƒ…å ±ï¼‰
         /// </summary>
         public static LogUtil EventLogInfo
         {
@@ -107,7 +107,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒCƒxƒ“ƒgƒƒOiƒGƒ‰[j
+        /// ã‚¤ãƒ™ãƒ³ãƒˆãƒ­ã‚°ï¼ˆã‚¨ãƒ©ãƒ¼ï¼‰
         /// </summary>
         public static LogUtil EventLogErr
         {
@@ -125,7 +125,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// •W€ƒƒO
+        /// æ¨™æº–ãƒ­ã‚°
         /// </summary>
         public static LogUtil Std
         {
@@ -140,7 +140,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒƒOƒtƒ@ƒCƒ‹–¼‚ğì¬‚·‚é
+        /// ãƒ­ã‚°ãƒ•ã‚¡ã‚¤ãƒ«åã‚’ä½œæˆã™ã‚‹
         /// </summary>
         /// <returns></returns>
         private string getFileName(string name)
@@ -160,7 +160,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒXƒgƒŠ[ƒ€‚ğŠJ‚­
+        /// ã‚¹ãƒˆãƒªãƒ¼ãƒ ã‚’é–‹ã
         /// </summary>
         private void _open()
         {
@@ -171,16 +171,16 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ‰½‚à‚µ‚È‚¢ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+        /// ä½•ã‚‚ã—ãªã„ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
         /// </summary>
         private LogUtil()
         {
         }
 
         /// <summary>
-        /// —Bˆê‚ÌƒRƒ“ƒXƒgƒ‰ƒNƒ^
+        /// å”¯ä¸€ã®ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
         /// </summary>
-        /// <param name="name">¯•Êq</param>
+        /// <param name="name">è­˜åˆ¥å­</param>
         public LogUtil(string fileid)
         {
             if (fileid == null || fileid.Length < 1)
@@ -192,7 +192,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒƒbƒZ[ƒW‚ğ’Ç‰Á‚·‚éi“¯‚¶ƒƒbƒZ[ƒW‚ªd‚È‚é‚Í‚P‚Â‚¾‚¯‹L˜^‚·‚éj
+        /// ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’è¿½åŠ ã™ã‚‹ï¼ˆåŒã˜ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ãŒé‡ãªã‚‹æ™‚ã¯ï¼‘ã¤ã ã‘è¨˜éŒ²ã™ã‚‹ï¼‰
         /// </summary>
         /// <param name="str"></param>
         public void AddOne(string str)
@@ -209,17 +209,17 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒtƒH[ƒ}ƒbƒg‚ÅƒƒO‚ğ‹L˜^
+        /// ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆã§ãƒ­ã‚°ã‚’è¨˜éŒ²
         /// </summary>
-        /// <param name="format">ƒtƒH[ƒ}ƒbƒg•¶š—ñ</param>
-        /// <param name="args">’lƒpƒ‰ƒ[ƒ^</param>
+        /// <param name="format">ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆæ–‡å­—åˆ—</param>
+        /// <param name="args">å€¤ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿</param>
         public void Add(string format, params object[] args)
         {
             Add(string.Format(format, args));
         }
 
         /// <summary>
-        /// ƒƒbƒZ[ƒW‚ğ’Ç‰Á‚·‚é
+        /// ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’è¿½åŠ ã™ã‚‹
         /// </summary>
         /// <param name="str"></param>
         public void Add(string str)
@@ -251,7 +251,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// —áŠO‚ğƒƒO‚É‹L˜^‚·‚é
+        /// ä¾‹å¤–ã‚’ãƒ­ã‚°ã«è¨˜éŒ²ã™ã‚‹
         /// </summary>
         /// <param name="title"></param>
         /// <param name="ex"></param>
@@ -260,7 +260,7 @@ namespace Tono.GuiWinForm
             Add(title + "\r\n\r\n" + ex.Message + "\r\n\r\n" + ex.StackTrace);
         }
 
-        #region IDisposable ƒƒ“ƒo
+        #region IDisposable ãƒ¡ãƒ³ãƒ
 
         public void Dispose()
         {

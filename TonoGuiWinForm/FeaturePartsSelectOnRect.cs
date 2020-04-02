@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System;
@@ -10,7 +10,7 @@ using System.Drawing;
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// w’è‹éŒ`‚É“ü‚è‚ñ‚¾ƒp[ƒc‚ğ‘I‘ğó‘Ô‚É‚·‚é
+    /// æŒ‡å®šçŸ©å½¢ã«å…¥ã‚Šè¾¼ã‚“ã ãƒ‘ãƒ¼ãƒ„ã‚’é¸æŠçŠ¶æ…‹ã«ã™ã‚‹
     /// </summary>
     public class FeaturePartsSelectOnRect : FeatureControlBridgeBase, IMouseListener, IPartsIllusionable
 #if DEBUG == false
@@ -23,7 +23,7 @@ namespace Tono.GuiWinForm
             private static readonly Pen _maskPen = new Pen(Color.FromArgb(128, 0, 255, 0));
 
             /// <summary>
-            /// ‘I‘ğ—Ìˆæ‚Ì‹éŒ`‚ğ•`‰æ‚·‚é
+            /// é¸æŠé ˜åŸŸã®çŸ©å½¢ã‚’æç”»ã™ã‚‹
             /// </summary>
             /// <param name="rp"></param>
             /// <returns></returns>
@@ -32,7 +32,7 @@ namespace Tono.GuiWinForm
                 if (_isVisible)
                 {
                     var spos = GetScRect(rp);
-                    if (isInClip(rp, spos) == false)    // •`‰æ•s—v‚Å‚ ‚ê‚ÎA‚È‚É‚à‚µ‚È‚¢
+                    if (isInClip(rp, spos) == false)    // æç”»ä¸è¦ã§ã‚ã‚Œã°ã€ãªã«ã‚‚ã—ãªã„
                     {
                         return false;
                     }
@@ -42,7 +42,7 @@ namespace Tono.GuiWinForm
                 return true;
             }
 
-            #region IPartsVisible ƒƒ“ƒo
+            #region IPartsVisible ãƒ¡ãƒ³ãƒ
             private bool _isVisible = true;
             public bool Visible
             {
@@ -58,11 +58,11 @@ namespace Tono.GuiWinForm
         [NonSerialized]
         private IRichPane _tarPane = null;
 
-        /// <summary>‘I‘ğ’†‚Ìƒp[ƒci‹¤—L•Ï”j</summary>
+        /// <summary>é¸æŠä¸­ã®ãƒ‘ãƒ¼ãƒ„ï¼ˆå…±æœ‰å¤‰æ•°ï¼‰</summary>
         private PartsCollectionBase _selectedParts;
 
         /// <summary>
-        /// ƒR[ƒ_[
+        /// ã‚³ãƒ¼ãƒ€ãƒ¼
         /// </summary>
         /// <param name="rect"></param>
         /// <param name="target"></param>
@@ -74,7 +74,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒ|ƒWƒVƒ‡ƒi[
+        /// ãƒã‚¸ã‚·ãƒ§ãƒŠãƒ¼
         /// </summary>
         /// <param name="rect"></param>
         /// <param name="target"></param>
@@ -86,17 +86,17 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ‰Šú‰»
+        /// åˆæœŸåŒ–
         /// </summary>
         public override void OnInitInstance()
         {
             base.OnInitInstance();
 
-            // ƒXƒe[ƒ^ƒX“¯Šú
+            // ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹åŒæœŸ
             _selectedParts = (PartsCollectionBase)Share.Get("SelectedParts", typeof(PartsCollection));
             _tarPane = Pane.GetPane("Resource");
 
-            // ‹éŒ`•`‰æ—pƒp[ƒc‚ğ¶¬‚·‚é
+            // çŸ©å½¢æç”»ç”¨ãƒ‘ãƒ¼ãƒ„ã‚’ç”Ÿæˆã™ã‚‹
             _mask = new dpMask
             {
                 Rect = CodeRect.FromLTWH(int.MinValue / 2, int.MinValue / 2, 0, 0),
@@ -108,7 +108,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒp[ƒcˆê——‚ğƒtƒBƒ‹ƒ^[‚·‚éiƒI[ƒo[ƒ‰ƒCƒh‚µ‚È‚¢‚Æ‘Sƒp[ƒc‚Æ‚È‚éj
+        /// ãƒ‘ãƒ¼ãƒ„ä¸€è¦§ã‚’ãƒ•ã‚£ãƒ«ã‚¿ãƒ¼ã™ã‚‹ï¼ˆã‚ªãƒ¼ãƒãƒ¼ãƒ©ã‚¤ãƒ‰ã—ãªã„ã¨å…¨ãƒ‘ãƒ¼ãƒ„ã¨ãªã‚‹ï¼‰
         /// </summary>
         /// <returns></returns>
         protected virtual ICollection<PartsBase> GetFilteredParts()
@@ -128,7 +128,7 @@ namespace Tono.GuiWinForm
         private readonly List<IPartsSelectable> _shiftAdd = new List<IPartsSelectable>();
 
         /// <summary>
-        /// ‘S BarTrip‚Ì‘I‘ğ‰ğœ
+        /// å…¨ BarTripã®é¸æŠè§£é™¤
         /// </summary>
         private void resetSelect(bool isInvaliadte)
         {
@@ -150,7 +150,7 @@ namespace Tono.GuiWinForm
         }
 
 
-        #region IMouseListener ƒƒ“ƒo
+        #region IMouseListener ãƒ¡ãƒ³ãƒ
 
         public void OnMouseMove(MouseState e)
         {
@@ -164,14 +164,14 @@ namespace Tono.GuiWinForm
                 _mask.Rect = CodeRect.FromLTRB(_startPos.X, _startPos.Y, e.Pos.X, e.Pos.Y);
                 _mask.Rect.Normalize();
 
-                // ‘I‘ğŠJn
+                // é¸æŠé–‹å§‹
                 resetSelect(false);
-                foreach (var shiftAdd in _shiftAdd)    // SHIFTƒL[‚Å’Ç‰Áw’è‚µ‚½ƒp[ƒc
+                foreach (var shiftAdd in _shiftAdd)    // SHIFTã‚­ãƒ¼ã§è¿½åŠ æŒ‡å®šã—ãŸãƒ‘ãƒ¼ãƒ„
                 {
                     shiftAdd.IsSelected = true;
                     _selectedParts.Add(_tarPane, (PartsBase)shiftAdd);
                 }
-                // ‘I‘ğ—Ìˆæ‚Ìƒp[ƒc
+                // é¸æŠé ˜åŸŸã®ãƒ‘ãƒ¼ãƒ„
                 foreach (var pts in GetFilteredParts())
                 {
                     if (Parts.IsOverlapped(_tarPane, pts, _tarPane, _mask, true))
@@ -204,13 +204,13 @@ namespace Tono.GuiWinForm
             }
             if (ClickParts != null)
             {
-                return; // ƒp[ƒcŠO‚Ìƒhƒ‰ƒbƒO‚Ì‚İA‘I‘ğŠJn‚Å‚«‚éB
+                return; // ãƒ‘ãƒ¼ãƒ„å¤–ã®ãƒ‰ãƒ©ãƒƒã‚°ã®ã¿ã€é¸æŠé–‹å§‹ã§ãã‚‹ã€‚
             }
-            if (e.Pos.Y >= _tarPane.GetPaneRect().RB.Y - 16)    // ƒXƒNƒ[ƒ‹ƒo[ã‚Å‚ÍA‘I‘ğŠJn‚Å‚«‚È‚¢
+            if (e.Pos.Y >= _tarPane.GetPaneRect().RB.Y - 16)    // ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ãƒãƒ¼ä¸Šã§ã¯ã€é¸æŠé–‹å§‹ã§ããªã„
             {
                 return;
             }
-            if (e.Pos.X >= _tarPane.GetPaneRect().RB.X - 16)    // ƒXƒNƒ[ƒ‹ƒo[ã‚Å‚ÍA‘I‘ğŠJn‚Å‚«‚È‚¢
+            if (e.Pos.X >= _tarPane.GetPaneRect().RB.X - 16)    // ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ãƒãƒ¼ä¸Šã§ã¯ã€é¸æŠé–‹å§‹ã§ããªã„
             {
                 return;
             }

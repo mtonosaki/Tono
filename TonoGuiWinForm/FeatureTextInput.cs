@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System;
@@ -8,15 +8,15 @@ namespace Tono.GuiWinForm
 {
     internal class FeatureTextInput : FeatureBase, IMouseListener, IKeyListener, ITokenListener
     {
-        #region ‘®«iƒVƒŠƒAƒ‰ƒCƒY‚µ‚È‚¢j
-        /// <summary>‘I‘ğ’†‚Ìƒp[ƒci‹¤—L•Ï”j</summary>
+        #region å±æ€§ï¼ˆã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºã—ãªã„ï¼‰
+        /// <summary>é¸æŠä¸­ã®ãƒ‘ãƒ¼ãƒ„ï¼ˆå…±æœ‰å¤‰æ•°ï¼‰</summary>
         [NonSerialized]
         protected PartsCollectionBase _selectedParts;
         [NonSerialized]
         private TextBox textBox1 = null;
         [NonSerialized]
         private static readonly NamedId _token = NamedId.FromName("TokenFontChanged");
-        /// <summary>‘I‘ğ’†‚Ìƒp[ƒc‚Æ‚¢‚¤ˆÓ–¡‚ÅƒVƒŠƒAƒ‰ƒCƒY‚·‚éID</summary>
+        /// <summary>é¸æŠä¸­ã®ãƒ‘ãƒ¼ãƒ„ã¨ã„ã†æ„å‘³ã§ã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºã™ã‚‹ID</summary>
         [NonSerialized]
         protected NamedId _meansSelectedParts = NamedId.FromName("FeatureDataSerializeID");
         #endregion
@@ -37,8 +37,8 @@ namespace Tono.GuiWinForm
         {
             base.OnInitInstance();
 
-            // ƒXƒe[ƒ^ƒX“¯Šú
-            _selectedParts = (PartsCollectionBase)Share.Get("SelectedParts", typeof(PartsCollection));   // ‘I‘ğÏ‚İ‚Ìƒp[ƒcˆê——
+            // ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹åŒæœŸ
+            _selectedParts = (PartsCollectionBase)Share.Get("SelectedParts", typeof(PartsCollection));   // é¸æŠæ¸ˆã¿ã®ãƒ‘ãƒ¼ãƒ„ä¸€è¦§
         }
 
         private PartsTextBase _tarParts = null;
@@ -100,7 +100,7 @@ namespace Tono.GuiWinForm
             }
         }
 
-        #region IMouseListener ƒƒ“ƒo
+        #region IMouseListener ãƒ¡ãƒ³ãƒ
 
         public void OnMouseMove(MouseState e)
         {
@@ -110,7 +110,7 @@ namespace Tono.GuiWinForm
         {
             if (textBox1 != null)
             {
-                // “K—p
+                // é©ç”¨
                 var toUpdate = false;
                 if (isCancel == false)
                 {
@@ -129,15 +129,15 @@ namespace Tono.GuiWinForm
                     Persister[UNDO].StartChunk(GetType().Name);
                     Persister[UNDO].Save(_tarParts, _meansSelectedParts);
 
-                    _tarParts.Text = textBox1.Text; // ƒeƒLƒXƒg•ÏX
+                    _tarParts.Text = textBox1.Text; // ãƒ†ã‚­ã‚¹ãƒˆå¤‰æ›´
                     Persister[REDO].Save(_tarParts, _meansSelectedParts);
 
-                    Persister[REDO].EndChunk(); // REDO‚ğæ‚És‚¤‚±‚Æ‚Íd—v
+                    Persister[REDO].EndChunk(); // REDOã‚’å…ˆã«è¡Œã†ã“ã¨ã¯é‡è¦
                     Persister[UNDO].EndChunk();
 
                     Data.SetModified();
                 }
-                // “ü—Í‰ğœ
+                // å…¥åŠ›è§£é™¤
                 Pane.Control.Controls.Remove(textBox1);
                 textBox1.Dispose();
                 Parts.Invalidate(_tarParts, _tarPane);
@@ -178,13 +178,13 @@ namespace Tono.GuiWinForm
         }
 
         #endregion
-        #region ITokenListener ƒƒ“ƒo
+        #region ITokenListener ãƒ¡ãƒ³ãƒ
 
         public NamedId TokenTriggerID => _token;
 
         #endregion
 
-        #region IKeyListener ƒƒ“ƒo
+        #region IKeyListener ãƒ¡ãƒ³ãƒ
 
         public void OnKeyDown(KeyState e)
         {

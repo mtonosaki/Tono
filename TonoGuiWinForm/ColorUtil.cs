@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System;
@@ -14,7 +14,7 @@ namespace Tono.GuiWinForm
     public static class ColorUtil
     {
         /// <summary>
-        /// w’èƒŒƒ“ƒW‚¢‚Á‚Ï‚¢‚Ég‚Á‚ÄAF‚Å”’l‚ğ•ª‚¯‚é‚±‚Æ‚ª‚Å‚«‚é‚æ‚¤‚É‚·‚éB
+        /// æŒ‡å®šãƒ¬ãƒ³ã‚¸ã„ã£ã±ã„ã«ä½¿ã£ã¦ã€è‰²ã§æ•°å€¤ã‚’åˆ†ã‘ã‚‹ã“ã¨ãŒã§ãã‚‹ã‚ˆã†ã«ã™ã‚‹ã€‚
         /// </summary>
         /// <param name="no"></param>
         /// <param name="range"></param>
@@ -30,16 +30,16 @@ namespace Tono.GuiWinForm
             {
                 switch (no % 10)
                 {
-                    case 0: return Color.FromArgb(8, 8, 8); // •‚¢—çi‚Oj•
-                    case 1: return Color.Brown;             // ’ƒ‚ğˆê”t
-                    case 2: return Color.Red;               // Ô‚¢‚Éi‚Qj‚ñ‚¶‚ñ
-                    case 3: return Color.Orange;            // ‘æiòjOÒ
-                    case 4: return Color.Yellow;            // Šİi‰©‚SjŒbq
-                    case 5: return Color.Green;             // —Îqi‚Tj
-                    case 6: return Color.Blue;              // ‚ë‚­i‚Uj‚Å‚È‚µ‚ÌÂ“ñË
-                    case 7: return Color.Purple;            // ‡®i‚Vj•”
-                    case 8: return Color.Gray;              // ƒnƒCiŠDjƒ„[i‚Wj
-                    case 9: return Color.White;             // ƒzƒƒCƒgƒNi‚XjƒŠƒXƒ}ƒX
+                    case 0: return Color.FromArgb(8, 8, 8); // é»’ã„ç¤¼ï¼ˆï¼ï¼‰æœ
+                    case 1: return Color.Brown;             // èŒ¶ã‚’ä¸€æ¯
+                    case 2: return Color.Red;               // èµ¤ã„ã«ï¼ˆï¼’ï¼‰ã‚“ã˜ã‚“
+                    case 3: return Color.Orange;            // ç¬¬ï¼ˆæ©™ï¼‰ä¸‰è€…
+                    case 4: return Color.Yellow;            // å²¸ï¼ˆé»„ï¼”ï¼‰æµå­
+                    case 5: return Color.Green;             // ç·‘å­ï¼ˆï¼•ï¼‰
+                    case 6: return Color.Blue;              // ã‚ãï¼ˆï¼–ï¼‰ã§ãªã—ã®é’äºŒæ‰
+                    case 7: return Color.Purple;            // ç´«å¼ï¼ˆï¼—ï¼‰éƒ¨
+                    case 8: return Color.Gray;              // ãƒã‚¤ï¼ˆç°ï¼‰ãƒ¤ãƒ¼ï¼ˆï¼˜ï¼‰
+                    case 9: return Color.White;             // ãƒ›ãƒ¯ã‚¤ãƒˆã‚¯ï¼ˆï¼™ï¼‰ãƒªã‚¹ãƒã‚¹
                     default:
                         break;
                 }
@@ -47,16 +47,16 @@ namespace Tono.GuiWinForm
             }
             else
             {
-                var h = (no * 129) % 360;       // 120ƒTƒCƒNƒ‹
-                var s = (no / 120) % 20;        // 20ƒXƒeƒbƒv
-                var v = (no / 2400) % 20;       // 20ƒXƒeƒbƒv
+                var h = (no * 129) % 360;       // 120ã‚µã‚¤ã‚¯ãƒ«
+                var s = (no / 120) % 20;        // 20ã‚¹ãƒ†ãƒƒãƒ—
+                var v = (no / 2400) % 20;       // 20ã‚¹ãƒ†ãƒƒãƒ—
                 var hsv = new HSV(h, 1f - (float)s / 20, 1f - (float)v / 20);
-                return hsv.ToColor();   // 48000FƒTƒCƒNƒ‹
+                return hsv.ToColor();   // 48000è‰²ã‚µã‚¤ã‚¯ãƒ«
             }
         }
 
         /// <summary>
-        /// ‚QF‚ğ‹Ï“™‚É¬‚º‚é
+        /// ï¼’è‰²ã‚’å‡ç­‰ã«æ··ãœã‚‹
         /// </summary>
         /// <param name="c1"></param>
         /// <param name="c2"></param>
@@ -77,10 +77,10 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// “§–¾“x‚ğ•ÏX‚·‚éiColor.FromArgb(int, Color)‚Æ‚Ìˆá‚¢‚ÍAƒAƒ‹ƒtƒ@’l‚ğ”ä‚Åw’è‚·‚é“_j
+        /// é€æ˜åº¦ã‚’å¤‰æ›´ã™ã‚‹ï¼ˆColor.FromArgb(int, Color)ã¨ã®é•ã„ã¯ã€ã‚¢ãƒ«ãƒ•ã‚¡å€¤ã‚’æ¯”ã§æŒ‡å®šã™ã‚‹ç‚¹ï¼‰
         /// </summary>
-        /// <param name="color">Œ³‚ÌF</param>
-        /// <param name="value">“§–¾“x 1.0f = Œ³‚Æ“¯‚¶ / 0.5f = ”{‚Ì“§–¾“x / 2.0f = ”{‚Ì•s“§–¾</param>
+        /// <param name="color">å…ƒã®è‰²</param>
+        /// <param name="value">é€æ˜åº¦ 1.0f = å…ƒã¨åŒã˜ / 0.5f = å€ã®é€æ˜åº¦ / 2.0f = å€ã®ä¸é€æ˜</param>
         /// <returns></returns>
         public static Color ChangeAlpha(Color color, float value)
         {
@@ -100,10 +100,10 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// –¾‚é‚³‚ğ•ÏX‚·‚é
+        /// æ˜ã‚‹ã•ã‚’å¤‰æ›´ã™ã‚‹
         /// </summary>
-        /// <param name="color">Œ³‚ÌF</param>
-        /// <param name="value">–¾‚é‚³ 1.0f = Œ³‚Æ“¯‚¶ / 2.0f = “ñ”{‚Ì–¾‚é‚³</param>
+        /// <param name="color">å…ƒã®è‰²</param>
+        /// <param name="value">æ˜ã‚‹ã• 1.0f = å…ƒã¨åŒã˜ / 2.0f = äºŒå€ã®æ˜ã‚‹ã•</param>
         /// <returns></returns>
         public static Color ChangeBrightness(Color color, float value)
         {
@@ -144,7 +144,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒlƒK’l‚ğ•Ô‚·
+        /// ãƒã‚¬å€¤ã‚’è¿”ã™
         /// </summary>
         /// <param name="c"></param>
         /// <returns></returns>
@@ -154,7 +154,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ‹ß‚¢F‚Å‹æ•Ê‚µ‚É‚­‚¢‚©‚Ç‚¤‚©’²‚×‚é
+        /// è¿‘ã„è‰²ã§åŒºåˆ¥ã—ã«ãã„ã‹ã©ã†ã‹èª¿ã¹ã‚‹
         /// </summary>
         /// <param name="c1"></param>
         /// <param name="c2"></param>
@@ -179,22 +179,22 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// F‘ŠEÊ“xE‹P“x
+        /// è‰²ç›¸ãƒ»å½©åº¦ãƒ»è¼åº¦
         /// </summary>
         public class HSV
         {
             /// <summary>
-            /// F‘Š
+            /// è‰²ç›¸
             /// </summary>
             public float H = 0; // 0-360f
 
             /// <summary>
-            /// Ê“x
+            /// å½©åº¦
             /// </summary>
             public float S = 0; // 0-1.0f
 
             /// <summary>
-            /// ‹P“x
+            /// è¼åº¦
             /// </summary>
             public float V = 0; // 0-1.0f
 
@@ -213,7 +213,7 @@ namespace Tono.GuiWinForm
             }
 
             /// <summary>
-            /// ColorƒIƒuƒWƒFƒNƒg‚ğì¬‚·‚é
+            /// Colorã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ä½œæˆã™ã‚‹
             /// </summary>
             /// <returns></returns>
             public Color ToColor()
@@ -264,9 +264,9 @@ namespace Tono.GuiWinForm
             }
 
             /// <summary>
-            /// ƒAƒ‹ƒtƒ@•t‚ÅColorƒIƒuƒWƒFƒNƒg‚ğ•Ô‚·
+            /// ã‚¢ãƒ«ãƒ•ã‚¡ä»˜ã§Colorã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’è¿”ã™
             /// </summary>
-            /// <param name="alpha">ƒAƒ‹ƒtƒ@ 0-1.0</param>
+            /// <param name="alpha">ã‚¢ãƒ«ãƒ•ã‚¡ 0-1.0</param>
             /// <returns></returns>
             public Color ToColor(double alpha)
             {
@@ -274,7 +274,7 @@ namespace Tono.GuiWinForm
             }
 
             /// <summary>
-            /// ColorƒIƒuƒWƒFƒNƒg‚©‚çƒCƒ“ƒXƒ^ƒ“ƒX‚ğì‚é
+            /// Colorã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‹ã‚‰ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ä½œã‚‹
             /// </summary>
             /// <param name="c"></param>
             /// <returns></returns>
@@ -387,10 +387,10 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒAƒ‹ƒtƒ@¬•ª‚ğíœ‚µ‚Ä•s“§–¾‚É‚·‚é
+        /// ã‚¢ãƒ«ãƒ•ã‚¡æˆåˆ†ã‚’å‰Šé™¤ã—ã¦ä¸é€æ˜ã«ã™ã‚‹
         /// </summary>
-        /// <param name="color">‘ÎÛ‚Æ‚È‚éF</param>
-        /// <returns>ƒAƒ‹ƒtƒ@‚ªíœ‚³‚ê‚½ColorƒCƒ“ƒXƒ^ƒ“ƒX</returns>
+        /// <param name="color">å¯¾è±¡ã¨ãªã‚‹è‰²</param>
+        /// <returns>ã‚¢ãƒ«ãƒ•ã‚¡ãŒå‰Šé™¤ã•ã‚ŒãŸColorã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹</returns>
         public static Color DeleteAlpha(Color color)
         {
             return Color.FromArgb(color.R, color.G, color.B);

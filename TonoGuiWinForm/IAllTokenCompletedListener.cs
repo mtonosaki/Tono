@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 #pragma warning disable 1591, 1572, 1573
@@ -6,9 +6,9 @@
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// IAllTokenCompleted ‚ÌŠT—v‚Ìà–¾‚Å‚·B
-    /// ‚·‚×‚Ä‚Ìƒg[ƒNƒ“ˆ—‚ªI‚í‚Á‚½‚Æ‚«‚Éó‚¯‚éƒCƒxƒ“ƒgB
-    /// OnAllTokenCompleted‚Åƒtƒ@ƒCƒiƒ‰ƒCƒUAƒg[ƒNƒ“‚ğ“Š‚°‚Ä‚àAˆ—‚³‚ê‚È‚¢B
+    /// IAllTokenCompleted ã®æ¦‚è¦ã®èª¬æ˜ã§ã™ã€‚
+    /// ã™ã¹ã¦ã®ãƒˆãƒ¼ã‚¯ãƒ³å‡¦ç†ãŒçµ‚ã‚ã£ãŸã¨ãã«å—ã‘ã‚‹ã‚¤ãƒ™ãƒ³ãƒˆã€‚
+    /// OnAllTokenCompletedã§ãƒ•ã‚¡ã‚¤ãƒŠãƒ©ã‚¤ã‚¶ã€ãƒˆãƒ¼ã‚¯ãƒ³ã‚’æŠ•ã’ã¦ã‚‚ã€å‡¦ç†ã•ã‚Œãªã„ã€‚
     /// </summary>
     public interface IAllTokenCompletedListener
     {

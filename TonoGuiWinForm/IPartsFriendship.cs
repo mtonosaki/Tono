@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System.Collections;
@@ -8,7 +8,7 @@ using System.Collections;
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// d•¡ƒ`ƒFƒbƒN‚ğ’ñ‹Ÿ‚·‚éƒCƒ“ƒ^[ƒtƒF[ƒX
+    /// é‡è¤‡ãƒã‚§ãƒƒã‚¯ã‚’æä¾›ã™ã‚‹ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ãƒ¼ã‚¹
     /// </summary>
     public interface IPartsFriendship
     {

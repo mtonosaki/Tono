@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System;
@@ -10,22 +10,22 @@ using System.Runtime.Serialization;
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// •ÏX‚ÉƒCƒxƒ“ƒg‚ª”­s‚Å‚«‚é•¶š—ñ
+    /// å¤‰æ›´æ™‚ã«ã‚¤ãƒ™ãƒ³ãƒˆãŒç™ºè¡Œã§ãã‚‹æ–‡å­—åˆ—
     /// </summary>
     [Serializable]
     public class StringListener : ISerializable
     {
         /// <summary>
-        /// ƒeƒLƒXƒg•ÏX’¼‘O‚ÌƒCƒxƒ“ƒg
+        /// ãƒ†ã‚­ã‚¹ãƒˆå¤‰æ›´ç›´å‰ã®ã‚¤ãƒ™ãƒ³ãƒˆ
         /// </summary>
         public event EventHandler TextChanging;
         /// <summary>
-        /// ƒeƒLƒXƒg•ÏX’¼Œã‚ÌƒCƒxƒ“ƒg
+        /// ãƒ†ã‚­ã‚¹ãƒˆå¤‰æ›´ç›´å¾Œã®ã‚¤ãƒ™ãƒ³ãƒˆ
         /// </summary>
         public event EventHandler TextChanged;
 
         /// <summary>
-        /// ƒVƒŠƒAƒ‰ƒCƒY‚·‚é‘ÎÛ‚Ì•¶š—ñ
+        /// ã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºã™ã‚‹å¯¾è±¡ã®æ–‡å­—åˆ—
         /// </summary>
         private string _str = "";
 
@@ -63,7 +63,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// stringŒ^‚Ö‚Ì©“®•ÏŠ·
+        /// stringå‹ã¸ã®è‡ªå‹•å¤‰æ›
         /// </summary>
         /// <param name="from"></param>
         /// <returns></returns>
@@ -73,7 +73,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// •¶š—ñ‚©‚çƒLƒƒƒXƒg‚·‚é‚ÆAƒCƒxƒ“ƒg‚ª¸‚í‚ê‚é‚Ì‚Å‹–‰Â‚µ‚È‚¢
+        /// æ–‡å­—åˆ—ã‹ã‚‰ã‚­ãƒ£ã‚¹ãƒˆã™ã‚‹ã¨ã€ã‚¤ãƒ™ãƒ³ãƒˆãŒå¤±ã‚ã‚Œã‚‹ã®ã§è¨±å¯ã—ãªã„
         /// </summary>
         /// <param name="from"></param>
         /// <returns></returns>
@@ -84,7 +84,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒCƒxƒ“ƒg‚ğl—¶‚µ‚½’l
+        /// ã‚¤ãƒ™ãƒ³ãƒˆã‚’è€ƒæ…®ã—ãŸå€¤
         /// </summary>
         public string Text
         {
@@ -102,14 +102,14 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒfƒtƒHƒ‹ƒgƒRƒ“ƒXƒgƒ‰ƒNƒ^
+        /// ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
         /// </summary>
         public StringListener()
         {
         }
 
         /// <summary>
-        /// ‘ã“üƒRƒ“ƒXƒgƒ‰ƒNƒ^
+        /// ä»£å…¥ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
         /// </summary>
         /// <param name="val"></param>
         public StringListener(string val)
@@ -118,7 +118,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒRƒs[ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+        /// ã‚³ãƒ”ãƒ¼ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
         /// </summary>
         /// <param name="val"></param>
         public StringListener(StringListener val)
@@ -128,10 +128,10 @@ namespace Tono.GuiWinForm
             TextChanging = val.TextChanging;
         }
 
-        #region ISerializable ƒƒ“ƒo
+        #region ISerializable ãƒ¡ãƒ³ãƒ
 
         /// <summary>
-        /// ƒVƒŠƒAƒ‰ƒCƒY\’ziƒCƒxƒ“ƒg‚Í•œ‹A‚µ‚È‚¢j
+        /// ã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºæ§‹ç¯‰ï¼ˆã‚¤ãƒ™ãƒ³ãƒˆã¯å¾©å¸°ã—ãªã„ï¼‰
         /// </summary>
         /// <param name="info"></param>
         /// <param name="context"></param>

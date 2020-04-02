@@ -1,24 +1,24 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// IScrollListener ‚ÌŠT—v‚Ìà–¾‚Å‚·B
+    /// IScrollListener ã®æ¦‚è¦ã®èª¬æ˜ã§ã™ã€‚
     /// </summary>
     public interface IScrollListener
     {
         /// <summary>
-        /// ƒY[ƒ€‚Ì‘ÎÛ‚Æ‚È‚éƒy[ƒ“
+        /// ã‚ºãƒ¼ãƒ ã®å¯¾è±¡ã¨ãªã‚‹ãƒšãƒ¼ãƒ³
         /// </summary>
         IRichPane[] ScrollEventTargets
         {
             get;
         }
         /// <summary>
-        /// ƒY[ƒ€‚ª‚ ‚Á‚½‚±‚Æ‚ğ¦‚·ƒCƒxƒ“ƒg
+        /// ã‚ºãƒ¼ãƒ ãŒã‚ã£ãŸã“ã¨ã‚’ç¤ºã™ã‚¤ãƒ™ãƒ³ãƒˆ
         /// </summary>
-        /// <param name="rp">ƒCƒxƒ“ƒg‚ğóM‚·‚éƒy[ƒ“</param>
+        /// <param name="rp">ã‚¤ãƒ™ãƒ³ãƒˆã‚’å—ä¿¡ã™ã‚‹ãƒšãƒ¼ãƒ³</param>
         void ScrollChanged(IRichPane rp);
     }
 }

@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System;
@@ -11,13 +11,13 @@ namespace Tono.GuiWinForm
     public static class TimeKeeper
     {
         /// <summary>
-        /// ƒtƒB[ƒ`ƒƒ[‘¬“xŒv‘ª—p
+        /// ãƒ•ã‚£ãƒ¼ãƒãƒ£ãƒ¼é€Ÿåº¦è¨ˆæ¸¬ç”¨
         /// </summary>
         private static readonly Dictionary<uint/*feature.ID*/, List<long/*tick*/>> _startTicks = new Dictionary<uint, List<long>>();
         private static readonly Dictionary<uint/*feature.ID*/, List<long/*tick*/>> _endTicks = new Dictionary<uint, List<long>>();
 
         /// <summary>
-        /// uTimeKeeper‚Ì•Û‘¶ƒ^ƒCƒv
+        /// uTimeKeeperã®ä¿å­˜æ™‚åˆ»ã‚¿ã‚¤ãƒ—
         /// </summary>
         public enum RecordType : uint
         {
@@ -59,7 +59,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ŠJn‚ğ•Û‘¶‚·‚é
+        /// é–‹å§‹æ™‚åˆ»ã‚’ä¿å­˜ã™ã‚‹
         /// </summary>
         /// <param name="fc"></param>
         public static void SetStart(RecordType tp, Id iid)
@@ -73,7 +73,7 @@ namespace Tono.GuiWinForm
             {
                 _endTicks[id] = eticks = new List<long>();
             }
-            while (eticks.Count < sticks.Count) // I—¹–³‚µiƒvƒƒOƒ‰ƒ€ƒoƒOj‚Ì®‡‚ğ®‚¦‚é
+            while (eticks.Count < sticks.Count) // çµ‚äº†ç„¡ã—ï¼ˆãƒ—ãƒ­ã‚°ãƒ©ãƒ ãƒã‚°ï¼‰ã®æ•´åˆã‚’æ•´ãˆã‚‹
             {
                 eticks.Add(long.MinValue);
             }
@@ -81,7 +81,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// I—¹‚ğ•Û‘¶‚·‚é
+        /// çµ‚äº†æ™‚åˆ»ã‚’ä¿å­˜ã™ã‚‹
         /// </summary>
         /// <param name="fc"></param>
         public static void SetEnd(RecordType tp, Id iid)
@@ -95,7 +95,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒtƒB[ƒ`ƒƒ[ÀsŠJnƒ`ƒbƒN‚ÌƒŠƒXƒg‚ğ•Ô‚·
+        /// ãƒ•ã‚£ãƒ¼ãƒãƒ£ãƒ¼å®Ÿè¡Œé–‹å§‹ãƒãƒƒã‚¯ã®ãƒªã‚¹ãƒˆã‚’è¿”ã™
         /// </summary>
         /// <param name="fc"></param>
         /// <returns></returns>
@@ -106,7 +106,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒtƒB[ƒ`ƒƒ[ÀsI—¹ƒ`ƒbƒN‚ÌƒŠƒXƒg‚ğ•Ô‚·
+        /// ãƒ•ã‚£ãƒ¼ãƒãƒ£ãƒ¼å®Ÿè¡Œçµ‚äº†ãƒãƒƒã‚¯ã®ãƒªã‚¹ãƒˆã‚’è¿”ã™
         /// </summary>
         /// <param name="fc"></param>
         /// <returns></returns>
@@ -117,7 +117,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// “o˜^‚³‚ê‚Ä‚¢‚éID‚Ìˆê——‚ğƒNƒGƒŠ[‚·‚é
+        /// ç™»éŒ²ã•ã‚Œã¦ã„ã‚‹IDã®ä¸€è¦§ã‚’ã‚¯ã‚¨ãƒªãƒ¼ã™ã‚‹
         /// </summary>
         public static ICollection<Id> GetIDs()
         {
@@ -131,7 +131,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// “o˜^‚³‚ê‚Ä‚¢‚éƒf[ƒ^—Ê‚ğ’²‚×‚é
+        /// ç™»éŒ²ã•ã‚Œã¦ã„ã‚‹ãƒ‡ãƒ¼ã‚¿é‡ã‚’èª¿ã¹ã‚‹
         /// </summary>
         /// <param name="tp"></param>
         /// <param name="iid"></param>
@@ -175,7 +175,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒJƒEƒ“ƒg‚ğƒŠƒZƒbƒg‚·‚é
+        /// ã‚«ã‚¦ãƒ³ãƒˆã‚’ãƒªã‚»ãƒƒãƒˆã™ã‚‹
         /// </summary>
         public static void Reset()
         {

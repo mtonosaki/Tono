@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System;
@@ -13,26 +13,26 @@ namespace Tono.GuiWinForm
     /// </summary>
     public static class Const
     {
-        /// <summary>’·‚³ƒ[ƒ‚Ì”z—ñ</summary>
+        /// <summary>é•·ã•ã‚¼ãƒ­ã®é…åˆ—</summary>
         public static readonly ICollection ZeroCollection = Array.Empty<object>();
 
         /// <summary>
-        /// ’·‚³ƒ[ƒ‚ÌƒŠƒXƒg
+        /// é•·ã•ã‚¼ãƒ­ã®ãƒªã‚¹ãƒˆ
         /// </summary>
         public static readonly IList ZeroList = new ArrayList(0);
 
         /// <summary>
-        /// Ô“¹”¼Œa[mm]
+        /// èµ¤é“åŠå¾„[mm]
         /// </summary>
         public static readonly double EarthRadiusX = 6378137000;
 
         /// <summary>
-        /// ‹É”¼Œa[mm]
+        /// æ¥µåŠå¾„[mm]
         /// </summary>
         public static readonly double EarthRadiusY = 6356752000;
 
         /// <summary>
-        /// •¶š—ñ‚ÌƒtƒH[ƒ}ƒbƒg
+        /// æ–‡å­—åˆ—ã®ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆ
         /// </summary>
         public static class Formatter
         {
@@ -55,35 +55,35 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒŒƒCƒ„[
+        /// ãƒ¬ã‚¤ãƒ¤ãƒ¼
         /// </summary>
         public static class Layer
         {
-            /// <summary>ƒfƒoƒCƒXƒvƒŒƒCƒ„[‚ªg—p‚·‚éƒtƒŠ[ƒŒƒCƒ„[</summary>
+            /// <summary>ãƒ‡ãƒã‚¤ã‚¹ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒä½¿ç”¨ã™ã‚‹ãƒ•ãƒªãƒ¼ãƒ¬ã‚¤ãƒ¤ãƒ¼</summary>
             public const int DevicePlayer = 60001;
 
-            /// <summary>ƒc[ƒ‹ƒ`ƒbƒv</summary>
+            /// <summary>ãƒ„ãƒ¼ãƒ«ãƒãƒƒãƒ—</summary>
             public const int Tooltip = 79003;
 
             /// <summary>
-            /// “Áê‚Èƒp[ƒciClear‚µ‚½‚­‚È‚¢‚à‚Ìjê—p‚ÌƒŒƒCƒ„[
+            /// ç‰¹æ®Šãªãƒ‘ãƒ¼ãƒ„ï¼ˆClearã—ãŸããªã„ã‚‚ã®ï¼‰å°‚ç”¨ã®ãƒ¬ã‚¤ãƒ¤ãƒ¼
             /// </summary>
             public static class StaticLayers
             {
-                // ƒƒO•\¦—pƒpƒlƒ‹•`‰æ
+                // ãƒ­ã‚°è¡¨ç¤ºç”¨ãƒ‘ãƒãƒ«æç”»
                 public const int LogPanel = 79008;
 
-                // ‘I‘ğ—Ìˆæ(FeaturePartsSelectOnRect)
+                // é¸æŠé ˜åŸŸ(FeaturePartsSelectOnRect)
                 public const int MaskRect = 79007;
 
-                // ƒXƒNƒ[ƒ‹ƒo[(FeatureScrollBarHorz/FeatureScrollBarVert)
+                // ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ãƒãƒ¼(FeatureScrollBarHorz/FeatureScrollBarVert)
                 public const int ScrollBarH = 79001;
                 public const int ScrollBarV = 79002;
 
                 /// <summary>
-				/// “Áê‚Èƒp[ƒciClear‚µ‚½‚­‚È‚¢‚à‚Ìj‚©‚Ç‚¤‚©H
+				/// ç‰¹æ®Šãªãƒ‘ãƒ¼ãƒ„ï¼ˆClearã—ãŸããªã„ã‚‚ã®ï¼‰ã‹ã©ã†ã‹ï¼Ÿ
 				/// </summary>
-				/// <param name="layer">ŒŸ¸‘ÎÛ</param>
+				/// <param name="layer">æ¤œæŸ»å¯¾è±¡</param>
 				/// <returns></returns>
 				public static bool IsStaticLayers(int layer)
                 {
@@ -100,15 +100,15 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// •¶š—ñ‚ªTrue‚ğ¦‚µ‚Ä‚¢‚é‚©‚Ç‚¤‚©‚ğ’²‚×‚é
+        /// æ–‡å­—åˆ—ãŒTrueã‚’ç¤ºã—ã¦ã„ã‚‹ã‹ã©ã†ã‹ã‚’èª¿ã¹ã‚‹
         /// </summary>
-        /// <param name="s">•¶š—ñ</param>
-        /// <returns>Œ‹‰Ê</returns>
-        /// <remarks>!IsTrue() != IsFalse()‚Å‚ ‚é‚±‚Æ‚É’ˆÓ‚·‚é</remarks>
+        /// <param name="s">æ–‡å­—åˆ—</param>
+        /// <returns>çµæœ</returns>
+        /// <remarks>!IsTrue() != IsFalse()ã§ã‚ã‚‹ã“ã¨ã«æ³¨æ„ã™ã‚‹</remarks>
         public static bool IsTrue(string s)
         {
             var ss = s.ToLower();
-            if (ss == "1" || ss == "true" || ss == "on" || ss == "“ü" || ss == "^" || ss == "ok" || ss == "yes" || ss == "y")
+            if (ss == "1" || ss == "true" || ss == "on" || ss == "å…¥" || ss == "çœŸ" || ss == "ok" || ss == "yes" || ss == "y")
             {
                 return true;
             }
@@ -119,9 +119,9 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// •‚“®¬”‚©‚çˆÀ‘S‚É true‚ğ”»’f‚·‚é
+        /// æµ®å‹•å°æ•°ã‹ã‚‰å®‰å…¨ã« trueã‚’åˆ¤æ–­ã™ã‚‹
         /// </summary>
-        /// <param name="val">•‚“®¬” / 0 ‚É‹ß‚¯‚ê‚Î falseA‚»‚¤‚Å‚È‚¯‚ê‚Îtrue</param>
+        /// <param name="val">æµ®å‹•å°æ•° / 0 ã«è¿‘ã‘ã‚Œã° falseã€ãã†ã§ãªã‘ã‚Œã°true</param>
         /// <returns>true / false</returns>
         public static bool IsTrue(double val)
         {
@@ -134,15 +134,15 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// •¶š—ñ‚ªFalse‚ğ¦‚µ‚Ä‚¢‚é‚©‚Ç‚¤‚©‚ğ’²‚×‚é
+        /// æ–‡å­—åˆ—ãŒFalseã‚’ç¤ºã—ã¦ã„ã‚‹ã‹ã©ã†ã‹ã‚’èª¿ã¹ã‚‹
         /// </summary>
-        /// <param name="s">•¶š—ñ</param>
-        /// <returns>Œ‹‰Ê</returns>
-        /// <remarks>!IsFalse() != IsTrue()‚Å‚ ‚é‚±‚Æ‚É’ˆÓ‚·‚é</remarks>
+        /// <param name="s">æ–‡å­—åˆ—</param>
+        /// <returns>çµæœ</returns>
+        /// <remarks>!IsFalse() != IsTrue()ã§ã‚ã‚‹ã“ã¨ã«æ³¨æ„ã™ã‚‹</remarks>
         public static bool IsFalse(string s)
         {
             var ss = s.ToLower();
-            if (ss == "0" || ss == "false" || ss == "off" || ss == "Ø" || ss == "‹U" || ss == "ng" || ss == "no" || ss == "n")
+            if (ss == "0" || ss == "false" || ss == "off" || ss == "åˆ‡" || ss == "å½" || ss == "ng" || ss == "no" || ss == "n")
             {
                 return true;
             }
@@ -153,23 +153,23 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// •‚“®¬”‚©‚çˆÀ‘S‚É true‚ğ”»’f‚·‚é
+        /// æµ®å‹•å°æ•°ã‹ã‚‰å®‰å…¨ã« trueã‚’åˆ¤æ–­ã™ã‚‹
         /// </summary>
-        /// <param name="val">•‚“®¬” / 0 ‚É‹ß‚¯‚ê‚Î falseA‚»‚¤‚Å‚È‚¯‚ê‚Îtrue</param>
+        /// <param name="val">æµ®å‹•å°æ•° / 0 ã«è¿‘ã‘ã‚Œã° falseã€ãã†ã§ãªã‘ã‚Œã°true</param>
         /// <returns>true / false</returns>
         public static bool IsFalse(double val)
         {
             return !IsTrue(val);
         }
 
-        /// <summary>‰üsƒR[ƒh</summary>
+        /// <summary>æ”¹è¡Œã‚³ãƒ¼ãƒ‰</summary>
         public const string CR = "\r\n";
 
         /// <summary>
-        /// w’èƒRƒŒƒNƒVƒ‡ƒ“‚©‚ç‚Ğ‚Æ‚Âæ“¾‚·‚é
+        /// æŒ‡å®šã‚³ãƒ¬ã‚¯ã‚·ãƒ§ãƒ³ã‹ã‚‰ã²ã¨ã¤å–å¾—ã™ã‚‹
         /// </summary>
-        /// <param name="col">ƒRƒŒƒNƒVƒ‡ƒ“</param>
-        /// <returns>ƒRƒŒƒNƒVƒ‡ƒ“’†‚Ì‚Ğ‚Æ‚Â–Ú</returns>
+        /// <param name="col">ã‚³ãƒ¬ã‚¯ã‚·ãƒ§ãƒ³</param>
+        /// <returns>ã‚³ãƒ¬ã‚¯ã‚·ãƒ§ãƒ³ä¸­ã®ã²ã¨ã¤ç›®</returns>
         public static object GetOne(ICollection col)
         {
             var e = col.GetEnumerator();

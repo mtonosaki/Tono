@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System;
@@ -11,11 +11,11 @@ namespace Tono.GuiWinForm
 {
 
     /// <summary>
-    /// Add‚µ‚Ä‚àƒf[ƒ^‚ªŠi”[‚Å‚«‚È‚¢‹UƒŠƒXƒgƒIƒuƒWƒFƒNƒg
+    /// Addã—ã¦ã‚‚ãƒ‡ãƒ¼ã‚¿ãŒæ ¼ç´ã§ããªã„å½ãƒªã‚¹ãƒˆã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
     /// </summary>
     public class ListDummy : IList
     {
-        #region IList ƒƒ“ƒo
+        #region IList ãƒ¡ãƒ³ãƒ
 
         public int Add(object value)
         {
@@ -64,7 +64,7 @@ namespace Tono.GuiWinForm
 
         #endregion
 
-        #region ICollection ƒƒ“ƒo
+        #region ICollection ãƒ¡ãƒ³ãƒ
 
         public void CopyTo(Array array, int index)
         {
@@ -78,7 +78,7 @@ namespace Tono.GuiWinForm
 
         #endregion
 
-        #region IEnumerable ƒƒ“ƒo
+        #region IEnumerable ãƒ¡ãƒ³ãƒ
 
         public IEnumerator GetEnumerator()
         {
@@ -89,13 +89,13 @@ namespace Tono.GuiWinForm
     }
 
     /// <summary>
-    /// Add‚µ‚Ä‚àƒf[ƒ^‚ªŠi”[‚Å‚«‚È‚¢‹UƒŠƒXƒgƒIƒuƒWƒFƒNƒg
+    /// Addã—ã¦ã‚‚ãƒ‡ãƒ¼ã‚¿ãŒæ ¼ç´ã§ããªã„å½ãƒªã‚¹ãƒˆã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
     /// </summary>
     public class ListDummy<T> : IList<T>
     {
         private static readonly List<T> _zero = new List<T>();
 
-        #region IList<T> ƒƒ“ƒo
+        #region IList<T> ãƒ¡ãƒ³ãƒ
 
         public int IndexOf(T item)
         {
@@ -120,7 +120,7 @@ namespace Tono.GuiWinForm
 
         #endregion
 
-        #region ICollection<T> ƒƒ“ƒo
+        #region ICollection<T> ãƒ¡ãƒ³ãƒ
 
         public void Add(T item)
         {
@@ -150,7 +150,7 @@ namespace Tono.GuiWinForm
 
         #endregion
 
-        #region IEnumerable<T> ƒƒ“ƒo
+        #region IEnumerable<T> ãƒ¡ãƒ³ãƒ
 
         public IEnumerator<T> GetEnumerator()
         {
@@ -159,7 +159,7 @@ namespace Tono.GuiWinForm
 
         #endregion
 
-        #region IEnumerable ƒƒ“ƒo
+        #region IEnumerable ãƒ¡ãƒ³ãƒ
 
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {

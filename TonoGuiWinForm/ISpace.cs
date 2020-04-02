@@ -1,10 +1,10 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// Class1 ‚ÌŠT—v‚Ìà–¾‚Å‚·B
+    /// Class1 ã®æ¦‚è¦ã®èª¬æ˜ã§ã™ã€‚
     /// </summary>
     public interface ISpace
     {
@@ -12,7 +12,7 @@ namespace Tono.GuiWinForm
         /// 
         /// </summary>
         /// <param name="value"></param>
-        /// <returns></returns>
+        /// <returns></returns>S
         bool IsIn(object value);
         /// <summary>
         /// 

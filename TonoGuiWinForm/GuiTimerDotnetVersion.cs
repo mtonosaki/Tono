@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 #if false
@@ -9,25 +9,25 @@ using System.Threading;
 namespace DS
 {
 	/// <summary>
-	/// GuiTimer ‚ÌŠT—v‚Ìà–¾‚Å‚·B
+	/// GuiTimer ã®æ¦‚è¦ã®èª¬æ˜ã§ã™ã€‚
 	/// </summary>
 	public class GuiTimer
 	{
-#region ƒ^ƒCƒ}[ƒnƒ“ƒhƒ‰
+#region ã‚¿ã‚¤ãƒãƒ¼ãƒãƒ³ãƒ‰ãƒ©
 
 		/// <summary>
-		/// ƒ^ƒCƒ}[’â~—pƒnƒ“ƒhƒ‰
+		/// ã‚¿ã‚¤ãƒãƒ¼åœæ­¢ç”¨ãƒãƒ³ãƒ‰ãƒ©
 		/// </summary>
 		public class Handle
 		{
 			Timer _timer = null;
 
 			/// <summary>
-			/// Às‹Ö~BHandleì¬
+			/// å®Ÿè¡Œç¦æ­¢ã€‚Handleä½œæˆ
 			/// </summary>
-			/// <param name="delay_ms">‹N“®ŠÔ[ms]</param>
-			/// <param name="call">ƒR[ƒ‹ƒoƒbƒNŠÖ”</param>
-			/// <param name="arg">ƒR[ƒ‹ƒoƒbƒNƒpƒ‰ƒ[ƒ^</param>
+			/// <param name="delay_ms">èµ·å‹•æ™‚é–“[ms]</param>
+			/// <param name="call">ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯é–¢æ•°</param>
+			/// <param name="arg">ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿</param>
 			internal Handle(int delay_ms, TimerCallback call, object arg)
 			{
 				_timer = new Timer(call, arg, delay_ms, System.Threading.Timeout.Infinite);
@@ -44,23 +44,23 @@ namespace DS
 		}
 #endregion
 
-#region ŠÖ”Œ^
+#region é–¢æ•°å‹
 
-		/// <summary>ˆø”‚È‚µŠÖ”Œ^</summary>
+		/// <summary>å¼•æ•°ãªã—é–¢æ•°å‹</summary>
 		public delegate void Proc0();
 
-		/// <summary>ˆø”‚Ğ‚Æ‚ÂŠÖ”Œ^</summary>
+		/// <summary>å¼•æ•°ã²ã¨ã¤é–¢æ•°å‹</summary>
 		public delegate void Proc1(object arg);
 
-		/// <summary>ˆø”ƒ}ƒ‹ƒ`ŠÖ”Œ^</summary>
+		/// <summary>å¼•æ•°ãƒãƒ«ãƒé–¢æ•°å‹</summary>
 		public delegate void ProcN(object[] args);
 
 #endregion
 
-#region ‘®«iƒVƒŠƒAƒ‰ƒCƒY‚µ‚È‚¢j
+#region å±æ€§ï¼ˆã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºã—ãªã„ï¼‰
 #endregion
 
-#region IDisposable ƒƒ“ƒo
+#region IDisposable ãƒ¡ãƒ³ãƒ
 
 		public virtual void Dispose()
 		{
@@ -69,7 +69,7 @@ namespace DS
 #endregion
 
 		/// <summary>
-		/// ƒ^ƒCƒ}[‚ğíœ‚·‚é
+		/// ã‚¿ã‚¤ãƒãƒ¼ã‚’å‰Šé™¤ã™ã‚‹
 		/// </summary>
 		/// <param name="h"></param>
 		public void Stop(Handle h)
@@ -81,7 +81,7 @@ namespace DS
 		}
 
 		/// <summary>
-		/// ƒ^ƒCƒ}[Às
+		/// ã‚¿ã‚¤ãƒãƒ¼å®Ÿè¡Œ
 		/// </summary>
 		/// <param name="arg"></param>
 		private void _onTimer(object arg)
@@ -90,7 +90,7 @@ namespace DS
 			((Handle)val[0])._stop();
 
 
-			// Œ^‚É‰‚¶‚½ˆ—
+			// å‹ã«å¿œã˜ãŸå‡¦ç†
 			if( val[1] is Proc0 )
 			{
 				Proc0 p = (Proc0)val[1];
@@ -130,14 +130,14 @@ namespace DS
 				}
 				return;
 			}
-			System.Diagnostics.Debug.Assert(false, "ƒ^ƒCƒ}[’v–½“IƒGƒ‰[");
+			System.Diagnostics.Debug.Assert(false, "ã‚¿ã‚¤ãƒãƒ¼è‡´å‘½çš„ã‚¨ãƒ©ãƒ¼");
 		}
 
 		/// <summary>
-		/// ˆø”‚È‚µ‚Ìƒ^ƒCƒ}[ŠÖ”‚ğ“o˜^‚·‚é
+		/// å¼•æ•°ãªã—ã®ã‚¿ã‚¤ãƒãƒ¼é–¢æ•°ã‚’ç™»éŒ²ã™ã‚‹
 		/// </summary>
-		/// <param name="delay_ms">‹N“®ƒ~ƒŠ•b</param>
-		/// <param name="function">‹N“®‚·‚éŠÖ”</param>
+		/// <param name="delay_ms">èµ·å‹•ãƒŸãƒªç§’</param>
+		/// <param name="function">èµ·å‹•ã™ã‚‹é–¢æ•°</param>
 		public Handle AddTrigger(int delay_ms, Proc0 function)
 		{
 			uSet st = new uSet(null, function, null);
@@ -147,21 +147,21 @@ namespace DS
 		}
 
 		/// <summary>
-		/// ˆø”‚È‚µ‚Ìƒ^ƒCƒ}[ŠÖ”‚ğ“o˜^‚·‚é
+		/// å¼•æ•°ãªã—ã®ã‚¿ã‚¤ãƒãƒ¼é–¢æ•°ã‚’ç™»éŒ²ã™ã‚‹
 		/// </summary>
-		/// <param name="delayTime">‹N“®ŠÔ</param>
-		/// <param name="function">‹N“®‚·‚éŠÖ”</param>
+		/// <param name="delayTime">èµ·å‹•æ™‚é–“</param>
+		/// <param name="function">èµ·å‹•ã™ã‚‹é–¢æ•°</param>
 		public Handle AddTrigger(uTime delayTime, Proc0 function)
 		{
 			return AddTrigger(delayTime.TotalSeconds * 1000, function);
 		}
 
 		/// <summary>
-		/// ˆø”•t‚«‚Ìƒ^ƒCƒ}[ŠÖ”‚ğ“o˜^‚·‚é
+		/// å¼•æ•°ä»˜ãã®ã‚¿ã‚¤ãƒãƒ¼é–¢æ•°ã‚’ç™»éŒ²ã™ã‚‹
 		/// </summary>
-		/// <param name="id">óM‚Ìˆø”</param>
-		/// <param name="delay_ms">‹N“®ƒ~ƒŠ•b</param>
-		/// <param name="function">‹N“®‚·‚éŠÖ”</param>
+		/// <param name="id">å—ä¿¡æ™‚ã®å¼•æ•°</param>
+		/// <param name="delay_ms">èµ·å‹•ãƒŸãƒªç§’</param>
+		/// <param name="function">èµ·å‹•ã™ã‚‹é–¢æ•°</param>
 		public Handle AddTrigger(object arg, int delay_ms, Proc1 function)
 		{
 			uSet st = new uSet(null, function, arg);
@@ -171,22 +171,22 @@ namespace DS
 		}
 
 		/// <summary>
-		/// ˆø”•t‚«‚Ìƒ^ƒCƒ}[ŠÖ”‚ğ“o˜^‚·‚é
+		/// å¼•æ•°ä»˜ãã®ã‚¿ã‚¤ãƒãƒ¼é–¢æ•°ã‚’ç™»éŒ²ã™ã‚‹
 		/// </summary>
-		/// <param name="id">óM‚Ìˆø”</param>
-		/// <param name="delayTime">‹N“®ŠÔ</param>
-		/// <param name="function">‹N“®‚·‚éŠÖ”</param>
+		/// <param name="id">å—ä¿¡æ™‚ã®å¼•æ•°</param>
+		/// <param name="delayTime">èµ·å‹•æ™‚é–“</param>
+		/// <param name="function">èµ·å‹•ã™ã‚‹é–¢æ•°</param>
 		public Handle AddTrigger(object arg, uTime delayTime, Proc1 function)
 		{
 			return AddTrigger(arg, delayTime.TotalSeconds * 1000, function);
 		}
 
 		/// <summary>
-		/// ˆø”•t‚«‚Ìƒ^ƒCƒ}[ŠÖ”‚ğ“o˜^‚·‚é
+		/// å¼•æ•°ä»˜ãã®ã‚¿ã‚¤ãƒãƒ¼é–¢æ•°ã‚’ç™»éŒ²ã™ã‚‹
 		/// </summary>
-		/// <param name="id">óM‚Ìˆø”</param>
-		/// <param name="delay_ms">‹N“®ƒ~ƒŠ•b</param>
-		/// <param name="function">‹N“®‚·‚éŠÖ”</param>
+		/// <param name="id">å—ä¿¡æ™‚ã®å¼•æ•°</param>
+		/// <param name="delay_ms">èµ·å‹•ãƒŸãƒªç§’</param>
+		/// <param name="function">èµ·å‹•ã™ã‚‹é–¢æ•°</param>
 		public Handle AddTrigger(object[] args, int delay_ms, ProcN function)
 		{
 			uSet st = new uSet(null, function, args);
@@ -196,11 +196,11 @@ namespace DS
 		}
 
 		/// <summary>
-		/// ˆø”•t‚«‚Ìƒ^ƒCƒ}[ŠÖ”‚ğ“o˜^‚·‚é
+		/// å¼•æ•°ä»˜ãã®ã‚¿ã‚¤ãƒãƒ¼é–¢æ•°ã‚’ç™»éŒ²ã™ã‚‹
 		/// </summary>
-		/// <param name="id">óM‚Ìˆø”</param>
-		/// <param name="delayTime">‹N“®ŠÔ</param>
-		/// <param name="function">‹N“®‚·‚éŠÖ”</param>
+		/// <param name="id">å—ä¿¡æ™‚ã®å¼•æ•°</param>
+		/// <param name="delayTime">èµ·å‹•æ™‚é–“</param>
+		/// <param name="function">èµ·å‹•ã™ã‚‹é–¢æ•°</param>
 		public Handle AddTrigger(object[] args, uTime delayTime, ProcN function)
 		{
 			return AddTrigger(args, delayTime.TotalSeconds * 1000, function);

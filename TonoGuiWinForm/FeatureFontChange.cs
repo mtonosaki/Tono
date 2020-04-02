@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System.Windows.Forms;
@@ -7,20 +7,20 @@ namespace Tono.GuiWinForm
 {
     internal class FeatureFontChange : FeatureBase
     {
-        #region ‘®«iƒVƒŠƒAƒ‰ƒCƒY‚µ‚È‚¢j
-        /// <summary>‘I‘ğ’†‚Ìƒp[ƒci‹¤—L•Ï”j</summary>
+        #region å±æ€§ï¼ˆã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºã—ãªã„ï¼‰
+        /// <summary>é¸æŠä¸­ã®ãƒ‘ãƒ¼ãƒ„ï¼ˆå…±æœ‰å¤‰æ•°ï¼‰</summary>
         protected PartsCollectionBase _selectedParts;
         #endregion
 
         public override void OnInitInstance()
         {
             base.OnInitInstance();
-            // ƒXƒe[ƒ^ƒX“¯Šú
-            _selectedParts = (PartsCollectionBase)Share.Get("SelectedParts", typeof(PartsCollection));   // ‘I‘ğÏ‚İ‚Ìƒp[ƒcˆê——
+            // ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹åŒæœŸ
+            _selectedParts = (PartsCollectionBase)Share.Get("SelectedParts", typeof(PartsCollection));   // é¸æŠæ¸ˆã¿ã®ãƒ‘ãƒ¼ãƒ„ä¸€è¦§
         }
 
         /// <summary>
-        /// ƒtƒHƒ“ƒg•ÏX‚Å‚«‚é‚©‚Ç‚¤‚©H
+        /// ãƒ•ã‚©ãƒ³ãƒˆå¤‰æ›´ã§ãã‚‹ã‹ã©ã†ã‹ï¼Ÿ
         /// </summary>
         public override bool CanStart => _selectedParts.Count > 0;
 
@@ -29,7 +29,7 @@ namespace Tono.GuiWinForm
             base.Start(who);
             var fd = new FontDialog();
 
-            // ‰Šú‰»
+            // åˆæœŸåŒ–
             foreach (PartsCollectionBase.PartsEntry pe in _selectedParts)
             {
                 if (pe.Parts is PartsTextBase fp)
@@ -47,7 +47,7 @@ namespace Tono.GuiWinForm
             fd.FontMustExist = true;
             fd.AllowVerticalFonts = false;
 
-            // ‘I‘ğ
+            // é¸æŠ
             if (fd.ShowDialog() == DialogResult.OK)
             {
                 foreach (PartsCollectionBase.PartsEntry pe in _selectedParts)

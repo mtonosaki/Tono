@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System;
@@ -37,12 +37,12 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ’†S“_‚Æ”¼Œa‚ğw’è‚µ‚Ä³•ûŒ`‚ÌÀ•W‚ğì¬‚·‚é
+        /// ä¸­å¿ƒç‚¹ã¨åŠå¾„ã‚’æŒ‡å®šã—ã¦æ­£æ–¹å½¢ã®åº§æ¨™ã‚’ä½œæˆã™ã‚‹
         /// </summary>
-        /// <param name="x">’†S“_iX)</param>
-        /// <param name="y">’†S“_iYj</param>
-        /// <param name="r">”¼Œa</param>
-        /// <returns>V‚µ‚¢ƒCƒ“ƒXƒ^ƒ“ƒX</returns>
+        /// <param name="x">ä¸­å¿ƒç‚¹ï¼ˆX)</param>
+        /// <param name="y">ä¸­å¿ƒç‚¹ï¼ˆYï¼‰</param>
+        /// <param name="r">åŠå¾„</param>
+        /// <returns>æ–°ã—ã„ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹</returns>
         public static CodeRect FromXYR(int x, int y, int r)
         {
             var ret = new CodeRect();
@@ -54,12 +54,12 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ®”’l‚©‚çƒCƒ“ƒXƒ^ƒ“ƒX‚ğ\’z‚·‚é
+        /// æ•´æ•°å€¤ã‹ã‚‰ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’æ§‹ç¯‰ã™ã‚‹
         /// </summary>
-        /// <param name="x">¶ãÀ•WX</param>
-        /// <param name="y">¶ãÀ•WY</param>
-        /// <param name="width">•</param>
-        /// <param name="height">‚‚³</param>
+        /// <param name="x">å·¦ä¸Šåº§æ¨™X</param>
+        /// <param name="y">å·¦ä¸Šåº§æ¨™Y</param>
+        /// <param name="width">å¹…</param>
+        /// <param name="height">é«˜ã•</param>
         /// <returns></returns>
 
         public static new CodeRect FromLTWH(int x, int y, int width, int height)
@@ -73,12 +73,12 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ®”’l‚©‚çƒCƒ“ƒXƒ^ƒ“ƒX‚ğ\’z‚·‚é
+        /// æ•´æ•°å€¤ã‹ã‚‰ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’æ§‹ç¯‰ã™ã‚‹
         /// </summary>
-        /// <param name="x">¶ãÀ•WX</param>
-        /// <param name="y">¶ãÀ•WY</param>
-        /// <param name="width">•</param>
-        /// <param name="height">‚‚³</param>
+        /// <param name="x">å·¦ä¸Šåº§æ¨™X</param>
+        /// <param name="y">å·¦ä¸Šåº§æ¨™Y</param>
+        /// <param name="width">å¹…</param>
+        /// <param name="height">é«˜ã•</param>
         /// <returns></returns>
 
         public static CodeRect FromLTWH(double x, double y, double width, double height)
@@ -87,12 +87,12 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ®”’l‚©‚çƒCƒ“ƒXƒ^ƒ“ƒX‚ğ\’z‚·‚é
+        /// æ•´æ•°å€¤ã‹ã‚‰ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’æ§‹ç¯‰ã™ã‚‹
         /// </summary>
-        /// <param name="x">¶ãÀ•WX</param>
-        /// <param name="y">¶ãÀ•WY</param>
-        /// <param name="width">•</param>
-        /// <param name="height">‚‚³</param>
+        /// <param name="x">å·¦ä¸Šåº§æ¨™X</param>
+        /// <param name="y">å·¦ä¸Šåº§æ¨™Y</param>
+        /// <param name="width">å¹…</param>
+        /// <param name="height">é«˜ã•</param>
         /// <returns></returns>
 
         public static new CodeRect FromLTRB(int l, int t, int r, int b)
@@ -106,7 +106,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ‰‰ZqƒI[ƒo[ƒ[ƒh
+        /// æ¼”ç®—å­ã‚ªãƒ¼ãƒãƒ¼ãƒ­ãƒ¼ãƒ‰
         /// </summary>
         public static CodeRect operator &(CodeRect r1, Rect r2) { return (CodeRect)((Rect)r1 & r2); }
         public static CodeRect operator +(CodeRect r1, XyBase r2) { return (CodeRect)((Rect)r1 + r2); }

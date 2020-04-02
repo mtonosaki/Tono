@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System;
@@ -13,17 +13,17 @@ using System.Windows.Forms;
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// .NET Form ‚ÌƒRƒ“ƒgƒ[ƒ‹‚ÆƒCƒxƒ“ƒgEƒvƒƒpƒeƒB‚ğ’ÊM‚·‚éŠî–{ƒNƒ‰ƒX
+    /// .NET Form ã®ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã¨ã‚¤ãƒ™ãƒ³ãƒˆãƒ»ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ã‚’é€šä¿¡ã™ã‚‹åŸºæœ¬ã‚¯ãƒ©ã‚¹
     /// </summary>
     public abstract class FeatureControlBridgeBase : FeatureBase, IDisposable
     {
-        #region ‘®«iƒVƒŠƒAƒ‰ƒCƒY‚·‚éj
+        #region å±æ€§ï¼ˆã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºã™ã‚‹ï¼‰
 
-        /// <summary>ƒgƒŠƒKî•ñ‚ğ•Û‘¶‚·‚é”z—ñ</summary>
+        /// <summary>ãƒˆãƒªã‚¬æƒ…å ±ã‚’ä¿å­˜ã™ã‚‹é…åˆ—</summary>
         private Dictionary<string, IList<EventUnit>> _addEvents = null;
 
         #endregion
-        #region ‘®«iƒVƒŠƒAƒ‰ƒCƒY‚µ‚È‚¢j
+        #region å±æ€§ï¼ˆã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºã—ãªã„ï¼‰
         private readonly ThreadUtil _ts = new ThreadUtil();
         #endregion
 
@@ -42,12 +42,12 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒXƒŒƒbƒhƒZ[ƒtŠÇ—
+        /// ã‚¹ãƒ¬ãƒƒãƒ‰ã‚»ãƒ¼ãƒ•ç®¡ç†
         /// </summary>
         protected ThreadUtil ThreadSafe => _ts;
 
         /// <summary>
-        /// ƒRƒ“ƒgƒ[ƒ‹‚ğŒŸõ‚·‚é
+        /// ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã‚’æ¤œç´¢ã™ã‚‹
         /// </summary>
         /// <param name="name"></param>
         /// <param name="value"></param>
@@ -84,11 +84,11 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ’S“–ƒtƒB[ƒ`ƒƒ[ƒŠƒbƒ`ã‚É‚ ‚éƒRƒ“ƒgƒ[ƒ‹‚ğ’Ç‰Á‚·‚é
-        /// –¼‘O‚ÅŒŸõ‚·‚é‚Æ’x‚¢B‘¬‚­‚µ‚½‚¯‚ê‚Î AddControl(Control )‚ğg—p‚·‚é‚±‚Æ
+        /// æ‹…å½“ãƒ•ã‚£ãƒ¼ãƒãƒ£ãƒ¼ãƒªãƒƒãƒä¸Šã«ã‚ã‚‹ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã‚’è¿½åŠ ã™ã‚‹
+        /// åå‰ã§æ¤œç´¢ã™ã‚‹ã¨é…ã„ã€‚é€Ÿãã—ãŸã‘ã‚Œã° AddControl(Control )ã‚’ä½¿ç”¨ã™ã‚‹ã“ã¨
         /// </summary>
-        /// <param name="name">ƒRƒ“ƒgƒ[ƒ‹–¼ Control.Name</param>
-        /// <returns>’Ç‰Á‚³‚ê‚½ƒRƒ“ƒgƒ[ƒ‹ / null = ƒGƒ‰[</returns>
+        /// <param name="name">ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«å Control.Name</param>
+        /// <returns>è¿½åŠ ã•ã‚ŒãŸã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ« / null = ã‚¨ãƒ©ãƒ¼</returns>
         public Control GetControl(string name)
         {
             Control root;
@@ -101,7 +101,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// eƒtƒH[ƒ€‚ğæ“¾‚·‚é
+        /// è¦ªãƒ•ã‚©ãƒ¼ãƒ ã‚’å–å¾—ã™ã‚‹
         /// </summary>
         /// <returns></returns>
         public Form GetParentForm()
@@ -140,7 +140,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒRƒ“ƒgƒ[ƒ‹‚ğŒŸõ‚·‚é
+        /// ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã‚’æ¤œç´¢ã™ã‚‹
         /// </summary>
         /// <param name="name"></param>
         /// <param name="value"></param>
@@ -186,7 +186,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ’S“–ƒtƒB[ƒ`ƒƒ[ƒŠƒbƒ`ã‚É‚ ‚é
+        /// æ‹…å½“ãƒ•ã‚£ãƒ¼ãƒãƒ£ãƒ¼ãƒªãƒƒãƒä¸Šã«ã‚ã‚‹
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
@@ -206,7 +206,7 @@ namespace Tono.GuiWinForm
         private static readonly MethodInfo _mi_setAutoRemoveFeature = typeof(FeatureGroupBase).GetMethod("_setAutoRemoveFeature", BindingFlags.Instance | BindingFlags.NonPublic);
 
         /// <summary>
-        /// ƒCƒxƒ“ƒg“]‘—
+        /// ã‚¤ãƒ™ãƒ³ãƒˆè»¢é€
         /// </summary>
         private void _event(object sender, EventArgs e, string eventName)
         {
@@ -225,7 +225,7 @@ namespace Tono.GuiWinForm
             }
             if (vals == null)
             {
-                System.Diagnostics.Debug.WriteLine("–¢“o˜^ƒCƒxƒ“ƒg = " + eventName);
+                System.Diagnostics.Debug.WriteLine("æœªç™»éŒ²ã‚¤ãƒ™ãƒ³ãƒˆ = " + eventName);
                 return;
             }
             foreach (var cp in vals)
@@ -257,7 +257,7 @@ namespace Tono.GuiWinForm
                     break;
                 }
             }
-            // ÅŒã‚Éƒg[ƒNƒ“Eƒtƒ@ƒCƒiƒ‰ƒCƒUƒ‹[ƒv‚ğÀs‚·‚é
+            // æœ€å¾Œã«ãƒˆãƒ¼ã‚¯ãƒ³ãƒ»ãƒ•ã‚¡ã‚¤ãƒŠãƒ©ã‚¤ã‚¶ãƒ«ãƒ¼ãƒ—ã‚’å®Ÿè¡Œã™ã‚‹
             GetRoot().FlushFeatureTriggers();
         }
 
@@ -286,7 +286,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒCƒxƒ“ƒgƒnƒ“ƒhƒ‹Œ^
+        /// ã‚¤ãƒ™ãƒ³ãƒˆãƒãƒ³ãƒ‰ãƒ«å‹
         /// </summary>
         public class Handle
         {
@@ -310,11 +310,11 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒCƒxƒ“ƒg‚ğ’Ç‰Á‚·‚é
+        /// ã‚¤ãƒ™ãƒ³ãƒˆã‚’è¿½åŠ ã™ã‚‹
         /// </summary>
-        /// <param name="control">ƒCƒxƒ“ƒg”­¶Œ¹</param>
-        /// <param name="eventName">ƒCƒxƒ“ƒg–¼</param>
-        /// <param name="function">ƒCƒxƒ“ƒg“]‘—æ</param>
+        /// <param name="control">ã‚¤ãƒ™ãƒ³ãƒˆç™ºç”Ÿæº</param>
+        /// <param name="eventName">ã‚¤ãƒ™ãƒ³ãƒˆå</param>
+        /// <param name="function">ã‚¤ãƒ™ãƒ³ãƒˆè»¢é€å…ˆ</param>
         public Handle AddTrigger(Component control, string eventName, object function)
         {
             Delegate eh = null;
@@ -335,12 +335,12 @@ namespace Tono.GuiWinForm
                         case "DoubleClick": ei.AddEventHandler(control, eh = new EventHandler(_DoubleClick)); break;
                         case "ColumnClick": ei.AddEventHandler(control, eh = new ColumnClickEventHandler(_ColumnClick)); break;
                         default:
-                            System.Diagnostics.Debug.Assert(false, "–¢À‘•‚ÌƒCƒxƒ“ƒg‚ª " + GetType().Name + " ‚ÅƒvƒƒOƒ‰ƒ~ƒ“ƒO‚³‚ê‚Ä‚¢‚Ü‚·B= " + eventName);
+                            System.Diagnostics.Debug.Assert(false, "æœªå®Ÿè£…ã®ã‚¤ãƒ™ãƒ³ãƒˆãŒ " + GetType().Name + " ã§ãƒ—ãƒ­ã‚°ãƒ©ãƒŸãƒ³ã‚°ã•ã‚Œã¦ã„ã¾ã™ã€‚= " + eventName);
                             break;
                     }
                     //ei.AddEventHandler(control, function);
 
-                    // “o˜^‚µ‚½ƒCƒxƒ“ƒg‚ğŠo‚¦‚Ä‚¨‚­
+                    // ç™»éŒ²ã—ãŸã‚¤ãƒ™ãƒ³ãƒˆã‚’è¦šãˆã¦ãŠã
                     if (_addEvents.TryGetValue(ei.Name, out var li) == false)
                     {
                         _addEvents.Add(ei.Name, li = new List<EventUnit>());
@@ -349,17 +349,17 @@ namespace Tono.GuiWinForm
                     return new Handle(ei, function, eh, control);
                 }
             }
-            System.Diagnostics.Debug.Assert(false, control.Site.Name + "ƒRƒ“ƒgƒ[ƒ‹(" + control.GetType().ToString() + ")‚É‚Í'" + eventName + "'‚Æ‚¢‚¤ƒCƒxƒ“ƒg‚ª‘¶İ‚µ‚Ü‚¹‚ñ");
+            System.Diagnostics.Debug.Assert(false, control.Site.Name + "ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«(" + control.GetType().ToString() + ")ã«ã¯'" + eventName + "'ã¨ã„ã†ã‚¤ãƒ™ãƒ³ãƒˆãŒå­˜åœ¨ã—ã¾ã›ã‚“");
             return null;
         }
 
         /// <summary>
-        /// ƒCƒxƒ“ƒg‚ğ’Ç‰Á‚·‚é
+        /// ã‚¤ãƒ™ãƒ³ãƒˆã‚’è¿½åŠ ã™ã‚‹
         /// </summary>
         public void AddTrigger(Handle h)
         {
             h.EventInfo.AddEventHandler(h.Control, h.EventHandler);
-            // “o˜^‚µ‚½ƒCƒxƒ“ƒg‚ğŠo‚¦‚Ä‚¨‚­
+            // ç™»éŒ²ã—ãŸã‚¤ãƒ™ãƒ³ãƒˆã‚’è¦šãˆã¦ãŠã
             var li = _addEvents[h.EventInfo.Name];
             if (li == null)
             {
@@ -369,9 +369,9 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒCƒxƒ“ƒg‚ğíœ‚·‚é
+        /// ã‚¤ãƒ™ãƒ³ãƒˆã‚’å‰Šé™¤ã™ã‚‹
         /// </summary>
-        /// <param name="h">AddTrigger‚Åæ“¾‚µ‚½ƒnƒ“ƒhƒ‰</param>
+        /// <param name="h">AddTriggerã§å–å¾—ã—ãŸãƒãƒ³ãƒ‰ãƒ©</param>
         public void RemoveTrigger(Handle h)
         {
             var li = (IList)_addEvents[h.EventInfo.Name];
@@ -394,7 +394,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// •¶š—ñ‚©‚çƒRƒ“ƒgƒ[ƒ‹‚ğŒŸõ‚µ‚ÄA‚»‚ê‚ÉƒCƒxƒ“ƒg‚ğ’Ç‰Á‚·‚éi‘SƒRƒ“ƒgƒ[ƒ‹‚ğƒXƒLƒƒƒ“‚·‚é‚Ì‚Å’á‘¬j
+        /// æ–‡å­—åˆ—ã‹ã‚‰ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã‚’æ¤œç´¢ã—ã¦ã€ãã‚Œã«ã‚¤ãƒ™ãƒ³ãƒˆã‚’è¿½åŠ ã™ã‚‹ï¼ˆå…¨ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã‚’ã‚¹ã‚­ãƒ£ãƒ³ã™ã‚‹ã®ã§ä½é€Ÿï¼‰
         /// </summary>
         /// <param name="controlName"></param>
         /// <param name="eventName"></param>
@@ -414,13 +414,13 @@ namespace Tono.GuiWinForm
             }
         }
 
-        #region IDisposable ƒƒ“ƒo
+        #region IDisposable ãƒ¡ãƒ³ãƒ
 
         public override void Dispose()
         {
             if (_addEvents != null)
             {
-                // ƒCƒxƒ“ƒg‚ğ‚·‚®‚Éíœ‚·‚é
+                // ã‚¤ãƒ™ãƒ³ãƒˆã‚’ã™ãã«å‰Šé™¤ã™ã‚‹
                 foreach (var de in _addEvents)
                 {
                     foreach (var os in de.Value)

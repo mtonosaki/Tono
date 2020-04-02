@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System.Collections;
@@ -8,49 +8,49 @@ using System.Collections;
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// FeatureGanttRowSnap ‚ÌŠT—v‚Ìà–¾‚Å‚·B
+    /// FeatureGanttRowSnap ã®æ¦‚è¦ã®èª¬æ˜ã§ã™ã€‚
     /// </summary>
     public class FeatureGanttRowSnap : FeatureBase, IMouseListener
     {
-        #region ‘®«iƒVƒŠƒAƒ‰ƒCƒY‚µ‚È‚¢j
+        #region å±æ€§ï¼ˆã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºã—ãªã„ï¼‰
 
-        /// <summary>ƒp[ƒcˆÊ’uŠÇ—ƒIƒuƒWƒFƒNƒg</summary>
+        /// <summary>ãƒ‘ãƒ¼ãƒ„ä½ç½®ç®¡ç†ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ</summary>
         protected PartsPositionManager _pos;
 
         #endregion
 
         /// <summary>
-        /// ‰Šú‰»i‹¤—L•Ï”‚ÌŠ„“–‚È‚Çj
+        /// åˆæœŸåŒ–ï¼ˆå…±æœ‰å¤‰æ•°ã®å‰²å½“ãªã©ï¼‰
         /// </summary>
         public override void OnInitInstance()
         {
             base.OnInitInstance();
 
-            // ƒXƒe[ƒ^ƒX“¯Šú
-            _pos = (PartsPositionManager)Share.Get("MovingParts", typeof(PartsPositionManager));    // ˆÚ“®’†‚Ìƒp[ƒcˆê——
+            // ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹åŒæœŸ
+            _pos = (PartsPositionManager)Share.Get("MovingParts", typeof(PartsPositionManager));    // ç§»å‹•ä¸­ã®ãƒ‘ãƒ¼ãƒ„ä¸€è¦§
         }
 
         /// <summary>
-        /// ƒ}ƒEƒXˆÚ“®‚ğƒhƒ‰ƒbƒO’†‚Æ‚µ‚ÄÀ‘•‚·‚é
+        /// ãƒã‚¦ã‚¹ç§»å‹•ã‚’ãƒ‰ãƒ©ãƒƒã‚°ä¸­ã¨ã—ã¦å®Ÿè£…ã™ã‚‹
         /// </summary>
         public void OnMouseMove(MouseState e)
         {
             if (_pos.Count > 0)
             {
-                foreach (DictionaryEntry de in _pos)            // ‘I‘ğ’†‘Sƒp[ƒc‚É‘Î‚µ‚Äs‚¤
+                foreach (DictionaryEntry de in _pos)            // é¸æŠä¸­å…¨ãƒ‘ãƒ¼ãƒ„ã«å¯¾ã—ã¦è¡Œã†
                 {
                     var p3 = (PartsPositionManager.Pos3)de.Value;
-                    // cˆÊ’u‚ğ16‚Ì”{”‚ÉƒXƒiƒbƒv‚·‚éƒTƒ“ƒvƒ‹
+                    // ç¸¦ä½ç½®ã‚’16ã®å€æ•°ã«ã‚¹ãƒŠãƒƒãƒ—ã™ã‚‹ã‚µãƒ³ãƒ—ãƒ«
                     //p3.Now.LT.Y = (p3.Now.LT.Y) / 16 * 16;
                     //p3.Now.RB.Y = (p3.Now.RB.Y) / 16 * 16;
 
-                    // ‚Æ‚è‚ ‚¦‚¸c•ûŒü‚ÌˆÚ“®‚Í‚µ‚È‚¢B
+                    // ã¨ã‚Šã‚ãˆãšç¸¦æ–¹å‘ã®ç§»å‹•ã¯ã—ãªã„ã€‚
                     //p3.Now.LT.Y = p3.Pre.LT.Y;
                     //p3.Now.RB.Y = p3.Pre.LT.Y;
                 }
             }
         }
-        #region IMouseListener ƒƒ“ƒo
+        #region IMouseListener ãƒ¡ãƒ³ãƒ
 
         public void OnMouseDown(MouseState e)
         {

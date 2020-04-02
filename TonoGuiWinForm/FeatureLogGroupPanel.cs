@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System;
@@ -12,14 +12,14 @@ using System.Windows.Forms;
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// ƒŒƒxƒ‹•ª‚¯‚µ‚½ƒƒO‚ğ•\¦‚·‚éƒCƒ“ƒ^[ƒtƒF[ƒX
-    /// w’è‚µ‚½ƒy[ƒ“‚Ìã‚É’š“xæ‚Á‚©‚é
+    /// ãƒ¬ãƒ™ãƒ«åˆ†ã‘ã—ãŸãƒ­ã‚°ã‚’è¡¨ç¤ºã™ã‚‹ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ãƒ¼ã‚¹
+    /// æŒ‡å®šã—ãŸãƒšãƒ¼ãƒ³ã®ä¸Šã«ä¸åº¦ä¹—ã£ã‹ã‚‹
     /// </summary>
     public class FeatureLogGroupPanel : FeatureBase, IMultiTokenListener, IMouseListener
     {
         #region Parts class
         /// <summary>
-        /// ƒpƒlƒ‹•`‰æ
+        /// ãƒ‘ãƒãƒ«æç”»
         /// </summary>
         protected internal class dpLogPanel : PartsBase, IPartsVisible
         {
@@ -107,7 +107,7 @@ namespace Tono.GuiWinForm
             private ScreenRect _margin = ScreenRect.FromLTRB(0, 0, 0, 0);
 
             /// <summary>
-            /// —Bˆê‚ÌƒRƒ“ƒXƒgƒ‰ƒNƒ^
+            /// å”¯ä¸€ã®ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
             /// </summary>
             /// <param name="clickArea"></param>
             public dpLogPanel(Dictionary<LLV, ScreenPos> clickArea)
@@ -117,7 +117,7 @@ namespace Tono.GuiWinForm
             }
 
             /// <summary>
-            /// ƒ}[ƒWƒ“‚ğƒZƒbƒg‚·‚é
+            /// ãƒãƒ¼ã‚¸ãƒ³ã‚’ã‚»ãƒƒãƒˆã™ã‚‹
             /// </summary>
             /// <param name="margin"></param>
             public void SetMargin(ScreenRect margin)
@@ -138,7 +138,7 @@ namespace Tono.GuiWinForm
             }
 
             /// <summary>
-            /// •`‰æ
+            /// æç”»
             /// </summary>
             /// <param name="rp"></param>
             /// <returns></returns>
@@ -156,7 +156,7 @@ namespace Tono.GuiWinForm
                         return true;
                     }
 
-                    #region —Ìˆæ‚Ì‹éŒ`
+                    #region é ˜åŸŸã®çŸ©å½¢
                     var lgb = createLogPanelBG(sr);
 
                     sr.LT.Y = sr.RB.Y - Rect.Height;
@@ -167,7 +167,7 @@ namespace Tono.GuiWinForm
                     rp.Graphics.FillRectangle(lgb, sr);
                     lgb.Dispose();
                     #endregion
-                    #region ƒ^ƒCƒgƒ‹ƒ{[ƒ_[
+                    #region ã‚¿ã‚¤ãƒˆãƒ«ãƒœãƒ¼ãƒ€ãƒ¼
                     Brush _bd = new SolidBrush(Color.FromArgb(64, 0, 0, 0));
                     var b = 8;
                     var w3 = sr.Width / 4;
@@ -191,19 +191,19 @@ namespace Tono.GuiWinForm
 
                     rp.Graphics.FillPolygon(_bd, ps);
                     _bd.Dispose();
-                    // ƒnƒCƒ‰ƒCƒg
+                    // ãƒã‚¤ãƒ©ã‚¤ãƒˆ
                     using (var p = new Pen(Color.FromArgb(96, 255, 255, 255)))
                     {
                         rp.Graphics.DrawLines(p, pst);
                     }
-                    // ƒVƒƒƒhƒE
+                    // ã‚·ãƒ£ãƒ‰ã‚¦
                     using (var p = new Pen(Color.FromArgb(96, 0, 0, 0)))
                     {
                         rp.Graphics.DrawLines(p, psb);
                     }
                     #endregion
 
-                    // ƒ^ƒCƒgƒ‹ƒƒbƒZ[ƒW
+                    // ã‚¿ã‚¤ãƒˆãƒ«ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸
                     var btr = sr.Clone() as ScreenRect;
                     btr.RB.X = btr.LT.X + 24;
                     btr.RB.Y = btr.LT.Y + 12;
@@ -212,7 +212,7 @@ namespace Tono.GuiWinForm
                     rp.Graphics.DrawString(titlestr, _fontTitle, new SolidBrush(Color.FromArgb(192, 192, 255)), btr.LT.X, btr.LT.Y);
                     btr += XyBase.FromInt((int)rp.Graphics.MeasureString(titlestr, _fontTitle).Width + 8, 0);
 
-                    // •\¦ƒŒƒxƒ‹ƒ{ƒ^ƒ“
+                    // è¡¨ç¤ºãƒ¬ãƒ™ãƒ«ãƒœã‚¿ãƒ³
                     _clickArea.Clear();
                     ScreenPos pos;
                     pos = savePos(LLV.ERR, btr.LT + XyBase.FromInt(0 - (int)(LOG.JumpErr.R / 2), LOG.JumpErr.Y));
@@ -224,19 +224,19 @@ namespace Tono.GuiWinForm
                     pos = savePos(LLV.DEV, btr.LT + XyBase.FromInt(66 - (int)(LOG.JumpDev.R / 2), LOG.JumpDev.Y));
                     rp.Graphics.DrawImage(LOG.DevSw ? Properties.Resources.lp_Dev_on : Properties.Resources.lp_Dev_off, pos.X, pos.Y, (float)(LOG.JumpDev.R + Properties.Resources.lp_Dev_on.Width), (float)(LOG.JumpDev.R + Properties.Resources.lp_Dev_on.Height));
 
-                    // ƒNƒ[ƒYƒ{ƒ^ƒ“
+                    // ã‚¯ãƒ­ãƒ¼ã‚ºãƒœã‚¿ãƒ³
                     pos = savePos(0, btr.LT + XyBase.FromInt(100 - (int)(LOG.JumpDev.R / 2), LOG.JumpDev.Y));
                     rp.Graphics.DrawImage(LOG.DevSw ? Properties.Resources.Cancel : Properties.Resources.Cancel, (float)pos.X, pos.Y, 16, 16);
 
-                    // ƒeƒLƒXƒg•\¦—Ìˆæ‚Ì‚İ
+                    // ãƒ†ã‚­ã‚¹ãƒˆè¡¨ç¤ºé ˜åŸŸã®ã¿
                     sr.Deflate(2);
                     sr.LT.X += 16;
                     sr.LT.Y += b + 16;
                     // for test		rp.Graphics.DrawLine(Pens.White, sr.LT, sr.RB);
 
-                    // ƒƒbƒZ[ƒW•\¦				
+                    // ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸è¡¨ç¤º				
                     var ms = rp.Graphics.MeasureString("AX08iIay", _font);
-                    float lm = 2;   // sŠÔ
+                    float lm = 2;   // è¡Œé–“
                     var y1 = ms.Height + lm;
                     var dispLineN = (int)(sr.Height / y1);
                     float curN = LOG.GetCurrentCount();
@@ -299,24 +299,24 @@ namespace Tono.GuiWinForm
         #endregion
 
         /// <summary>
-        /// ƒƒO•\¦ƒy[ƒ“
+        /// ãƒ­ã‚°è¡¨ç¤ºãƒšãƒ¼ãƒ³
         /// </summary>
         private IRichPane _tarPane = null;
         /// <summary>
-        /// ƒp[ƒcƒCƒ“ƒXƒ^ƒ“ƒX
+        /// ãƒ‘ãƒ¼ãƒ„ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹
         /// </summary>
         private dpLogPanel _lp = null;
         /// <summary>
-        /// ƒŒƒxƒ‹–ˆ‚Ì•\¦ƒ{ƒ^ƒ“ƒNƒŠƒbƒN¶ãÀ•W
+        /// ãƒ¬ãƒ™ãƒ«æ¯ã®è¡¨ç¤ºãƒœã‚¿ãƒ³ã‚¯ãƒªãƒƒã‚¯å·¦ä¸Šåº§æ¨™
         /// </summary>
         private readonly Dictionary<LLV, ScreenPos> _clickArea = new Dictionary<LLV, ScreenPos>();
         /// <summary>
-        /// ƒƒOƒpƒlƒ‹•\¦ˆÊ’uƒ}[ƒWƒ“iŠeLTRB‚ğƒ}[ƒWƒ“•‚Æ‚µ‚Ä—p‚¢‚éj
+        /// ãƒ­ã‚°ãƒ‘ãƒãƒ«è¡¨ç¤ºä½ç½®ãƒãƒ¼ã‚¸ãƒ³ï¼ˆå„LTRBã‚’ãƒãƒ¼ã‚¸ãƒ³å¹…ã¨ã—ã¦ç”¨ã„ã‚‹ï¼‰
         /// </summary>
         private readonly ScreenRect _margin = ScreenRect.FromLTRB(0, 0, 0, 0);
 
         /// <summary>
-        /// ƒpƒ‰ƒ[ƒ^‚ğæ“¾‚·‚é
+        /// ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã‚’å–å¾—ã™ã‚‹
         /// </summary>
         /// <param name="param"></param>
         public override void ParseParameter(string param)
@@ -353,7 +353,7 @@ namespace Tono.GuiWinForm
             }
         }
         /// <summary>
-        /// ƒtƒB[ƒ`ƒƒ[‰Šú‰»
+        /// ãƒ•ã‚£ãƒ¼ãƒãƒ£ãƒ¼åˆæœŸåŒ–
         /// </summary>
         public override void OnInitInstance()
         {
@@ -363,7 +363,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒƒOƒNƒŠƒA—v‹
+        /// ãƒ­ã‚°ã‚¯ãƒªã‚¢è¦æ±‚
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -373,7 +373,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// dpLogPanel‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‚ğ¶¬‚·‚é
+        /// dpLogPanelã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ç”Ÿæˆã™ã‚‹
         /// </summary>
         /// <param name="clickArea"></param>
         /// <returns></returns>
@@ -383,7 +383,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒp[ƒcì¬ŠJn
+        /// ãƒ‘ãƒ¼ãƒ„ä½œæˆé–‹å§‹
         /// </summary>
         /// <param name="who"></param>
         public override void Start(NamedId who)
@@ -398,7 +398,7 @@ namespace Tono.GuiWinForm
                 LOG.JumpWar.Jumping += new EventHandler(onJumping);
                 LOG.JumpDev.Jumping += new EventHandler(onJumping);
                 _lp.SetMargin(_margin);
-                _lp.Rect = CodeRect.FromLTWH(0, 0, 0, ph);   // ‚‚³‚Ì‰Šú’li’PˆÊGƒhƒbƒgj
+                _lp.Rect = CodeRect.FromLTWH(0, 0, 0, ph);   // é«˜ã•ã®åˆæœŸå€¤ï¼ˆå˜ä½ï¼›ãƒ‰ãƒƒãƒˆï¼‰
                 Parts.Add(_tarPane, _lp, Const.Layer.StaticLayers.LogPanel);
                 _tarPane.Invalidate(null);
 
@@ -411,12 +411,12 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// Ü‚è‚½‚½‚ñ‚¾‚ÌƒTƒCƒY
+        /// æŠ˜ã‚ŠãŸãŸã‚“ã æ™‚ã®ã‚µã‚¤ã‚º
         /// </summary>
         protected virtual int foldingHeight => 24;
 
         /// <summary>
-        /// ƒNƒ[ƒYƒ{ƒ^ƒ“‚ğ‰Ÿ‚µ‚½‚Æ‚«‚Ìˆ—
+        /// ã‚¯ãƒ­ãƒ¼ã‚ºãƒœã‚¿ãƒ³ã‚’æŠ¼ã—ãŸã¨ãã®å‡¦ç†
         /// </summary>
         private void triggerCloseButtonProc()
         {
@@ -452,7 +452,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒWƒƒƒ“ƒv‚µ‚Ä‚¢‚é‚Æ‚«‚ÌŒp‘±ƒCƒxƒ“ƒg
+        /// ã‚¸ãƒ£ãƒ³ãƒ—ã—ã¦ã„ã‚‹ã¨ãã®ç¶™ç¶šã‚¤ãƒ™ãƒ³ãƒˆ
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -462,7 +462,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒŠƒtƒŒƒbƒVƒ…
+        /// ãƒªãƒ•ãƒ¬ãƒƒã‚·ãƒ¥
         /// </summary>
         private void refresh0()
         {
@@ -477,7 +477,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒƒO‚Ì•\¦XV‚ğ‚İ‚é
+        /// ãƒ­ã‚°ã®è¡¨ç¤ºæ›´æ–°ã‚’è©¦ã¿ã‚‹
         /// </summary>
         private void refresh()
         {
@@ -491,16 +491,16 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒƒOƒpƒlƒ‹‚Ì‚‚³‚ğ•Û‘¶‚µ‚ÄAŸ‰ñ‹N“®‚É”½‰f‚Å‚«‚é‚æ‚¤‚É‚·‚é
+        /// ãƒ­ã‚°ãƒ‘ãƒãƒ«ã®é«˜ã•ã‚’ä¿å­˜ã—ã¦ã€æ¬¡å›èµ·å‹•æ™‚ã«åæ˜ ã§ãã‚‹ã‚ˆã†ã«ã™ã‚‹
         /// </summary>
         private void savePanelHeight()
         {
             ConfigRegister.Current["LogPanelGroupHeight"] = _lp.Rect.Height;
         }
 
-        #region IMouseListener ƒƒ“ƒo
+        #region IMouseListener ãƒ¡ãƒ³ãƒ
 
-        private ScreenPos _sizingHeightOrg = null;	// ƒƒOƒpƒlƒ‹‚Ì‚‚³•ÏX’†
+        private ScreenPos _sizingHeightOrg = null;	// ãƒ­ã‚°ãƒ‘ãƒãƒ«ã®é«˜ã•å¤‰æ›´ä¸­
 
         private ScreenRect getPaneRect()
         {
@@ -546,7 +546,7 @@ namespace Tono.GuiWinForm
             }
             else
             {
-                if (_lp != null && Math.Abs(e.Pos.Y - (pr.RB.Y - _lp.Rect.Height)) < 4 && pr.LR.IsIn(e.Pos))    // ƒƒOƒpƒlƒ‹ƒTƒCƒY•ÏX
+                if (_lp != null && Math.Abs(e.Pos.Y - (pr.RB.Y - _lp.Rect.Height)) < 4 && pr.LR.IsIn(e.Pos))    // ãƒ­ã‚°ãƒ‘ãƒãƒ«ã‚µã‚¤ã‚ºå¤‰æ›´
                 {
                     Pane.Control.Cursor = Cursors.SizeNS;
                 }
@@ -576,7 +576,7 @@ namespace Tono.GuiWinForm
         public void OnMouseDown(MouseState e)
         {
             var pr = getPaneRect();
-            if (_lp != null && Math.Abs(e.Pos.Y - (pr.RB.Y - _lp.Rect.Height)) < 4 && pr.LR.IsIn(e.Pos))    // ƒƒOƒpƒlƒ‹ƒTƒCƒY•ÏX
+            if (_lp != null && Math.Abs(e.Pos.Y - (pr.RB.Y - _lp.Rect.Height)) < 4 && pr.LR.IsIn(e.Pos))    // ãƒ­ã‚°ãƒ‘ãƒãƒ«ã‚µã‚¤ã‚ºå¤‰æ›´
             {
                 _sizingHeightOrg = e.Pos.Clone() as ScreenPos;
                 Pane.Control.Cursor = Cursors.SizeNS;
@@ -589,7 +589,7 @@ namespace Tono.GuiWinForm
                     if (re.IsIn(e.Pos))
                     {
                         LOG.ChangeDispLevel(kv.Key);
-                        if (kv.Key == 0)    // ƒNƒ[ƒYƒ{ƒ^ƒ“
+                        if (kv.Key == 0)    // ã‚¯ãƒ­ãƒ¼ã‚ºãƒœã‚¿ãƒ³
                         {
                             triggerCloseButtonProc();
                         }
@@ -612,7 +612,7 @@ namespace Tono.GuiWinForm
         }
 
         #endregion
-        #region IMultiTokenListener ƒƒ“ƒo
+        #region IMultiTokenListener ãƒ¡ãƒ³ãƒ
         private static readonly NamedId[] _tokens = new NamedId[] { NamedId.FromName("FeatureLogGroupPanel_Init"), NamedId.FromName("LogPanelCloseButton") };
 
         public NamedId[] MultiTokenTriggerID => _tokens;

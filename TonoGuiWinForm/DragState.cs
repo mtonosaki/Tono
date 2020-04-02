@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System.Windows.Forms;
@@ -8,29 +8,29 @@ using System.Windows.Forms;
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// ƒhƒ‰ƒbƒO•ƒhƒƒbƒvƒCƒxƒ“ƒg‚Ì‘®«‚ğ•\Œ»‚·‚éƒNƒ‰ƒX
+    /// ãƒ‰ãƒ©ãƒƒã‚°ï¼†ãƒ‰ãƒ­ãƒƒãƒ—ã‚¤ãƒ™ãƒ³ãƒˆã®å±æ€§ã‚’è¡¨ç¾ã™ã‚‹ã‚¯ãƒ©ã‚¹
     /// </summary>
     public class DragState : Tono.GuiWinForm.MouseState
     {
-        #region	‘®«(ƒVƒŠƒAƒ‰ƒCƒY‚·‚é)
+        #region	å±æ€§(ã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºã™ã‚‹)
         #endregion
-        #region	‘®«(ƒVƒŠƒAƒ‰ƒCƒY‚µ‚È‚¢)
-        /// <summary>ƒhƒƒbƒv‚³‚ê‚½ƒtƒ@ƒCƒ‹ƒpƒX</summary>
+        #region	å±æ€§(ã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºã—ãªã„)
+        /// <summary>ãƒ‰ãƒ­ãƒƒãƒ—ã•ã‚ŒãŸãƒ•ã‚¡ã‚¤ãƒ«ãƒ‘ã‚¹</summary>
         public string[] filepath;
         #endregion
 
         /// <summary>
-        /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+        /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
         /// </summary>
         public DragState()
         {
         }
 
         /// <summary>
-        /// ƒ}ƒEƒXƒCƒxƒ“ƒg‘®«‚©‚çƒCƒ“ƒXƒ^ƒ“ƒX‚ğ¶¬‚·‚é
+        /// ãƒã‚¦ã‚¹ã‚¤ãƒ™ãƒ³ãƒˆå±æ€§ã‹ã‚‰ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ç”Ÿæˆã™ã‚‹
         /// </summary>
-        /// <param name="e">ƒ}ƒEƒXƒCƒxƒ“ƒg‘®«</param>
-        /// <returns>V‚µ‚¢ƒCƒ“ƒXƒ^ƒ“ƒX</returns>
+        /// <param name="e">ãƒã‚¦ã‚¹ã‚¤ãƒ™ãƒ³ãƒˆå±æ€§</param>
+        /// <returns>æ–°ã—ã„ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹</returns>
         public static DragState FromDragEventArgs(System.Windows.Forms.DragEventArgs e, IRichPane posPane)
         {
             var ret = new DragState();

@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System;
@@ -9,16 +9,16 @@ using System.Drawing;
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// ‹éŒ`À•W‚Ìæ“¾
+    /// çŸ©å½¢åº§æ¨™ã®å–å¾—
     /// </summary>
     [Serializable]
     public class Rect : ISpace, ICloneable
     {
-        #region ‘®«iƒVƒŠƒAƒ‰ƒCƒY—L‚èj
+        #region å±æ€§ï¼ˆã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºæœ‰ã‚Šï¼‰
 
-        ///<summary>left‚Ætop‚ÌÀ•W’l</summary>
+        ///<summary>leftã¨topã®åº§æ¨™å€¤</summary>
         protected XyBase _lt;
-        ///<summary>right‚Æbottom‚ÌÀ•W’l</summary>
+        ///<summary>rightã¨bottomã®åº§æ¨™å€¤</summary>
         protected XyBase _rb;
 
         #endregion
@@ -32,7 +32,7 @@ namespace Tono.GuiWinForm
         public static Rect Empty => Rect.FromLTRB(0, 0, 0, 0);
 
         /// <summary>
-        /// LT‚ÆRB‚ª“¯‚¶’l‚©‚Ç‚¤‚©‚ğ’²‚×‚é
+        /// LTã¨RBãŒåŒã˜å€¤ã‹ã©ã†ã‹ã‚’èª¿ã¹ã‚‹
         /// </summary>
         public bool IsEmpty => _lt.X == _rb.X && _lt.Y == _rb.Y;
 
@@ -53,7 +53,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+        /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
         /// </summary>
 
         public Rect()
@@ -82,7 +82,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// LT¶ãARB‰E‰º‚É‚È‚é‚æ‚¤‚ÉÀ•W‚ğŒğŠ·‚·‚é
+        /// LTå·¦ä¸Šã€RBå³ä¸‹ã«ãªã‚‹ã‚ˆã†ã«åº§æ¨™ã‚’äº¤æ›ã™ã‚‹
         /// </summary>
         public void Normalize()
         {
@@ -101,10 +101,10 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒCƒ“ƒXƒ^ƒ“ƒX‚ÌŒ^‚ğRectangleFŒ^‚É•ÏŠ·‚·‚é
+        /// ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã®å‹ã‚’RectangleFå‹ã«å¤‰æ›ã™ã‚‹
         /// </summary>
-        /// <param name="r">•ÏŠ·‘ÎÛ</param>
-        /// <returns>V‚µ‚¢Œ^‚ÌƒCƒ“ƒXƒ^ƒ“ƒX</returns>
+        /// <param name="r">å¤‰æ›å¯¾è±¡</param>
+        /// <returns>æ–°ã—ã„å‹ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹</returns>
 
         public static implicit operator RectangleF(Rect r)
         {
@@ -112,10 +112,10 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒCƒ“ƒXƒ^ƒ“ƒX‚ÌŒ^‚ğRectangleFŒ^‚É•ÏŠ·‚·‚é
+        /// ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã®å‹ã‚’RectangleFå‹ã«å¤‰æ›ã™ã‚‹
         /// </summary>
-        /// <param name="r">•ÏŠ·‘ÎÛ</param>
-        /// <returns>V‚µ‚¢Œ^‚ÌƒCƒ“ƒXƒ^ƒ“ƒX</returns>
+        /// <param name="r">å¤‰æ›å¯¾è±¡</param>
+        /// <returns>æ–°ã—ã„å‹ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹</returns>
 
         public static implicit operator Rectangle(Rect r)
         {
@@ -123,12 +123,12 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ®”’l‚©‚çƒCƒ“ƒXƒ^ƒ“ƒX‚ğ\’z‚·‚é
+        /// æ•´æ•°å€¤ã‹ã‚‰ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’æ§‹ç¯‰ã™ã‚‹
         /// </summary>
-        /// <param name="x">¶ãÀ•WX</param>
-        /// <param name="y">¶ãÀ•WY</param>
-        /// <param name="width">•</param>
-        /// <param name="height">‚‚³</param>
+        /// <param name="x">å·¦ä¸Šåº§æ¨™X</param>
+        /// <param name="y">å·¦ä¸Šåº§æ¨™Y</param>
+        /// <param name="width">å¹…</param>
+        /// <param name="height">é«˜ã•</param>
         /// <returns></returns>
 
         public static Rect FromLTWH(int x, int y, int width, int height)
@@ -142,13 +142,13 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// À•W‚ğw’è‚µ‚ÄV‚µ‚¢ƒCƒ“ƒXƒ^ƒ“ƒX‚ğ\’z‚·‚é
+        /// åº§æ¨™ã‚’æŒ‡å®šã—ã¦æ–°ã—ã„ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’æ§‹ç¯‰ã™ã‚‹
         /// </summary>
-        /// <param name="x0">¶ã‚ÌXÀ•W</param>
-        /// <param name="y0">¶ã‚ÌYÀ•W</param>
-        /// <param name="x1">‰E‰º‚ÌXÀ•W</param>
-        /// <param name="y1">‰E‰º‚ÌYÀ•W</param>
-        /// <returns>\’z‚µ‚½ƒCƒ“ƒXƒ^ƒ“ƒX</returns>
+        /// <param name="x0">å·¦ä¸Šã®Xåº§æ¨™</param>
+        /// <param name="y0">å·¦ä¸Šã®Yåº§æ¨™</param>
+        /// <param name="x1">å³ä¸‹ã®Xåº§æ¨™</param>
+        /// <param name="y1">å³ä¸‹ã®Yåº§æ¨™</param>
+        /// <returns>æ§‹ç¯‰ã—ãŸã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹</returns>
 
         public static Rect FromLTRB(int x0, int y0, int x1, int y1)
         {
@@ -161,17 +161,17 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// •‚ÌŒvZ
+        /// å¹…ã®è¨ˆç®—
         /// </summary>
         public int Width => RB.X - LT.X + 1;
 
         /// <summary>
-        /// ‚‚³‚ÌŒvZ
+        /// é«˜ã•ã®è¨ˆç®—
         /// </summary>
         public int Height => RB.Y - LT.Y + 1;
 
         /// <summary>
-        /// ’†S“_‚ğæ“¾‚·‚é
+        /// ä¸­å¿ƒç‚¹ã‚’å–å¾—ã™ã‚‹
         /// </summary>
         /// <returns></returns>
         public XyBase GetCenter()
@@ -188,9 +188,9 @@ namespace Tono.GuiWinForm
         public RangeYy TB => RangeYy.FromInt(LT.Y, RB.Y);
 
         /// <summary>
-        /// ƒTƒCƒY‚ğ{‚P‚µ‚½ƒCƒ“ƒXƒ^ƒ“ƒX‚ğ•Ô‚·
+        /// ã‚µã‚¤ã‚ºã‚’ï¼‹ï¼‘ã—ãŸã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’è¿”ã™
         /// </summary>
-        /// <returns>ƒTƒCƒY{‚P‚µ‚½ƒCƒ“ƒXƒ^ƒ“ƒX</returns>
+        /// <returns>ã‚µã‚¤ã‚ºï¼‹ï¼‘ã—ãŸã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹</returns>
 
         public Rect GetPpSize()
         {
@@ -201,9 +201,9 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ³‚µ‚¢‹éŒ`‚©‚Ç‚¤‚©i•‰‚Ì‘å‚«‚³‚É‚È‚Ä‚È‚¢‚©j’²‚×‚é
+        /// æ­£ã—ã„çŸ©å½¢ã‹ã©ã†ã‹ï¼ˆè² ã®å¤§ãã•ã«ãªã¦ãªã„ã‹ï¼‰èª¿ã¹ã‚‹
         /// </summary>
-        /// <returns>true = ³‚µ‚¢—Ìˆæ / false = •‰‚Ì—Ìˆæ</returns>
+        /// <returns>true = æ­£ã—ã„é ˜åŸŸ / false = è² ã®é ˜åŸŸ</returns>
         //		 
         public bool IsNormalizedRect()
         {
@@ -219,11 +219,11 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// —Ìˆæ‚ÌAND‚ğæ‚é
+        /// é ˜åŸŸã®ANDã‚’å–ã‚‹
         /// </summary>
-        /// <param name="r">—Ìˆæ‚P</param>
-        /// <param name="v">—Ìˆæ‚Q</param>
-        /// <returns>ANDŒã‚ÌV‚µ‚¢ƒCƒ“ƒXƒ^ƒ“ƒX</returns>
+        /// <param name="r">é ˜åŸŸï¼‘</param>
+        /// <param name="v">é ˜åŸŸï¼’</param>
+        /// <returns>ANDå¾Œã®æ–°ã—ã„ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹</returns>
 
         public static Rect operator &(Rect r1, Rect r2)
         {
@@ -244,11 +244,11 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// —Ìˆæ‚ÌOR‚ğæ‚éB—£‚ê‚½ˆÊ’u‚É‚ ‚é‹éŒ`“¯m‚Å‚àŠe—Ìˆæ‚ÌÅ¬EÅ‘å‚ğ‚Æ‚Á‚½‚Ğ‚Æ‚Â‚Ì‹éŒ`‚ğ•Ô‚·B
+        /// é ˜åŸŸã®ORã‚’å–ã‚‹ã€‚é›¢ã‚ŒãŸä½ç½®ã«ã‚ã‚‹çŸ©å½¢åŒå£«ã§ã‚‚å„é ˜åŸŸã®æœ€å°ãƒ»æœ€å¤§ã‚’ã¨ã£ãŸã²ã¨ã¤ã®çŸ©å½¢ã‚’è¿”ã™ã€‚
         /// </summary>
-        /// <param name="r">—Ìˆæ‚P</param>
-        /// <param name="v">—Ìˆæ‚Q</param>
-        /// <returns>ORŒã‚ÌV‚µ‚¢ƒCƒ“ƒXƒ^ƒ“ƒX</returns>
+        /// <param name="r">é ˜åŸŸï¼‘</param>
+        /// <param name="v">é ˜åŸŸï¼’</param>
+        /// <returns>ORå¾Œã®æ–°ã—ã„ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹</returns>
         //		
         public static Rect operator |(Rect r1, Rect r2)
         {
@@ -269,11 +269,11 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ‰ÁZ‰‰Zq
+        /// åŠ ç®—æ¼”ç®—å­
         /// </summary>
-        /// <param name="r">Œ³‚ÌƒIƒuƒWƒFƒNƒg</param>
-        /// <param name="v">‰ÁZ’l</param>
-        /// <returns>‰ÁZŒã‚ÌV‚µ‚¢ƒCƒ“ƒXƒ^ƒ“ƒX</returns>
+        /// <param name="r">å…ƒã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ</param>
+        /// <param name="v">åŠ ç®—å€¤</param>
+        /// <returns>åŠ ç®—å¾Œã®æ–°ã—ã„ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹</returns>
 
         public static Rect operator +(Rect r, XyBase v)
         {
@@ -283,11 +283,11 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// Œ¸Z‰‰Zq
+        /// æ¸›ç®—æ¼”ç®—å­
         /// </summary>
-        /// <param name="r">Œ³‚ÌƒIƒuƒWƒFƒNƒg</param>
-        /// <param name="v">‰ÁZ’l</param>
-        /// <returns>‰ÁZŒã‚ÌV‚µ‚¢ƒCƒ“ƒXƒ^ƒ“ƒX</returns>
+        /// <param name="r">å…ƒã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ</param>
+        /// <param name="v">åŠ ç®—å€¤</param>
+        /// <returns>åŠ ç®—å¾Œã®æ–°ã—ã„ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹</returns>
 
         public static Rect operator -(Rect r, XyBase v)
         {
@@ -300,11 +300,11 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// æZ‰‰Zq
+        /// ä¹—ç®—æ¼”ç®—å­
         /// </summary>
-        /// <param name="r">Œ³‚ÌƒIƒuƒWƒFƒNƒg</param>
-        /// <param name="v">‰ÁZ’l</param>
-        /// <returns>‰ÁZŒã‚ÌV‚µ‚¢ƒCƒ“ƒXƒ^ƒ“ƒX</returns>
+        /// <param name="r">å…ƒã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ</param>
+        /// <param name="v">åŠ ç®—å€¤</param>
+        /// <returns>åŠ ç®—å¾Œã®æ–°ã—ã„ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹</returns>
 
         public static Rect operator *(Rect r, XyBase v)
         {
@@ -317,11 +317,11 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// æZ‰‰Zq
+        /// ä¹—ç®—æ¼”ç®—å­
         /// </summary>
-        /// <param name="r">Œ³‚ÌƒIƒuƒWƒFƒNƒg</param>
-        /// <param name="v">‰ÁZ’l</param>
-        /// <returns>‰ÁZŒã‚ÌV‚µ‚¢ƒCƒ“ƒXƒ^ƒ“ƒX</returns>
+        /// <param name="r">å…ƒã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ</param>
+        /// <param name="v">åŠ ç®—å€¤</param>
+        /// <returns>åŠ ç®—å¾Œã®æ–°ã—ã„ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹</returns>
 
         public static Rect operator *(Rect r, int v)
         {
@@ -334,11 +334,11 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// œZ‰‰Zq
+        /// é™¤ç®—æ¼”ç®—å­
         /// </summary>
-        /// <param name="r">Œ³‚ÌƒIƒuƒWƒFƒNƒg</param>
-        /// <param name="v">‰ÁZ’l</param>
-        /// <returns>‰ÁZŒã‚ÌV‚µ‚¢ƒCƒ“ƒXƒ^ƒ“ƒX</returns>
+        /// <param name="r">å…ƒã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ</param>
+        /// <param name="v">åŠ ç®—å€¤</param>
+        /// <returns>åŠ ç®—å¾Œã®æ–°ã—ã„ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹</returns>
 
         public static Rect operator /(Rect r, int v)
         {
@@ -351,11 +351,11 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// œZ‰‰Zq
+        /// é™¤ç®—æ¼”ç®—å­
         /// </summary>
-        /// <param name="r">Œ³‚ÌƒIƒuƒWƒFƒNƒg</param>
-        /// <param name="v">‰ÁZ’l</param>
-        /// <returns>‰ÁZŒã‚ÌV‚µ‚¢ƒCƒ“ƒXƒ^ƒ“ƒX</returns>
+        /// <param name="r">å…ƒã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ</param>
+        /// <param name="v">åŠ ç®—å€¤</param>
+        /// <returns>åŠ ç®—å¾Œã®æ–°ã—ã„ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹</returns>
 
         public static Rect operator /(Rect r, XyBase v)
         {
@@ -367,13 +367,13 @@ namespace Tono.GuiWinForm
             return ret;
         }
 
-        #region ISpace ƒƒ“ƒo
+        #region ISpace ãƒ¡ãƒ³ãƒ
 
         /// <summary>
-        /// w’è‚µ‚½ƒ|ƒCƒ“ƒg‚ªƒIƒuƒWƒFƒNƒg—Ìˆæ“à‚É‚ ‚é‚©‚Ç‚¤‚©”»’è‚·‚é
+        /// æŒ‡å®šã—ãŸãƒã‚¤ãƒ³ãƒˆãŒã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆé ˜åŸŸå†…ã«ã‚ã‚‹ã‹ã©ã†ã‹åˆ¤å®šã™ã‚‹
         /// </summary>
-        /// <param name="o1">uXyŒ^‚Ìw’èƒ|ƒCƒ“ƒg</param>
-        /// <returns>true:—Ìˆæ“à / false:—ÌˆæŠO</returns>
+        /// <param name="o1">uXyå‹ã®æŒ‡å®šãƒã‚¤ãƒ³ãƒˆ</param>
+        /// <returns>true:é ˜åŸŸå†… / false:é ˜åŸŸå¤–</returns>
         public bool IsIn(object value)
         {
             if (value is XyBase xy)
@@ -406,16 +406,16 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒIƒuƒWƒFƒNƒg‚ÌˆÚ“®
+        /// ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ç§»å‹•
         /// </summary>
-        /// <param name="value">uXyŒ^‚ÌˆÚ“®’l (X,Y)</param>
+        /// <param name="value">uXyå‹ã®ç§»å‹•å€¤ (X,Y)</param>
 
         public void Transfer(object value)
         {
-            System.Diagnostics.Debug.Assert(value is XyBase, "Transfer‚ÍuXyŒ^‚¾‚¯ƒTƒ|[ƒg‚µ‚Ä‚¢‚Ü‚·");
+            System.Diagnostics.Debug.Assert(value is XyBase, "Transferã¯uXyå‹ã ã‘ã‚µãƒãƒ¼ãƒˆã—ã¦ã„ã¾ã™");
             var pt = (XyBase)value;
 
-            //ƒIƒuƒWƒFƒNƒg‚ÌˆÚ“®
+            //ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ç§»å‹•
             LT.X = LT.X + pt.X;
             LT.Y = LT.Y + pt.Y;
             RB.X = RB.X + pt.X;
@@ -423,15 +423,15 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒIƒuƒWƒFƒNƒg‚ÌŠg‘å
+        /// ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®æ‹¡å¤§
         /// </summary>
-        /// <param name="value">uXyŒ^‚Ìk¬’l (X,Y)</param>
+        /// <param name="value">uXyå‹ã®ç¸®å°å€¤ (X,Y)</param>
 
         public void Inflate(object value)
         {
             if (value is double vald)
             {
-                //Šg‘å
+                //æ‹¡å¤§
                 LT.X = (int)(LT.X - vald);
                 LT.Y = (int)(LT.Y - vald);
                 RB.X = (int)(RB.X + vald);
@@ -440,7 +440,7 @@ namespace Tono.GuiWinForm
             else
             if (value is int vali)
             {
-                //Šg‘å
+                //æ‹¡å¤§
                 LT.X = LT.X - vali;
                 LT.Y = LT.Y - vali;
                 RB.X = RB.X + vali;
@@ -448,11 +448,11 @@ namespace Tono.GuiWinForm
             }
             else
             {
-                System.Diagnostics.Debug.Assert(value is XyBase, "Inflate‚ÍuXyŒ^‚¾‚¯ƒTƒ|[ƒg‚µ‚Ä‚¢‚Ü‚·");
+                System.Diagnostics.Debug.Assert(value is XyBase, "Inflateã¯uXyå‹ã ã‘ã‚µãƒãƒ¼ãƒˆã—ã¦ã„ã¾ã™");
 
                 var pt = (XyBase)value;
 
-                //Šg‘å
+                //æ‹¡å¤§
                 LT.X = LT.X - pt.X;
                 LT.Y = LT.Y - pt.Y;
                 RB.X = RB.X + pt.X;
@@ -461,15 +461,15 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒIƒuƒWƒFƒNƒg‚Ìk¬
+        /// ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ç¸®å°
         /// </summary>
-        /// <param name="value">uXy‚ÌŠg‘å’l (X,Y)</param>
+        /// <param name="value">uXyã®æ‹¡å¤§å€¤ (X,Y)</param>
 
         public void Deflate(object value)
         {
             if (value is double vald)
             {
-                //k¬
+                //ç¸®å°
                 LT.X = (int)(LT.X + vald);
                 LT.Y = (int)(LT.Y + vald);
                 RB.X = (int)(RB.X - vald);
@@ -478,7 +478,7 @@ namespace Tono.GuiWinForm
             else
             if (value is int vali)
             {
-                //k¬
+                //ç¸®å°
                 LT.X = LT.X + vali;
                 LT.Y = LT.Y + vali;
                 RB.X = RB.X - vali;
@@ -486,11 +486,11 @@ namespace Tono.GuiWinForm
             }
             else
             {
-                System.Diagnostics.Debug.Assert(value is XyBase, "Deflate‚ÍuXyŒ^‚¾‚¯ƒTƒ|[ƒg‚µ‚Ä‚¢‚Ü‚·");
+                System.Diagnostics.Debug.Assert(value is XyBase, "Deflateã¯uXyå‹ã ã‘ã‚µãƒãƒ¼ãƒˆã—ã¦ã„ã¾ã™");
 
                 var pt = (XyBase)value;
 
-                //k¬
+                //ç¸®å°
                 LT.X = LT.X + pt.X;
                 LT.Y = LT.Y + pt.Y;
                 RB.X = RB.X - pt.X;
@@ -501,7 +501,7 @@ namespace Tono.GuiWinForm
 
         #endregion
 
-        #region ICloneable ƒƒ“ƒo
+        #region ICloneable ãƒ¡ãƒ³ãƒ
 
 
         public object Clone()
@@ -517,9 +517,9 @@ namespace Tono.GuiWinForm
         #endregion
 
         /// <summary>
-        /// ƒCƒ“ƒXƒ^ƒ“ƒX‚ğ•\Œ»‚·‚é•¶š—ñ‚ğì¬‚·‚éi•\¦•û–@‚Í•Ï‚í‚é‚Ì‚ÅA‹Šo–Ú“I‚É‚Ì‚İg—p‚·‚é‚±‚Æj
+        /// ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’è¡¨ç¾ã™ã‚‹æ–‡å­—åˆ—ã‚’ä½œæˆã™ã‚‹ï¼ˆè¡¨ç¤ºæ–¹æ³•ã¯å¤‰ã‚ã‚‹ã®ã§ã€è¦–è¦šç›®çš„ã«ã®ã¿ä½¿ç”¨ã™ã‚‹ã“ã¨ï¼‰
         /// </summary>
-        /// <returns>•¶š—ñ</returns>
+        /// <returns>æ–‡å­—åˆ—</returns>
 
         public override string ToString()
         {

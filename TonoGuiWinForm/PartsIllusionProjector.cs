@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System;
@@ -9,24 +9,24 @@ using System.Collections;
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// dfPartsIllusionBase ‚ÌŠT—v‚Ìà–¾‚Å‚·B
-    /// ‚±‚ÌƒNƒ‰ƒX‚ÍA“Á’è‚Ìƒp[ƒc‚ª•¡”‰ÓŠ‚É‚ ‚é‚æ‚¤‚ÉŒ©‚¹‚©‚¯‚éŒ¶‰e‚ğì‚èo‚·ƒNƒ‰ƒX
-    /// Œ´—‚ÍA“Á’è‚ÌIRichPane‚Ì“à—e‚ğ‚»‚Ì‚Ü‚Ü•Ê‚ÌIRichPane‚É•`‰æ‚·‚é‚±‚Æ‚ÅÀŒ»
-    /// ‚±‚ÌƒNƒ‰ƒX‚Ìg‚¢•û‚Ì—á‚ÍAFeatureDposeRichPane‚ÌOnInitialInstance‚ğQÆ
+    /// dfPartsIllusionBase ã®æ¦‚è¦ã®èª¬æ˜ã§ã™ã€‚
+    /// ã“ã®ã‚¯ãƒ©ã‚¹ã¯ã€ç‰¹å®šã®ãƒ‘ãƒ¼ãƒ„ãŒè¤‡æ•°ç®‡æ‰€ã«ã‚ã‚‹ã‚ˆã†ã«è¦‹ã›ã‹ã‘ã‚‹å¹»å½±ã‚’ä½œã‚Šå‡ºã™ã‚¯ãƒ©ã‚¹
+    /// åŸç†ã¯ã€ç‰¹å®šã®IRichPaneã®å†…å®¹ã‚’ãã®ã¾ã¾åˆ¥ã®IRichPaneã«æç”»ã™ã‚‹ã“ã¨ã§å®Ÿç¾
+    /// ã“ã®ã‚¯ãƒ©ã‚¹ã®ä½¿ã„æ–¹ã®ä¾‹ã¯ã€FeatureDposeRichPaneã®OnInitialInstanceã‚’å‚ç…§
     /// </summary>
     /// <remarks>
-    /// “Á‹–ŒöŠJ”Ô†F2008-171229
+    /// ç‰¹è¨±å…¬é–‹ç•ªå·ï¼š2008-171229
     /// </remarks>
     public class PartsIllusionProjector : IDisposable
     {
-        #region ƒfƒŠƒQ[ƒgŒ^
+        #region ãƒ‡ãƒªã‚²ãƒ¼ãƒˆå‹
         public delegate void SetIllusionStateMethod(PartsIllusionProjector projector, PartsBase target);
         public delegate bool IsIllusionProjectMethod(IRichPane originalPane, PartsBase targetParts);
         #endregion
-        #region ƒy[ƒ“Enumerator
+        #region ãƒšãƒ¼ãƒ³Enumerator
 
         /// <summary>
-        /// ƒCƒŠƒ…[ƒWƒ‡ƒ“‚ÆŒ³ƒy[ƒ“‚ğŠÜ‚ß‚Ä—ñ‹“‚ğ§Œä‚·‚é
+        /// ã‚¤ãƒªãƒ¥ãƒ¼ã‚¸ãƒ§ãƒ³ã¨å…ƒãƒšãƒ¼ãƒ³ã‚’å«ã‚ã¦åˆ—æŒ™ã‚’åˆ¶å¾¡ã™ã‚‹
         /// </summary>
         public class PaneEnumerator : IEnumerable, IEnumerator
         {
@@ -49,11 +49,11 @@ namespace Tono.GuiWinForm
             }
 #endif
             /// <summary>
-            /// Enumerator‚ğ\’z‚·‚é
+            /// Enumeratorã‚’æ§‹ç¯‰ã™ã‚‹
             /// </summary>
-            /// <param name="parent">target‚ª0Œ‚Ì‚É“K—p‚³‚ê‚éƒy[ƒ“</param>
-            /// <param name="target">dfPartsIllusionProjectorŒ^‚ÌƒŠƒXƒg</param>
-            /// <param name="parts">QÆ’†‚Ìƒp[ƒc</param>
+            /// <param name="parent">targetãŒ0ä»¶ã®æ™‚ã«é©ç”¨ã•ã‚Œã‚‹ãƒšãƒ¼ãƒ³</param>
+            /// <param name="target">dfPartsIllusionProjectorå‹ã®ãƒªã‚¹ãƒˆ</param>
+            /// <param name="parts">å‚ç…§ä¸­ã®ãƒ‘ãƒ¼ãƒ„</param>
             internal PaneEnumerator(IRichPane parent, IList target, PartsBase parts)
             {
                 _parent = parent;
@@ -68,7 +68,7 @@ namespace Tono.GuiWinForm
                 _parts = parts;
                 Reset();
             }
-            #region IEnumerable ƒƒ“ƒo
+            #region IEnumerable ãƒ¡ãƒ³ãƒ
 
             public IEnumerator GetEnumerator()
             {
@@ -77,7 +77,7 @@ namespace Tono.GuiWinForm
 
             #endregion
 
-            #region IEnumerator ƒƒ“ƒo
+            #region IEnumerator ãƒ¡ãƒ³ãƒ
 
             public void Reset()
             {
@@ -85,7 +85,7 @@ namespace Tono.GuiWinForm
             }
 
             /// <summary>
-            /// IRichPaneŒ^
+            /// IRichPaneå‹
             /// </summary>
             public object Current => _current;
 
@@ -124,25 +124,25 @@ namespace Tono.GuiWinForm
 
         #endregion
 
-        #region ‘®«iƒVƒŠƒAƒ‰ƒCƒY‚·‚éj
+        #region å±æ€§ï¼ˆã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºã™ã‚‹ï¼‰
 
         private IRichPane _screen;
         private IRichPane _original;
         private bool _isEnable = true;
 
         #endregion
-        #region ‘®«iƒVƒŠƒAƒ‰ƒCƒY‚µ‚È‚¢j
+        #region å±æ€§ï¼ˆã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºã—ãªã„ï¼‰
 
-        /// <summary>ƒCƒŠƒ…[ƒWƒ‡ƒ“’†‚Ìó‘Ô•ÏXŠÖ”‚ğw’è‚·‚é</summary>
+        /// <summary>ã‚¤ãƒªãƒ¥ãƒ¼ã‚¸ãƒ§ãƒ³ä¸­ã®çŠ¶æ…‹å¤‰æ›´é–¢æ•°ã‚’æŒ‡å®šã™ã‚‹</summary>
         private SetIllusionStateMethod _stateFunction = null;
 
-        /// <summary>ƒCƒŠƒ…[ƒWƒ‡ƒ“‚·‚é‚©‚Ç‚¤‚©‚Ì”»’è‚ğˆ—‚·‚éŠÖ”‚ğw’è‚·‚é</summary>
+        /// <summary>ã‚¤ãƒªãƒ¥ãƒ¼ã‚¸ãƒ§ãƒ³ã™ã‚‹ã‹ã©ã†ã‹ã®åˆ¤å®šã‚’å‡¦ç†ã™ã‚‹é–¢æ•°ã‚’æŒ‡å®šã™ã‚‹</summary>
         private IsIllusionProjectMethod _isIllutionFunction = null;
 
         #endregion
 
         /// <summary>
-        /// —LŒø^–³Œø getProjector‚Ì‚ÉæÌ‚³‚ê‚éğŒ‚É‚È‚é
+        /// æœ‰åŠ¹ï¼ç„¡åŠ¹ getProjectorã®æ™‚ã«å–æ¨ã•ã‚Œã‚‹æ¡ä»¶ã«ãªã‚‹
         /// </summary>
         public bool Enabled
         {
@@ -151,7 +151,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒy[ƒ“‚ğ—ñ‹“‚·‚éEnumerator‚ğæ“¾‚·‚é
+        /// ãƒšãƒ¼ãƒ³ã‚’åˆ—æŒ™ã™ã‚‹Enumeratorã‚’å–å¾—ã™ã‚‹
         /// </summary>
         /// <param name="parent"></param>
         /// <param name="target"></param>
@@ -163,7 +163,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒCƒŠƒ…[ƒWƒ‡ƒ“‚·‚é‚©‚Ç‚¤‚©‚Ì”»’è‚ğˆ—‚·‚éŠÖ”‚ğw’è‚·‚é
+        /// ã‚¤ãƒªãƒ¥ãƒ¼ã‚¸ãƒ§ãƒ³ã™ã‚‹ã‹ã©ã†ã‹ã®åˆ¤å®šã‚’å‡¦ç†ã™ã‚‹é–¢æ•°ã‚’æŒ‡å®šã™ã‚‹
         /// </summary>
         public IsIllusionProjectMethod IsIllusionProject
         {
@@ -171,10 +171,10 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒCƒŠƒ…[ƒWƒ‡ƒ“‚·‚×‚«‚©‚Ç‚¤‚©‚ğ”»’f‚·‚é
+        /// ã‚¤ãƒªãƒ¥ãƒ¼ã‚¸ãƒ§ãƒ³ã™ã¹ãã‹ã©ã†ã‹ã‚’åˆ¤æ–­ã™ã‚‹
         /// </summary>
-        /// <param name="parts">’²¸ƒp[ƒc</param>
-        /// <returns>true = ƒCƒŠƒ…[ƒWƒ‡ƒ“‚·‚é‚×‚« / false = •s—v</returns>
+        /// <param name="parts">èª¿æŸ»ãƒ‘ãƒ¼ãƒ„</param>
+        /// <returns>true = ã‚¤ãƒªãƒ¥ãƒ¼ã‚¸ãƒ§ãƒ³ã™ã‚‹ã¹ã / false = ä¸è¦</returns>
         internal bool isNeedProject(PartsBase parts)
         {
             if (_isIllutionFunction != null)
@@ -185,7 +185,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒCƒŠƒ…[ƒWƒ‡ƒ“’†‚Ìó‘Ô•ÏXŠÖ”‚ğw’è‚·‚é
+        /// ã‚¤ãƒªãƒ¥ãƒ¼ã‚¸ãƒ§ãƒ³ä¸­ã®çŠ¶æ…‹å¤‰æ›´é–¢æ•°ã‚’æŒ‡å®šã™ã‚‹
         /// </summary>
         public SetIllusionStateMethod SetIllusionState
         {
@@ -193,7 +193,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ÅV‚ÌƒCƒŠƒ…[ƒWƒ‡ƒ“ó‘Ô‚ÉXV‚·‚é
+        /// æœ€æ–°ã®ã‚¤ãƒªãƒ¥ãƒ¼ã‚¸ãƒ§ãƒ³çŠ¶æ…‹ã«æ›´æ–°ã™ã‚‹
         /// </summary>
         public void ChangeState(PartsBase target)
         {
@@ -201,33 +201,33 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// —Bˆê‚ÌƒRƒ“ƒXƒgƒ‰ƒNƒ^
+        /// å”¯ä¸€ã®ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
         /// </summary>
-        /// <param name="target">Šîƒf[ƒ^‚ªû‚Ü‚éƒy[ƒ“</param>
-        /// <param name="idText">ƒCƒŠƒ…[ƒWƒ‡ƒ“ŠÇ——p‚Ìƒy[ƒ“‚ÌIdText</param>
+        /// <param name="target">åŸºãƒ‡ãƒ¼ã‚¿ãŒåã¾ã‚‹ãƒšãƒ¼ãƒ³</param>
+        /// <param name="idText">ã‚¤ãƒªãƒ¥ãƒ¼ã‚¸ãƒ§ãƒ³ç®¡ç†ç”¨ã®ãƒšãƒ¼ãƒ³ã®IdText</param>
         public PartsIllusionProjector(IRichPane target, string idtext)
         {
             _original = target;
             _screen = new RichPaneBinder(_original)
             {
 
-                // ƒvƒƒpƒeƒB“K—p
+                // ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£é©ç”¨
                 IdText = idtext,
-                // ˆÈ‰º‚ÌƒvƒƒpƒeƒB‚ÍAƒfƒŠƒQ[ƒg‚Ì_stateFunctionŠÖ”‚Å–‚ ‚é‚²‚Æ‚ÉXV‚³‚ê‚é
+                // ä»¥ä¸‹ã®ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ã¯ã€ãƒ‡ãƒªã‚²ãƒ¼ãƒˆã®_stateFunctioné–¢æ•°ã§äº‹ã‚ã‚‹ã”ã¨ã«æ›´æ–°ã•ã‚Œã‚‹
                 Zoom = _original.Zoom,
                 Scroll = _original.Scroll
             };
         }
 
         /// <summary>
-        /// ƒfƒXƒgƒ‰ƒNƒ^
+        /// ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
         /// </summary>
         ~PartsIllusionProjector()
         {
             Dispose();
         }
 
-        #region IDisposable ƒƒ“ƒo
+        #region IDisposable ãƒ¡ãƒ³ãƒ
 
         public void Dispose()
         {
@@ -243,12 +243,12 @@ namespace Tono.GuiWinForm
         #endregion
 
         /// <summary>
-        /// ƒCƒŠƒ…[ƒWƒ‡ƒ“‘¤‚Ìƒy[ƒ“iƒIƒŠƒWƒiƒ‹‘¤‚Å‚Í‚È‚¢j
+        /// ã‚¤ãƒªãƒ¥ãƒ¼ã‚¸ãƒ§ãƒ³å´ã®ãƒšãƒ¼ãƒ³ï¼ˆã‚ªãƒªã‚¸ãƒŠãƒ«å´ã§ã¯ãªã„ï¼‰
         /// </summary>
         public IRichPane ScreenPane => _screen;
 
         /// <summary>
-        /// ƒp[ƒc‚ªŠ‘®‚·‚é‘¤‚Ìƒy[ƒ“iƒCƒŠƒ…[ƒWƒ‡ƒ“‘¤‚Å‚Í‚È‚¢j
+        /// ãƒ‘ãƒ¼ãƒ„ãŒæ‰€å±ã™ã‚‹å´ã®ãƒšãƒ¼ãƒ³ï¼ˆã‚¤ãƒªãƒ¥ãƒ¼ã‚¸ãƒ§ãƒ³å´ã§ã¯ãªã„ï¼‰
         /// </summary>
         public IRichPane OriginalPane => _original;
     }

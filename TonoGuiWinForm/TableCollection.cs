@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System;
@@ -11,35 +11,35 @@ using System.Reflection;
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// ƒe[ƒuƒ‹ŠÇ—ƒNƒ‰ƒX
-    /// ‚±‚ÌƒNƒ‰ƒX‚ÍAƒe[ƒuƒ‹ŠÇ—‚É“Á‰»‚³‚ê‚½ƒRƒŒƒNƒVƒ‡ƒ“B
-    /// Data‚ÉŠ—L‚·‚é‚Æ‚«‚É‚Ì‚İA—p‚¢‚é‚±‚Æ‚ªo—ˆ‚Ü‚·BArrayList‚Ì•Ö—˜”Å‚Ì‚æ‚¤‚Ég‚¤‚±‚Æ‚ª‚Å‚«‚Ü‚¹‚ñB
-    /// ‚±‚ÌƒNƒ‰ƒX‚ÍAŠetRecordBase‚ÌƒCƒ“ƒXƒ^ƒ“ƒXID‚ğŠÇ—‚µ‚Ü‚·BAdd/Remove‚Í‚±‚Ì‚½‚ß‚É’x‚¢‚Å‚·B
+    /// ãƒ†ãƒ¼ãƒ–ãƒ«ç®¡ç†ã‚¯ãƒ©ã‚¹
+    /// ã“ã®ã‚¯ãƒ©ã‚¹ã¯ã€ãƒ†ãƒ¼ãƒ–ãƒ«ç®¡ç†ã«ç‰¹åŒ–ã•ã‚ŒãŸã‚³ãƒ¬ã‚¯ã‚·ãƒ§ãƒ³ã€‚
+    /// Dataã«æ‰€æœ‰ã™ã‚‹ã¨ãã«ã®ã¿ã€ç”¨ã„ã‚‹ã“ã¨ãŒå‡ºæ¥ã¾ã™ã€‚ArrayListã®ä¾¿åˆ©ç‰ˆã®ã‚ˆã†ã«ä½¿ã†ã“ã¨ãŒã§ãã¾ã›ã‚“ã€‚
+    /// ã“ã®ã‚¯ãƒ©ã‚¹ã¯ã€å„tRecordBaseã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹IDã‚’ç®¡ç†ã—ã¾ã™ã€‚Add/Removeã¯ã“ã®ãŸã‚ã«é…ã„ã§ã™ã€‚
     /// 
-    /// ReadonlyƒA[ƒLƒeƒNƒ`ƒƒ
-    /// ‚±‚ÌƒIƒuƒWƒFƒNƒg‚ÌSetReadonly()‚ğÀs‚·‚é‚ÆAˆÈŒãƒŒƒR[ƒh‚Ö‚ÌƒAƒNƒZƒX‚ÅƒGƒ‰[‚ªo‚Ü‚·iDebugŠÂ‹«‚Ì‚İj
-    /// RecordCommon ‚Ìƒƒ“ƒo‚Í•K‚¸ƒvƒƒpƒeƒBSetter‰»‚µA‚»‚Ì’†‚ÅcheckSettable‚ğÀs‚·‚é•K—v‚ª‚ ‚è‚Ü‚·B
-    /// RecordCommon ƒƒ“ƒo‚ª(uTime‚Ì‚æ‚¤‚ÉjQÆŒ^ƒIƒuƒWƒFƒNƒg‚Ìê‡A‚»‚ÌƒNƒ‰ƒX‚ÍIReadonly‚ğÀ‘•‚·‚é•K—v‚ª‚ ‚è‚Ü‚·B
-    /// IReadony‚ğÀ‘•‚·‚éƒIƒuƒWƒFƒNƒg‚Ì‘Oƒƒ“ƒo‚ÍƒvƒƒpƒeƒBSetter‰»‚µA‚»‚Ì’†‚ÅReadonlyŒŸ¸EAssert‚ğÀ‘•‚µ‚Ä‚­‚¾‚³‚¢B
+    /// Readonlyã‚¢ãƒ¼ã‚­ãƒ†ã‚¯ãƒãƒ£
+    /// ã“ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®SetReadonly()ã‚’å®Ÿè¡Œã™ã‚‹ã¨ã€ä»¥å¾Œãƒ¬ã‚³ãƒ¼ãƒ‰ã¸ã®ã‚¢ã‚¯ã‚»ã‚¹ã§ã‚¨ãƒ©ãƒ¼ãŒå‡ºã¾ã™ï¼ˆDebugç’°å¢ƒã®ã¿ï¼‰
+    /// RecordCommon ã®ãƒ¡ãƒ³ãƒã¯å¿…ãšãƒ—ãƒ­ãƒ‘ãƒ†ã‚£SetteråŒ–ã—ã€ãã®ä¸­ã§checkSettableã‚’å®Ÿè¡Œã™ã‚‹å¿…è¦ãŒã‚ã‚Šã¾ã™ã€‚
+    /// RecordCommon ãƒ¡ãƒ³ãƒãŒ(uTimeã®ã‚ˆã†ã«ï¼‰å‚ç…§å‹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®å ´åˆã€ãã®ã‚¯ãƒ©ã‚¹ã¯IReadonlyã‚’å®Ÿè£…ã™ã‚‹å¿…è¦ãŒã‚ã‚Šã¾ã™ã€‚
+    /// IReadonyã‚’å®Ÿè£…ã™ã‚‹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®å‰ãƒ¡ãƒ³ãƒã¯ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£SetteråŒ–ã—ã€ãã®ä¸­ã§Readonlyæ¤œæŸ»ãƒ»Assertã‚’å®Ÿè£…ã—ã¦ãã ã•ã„ã€‚
     /// </summary>
     public class TableCollection : ICollection, IReadonlyable
     {
-        #region		‘®«(ƒVƒŠƒAƒ‰ƒCƒY‚·‚é)
-        /** <summary>ƒe[ƒuƒ‹‚ÌƒtƒB[ƒ‹ƒh\¬</summary> */
+        #region		å±æ€§(ã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºã™ã‚‹)
+        /** <summary>ãƒ†ãƒ¼ãƒ–ãƒ«ã®ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰æ§‹æˆ</summary> */
         private System.Data.DataColumnCollection _DataColumn = null;
         private readonly IDictionary _dat = null;
 
-        /// <summary>ƒŒƒR[ƒh‚ÌŒ^</summary>
+        /// <summary>ãƒ¬ã‚³ãƒ¼ãƒ‰ã®å‹</summary>
         private readonly Type _recordType;
 
-        /// <summary>•¶š—ñ‚©‚ç‚±‚Ì‚±‚ÌƒRƒŒƒNƒVƒ‡ƒ“‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‚ªæ“¾‚Å‚«‚é‚½‚ß‚ÌƒL[</summary>
+        /// <summary>æ–‡å­—åˆ—ã‹ã‚‰ã“ã®ã“ã®ã‚³ãƒ¬ã‚¯ã‚·ãƒ§ãƒ³ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ãŒå–å¾—ã§ãã‚‹ãŸã‚ã®ã‚­ãƒ¼</summary>
         private readonly string _collectionKey;
 
-        /// <summary>ƒŠ[ƒhƒIƒ“ƒŠ[ƒtƒ‰ƒO</summary>
+        /// <summary>ãƒªãƒ¼ãƒ‰ã‚ªãƒ³ãƒªãƒ¼ãƒ•ãƒ©ã‚°</summary>
         private bool _isReadonly = false;
 
         #endregion
-        #region		‘®«(ƒVƒŠƒAƒ‰ƒCƒY‚µ‚È‚¢)
+        #region		å±æ€§(ã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºã—ãªã„)
         private static readonly IDictionary _instanceIdToRec = new Hashtable();
         private static readonly IDictionary _instanceIdToCol = new Hashtable();
         private static readonly IDictionary _keyToInstance = new Hashtable();
@@ -75,7 +75,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// “Ç‚İæ‚èê—pƒtƒ‰ƒO‚ğ•t—^‚·‚é
+        /// èª­ã¿å–ã‚Šå°‚ç”¨ãƒ•ãƒ©ã‚°ã‚’ä»˜ä¸ã™ã‚‹
         /// </summary>
         public void SetReadonly()
         {
@@ -89,9 +89,9 @@ namespace Tono.GuiWinForm
                     foreach (RecordCommon rec in this)
                     {
                         var sw = (IReadonlyable)rec[fi];
-                        if (sw != null)	// null‚Ìê‡A•K‚¸tCollection.setter‚ğŒo—R‚µ‚Ä’l‚ğ“ü‚ê‚é‚Ì‚ÅA‚±‚±‚Å‚Í–³‹‚µ‚Ä·‚µx‚¦‚È‚¢
+                        if (sw != null)	// nullã®å ´åˆã€å¿…ãštCollection.setterã‚’çµŒç”±ã—ã¦å€¤ã‚’å…¥ã‚Œã‚‹ã®ã§ã€ã“ã“ã§ã¯ç„¡è¦–ã—ã¦å·®ã—æ”¯ãˆãªã„
                         {
-                            sw.SetReadonly();	// uTime‚Ì‚æ‚¤‚ÉATotalSeconds‚Ì—l‚ÈƒvƒƒpƒeƒB‘€ì‚Å’l‚ª•Ï‚í‚ç‚È‚¢‚æ‚¤‚ÉAƒtƒ‰ƒO‚ğƒZƒbƒg‚·‚é
+                            sw.SetReadonly();	// uTimeã®ã‚ˆã†ã«ã€TotalSecondsã®æ§˜ãªãƒ—ãƒ­ãƒ‘ãƒ†ã‚£æ“ä½œã§å€¤ãŒå¤‰ã‚ã‚‰ãªã„ã‚ˆã†ã«ã€ãƒ•ãƒ©ã‚°ã‚’ã‚»ãƒƒãƒˆã™ã‚‹
                         }
                     }
                 }
@@ -99,15 +99,15 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// “Ç‚İæ‚èƒtƒ‰ƒO‚ªƒZƒbƒg‚³‚ê‚Ä‚¢‚é‚©‚Ç‚¤‚©‚ğ’²‚×‚é
+        /// èª­ã¿å–ã‚Šãƒ•ãƒ©ã‚°ãŒã‚»ãƒƒãƒˆã•ã‚Œã¦ã„ã‚‹ã‹ã©ã†ã‹ã‚’èª¿ã¹ã‚‹
         /// </summary>
         public bool IsReadonly => _isReadonly;
 
         /// <summary>
-        /// w’è‚µ‚½ƒCƒ“ƒXƒ^ƒ“ƒXID‚ÌƒŒƒR[ƒh‚ğæ“¾‚·‚é
+        /// æŒ‡å®šã—ãŸã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹IDã®ãƒ¬ã‚³ãƒ¼ãƒ‰ã‚’å–å¾—ã™ã‚‹
         /// </summary>
-        /// <param name="instanceID">ƒCƒ“ƒXƒ^ƒ“ƒXID</param>
-        /// <returns>ƒCƒ“ƒXƒ^ƒ“ƒX</returns>
+        /// <param name="instanceID">ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ID</param>
+        /// <returns>ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹</returns>
         public static RecordCommon GetRecordByInstanceID(int instanceID)
         {
             lock (_instanceIdToRec.SyncRoot)
@@ -117,10 +117,10 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// w’è‚µ‚½ƒCƒ“ƒXƒ^ƒ“ƒXID‚ÌƒRƒŒƒNƒVƒ‡ƒ“‚ğæ“¾‚·‚é
+        /// æŒ‡å®šã—ãŸã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹IDã®ã‚³ãƒ¬ã‚¯ã‚·ãƒ§ãƒ³ã‚’å–å¾—ã™ã‚‹
         /// </summary>
-        /// <param name="instanceID">ƒCƒ“ƒXƒ^ƒ“ƒXID</param>
-        /// <returns>ƒCƒ“ƒXƒ^ƒ“ƒX</returns>
+        /// <param name="instanceID">ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ID</param>
+        /// <returns>ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹</returns>
         public static TableCollection GetCollectionByInstanceID(int instanceID)
         {
             lock (_instanceIdToRec.SyncRoot)
@@ -130,10 +130,10 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒL[•¶š—ñ‚©‚çƒRƒŒƒNƒVƒ‡ƒ“‚ğæ“¾‚·‚é
+        /// ã‚­ãƒ¼æ–‡å­—åˆ—ã‹ã‚‰ã‚³ãƒ¬ã‚¯ã‚·ãƒ§ãƒ³ã‚’å–å¾—ã™ã‚‹
         /// </summary>
-        /// <param name="key">ƒL[</param>
-        /// <returns>ƒRƒŒƒNƒVƒ‡ƒ“‚ÌƒCƒ“ƒXƒ^ƒ“ƒX</returns>
+        /// <param name="key">ã‚­ãƒ¼</param>
+        /// <returns>ã‚³ãƒ¬ã‚¯ã‚·ãƒ§ãƒ³ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹</returns>
         public static TableCollection GetCollectionByKey(string key)
         {
             lock (_instanceIdToRec.SyncRoot)
@@ -143,13 +143,13 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ‰Šú‰»ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+        /// åˆæœŸåŒ–ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
         /// </summary>
-        /// <param name="recordType">ƒŒƒR[ƒh‚ÌŒ^</param>
-        /// <param name="collectionInstance">ƒRƒŒƒNƒVƒ‡ƒ“‚ÌƒCƒ“ƒXƒ^ƒ“ƒX</param>
+        /// <param name="recordType">ãƒ¬ã‚³ãƒ¼ãƒ‰ã®å‹</param>
+        /// <param name="collectionInstance">ã‚³ãƒ¬ã‚¯ã‚·ãƒ§ãƒ³ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹</param>
         public TableCollection(Type recordType)
         {
-            // lock ‚Í‚µ‚È‚¢B——RFda`‚Åˆê“xŒÀ‚è¶¬‚³‚ê‚é‚à‚Ì‚¾‚©‚çB
+            // lock ã¯ã—ãªã„ã€‚ç†ç”±ï¼šdaï½ã§ä¸€åº¦é™ã‚Šç”Ÿæˆã•ã‚Œã‚‹ã‚‚ã®ã ã‹ã‚‰ã€‚
             //_dat = new ArrayList();
             _dat = new Hashtable();
             _recordType = recordType;
@@ -162,9 +162,9 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒCƒ“ƒXƒ^ƒ“ƒX‚ğ“Á’è‚Å‚«‚é•¶š—ñ‚ğæ“¾‚·‚é
+        /// ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ç‰¹å®šã§ãã‚‹æ–‡å­—åˆ—ã‚’å–å¾—ã™ã‚‹
         /// </summary>
-        /// <returns>ƒL[•¶š—ñ</returns>
+        /// <returns>ã‚­ãƒ¼æ–‡å­—åˆ—</returns>
         public string GetCollectionKey()
         {
             return _collectionKey;
@@ -172,12 +172,12 @@ namespace Tono.GuiWinForm
 
 
         /// <summary>
-        /// ƒŒƒR[ƒh‚ÌŒ^‚ğ’²‚×‚é
+        /// ãƒ¬ã‚³ãƒ¼ãƒ‰ã®å‹ã‚’èª¿ã¹ã‚‹
         /// </summary>
         public Type RecordType => _recordType;
 
         /// <summary>
-        /// ƒe[ƒuƒ‹–¼‚Ìæ“¾/İ’è
+        /// ãƒ†ãƒ¼ãƒ–ãƒ«åã®å–å¾—/è¨­å®š
         /// </summary>
         public virtual string TableName
         {
@@ -193,15 +193,15 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒNƒ‰ƒX‚©‚çƒe[ƒuƒ‹ƒXƒL[ƒ}‚ğæ“¾‚·‚é
+        /// ã‚¯ãƒ©ã‚¹ã‹ã‚‰ãƒ†ãƒ¼ãƒ–ãƒ«ã‚¹ã‚­ãƒ¼ãƒã‚’å–å¾—ã™ã‚‹
         /// </summary>
-        /// <returns>ƒXƒL[ƒ}–¼‚Ìˆê——</returns>
+        /// <returns>ã‚¹ã‚­ãƒ¼ãƒåã®ä¸€è¦§</returns>
         public IList GetFieldNames(bool isNonSchema)
         {
             var ret = new ArrayList();
             foreach (var fi in RecordType.GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic))
             {
-                // ‘®«[DBSchema]‚ª‚Â‚¢‚Ä‚¢‚é‚à‚Ì‚¾‚¯‚ğ‘I‚Ô
+                // å±æ€§[DBSchema]ãŒã¤ã„ã¦ã„ã‚‹ã‚‚ã®ã ã‘ã‚’é¸ã¶
                 var ats = fi.GetCustomAttributes(typeof(DBSchemaAttribute), true);
                 if (ats.Length > 0)
                 {
@@ -224,10 +224,10 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒtƒB[ƒ‹ƒhî•ñ‚ğæ“¾‚·‚é
+        /// ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰æƒ…å ±ã‚’å–å¾—ã™ã‚‹
         /// </summary>
-        /// <param name="key">DB‚Ì‘®«–¼ (DBSchemaAttribute‚ÌName)</param>
-        /// <returns>.NET‚ÌƒtƒB[ƒ‹ƒhî•ñ</returns>
+        /// <param name="key">DBã®å±æ€§å (DBSchemaAttributeã®Name)</param>
+        /// <returns>.NETã®ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰æƒ…å ±</returns>
         public FieldInfo GetFieldInfo(string key)
         {
             var finfo = (IDictionary)RecordCommon.fInfos[GetType()];
@@ -246,7 +246,7 @@ namespace Tono.GuiWinForm
 
             foreach (var fi in RecordType.GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic))
             {
-                // ‘®«[DBSchema]‚ª‚Â‚¢‚Ä‚¢‚é‚à‚Ì‚¾‚¯‚ğ‘I‚Ô
+                // å±æ€§[DBSchema]ãŒã¤ã„ã¦ã„ã‚‹ã‚‚ã®ã ã‘ã‚’é¸ã¶
                 var ats = fi.GetCustomAttributes(typeof(DBSchemaAttribute), true);
                 if (ats.Length > 0)
                 {
@@ -271,7 +271,7 @@ namespace Tono.GuiWinForm
                 }
             }
             return null;
-            #region ‹Œ®
+            #region æ—§å¼
             //			if( _dat.Count > 0 )
             //			{
             //				tRecordBase rec = (tRecordBase)_dat[0];
@@ -282,7 +282,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒtƒB[ƒ‹ƒh\¬‚Ìæ“¾/İ’èi‚ ‚Ü‚èg—p‚µ‚È‚¢‚ÅAGetFieldNames‚ğg—p‚·‚é–j
+        /// ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰æ§‹æˆã®å–å¾—/è¨­å®šï¼ˆã‚ã¾ã‚Šä½¿ç”¨ã—ãªã„ã§ã€GetFieldNamesã‚’ä½¿ç”¨ã™ã‚‹äº‹ï¼‰
         /// </summary>
         public virtual System.Data.DataColumnCollection DataColumn
         {
@@ -290,16 +290,16 @@ namespace Tono.GuiWinForm
             set => _DataColumn = value;
         }
 
-        #region IList ƒƒ“ƒo
+        #region IList ãƒ¡ãƒ³ãƒ
 
         /// <summary>
-        /// ƒf[ƒ^ŠÇ—‚ğl—¶‚µ‚È‚¢‚ÅƒŒƒR[ƒh‚ğíœ‚·‚é
-        /// i“à•”ˆ——p‚È‚Ì‚ÅAda****.Remove‚ğg—p‚µ‚Ä‚­‚¾‚³‚¢j
+        /// ãƒ‡ãƒ¼ã‚¿ç®¡ç†ã‚’è€ƒæ…®ã—ãªã„ã§ãƒ¬ã‚³ãƒ¼ãƒ‰ã‚’å‰Šé™¤ã™ã‚‹
+        /// ï¼ˆå†…éƒ¨å‡¦ç†ç”¨ãªã®ã§ã€da****.Removeã‚’ä½¿ç”¨ã—ã¦ãã ã•ã„ï¼‰
         /// </summary>
         /// <param name="value"></param>
         internal void DirectRemove(object value)
         {
-            System.Diagnostics.Debug.Assert(_isReadonly == false, "“Ç‚İæ‚èê—pƒe[ƒuƒ‹ " + GetType().Name + " ‚©‚çRemove‚Í‚Å‚«‚Ü‚¹‚ñ");
+            System.Diagnostics.Debug.Assert(_isReadonly == false, "èª­ã¿å–ã‚Šå°‚ç”¨ãƒ†ãƒ¼ãƒ–ãƒ« " + GetType().Name + " ã‹ã‚‰Removeã¯ã§ãã¾ã›ã‚“");
             lock (_instanceIdToRec.SyncRoot)
             {
                 _instanceIdToRec.Remove(((RecordCommon)value).InstanceID);
@@ -314,7 +314,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒRƒŒƒNƒVƒ‡ƒ“’†‚Ìƒf[ƒ^‚ğíœ‚·‚éiƒCƒ“ƒXƒ^ƒ“ƒXŠÇ—‚à“K—p‚·‚éj
+        /// ã‚³ãƒ¬ã‚¯ã‚·ãƒ§ãƒ³ä¸­ã®ãƒ‡ãƒ¼ã‚¿ã‚’å‰Šé™¤ã™ã‚‹ï¼ˆã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ç®¡ç†ã‚‚é©ç”¨ã™ã‚‹ï¼‰
         /// </summary>
         public void Clear()
         {
@@ -331,13 +331,13 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒf[ƒ^ŠÇ—‚ğ‚µ‚È‚¢‚Å’Ç‰Á
-        /// da****.Add‚ğg—p‚µ‚Ä‚­‚¾‚³‚¢
+        /// ãƒ‡ãƒ¼ã‚¿ç®¡ç†ã‚’ã—ãªã„ã§è¿½åŠ 
+        /// da****.Addã‚’ä½¿ç”¨ã—ã¦ãã ã•ã„
         /// </summary>
         /// <param name="value"></param>
         internal void DirectAdd(object value)
         {
-            System.Diagnostics.Debug.Assert(_isReadonly == false, "“Ç‚İæ‚èê—pƒe[ƒuƒ‹ " + GetType().Name + " ‚ÉAdd‚Í‚Å‚«‚Ü‚¹‚ñ");
+            System.Diagnostics.Debug.Assert(_isReadonly == false, "èª­ã¿å–ã‚Šå°‚ç”¨ãƒ†ãƒ¼ãƒ–ãƒ« " + GetType().Name + " ã«Addã¯ã§ãã¾ã›ã‚“");
             if (value is RecordCommon)
             {
                 lock (_instanceIdToRec.SyncRoot)
@@ -348,7 +348,7 @@ namespace Tono.GuiWinForm
 #if DEBUG
                     if (preCount >= _instanceIdToRec.Count)
                     {
-                        System.Diagnostics.Debug.WriteLine(false, "ƒŒƒR[ƒh‚ª“ñ‰ñAdd‚³‚ê‚½B–”‚ÍAˆê“I‚ÈtCollection‚ğì‚Á‚ÄAdaDpose‚É‚à“o˜^‚µ‚½ƒŒƒR[ƒh‚ğ‚»‚±‚É’Ç‰Á‚µ‚½i‚±‚Ìê‡AtCollection‚Å‚Í‚È‚­AArrayList‚ğg‚Á‚Ä—~‚µ‚¢j");
+                        System.Diagnostics.Debug.WriteLine(false, "ãƒ¬ã‚³ãƒ¼ãƒ‰ãŒäºŒå›Addã•ã‚ŒãŸã€‚åˆã¯ã€ä¸€æ™‚çš„ãªtCollectionã‚’ä½œã£ã¦ã€daDposeã«ã‚‚ç™»éŒ²ã—ãŸãƒ¬ã‚³ãƒ¼ãƒ‰ã‚’ãã“ã«è¿½åŠ ã—ãŸï¼ˆã“ã®å ´åˆã€tCollectionã§ã¯ãªãã€ArrayListã‚’ä½¿ã£ã¦æ¬²ã—ã„ï¼‰");
                     }
 #endif
                 }
@@ -357,7 +357,7 @@ namespace Tono.GuiWinForm
         }
         #endregion
 
-        #region ICollection ƒƒ“ƒo
+        #region ICollection ãƒ¡ãƒ³ãƒ
 
         public bool IsSynchronized => _dat.IsSynchronized;
 
@@ -373,7 +373,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// IDŠÇ—‚ğs‚Á‚Ä‚¢‚é‚Ì‚ÅAƒNƒ‰ƒX“¯Šú‚Æ‚È‚éB
+        /// IDç®¡ç†ã‚’è¡Œã£ã¦ã„ã‚‹ã®ã§ã€ã‚¯ãƒ©ã‚¹åŒæœŸã¨ãªã‚‹ã€‚
         /// </summary>
         public object SyncRoot
         {
@@ -381,7 +381,7 @@ namespace Tono.GuiWinForm
             {
                 if (IsReadonly)
                 {
-                    return new object();	// “Ç‚İæ‚èê—p‚Å‚ÍAƒXƒŒƒbƒhƒZ[ƒt‚ğˆÓ¯‚µ‚È‚¢‚Å‚‘¬‰»
+                    return new object();	// èª­ã¿å–ã‚Šå°‚ç”¨ã§ã¯ã€ã‚¹ãƒ¬ãƒƒãƒ‰ã‚»ãƒ¼ãƒ•ã‚’æ„è­˜ã—ãªã„ã§é«˜é€ŸåŒ–
                 }
                 else
                 {
@@ -391,7 +391,7 @@ namespace Tono.GuiWinForm
         }
         #endregion
 
-        #region IEnumerable ƒƒ“ƒo
+        #region IEnumerable ãƒ¡ãƒ³ãƒ
 
         public IEnumerator GetEnumerator()
         {

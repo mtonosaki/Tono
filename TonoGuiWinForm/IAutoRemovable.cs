@@ -1,11 +1,11 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// IAutoRemovable ‚ÌŠT—v‚Ìà–¾‚Å‚·B
-    /// ƒtƒB[ƒ`ƒƒ[‚ÉÀ‘•‚·‚é‚ÆAƒtƒB[ƒ`ƒƒ[‚ÌOnInitInstance‚Å—áŠO‚ª”­¶‚µ‚½‚Æ‚«‚ÉAƒtƒB[ƒ`ƒƒ[‚ğØ‚è—£‚·‚±‚Æ‚ª‚Å‚«‚éd‘g‚İ
+    /// IAutoRemovable ã®æ¦‚è¦ã®èª¬æ˜ã§ã™ã€‚
+    /// ãƒ•ã‚£ãƒ¼ãƒãƒ£ãƒ¼ã«å®Ÿè£…ã™ã‚‹ã¨ã€ãƒ•ã‚£ãƒ¼ãƒãƒ£ãƒ¼ã®OnInitInstanceã§ä¾‹å¤–ãŒç™ºç”Ÿã—ãŸã¨ãã«ã€ãƒ•ã‚£ãƒ¼ãƒãƒ£ãƒ¼ã‚’åˆ‡ã‚Šé›¢ã™ã“ã¨ãŒã§ãã‚‹ä»•çµ„ã¿
     /// </summary>
     public interface IAutoRemovable
     {

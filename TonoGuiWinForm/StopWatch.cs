@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System;
@@ -9,7 +9,7 @@ using System.Collections;
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// ƒXƒgƒbƒvƒEƒHƒbƒ`ƒNƒ‰ƒX
+    /// ã‚¹ãƒˆãƒƒãƒ—ã‚¦ã‚©ãƒƒãƒã‚¯ãƒ©ã‚¹
     /// </summary>
     [NoTestClass]
     public class StopWatch
@@ -18,7 +18,7 @@ namespace Tono.GuiWinForm
         private readonly string _name;
 
         /// <summary>
-        /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+        /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
         /// </summary>
         public StopWatch()
         {
@@ -27,9 +27,9 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ‰Šú‰»ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+        /// åˆæœŸåŒ–ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
         /// </summary>
-        /// <param name="name">ƒXƒgƒbƒvƒEƒHƒbƒ`‚Ì–¼‘O</param>
+        /// <param name="name">ã‚¹ãƒˆãƒƒãƒ—ã‚¦ã‚©ãƒƒãƒã®åå‰</param>
         public StopWatch(string name)
         {
             _name = name;
@@ -37,9 +37,9 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ‰Šú‰»ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+        /// åˆæœŸåŒ–ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
         /// </summary>
-        /// <param name="sw">TRUE:Œv‘ª‚ğŠJn‚·‚é/FALSE:Œv‘ª‚ğŠJn‚µ‚È‚¢</param>
+        /// <param name="sw">TRUE:è¨ˆæ¸¬ã‚’é–‹å§‹ã™ã‚‹/FALSE:è¨ˆæ¸¬ã‚’é–‹å§‹ã—ãªã„</param>
         public StopWatch(bool sw)
         {
             _name = "Stop";
@@ -50,7 +50,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒfƒXƒgƒ‰ƒNƒ^‚Í‚¢‚ÂŒÄ‚Î‚ê‚é‚©‚í‚©‚ç‚È‚¢
+        /// ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ã¯ã„ã¤å‘¼ã°ã‚Œã‚‹ã‹ã‚ã‹ã‚‰ãªã„
         /// </summary>
         ~StopWatch()
         {
@@ -59,7 +59,7 @@ namespace Tono.GuiWinForm
 
         public void Start()
         {
-            if ((_buf.Count % 2) == 1)  // Œv‘ª’†
+            if ((_buf.Count % 2) == 1)  // è¨ˆæ¸¬ä¸­
             {
                 return;
             }
@@ -67,16 +67,16 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// Œv‘ªŠJn‚©‚ç‚Ì‘•b”‚ğ•Ô‚·
+        /// è¨ˆæ¸¬é–‹å§‹ã‹ã‚‰ã®ç·ç§’æ•°ã‚’è¿”ã™
         /// </summary>
-        /// <returns>—İÏ•b</returns>
+        /// <returns>ç´¯ç©ç§’</returns>
         public double span()
         {
             if (_buf.Count < 2)
             {
                 return 0.0;
             }
-            if ((_buf.Count % 2) == 1)  // Œv‘ª’†
+            if ((_buf.Count % 2) == 1)  // è¨ˆæ¸¬ä¸­
             {
                 return 0.0;
             }
@@ -85,19 +85,19 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// Œv‘ªŠJn‚©‚çŒ»İ‚Ü‚Å‚ÌŒo‰ßŠÔm•bn‚ğ•Ô‚·
+        /// è¨ˆæ¸¬é–‹å§‹ã‹ã‚‰ç¾åœ¨ã¾ã§ã®çµŒéæ™‚é–“ï¼»ç§’ï¼½ã‚’è¿”ã™
         /// </summary>
-        /// <returns>—İÏ•b”</returns>
+        /// <returns>ç´¯ç©ç§’æ•°</returns>
         public double NowSpan()
         {
             if (_buf.Count == 0)
             {
-                return 0.0;        // –¢Œv‘ª
+                return 0.0;        // æœªè¨ˆæ¸¬
             }
 
             if ((_buf.Count % 2) == 0)
             {
-                return 0.0;  // Œv‘ªI—¹Ï
+                return 0.0;  // è¨ˆæ¸¬çµ‚äº†æ¸ˆ
             }
 
             double ret = DateTime.Now.Ticks - (long)_buf[0];
@@ -105,9 +105,9 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒXƒgƒbƒvƒEƒHƒbƒ`‚ğ’â~‚µ‚Ä—İÏ•b‚ğ•Ô‚·
+        /// ã‚¹ãƒˆãƒƒãƒ—ã‚¦ã‚©ãƒƒãƒã‚’åœæ­¢ã—ã¦ç´¯ç©ç§’ã‚’è¿”ã™
         /// </summary>
-        /// <returns>—İÏ•b</returns>
+        /// <returns>ç´¯ç©ç§’</returns>
         public double Stop()
         {
             _buf.Add(DateTime.Now.Ticks);
@@ -116,7 +116,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒXƒgƒbƒvƒEƒHƒbƒ`‚ğ’â~‚µ‚Ä—İÏ•b‚ğƒfƒoƒbƒOo—Í‚É•\¦‚·‚é
+        /// ã‚¹ãƒˆãƒƒãƒ—ã‚¦ã‚©ãƒƒãƒã‚’åœæ­¢ã—ã¦ç´¯ç©ç§’ã‚’ãƒ‡ãƒãƒƒã‚°å‡ºåŠ›ã«è¡¨ç¤ºã™ã‚‹
         /// </summary>
         public void StopAndDiag()
         {

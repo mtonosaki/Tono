@@ -1,20 +1,20 @@
-// (c) 2019 Manabu Tonosaki
+﻿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// �y�[���ւ̃A�N�Z�X��񋟂���C���^�[�t�F�[�X
+    /// ペーンへのアクセスを提供するインターフェース
     /// </summary>
     public interface IRichPane
     {
         /// <summary>
-        /// ID�e�L�X�g
+        /// IDテキスト
         /// </summary>
         string IdText { get; set; }
 
         /// <summary>
-        /// IRichPane�̎��̂̃R���g���[���^
+        /// IRichPaneの実体のコントロール型
         /// </summary>
         System.Windows.Forms.Control Control
         {
@@ -22,39 +22,39 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// �e�y�[����Ԃ�
+        /// 親ペーンを返す
         /// </summary>
-        /// <returns>null = �e�͂��Ȃ�</returns>
+        /// <returns>null = 親はいない</returns>
         IRichPane GetParent();
 
         /// <summary>
-        /// ���O�Ńy�[������������i�x���̂Œ��Ӂj
+        /// 名前でペーンを検索する（遅いので注意）
         /// </summary>
-        /// <param name="name">��������y�[����Name�v���p�e�B</param>
-        /// <returns>���������y�[�� / null = ������Ȃ�����</returns>
+        /// <param name="name">検索するペーンのNameプロパティ</param>
+        /// <returns>見つかったペーン / null = 見つからなかった</returns>
         IRichPane GetPane(string name);
 
         /// <summary>
-        /// �y�[���̗̈��Ԃ��C���^�[�t�F�[�X
+        /// ペーンの領域を返すインターフェース
         /// </summary>
-        /// <returns>�̈�</returns>
+        /// <returns>領域</returns>
         ScreenRect GetPaneRect();
 
         /// <summary>
-        /// �`�悪�K�v�ȗ̈��Ԃ��C���^�[�t�F�[�X
+        /// 描画が必要な領域を返すインターフェース
         /// </summary>
-        /// <returns>�̈�</returns>
+        /// <returns>領域</returns>
         ScreenRect GetPaintClipRect();
 
         /// <summary>
-        /// ��ʂ��ĕ`�悷��
+        /// 画面を再描画する
         /// </summary>
-        /// <param name="rect">�ĕ`��X�N���[����Έʒu�i�y�[�����΍��W�łȂ��j / null=�S�̈�</param>
+        /// <param name="rect">再描画スクリーン絶対位置（ペーン相対座標でない） / null=全領域</param>
         void Invalidate(ScreenRect rect);
 
         /// <summary>
-        /// �Y�[���{����Ԃ��C���^�[�t�F�[�X
-        ///�@�~10[%]�̒l���i�[����Ă���
+        /// ズーム倍率を返すインターフェース
+        ///　×10[%]の値が格納されている
         /// </summary>
         XyBase Zoom
         {
@@ -63,8 +63,8 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// �X�N���[���ʂ�Ԃ��C���^�[�t�F�[�X
-        /// �v���X�����́A��ʂ̉E��
+        /// スクロール量を返すインターフェース
+        /// プラス方向は、画面の右下
         /// </summary>
         ScreenPos Scroll
         {
@@ -73,7 +73,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// �O���t�B�b�N�I�u�W�F�N�g
+        /// グラフィックオブジェクト
         /// </summary>
         System.Drawing.Graphics Graphics
         {
@@ -81,7 +81,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// �p�[�c���W����X�N���[���i�}�E�X�j���W�ɕϊ�����
+        /// パーツ座標からスクリーン（マウス）座標に変換する
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
@@ -100,7 +100,7 @@ namespace Tono.GuiWinForm
         ScreenPos GetZoomed(LayoutPos value);
 
         /// <summary>
-        /// �X�N���[���i�}�E�X�j���W����p�[�c���W�ɕϊ�����
+        /// スクリーン（マウス）座標からパーツ座標に変換する
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>

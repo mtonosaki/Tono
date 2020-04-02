@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System;
@@ -16,34 +16,34 @@ using System.Windows.Forms;
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// Tono.GuiWinForm”Å ‚‘¬EŠg‘åk¬ ƒŠƒXƒgƒrƒ…[
+    /// Tono.GuiWinFormç‰ˆ é«˜é€Ÿãƒ»æ‹¡å¤§ç¸®å° ãƒªã‚¹ãƒˆãƒ“ãƒ¥ãƒ¼
     /// </summary>
     /// <example>
-    /// ƒJƒ‰ƒ€‚P‚Â‚ß‚ÍAƒ_ƒ~[‚ğİ‚¯‚é‚±‚Æ
+    /// ã‚«ãƒ©ãƒ ï¼‘ã¤ã‚ã¯ã€ãƒ€ãƒŸãƒ¼ã‚’è¨­ã‘ã‚‹ã“ã¨
     /// 
-    ///		// Å‰‚ÌƒJƒ‰ƒ€AİŒvã•K—v
-    /// ===== \’zq =====
-    ///		ColumnHeader hd = new ColumnHeader();	// ƒ_ƒ~[—p‚ÌƒJƒ‰ƒ€‚ğ‚Ğ‚Æ‚Â’Ç‰Á‚·‚é‚Ì‚ªd—v
+    ///		// æœ€åˆã®ã‚«ãƒ©ãƒ ã€è¨­è¨ˆä¸Šå¿…è¦
+    /// ===== æ§‹ç¯‰å­ =====
+    ///		ColumnHeader hd = new ColumnHeader();	// ãƒ€ãƒŸãƒ¼ç”¨ã®ã‚«ãƒ©ãƒ ã‚’ã²ã¨ã¤è¿½åŠ ã™ã‚‹ã®ãŒé‡è¦
     ///		hd.Text = "*";
     ///		hd.Width = 20;
     ///		_lv.Columns.Add(hd);
     /// 
-    /// =====ƒwƒbƒ_ì¬=====
+    /// =====ãƒ˜ãƒƒãƒ€ä½œæˆ=====
     ///			ColumnHeader hd = new ColumnHeader(cs);
-    ///			hd.Text = "ƒJƒ‰ƒ€‚P";
+    ///			hd.Text = "ã‚«ãƒ©ãƒ ï¼‘";
     ///			_lv.Columns.Add(hd);
-    ///		ˆÈãŒJ‚è•Ô‚µ
-    /// =====ƒf[ƒ^ì¬=====
-    ///			ListViewItem li = new ListViewItem(""); // ƒ_ƒ~[—p‚Ìƒwƒbƒ_
-    ///			li.SubItems.Add("ƒ_ƒ~[‚Ì‰¡‚ÌƒJƒ‰ƒ€1");
-    ///			li.SubItems.Add("ƒ_ƒ~[‚Ì‰¡‚ÌƒJƒ‰ƒ€2");
+    ///		ä»¥ä¸Šç¹°ã‚Šè¿”ã—
+    /// =====ãƒ‡ãƒ¼ã‚¿ä½œæˆ=====
+    ///			ListViewItem li = new ListViewItem(""); // ãƒ€ãƒŸãƒ¼ç”¨ã®ãƒ˜ãƒƒãƒ€
+    ///			li.SubItems.Add("ãƒ€ãƒŸãƒ¼ã®æ¨ªã®ã‚«ãƒ©ãƒ 1");
+    ///			li.SubItems.Add("ãƒ€ãƒŸãƒ¼ã®æ¨ªã®ã‚«ãƒ©ãƒ 2");
     ///			_lv.Items.Add(li);
     /// </example>
     public partial class TListViewFree : UserControl
     {
-        #region ƒCƒxƒ“ƒgˆø”
+        #region ã‚¤ãƒ™ãƒ³ãƒˆå¼•æ•°
         /// <summary>
-        /// •¶š—ñ‚ğ“]‘—‚·‚éƒCƒxƒ“ƒgˆø”
+        /// æ–‡å­—åˆ—ã‚’è»¢é€ã™ã‚‹ã‚¤ãƒ™ãƒ³ãƒˆå¼•æ•°
         /// </summary>
         public class StringAugmentEventArgs : EventArgs
         {
@@ -59,7 +59,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒeƒLƒXƒgƒCƒxƒ“ƒg
+        /// ãƒ†ã‚­ã‚¹ãƒˆã‚¤ãƒ™ãƒ³ãƒˆ
         /// </summary>
         public class TooltipTextRequestArgs : EventArgs
         {
@@ -79,38 +79,38 @@ namespace Tono.GuiWinForm
             }
         }
         #endregion
-        #region Tono.GuiWinForm ƒf[ƒ^\‘¢
+        #region Tono.GuiWinForm ãƒ‡ãƒ¼ã‚¿æ§‹é€ 
 
         /// <summary>
-        /// Tono.GuiWinFormƒf[ƒ^i‰i‘±ƒf[ƒ^‚ğŠÇ—j
+        /// Tono.GuiWinFormãƒ‡ãƒ¼ã‚¿ï¼ˆæ°¸ç¶šãƒ‡ãƒ¼ã‚¿ã‚’ç®¡ç†ï¼‰
         /// </summary>
         public class HotData : DataHotBase
         {
             /// <summary>
-            /// ƒŠƒXƒgƒAƒCƒeƒ€A’Ç‰Áî•ñ
+            /// ãƒªã‚¹ãƒˆã‚¢ã‚¤ãƒ†ãƒ ã€è¿½åŠ æƒ…å ±
             /// </summary>
             public class Status
             {
                 /// <summary>
-                /// s•\¦ƒtƒ‰ƒO
+                /// è¡Œè¡¨ç¤ºãƒ•ãƒ©ã‚°
                 /// </summary>
                 public bool Visible = true;
 
                 /// <summary>
-                /// ƒL[‚É‚æ‚Á‚ÄƒOƒ‹[ƒv‰»‚³‚ê‚Ä‚àƒ†ƒj[ƒN‚Åu‚È‚¢v‚±‚Æ‚Ìƒtƒ‰ƒO
-                /// i“o˜^‚³‚ê‚Ä‚¢‚é—ñ”‚ÍAƒ†ƒj[ƒN‚Å‚Í‚È‚­A’P‚È‚é‘ã•\sj
-                /// ‚±‚±‚É“o˜^‚³‚ê‚Ä‚¢‚È‚¢‚Ì‚ÍAƒ†ƒj[ƒN‚Å‚ ‚éBValue‚ªTrue‚Ì‚à‚Ì‚Í“o˜^‚³‚ê‚È‚¢
+                /// ã‚­ãƒ¼ã«ã‚ˆã£ã¦ã‚°ãƒ«ãƒ¼ãƒ—åŒ–ã•ã‚Œã¦ã‚‚ãƒ¦ãƒ‹ãƒ¼ã‚¯ã§ã€Œãªã„ã€ã“ã¨ã®ãƒ•ãƒ©ã‚°
+                /// ï¼ˆç™»éŒ²ã•ã‚Œã¦ã„ã‚‹åˆ—ï¼ƒã¯ã€ãƒ¦ãƒ‹ãƒ¼ã‚¯ã§ã¯ãªãã€å˜ãªã‚‹ä»£è¡¨è¡Œï¼‰
+                /// ã“ã“ã«ç™»éŒ²ã•ã‚Œã¦ã„ãªã„ã®ã¯ã€ãƒ¦ãƒ‹ãƒ¼ã‚¯ã§ã‚ã‚‹ã€‚ValueãŒTrueã®ã‚‚ã®ã¯ç™»éŒ²ã•ã‚Œãªã„
                 /// </summary>
-                private readonly Dictionary<int/*column*/, int/*í—Ş”*/> _noOfDuplicatedInfo = new Dictionary<int, int>();
-                private readonly Dictionary<int/*column*/, uCouple<TListViewFree.SummaryMode, object/*ƒTƒ}ƒŠî•ñ*/>> _summaryInfo = new Dictionary<int, uCouple<SummaryMode, object>>();
+                private readonly Dictionary<int/*column*/, int/*ç¨®é¡æ•°*/> _noOfDuplicatedInfo = new Dictionary<int, int>();
+                private readonly Dictionary<int/*column*/, uCouple<TListViewFree.SummaryMode, object/*ã‚µãƒãƒªæƒ…å ±*/>> _summaryInfo = new Dictionary<int, uCouple<SummaryMode, object>>();
 
                 /// <summary>
-                /// ƒOƒ‹[ƒv‚³‚ê‚éŒ³‚ÌƒŒƒR[ƒh”
+                /// ã‚°ãƒ«ãƒ¼ãƒ—ã•ã‚Œã‚‹å…ƒã®ãƒ¬ã‚³ãƒ¼ãƒ‰æ•°
                 /// </summary>
                 private int _nGroupedRecord = 1;
 
                 /// <summary>
-                /// ƒL[‚É‚æ‚Á‚ÄƒOƒ‹[ƒv‰»‚³‚ê‚Ä‚àƒ†ƒj[ƒN‚Å‚ ‚é‚©‚Ç‚¤‚©‚ğƒŠƒZƒbƒg‚·‚é
+                /// ã‚­ãƒ¼ã«ã‚ˆã£ã¦ã‚°ãƒ«ãƒ¼ãƒ—åŒ–ã•ã‚Œã¦ã‚‚ãƒ¦ãƒ‹ãƒ¼ã‚¯ã§ã‚ã‚‹ã‹ã©ã†ã‹ã‚’ãƒªã‚»ãƒƒãƒˆã™ã‚‹
                 /// </summary>
                 public void ResetNotUniqueInfo()
                 {
@@ -119,7 +119,7 @@ namespace Tono.GuiWinForm
                 }
 
                 /// <summary>
-                /// ƒOƒ‹[ƒv‚³‚ê‚éŒ³‚ÌƒŒƒR[ƒh”
+                /// ã‚°ãƒ«ãƒ¼ãƒ—ã•ã‚Œã‚‹å…ƒã®ãƒ¬ã‚³ãƒ¼ãƒ‰æ•°
                 /// </summary>
                 public int nGroupedRecord
                 {
@@ -128,10 +128,10 @@ namespace Tono.GuiWinForm
                 }
 
                 /// <summary>
-                /// ƒL[‚É‚æ‚Á‚ÄƒOƒ‹[ƒv‰»‚³‚ê‚Ä‚àƒ†ƒj[ƒN‚Å‚ ‚é‚±‚Æ‚ğw’è‚·‚é
+                /// ã‚­ãƒ¼ã«ã‚ˆã£ã¦ã‚°ãƒ«ãƒ¼ãƒ—åŒ–ã•ã‚Œã¦ã‚‚ãƒ¦ãƒ‹ãƒ¼ã‚¯ã§ã‚ã‚‹ã“ã¨ã‚’æŒ‡å®šã™ã‚‹
                 /// </summary>
-                /// <param name="column">—ñ”</param>
-                /// <param name="nDuplicatedInfo">1=ƒ†ƒj[ƒN / 2ˆÈã=î•ñí—Ş”</param>
+                /// <param name="column">åˆ—ï¼ƒ</param>
+                /// <param name="nDuplicatedInfo">1=ãƒ¦ãƒ‹ãƒ¼ã‚¯ / 2ä»¥ä¸Š=æƒ…å ±ç¨®é¡æ•°</param>
                 public void SetUnique(int column, int nDuplicatedInfo, SummaryMode mode, object summaryInfo)
                 {
                     if (nDuplicatedInfo == 1)
@@ -150,10 +150,10 @@ namespace Tono.GuiWinForm
                 }
 
                 /// <summary>
-                /// w’è—ñ‚ªAƒOƒ‹[ƒv‰»‚É‚æ‚Á‚ÄA‰½í—Ş‚ÌƒoƒŠƒG[ƒVƒ‡ƒ“‚É‚È‚Á‚½‚©‚ğ’²‚×‚é
+                /// æŒ‡å®šåˆ—ãŒã€ã‚°ãƒ«ãƒ¼ãƒ—åŒ–ã«ã‚ˆã£ã¦ã€ä½•ç¨®é¡ã®ãƒãƒªã‚¨ãƒ¼ã‚·ãƒ§ãƒ³ã«ãªã£ãŸã‹ã‚’èª¿ã¹ã‚‹
                 /// </summary>
-                /// <param name="column">—ñ”</param>
-                /// <returns>1=‚Pí—Şƒ†ƒj[ƒNB2ˆÈã=í—Ş”Bs”‚Å‚Í‚È‚¢</returns>
+                /// <param name="column">åˆ—ï¼ƒ</param>
+                /// <returns>1=ï¼‘ç¨®é¡ï¼ãƒ¦ãƒ‹ãƒ¼ã‚¯ã€‚2ä»¥ä¸Š=ç¨®é¡æ•°ã€‚è¡Œæ•°ã§ã¯ãªã„</returns>
                 public int CheckNoOfKindOfTheInfo(int column)
                 {
                     if (_noOfDuplicatedInfo.TryGetValue(column, out var nDuplicatedInfo))
@@ -162,12 +162,12 @@ namespace Tono.GuiWinForm
                     }
                     else
                     {
-                        return 1;   // “o˜^‚³‚ê‚Ä‚¢‚È‚¢‚È‚çAƒ†ƒj[ƒN‚Å‚ ‚éB
+                        return 1;   // ç™»éŒ²ã•ã‚Œã¦ã„ãªã„ãªã‚‰ã€ãƒ¦ãƒ‹ãƒ¼ã‚¯ã§ã‚ã‚‹ã€‚
                     }
                 }
 
                 /// <summary>
-                /// ƒTƒ}ƒŠî•ñ‚ğæ“¾‚·‚é
+                /// ã‚µãƒãƒªæƒ…å ±ã‚’å–å¾—ã™ã‚‹
                 /// </summary>
                 /// <param name="column"></param>
                 /// <returns></returns>
@@ -184,7 +184,7 @@ namespace Tono.GuiWinForm
                 }
 
                 /// <summary>
-                /// ƒTƒ}ƒŠƒ‚[ƒh‚ğæ“¾‚·‚é
+                /// ã‚µãƒãƒªãƒ¢ãƒ¼ãƒ‰ã‚’å–å¾—ã™ã‚‹
                 /// </summary>
                 /// <param name="column"></param>
                 /// <returns></returns>
@@ -199,44 +199,44 @@ namespace Tono.GuiWinForm
             }
 
             /// <summary>
-            /// ƒOƒ‹[ƒvˆ—‚³‚ê‚½i‰ğœ‚³‚ê‚½j
+            /// ã‚°ãƒ«ãƒ¼ãƒ—å‡¦ç†ã•ã‚ŒãŸï¼ˆè§£é™¤ã•ã‚ŒãŸï¼‰
             /// </summary>
             public event ColumnClickEventHandler GroupKeyChanged;
 
             /// <summary>
-            /// ƒAƒCƒeƒ€ƒRƒŒƒNƒVƒ‡ƒ“iƒtƒBƒ‹ƒ^[Œã‚ÌƒAƒCƒeƒ€‚Ì‚İBƒtƒBƒ‹ƒ^‚³‚ê‚½ƒAƒCƒeƒ€‚Í_status‚ÌKey‚É“ü‚Á‚Ä‚¢‚éj
+            /// ã‚¢ã‚¤ãƒ†ãƒ ã‚³ãƒ¬ã‚¯ã‚·ãƒ§ãƒ³ï¼ˆãƒ•ã‚£ãƒ«ã‚¿ãƒ¼å¾Œã®ã‚¢ã‚¤ãƒ†ãƒ ã®ã¿ã€‚ãƒ•ã‚£ãƒ«ã‚¿ã•ã‚ŒãŸã‚¢ã‚¤ãƒ†ãƒ ã¯_statusã®Keyã«å…¥ã£ã¦ã„ã‚‹ï¼‰
             /// </summary>
             private readonly ListViewItemCollection _lvis = new ListViewItemCollection();
 
             /// <summary>
-            /// ƒAƒCƒeƒ€‚ÌƒXƒe[ƒ^ƒX
+            /// ã‚¢ã‚¤ãƒ†ãƒ ã®ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹
             /// </summary>
             private readonly Dictionary<ListViewItem, Status> _status = new Dictionary<ListViewItem, Status>();
 
             /// <summary>
-            /// ƒwƒbƒ_ƒRƒŒƒNƒVƒ‡ƒ“
+            /// ãƒ˜ãƒƒãƒ€ã‚³ãƒ¬ã‚¯ã‚·ãƒ§ãƒ³
             /// </summary>
             private readonly ColumnHeaderCollection _lvhs = new ColumnHeaderCollection();
 
             /// <summary>
-            /// ƒtƒBƒ‹ƒ^ƒRƒŒƒNƒVƒ‡ƒ“
+            /// ãƒ•ã‚£ãƒ«ã‚¿ã‚³ãƒ¬ã‚¯ã‚·ãƒ§ãƒ³
             /// </summary>
             private readonly List<string> _filters = new List<string>();
 
 
             /// <summary>
-            /// ƒtƒBƒ‹ƒ^[EƒOƒ‹[ƒvˆ—‚³‚ê‚½ListView¡Item
+            /// ãƒ•ã‚£ãƒ«ã‚¿ãƒ¼ãƒ»ã‚°ãƒ«ãƒ¼ãƒ—å‡¦ç†ã•ã‚ŒãŸListViewï½¡Item
             /// </summary>
             private ListViewItemCollection _filtered_lvis = null;
 
             /// <summary>
-            /// ƒOƒ‹[ƒvˆ—‚ÌƒL[‚Æ‚È‚é—ñ”Ô†
+            /// ã‚°ãƒ«ãƒ¼ãƒ—å‡¦ç†ã®ã‚­ãƒ¼ã¨ãªã‚‹åˆ—ç•ªå·
             /// </summary>
             private int _column_no_of_distinctedRow = -1;
 
 
             /// <summary>
-            /// ‘SƒtƒBƒ‹ƒ^[ó‘Ô‚ğ‰ğœ‚µ‚ÄA‚·‚×‚Ä‚Ìs‚ğ•\¦‚·‚é
+            /// å…¨ãƒ•ã‚£ãƒ«ã‚¿ãƒ¼çŠ¶æ…‹ã‚’è§£é™¤ã—ã¦ã€ã™ã¹ã¦ã®è¡Œã‚’è¡¨ç¤ºã™ã‚‹
             /// </summary>
             public void FilterOff()
             {
@@ -260,7 +260,7 @@ namespace Tono.GuiWinForm
             }
 
             /// <summary>
-            /// ‚Ü‚Æ‚ß‚Ä•\¦ó‘Ô‚ğ•ÏX
+            /// ã¾ã¨ã‚ã¦è¡¨ç¤ºçŠ¶æ…‹ã‚’å¤‰æ›´
             /// </summary>
             /// <param name="items"></param>
             /// <param name="sw"></param>
@@ -321,7 +321,7 @@ namespace Tono.GuiWinForm
             }
 
             /// <summary>
-            /// ƒAƒCƒeƒ€‚ÌƒXƒe[ƒ^ƒX‚ğæ“¾‚·‚é
+            /// ã‚¢ã‚¤ãƒ†ãƒ ã®ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚’å–å¾—ã™ã‚‹
             /// </summary>
             /// <param name="lvi"></param>
             /// <returns></returns>
@@ -338,8 +338,8 @@ namespace Tono.GuiWinForm
             }
 
             /// <summary>
-            /// •\¦ó‘Ô‚ğ•ÏX
-            /// ’x‚¢‚Ì‚ÅASetVisible(ICollection...‚ğŠˆ—p‚µ‚Ä‚­‚¾‚³‚¢
+            /// è¡¨ç¤ºçŠ¶æ…‹ã‚’å¤‰æ›´
+            /// é…ã„ã®ã§ã€SetVisible(ICollection...ã‚’æ´»ç”¨ã—ã¦ãã ã•ã„
             /// </summary>
             /// <param name="item"></param>
             /// <param name="sw"></param>
@@ -397,14 +397,14 @@ namespace Tono.GuiWinForm
 
 
             /// <summary>
-            /// ƒOƒ‹[ƒvˆ—‚³‚ê‚½—ñ‚ªw’è‚³‚ê‚Ä‚¢‚é‚©‚Ç‚¤‚©‚ğ’²‚×‚é
+            /// ã‚°ãƒ«ãƒ¼ãƒ—å‡¦ç†ã•ã‚ŒãŸåˆ—ãŒæŒ‡å®šã•ã‚Œã¦ã„ã‚‹ã‹ã©ã†ã‹ã‚’èª¿ã¹ã‚‹
             /// </summary>
             public bool IsDistinctedRow => _column_no_of_distinctedRow >= 0;
 
             /// <summary>
-            /// ƒOƒ‹[ƒvˆ—‚ÌƒL[‚Æ‚È‚é—ñ”Ô†
+            /// ã‚°ãƒ«ãƒ¼ãƒ—å‡¦ç†ã®ã‚­ãƒ¼ã¨ãªã‚‹åˆ—ç•ªå·
             /// </summary>
-            /// <returns>—ñ”Ô† / -1=ƒOƒ‹[ƒvˆ—‚µ‚Ä‚¢‚È‚¢</returns>
+            /// <returns>åˆ—ç•ªå· / -1=ã‚°ãƒ«ãƒ¼ãƒ—å‡¦ç†ã—ã¦ã„ãªã„</returns>
             public int GetColumnNoOfDistinctedRow()
             {
                 return _column_no_of_distinctedRow;
@@ -413,20 +413,20 @@ namespace Tono.GuiWinForm
             private static readonly Dictionary<Type, MethodInfo> cast_to_double = new Dictionary<Type, MethodInfo>();
 
             /// <summary>
-            /// w’èƒJƒ‰ƒ€‚ª‚Pí—Ş‚Ps‚É‚È‚é‚æ‚¤‚ÉAƒtƒBƒ‹ƒ^ƒŠƒ“ƒO‚µ‚½Items‚ğì¬‚·‚é
-            ///ƒ\[ƒg•ö‚ê‚é
+            /// æŒ‡å®šã‚«ãƒ©ãƒ ãŒï¼‘ç¨®é¡ï¼‘è¡Œã«ãªã‚‹ã‚ˆã†ã«ã€ãƒ•ã‚£ãƒ«ã‚¿ãƒªãƒ³ã‚°ã—ãŸItemsã‚’ä½œæˆã™ã‚‹
+            ///ã‚½ãƒ¼ãƒˆå´©ã‚Œã‚‹
             /// </summary>
-            /// <param name="column">—ñ”Ô†B-1=‰ğœ</param>
+            /// <param name="column">åˆ—ç•ªå·ã€‚-1=è§£é™¤</param>
             public void SetDistinctRow(int column)
             {
-                // ƒ†ƒj[ƒNî•ñ‚ğƒNƒŠƒA‚·‚é
+                // ãƒ¦ãƒ‹ãƒ¼ã‚¯æƒ…å ±ã‚’ã‚¯ãƒªã‚¢ã™ã‚‹
                 foreach (var kv in _status)
                 {
                     kv.Value.ResetNotUniqueInfo();
                 }
 
-                // ƒ}ƒCƒiƒXƒJƒ‰ƒ€‚ÍA‰ğœ‚ğˆÓ–¡‚·‚é 
-                bool isChanged; // ƒCƒxƒ“ƒg”­s—p ƒ_[ƒeƒB[ƒtƒ‰ƒO
+                // ãƒã‚¤ãƒŠã‚¹ã‚«ãƒ©ãƒ ã¯ã€è§£é™¤ã‚’æ„å‘³ã™ã‚‹ ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼
+                bool isChanged; // ã‚¤ãƒ™ãƒ³ãƒˆç™ºè¡Œç”¨ ãƒ€ãƒ¼ãƒ†ã‚£ãƒ¼ãƒ•ãƒ©ã‚°
                 if (column < 0)
                 {
                     isChanged = _column_no_of_distinctedRow >= 0;
@@ -438,13 +438,13 @@ namespace Tono.GuiWinForm
                     _column_no_of_distinctedRow = -1;
                     if (isChanged)
                     {
-                        GroupKeyChanged?.Invoke(this, new ColumnClickEventArgs(-1));    // ƒCƒxƒ“ƒg”­s
+                        GroupKeyChanged?.Invoke(this, new ColumnClickEventArgs(-1));    // ã‚¤ãƒ™ãƒ³ãƒˆç™ºè¡Œ
                     }
                     return;
                 }
 
-                // ƒOƒ‹[ƒv—ñw’è@
-                isChanged = _column_no_of_distinctedRow != column;  // ƒCƒxƒ“ƒg”­s—pƒ_[ƒeƒB[ƒtƒ‰ƒO
+                // ã‚°ãƒ«ãƒ¼ãƒ—åˆ—æŒ‡å®šã€€ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼
+                isChanged = _column_no_of_distinctedRow != column;  // ã‚¤ãƒ™ãƒ³ãƒˆç™ºè¡Œç”¨ãƒ€ãƒ¼ãƒ†ã‚£ãƒ¼ãƒ•ãƒ©ã‚°
                 _column_no_of_distinctedRow = column;
                 var groupbykey = new Dictionary<string, List<ListViewItem>>();
                 foreach (ListViewItem lvi in _lvis)
@@ -468,8 +468,8 @@ namespace Tono.GuiWinForm
                 {
                     _filtered_lvis.Add(lvis[0]);
 
-                    // ƒ†ƒj[ƒNŒŸ¸
-                    for (var c = 0; c < _lvhs.Count; c++)   // ƒwƒbƒ_”ƒ‹[ƒv
+                    // ãƒ¦ãƒ‹ãƒ¼ã‚¯æ¤œæŸ»
+                    for (var c = 0; c < _lvhs.Count; c++)   // ãƒ˜ãƒƒãƒ€æ•°ãƒ«ãƒ¼ãƒ—
                     {
                         if (_status.TryGetValue(lvis[0], out var status) == false)
                         {
@@ -604,7 +604,7 @@ namespace Tono.GuiWinForm
                                         }
                                         break;
                                     default:
-                                        Debug.Assert(false, "‚·‚×‚Ä‚ÌsummaryMode‚É‚Â‚¢‚ÄƒvƒƒOƒ‰ƒ€‚µ‚Ä‚­‚¾‚³‚¢");
+                                        Debug.Assert(false, "ã™ã¹ã¦ã®summaryModeã«ã¤ã„ã¦ãƒ—ãƒ­ã‚°ãƒ©ãƒ ã—ã¦ãã ã•ã„");
                                         break;
                                 }
                             }
@@ -614,7 +614,7 @@ namespace Tono.GuiWinForm
                             }
                             if (summaryMode == SummaryMode.Maximum || summaryMode == SummaryMode.Minimum)
                             {
-                                if (!isAllSameValue)    // ‘S•”“¯‚¶’l‚È‚çAÅ‘åEÅ¬•\¦‚Å‚È‚­‚Ä‚à‚æ‚¢i‚»‚Á‚¿‚Ì•û‚ªAƒZƒ‹‚ÉÅ‘å‚ğ¦‚·ƒAƒCƒRƒ“‚ª•t‚©‚È‚­‚ÄŒ©‚â‚·‚¢j
+                                if (!isAllSameValue)    // å…¨éƒ¨åŒã˜å€¤ãªã‚‰ã€æœ€å¤§ãƒ»æœ€å°è¡¨ç¤ºã§ãªãã¦ã‚‚ã‚ˆã„ï¼ˆãã£ã¡ã®æ–¹ãŒã€ã‚»ãƒ«ã«æœ€å¤§ã‚’ç¤ºã™ã‚¢ã‚¤ã‚³ãƒ³ãŒä»˜ã‹ãªãã¦è¦‹ã‚„ã™ã„ï¼‰
                                 {
                                     status.SetUnique(c, lvis.Count, summaryMode, summary);
                                 }
@@ -625,10 +625,10 @@ namespace Tono.GuiWinForm
                             }
                         }
                     }
-                    // ƒOƒ‹[ƒv‚³‚ê‚½s”‚ğ•Û‘¶‚·‚é
+                    // ã‚°ãƒ«ãƒ¼ãƒ—ã•ã‚ŒãŸè¡Œæ•°ã‚’ä¿å­˜ã™ã‚‹
                     if (lvis.Count > 1)
                     {
-                        if (_status.ContainsKey(lvis[0]) == false)  // ‚QsˆÈã‚ª‚Ü‚Á‚½‚­ˆê’v‚µ‚Ä‚¢‚½ê‡AStatus‚ª“o˜^‚³‚ê‚Ä‚¢‚È‚¢‚Ì‚ÅA‚±‚±‚Åƒ†ƒj[ƒNˆµ‚¢‚Å“o˜^‚·‚é
+                        if (_status.ContainsKey(lvis[0]) == false)  // ï¼’è¡Œä»¥ä¸ŠãŒã¾ã£ãŸãä¸€è‡´ã—ã¦ã„ãŸå ´åˆã€StatusãŒç™»éŒ²ã•ã‚Œã¦ã„ãªã„ã®ã§ã€ã“ã“ã§ãƒ¦ãƒ‹ãƒ¼ã‚¯æ‰±ã„ã§ç™»éŒ²ã™ã‚‹
                         {
                             _status[lvis[0]] = new Status();
                         }
@@ -646,8 +646,8 @@ namespace Tono.GuiWinForm
             }
 
             /// <summary>
-            /// ƒAƒCƒeƒ€‚ÌƒRƒŒƒNƒVƒ‡ƒ“
-            /// iSetDistinct‚µ‚Ä‚¢‚éê‡‚ÍA‚»‚ê‚ª”½‰f‚³‚ê‚½ƒRƒŒƒNƒVƒ‡ƒ“j
+            /// ã‚¢ã‚¤ãƒ†ãƒ ã®ã‚³ãƒ¬ã‚¯ã‚·ãƒ§ãƒ³
+            /// ï¼ˆSetDistinctã—ã¦ã„ã‚‹å ´åˆã¯ã€ãã‚ŒãŒåæ˜ ã•ã‚ŒãŸã‚³ãƒ¬ã‚¯ã‚·ãƒ§ãƒ³ï¼‰
             /// </summary>
             public ListViewItemCollection Items
             {
@@ -665,7 +665,7 @@ namespace Tono.GuiWinForm
             }
 
             /// <summary>
-            /// w’èƒŒƒR[ƒh‚É‘Î‚·‚é‰B‚ê‚½s‚ğ‚·‚×‚Ä•Ô‚·i’x‚¢j
+            /// æŒ‡å®šãƒ¬ã‚³ãƒ¼ãƒ‰ã«å¯¾ã™ã‚‹éš ã‚ŒãŸè¡Œã‚’ã™ã¹ã¦è¿”ã™ï¼ˆé…ã„ï¼‰
             /// </summary>
             /// <param name="lvi"></param>
             /// <returns></returns>
@@ -690,7 +690,7 @@ namespace Tono.GuiWinForm
             }
 
             /// <summary>
-            /// ƒtƒBƒ‹ƒ^ó‘Ô‚Ì‚à‚Ì‚àŠÜ‚ß‚ÄA‚·‚×‚Ä‚ÌƒAƒCƒeƒ€
+            /// ãƒ•ã‚£ãƒ«ã‚¿çŠ¶æ…‹ã®ã‚‚ã®ã‚‚å«ã‚ã¦ã€ã™ã¹ã¦ã®ã‚¢ã‚¤ãƒ†ãƒ 
             /// </summary>
             public ICollection<ListViewItem> GetAllItems()
             {
@@ -711,18 +711,18 @@ namespace Tono.GuiWinForm
 
 
             /// <summary>
-            /// ƒwƒbƒ_‚ÌƒRƒŒƒNƒVƒ‡ƒ“
+            /// ãƒ˜ãƒƒãƒ€ã®ã‚³ãƒ¬ã‚¯ã‚·ãƒ§ãƒ³
             /// </summary>
             public ColumnHeaderCollection Columns => _lvhs;
 
             /// <summary>
-            /// ƒtƒBƒ‹ƒ^[‚ÌƒRƒŒƒNƒVƒ‡ƒ“
+            /// ãƒ•ã‚£ãƒ«ã‚¿ãƒ¼ã®ã‚³ãƒ¬ã‚¯ã‚·ãƒ§ãƒ³
             /// </summary>
             public List<string> Filters
             {
                 get
                 {
-                    for (var i = _filters.Count; i < _lvhs.Count; i++)  // ƒJƒ‰ƒ€‚Ì—Ê‚¾‚¯ƒtƒBƒ‹ƒ^‚ª‚ ‚é‚æ‚¤‚É‚·‚é
+                    for (var i = _filters.Count; i < _lvhs.Count; i++)  // ã‚«ãƒ©ãƒ ã®é‡ã ã‘ãƒ•ã‚£ãƒ«ã‚¿ãŒã‚ã‚‹ã‚ˆã†ã«ã™ã‚‹
                     {
                         _filters.Add("");
                     }
@@ -731,13 +731,13 @@ namespace Tono.GuiWinForm
             }
 
             /// <summary>
-            /// ƒOƒ‹[ƒv‰»‚µ‚Ä‚àƒ†ƒj[ƒN‚Å‚ ‚é‚©‚Ç‚¤‚©‚ğ’²‚×‚é
+            /// ã‚°ãƒ«ãƒ¼ãƒ—åŒ–ã—ã¦ã‚‚ãƒ¦ãƒ‹ãƒ¼ã‚¯ã§ã‚ã‚‹ã‹ã©ã†ã‹ã‚’èª¿ã¹ã‚‹
             /// </summary>
             /// <param name="lvi"></param>
             /// <param name="column"></param>
-            /// <param name="summaryValue">WŒvŒ‹‰Ê</param>
-            /// <param name="summaryMode">WŒv•û–@</param>
-            /// <returns>1=ƒ†ƒj[ƒN‚È‚Pí—Ş‚ÅƒTƒ}ƒŠWŒv‚µ‚Ä‚¢‚È‚¢B‚QˆÈã=î•ñ‚Ìí—Ş”is”‚Å‚Í‚È‚¢j‚ÅWŒv‚µ‚Ä‚¢‚é</returns>
+            /// <param name="summaryValue">é›†è¨ˆçµæœ</param>
+            /// <param name="summaryMode">é›†è¨ˆæ–¹æ³•</param>
+            /// <returns>1=ãƒ¦ãƒ‹ãƒ¼ã‚¯ãªï¼‘ç¨®é¡ã§ã‚µãƒãƒªé›†è¨ˆã—ã¦ã„ãªã„ã€‚ï¼’ä»¥ä¸Š=æƒ…å ±ã®ç¨®é¡æ•°ï¼ˆè¡Œæ•°ã§ã¯ãªã„ï¼‰ã§é›†è¨ˆã—ã¦ã„ã‚‹</returns>
             public int GetSummaryInfo(ListViewItem lvi, int column, out SummaryMode summaryMode, out object summaryValue)
             {
                 if (_status.TryGetValue(lvi, out var status))
@@ -755,7 +755,7 @@ namespace Tono.GuiWinForm
             }
 
             /// <summary>
-            /// ƒOƒ‹[ƒv‰»‚³‚ê‚½Œ³‚ÌƒŒƒR[ƒh”‚ğ’²‚×‚é
+            /// ã‚°ãƒ«ãƒ¼ãƒ—åŒ–ã•ã‚ŒãŸå…ƒã®ãƒ¬ã‚³ãƒ¼ãƒ‰æ•°ã‚’èª¿ã¹ã‚‹
             /// </summary>
             /// <param name="lvi"></param>
             /// <returns></returns>
@@ -773,32 +773,32 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// Tono.GuiWinFormƒp[ƒci•\¦—pˆêƒf[ƒ^‚ğŠÇ—j
+        /// Tono.GuiWinFormãƒ‘ãƒ¼ãƒ„ï¼ˆè¡¨ç¤ºç”¨ä¸€æ™‚ãƒ‡ãƒ¼ã‚¿ã‚’ç®¡ç†ï¼‰
         /// </summary>
         public class FreeViewPartsCollection : PartsCollection
         {
             /// <summary>
-            /// ƒZƒ‹AƒeƒLƒXƒgƒ}[ƒWƒ“iƒY[ƒ€‘Oj
+            /// ã‚»ãƒ«ã€ãƒ†ã‚­ã‚¹ãƒˆãƒãƒ¼ã‚¸ãƒ³ï¼ˆã‚ºãƒ¼ãƒ å‰ï¼‰
             /// </summary>
             public float ptCellMarginX = 2;
 
             /// <summary>
-            /// ƒZƒ‹AƒeƒLƒXƒgƒ}[ƒWƒ“iƒY[ƒ€‘Oj
+            /// ã‚»ãƒ«ã€ãƒ†ã‚­ã‚¹ãƒˆãƒãƒ¼ã‚¸ãƒ³ï¼ˆã‚ºãƒ¼ãƒ å‰ï¼‰
             /// </summary>
             public float ptCellMarginY = 2;
 
             /// <summary>
-            /// ƒtƒBƒ‹ƒ^ƒ{ƒbƒNƒX‚Ì‚‚³iƒwƒbƒ_’¼‰º‚É•t‚­AƒY[ƒ€‘Oj
+            /// ãƒ•ã‚£ãƒ«ã‚¿ãƒœãƒƒã‚¯ã‚¹ã®é«˜ã•ï¼ˆãƒ˜ãƒƒãƒ€ç›´ä¸‹ã«ä»˜ãã€ã‚ºãƒ¼ãƒ å‰ï¼‰
             /// </summary>
             public float ptFilterHeight = 18;
 
             /// <summary>
-            /// ƒwƒbƒ_‚Ì•W€‚‚³iƒY[ƒ€‘Oj
+            /// ãƒ˜ãƒƒãƒ€ã®æ¨™æº–é«˜ã•ï¼ˆã‚ºãƒ¼ãƒ å‰ï¼‰
             /// </summary>
             public float ptHeaderLabelHeight = 24;
 
             /// <summary>
-            /// ƒwƒbƒ_‚Ì•W€‚‚³iƒY[ƒ€‘OjƒtƒBƒ‹ƒ^—Ìˆæ‚ÌƒTƒCƒY‚ğŠÜ‚Ş‚Ì‚ÅAæ“ªs‚ÌˆÊ’u‚ğæ“¾‚·‚é‚½‚ß‚É—p‚¢‚é
+            /// ãƒ˜ãƒƒãƒ€ã®æ¨™æº–é«˜ã•ï¼ˆã‚ºãƒ¼ãƒ å‰ï¼‰ãƒ•ã‚£ãƒ«ã‚¿é ˜åŸŸã®ã‚µã‚¤ã‚ºã‚’å«ã‚€ã®ã§ã€å…ˆé ­è¡Œã®ä½ç½®ã‚’å–å¾—ã™ã‚‹ãŸã‚ã«ç”¨ã„ã‚‹
             /// </summary>
             public float ptHDy
             {
@@ -807,53 +807,53 @@ namespace Tono.GuiWinForm
             }
 
             /// <summary>
-            /// s‚Ì•W€‚‚³iƒY[ƒ€‘Oj
+            /// è¡Œã®æ¨™æº–é«˜ã•ï¼ˆã‚ºãƒ¼ãƒ å‰ï¼‰
             /// </summary>
             public float ptROWy = 20;
 
             /// <summary>
-            /// ƒwƒbƒ_‚Ì‚‚³iƒXƒNƒŠ[ƒ“À•Wj
+            /// ãƒ˜ãƒƒãƒ€ã®é«˜ã•ï¼ˆã‚¹ã‚¯ãƒªãƒ¼ãƒ³åº§æ¨™ï¼‰
             /// </summary>
             public float scHeaderHeight;
 
             /// <summary>
-            /// ƒtƒBƒ‹ƒ^‚Ì‚‚³iƒXƒNƒŠ[ƒ“À•Wj
+            /// ãƒ•ã‚£ãƒ«ã‚¿ã®é«˜ã•ï¼ˆã‚¹ã‚¯ãƒªãƒ¼ãƒ³åº§æ¨™ï¼‰
             /// </summary>
             public float scFilterHeight;
 
             /// <summary>
-            /// s‚Ì‚‚³iƒXƒNƒŠ[ƒ“À•Wj
+            /// è¡Œã®é«˜ã•ï¼ˆã‚¹ã‚¯ãƒªãƒ¼ãƒ³åº§æ¨™ï¼‰
             /// </summary>
             public float scRowHeight;
 
             /// <summary>
-            /// ƒJƒ‰ƒ€‚Ì•\¦ŠJnˆÊ’uiXÀ•Wj
+            /// ã‚«ãƒ©ãƒ ã®è¡¨ç¤ºé–‹å§‹ä½ç½®ï¼ˆXåº§æ¨™ï¼‰
             /// </summary>
             public List<float> scColStartX = new List<float>();
 
             /// <summary>
-            /// ƒ}ƒEƒXˆÊ’u‚ÌƒJƒ‰ƒ€
+            /// ãƒã‚¦ã‚¹ä½ç½®ã®ã‚«ãƒ©ãƒ 
             /// </summary>
             public int columnAtMouse = -1;
 
             /// <summary>
-            /// ƒ}ƒEƒXˆÊ’u‚Ìs
+            /// ãƒã‚¦ã‚¹ä½ç½®ã®è¡Œ
             /// </summary>
             public int rowAtMouse = -1;
 
             /// <summary>
-            /// ƒ}ƒEƒXˆÊ’u‚Ì’l
+            /// ãƒã‚¦ã‚¹ä½ç½®ã®å€¤
             /// </summary>
             public string valueAtMouse = "";
 
             /// <summary>
-            /// ƒCƒ[ƒWƒŠƒXƒg
+            /// ã‚¤ãƒ¡ãƒ¼ã‚¸ãƒªã‚¹ãƒˆ
             /// </summary>
             public ImageList ImageList = null;
         }
 
         /// <summary>
-        /// Tono.GuiWinFormƒŠƒ“ƒN‹@\
+        /// Tono.GuiWinFormãƒªãƒ³ã‚¯æ©Ÿæ§‹
         /// </summary>
         public class DataLink : DataLinkBase
         {
@@ -877,16 +877,16 @@ namespace Tono.GuiWinForm
         }
 
         #endregion
-        #region Tono.GuiWinForm ƒtƒB[ƒ`ƒƒ[
+        #region Tono.GuiWinForm ãƒ•ã‚£ãƒ¼ãƒãƒ£ãƒ¼
         /// <summary>
-        /// ƒXƒNƒ[ƒ‹‚âƒY[ƒ€‚Ì’l‚ğ•\¦”ÍˆÍ‚É§ŒÀ‚·‚é
+        /// ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ã‚„ã‚ºãƒ¼ãƒ ã®å€¤ã‚’è¡¨ç¤ºç¯„å›²ã«åˆ¶é™ã™ã‚‹
         /// </summary>
         public class FeatureZoomScrollNormalizer : FeatureBase, IScrollListener, IZoomListener, IMouseListener
         {
             private IRichPane[] _rpTarget;
             private XyBase _preZoom = XyBase.FromInt(-1, -1);
             /// <summary>
-            /// ƒY[ƒ€ŒÀŠE‚È‚Ì‚Å©“®‹“_ˆÚ“®‚µ‚È‚¢
+            /// ã‚ºãƒ¼ãƒ é™ç•Œãªã®ã§è‡ªå‹•è¦–ç‚¹ç§»å‹•ã—ãªã„
             /// </summary>
             private DataSharingManager.Boolean _noscrollmove = null;
 
@@ -897,7 +897,7 @@ namespace Tono.GuiWinForm
                 _noscrollmove = (DataSharingManager.Boolean)Share.Get("NoScrollMoveFlag", typeof(DataSharingManager.Boolean));
             }
 
-            #region IScrollListener ƒƒ“ƒo
+            #region IScrollListener ãƒ¡ãƒ³ãƒ
 
             public IRichPane[] ScrollEventTargets => _rpTarget;
 
@@ -940,7 +940,7 @@ namespace Tono.GuiWinForm
 
             #endregion
 
-            #region IZoomListener ƒƒ“ƒo
+            #region IZoomListener ãƒ¡ãƒ³ãƒ
 
             public IRichPane[] ZoomEventTargets => _rpTarget;
 
@@ -964,7 +964,7 @@ namespace Tono.GuiWinForm
 
             #endregion
 
-            #region IMouseListener ƒƒ“ƒo
+            #region IMouseListener ãƒ¡ãƒ³ãƒ
 
             public void OnMouseMove(MouseState e)
             {
@@ -987,17 +987,17 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒJƒ‰ƒ€•‚ğƒXƒ€[ƒY‚É’²®
+        /// ã‚«ãƒ©ãƒ å¹…ã‚’ã‚¹ãƒ ãƒ¼ã‚ºã«èª¿æ•´
         /// </summary>
         public class FeatureDragColumnZoom : FeatureBase, IMouseListener
         {
             /// <summary>
-            /// Å¬•
+            /// æœ€å°å¹…
             /// </summary>
             public static readonly int MinimumWidth = 4;
 
             /// <summary>
-            /// Å‘å•
+            /// æœ€å¤§å¹…
             /// </summary>
             public static readonly int MaximumWidth = 800;
 
@@ -1005,7 +1005,7 @@ namespace Tono.GuiWinForm
             private readonly ScreenPos _orgPos = ScreenPos.FromInt(0, 0);
             private int _orgWidth = -1;
 
-            #region IMouseListener ƒƒ“ƒo
+            #region IMouseListener ãƒ¡ãƒ³ãƒ
 
             public void OnMouseMove(MouseState e)
             {
@@ -1051,42 +1051,42 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ‚‚³•ûŒü‚ÌƒXƒ€[ƒYƒY[ƒ€
+        /// é«˜ã•æ–¹å‘ã®ã‚¹ãƒ ãƒ¼ã‚ºã‚ºãƒ¼ãƒ 
         /// </summary>
         public class FeatureDragHeightZoom : FeatureBase, IMouseListener
         {
-            #region		‘®«(ƒVƒŠƒAƒ‰ƒCƒY‚·‚é)
-            /** <summary>ƒY[ƒ€‚ğŠJn‚·‚éƒgƒŠƒK</summary> */
+            #region		å±æ€§(ã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºã™ã‚‹)
+            /** <summary>ã‚ºãƒ¼ãƒ ã‚’é–‹å§‹ã™ã‚‹ãƒˆãƒªã‚¬</summary> */
             private readonly MouseState.Buttons _trigger;
             private readonly bool _isCenterLock;
             #endregion
-            #region		‘®«(ƒVƒŠƒAƒ‰ƒCƒY‚µ‚È‚¢)
-            /// <summary>ƒ}ƒEƒX‚ğƒNƒŠƒbƒN‚µ‚½“_‚Å‚Ìƒ}ƒEƒXÀ•W</summary>
+            #region		å±æ€§(ã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºã—ãªã„)
+            /// <summary>ãƒã‚¦ã‚¹ã‚’ã‚¯ãƒªãƒƒã‚¯ã—ãŸæ™‚ç‚¹ã§ã®ãƒã‚¦ã‚¹åº§æ¨™</summary>
             private ScreenPos _posDown = null;
-            /// <summary>ƒ}ƒEƒX‚ğƒNƒŠƒbƒN‚µ‚½“_‚Å‚ÌƒXƒNƒ[ƒ‹—Ê</summary>
+            /// <summary>ãƒã‚¦ã‚¹ã‚’ã‚¯ãƒªãƒƒã‚¯ã—ãŸæ™‚ç‚¹ã§ã®ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«é‡</summary>
             private ScreenPos _scrollDown;
-            /// <summary>ƒ}ƒEƒX‚ğƒNƒŠƒbƒN‚µ‚½‚ÌƒY[ƒ€’l</summary>
+            /// <summary>ãƒã‚¦ã‚¹ã‚’ã‚¯ãƒªãƒƒã‚¯ã—ãŸæ™‚ã®ã‚ºãƒ¼ãƒ å€¤</summary>
             private XyBase _zoomDown;
-            /// <summary>ƒ}ƒEƒX‚ğƒNƒŠƒbƒN‚µ‚½‚Æ‚«‚Ìƒy[ƒ“</summary>
+            /// <summary>ãƒã‚¦ã‚¹ã‚’ã‚¯ãƒªãƒƒã‚¯ã—ãŸã¨ãã®ãƒšãƒ¼ãƒ³</summary>
             private IRichPane _paneDown;
-            /// <summary>ƒCƒxƒ“ƒg‚É‚æ‚Á‚Ä•ÏX‚·‚éƒJ[ƒ\ƒ‹‚ÌƒŠƒXƒg</summary>
+            /// <summary>ã‚¤ãƒ™ãƒ³ãƒˆã«ã‚ˆã£ã¦å¤‰æ›´ã™ã‚‹ã‚«ãƒ¼ã‚½ãƒ«ã®ãƒªã‚¹ãƒˆ</summary>
             private readonly Hashtable _CursorList = new Hashtable();
-            /// <summary>’¼‘O‚Ìƒ}ƒEƒXƒJ[ƒ\ƒ‹‚Ìó‹µ</summary>
+            /// <summary>ç›´å‰ã®ãƒã‚¦ã‚¹ã‚«ãƒ¼ã‚½ãƒ«ã®çŠ¶æ³</summary>
             private readonly MouseState.Buttons _prev = new MouseState.Buttons();
-            /// <summary>ƒJ[ƒ\ƒ‹‚ğ</summary>
+            /// <summary>ã‚«ãƒ¼ã‚½ãƒ«ã‚’</summary>
             protected NamedId _tokenListenID = NamedId.FromName("CursorSetJob");
             /// <summary>
-            /// ƒY[ƒ€ŒÀŠE‚È‚Ì‚Å©“®‹“_ˆÚ“®‚µ‚È‚¢
+            /// ã‚ºãƒ¼ãƒ é™ç•Œãªã®ã§è‡ªå‹•è¦–ç‚¹ç§»å‹•ã—ãªã„
             /// </summary>
             private DataSharingManager.Boolean _noscrollmove = null;
             #endregion
 
             /// <summary>
-            /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+            /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
             /// </summary>
             public FeatureDragHeightZoom()
             {
-                // ƒfƒtƒHƒ‹ƒg‚Åƒhƒ‰ƒbƒOƒXƒNƒ[ƒ‹‚·‚é‚½‚ß‚ÌƒL[‚ğİ’è‚·‚é
+                // ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã§ãƒ‰ãƒ©ãƒƒã‚°ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ã™ã‚‹ãŸã‚ã®ã‚­ãƒ¼ã‚’è¨­å®šã™ã‚‹
                 _trigger = new MouseState.Buttons
                 {
                     IsButton = true,
@@ -1098,7 +1098,7 @@ namespace Tono.GuiWinForm
             }
 
             /// <summary>
-            /// ‰Šú‰»
+            /// åˆæœŸåŒ–
             /// </summary>
             public override void OnInitInstance()
             {
@@ -1106,9 +1106,9 @@ namespace Tono.GuiWinForm
                 _noscrollmove = (DataSharingManager.Boolean)Share.Get("NoScrollMoveFlag", typeof(DataSharingManager.Boolean));
             }
 
-            #region IMouseListener ƒƒ“ƒo
+            #region IMouseListener ãƒ¡ãƒ³ãƒ
             /// <summary>
-            /// ƒ{ƒ^ƒ“DownƒCƒxƒ“ƒg
+            /// ãƒœã‚¿ãƒ³Downã‚¤ãƒ™ãƒ³ãƒˆ
             /// </summary>
             /// <param name="e"></param>
             public void OnMouseDown(MouseState e)
@@ -1123,7 +1123,7 @@ namespace Tono.GuiWinForm
             }
 
             /// <summary>
-            /// ƒ}ƒEƒXMoveƒCƒxƒ“ƒg
+            /// ãƒã‚¦ã‚¹Moveã‚¤ãƒ™ãƒ³ãƒˆ
             /// </summary>
             /// <param name="e"></param>
             public void OnMouseMove(MouseState e)
@@ -1135,8 +1135,8 @@ namespace Tono.GuiWinForm
 
                 if (e.Attr.Equals(_trigger))
                 {
-                    // ‰æ–Ê‚ÌŠg‘å/k¬
-                    var movePos = e.Pos - _posDown;          // ƒJ[ƒ\ƒ‹‚ÌˆÚ“®—Ê‚ÌŒvZ
+                    // ç”»é¢ã®æ‹¡å¤§/ç¸®å°
+                    var movePos = e.Pos - _posDown;          // ã‚«ãƒ¼ã‚½ãƒ«ã®ç§»å‹•é‡ã®è¨ˆç®—
                     movePos.X = movePos.Y;
 
                     var pdBak = (ScreenPos)_posDown.Clone();
@@ -1146,9 +1146,9 @@ namespace Tono.GuiWinForm
                         _posDown.Y = e.Pane.GetPaneRect().LT.Y + (e.Pane.GetPaneRect().RB.Y - e.Pane.GetPaneRect().LT.Y) / 2;
                     }
 
-                    var zoomNow = _zoomDown + movePos * 2;      // ƒY[ƒ€’l‚ÌZo
+                    var zoomNow = _zoomDown + movePos * 2;      // ã‚ºãƒ¼ãƒ å€¤ã®ç®—å‡º
 
-                    // ƒY[ƒ€’l‚ğ‹K’è”ÍˆÍ“à‚Éû‚ß‚é
+                    // ã‚ºãƒ¼ãƒ å€¤ã‚’è¦å®šç¯„å›²å†…ã«åã‚ã‚‹
                     if (zoomNow.X > 4000)
                     {
                         zoomNow.X = 4000;
@@ -1169,11 +1169,11 @@ namespace Tono.GuiWinForm
                         zoomNow.Y = 5;
                     }
 
-                    Pane.Zoom = (XyBase)zoomNow.Clone();           // ƒY[ƒ€’l‚Ì”½‰f
+                    Pane.Zoom = (XyBase)zoomNow.Clone();           // ã‚ºãƒ¼ãƒ å€¤ã®åæ˜ 
 
-                    // ƒNƒŠƒbƒN‚µ‚½ˆÊ’u‚ğŠî€‚É‚µ‚ÄƒY[ƒ€‚·‚é‚æ‚¤‚É‰æ–Ê‚ğƒXƒNƒ[ƒ‹‚·‚éB
-                    var ZoomRatioX = (double)zoomNow.X / _zoomDown.X;    // X•ûŒü‚ÌƒY[ƒ€—¦‚ÌZo
-                    var ZoomRatioY = (double)zoomNow.Y / _zoomDown.Y;    // Y•ûŒü‚ÌƒY[ƒ€—¦‚ÌZo
+                    // ã‚¯ãƒªãƒƒã‚¯ã—ãŸä½ç½®ã‚’åŸºæº–ã«ã—ã¦ã‚ºãƒ¼ãƒ ã™ã‚‹ã‚ˆã†ã«ç”»é¢ã‚’ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ã™ã‚‹ã€‚
+                    var ZoomRatioX = (double)zoomNow.X / _zoomDown.X;    // Xæ–¹å‘ã®ã‚ºãƒ¼ãƒ ç‡ã®ç®—å‡º
+                    var ZoomRatioY = (double)zoomNow.Y / _zoomDown.Y;    // Yæ–¹å‘ã®ã‚ºãƒ¼ãƒ ç‡ã®ç®—å‡º
 
                     var beforeDownPos = _posDown - _scrollDown - e.Pane.GetPaneRect().LT;    // 
                     var afterDownPos = ScreenPos.FromInt((int)(ZoomRatioX * beforeDownPos.X), (int)(ZoomRatioY * beforeDownPos.Y));
@@ -1196,7 +1196,7 @@ namespace Tono.GuiWinForm
             }
 
             /// <summary>
-            /// ƒ{ƒ^ƒ“UpƒCƒxƒ“ƒg
+            /// ãƒœã‚¿ãƒ³Upã‚¤ãƒ™ãƒ³ãƒˆ
             /// </summary>
             /// <param name="e"></param>
             public void OnMouseUp(MouseState e)
@@ -1207,28 +1207,28 @@ namespace Tono.GuiWinForm
             }
 
             /// <summary>
-            /// ƒ}ƒEƒXƒzƒC[ƒ‹ƒCƒxƒ“ƒg
+            /// ãƒã‚¦ã‚¹ãƒ›ã‚¤ãƒ¼ãƒ«ã‚¤ãƒ™ãƒ³ãƒˆ
             /// </summary>
             /// <param name="e"></param>
             public void OnMouseWheel(MouseState e)
             {
-                // –¢g—p
+                // æœªä½¿ç”¨
             }
 
             #endregion
         }
 
         /// <summary>
-        /// ƒJƒ‰ƒ€ƒNƒŠƒbƒNƒCƒxƒ“ƒg‚ğ”­s‚·‚é
+        /// ã‚«ãƒ©ãƒ ã‚¯ãƒªãƒƒã‚¯ã‚¤ãƒ™ãƒ³ãƒˆã‚’ç™ºè¡Œã™ã‚‹
         /// </summary>
         public class FeatureColumnClickHandler : FeatureBase, IMouseListener
         {
             /// <summary>
-            /// ƒJƒ‰ƒ€ƒNƒŠƒbƒNƒCƒxƒ“ƒgiƒ\[ƒg‚È‚Çj
+            /// ã‚«ãƒ©ãƒ ã‚¯ãƒªãƒƒã‚¯ã‚¤ãƒ™ãƒ³ãƒˆï¼ˆã‚½ãƒ¼ãƒˆãªã©ï¼‰
             /// </summary>
             public event ColumnClickEventHandler ColumnClick;
 
-            #region IMouseListener ƒƒ“ƒo
+            #region IMouseListener ãƒ¡ãƒ³ãƒ
 
             public void OnMouseMove(MouseState e)
             {
@@ -1265,7 +1265,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒtƒBƒ‹ƒ^•¶š‚Ì•ÒW‚ğƒTƒ|[ƒg
+        /// ãƒ•ã‚£ãƒ«ã‚¿æ–‡å­—ã®ç·¨é›†ã‚’ã‚µãƒãƒ¼ãƒˆ
         /// </summary>
         public class FeatureFilterEdit : FeatureBase, IMouseListener, ITokenListener, IScrollListener, IZoomListener
         {
@@ -1278,11 +1278,11 @@ namespace Tono.GuiWinForm
             }
 
             /// <summary>
-            /// ƒtƒBƒ‹ƒ^[Às—v‹‚ª‚ ‚Á‚½
+            /// ãƒ•ã‚£ãƒ«ã‚¿ãƒ¼å®Ÿè¡Œè¦æ±‚ãŒã‚ã£ãŸ
             /// </summary>
             public event ColumnClickEventHandler FilterRequested;
 
-            #region IMouseListener ƒƒ“ƒo
+            #region IMouseListener ãƒ¡ãƒ³ãƒ
 
             public void OnMouseMove(MouseState e)
             {
@@ -1296,7 +1296,7 @@ namespace Tono.GuiWinForm
             {
                 if (e.Attr.IsButton && e.Attr.IsCtrl == false && e.Attr.IsShift == false)
                 {
-                    // ŒÃ‚¢ƒRƒ“ƒgƒ[ƒ‹‚ªŒ©‚Â‚©‚Á‚½‚çAÁ‚·
+                    // å¤ã„ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ãŒè¦‹ã¤ã‹ã£ãŸã‚‰ã€æ¶ˆã™
                     deleteTextControl();
 
                     var ps = (FreeViewPartsCollection)Parts;
@@ -1304,7 +1304,7 @@ namespace Tono.GuiWinForm
                     {
                         if (e.Pos.Y > ps.scHeaderHeight - ps.scFilterHeight && e.Pos.Y < ps.scHeaderHeight)
                         {
-                            // ƒeƒLƒXƒgƒ{ƒbƒNƒXƒRƒ“ƒgƒ[ƒ‹‚ğì¬‚·‚é
+                            // ãƒ†ã‚­ã‚¹ãƒˆãƒœãƒƒã‚¯ã‚¹ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã‚’ä½œæˆã™ã‚‹
                             var zx = (float)Pane.Zoom.X / 1000;
                             var zy = (float)Pane.Zoom.Y / 1000;
                             var tb = new TextBox
@@ -1348,7 +1348,7 @@ namespace Tono.GuiWinForm
             }
 
             /// <summary>
-            /// ƒg[ƒNƒ“‚ğó‚¯‚ÄAƒtƒBƒ‹ƒ^[Às—v¿‚ÌƒCƒxƒ“ƒg‚ğ”­s‚·‚é
+            /// ãƒˆãƒ¼ã‚¯ãƒ³ã‚’å—ã‘ã¦ã€ãƒ•ã‚£ãƒ«ã‚¿ãƒ¼å®Ÿè¡Œè¦è«‹ã®ã‚¤ãƒ™ãƒ³ãƒˆã‚’ç™ºè¡Œã™ã‚‹
             /// </summary>
             /// <param name="who"></param>
             public override void Start(NamedId who)
@@ -1356,7 +1356,7 @@ namespace Tono.GuiWinForm
                 base.Start(who);
                 if (_token.Equals(who))
                 {
-                    FilterRequested?.Invoke(this, new ColumnClickEventArgs(-1));    // -1‚Í‘SƒtƒBƒ‹ƒ^[‚ÌˆÓ–¡
+                    FilterRequested?.Invoke(this, new ColumnClickEventArgs(-1));    // -1ã¯å…¨ãƒ•ã‚£ãƒ«ã‚¿ãƒ¼ã®æ„å‘³
                 }
             }
 
@@ -1365,7 +1365,7 @@ namespace Tono.GuiWinForm
                 var tb = sender as TextBox;
                 if (e.KeyCode == Keys.Enter)
                 {
-                    var col = (int)tb.Tag;  //	ƒtƒBƒ‹ƒ^’l‚ğ”½‰f
+                    var col = (int)tb.Tag;  //	ãƒ•ã‚£ãƒ«ã‚¿å€¤ã‚’åæ˜ 
                     ((HotData)Data).Filters[col] = tb.Text;
 
                     tb_Leave(sender, EventArgs.Empty);
@@ -1393,7 +1393,7 @@ namespace Tono.GuiWinForm
             private void tb_TextChanged(object sender, EventArgs e)
             {
                 //var tb = sender as TextBox;
-                //int col = (int)tb.Tag;	// ƒŠƒAƒ‹ƒ^ƒCƒ€XV‚µ‚È‚¢
+                //int col = (int)tb.Tag;	// ãƒªã‚¢ãƒ«ã‚¿ã‚¤ãƒ æ›´æ–°ã—ãªã„
                 //((daData)Data).Filters[col] = tb.Text;
             }
 
@@ -1403,13 +1403,13 @@ namespace Tono.GuiWinForm
 
             #endregion
 
-            #region ITokenListener ƒƒ“ƒo
+            #region ITokenListener ãƒ¡ãƒ³ãƒ
             private static readonly NamedId _token = NamedId.FromName("RequestFilter");
             public NamedId TokenTriggerID => _token;
 
             #endregion
 
-            #region IScrollListener ƒƒ“ƒo
+            #region IScrollListener ãƒ¡ãƒ³ãƒ
 
             public IRichPane[] ScrollEventTargets => _tarPanes;
 
@@ -1420,7 +1420,7 @@ namespace Tono.GuiWinForm
 
             #endregion
 
-            #region IZoomListener ƒƒ“ƒo
+            #region IZoomListener ãƒ¡ãƒ³ãƒ
 
             public IRichPane[] ZoomEventTargets => _tarPanes;
 
@@ -1433,27 +1433,27 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒRƒ“ƒeƒLƒXƒgƒƒjƒ…[‘€ì
+        /// ã‚³ãƒ³ãƒ†ã‚­ã‚¹ãƒˆãƒ¡ãƒ‹ãƒ¥ãƒ¼æ“ä½œ
         /// </summary>
         public class FeatureContextMenu : FeatureBase, IMouseListener
         {
             /// <summary>
-            /// ƒtƒBƒ‹ƒ^[Às—v‹
+            /// ãƒ•ã‚£ãƒ«ã‚¿ãƒ¼å®Ÿè¡Œè¦æ±‚
             /// </summary>
             public event ColumnClickEventHandler FilterRequested;
 
             /// <summary>
-            /// ƒtƒ@ƒW[•¶š—ñì¬•â•‚Ì—v‹ƒCƒxƒ“ƒg
+            /// ãƒ•ã‚¡ã‚¸ãƒ¼æ–‡å­—åˆ—ä½œæˆè£œåŠ©ã®è¦æ±‚ã‚¤ãƒ™ãƒ³ãƒˆ
             /// </summary>
             public event EventHandler<StringAugmentEventArgs> RequestFuzzyString;
 
             /// <summary>
-            /// ƒfƒUƒCƒi‚Åì‚Á‚½ƒRƒ“ƒeƒLƒXƒgƒƒjƒ…[‚ÌQÆ
+            /// ãƒ‡ã‚¶ã‚¤ãƒŠã§ä½œã£ãŸã‚³ãƒ³ãƒ†ã‚­ã‚¹ãƒˆãƒ¡ãƒ‹ãƒ¥ãƒ¼ã®å‚ç…§
             /// </summary>
             private ContextMenuStrip _menu = null;
 
             /// <summary>
-            /// ƒRƒ“ƒeƒLƒXƒgƒƒjƒ…[‚ğ“o˜^‚·‚é
+            /// ã‚³ãƒ³ãƒ†ã‚­ã‚¹ãƒˆãƒ¡ãƒ‹ãƒ¥ãƒ¼ã‚’ç™»éŒ²ã™ã‚‹
             /// </summary>
             /// <param name="cms"></param>
             public void SetContextMenu(ContextMenuStrip cms)
@@ -1474,7 +1474,7 @@ namespace Tono.GuiWinForm
             }
 
             /// <summary>
-            /// ƒƒjƒ…[ŠJ‚­‚Ìˆ—
+            /// ãƒ¡ãƒ‹ãƒ¥ãƒ¼é–‹ãæ™‚ã®å‡¦ç†
             /// </summary>
             /// <param name="sender"></param>
             /// <param name="e"></param>
@@ -1483,7 +1483,7 @@ namespace Tono.GuiWinForm
                 var dat = (HotData)Data;
                 var ps = (FreeViewPartsCollection)Parts;
 
-                // —ñ–¼‚ğ’Ç‰Á‚·‚é
+                // åˆ—åã‚’è¿½åŠ ã™ã‚‹
                 foreach (ToolStripItem tsi in _menu.Items)
                 {
                     if (tsi is ToolStripMenuItem tsmi)
@@ -1529,7 +1529,7 @@ namespace Tono.GuiWinForm
                                 }
                             }
 
-                            // Enable’²®
+                            // Enableèª¿æ•´
                             if (txt.IndexOf("@COL@") >= 0 || txt.IndexOf("@VAL@") >= 0)
                             {
                                 tsmi.Enabled = true;
@@ -1548,7 +1548,7 @@ namespace Tono.GuiWinForm
                             }
 
 
-                            // ƒeƒLƒXƒg”½‰f
+                            // ãƒ†ã‚­ã‚¹ãƒˆåæ˜ 
                             txt = txt.Replace("@COL@", col);
                             txt = txt.Replace("@VAL@", val);
                             txt = txt.Replace("@KEY@", key);
@@ -1557,7 +1557,7 @@ namespace Tono.GuiWinForm
                     }
                 }
 
-                // ƒƒjƒ…[‚Ì—LŒø–³Œø
+                // ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã®æœ‰åŠ¹ç„¡åŠ¹
                 var isNoFilter = true;
                 for (var i = 0; i < dat.Columns.Count; i++)
                 {
@@ -1589,7 +1589,7 @@ namespace Tono.GuiWinForm
             }
 
             /// <summary>
-            /// ƒtƒBƒ‹ƒ^[‚Ì§ŒÀ•¶š ^ $ “™‚ğ‚Í‚¸‚·
+            /// ãƒ•ã‚£ãƒ«ã‚¿ãƒ¼ã®åˆ¶é™æ–‡å­— ^ $ ç­‰ã‚’ã¯ãšã™
             /// </summary>
             /// <param name="sender"></param>
             /// <param name="e"></param>
@@ -1614,7 +1614,7 @@ namespace Tono.GuiWinForm
             }
 
             /// <summary>
-            /// ƒOƒ‹[ƒv‚³‚ê‚½ƒŒƒR[ƒh‚¾‚¯•\¦‚·‚é
+            /// ã‚°ãƒ«ãƒ¼ãƒ—ã•ã‚ŒãŸãƒ¬ã‚³ãƒ¼ãƒ‰ã ã‘è¡¨ç¤ºã™ã‚‹
             /// </summary>
             /// <param name="sender"></param>
             /// <param name="e"></param>
@@ -1635,7 +1635,7 @@ namespace Tono.GuiWinForm
             }
 
             /// <summary>
-            /// ƒ}ƒEƒXˆÊ’u‚ÌƒeƒLƒXƒg‚Å‘I‘ğƒtƒBƒ‹ƒ^[‚©‚¯‚é
+            /// ãƒã‚¦ã‚¹ä½ç½®ã®ãƒ†ã‚­ã‚¹ãƒˆã§é¸æŠãƒ•ã‚£ãƒ«ã‚¿ãƒ¼ã‹ã‘ã‚‹
             /// </summary>
             /// <param name="sender"></param>
             /// <param name="e"></param>
@@ -1659,7 +1659,7 @@ namespace Tono.GuiWinForm
             }
 
             /// <summary>
-            /// ƒ}ƒEƒXˆÊ’u‚ÌƒeƒLƒXƒg‚Å”ñ‘I‘ğƒtƒBƒ‹ƒ^[‚©‚¯‚é
+            /// ãƒã‚¦ã‚¹ä½ç½®ã®ãƒ†ã‚­ã‚¹ãƒˆã§éé¸æŠãƒ•ã‚£ãƒ«ã‚¿ãƒ¼ã‹ã‘ã‚‹
             /// </summary>
             /// <param name="sender"></param>
             /// <param name="e"></param>
@@ -1688,7 +1688,7 @@ namespace Tono.GuiWinForm
 
 
             /// <summary>
-            /// ƒOƒ‹[ƒv—ñ‚Ì‰ğœi‘SƒŒƒR[ƒh•\¦j
+            /// ã‚°ãƒ«ãƒ¼ãƒ—åˆ—ã®è§£é™¤ï¼ˆå…¨ãƒ¬ã‚³ãƒ¼ãƒ‰è¡¨ç¤ºï¼‰
             /// </summary>
             /// <param name="sender"></param>
             /// <param name="e"></param>
@@ -1700,7 +1700,7 @@ namespace Tono.GuiWinForm
             }
 
             /// <summary>
-            /// ƒOƒ‹[ƒv—ñİ’èˆ—
+            /// ã‚°ãƒ«ãƒ¼ãƒ—åˆ—è¨­å®šå‡¦ç†
             /// </summary>
             /// <param name="sender"></param>
             /// <param name="e"></param>
@@ -1717,7 +1717,7 @@ namespace Tono.GuiWinForm
 
 
             /// <summary>
-            /// ƒtƒBƒ‹ƒ^[‚PƒNƒŠƒA
+            /// ãƒ•ã‚£ãƒ«ã‚¿ãƒ¼ï¼‘ã‚¯ãƒªã‚¢
             /// </summary>
             /// <param name="sender"></param>
             /// <param name="e"></param>
@@ -1732,7 +1732,7 @@ namespace Tono.GuiWinForm
             }
 
             /// <summary>
-            /// ƒtƒBƒ‹ƒ^[ƒI[ƒ‹ƒNƒŠƒA
+            /// ãƒ•ã‚£ãƒ«ã‚¿ãƒ¼ã‚ªãƒ¼ãƒ«ã‚¯ãƒªã‚¢
             /// </summary>
             /// <param name="sender"></param>
             /// <param name="e"></param>
@@ -1746,7 +1746,7 @@ namespace Tono.GuiWinForm
                 Token.Add(NamedId.FromName("RequestFilter"), this);
             }
 
-            #region IMouseListener ƒƒ“ƒo
+            #region IMouseListener ãƒ¡ãƒ³ãƒ
 
             public void OnMouseMove(MouseState e)
             {
@@ -1771,14 +1771,14 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// CTRL+C‚ÅƒRƒs[‚ğƒTƒ|[ƒg
+        /// CTRL+Cã§ã‚³ãƒ”ãƒ¼ã‚’ã‚µãƒãƒ¼ãƒˆ
         /// </summary>
         public class FeatureCopyKey : FeatureBase, IKeyListener
         {
             private Synonym _synonim = null;
 
             /// <summary>
-            /// ƒVƒmƒjƒ€ƒIƒuƒWƒFƒNƒg‚ğ‘İ‚·
+            /// ã‚·ãƒãƒ‹ãƒ ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’è²¸ã™
             /// </summary>
             /// <param name="synonym"></param>
             public void SetSynonym(Synonym synonym)
@@ -1786,7 +1786,7 @@ namespace Tono.GuiWinForm
                 _synonim = synonym;
             }
 
-            #region IKeyListener ƒƒ“ƒo
+            #region IKeyListener ãƒ¡ãƒ³ãƒ
 
             public void OnKeyDown(KeyState e)
             {
@@ -1816,12 +1816,12 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒc[ƒ‹ƒ`ƒbƒvƒTƒ|[ƒg
+        /// ãƒ„ãƒ¼ãƒ«ãƒãƒƒãƒ—ã‚µãƒãƒ¼ãƒˆ
         /// </summary>
         public class FeatureListTooltip : FeatureToolTip, IMouseListener, IScrollListener, IZoomListener
         {
             /// <summary>
-            /// ƒc[ƒ‹ƒ`ƒbƒv‚Éæ‚éƒeƒLƒXƒg¶¬—v‹ƒCƒxƒ“ƒg
+            /// ãƒ„ãƒ¼ãƒ«ãƒãƒƒãƒ—ã«ä¹—ã‚‹ãƒ†ã‚­ã‚¹ãƒˆç”Ÿæˆè¦æ±‚ã‚¤ãƒ™ãƒ³ãƒˆ
             /// </summary>
             public event EventHandler<TooltipTextRequestArgs> TooltipTextRequest;
 
@@ -1838,7 +1838,7 @@ namespace Tono.GuiWinForm
             }
 
             /// <summary>
-            /// ’x‰„ˆ—
+            /// é…å»¶å‡¦ç†
             /// </summary>
             /// <param name="e"></param>
             private void delayProc(object ie)
@@ -1891,7 +1891,7 @@ namespace Tono.GuiWinForm
                 }
             }
 
-            #region IMouseListener ƒƒ“ƒo
+            #region IMouseListener ãƒ¡ãƒ³ãƒ
 
             public void OnMouseMove(MouseState e)
             {
@@ -1923,7 +1923,7 @@ namespace Tono.GuiWinForm
 
             #endregion
 
-            #region IScrollListener ƒƒ“ƒo
+            #region IScrollListener ãƒ¡ãƒ³ãƒ
 
             public IRichPane[] ScrollEventTargets => _tars;
 
@@ -1935,7 +1935,7 @@ namespace Tono.GuiWinForm
 
             #endregion
 
-            #region IZoomListener ƒƒ“ƒo
+            #region IZoomListener ãƒ¡ãƒ³ãƒ
 
             public IRichPane[] ZoomEventTargets => _tars;
 
@@ -1949,10 +1949,10 @@ namespace Tono.GuiWinForm
         }
 
         #endregion
-        #region Tono.GuiWinForm ƒp[ƒcƒA[ƒLƒeƒNƒ`ƒƒ
+        #region Tono.GuiWinForm ãƒ‘ãƒ¼ãƒ„ã‚¢ãƒ¼ã‚­ãƒ†ã‚¯ãƒãƒ£
 
         /// <summary>
-        /// •`‰æ‘S‘Ì‚ğ’S“–
+        /// æç”»å…¨ä½“ã‚’æ‹…å½“
         /// </summary>
         public class PartsViewFree : PartsBase
         {
@@ -1979,14 +1979,14 @@ namespace Tono.GuiWinForm
 
 
             /// <summary>
-            /// ƒXƒ^ƒeƒBƒbƒN‰Šú‰»
+            /// ã‚¹ã‚¿ãƒ†ã‚£ãƒƒã‚¯åˆæœŸåŒ–
             /// </summary>
             static PartsViewFree()
             {
             }
 
             /// <summary>
-            /// ƒf[ƒ^‚ğŠ„‚è“–‚Ä‚é
+            /// ãƒ‡ãƒ¼ã‚¿ã‚’å‰²ã‚Šå½“ã¦ã‚‹
             /// </summary>
             /// <param name="dat"></param>
             public void SetData(HotData dat, FreeViewPartsCollection partsset)
@@ -1996,7 +1996,7 @@ namespace Tono.GuiWinForm
             }
 
             /// <summary>
-            /// ƒCƒ[ƒWƒŠƒXƒg‚ğw’è‚·‚é
+            /// ã‚¤ãƒ¡ãƒ¼ã‚¸ãƒªã‚¹ãƒˆã‚’æŒ‡å®šã™ã‚‹
             /// </summary>
             /// <param name="il"></param>
             public void SetImageList(ImageList il)
@@ -2005,7 +2005,7 @@ namespace Tono.GuiWinForm
             }
 
             /// <summary>
-            /// •`‰æ
+            /// æç”»
             /// </summary>
             /// <param name="rp"></param>
             /// <returns></returns>
@@ -2030,19 +2030,19 @@ namespace Tono.GuiWinForm
                     _fontSummary = new Font(_fontSummary.FontFamily, fontsize);
                 }
 
-                var mx = _partsset.ptCellMarginX * zx;    // ƒ}[ƒWƒ“ƒXƒy[ƒXiXj
-                var my = _partsset.ptCellMarginY * zy;    // ƒ}[ƒWƒ“ƒXƒy[ƒXiYj
+                var mx = _partsset.ptCellMarginX * zx;    // ãƒãƒ¼ã‚¸ãƒ³ã‚¹ãƒšãƒ¼ã‚¹ï¼ˆXï¼‰
+                var my = _partsset.ptCellMarginY * zy;    // ãƒãƒ¼ã‚¸ãƒ³ã‚¹ãƒšãƒ¼ã‚¹ï¼ˆYï¼‰
 
-                // ƒwƒbƒ_‚ÌÅ‘å‚‚³‚ğ’²‚×‚é
+                // ãƒ˜ãƒƒãƒ€ã®æœ€å¤§é«˜ã•ã‚’èª¿ã¹ã‚‹
                 var maxHeaderHeight = zy * _partsset.ptHDy;
-                var headerMargin = rp.Graphics.MeasureString("ˆ¤", _font); // ˆê—ñ
+                var headerMargin = rp.Graphics.MeasureString("æ„›", _font); // ä¸€åˆ—
                 headerMargin.Height = maxHeaderHeight - headerMargin.Height;
                 for (var i = 1; i < _data.Columns.Count; i++)
                 {
                     var hd = _data.Columns[i];
                     var hw = zx * hd.Width;
                     SizeF size;
-                    if (hd.Width < 8)   // Œ©‚¦‚È‚¢‚Í‚‚³Šg’£‚Ì‘ÎÛ‚©‚çŠO‚·
+                    if (hd.Width < 8)   // è¦‹ãˆãªã„æ™‚ã¯é«˜ã•æ‹¡å¼µã®å¯¾è±¡ã‹ã‚‰å¤–ã™
                     {
                         size = rp.Graphics.MeasureString(hd.Text, _font);
                     }
@@ -2069,13 +2069,13 @@ namespace Tono.GuiWinForm
                     }
                 }
 
-                _partsset.scHeaderHeight = maxHeaderHeight; // ƒwƒbƒ_‚‚³
+                _partsset.scHeaderHeight = maxHeaderHeight; // ãƒ˜ãƒƒãƒ€é«˜ã•
 
                 var paneRect = rp.GetPaneRect();
                 var mouse = rp.Control.PointToClient(MouseState.NowPosition) + paneRect.LT;
 
-                // ƒnƒCƒ‰ƒCƒg•\¦iƒJƒ‰ƒ€j
-                var hx = sx;          // ƒwƒbƒ_ˆÊ’u
+                // ãƒã‚¤ãƒ©ã‚¤ãƒˆè¡¨ç¤ºï¼ˆã‚«ãƒ©ãƒ ï¼‰
+                var hx = sx;          // ãƒ˜ãƒƒãƒ€ä½ç½®
                 _partsset.scColStartX.Clear();
                 _partsset.columnAtMouse = -1;
                 for (var i = 0; i < _data.Columns.Count; i++)
@@ -2084,14 +2084,14 @@ namespace Tono.GuiWinForm
                     var hd = _data.Columns[i];
                     var hw = zx * hd.Width;
 
-                    // ƒOƒ‹[ƒvƒL[‚É‚È‚Á‚Ä‚¢‚éƒJƒ‰ƒ€‚ÌF‚ğ•Ï‚¦‚é
+                    // ã‚°ãƒ«ãƒ¼ãƒ—ã‚­ãƒ¼ã«ãªã£ã¦ã„ã‚‹ã‚«ãƒ©ãƒ ã®è‰²ã‚’å¤‰ãˆã‚‹
                     if (i == _data.GetColumnNoOfDistinctedRow())
                     {
                         rp.Graphics.FillRectangle(Brushes.White, hx, paneRect.LT.Y, hw, paneRect.Height);
                         rp.Graphics.FillRectangle(new LinearGradientBrush(new PointF(hx, 0), new PointF(hx + 48, 0), Color.FromArgb(48, Color.Red), Color.White), hx, paneRect.LT.Y, Math.Min(48, hw), paneRect.Height);
                     }
 
-                    // ƒ}ƒEƒXˆÊ’u‚ÌƒJƒ‰ƒ€‚ğ’²¸‚µAF‚ğ•ÏX
+                    // ãƒã‚¦ã‚¹ä½ç½®ã®ã‚«ãƒ©ãƒ ã‚’èª¿æŸ»ã—ã€è‰²ã‚’å¤‰æ›´
                     if (hx <= mouse.X && mouse.X < hx + hw)
                     {
                         rp.Graphics.FillRectangle(_hiBrushCol, hx, paneRect.LT.Y, hw, paneRect.Height);
@@ -2102,7 +2102,7 @@ namespace Tono.GuiWinForm
                 }
 
 
-                // ƒf[ƒ^‚ğ•`‰æ
+                // ãƒ‡ãƒ¼ã‚¿ã‚’æç”»
                 _partsset.rowAtMouse = -1;
                 var dy = sy + _partsset.scHeaderHeight;
                 if (dy > _partsset.scHeaderHeight)
@@ -2117,13 +2117,13 @@ namespace Tono.GuiWinForm
                     start_i = 0;
                 }
 
-                dy += _partsset.scRowHeight * start_i;  // •`‰æŠJnˆÊ’u‚ğ’²®
-                bool isMouseRow;    // ƒ}ƒEƒXs‚Ìˆ—’†
+                dy += _partsset.scRowHeight * start_i;  // æç”»é–‹å§‹ä½ç½®ã‚’èª¿æ•´
+                bool isMouseRow;    // ãƒã‚¦ã‚¹è¡Œã®å‡¦ç†ä¸­
                 _partsset.valueAtMouse = "";
 
                 for (var i = start_i; i < _data.Items.Count; i++)
                 {
-                    // ƒnƒCƒ‰ƒCƒg•\¦isj
+                    // ãƒã‚¤ãƒ©ã‚¤ãƒˆè¡¨ç¤ºï¼ˆè¡Œï¼‰
                     if (dy <= mouse.Y && mouse.Y < dy + _partsset.scRowHeight)
                     {
                         rp.Graphics.FillRectangle(_hiBrushRow, paneRect.LT.X, dy, paneRect.Width, _partsset.scRowHeight);
@@ -2135,29 +2135,29 @@ namespace Tono.GuiWinForm
                         isMouseRow = false;
                     }
 
-                    // ƒf[ƒ^•`‰æ
+                    // ãƒ‡ãƒ¼ã‚¿æç”»
                     var lvi = _data.Items[i];
                     var dx = sx;
                     for (var col = 0; col < lvi.SubItems.Count; col++)
                     {
                         var hd = _data.Columns[col];
                         var dw = zx * hd.Width;
-                        if (dx + dw + mx >= paneRect.LT.X && dx + mx <= paneRect.RB.X)  // Œ©‚¦‚Ä‚¢‚é—ñ‚Ì‚İ•`‰æ
+                        if (dx + dw + mx >= paneRect.LT.X && dx + mx <= paneRect.RB.X)  // è¦‹ãˆã¦ã„ã‚‹åˆ—ã®ã¿æç”»
                         {
-                            // ƒOƒ‹[ƒv‚É‚æ‚Á‚Äƒ†ƒj[ƒN‚Å‚È‚­‚È‚Á‚½î•ñi’P‚È‚é‘ã•\î•ñ‚Å‚ ‚é‚±‚Æj‚ğ•ª‚é‚æ‚¤‚É‚·‚é
+                            // ã‚°ãƒ«ãƒ¼ãƒ—ã«ã‚ˆã£ã¦ãƒ¦ãƒ‹ãƒ¼ã‚¯ã§ãªããªã£ãŸæƒ…å ±ï¼ˆå˜ãªã‚‹ä»£è¡¨æƒ…å ±ã§ã‚ã‚‹ã“ã¨ï¼‰ã‚’åˆ†ã‚‹ã‚ˆã†ã«ã™ã‚‹
                             var noInfoKind = _data.GetSummaryInfo(lvi, col, out var summaryMode, out var summaryResult);
 
-                            // ListViewSubItem‚Ìƒf[ƒ^€”õ
+                            // ListViewSubItemã®ãƒ‡ãƒ¼ã‚¿æº–å‚™
                             var si = lvi.SubItems[col];
 
-                            // ’l•`‰æ
+                            // å€¤æç”»
                             var sf = makeStringFormat(hd);
                             var rectcell = new RectangleF(dx, dy, dw, _partsset.scRowHeight);
                             var rect = new RectangleF(dx + mx, dy + my, dw - mx * 2, _partsset.scRowHeight - my * 2);
 
-                            if (col == 0)   // Å‰‚Ì—ñ‚ÍAsƒwƒbƒ_‚Æ‚·‚é
+                            if (col == 0)   // æœ€åˆã®åˆ—ã¯ã€è¡Œãƒ˜ãƒƒãƒ€ã¨ã™ã‚‹
                             {
-                                // sƒwƒbƒ_‚Ì”wŒiF
+                                // è¡Œãƒ˜ãƒƒãƒ€ã®èƒŒæ™¯è‰²
                                 rp.Graphics.FillRectangle(_headerBrush, rectcell);
                             }
                             if (rect.Width > 2)
@@ -2212,7 +2212,7 @@ namespace Tono.GuiWinForm
                                 }
                             }
 
-                            // •¶š‚Ì‚Í‚İo‚µ‚ğÔ‚¢ü‚Å•ª‚é‚æ‚¤‚É‚·‚é
+                            // æ–‡å­—ã®ã¯ã¿å‡ºã—ã‚’èµ¤ã„ç·šã§åˆ†ã‚‹ã‚ˆã†ã«ã™ã‚‹
                             if (col > 0)
                             {
                                 var sizestr = rp.Graphics.MeasureString(si.Text, _font);
@@ -2244,7 +2244,7 @@ namespace Tono.GuiWinForm
 
                                 if (summaryMode == SummaryMode.OneOfRecord)
                                 {
-                                    if (noInfoKind > 1) // ƒf[ƒ^‚Ìí—Ş”
+                                    if (noInfoKind > 1) // ãƒ‡ãƒ¼ã‚¿ã®ç¨®é¡æ•°
                                     {
                                         rp.Graphics.FillRectangle(_notUniqueMaskBrush, rect);
                                         rp.Graphics.DrawString(
@@ -2258,7 +2258,7 @@ namespace Tono.GuiWinForm
                                 }
                                 if (col == _data.GetColumnNoOfDistinctedRow())
                                 {
-                                    // ƒOƒ‹[ƒv‚³‚ê‚½ƒŒƒR[ƒh”‚Ì•\¦
+                                    // ã‚°ãƒ«ãƒ¼ãƒ—ã•ã‚ŒãŸãƒ¬ã‚³ãƒ¼ãƒ‰æ•°ã®è¡¨ç¤º
                                     var n_of_kind = _data.CheckNoOfRecordOfTheInfo(lvi);
                                     rp.Graphics.DrawString(
                                         "n=" + n_of_kind.ToString(),
@@ -2269,7 +2269,7 @@ namespace Tono.GuiWinForm
 
                                 }
                             }
-                            // ƒ}ƒEƒXˆÊ’u‚Ì’l‚ğ•¶š‚ğ•Û‘¶
+                            // ãƒã‚¦ã‚¹ä½ç½®ã®å€¤ã‚’æ–‡å­—ã‚’ä¿å­˜
                             if (isMouseRow && _partsset.columnAtMouse == col)
                             {
                                 _partsset.valueAtMouse = si.Text;
@@ -2277,7 +2277,7 @@ namespace Tono.GuiWinForm
                         }
                         else
                         {
-                            // •\¦ƒXƒLƒbƒv‚Ì—ñ
+                            // è¡¨ç¤ºã‚¹ã‚­ãƒƒãƒ—ã®åˆ—
                         }
                         dx += dw;
                     }
@@ -2289,10 +2289,10 @@ namespace Tono.GuiWinForm
                     }
                 }
 
-                // ƒwƒbƒ_‚ğ•`‰æ
-                hx = sx;            // ƒwƒbƒ_ˆÊ’u
-                _partsset.scFilterHeight = zy * _partsset.ptFilterHeight;       // ƒtƒBƒ‹ƒ^ƒ{ƒbƒNƒX‚Ì‚‚³iƒXƒNƒŠ[ƒ“À•Wj
-                var hh = _partsset.scHeaderHeight - _partsset.scFilterHeight; // ƒwƒbƒ_—Ìˆæ‚Ì‚¤‚¿AƒtƒBƒ‹ƒ^ƒ{ƒbƒNƒX‚ğœ‚¢‚½‚‚³iƒwƒbƒ_•\¦—pj
+                // ãƒ˜ãƒƒãƒ€ã‚’æç”»
+                hx = sx;            // ãƒ˜ãƒƒãƒ€ä½ç½®
+                _partsset.scFilterHeight = zy * _partsset.ptFilterHeight;       // ãƒ•ã‚£ãƒ«ã‚¿ãƒœãƒƒã‚¯ã‚¹ã®é«˜ã•ï¼ˆã‚¹ã‚¯ãƒªãƒ¼ãƒ³åº§æ¨™ï¼‰
+                var hh = _partsset.scHeaderHeight - _partsset.scFilterHeight; // ãƒ˜ãƒƒãƒ€é ˜åŸŸã®ã†ã¡ã€ãƒ•ã‚£ãƒ«ã‚¿ãƒœãƒƒã‚¯ã‚¹ã‚’é™¤ã„ãŸé«˜ã•ï¼ˆãƒ˜ãƒƒãƒ€è¡¨ç¤ºç”¨ï¼‰
 
                 _partsset.scColStartX.Clear();
                 for (var i = 0; i < _data.Columns.Count; i++)
@@ -2300,9 +2300,9 @@ namespace Tono.GuiWinForm
                     _partsset.scColStartX.Add(hx);
                     var hd = _data.Columns[i];
                     var hw = zx * hd.Width;
-                    if (hx + hw > paneRect.LT.X && hx < paneRect.RB.X)  // Œ©‚¦‚Ä‚¢‚éƒwƒbƒ_‚Ì‚İ•`‰æ
+                    if (hx + hw > paneRect.LT.X && hx < paneRect.RB.X)  // è¦‹ãˆã¦ã„ã‚‹ãƒ˜ãƒƒãƒ€ã®ã¿æç”»
                     {
-                        // ƒtƒBƒ‹ƒ^ƒ{ƒbƒNƒX•`‰æ
+                        // ãƒ•ã‚£ãƒ«ã‚¿ãƒœãƒƒã‚¯ã‚¹æç”»
                         rp.Graphics.FillRectangle(_filterBoxBrush, hx, hh, hw, _partsset.scFilterHeight);
                         rp.Graphics.DrawRectangle(Pens.DarkBlue, hx, hh, hw, _partsset.scFilterHeight);
                         var rect = new RectangleF(hx + 2, hh + 2, hw - 4, _partsset.scFilterHeight - 2);
@@ -2311,7 +2311,7 @@ namespace Tono.GuiWinForm
                             rp.Graphics.DrawString(_data.Filters[i], _font, Brushes.Yellow, rect);
                         }
 
-                        // ƒwƒbƒ_•`‰æ
+                        // ãƒ˜ãƒƒãƒ€æç”»
                         rp.Graphics.FillRectangle(_headerBrush, hx, 0, hw, hh);
                         rp.Graphics.DrawRectangle(Pens.White, hx, 0, hw, hh);
                         var font = i == _data.GetColumnNoOfDistinctedRow() ? _fontB : _font;
@@ -2354,7 +2354,7 @@ namespace Tono.GuiWinForm
             }
 
             /// <summary>
-            /// StringFormat‚ğì¬‚·‚é
+            /// StringFormatã‚’ä½œæˆã™ã‚‹
             /// </summary>
             /// <param name="hd"></param>
             /// <returns></returns>
@@ -2383,66 +2383,66 @@ namespace Tono.GuiWinForm
         #endregion
 
         /// <summary>
-        /// ƒOƒ‹[ƒv‰»‚µ‚½‚ÌWŒv•û–@
+        /// ã‚°ãƒ«ãƒ¼ãƒ—åŒ–ã—ãŸæ™‚ã®é›†è¨ˆæ–¹æ³•
         /// </summary>
         public enum SummaryMode
         {
             /// <summary>
-            /// ‚PŒ‚Ì‚Ç‚ê‚©
+            /// ï¼‘ä»¶ã®ã©ã‚Œã‹
             /// </summary>
             OneOfRecord,
             /// <summary>
-            /// ‡Œv
+            /// åˆè¨ˆ
             /// </summary>
             Sum,
             /// <summary>
-            /// •½‹Ï
+            /// å¹³å‡
             /// </summary>
             Average,
             /// <summary>
-            /// Å¬
+            /// æœ€å°
             /// </summary>
             Minimum,
             /// <summary>
-            /// Å‘å
+            /// æœ€å¤§
             /// </summary>
             Maximum,
             /// <summary>
-            /// Œ”
+            /// ä»¶æ•°
             /// </summary>
             Count,
         }
 
         /// <summary>
-        /// ¶’l‚ª•Û‘¶‚Å‚«‚éƒTƒuƒAƒCƒeƒ€
+        /// ç”Ÿå€¤ãŒä¿å­˜ã§ãã‚‹ã‚µãƒ–ã‚¢ã‚¤ãƒ†ãƒ 
         /// </summary>
         public class ListViewSubItemEx : ListViewItem.ListViewSubItem
         {
             /// <summary>
-            /// ¶’l
+            /// ç”Ÿå€¤
             /// </summary>
             public object RawData = null;
         }
 
         /// <summary>
-        /// ƒtƒH[ƒ}ƒbƒ^‚ª•Û‘¶‚Å‚«‚éƒJƒ‰ƒ€ƒwƒbƒ_
+        /// ãƒ•ã‚©ãƒ¼ãƒãƒƒã‚¿ãŒä¿å­˜ã§ãã‚‹ã‚«ãƒ©ãƒ ãƒ˜ãƒƒãƒ€
         /// </summary>
         public class ColumnHeaderEx : ColumnHeader
         {
             /// <summary>
-            /// ƒtƒH[ƒ}ƒbƒ^[
+            /// ãƒ•ã‚©ãƒ¼ãƒãƒƒã‚¿ãƒ¼
             /// </summary>
             /// <param name="value"></param>
             /// <returns></returns>
             public delegate string FormatterMethod(object value);
 
             /// <summary>
-            /// ƒtƒH[ƒ}ƒbƒ^[ƒƒ\ƒbƒh
+            /// ãƒ•ã‚©ãƒ¼ãƒãƒƒã‚¿ãƒ¼ãƒ¡ã‚½ãƒƒãƒ‰
             /// </summary>
             public FormatterMethod Formatter = null;
 
             /// <summary>
-            /// ƒtƒH[ƒ}ƒbƒ^‚ğg‚Á‚½•¶š—ñ‚ğì¬‚·‚é
+            /// ãƒ•ã‚©ãƒ¼ãƒãƒƒã‚¿ã‚’ä½¿ã£ãŸæ–‡å­—åˆ—ã‚’ä½œæˆã™ã‚‹
             /// </summary>
             /// <param name="summaryResult"></param>
             /// <returns></returns>
@@ -2459,14 +2459,14 @@ namespace Tono.GuiWinForm
             }
 
             /// <summary>
-            /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+            /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
             /// </summary>
             public ColumnHeaderEx() : base()
             {
             }
 
             /// <summary>
-            /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+            /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
             /// </summary>
             /// <param name="txt"></param>
             public ColumnHeaderEx(string txt)
@@ -2476,14 +2476,14 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒAƒCƒeƒ€ƒRƒŒƒNƒVƒ‡ƒ“
+        /// ã‚¢ã‚¤ãƒ†ãƒ ã‚³ãƒ¬ã‚¯ã‚·ãƒ§ãƒ³
         /// </summary>
         public class ListViewItemCollection : IEnumerable, IEnumerable<ListViewItem>
         {
             private readonly List<ListViewItem> _items = new List<ListViewItem>();
 
             /// <summary>
-            /// ‘SƒAƒCƒeƒ€ƒNƒŠƒA
+            /// å…¨ã‚¢ã‚¤ãƒ†ãƒ ã‚¯ãƒªã‚¢
             /// </summary>
             public void Clear()
             {
@@ -2491,14 +2491,14 @@ namespace Tono.GuiWinForm
             }
 
             /// <summary>
-            /// ƒAƒCƒeƒ€‚ğQÆ
+            /// ã‚¢ã‚¤ãƒ†ãƒ ã‚’å‚ç…§
             /// </summary>
             /// <param name="idx"></param>
             /// <returns></returns>
             public ListViewItem this[int idx] => _items[idx];
 
             /// <summary>
-            /// €–Ú‚ğ’Ç‰Á
+            /// é …ç›®ã‚’è¿½åŠ 
             /// </summary>
             /// <param name="lvi"></param>
             public void Add(ListViewItem lvi)
@@ -2507,7 +2507,7 @@ namespace Tono.GuiWinForm
             }
 
             /// <summary>
-            /// •¡”“¯“o˜^
+            /// è¤‡æ•°åŒæ™‚ç™»éŒ²
             /// </summary>
             /// <param name="lvis"></param>
             public void AddRange(ICollection<ListViewItem> lvis)
@@ -2521,11 +2521,11 @@ namespace Tono.GuiWinForm
             }
 
             /// <summary>
-            /// €–Ú”
+            /// é …ç›®æ•°
             /// </summary>
             public int Count => _items.Count;
 
-            #region IEnumerable<ListViewItem> ƒƒ“ƒo
+            #region IEnumerable<ListViewItem> ãƒ¡ãƒ³ãƒ
 
             IEnumerator<ListViewItem> IEnumerable<ListViewItem>.GetEnumerator()
             {
@@ -2536,7 +2536,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒJƒ‰ƒ€‚ÌƒRƒŒƒNƒVƒ‡ƒ“
+        /// ã‚«ãƒ©ãƒ ã®ã‚³ãƒ¬ã‚¯ã‚·ãƒ§ãƒ³
         /// </summary>
         public class ColumnHeaderCollection : IEnumerable<ColumnHeader>
         {
@@ -2544,7 +2544,7 @@ namespace Tono.GuiWinForm
             private readonly List<SummaryMode> _summaryMode = new List<SummaryMode>();
 
             /// <summary>
-            /// ƒJƒ‰ƒ€’Ç‰Á
+            /// ã‚«ãƒ©ãƒ è¿½åŠ 
             /// </summary>
             /// <param name="hd"></param>
             public void Add(ColumnHeader hd)
@@ -2554,10 +2554,10 @@ namespace Tono.GuiWinForm
             }
 
             /// <summary>
-            /// ƒJƒ‰ƒ€’Ç‰Á
+            /// ã‚«ãƒ©ãƒ è¿½åŠ 
             /// </summary>
             /// <param name="hd"></param>
-            /// <param name="summaryMode">ƒTƒ}ƒŠ[ƒ‚[ƒh</param>
+            /// <param name="summaryMode">ã‚µãƒãƒªãƒ¼ãƒ¢ãƒ¼ãƒ‰</param>
             public void Add(ColumnHeader hd, TListViewFree.SummaryMode summaryMode)
             {
                 _hdrs.Add(hd);
@@ -2565,7 +2565,7 @@ namespace Tono.GuiWinForm
             }
 
             /// <summary>
-            /// ƒJƒ‰ƒ€•¡”“¯’Ç‰Á
+            /// ã‚«ãƒ©ãƒ è¤‡æ•°åŒæ™‚è¿½åŠ 
             /// </summary>
             /// <param name="hds"></param>
             public void AddRange(ICollection<ColumnHeader> hds)
@@ -2578,23 +2578,23 @@ namespace Tono.GuiWinForm
             }
 
             /// <summary>
-            /// ƒJƒ‰ƒ€ƒwƒbƒ_
+            /// ã‚«ãƒ©ãƒ ãƒ˜ãƒƒãƒ€
             /// </summary>
             /// <param name="idx"></param>
             /// <returns></returns>
             public ColumnHeader this[int idx] => _hdrs[idx];
 
             /// <summary>
-            /// ƒTƒ}ƒŠ[ƒ‚[ƒh
+            /// ã‚µãƒãƒªãƒ¼ãƒ¢ãƒ¼ãƒ‰
             /// </summary>
             public IList<SummaryMode> SummaryMode => _summaryMode;
 
             /// <summary>
-            /// ƒwƒbƒ_‚ÌƒJƒEƒ“ƒg
+            /// ãƒ˜ãƒƒãƒ€ã®ã‚«ã‚¦ãƒ³ãƒˆ
             /// </summary>
             public int Count => _hdrs.Count;
 
-            #region IEnumerable<ColumnHeader> ƒƒ“ƒo
+            #region IEnumerable<ColumnHeader> ãƒ¡ãƒ³ãƒ
 
             public IEnumerator<ColumnHeader> GetEnumerator()
             {
@@ -2603,7 +2603,7 @@ namespace Tono.GuiWinForm
 
             #endregion
 
-            #region IEnumerable ƒƒ“ƒo
+            #region IEnumerable ãƒ¡ãƒ³ãƒ
 
             IEnumerator IEnumerable.GetEnumerator()
             {
@@ -2614,29 +2614,29 @@ namespace Tono.GuiWinForm
         }
 
 
-        #region ƒCƒxƒ“ƒg
+        #region ã‚¤ãƒ™ãƒ³ãƒˆ
         /// <summary>
-        /// ƒJƒ‰ƒ€ƒNƒŠƒbƒNƒCƒxƒ“ƒgiƒ\[ƒg‚È‚Çj
+        /// ã‚«ãƒ©ãƒ ã‚¯ãƒªãƒƒã‚¯ã‚¤ãƒ™ãƒ³ãƒˆï¼ˆã‚½ãƒ¼ãƒˆãªã©ï¼‰
         /// </summary>
         public event ColumnClickEventHandler ColumnClick;
 
         /// <summary>
-        /// ƒtƒBƒ‹ƒ^[Às—v‹‚ª‚ ‚Á‚½
+        /// ãƒ•ã‚£ãƒ«ã‚¿ãƒ¼å®Ÿè¡Œè¦æ±‚ãŒã‚ã£ãŸ
         /// </summary>
         public event ColumnClickEventHandler FilterRequested;
 
         /// <summary>
-        /// ƒOƒ‹[ƒv‰»ƒL[‚ª•ÏX‚³‚ê‚½
+        /// ã‚°ãƒ«ãƒ¼ãƒ—åŒ–ã‚­ãƒ¼ãŒå¤‰æ›´ã•ã‚ŒãŸ
         /// </summary>
         public event ColumnClickEventHandler GroupKeyChanged;
 
         /// <summary>
-        /// ƒtƒ@ƒW[•¶š—ñì¬•â•‚Ì—v¿
+        /// ãƒ•ã‚¡ã‚¸ãƒ¼æ–‡å­—åˆ—ä½œæˆè£œåŠ©ã®è¦è«‹
         /// </summary>
         public event EventHandler<StringAugmentEventArgs> RequestFuzzyString;
 
         /// <summary>
-        /// ƒc[ƒ‹ƒ`ƒbƒv‚Éæ‚éƒeƒLƒXƒg¶¬—v‹ƒCƒxƒ“ƒg
+        /// ãƒ„ãƒ¼ãƒ«ãƒãƒƒãƒ—ã«ä¹—ã‚‹ãƒ†ã‚­ã‚¹ãƒˆç”Ÿæˆè¦æ±‚ã‚¤ãƒ™ãƒ³ãƒˆ
         /// </summary>
         public event EventHandler<TooltipTextRequestArgs> TooltipTextRequest;
 
@@ -2644,27 +2644,27 @@ namespace Tono.GuiWinForm
         #endregion
 
         /// <summary>
-        /// —Bˆê‚Ìƒf[ƒ^ƒCƒ“ƒXƒ^ƒ“ƒX
+        /// å”¯ä¸€ã®ãƒ‡ãƒ¼ã‚¿ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹
         /// </summary>
         public HotData _data = new HotData();
 
         /// <summary>
-        /// —Bˆê‚Ì•\¦—pƒeƒ“ƒ|ƒ‰ƒŠƒf[ƒ^ƒCƒ“ƒXƒ^ƒ“ƒX
+        /// å”¯ä¸€ã®è¡¨ç¤ºç”¨ãƒ†ãƒ³ãƒãƒ©ãƒªãƒ‡ãƒ¼ã‚¿ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹
         /// </summary>
         public FreeViewPartsCollection _parts = new FreeViewPartsCollection();
 
         /// <summary>
-        /// —BˆêA•\¦—pƒp[ƒc
+        /// å”¯ä¸€ã€è¡¨ç¤ºç”¨ãƒ‘ãƒ¼ãƒ„
         /// </summary>
         public PartsViewFree _view = new PartsViewFree();
 
         /// <summary>
-        /// ƒVƒmƒjƒ€ƒnƒ“ƒhƒ‰[
+        /// ã‚·ãƒãƒ‹ãƒ ãƒãƒ³ãƒ‰ãƒ©ãƒ¼
         /// </summary>
         private Synonym _synonim = null;
 
         /// <summary>
-        /// \’zq
+        /// æ§‹ç¯‰å­
         /// </summary>
         public TListViewFree()
         {
@@ -2673,7 +2673,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒAƒCƒeƒ€‚ÌƒXƒe[ƒ^ƒX‚ğæ“¾‚·‚é
+        /// ã‚¢ã‚¤ãƒ†ãƒ ã®ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚’å–å¾—ã™ã‚‹
         /// </summary>
         /// <param name="lvi"></param>
         /// <returns></returns>
@@ -2683,7 +2683,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒVƒmƒjƒ€‚ğİ’è‚·‚é
+        /// ã‚·ãƒãƒ‹ãƒ ã‚’è¨­å®šã™ã‚‹
         /// </summary>
         /// <param name="synonim"></param>
         public void SetSynonim(Synonym synonim)
@@ -2692,12 +2692,12 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒRƒ“ƒgƒ[ƒ‹‰Šú‰»ˆ—	
+        /// ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«åˆæœŸåŒ–å‡¦ç†	
         /// </summary>
         /// <param name="e"></param>
         private void coListView_Load(object sender, EventArgs e)
         {
-            // ƒtƒB[ƒ`ƒƒ[‚Ì‰Šú‰»
+            // ãƒ•ã‚£ãƒ¼ãƒãƒ£ãƒ¼ã®åˆæœŸåŒ–
             TabStop = true;
             rpResource.TabStop = true;
             frMain.TabStop = true;
@@ -2712,7 +2712,7 @@ namespace Tono.GuiWinForm
 
             _data.GroupKeyChanged += new ColumnClickEventHandler(_data_GroupKeyChanged);
 
-            // ƒtƒB[ƒ`ƒƒ[“o˜^
+            // ãƒ•ã‚£ãƒ¼ãƒãƒ£ãƒ¼ç™»éŒ²
             root.AddChildFeature(typeof(FeatureKeyZoom));
             root.AddChildFeature(typeof(FeatureDragColumnZoom));
             root.AddChildFeature(typeof(FeatureDragHeightZoom));
@@ -2746,13 +2746,13 @@ namespace Tono.GuiWinForm
             cm.FilterRequested += new ColumnClickEventHandler(fe_FilterRequested);
             cm.RequestFuzzyString += new EventHandler<StringAugmentEventArgs>(cm_RequestFuzzyString);
 
-            // ƒp[ƒc“o˜^
+            // ãƒ‘ãƒ¼ãƒ„ç™»éŒ²
             _view.SetData(_data, (FreeViewPartsCollection)root.GetPartsSet());
             root.GetPartsSet().Add(rpResource, _view);
         }
 
         /// <summary>
-        /// ƒc[ƒ‹ƒ`ƒbƒvƒeƒLƒXƒgƒCƒxƒ“ƒg“]‘—
+        /// ãƒ„ãƒ¼ãƒ«ãƒãƒƒãƒ—ãƒ†ã‚­ã‚¹ãƒˆã‚¤ãƒ™ãƒ³ãƒˆè»¢é€
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -2762,7 +2762,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒtƒ@ƒW[•¶š—ñì¬—v¿
+        /// ãƒ•ã‚¡ã‚¸ãƒ¼æ–‡å­—åˆ—ä½œæˆè¦è«‹
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -2772,7 +2772,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒCƒxƒ“ƒg‹´“n‚µiƒOƒ‹[ƒvƒL[•ÏXj
+        /// ã‚¤ãƒ™ãƒ³ãƒˆæ©‹æ¸¡ã—ï¼ˆã‚°ãƒ«ãƒ¼ãƒ—ã‚­ãƒ¼å¤‰æ›´ï¼‰
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -2782,7 +2782,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒCƒxƒ“ƒg‹´“n‚µiƒtƒBƒ‹ƒ^ƒŠƒNƒGƒXƒgj
+        /// ã‚¤ãƒ™ãƒ³ãƒˆæ©‹æ¸¡ã—ï¼ˆãƒ•ã‚£ãƒ«ã‚¿ãƒªã‚¯ã‚¨ã‚¹ãƒˆï¼‰
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -2792,7 +2792,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒCƒxƒ“ƒg‹´“n‚µiƒJƒ‰ƒ€ƒNƒŠƒbƒNj
+        /// ã‚¤ãƒ™ãƒ³ãƒˆæ©‹æ¸¡ã—ï¼ˆã‚«ãƒ©ãƒ ã‚¯ãƒªãƒƒã‚¯ï¼‰
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -2802,13 +2802,13 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒAƒCƒeƒ€‚ÌƒRƒŒƒNƒVƒ‡ƒ“
+        /// ã‚¢ã‚¤ãƒ†ãƒ ã®ã‚³ãƒ¬ã‚¯ã‚·ãƒ§ãƒ³
         /// </summary>
         public ListViewItemCollection Items => _data.Items;
 
         /// <summary>
-        /// ƒtƒBƒ‹ƒ^ó‘Ô‚Ì‚à‚Ì‚àŠÜ‚ß‚ÄA‚·‚×‚Ä‚ÌƒAƒCƒeƒ€
-        /// iŠÔ‚©‚©‚éj
+        /// ãƒ•ã‚£ãƒ«ã‚¿çŠ¶æ…‹ã®ã‚‚ã®ã‚‚å«ã‚ã¦ã€ã™ã¹ã¦ã®ã‚¢ã‚¤ãƒ†ãƒ 
+        /// ï¼ˆæ™‚é–“ã‹ã‹ã‚‹ï¼‰
         /// </summary>
         public ICollection<ListViewItem> GetAllItems()
         {
@@ -2816,17 +2816,17 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒwƒbƒ_‚ÌƒRƒŒƒNƒVƒ‡ƒ“
+        /// ãƒ˜ãƒƒãƒ€ã®ã‚³ãƒ¬ã‚¯ã‚·ãƒ§ãƒ³
         /// </summary>
         public ColumnHeaderCollection Columns => _data.Columns;
 
         /// <summary>
-        /// ƒtƒBƒ‹ƒ^[‚ÌƒRƒŒƒNƒVƒ‡ƒ“
+        /// ãƒ•ã‚£ãƒ«ã‚¿ãƒ¼ã®ã‚³ãƒ¬ã‚¯ã‚·ãƒ§ãƒ³
         /// </summary>
         public List<string> Filters => _data.Filters;
 
         /// <summary>
-        /// ƒCƒ[ƒWƒŠƒXƒg
+        /// ã‚¤ãƒ¡ãƒ¼ã‚¸ãƒªã‚¹ãƒˆ
         /// </summary>
         public ImageList SmallImageList
         {
@@ -2839,7 +2839,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒCƒ[ƒWƒŠƒXƒg
+        /// ã‚¤ãƒ¡ãƒ¼ã‚¸ãƒªã‚¹ãƒˆ
         /// </summary>
         public ImageList StateImageList
         {
@@ -2852,7 +2852,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒ\[ƒgŠJn
+        /// ã‚½ãƒ¼ãƒˆé–‹å§‹
         /// </summary>
         public void Sort()
         {
@@ -2868,7 +2868,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒ\[ƒg—p”äŠrˆ—
+        /// ã‚½ãƒ¼ãƒˆç”¨æ¯”è¼ƒå‡¦ç†
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
@@ -2886,7 +2886,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// •\¦XV
+        /// è¡¨ç¤ºæ›´æ–°
         /// </summary>
         public new void Invalidate()
         {
@@ -2895,10 +2895,10 @@ namespace Tono.GuiWinForm
 
         private IComparer _sorter = null;
 
-        #region ƒ_ƒ~[ƒƒ\ƒbƒh
+        #region ãƒ€ãƒŸãƒ¼ãƒ¡ã‚½ãƒƒãƒ‰
 
         /// <summary>
-        /// ƒ\[ƒgƒƒ\ƒbƒh
+        /// ã‚½ãƒ¼ãƒˆãƒ¡ã‚½ãƒƒãƒ‰
         /// </summary>
         public IComparer ListViewItemSorter
         {
@@ -2907,7 +2907,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒ\[ƒgó‘Ôiw¦j
+        /// ã‚½ãƒ¼ãƒˆçŠ¶æ…‹ï¼ˆæŒ‡ç¤ºï¼‰
         /// </summary>
         public SortOrder Sorting
         {
@@ -2918,7 +2918,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ‘I‘ğó‘Ô‚Ì•\¦•û–@
+        /// é¸æŠçŠ¶æ…‹ã®è¡¨ç¤ºæ–¹æ³•
         /// </summary>
         public bool FullRowSelect
         {
@@ -2929,7 +2929,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ‘I‘ğó‘Ô‚Ì•\¦•û–@
+        /// é¸æŠçŠ¶æ…‹ã®è¡¨ç¤ºæ–¹æ³•
         /// </summary>
         public bool GridLines
         {
@@ -2940,7 +2940,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ‘I‘ğó‘Ô‚Ì•\¦•û–@
+        /// é¸æŠçŠ¶æ…‹ã®è¡¨ç¤ºæ–¹æ³•
         /// </summary>
         public bool HideSelection
         {
@@ -2951,7 +2951,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ‘I‘ğó‘Ô‚Ì•\¦•û–@
+        /// é¸æŠçŠ¶æ…‹ã®è¡¨ç¤ºæ–¹æ³•
         /// </summary>
         public bool ShowItemToolTips
         {
@@ -2962,7 +2962,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ‘I‘ğó‘Ô‚Ì•\¦•û–@
+        /// é¸æŠçŠ¶æ…‹ã®è¡¨ç¤ºæ–¹æ³•
         /// </summary>
         public bool UseCompatibleStateImageBehavior
         {
@@ -2973,7 +2973,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒrƒ…[‚ÌŒ`®iDetailsŒÅ’èj
+        /// ãƒ“ãƒ¥ãƒ¼ã®å½¢å¼ï¼ˆDetailså›ºå®šï¼‰
         /// </summary>
         public System.Windows.Forms.View View
         {
@@ -2986,7 +2986,7 @@ namespace Tono.GuiWinForm
         #endregion
 
         /// <summary>
-        /// w’ès‚ªŒ©‚¦‚éˆÊ’u‚Ü‚ÅƒXƒNƒ[ƒ‹‚·‚é
+        /// æŒ‡å®šè¡ŒãŒè¦‹ãˆã‚‹ä½ç½®ã¾ã§ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ã™ã‚‹
         /// </summary>
         /// <param name="p"></param>
         public void EnsureVisible(int p)
@@ -2996,7 +2996,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ‘SƒtƒBƒ‹ƒ^[‰ğœ
+        /// å…¨ãƒ•ã‚£ãƒ«ã‚¿ãƒ¼è§£é™¤
         /// </summary>
         public void FilterOff()
         {
@@ -3004,9 +3004,9 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// s‚Ì•\¦ó‘Ô‚ğ•ÏX
-        /// i’x‚¢‚Ì‚ÅASetVisible(ICollection...ƒo[ƒWƒ‡ƒ“‚ğg‚Á‚Ä‚­‚¾‚³‚¢j
-        /// ƒ\[ƒg‚Í•ö‚ê‚é
+        /// è¡Œã®è¡¨ç¤ºçŠ¶æ…‹ã‚’å¤‰æ›´
+        /// ï¼ˆé…ã„ã®ã§ã€SetVisible(ICollection...ãƒãƒ¼ã‚¸ãƒ§ãƒ³ã‚’ä½¿ã£ã¦ãã ã•ã„ï¼‰
+        /// ã‚½ãƒ¼ãƒˆã¯å´©ã‚Œã‚‹
         /// </summary>
         /// <param name="lvi"></param>
         /// <param name="sw"></param>
@@ -3016,8 +3016,8 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// •\¦ó‘Ô‚Ì•ÏXi‚Ü‚Æ‚ß‚Ä‚â‚é‚Ì‚Å‘¬‚¢j
-        /// ƒ\[ƒg‚Í•ö‚ê‚é
+        /// è¡¨ç¤ºçŠ¶æ…‹ã®å¤‰æ›´ï¼ˆã¾ã¨ã‚ã¦ã‚„ã‚‹ã®ã§é€Ÿã„ï¼‰
+        /// ã‚½ãƒ¼ãƒˆã¯å´©ã‚Œã‚‹
         /// </summary>
         /// <param name="items"></param>
         /// <param name="sw"></param>
@@ -3027,7 +3027,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// w’è‘ã•\ƒŒƒR[ƒh‚É‘Î‚·‚éA‘S‰B‚ês‚ğ—ñ‹“i’x‚¢j
+        /// æŒ‡å®šä»£è¡¨ãƒ¬ã‚³ãƒ¼ãƒ‰ã«å¯¾ã™ã‚‹ã€å…¨éš ã‚Œè¡Œã‚’åˆ—æŒ™ï¼ˆé…ã„ï¼‰
         /// </summary>
         /// <param name="lvi"></param>
         /// <returns></returns>
@@ -3037,10 +3037,10 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// w’èƒJƒ‰ƒ€‚ÌƒR[ƒh‚©‚ç”Ô†‚ğæ“¾‚·‚é
+        /// æŒ‡å®šã‚«ãƒ©ãƒ ã®ã‚³ãƒ¼ãƒ‰ã‹ã‚‰ç•ªå·ã‚’å–å¾—ã™ã‚‹
         /// </summary>
         /// <param name="code"></param>
-        /// <returns>-1=ƒGƒ‰[, —ñ‚Ì”Ô† Columns[‚±‚Ì”Ô†]</returns>
+        /// <returns>-1=ã‚¨ãƒ©ãƒ¼, åˆ—ã®ç•ªå· Columns[ã“ã®ç•ªå·]</returns>
         public int GetColumnNo(string code)
         {
             for (var i = 0; i < Columns.Count; i++)
