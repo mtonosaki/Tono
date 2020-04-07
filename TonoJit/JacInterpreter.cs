@@ -142,11 +142,11 @@ namespace Tono.Jit
 
             foreach (var key in removeRequestInstance)
             {
-                instanceBuf.Remove(key);    // TODO: add で instanceBufから削除
+                instanceBuf.Remove(key);
             }
             foreach (var key in removeRequestVarBuf)
             {
-                varBuf.Remove(key);         // TODO: add で varBufから削除
+                varBuf.Remove(key);
             }
         }
 
@@ -571,6 +571,8 @@ namespace Tono.Jit
             var collectionName = rpnStack.Pop();                    // (4,"Procs")                  | (4,"ProcLinks")
             var parentObjectName = rpnStack.Pop();                  // (0, "Stage ID of st")        | (0, "Stage ID of st") 
             var parentObject = ParseValue(parentObjectName.Com);    // the stage instance of st     | the stage instance of st
+
+            // call method that have JacList???Attribute
             var methods =                                           // to get MethodInfo named "Procs" in Stage Class
                 from method in parentObject.GetType().GetMethods()
                 from atobj in method.GetCustomAttributes(attrType, true)
@@ -588,8 +590,8 @@ namespace Tono.Jit
             if (isRemove)
             {
                 // from instanceBuf
-                var dels = instanceBuf.Where(a => ReferenceEquals(a.Value, itemValue)).Select(a => a.Key);
-                foreach (var delkey in dels.ToArray())
+                var dels = instanceBuf.Where(a => ReferenceEquals(a.Value, itemValue)).Select(a => a.Key).ToArray();
+                foreach (var delkey in dels)
                 {
                     removeRequestInstance.Add(delkey);
                 }
