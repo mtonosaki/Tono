@@ -605,6 +605,28 @@ namespace Tono.Jit
             }
             if (isAdd)
             {
+                if (itemValue is ValueTuple<object, object> tpl)
+                {
+                    foreach (var key in removeRequestVarBuf)
+                    {
+                        if (tpl.Item1 is IJitObjectID jid1)
+                        {
+                            if (key.Equals(jid1.ID))
+                            {
+                                removeRequestVarBuf.Remove(key);
+                                break;
+                            }
+                        }
+                        if (tpl.Item2 is IJitObjectID jid2)
+                        {
+                            if (key.Equals(jid2.ID))
+                            {
+                                removeRequestVarBuf.Remove(key);
+                                break;
+                            }
+                        }
+                    }
+                }
                 removeRequestInstance.Remove(itemName.Com);
                 removeRequestVarBuf.Remove(itemName.Com);
             }
