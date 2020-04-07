@@ -67,6 +67,8 @@ namespace Tono.Jit
         private readonly Dictionary<string/*variable name*/, object> varBuf = new Dictionary<string, object>();
         private readonly List<List<string>> Lines = new List<List<string>>();
         private readonly List<List<int>> Levels = new List<List<int>>();
+        private readonly List<string> removeRequestInstance = new List<string>();    // instanceBuf.Remove(...);
+        private readonly List<string> removeRequestVarBuf = new List<string>();      // varBuf.Remove(...);
         private int TargetLevel;
         private int instanceIdCounter = 0;
         private const int tabspace = 4;
@@ -80,6 +82,8 @@ namespace Tono.Jit
             opeStack.Clear();
             instanceBuf.Clear();
             varBuf.Clear();
+            removeRequestInstance.Clear();
+            removeRequestVarBuf.Clear();
             Lines.Clear();
             Levels.Clear();
             TargetLevel = 0;
@@ -383,7 +387,7 @@ namespace Tono.Jit
                     From = ParseValue(left.Com),
                     To = ParseValue(right.Com),
                 };
-                varBuf[obj.Name] = obj;
+                SetVarBuf(obj.Name, obj);
                 rpnStack.Push((left.Level, obj.Name));
             }
             if (ope == ":")
@@ -400,7 +404,7 @@ namespace Tono.Jit
                 {
                     obj = new ValueTuple<object, object>(v1, v2);
                 }
-                varBuf[name] = obj;
+                SetVarBuf(name, obj);
                 rpnStack.Push((left.Level, name));
             }
         }
@@ -498,11 +502,11 @@ namespace Tono.Jit
                                 pi.SetValue(obj, item);
                                 if (variable.Com.Equals("ID", StringComparison.CurrentCultureIgnoreCase))
                                 {
-                                    varBuf[item?.ToString() ?? "null"] = obj;
+                                    SetVarBuf(item?.ToString() ?? "null", obj);
                                 }
                                 if (variable.Com.Equals("Name", StringComparison.CurrentCultureIgnoreCase))
                                 {
-                                    varBuf[item?.ToString() ?? "null"] = obj;
+                                    SetVarBuf(item?.ToString() ?? "null", obj);
                                 }
                             }
                         }
@@ -527,7 +531,7 @@ namespace Tono.Jit
                     }
                 }
             }
-            varBuf[variable.Com] = item;
+            SetVarBuf(variable.Com, item);
             rpnStack.Push(variable);
         }
 
@@ -544,9 +548,6 @@ namespace Tono.Jit
             }
         }
 
-        private List<string> removeRequestInstance = new List<string>();    // instanceBuf.Remove(...);
-        private List<string> removeRequestVarBuf = new List<string>();      // varBuf.Remove(...);
-
         private void ProcList(Stack<(int Level, string Com)> rpnStack, bool isNextAddRemove, bool isAdd)
         {
             if (rpnStack.Count < 3)
@@ -558,11 +559,12 @@ namespace Tono.Jit
             //st = new Stage
             //    Procs
             //        add p1 = new Process
-
+            //=== EXSAMPLE ===
             //st
             //    ProcLinks
             //      add p1 -> p2
 
+            var isRemove = !isAdd;
             var attrType = isAdd ? typeof(JacListAddAttribute) : typeof(JacListRemoveAttribute);
             var itemName = rpnStack.Pop();                          // (8,"p1")                     | (8,"PushFromTo_1170D29C45C4AD4F9BCB6700EB1D4EFD") 
             var itemValue = ParseValue(itemName.Com);               // the process instance of p1   | the PushFromTo instance
@@ -583,7 +585,7 @@ namespace Tono.Jit
             tarMethod?.Invoke(parentObject, new[] { itemValue });
 
             // Remove cached object
-            if (isAdd == false)
+            if (isRemove)
             {
                 // from instanceBuf
                 var dels = instanceBuf.Where(a => ReferenceEquals(a.Value, itemValue)).Select(a => a.Key);
@@ -598,6 +600,11 @@ namespace Tono.Jit
                     itemName.Com = itemName.Com.Substring(1, itemName.Com.Length - 2);
                 }
                 removeRequestVarBuf.Add(itemName.Com);
+            }
+            if (isAdd)
+            {
+                removeRequestInstance.Remove(itemName.Com);
+                removeRequestVarBuf.Remove(itemName.Com);
             }
 
             rpnStack.Push(parentObjectName);
@@ -625,15 +632,24 @@ namespace Tono.Jit
                 {
                     pi.SetValue(instance, instanceKey); // Set Name Property
                 }
-                instanceBuf[instanceKey] = instance;
+                SetInstanceBuf(instanceKey, instance);
                 rpnStack.Push((typeName.Level, instanceKey));
-
-
             }
             else
             {
                 throw new JacException(JacException.Codes.TypeNotFound, $"Type {typeName.Com} not found.");
             }
+        }
+        private void SetInstanceBuf(string instanceKey, object instance)
+        {
+            instanceBuf[instanceKey] = instance;
+            removeRequestInstance.Remove(instanceKey);
+        }
+
+        private void SetVarBuf(string name, object instance)
+        {
+            varBuf[name] = instance;
+            removeRequestVarBuf.Remove(name);
         }
 
         private static readonly Regex chkTimeSpan = new Regex(@"^-?[0-9]+(\.[0-9]*)?([eE][-+]?[0-9]+)?(MS|S|M|H|D|W)$");
@@ -854,7 +870,7 @@ namespace Tono.Jit
         public object this[string varname]
         {
             get => ParseValue(varname);
-            set => varBuf[varname] = value;
+            set => SetVarBuf(varname, value);
         }
 
         /// <summary>
