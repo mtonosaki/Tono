@@ -53,7 +53,7 @@ To use this object, follow below steps.
                 options.Filters.Add(new AuthorizeFilter(policy));
             });
 
-            services.Configure<GtotConfig>(this.Configuration.GetSection("GtotConfig"));
+            services.Configure<MyConfig>(this.Configuration.GetSection("MyConfig"));
         }
 ```  
 
