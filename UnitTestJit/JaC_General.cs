@@ -125,8 +125,9 @@ namespace UnitTestJit
             Assert.AreEqual(st.GetChildProcesses().Count(), 1);
             Assert.AreEqual(st.GetChildProcess(0).Name, "IgnoreProcess");
         }
+
         [TestMethod]
-        public void Test06()
+        public void Test06_1()
         {
             var code = @"
                 st = new Stage
@@ -152,6 +153,89 @@ namespace UnitTestJit
             Assert.IsNull(jac.GetProcess("IgnoreProcess")); // removed from VarBuffer
             Assert.IsNull(jac.GetProcess(name));            // removed from InstanceBuffer
         }
+
+        [TestMethod]
+        public void Test06_2()
+        {
+            var code = @"
+                st = new Stage
+                    Procs
+                        add new Process
+                            ID = 'IgnoreProcess'
+            ";
+            var jac = new JacInterpreter();
+            jac.Exec(code);
+            Assert.IsNotNull(jac.GetProcess("IgnoreProcess"));
+
+            code = @"
+                st
+                    Procs
+                        remove IgnoreProcess
+            ";
+            jac.Exec(code);
+            Assert.IsNull(jac.GetProcess("IgnoreProcess"));
+
+            code = @"
+                st
+                    Procs
+                        add IgnoreProcess   // Expected cannot add removed process.
+            ";
+            jac.Exec(code);
+            Assert.IsNull(jac.GetProcess("IgnoreProcess"));   // CANNOT ADD After Removed
+        }
+
+        [TestMethod]
+        public void Test06_3()
+        {
+            var code = @"
+                st = new Stage
+                p1 = new Process
+                    ID = 'IgnoreProcess'
+            ";
+            var jac = new JacInterpreter();
+            jac.Exec(code);
+            Assert.IsNotNull(jac.GetProcess("IgnoreProcess"));
+
+            code = @"
+                st
+                    Procs
+                        add IgnoreProcess
+            ";
+            jac.Exec(code);
+            Assert.IsNotNull(jac.GetProcess("IgnoreProcess"));
+
+            code = @"
+                st
+                    Procs
+                        remove IgnoreProcess
+            ";
+            jac.Exec(code);
+            Assert.IsNull(jac.GetProcess("IgnoreProcess"));
+        }
+
+        [TestMethod]
+        public void Test06_4()
+        {
+            var code = @"
+                st = new Stage
+                    Procs
+                        add new Process
+                            ID = 'IgnoreProcess'
+            ";
+            var jac = new JacInterpreter();
+            jac.Exec(code);
+            Assert.IsNotNull(jac.GetProcess("IgnoreProcess"));
+
+            code = @"
+                st
+                    Procs
+                        remove IgnoreProcess
+                        add IgnoreProcess           // Expected success add because there is in the same jac code.
+            ";
+            jac.Exec(code);
+            Assert.IsNotNull(jac.GetProcess("IgnoreProcess"));
+        }
+
         [TestMethod]
         public void Test07()
         {

@@ -1,26 +1,26 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// ƒ}ƒEƒXƒzƒC[ƒ‹‚ÅƒXƒN[ƒ‹‚ğƒTƒ|[ƒg‚·‚é‹@”\
+    /// ãƒã‚¦ã‚¹ãƒ›ã‚¤ãƒ¼ãƒ«ã§ã‚¹ã‚¯ãƒ¼ãƒ«ã‚’ã‚µãƒãƒ¼ãƒˆã™ã‚‹æ©Ÿèƒ½
     /// </summary>
     public class FeatureWheelScroll : Tono.GuiWinForm.FeatureBase, IMouseListener
     {
-        #region ‘®«iƒVƒŠƒAƒ‰ƒCƒY‚·‚éj
-        /// <summary>ƒCƒxƒ“ƒg‚ÌÀsƒL[</summary>
+        #region å±æ€§ï¼ˆã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºã™ã‚‹ï¼‰
+        /// <summary>ã‚¤ãƒ™ãƒ³ãƒˆã®å®Ÿè¡Œã‚­ãƒ¼</summary>
         private MouseState.Buttons _trigger;
         #endregion
-        #region ‘®«iƒVƒŠƒAƒ‰ƒCƒY‚µ‚È‚¢j
+        #region å±æ€§ï¼ˆã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºã—ãªã„ï¼‰
         #endregion
 
         /// <summary>
-        /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+        /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
         /// </summary>
         public FeatureWheelScroll()
         {
-            // ƒfƒtƒHƒ‹ƒg‚Åƒhƒ‰ƒbƒOƒXƒNƒ[ƒ‹‚·‚é‚½‚ß‚ÌƒL[‚ğİ’è‚·‚é
+            // ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã§ãƒ‰ãƒ©ãƒƒã‚°ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ã™ã‚‹ãŸã‚ã®ã‚­ãƒ¼ã‚’è¨­å®šã™ã‚‹
             _trigger = new MouseState.Buttons
             {
                 IsButton = false,
@@ -31,46 +31,46 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒgƒŠƒKiÀs¯•ÊƒL[j‚ğ•ÏX‚·‚é
+        /// ãƒˆãƒªã‚¬ï¼ˆå®Ÿè¡Œè­˜åˆ¥ã‚­ãƒ¼ï¼‰ã‚’å¤‰æ›´ã™ã‚‹
         /// </summary>
-        /// <param name="value">V‚µ‚¢ƒgƒŠƒK[</param>
+        /// <param name="value">æ–°ã—ã„ãƒˆãƒªã‚¬ãƒ¼</param>
         public void SetTrigger(MouseState.Buttons value)
         {
             _trigger = value;
         }
 
-        #region	IMoueListener ƒƒ“ƒo
+        #region	IMoueListener ãƒ¡ãƒ³ãƒ
         /// <summary>
-        /// ƒ}ƒEƒXˆÚ“®ƒCƒxƒ“ƒg‚ğ“]‘—‚·‚é
+        /// ãƒã‚¦ã‚¹ç§»å‹•ã‚¤ãƒ™ãƒ³ãƒˆã‚’è»¢é€ã™ã‚‹
         /// </summary>
-        /// <param name="e">ƒ}ƒEƒXó‘Ô</param>
+        /// <param name="e">ãƒã‚¦ã‚¹çŠ¶æ…‹</param>
         public void OnMouseMove(MouseState e)
         {
-            // –¢g—p
+            // æœªä½¿ç”¨
         }
 
         /// <summary>
-        /// ƒ}ƒEƒXˆÚ“®ƒCƒxƒ“ƒg‚ğ“]‘—‚·‚é
+        /// ãƒã‚¦ã‚¹ç§»å‹•ã‚¤ãƒ™ãƒ³ãƒˆã‚’è»¢é€ã™ã‚‹
         /// </summary>
-        /// <param name="e">ƒ}ƒEƒXó‘Ô</param>
+        /// <param name="e">ãƒã‚¦ã‚¹çŠ¶æ…‹</param>
         public void OnMouseDown(MouseState e)
         {
-            // –¢g—p
+            // æœªä½¿ç”¨
         }
 
         /// <summary>
-        /// ƒ}ƒEƒXˆÚ“®ƒCƒxƒ“ƒg‚ğ“]‘—‚·‚é
+        /// ãƒã‚¦ã‚¹ç§»å‹•ã‚¤ãƒ™ãƒ³ãƒˆã‚’è»¢é€ã™ã‚‹
         /// </summary>
-        /// <param name="e">ƒ}ƒEƒXó‘Ô</param>
+        /// <param name="e">ãƒã‚¦ã‚¹çŠ¶æ…‹</param>
         public void OnMouseUp(MouseState e)
         {
-            // –¢g—p
+            // æœªä½¿ç”¨
         }
 
         /// <summary>
-        /// ƒ}ƒEƒXƒzƒC[ƒ‹‚ÌƒCƒxƒ“ƒg‚ğ“]‘—‚·‚é
+        /// ãƒã‚¦ã‚¹ãƒ›ã‚¤ãƒ¼ãƒ«ã®ã‚¤ãƒ™ãƒ³ãƒˆã‚’è»¢é€ã™ã‚‹
         /// </summary>
-        /// <param name="e">ƒ}ƒEƒXó‘Ô</param>
+        /// <param name="e">ãƒã‚¦ã‚¹çŠ¶æ…‹</param>
         public void OnMouseWheel(MouseState e)
         {
             if (e.Attr.Equals(_trigger))

@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System;
@@ -9,7 +9,7 @@ using System.IO;
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// FeaturePaneSync ‚ÌŠT—v‚Ìà–¾‚Å‚·B
+    /// FeaturePaneSync ã®æ¦‚è¦ã®èª¬æ˜ã§ã™ã€‚
     /// </summary>
     public class FeaturePaneSync : FeatureBase, IZoomListener, IScrollListener, IDisposable, IAutoRemovable
     {
@@ -43,7 +43,7 @@ namespace Tono.GuiWinForm
 
 
         /// <summary>
-        /// ‹L˜^—pƒtƒ@ƒCƒ‹–¼‚ğì¬‚·‚é
+        /// è¨˜éŒ²ç”¨ãƒ•ã‚¡ã‚¤ãƒ«åã‚’ä½œæˆã™ã‚‹
         /// </summary>
         protected virtual string getFileName()
         {
@@ -62,7 +62,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒ^ƒCƒ}[‚ÅƒXƒNƒ[ƒ‹“K—p‚ğ”»’f‚µ‚ÄA“¯Šú‚·‚é
+        /// ã‚¿ã‚¤ãƒãƒ¼ã§ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«é©ç”¨ã‚’åˆ¤æ–­ã—ã¦ã€åŒæœŸã™ã‚‹
         /// </summary>
         private void timerProc()
         {
@@ -149,13 +149,13 @@ namespace Tono.GuiWinForm
             }
         }
 
-        #region IZoomListener ƒƒ“ƒo
+        #region IZoomListener ãƒ¡ãƒ³ãƒ
 
         public IRichPane[] ZoomEventTargets => _tarPanes;
 
         #endregion
 
-        #region IScrollListener ƒƒ“ƒo
+        #region IScrollListener ãƒ¡ãƒ³ãƒ
 
         public IRichPane[] ScrollEventTargets => _tarPanes;
 
@@ -166,7 +166,7 @@ namespace Tono.GuiWinForm
 
         #endregion
 
-        #region IDisposable ƒƒ“ƒo
+        #region IDisposable ãƒ¡ãƒ³ãƒ
 
         public override void Dispose()
         {

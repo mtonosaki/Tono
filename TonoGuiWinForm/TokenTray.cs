@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System.Collections;
@@ -6,19 +6,19 @@ using System.Collections;
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// ƒg[ƒNƒ“‚ğó‚¯‚éêŠiƒg[ƒNƒ“‚Æ‚ÍA‘¼‚ÌƒtƒB[ƒ`ƒƒ[‚ğ‹N“®‚·‚é‚½‚ß‚Ìd‘g‚İj
+    /// ãƒˆãƒ¼ã‚¯ãƒ³ã‚’å—ã‘ã‚‹å ´æ‰€ï¼ˆãƒˆãƒ¼ã‚¯ãƒ³ã¨ã¯ã€ä»–ã®ãƒ•ã‚£ãƒ¼ãƒãƒ£ãƒ¼ã‚’èµ·å‹•ã™ã‚‹ãŸã‚ã®ä»•çµ„ã¿ï¼‰
     /// </summary>
     public class TokenTray
     {
         //		private IDictionary _dat = new HybridDictionary();	// TONO
         private readonly IDictionary _dat = new Hashtable();
 
-        /// <summary>InvokeStart‚Ì‹N“®Ï‚İƒtƒ‰ƒO—p•Ï”</summary>
+        /// <summary>InvokeStartã®èµ·å‹•æ¸ˆã¿ãƒ•ãƒ©ã‚°ç”¨å¤‰æ•°</summary>
         //		private /*friane fgBase*/IDictionary TokenInvokedChecker = new HybridDictionary();	// TONO
         private /*friane fgBase*/readonly IDictionary TokenInvokedChecker = new Hashtable();
 
         /// <summary>
-        /// w’èƒtƒB[ƒ`ƒƒ[‚Ìƒg[ƒNƒ“ƒŠƒXƒi[‚Éw’èID‚ªŠÜ‚Ü‚ê‚Ä‚¢‚é‚©‚Ç‚¤‚©’²‚×‚é
+        /// æŒ‡å®šãƒ•ã‚£ãƒ¼ãƒãƒ£ãƒ¼ã®ãƒˆãƒ¼ã‚¯ãƒ³ãƒªã‚¹ãƒŠãƒ¼ã«æŒ‡å®šIDãŒå«ã¾ã‚Œã¦ã„ã‚‹ã‹ã©ã†ã‹èª¿ã¹ã‚‹
         /// </summary>
         /// <param name="fo"></param>
         /// <param name="tokenid"></param>
@@ -46,23 +46,23 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒg[ƒNƒ“‚ğ’Ç‰Ái—\–ñj‚·‚éB‚±‚ê‚ÍFlush‚ğÀs‚µ‚½‚Æ‚«‚ÉA–{“–‚É’Ç‰Á‚³‚ê‚é
+        /// ãƒˆãƒ¼ã‚¯ãƒ³ã‚’è¿½åŠ ï¼ˆäºˆç´„ï¼‰ã™ã‚‹ã€‚ã“ã‚Œã¯Flushã‚’å®Ÿè¡Œã—ãŸã¨ãã«ã€æœ¬å½“ã«è¿½åŠ ã•ã‚Œã‚‹
         /// </summary>
-        /// <param name="id">ƒg[ƒNƒ“‚É•t‚¯‚½–¼‘O</param>
-        /// <param name="from">ƒg[ƒNƒ“‚ğ’Ç‰Á‚µ‚½ƒNƒ‰ƒX</param>
+        /// <param name="id">ãƒˆãƒ¼ã‚¯ãƒ³ã«ä»˜ã‘ãŸåå‰</param>
+        /// <param name="from">ãƒˆãƒ¼ã‚¯ãƒ³ã‚’è¿½åŠ ã—ãŸã‚¯ãƒ©ã‚¹</param>
         public void Add(NamedId id, FeatureBase from)
         {
-            System.Diagnostics.Debug.Assert(id != null, "ffTokenTray.Add‚Énull id ‚ğw’è‚µ‚È‚¢‚Å‚­‚¾‚³‚¢");
+            System.Diagnostics.Debug.Assert(id != null, "ffTokenTray.Addã«null id ã‚’æŒ‡å®šã—ãªã„ã§ãã ã•ã„");
             lock (_dat.SyncRoot)
             {
                 _dat[id] = from;
             }
 
-            // ƒg[ƒNƒ“ˆ—’†‚Éƒg[ƒNƒ“’Ç‰Á‚³‚ê‚½ê‡A‹N“®Ï‚İƒtƒB[ƒ`ƒƒ[‚ğ‰ğœ‚µ‚ÄA‚»‚ÌƒtƒB[ƒ`ƒƒ[‚ğ‚à‚¤ˆê“x‹N“®‚Å‚«‚é‚æ‚¤‚É‚·‚é
+            // ãƒˆãƒ¼ã‚¯ãƒ³å‡¦ç†ä¸­ã«ãƒˆãƒ¼ã‚¯ãƒ³è¿½åŠ ã•ã‚ŒãŸå ´åˆã€èµ·å‹•æ¸ˆã¿ãƒ•ã‚£ãƒ¼ãƒãƒ£ãƒ¼ã‚’è§£é™¤ã—ã¦ã€ãã®ãƒ•ã‚£ãƒ¼ãƒãƒ£ãƒ¼ã‚’ã‚‚ã†ä¸€åº¦èµ·å‹•ã§ãã‚‹ã‚ˆã†ã«ã™ã‚‹
             IList dels = new ArrayList();
             lock (dels.SyncRoot)
             {
-                foreach (FeatureBase fo in TokenInvokedChecker.Keys) // fo = ‹N“®Ï‚İƒtƒB[ƒ`ƒƒ[
+                foreach (FeatureBase fo in TokenInvokedChecker.Keys) // fo = èµ·å‹•æ¸ˆã¿ãƒ•ã‚£ãƒ¼ãƒãƒ£ãƒ¼
                 {
                     if (ContainsTokenID(fo, id))
                     {
@@ -77,15 +77,15 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒg[ƒNƒ“‚É“o˜^‚³‚ê‚½‘SID”
+        /// ãƒˆãƒ¼ã‚¯ãƒ³ã«ç™»éŒ²ã•ã‚ŒãŸå…¨IDæ•°
         /// </summary>
         public int Count => _dat.Count;
 
         /// <summary>
-        /// w’èID‚ªŠÜ‚Ü‚ê‚Ä‚¢‚é‚©‚Ç‚¤‚©‚ğ’²‚×‚é
+        /// æŒ‡å®šIDãŒå«ã¾ã‚Œã¦ã„ã‚‹ã‹ã©ã†ã‹ã‚’èª¿ã¹ã‚‹
         /// </summary>
         /// <param name="value">ID</param>
-        /// <returns>true = ŠÜ‚Ü‚ê‚Ä‚¢‚é / false = ŠÜ‚Ü‚ê‚È‚¢</returns>
+        /// <returns>true = å«ã¾ã‚Œã¦ã„ã‚‹ / false = å«ã¾ã‚Œãªã„</returns>
         public bool Contains(NamedId value)
         {
             if (value == null)
@@ -96,10 +96,10 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// w’èƒtƒB[ƒ`ƒƒ[‚ª—v‹‚·‚éƒŠƒXƒi[‚ªTokenTray‚É‚ ‚é‚©‚Ç‚¤‚©‚ğ’²¸‚·‚é
+        /// æŒ‡å®šãƒ•ã‚£ãƒ¼ãƒãƒ£ãƒ¼ãŒè¦æ±‚ã™ã‚‹ãƒªã‚¹ãƒŠãƒ¼ãŒTokenTrayã«ã‚ã‚‹ã‹ã©ã†ã‹ã‚’èª¿æŸ»ã™ã‚‹
         /// </summary>
-        /// <param name="value">’²¸‘ÎÛ‚Æ‚·‚éƒtƒB[ƒ`ƒƒ[</param>
-        /// <returns>true = ŠÜ‚Ü‚ê‚Ä‚¢‚é / false = ŠÜ‚Ü‚ê‚È‚¢</returns>
+        /// <param name="value">èª¿æŸ»å¯¾è±¡ã¨ã™ã‚‹ãƒ•ã‚£ãƒ¼ãƒãƒ£ãƒ¼</param>
+        /// <returns>true = å«ã¾ã‚Œã¦ã„ã‚‹ / false = å«ã¾ã‚Œãªã„</returns>
         public bool Contains(FeatureBase value)
         {
             var ret = false;
@@ -122,7 +122,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ‚·‚×‚Ä‚Ìƒg[ƒNƒ“‚ğíœ‚·‚é
+        /// ã™ã¹ã¦ã®ãƒˆãƒ¼ã‚¯ãƒ³ã‚’å‰Šé™¤ã™ã‚‹
         /// </summary>
         internal void _clear()
         {

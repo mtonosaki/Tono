@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System.Collections;
@@ -9,8 +9,8 @@ using System.Collections.Specialized;
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// ffPersister ‚ÌŠT—v‚Ìà–¾‚Å‚·B
-    /// ƒIƒuƒWƒFƒNƒg‰i‘±‰»ˆ—‚ğ’S“–
+    /// ffPersister ã®æ¦‚è¦ã®èª¬æ˜ã§ã™ã€‚
+    /// ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆæ°¸ç¶šåŒ–å‡¦ç†ã‚’æ‹…å½“
     /// </summary>
     public class PersistManager
     {
@@ -21,26 +21,26 @@ namespace Tono.GuiWinForm
                 get;
             }
         }
-        #region ‘®«iƒVƒŠƒAƒ‰ƒCƒY‚µ‚È‚¢j
+        #region å±æ€§ï¼ˆã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºã—ãªã„ï¼‰
 
-        /// <summary>ƒŒƒR[ƒ_ŠÇ—</summary>
+        /// <summary>ãƒ¬ã‚³ãƒ¼ãƒ€ç®¡ç†</summary>
         private readonly IDictionary/*<string name,IRecorder>*/ _recorders = new HybridDictionary();
 
         #endregion
 
         /// <summary>
-        /// ƒŒƒR[ƒ_‚ğw’è‚·‚é
+        /// ãƒ¬ã‚³ãƒ¼ãƒ€ã‚’æŒ‡å®šã™ã‚‹
         /// </summary>
-        /// <param name="value">ƒŒƒR[ƒ_</param>
+        /// <param name="value">ãƒ¬ã‚³ãƒ¼ãƒ€</param>
         public void AddRecorder(IRecorder value, Id id)
         {
             _recorders.Add(id.Value, value);
         }
 
         /// <summary>
-        /// ƒŒƒR[ƒ_[‚ğ‰ğœ‚·‚é
+        /// ãƒ¬ã‚³ãƒ¼ãƒ€ãƒ¼ã‚’è§£é™¤ã™ã‚‹
         /// </summary>
-        /// <param name="value">ƒŒƒR[ƒ_[</param>
+        /// <param name="value">ãƒ¬ã‚³ãƒ¼ãƒ€ãƒ¼</param>
         public void RemoveRecorder(Id value)
         {
             var rec = (IRecorder)_recorders[value.Value];
@@ -48,9 +48,9 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒŒƒR[ƒ_[‚ğ‰ğœ‚·‚é
+        /// ãƒ¬ã‚³ãƒ¼ãƒ€ãƒ¼ã‚’è§£é™¤ã™ã‚‹
         /// </summary>
-        /// <param name="value">ƒŒƒR[ƒ_[</param>
+        /// <param name="value">ãƒ¬ã‚³ãƒ¼ãƒ€ãƒ¼</param>
         public void RemoveRecorder(IRecorder value)
         {
             foreach (DictionaryEntry de in _recorders)
@@ -64,15 +64,15 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒŒƒR[ƒ_[‚Ö‚ÌƒuƒŠƒbƒW
+        /// ãƒ¬ã‚³ãƒ¼ãƒ€ãƒ¼ã¸ã®ãƒ–ãƒªãƒƒã‚¸
         /// </summary>
         public class RecorderBridge
         {
-            /// <summary>‘ÎÛ‚Æ‚·‚éƒŒƒR[ƒ_[ƒIƒuƒWƒFƒNƒg</summary>
+            /// <summary>å¯¾è±¡ã¨ã™ã‚‹ãƒ¬ã‚³ãƒ¼ãƒ€ãƒ¼ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ</summary>
             private readonly IRecorder _recorder;
 
             /// <summary>
-            /// —Bˆê‚ÌƒRƒ“ƒXƒgƒ‰ƒNƒ^
+            /// å”¯ä¸€ã®ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
             /// </summary>
             /// <param name="rec"></param>
             internal RecorderBridge(IRecorder rec)
@@ -81,7 +81,7 @@ namespace Tono.GuiWinForm
             }
 
             /// <summary>
-            /// •Û‘¶
+            /// ä¿å­˜
             /// </summary>
             /// <param name="value"></param>
             public void Save(object value, Id savingObjectID)
@@ -93,7 +93,7 @@ namespace Tono.GuiWinForm
             }
 
             /// <summary>
-            /// ‚·‚×‚Ä‰i‘±‰»‚Ìî•ñ‚ğÁ‚·
+            /// ã™ã¹ã¦æ°¸ç¶šåŒ–ã®æƒ…å ±ã‚’æ¶ˆã™
             /// </summary>
             public void Reset()
             {
@@ -104,7 +104,7 @@ namespace Tono.GuiWinForm
             }
 
             /// <summary>
-            /// ƒ`ƒƒƒ“ƒNŠJn
+            /// ãƒãƒ£ãƒ³ã‚¯é–‹å§‹
             /// </summary>
             public void StartChunk(string debugName)
             {
@@ -115,9 +115,9 @@ namespace Tono.GuiWinForm
             }
 
             /// <summary>
-            /// ƒ`ƒƒƒ“ƒNk’†‚©‚Ç‚¤‚©’²¸‚·‚é
+            /// ãƒãƒ£ãƒ³ã‚¯kä¸­ã‹ã©ã†ã‹èª¿æŸ»ã™ã‚‹
             /// </summary>
-            /// <returns>true = ƒ`ƒƒƒ“ƒN’†</returns>
+            /// <returns>true = ãƒãƒ£ãƒ³ã‚¯ä¸­</returns>
             public bool IsStartedChunk
             {
                 get
@@ -134,7 +134,7 @@ namespace Tono.GuiWinForm
             }
 
             /// <summary>
-            /// ƒ`ƒƒƒ“ƒNI—¹
+            /// ãƒãƒ£ãƒ³ã‚¯çµ‚äº†
             /// </summary>
             public void EndChunk()
             {
@@ -145,7 +145,7 @@ namespace Tono.GuiWinForm
             }
 
             /// <summary>
-            /// ƒ`ƒƒƒ“ƒNƒLƒƒƒ“ƒZƒ‹
+            /// ãƒãƒ£ãƒ³ã‚¯ã‚­ãƒ£ãƒ³ã‚»ãƒ«
             /// </summary>
             public void CancelChunk()
             {
@@ -158,10 +158,10 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// w’èƒOƒ‹[ƒv‚É‘®‚·‚éPersister‚ÌChunkŠK‘w‚ğw’è‚·‚éiw’èŠK‘wˆÈ~‚ğØ‚èÌ‚Ä‚éj
+        /// æŒ‡å®šã‚°ãƒ«ãƒ¼ãƒ—ã«å±ã™ã‚‹Persisterã®Chunkéšå±¤ã‚’æŒ‡å®šã™ã‚‹ï¼ˆæŒ‡å®šéšå±¤ä»¥é™ã‚’åˆ‡ã‚Šæ¨ã¦ã‚‹ï¼‰
         /// </summary>
-        /// <param name="groupID">ƒOƒ‹[ƒv‚ÌID</param>
-        /// <param name="length">ŠK‘w</param>
+        /// <param name="groupID">ã‚°ãƒ«ãƒ¼ãƒ—ã®ID</param>
+        /// <param name="length">éšå±¤</param>
         public void SetChunkLength(NamedId groupID, int length)
         {
             foreach (IRecorder rec in _recorders.Values)
@@ -177,7 +177,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒŒƒR[ƒ_[‚ğæ“¾‚·‚é
+        /// ãƒ¬ã‚³ãƒ¼ãƒ€ãƒ¼ã‚’å–å¾—ã™ã‚‹
         /// </summary>
         public RecorderBridge this[Id id] => new RecorderBridge((IRecorder)_recorders[id.Value]);
     }

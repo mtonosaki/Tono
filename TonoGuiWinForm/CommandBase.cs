@@ -10,7 +10,7 @@ using System.Text;
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// TCiƒeƒLƒXƒgƒRƒ}ƒ“ƒhj‚Ì‚PƒRƒ}ƒ“ƒh‚ð•\‚·Šî–{ƒNƒ‰ƒX
+    /// TCï¼ˆãƒ†ã‚­ã‚¹ãƒˆã‚³ãƒžãƒ³ãƒ‰ï¼‰ã®ï¼‘ã‚³ãƒžãƒ³ãƒ‰ã‚’è¡¨ã™åŸºæœ¬ã‚¯ãƒ©ã‚¹
     /// </summary>
     public class CommandBase
     {
@@ -18,7 +18,7 @@ namespace Tono.GuiWinForm
         private readonly Dictionary<string, object> _operands = new Dictionary<string, object>();
 
         /// <summary>
-        /// ƒCƒ“ƒXƒ^ƒ“ƒX•¡»
+        /// ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹è¤‡è£½
         /// </summary>
         /// <returns></returns>
         public CommandBase Clone()
@@ -32,7 +32,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒCƒ“ƒXƒ^ƒ“ƒX‚Ì•¶Žš—ñ‚ðì¬‚·‚éiƒtƒ@ƒCƒ‹‚É‹Lq‚³‚ê‚étc•”•ªiŽž‚È‚Ç‚ðœ‚­j‚Æ“¯‚¶j
+        /// ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã®æ–‡å­—åˆ—ã‚’ä½œæˆã™ã‚‹ï¼ˆãƒ•ã‚¡ã‚¤ãƒ«ã«è¨˜è¿°ã•ã‚Œã‚‹tcéƒ¨åˆ†ï¼ˆæ™‚åˆ»ãªã©ã‚’é™¤ãï¼‰ã¨åŒã˜ï¼‰
         /// </summary>
         /// <returns></returns>
         public override string ToString()
@@ -67,12 +67,12 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒRƒ}ƒ“ƒhi‘å•¶ŽšE¬•¶Žš‚Ì‹æ•Ê—L‚èj
+        /// ã‚³ãƒžãƒ³ãƒ‰ï¼ˆå¤§æ–‡å­—ãƒ»å°æ–‡å­—ã®åŒºåˆ¥æœ‰ã‚Šï¼‰
         /// </summary>
         public string Command => _com;
 
         /// <summary>
-        /// ƒIƒyƒ‰ƒ“ƒh‚Ìˆê——‚ð•Ô‚·
+        /// ã‚ªãƒšãƒ©ãƒ³ãƒ‰ã®ä¸€è¦§ã‚’è¿”ã™
         /// </summary>
         /// <returns></returns>
         public ICollection<string> GetOperandKeys()
@@ -81,7 +81,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒIƒyƒ‰ƒ“ƒh‚È‚µ‚ÅƒCƒ“ƒXƒ^ƒ“ƒX\’z
+        /// ã‚ªãƒšãƒ©ãƒ³ãƒ‰ãªã—ã§ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹æ§‹ç¯‰
         /// </summary>
         /// <param name="com"></param>
         public CommandBase(string com)
@@ -90,7 +90,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒIƒyƒ‰ƒ“ƒh‚Ì’l‚ðŽæ“¾‚·‚é
+        /// ã‚ªãƒšãƒ©ãƒ³ãƒ‰ã®å€¤ã‚’å–å¾—ã™ã‚‹
         /// </summary>
         /// <param name="key"></param>
         /// <returns></returns>
@@ -112,7 +112,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ®”‚ðŽæ“¾‚·‚é
+        /// æ•´æ•°ã‚’å–å¾—ã™ã‚‹
         /// </summary>
         /// <param name="key"></param>
         /// <returns></returns>
@@ -137,7 +137,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ŽÀ”Žæ“¾‚·‚é
+        /// å®Ÿæ•°å–å¾—ã™ã‚‹
         /// </summary>
         /// <param name="key"></param>
         /// <returns></returns>
@@ -162,7 +162,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// Boolean‚ðŽæ“¾‚·‚é
+        /// Booleanã‚’å–å¾—ã™ã‚‹
         /// </summary>
         /// <param name="key"></param>
         /// <returns></returns>
@@ -186,7 +186,7 @@ namespace Tono.GuiWinForm
             }
         }
         /// <summary>
-        /// ƒIƒyƒ‰ƒ“ƒh‚ðÝ’è‚·‚é
+        /// ã‚ªãƒšãƒ©ãƒ³ãƒ‰ã‚’è¨­å®šã™ã‚‹
         /// </summary>
         /// <param name="key"></param>
         /// <param name="val"></param>
@@ -198,7 +198,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒIƒyƒ‰ƒ“ƒh‚ðÝ’è‚·‚é
+        /// ã‚ªãƒšãƒ©ãƒ³ãƒ‰ã‚’è¨­å®šã™ã‚‹
         /// </summary>
         /// <param name="key"></param>
         /// <param name="val"></param>
@@ -210,7 +210,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒIƒyƒ‰ƒ“ƒh‚ðÝ’è‚·‚é
+        /// ã‚ªãƒšãƒ©ãƒ³ãƒ‰ã‚’è¨­å®šã™ã‚‹
         /// </summary>
         /// <param name="key"></param>
         /// <param name="val"></param>
@@ -223,7 +223,7 @@ namespace Tono.GuiWinForm
 
 
         /// <summary>
-        /// ƒIƒyƒ‰ƒ“ƒh‚ðˆê‚ÂŽw’è‚µ‚ÄƒCƒ“ƒXƒ^ƒ“ƒX\’z
+        /// ã‚ªãƒšãƒ©ãƒ³ãƒ‰ã‚’ä¸€ã¤æŒ‡å®šã—ã¦ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹æ§‹ç¯‰
         /// </summary>
         /// <param name="com"></param>
         /// <param name="opkey1"></param>
@@ -238,7 +238,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// •¶Žš—ñ‚©‚çV‚µ‚¢ƒCƒ“ƒXƒ^ƒ“ƒX‚ðì¬‚·‚é
+        /// æ–‡å­—åˆ—ã‹ã‚‰æ–°ã—ã„ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ä½œæˆã™ã‚‹
         /// </summary>
         /// <param name="str"></param>
         /// <returns></returns>

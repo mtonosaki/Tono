@@ -1,35 +1,35 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// ƒ}ƒEƒXEƒL[ƒ{[ƒh‚ÌƒŠƒbƒ`ƒNƒ‰ƒCƒAƒ“ƒg“ü—Í‚ğƒTƒ|[ƒg‚·‚éƒCƒ“ƒ^[ƒtƒF[ƒX
+    /// ãƒã‚¦ã‚¹ãƒ»ã‚­ãƒ¼ãƒœãƒ¼ãƒ‰ã®ãƒªãƒƒãƒã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆå…¥åŠ›ã‚’ã‚µãƒãƒ¼ãƒˆã™ã‚‹ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ãƒ¼ã‚¹
     /// </summary>
     public interface IMouseListener
     {
         /// <summary>
-        /// ƒ}ƒEƒXˆÚ“®ƒCƒxƒ“ƒg‚ğ“]‘—‚·‚é
+        /// ãƒã‚¦ã‚¹ç§»å‹•ã‚¤ãƒ™ãƒ³ãƒˆã‚’è»¢é€ã™ã‚‹
         /// </summary>
-        /// <param name="e">ƒ}ƒEƒXó‘Ô</param>
+        /// <param name="e">ãƒã‚¦ã‚¹çŠ¶æ…‹</param>
         void OnMouseMove(MouseState e);
 
         /// <summary>
-        /// ƒ{ƒ^ƒ“ƒ_ƒEƒ“ƒCƒxƒ“ƒg‚ğ“]‘—‚·‚é
+        /// ãƒœã‚¿ãƒ³ãƒ€ã‚¦ãƒ³ã‚¤ãƒ™ãƒ³ãƒˆã‚’è»¢é€ã™ã‚‹
         /// </summary>
-        /// <param name="e">ƒ}ƒEƒXó‘Ô</param>
+        /// <param name="e">ãƒã‚¦ã‚¹çŠ¶æ…‹</param>
         void OnMouseDown(MouseState e);
 
         /// <summary>
-        /// ƒ{ƒ^ƒ“ƒAƒbƒvƒCƒxƒ“ƒg‚ğ“]‘—‚·‚é
+        /// ãƒœã‚¿ãƒ³ã‚¢ãƒƒãƒ—ã‚¤ãƒ™ãƒ³ãƒˆã‚’è»¢é€ã™ã‚‹
         /// </summary>
-        /// <param name="e">ƒ}ƒEƒXó‘Ô</param>
+        /// <param name="e">ãƒã‚¦ã‚¹çŠ¶æ…‹</param>
         void OnMouseUp(MouseState e);
 
         /// <summary>
-        /// ƒ}ƒEƒXƒzƒC[ƒ‹‚ÌƒCƒxƒ“ƒg‚ğ“]‘—‚·‚é
+        /// ãƒã‚¦ã‚¹ãƒ›ã‚¤ãƒ¼ãƒ«ã®ã‚¤ãƒ™ãƒ³ãƒˆã‚’è»¢é€ã™ã‚‹
         /// </summary>
-        /// <param name="e">ƒ}ƒEƒXó‘Ô</param>
+        /// <param name="e">ãƒã‚¦ã‚¹çŠ¶æ…‹</param>
         void OnMouseWheel(MouseState e);
 
     }

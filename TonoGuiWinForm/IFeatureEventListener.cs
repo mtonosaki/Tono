@@ -1,18 +1,18 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// IFeatureEventListener ‚ÌŠT—v‚Ìà–¾‚Å‚·B
-    /// ƒtƒB[ƒ`ƒƒ[ƒNƒ‰ƒX‚ª‚ÂƒCƒxƒ“ƒgƒCƒ“ƒ^[ƒtƒF[ƒX
+    /// IFeatureEventListener ã®æ¦‚è¦ã®èª¬æ˜ã§ã™ã€‚
+    /// ãƒ•ã‚£ãƒ¼ãƒãƒ£ãƒ¼ã‚¯ãƒ©ã‚¹ãŒæŒã¤ã‚¤ãƒ™ãƒ³ãƒˆã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ãƒ¼ã‚¹
     /// </summary>
     public interface IFeatureEventListener
     {
         /// <summary>
-        /// ƒCƒxƒ“ƒg‚Ì“]‘—æ‚Æ‚È‚éƒtƒB[ƒ`ƒƒ[ƒNƒ‰ƒX‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‚ğw’è‚·‚é
+        /// ã‚¤ãƒ™ãƒ³ãƒˆã®è»¢é€å…ˆã¨ãªã‚‹ãƒ•ã‚£ãƒ¼ãƒãƒ£ãƒ¼ã‚¯ãƒ©ã‚¹ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’æŒ‡å®šã™ã‚‹
         /// </summary>
-        /// <param name="target">ƒtƒB[ƒ`ƒƒ[ƒNƒ‰ƒX‚ÌƒCƒ“ƒXƒ^ƒ“ƒX</param>
+        /// <param name="target">ãƒ•ã‚£ãƒ¼ãƒãƒ£ãƒ¼ã‚¯ãƒ©ã‚¹ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹</param>
         void LinkFeature(FeatureBase target);
     }
 }

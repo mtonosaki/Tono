@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System;
@@ -12,22 +12,22 @@ using System.Xml;
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// Mes ‚ÌŠT—v‚Ìà–¾‚Å‚·B
+    /// Mes ã®æ¦‚è¦ã®èª¬æ˜ã§ã™ã€‚
     /// </summary>
     public class Mes
     {
-        #region ƒtƒH[ƒ}ƒbƒgƒNƒ‰ƒX
+        #region ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆã‚¯ãƒ©ã‚¹
         [Serializable]
         public class Format
         {
-            /// <summary>ƒtƒH[ƒ}ƒbƒg‚ğ•Û‘¶</summary>
+            /// <summary>ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆã‚’ä¿å­˜</summary>
             private readonly ArrayList _formats = new ArrayList();
 
             /// <summary>
-            /// ƒIƒuƒWƒFƒNƒg‚©‚ç\’z
+            /// ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‹ã‚‰æ§‹ç¯‰
             /// </summary>
-            /// <param name="value">ƒIƒuƒWƒFƒNƒg</param>
-            /// <returns>V‚µ‚¢ƒCƒ“ƒXƒ^ƒ“ƒX</returns>
+            /// <param name="value">ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ</param>
+            /// <returns>æ–°ã—ã„ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹</returns>
             public static Format FromObject(object value)
             {
                 var ret = new Format();
@@ -37,10 +37,10 @@ namespace Tono.GuiWinForm
             }
 
             /// <summary>
-            /// ƒtƒH[ƒ}ƒbƒg‚ğ˜AŒ‹‚·‚é
+            /// ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆã‚’é€£çµã™ã‚‹
             /// </summary>
-            /// <param name="f1">ƒtƒH[ƒ}ƒbƒg‚Pi‚±‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‚Éf2‚ª˜AŒ‹‚³‚ê‚éj</param>
-            /// <param name="f2">ƒtƒH[ƒ}ƒbƒg‚Qi˜AŒ‹ŒãA‚±‚¿‚ç‚Í–¢g—pj</param>
+            /// <param name="f1">ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆï¼‘ï¼ˆã“ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã«f2ãŒé€£çµã•ã‚Œã‚‹ï¼‰</param>
+            /// <param name="f2">ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆï¼’ï¼ˆé€£çµå¾Œã€ã“ã¡ã‚‰ã¯æœªä½¿ç”¨ï¼‰</param>
             /// <returns></returns>
             public static Format operator +(Format f1, Format f2)
             {
@@ -49,13 +49,13 @@ namespace Tono.GuiWinForm
             }
 
             /// <summary>
-            /// •¶š—ñ‚©‚ç\’z
+            /// æ–‡å­—åˆ—ã‹ã‚‰æ§‹ç¯‰
             /// </summary>
-            /// <param name="format">ƒtƒH[ƒ}ƒbƒg</param>
-            /// <returns>V‚µ‚¢ƒCƒ“ƒXƒ^ƒ“ƒX</returns>
+            /// <param name="format">ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆ</param>
+            /// <returns>æ–°ã—ã„ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹</returns>
             /// <remarks>
-            /// ƒtƒH[ƒ}ƒbƒg‚ÍA@ƒ}[ƒN‚ÅˆÍ‚ñ‚Å‚ ‚é‚à‚Ì‚ğƒƒbƒZ[ƒWƒL[‚Æ‚µ‚Äæ‚èˆµ‚¤
-            /// —áGDPOS @Editor@  ¨ (‰p)DPOS Editor  / (“ú)DPOS ƒGƒfƒBƒ^ / (’†)DPOS •ÒW“îŒ
+            /// ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆã¯ã€@ãƒãƒ¼ã‚¯ã§å›²ã‚“ã§ã‚ã‚‹ã‚‚ã®ã‚’ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚­ãƒ¼ã¨ã—ã¦å–ã‚Šæ‰±ã†
+            /// ä¾‹ï¼›DPOS @Editor@  â†’ (è‹±)DPOS Editor  / (æ—¥)DPOS ã‚¨ãƒ‡ã‚£ã‚¿ / (ä¸­)DPOS ç·¨é›†è»Ÿä»¶
             /// </remarks>
             public static Format FromString(string formatString)
             {
@@ -66,10 +66,10 @@ namespace Tono.GuiWinForm
             }
 
             /// <summary>
-            /// ®”‚©‚ç\’z
+            /// æ•´æ•°ã‹ã‚‰æ§‹ç¯‰
             /// </summary>
-            /// <param name="format">ƒtƒH[ƒ}ƒbƒg</param>
-            /// <returns>V‚µ‚¢ƒCƒ“ƒXƒ^ƒ“ƒX</returns>
+            /// <param name="format">ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆ</param>
+            /// <returns>æ–°ã—ã„ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹</returns>
             public static Format FromInt(int value)
             {
                 var ret = new Format();
@@ -79,10 +79,10 @@ namespace Tono.GuiWinForm
             }
 
             /// <summary>
-            /// ®”‚©‚ç\’z
+            /// æ•´æ•°ã‹ã‚‰æ§‹ç¯‰
             /// </summary>
-            /// <param name="format">ƒtƒH[ƒ}ƒbƒg</param>
-            /// <returns>V‚µ‚¢ƒCƒ“ƒXƒ^ƒ“ƒX</returns>
+            /// <param name="format">ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆ</param>
+            /// <returns>æ–°ã—ã„ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹</returns>
             public static Format FromInt(int value, string toStringFormat)
             {
                 var ret = new Format();
@@ -92,9 +92,9 @@ namespace Tono.GuiWinForm
             }
 
             /// <summary>
-            /// •¶š—ñ‰»
+            /// æ–‡å­—åˆ—åŒ–
             /// </summary>
-            /// <returns>•¶š—ñ</returns>
+            /// <returns>æ–‡å­—åˆ—</returns>
             public override string ToString()
             {
                 var ret = "";
@@ -131,17 +131,17 @@ namespace Tono.GuiWinForm
         }
         #endregion
 
-        /** <summary>ƒƒbƒZ[ƒWƒf[ƒ^	</summary> */
+        /** <summary>ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ãƒ‡ãƒ¼ã‚¿	</summary> */
         private readonly Hashtable _dat = new Hashtable();
 
-        /// <summary>ƒJƒŒƒ“ƒgƒƒbƒZ[ƒWƒCƒ“ƒXƒ^ƒ“ƒX</summary>
+        /// <summary>ã‚«ãƒ¬ãƒ³ãƒˆãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹</summary>
         private static Mes _current = null;
 
-        /// <summary>ƒƒjƒ…[ƒAƒCƒeƒ€‚ÌNameiƒfƒUƒCƒ“j‚ğ‹L‰¯‚·‚é«‘</summary>
+        /// <summary>ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã‚¢ã‚¤ãƒ†ãƒ ã®Nameï¼ˆãƒ‡ã‚¶ã‚¤ãƒ³æ™‚ï¼‰ã‚’è¨˜æ†¶ã™ã‚‹è¾æ›¸</summary>
         private static readonly IDictionary _objNameSave = new Hashtable();
         private static readonly IDictionary _fonts = new Hashtable();
 
-        #region ƒCƒxƒ“ƒg
+        #region ã‚¤ãƒ™ãƒ³ãƒˆ
         public delegate void CodeChangedEventHandler(object sender, CodeChangedEventArgs e);
         public class CodeChangedEventArgs : EventArgs
         {
@@ -157,16 +157,16 @@ namespace Tono.GuiWinForm
             public string OldCode => _old;
         }
         /// <summary>
-        /// ƒR[ƒh‚ª•Ï‚í‚Á‚½‚Æ‚«‚ÉƒR[ƒ‹‚³‚ê‚é
+        /// ã‚³ãƒ¼ãƒ‰ãŒå¤‰ã‚ã£ãŸã¨ãã«ã‚³ãƒ¼ãƒ«ã•ã‚Œã‚‹
         /// </summary>
         public event CodeChangedEventHandler CodeChanged;
         #endregion
 
-        /// <summary>Œ¾ŒêƒR[ƒh</summary>
+        /// <summary>è¨€èªã‚³ãƒ¼ãƒ‰</summary>
         private string _code = "jp";
 
         /// <summary>
-        /// “ú–{Œê‚©‚Ç‚¤‚©‚ğ’²‚×‚é
+        /// æ—¥æœ¬èªã‹ã©ã†ã‹ã‚’èª¿ã¹ã‚‹
         /// </summary>
         public bool IsJp => _code.Equals("jp", StringComparison.CurrentCultureIgnoreCase);
 
@@ -182,12 +182,12 @@ namespace Tono.GuiWinForm
         #endregion
 
         /// <summary>
-        /// ƒAƒvƒŠƒP[ƒVƒ‡ƒ“—Bˆê‚ÌƒCƒ“ƒXƒ^ƒ“ƒX
+        /// ã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³å”¯ä¸€ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹
         /// </summary>
         public static Mes Current => _current;
 
         /// <summary>
-        /// Œ»İ‚ÌŒ¾ŒêƒR[ƒh‚ğæ“¾‚·‚é
+        /// ç¾åœ¨ã®è¨€èªã‚³ãƒ¼ãƒ‰ã‚’å–å¾—ã™ã‚‹
         /// </summary>
         public string GetCode()
         {
@@ -195,7 +195,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒfƒtƒHƒ‹ƒg‚Ì’l‚ğƒ[ƒh‚·‚é
+        /// ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã®å€¤ã‚’ãƒ­ãƒ¼ãƒ‰ã™ã‚‹
         /// </summary>
         public static void SetDefault()
         {
@@ -203,15 +203,15 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// DateTime‚ÌƒtƒH[ƒ}ƒbƒgi”NŒ“ú•ª•bj
+        /// DateTimeã®ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆï¼ˆå¹´æœˆæ—¥æ™‚åˆ†ç§’ï¼‰
         /// </summary>
         public string FormatYMDHMS => provideDefault(this["FormatYMDHMS"], "yyyy/MM/dd HH:mm:ss");
         /// <summary>
-        /// DateTime‚ÌƒtƒH[ƒ}ƒbƒgi•ª•bj
+        /// DateTimeã®ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆï¼ˆæ™‚åˆ†ç§’ï¼‰
         /// </summary>
         public string FormatHMS => provideDefault(this["FormatHMS"], "HH:mm:ss");
         /// <summary>
-        /// DateTime‚ÌƒtƒH[ƒ}ƒbƒgi•ªj
+        /// DateTimeã®ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆï¼ˆæ™‚åˆ†ï¼‰
         /// </summary>
         public string FormatHM => provideDefault(this["FormatHM"], "HH:mm");
 
@@ -228,10 +228,10 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒ[ƒJƒ‰ƒCƒY‚³‚ê‚½ƒtƒHƒ“ƒg‚ğæ“¾‚·‚éBæ“¾‚µ‚½‚çÓ”C‚à‚Á‚ÄDispose‚·‚é‚±‚Æ
+        /// ãƒ­ãƒ¼ã‚«ãƒ©ã‚¤ã‚ºã•ã‚ŒãŸãƒ•ã‚©ãƒ³ãƒˆã‚’å–å¾—ã™ã‚‹ã€‚å–å¾—ã—ãŸã‚‰è²¬ä»»ã‚‚ã£ã¦Disposeã™ã‚‹ã“ã¨
         /// </summary>
-        /// <param name="key">ƒL[</param>
-        /// <returns>ƒtƒHƒ“ƒgFŒ©‚Â‚©‚ç‚È‚¢ê‡‚ÍAƒfƒtƒHƒ‹ƒgƒtƒHƒ“ƒg‚ª•Ô‚é</returns>
+        /// <param name="key">ã‚­ãƒ¼</param>
+        /// <returns>ãƒ•ã‚©ãƒ³ãƒˆï¼šè¦‹ã¤ã‹ã‚‰ãªã„å ´åˆã¯ã€ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆãƒ•ã‚©ãƒ³ãƒˆãŒè¿”ã‚‹</returns>
         public System.Drawing.Font GetFont(string key)
         {
             var ret = (System.Drawing.Font)_fonts[key];
@@ -243,7 +243,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// uMes—p‚Ìƒtƒ@ƒCƒ‹–¼‚ğì¬‚·‚é
+        /// uMesç”¨ã®ãƒ•ã‚¡ã‚¤ãƒ«åã‚’ä½œæˆã™ã‚‹
         /// </summary>
         /// <param name="langCode"></param>
         /// <returns></returns>
@@ -253,7 +253,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// Œ¾ŒêƒR[ƒh‚ğw’è‚µ‚ÄƒfƒtƒHƒ‹ƒgŒ¾Œê‚ğƒZƒbƒg‚·‚é
+        /// è¨€èªã‚³ãƒ¼ãƒ‰ã‚’æŒ‡å®šã—ã¦ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆè¨€èªã‚’ã‚»ãƒƒãƒˆã™ã‚‹
         /// </summary>
         /// <param name="langCode"></param>
         public static void SetCurrentLanguage(string langCode)
@@ -267,7 +267,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ©“®‰Šú‰»ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+        /// è‡ªå‹•åˆæœŸåŒ–ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
         /// </summary>
         private static Mes fromAuto()
         {
@@ -283,7 +283,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ‹ó‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‚ğì¬‚·‚é
+        /// ç©ºã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ä½œæˆã™ã‚‹
         /// </summary>
         /// <returns></returns>
         public static Mes FromNull()
@@ -293,10 +293,10 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒtƒ‹ƒpƒX‚ğw’è‚µ‚ÄƒCƒ“ƒXƒ^ƒ“ƒX‚ğ\’z‚·‚é
+        /// ãƒ•ãƒ«ãƒ‘ã‚¹ã‚’æŒ‡å®šã—ã¦ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’æ§‹ç¯‰ã™ã‚‹
         /// </summary>
-        /// <param name="fullPath">ƒtƒ‹ƒpƒX</param>
-        /// <returns>V‚µ‚¢ƒCƒ“ƒXƒ^ƒ“ƒX</returns>
+        /// <param name="fullPath">ãƒ•ãƒ«ãƒ‘ã‚¹</param>
+        /// <returns>æ–°ã—ã„ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹</returns>
         public static Mes FromFile(string fullPath)
         {
             var ret = new Mes();
@@ -305,7 +305,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ’l‚ğXV‚·‚é
+        /// å€¤ã‚’æ›´æ–°ã™ã‚‹
         /// </summary>
         /// <param name="key"></param>
         /// <param name="value"></param>
@@ -315,13 +315,13 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// w’èƒtƒ@ƒCƒ‹‚ÌXML‚©‚çƒƒbƒZ[ƒW‚ğ“Ç‚İ‚Ş
+        /// æŒ‡å®šãƒ•ã‚¡ã‚¤ãƒ«ã®XMLã‹ã‚‰ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’èª­ã¿è¾¼ã‚€
         /// </summary>
-        /// <param name="filename">ƒtƒ@ƒCƒ‹–¼iƒtƒ‹ƒpƒXj</param>
-        /// <param name="recCheck">zŠÂQÆ–h~—p ƒtƒ@ƒCƒ‹–¼‹L‰¯«‘</param>
+        /// <param name="filename">ãƒ•ã‚¡ã‚¤ãƒ«åï¼ˆãƒ•ãƒ«ãƒ‘ã‚¹ï¼‰</param>
+        /// <param name="recCheck">å¾ªç’°å‚ç…§é˜²æ­¢ç”¨ ãƒ•ã‚¡ã‚¤ãƒ«åè¨˜æ†¶è¾æ›¸</param>
         private void _init(string filename, IDictionary recCheck)
         {
-            // zŠÂQÆ–h~
+            // å¾ªç’°å‚ç…§é˜²æ­¢
             if (recCheck.Contains(filename))
             {
                 return;
@@ -331,7 +331,7 @@ namespace Tono.GuiWinForm
                 recCheck[filename] = this;
             }
 
-            // “Ç‚İ‚İˆ—
+            // èª­ã¿è¾¼ã¿å‡¦ç†
             var xd = new XmlDocument();
             xd.Load(filename);
 
@@ -340,7 +340,7 @@ namespace Tono.GuiWinForm
 
             foreach (XmlNode node in week)
             {
-                // load ‘®«‚Ìˆ—
+                // load å±æ€§ã®å‡¦ç†
                 if (node.Attributes != null)
                 {
                     XmlNode n2 = node.Attributes["load"];
@@ -352,7 +352,7 @@ namespace Tono.GuiWinForm
                     }
                 }
 
-                // ’l‚Ìˆ—
+                // å€¤ã®å‡¦ç†
                 string key;
                 if (node.Attributes != null && node.Attributes["key"] != null)
                 {
@@ -369,7 +369,7 @@ namespace Tono.GuiWinForm
 
                 }
 
-                // ‰ºˆÊƒƒbƒZ[ƒW‚Ìˆ—
+                // ä¸‹ä½ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã®å‡¦ç†
                 var innnerN = 0;
                 foreach (XmlNode cnode in node.ChildNodes)
                 {
@@ -389,7 +389,7 @@ namespace Tono.GuiWinForm
                 }
             }
 
-            // ƒtƒHƒ“ƒg‚Ì“Ç‚İ‚İ
+            // ãƒ•ã‚©ãƒ³ãƒˆã®èª­ã¿è¾¼ã¿
             foreach (XmlNode fnode in root.GetElementsByTagName("font"))
             {
                 if (fnode.Attributes != null)
@@ -441,7 +441,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// Œ¾Œê‚ÌƒtƒHƒ“ƒg‚ğXV‚·‚é
+        /// è¨€èªã®ãƒ•ã‚©ãƒ³ãƒˆã‚’æ›´æ–°ã™ã‚‹
         /// </summary>
         /// <param name="key"></param>
         /// <param name="face"></param>
@@ -478,7 +478,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒL[‚Æƒo[ƒWƒ‡ƒ“‚©‚ç’l‚ğæ“¾‚·‚é
+        /// ã‚­ãƒ¼ã¨ãƒãƒ¼ã‚¸ãƒ§ãƒ³ã‹ã‚‰å€¤ã‚’å–å¾—ã™ã‚‹
         /// </summary>
         public string this[string key, string ver]
         {
@@ -487,7 +487,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        ///@•¶š—ñ‚ğæ“¾‚·‚é
+        ///ã€€æ–‡å­—åˆ—ã‚’å–å¾—ã™ã‚‹
         /// </summary>
         public virtual string this[string key]
         {
@@ -504,11 +504,11 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// w’è•¶š—ñƒL[‚ªŠÜ‚Ü‚ê‚Ä‚¢‚é‚©’²¸‚·‚é
+        /// æŒ‡å®šæ–‡å­—åˆ—ã‚­ãƒ¼ãŒå«ã¾ã‚Œã¦ã„ã‚‹ã‹èª¿æŸ»ã™ã‚‹
         /// </summary>
-        /// <param name="key">ƒL[</param>
-        /// <param name="ver">ƒo[ƒWƒ‡ƒ“</param>
-        /// <returns>true = ŠÜ‚Ü‚ê‚Ä‚¢‚é / false = ‚¢‚È‚¢</returns>
+        /// <param name="key">ã‚­ãƒ¼</param>
+        /// <param name="ver">ãƒãƒ¼ã‚¸ãƒ§ãƒ³</param>
+        /// <returns>true = å«ã¾ã‚Œã¦ã„ã‚‹ / false = ã„ãªã„</returns>
         [NoTest]
         public bool Contains(string key, string ver)
         {
@@ -516,10 +516,10 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// w’è•¶š—ñƒL[‚ªŠÜ‚Ü‚ê‚Ä‚¢‚é‚©’²¸‚·‚é
+        /// æŒ‡å®šæ–‡å­—åˆ—ã‚­ãƒ¼ãŒå«ã¾ã‚Œã¦ã„ã‚‹ã‹èª¿æŸ»ã™ã‚‹
         /// </summary>
-        /// <param name="key">ƒL[</param>
-        /// <returns>true = ŠÜ‚Ü‚ê‚Ä‚¢‚é / false = ‚¢‚È‚¢</returns>
+        /// <param name="key">ã‚­ãƒ¼</param>
+        /// <returns>true = å«ã¾ã‚Œã¦ã„ã‚‹ / false = ã„ãªã„</returns>
         [NoTest]
         public bool Contains(string key)
         {
@@ -527,7 +527,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒƒjƒ…[ƒAƒCƒeƒ€‚ğƒZƒbƒg‚µ‚½ê‡‚ÌƒƒbƒZ[ƒW“K—p
+        /// ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã‚¢ã‚¤ãƒ†ãƒ ã‚’ã‚»ãƒƒãƒˆã—ãŸå ´åˆã®ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸é©ç”¨
         /// </summary>
         public string this[MenuItem mi]
         {
@@ -582,7 +582,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒIƒuƒWƒFƒNƒg‚©‚ç’l‚ğæ“¾‚·‚é
+        /// ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‹ã‚‰å€¤ã‚’å–å¾—ã™ã‚‹
         /// </summary>
         public string this[Type value]
         {
@@ -601,7 +601,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒIƒuƒWƒFƒNƒg‚©‚ç’l‚ğæ“¾‚·‚é
+        /// ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‹ã‚‰å€¤ã‚’å–å¾—ã™ã‚‹
         /// </summary>
         public string this[object value]
         {
@@ -622,18 +622,18 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// w’èƒRƒ“ƒgƒ[ƒ‹‚É‘®‚·‚éŒ¾ŒêƒeƒLƒXƒg‚ğ‚·‚×‚Ä“K—p‚·‚é
+        /// æŒ‡å®šã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã«å±ã™ã‚‹è¨€èªãƒ†ã‚­ã‚¹ãƒˆã‚’ã™ã¹ã¦é©ç”¨ã™ã‚‹
         /// </summary>
-        /// <param name="rootForm">ƒtƒH[ƒ€</param>
+        /// <param name="rootForm">ãƒ•ã‚©ãƒ¼ãƒ </param>
         public void ResetText(Control rootControl)
         {
             resetControlText(rootControl);
         }
 
         /// <summary>
-        /// w’èƒtƒH[ƒ€‚É‘®‚·‚éŒ¾ŒêƒeƒLƒXƒg‚ğ‚·‚×‚Ä“K—p‚·‚é
+        /// æŒ‡å®šãƒ•ã‚©ãƒ¼ãƒ ã«å±ã™ã‚‹è¨€èªãƒ†ã‚­ã‚¹ãƒˆã‚’ã™ã¹ã¦é©ç”¨ã™ã‚‹
         /// </summary>
-        /// <param name="rootForm">ƒtƒH[ƒ€</param>
+        /// <param name="rootForm">ãƒ•ã‚©ãƒ¼ãƒ </param>
         public void ResetText(Form rootForm)
         {
             if (rootForm.Menu != null)
@@ -656,9 +656,9 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// w’èƒRƒ“ƒgƒ[ƒ‹‚Æ‚»‚ê‚ªŠ—L‚·‚é”z—ñŒ`®‚ÌƒIƒuƒWƒFƒNƒg‚ÉŒ¾Œê‚ğİ’è‚·‚é
+        /// æŒ‡å®šã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã¨ãã‚ŒãŒæ‰€æœ‰ã™ã‚‹é…åˆ—å½¢å¼ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã«è¨€èªã‚’è¨­å®šã™ã‚‹
         /// </summary>
-        /// <param name="c">ƒ[ƒJƒ‰ƒCƒY‚µ‚½‚¢ƒRƒ“ƒgƒ[ƒ‹</param>
+        /// <param name="c">ãƒ­ãƒ¼ã‚«ãƒ©ã‚¤ã‚ºã—ãŸã„ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«</param>
         private void setNameToControl(Control c)
         {
             Type tp;
@@ -687,7 +687,7 @@ namespace Tono.GuiWinForm
             {
                 c.Text = o.ToString();
             }
-            // ƒŠƒXƒgƒrƒ…[‚Ì—l‚ÉA”z—ñ‚ğ‚Á‚Ä‚¢‚éƒIƒuƒWƒFƒNƒg‚É‘Î‚µ‚ÄAƒƒbƒZ[ƒWˆ—
+            // ãƒªã‚¹ãƒˆãƒ“ãƒ¥ãƒ¼ã®æ§˜ã«ã€é…åˆ—ã‚’æŒã£ã¦ã„ã‚‹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã«å¯¾ã—ã¦ã€ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸å‡¦ç†
             var pis = c.GetType().GetProperties();
             foreach (var pi in pis)
             {
@@ -700,7 +700,7 @@ namespace Tono.GuiWinForm
                     }
                     foreach (var ao in (ICollection)pi.GetValue(c, null))
                     {
-                        // ao = ”z—ñ“à‚ÌŠe’l
+                        // ao = é…åˆ—å†…ã®å„å€¤
                         var ptext = ao.GetType().GetProperty("Text");
                         var pname = ao.GetType().GetProperty("Name");
                         if (ptext != null)
@@ -710,7 +710,7 @@ namespace Tono.GuiWinForm
                             {
                                 sp = ptext;
 
-                                // Text‘®«‚ğƒIƒŠƒWƒiƒ‹‚É–ß‚·
+                                // Textå±æ€§ã‚’ã‚ªãƒªã‚¸ãƒŠãƒ«ã«æˆ»ã™
                                 var originalText = _objNameSave[ao];
                                 if (originalText != null)
                                 {
@@ -741,9 +741,9 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒRƒ“ƒgƒ[ƒ‹‚Ì•\¦Œ¾Œê‚Ì•ÏX
+        /// ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã®è¡¨ç¤ºè¨€èªã®å¤‰æ›´
         /// </summary>
-        /// <param name="c">ControlƒIƒuƒWƒFƒNƒg</param>
+        /// <param name="c">Controlã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ</param>
         [NoTest]
         private void resetControlText(Control c)
         {
@@ -763,12 +763,12 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒƒjƒ…[‚Ì•\¦Œ¾Œê‚Ì•ÏX
+        /// ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã®è¡¨ç¤ºè¨€èªã®å¤‰æ›´
         /// </summary>
-        /// <param name="c">MenuItemƒIƒuƒWƒFƒNƒg</param>
+        /// <param name="c">MenuItemã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ</param>
         private void resetMenuText(Menu menu)
         {
-            //ƒƒjƒ…[ƒAƒCƒeƒ€‚ÌƒeƒLƒXƒg‚ğ•ÏX
+            //ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã‚¢ã‚¤ãƒ†ãƒ ã®ãƒ†ã‚­ã‚¹ãƒˆã‚’å¤‰æ›´
             foreach (MenuItem mi in menu.MenuItems)
             {
                 menuItemLoop(mi);
@@ -776,7 +776,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒƒjƒ…[ƒAƒCƒeƒ€‚ğÄ‹AƒR[ƒ‹‚µ‚È‚ª‚ç“K—p‚·‚é
+        /// ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã‚¢ã‚¤ãƒ†ãƒ ã‚’å†å¸°ã‚³ãƒ¼ãƒ«ã—ãªãŒã‚‰é©ç”¨ã™ã‚‹
         /// </summary>
         private void menuItemLoop(MenuItem c)
         {
@@ -788,7 +788,7 @@ namespace Tono.GuiWinForm
             }
         }
         /// <summary>
-        /// ƒƒjƒ…[ƒAƒCƒeƒ€‚ğÄ‹AƒR[ƒ‹‚µ‚È‚ª‚ç“K—p‚·‚é
+        /// ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã‚¢ã‚¤ãƒ†ãƒ ã‚’å†å¸°ã‚³ãƒ¼ãƒ«ã—ãªãŒã‚‰é©ç”¨ã™ã‚‹
         /// </summary>
         private void menuItemStripLoop(ToolStripItemCollection c)
         {

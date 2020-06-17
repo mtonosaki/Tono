@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System;
@@ -9,7 +9,7 @@ using System.Windows.Forms;
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// uScRect ‚ÌŠT—v‚Ìà–¾‚Å‚·B
+    /// uScRect ã®æ¦‚è¦ã®èª¬æ˜ã§ã™ã€‚
     /// </summary>
     [Serializable]
     public class ScreenRect : Rect
@@ -17,7 +17,7 @@ namespace Tono.GuiWinForm
         public static new ScreenRect Empty => ScreenRect.FromLTRB(0, 0, 0, 0);
 
         /// <summary>
-        /// ƒfƒtƒHƒ‹ƒgƒRƒ“ƒXƒgƒ‰ƒNƒ^
+        /// ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
         /// </summary>
 
         public ScreenRect()
@@ -56,10 +56,10 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒRƒ“ƒgƒ[ƒ‹‚©‚çƒCƒ“ƒXƒ^ƒ“ƒX‚ğ¶¬‚·‚é
+        /// ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã‹ã‚‰ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ç”Ÿæˆã™ã‚‹
         /// </summary>
-        /// <param name="c">ƒRƒ“ƒgƒ[ƒ‹</param>
-        /// <returns>V‚µ‚¢ƒCƒ“ƒXƒ^ƒ“ƒX</returns>
+        /// <param name="c">ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«</param>
+        /// <returns>æ–°ã—ã„ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹</returns>
 
         public static ScreenRect FromControl(Control c)
         {
@@ -68,13 +68,13 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ®”’l‚©‚çƒCƒ“ƒXƒ^ƒ“ƒX‚ğ\’z‚·‚é
+        /// æ•´æ•°å€¤ã‹ã‚‰ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’æ§‹ç¯‰ã™ã‚‹
         /// </summary>
-        /// <param name="x">¶ãÀ•WX</param>
-        /// <param name="y">¶ãÀ•WY</param>
-        /// <param name="width">•</param>
-        /// <param name="height">‚‚³</param>
-        /// <returns>V‚µ‚¢ƒCƒ“ƒXƒ^ƒ“ƒX</returns>
+        /// <param name="x">å·¦ä¸Šåº§æ¨™X</param>
+        /// <param name="y">å·¦ä¸Šåº§æ¨™Y</param>
+        /// <param name="width">å¹…</param>
+        /// <param name="height">é«˜ã•</param>
+        /// <returns>æ–°ã—ã„ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹</returns>
 
         public static new ScreenRect FromLTWH(int x, int y, int width, int height)
         {
@@ -87,7 +87,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ’†S‚ğæ“¾‚·‚é
+        /// ä¸­å¿ƒã‚’å–å¾—ã™ã‚‹
         /// </summary>
         /// <returns></returns>
         public new ScreenPos GetCenter()
@@ -97,13 +97,13 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// À•W‚ğw’è‚µ‚ÄV‚µ‚¢ƒCƒ“ƒXƒ^ƒ“ƒX‚ğ\’z‚·‚é
+        /// åº§æ¨™ã‚’æŒ‡å®šã—ã¦æ–°ã—ã„ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’æ§‹ç¯‰ã™ã‚‹
         /// </summary>
-        /// <param name="x0">¶ã‚ÌXÀ•W</param>
-        /// <param name="y0">¶ã‚ÌYÀ•W</param>
-        /// <param name="x1">‰E‰º‚ÌXÀ•W</param>
-        /// <param name="y1">‰E‰º‚ÌYÀ•W</param>
-        /// <returns>\’z‚µ‚½ƒCƒ“ƒXƒ^ƒ“ƒX</returns>
+        /// <param name="x0">å·¦ä¸Šã®Xåº§æ¨™</param>
+        /// <param name="y0">å·¦ä¸Šã®Yåº§æ¨™</param>
+        /// <param name="x1">å³ä¸‹ã®Xåº§æ¨™</param>
+        /// <param name="y1">å³ä¸‹ã®Yåº§æ¨™</param>
+        /// <returns>æ§‹ç¯‰ã—ãŸã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹</returns>
 
         public static new ScreenRect FromLTRB(int x0, int y0, int x1, int y1)
         {
@@ -117,10 +117,10 @@ namespace Tono.GuiWinForm
 
 
         /// <summary>
-        /// Rectangle‚©‚çƒCƒ“ƒXƒ^ƒ“ƒX‚ğ\’z‚·‚é
+        /// Rectangleã‹ã‚‰ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’æ§‹ç¯‰ã™ã‚‹
         /// </summary>
-        /// <param name="r">RectangleŒ^‚ÌŒ³‚Ì’l</param>
-        /// <returns>V‚µ‚¢ƒCƒ“ƒXƒ^ƒ“ƒX</returns>
+        /// <param name="r">Rectangleå‹ã®å…ƒã®å€¤</param>
+        /// <returns>æ–°ã—ã„ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹</returns>
         //		 
         public static ScreenRect FromRectangle(System.Drawing.Rectangle r)
         {
@@ -133,7 +133,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ‰‰ZqƒI[ƒo[ƒ[ƒh
+        /// æ¼”ç®—å­ã‚ªãƒ¼ãƒãƒ¼ãƒ­ãƒ¼ãƒ‰
         /// </summary>
         public static ScreenRect operator &(ScreenRect r1, Rect r2) { return (ScreenRect)((Rect)r1 & r2); }
         public static ScreenRect operator +(ScreenRect r1, XyBase r2) { return (ScreenRect)((Rect)r1 + r2); }

@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System;
@@ -10,14 +10,14 @@ using System.Windows.Forms;
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// FeatureBase ‚ÌŠT—v‚Ìà–¾‚Å‚·B
-    /// ƒtƒB[ƒ`ƒƒ[ƒNƒ‰ƒX‚ÌŠî–{ƒNƒ‰ƒX
+    /// FeatureBase ã®æ¦‚è¦ã®èª¬æ˜ã§ã™ã€‚
+    /// ãƒ•ã‚£ãƒ¼ãƒãƒ£ãƒ¼ã‚¯ãƒ©ã‚¹ã®åŸºæœ¬ã‚¯ãƒ©ã‚¹
     /// </summary>
     public abstract class FeatureBase : DataLinkManager
     {
-        #region ƒtƒ@ƒCƒ‹ƒZƒŒƒNƒ^@ƒtƒB[ƒ`ƒƒ[”Å
+        #region ãƒ•ã‚¡ã‚¤ãƒ«ã‚»ãƒ¬ã‚¯ã‚¿ã€€ãƒ•ã‚£ãƒ¼ãƒãƒ£ãƒ¼ç‰ˆ
         /// <summary>
-        /// ƒtƒ@ƒCƒ‹ƒZƒŒƒNƒ^@ƒtƒB[ƒ`ƒƒ[”Å
+        /// ãƒ•ã‚¡ã‚¤ãƒ«ã‚»ãƒ¬ã‚¯ã‚¿ã€€ãƒ•ã‚£ãƒ¼ãƒãƒ£ãƒ¼ç‰ˆ
         /// </summary>
         public class FileSelectorAdapter
         {
@@ -28,7 +28,7 @@ namespace Tono.GuiWinForm
             private readonly PersistManager.RecorderBridge IR;
 
             /// <summary>
-            /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+            /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
             /// </summary>
             public FileSelectorAdapter(PersistManager.RecorderBridge irPersister)
             {
@@ -43,7 +43,7 @@ namespace Tono.GuiWinForm
 
 
             /// <summary>
-            /// Às‚·‚é
+            /// å®Ÿè¡Œã™ã‚‹
             /// </summary>
             /// <returns></returns>
             public DialogResult ShowDialog()
@@ -51,8 +51,8 @@ namespace Tono.GuiWinForm
                 object ret;
 
                 {
-#if false  // fFileSelectorg—p‚Ìê‡
-				// ƒCƒ“ƒXƒ^ƒ“ƒX¶¬
+#if false  // fFileSelectorä½¿ç”¨ã®å ´åˆ
+				// ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ç”Ÿæˆ
 				const BindingFlags flags = BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic;
 				ConstructorInfo ci = typeof(fFileSelector).GetConstructor(flags, null, new Type[]{}, null);				
 				fFileSelector fs = (fFileSelector)ci.Invoke(new object[]{});
@@ -63,10 +63,10 @@ namespace Tono.GuiWinForm
 				fs.FileName = this._filename;
 				fs.Filter = this._filter;
 
-				// ShowDialogÀs
+				// ShowDialogå®Ÿè¡Œ
 				MethodInfo mi = typeof(fFileSelector).GetMethod("showDialog", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
 				object ret = mi.Invoke(fs, new object[]{});
-#else      // OpenFileDialogg—p‚Ìê‡
+#else      // OpenFileDialogä½¿ç”¨ã®å ´åˆ
                     IR.Save(new DeviceRecord.TagSkipStart(), NamedId.FromName("InputRecorderSaveSerializeID"));
 
                     FileDialog fs;
@@ -109,7 +109,7 @@ namespace Tono.GuiWinForm
 #endif
                     ret = fs.ShowDialog();
 
-                    // ‘€ì‹L˜^
+                    // æ“ä½œè¨˜éŒ²
                     IR.Save(new DeviceRecord.TagFileSelect((DialogResult)ret, fs.FileName), NamedId.FromName("InputRecorderSaveSerializeID"));
 
                     _filename = fs.FileName;
@@ -117,7 +117,7 @@ namespace Tono.GuiWinForm
 
                     IR.Save(new DeviceRecord.TagSkipEnd(), NamedId.FromName("InputRecorderSaveSerializeID"));
                 }
-                // ƒtƒ@ƒCƒ‹–¼ˆÈŠO‚ÍA‚·‚×‚ÄƒŠƒZƒbƒg‚·‚é
+                // ãƒ•ã‚¡ã‚¤ãƒ«åä»¥å¤–ã¯ã€ã™ã¹ã¦ãƒªã‚»ãƒƒãƒˆã™ã‚‹
                 _hlList.Clear();
                 _filter = "*.*";
 
@@ -125,16 +125,16 @@ namespace Tono.GuiWinForm
             }
 
             /// <summary>
-            /// ƒnƒCƒ‰ƒCƒg‚ÌŠg’£q‚ğw’è‚·‚é
+            /// ãƒã‚¤ãƒ©ã‚¤ãƒˆã®æ‹¡å¼µå­ã‚’æŒ‡å®šã™ã‚‹
             /// </summary>
-            /// <param name="ext">Šg’£q</param>
+            /// <param name="ext">æ‹¡å¼µå­</param>
             public void AddHighlightExt(string ext)
             {
                 _hlList.Add(ext);
             }
 
             /// <summary>
-            /// ƒtƒ@ƒCƒ‹–¼
+            /// ãƒ•ã‚¡ã‚¤ãƒ«å
             /// </summary>
             public string FileName
             {
@@ -143,7 +143,7 @@ namespace Tono.GuiWinForm
             }
 
             /// <summary>
-            /// ƒtƒBƒ‹ƒ^ —áF  *.doc|*.txt|*.rtf
+            /// ãƒ•ã‚£ãƒ«ã‚¿ ä¾‹ï¼š  *.doc|*.txt|*.rtf
             /// </summary>
             public string Filter
             {
@@ -158,7 +158,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// •K‚¸“’…‚·‚éƒg[ƒNƒ“‚ğ”­s‚Å‚«‚éƒtƒB[ƒ`ƒƒ[ƒIƒuƒWƒFƒNƒg
+        /// å¿…ãšåˆ°ç€ã™ã‚‹ãƒˆãƒ¼ã‚¯ãƒ³ã‚’ç™ºè¡Œã§ãã‚‹ãƒ•ã‚£ãƒ¼ãƒãƒ£ãƒ¼ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
         /// </summary>
         /// <returns></returns>
         public static FeatureBase ForMultiTokenDummy()
@@ -173,40 +173,40 @@ namespace Tono.GuiWinForm
         {
         }
 
-        #region ‘®«iƒVƒŠƒAƒ‰ƒCƒY‚·‚éj
-        /// <summary>ƒCƒ“ƒXƒ^ƒ“ƒX‚ğ“Á’è‚·‚é‚½‚ß‚ÌID</summary>
+        #region å±æ€§ï¼ˆã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºã™ã‚‹ï¼‰
+        /// <summary>ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ç‰¹å®šã™ã‚‹ãŸã‚ã®ID</summary>
         private Id _instanceID;
-        /// <summary>ÅI•\¦ƒJ[ƒ\ƒ‹</summary>
+        /// <summary>æœ€çµ‚è¡¨ç¤ºã‚«ãƒ¼ã‚½ãƒ«</summary>
         public static System.Windows.Forms.Cursor Cursor = Cursors.Default;
-        /// <summary>©ƒCƒxƒ“ƒg‚Ì•\¦ƒJ[ƒ\ƒ‹</summary>
+        /// <summary>è‡ªã‚¤ãƒ™ãƒ³ãƒˆæ™‚ã®è¡¨ç¤ºã‚«ãƒ¼ã‚½ãƒ«</summary>
         protected System.Windows.Forms.Cursor _EventCursor = Cursors.Default;
-        /// <summary>ƒpƒ‰ƒ[ƒ^•¶š—ñ‚Ì•Û‘¶</summary>
+        /// <summary>ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿æ–‡å­—åˆ—ã®ä¿å­˜</summary>
         private readonly string _paramString = "";
 
-        /// <summary>ƒtƒB[ƒ`ƒƒ[‚Ì–¼‘O</summary>
+        /// <summary>ãƒ•ã‚£ãƒ¼ãƒãƒ£ãƒ¼ã®åå‰</summary>
         private string _featureName = null;
 
-        /// <summary>ƒtƒB[ƒ`ƒƒ[‚ğg—p‚·‚é‚©‚Ç‚¤‚©‚Ìƒtƒ‰ƒO</summary>
+        /// <summary>ãƒ•ã‚£ãƒ¼ãƒãƒ£ãƒ¼ã‚’ä½¿ç”¨ã™ã‚‹ã‹ã©ã†ã‹ã®ãƒ•ãƒ©ã‚°</summary>
         private bool _isEnable = true;
         #endregion
-        #region ‘®«iƒVƒŠƒAƒ‰ƒCƒY‚µ‚È‚¢j
+        #region å±æ€§ï¼ˆã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºã—ãªã„ï¼‰
 
-        /// <summary>ƒg[ƒNƒ“Às‚ğRecord‚·‚éƒ^ƒCƒ~ƒ“ƒO</summary>
+        /// <summary>ãƒˆãƒ¼ã‚¯ãƒ³å®Ÿè¡Œã‚’Recordã™ã‚‹ã‚¿ã‚¤ãƒŸãƒ³ã‚°</summary>
         protected NamedId startToken;
         private static int _instanceCounter = 1;
         /// <summary>
-        /// EnableƒvƒƒpƒeƒB[•ÏX‚Ì’m‚ç‚¹
+        /// Enableãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ãƒ¼å¤‰æ›´ã®çŸ¥ã‚‰ã›
         /// </summary>
         protected EventHandler<EventArgs> EnableChanged;
 
-        /// <summary>ˆê“I‚Èƒg[ƒNƒ“IDiƒƒjƒ…[‚âƒ{ƒ^ƒ“‚©‚ç‚Ì‹N“®‚Ég—pj</summary>
+        /// <summary>ä¸€æ™‚çš„ãªãƒˆãƒ¼ã‚¯ãƒ³IDï¼ˆãƒ¡ãƒ‹ãƒ¥ãƒ¼ã‚„ãƒœã‚¿ãƒ³ã‹ã‚‰ã®èµ·å‹•ã«ä½¿ç”¨ï¼‰</summary>
         private NamedId _temporaryTokenListenerID = null;
         /// <summary>
-        /// REDO—p‚ÌID
+        /// REDOç”¨ã®ID
         /// </summary>
         public static readonly NamedId REDO = NamedId.FromName("PersisterForRedo");
         /// <summary>
-        /// UNDO—p‚ÌID
+        /// UNDOç”¨ã®ID
         /// </summary>
         public static readonly NamedId UNDO = NamedId.FromName("PersisterForUndo");
 
@@ -215,7 +215,7 @@ namespace Tono.GuiWinForm
         #endregion
 
         /// <summary>
-        /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+        /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
         /// </summary>
         protected FeatureBase()
         {
@@ -225,7 +225,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒCƒ“ƒXƒ^ƒ“ƒX–¼
+        /// ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹å
         /// </summary>
         public string Name
         {
@@ -234,20 +234,20 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ©“®‹N“®‚³‚¹‚éƒRƒ}ƒ“ƒhƒpƒ‰ƒ[ƒ^
+        /// è‡ªå‹•èµ·å‹•ã•ã›ã‚‹ã‚³ãƒãƒ³ãƒ‰ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿
         /// </summary>
         public string CommandParameter { get; set; } = null;
 
         /// <summary>
-        /// ƒRƒ}ƒ“ƒhƒpƒ‰ƒ[ƒ^‚ªw’è‚³‚ê‚Ä‚¢‚éA‹N“®‚É©“®“I‚ÉƒR[ƒ‹‚³‚ê‚é
+        /// ã‚³ãƒãƒ³ãƒ‰ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ãŒæŒ‡å®šã•ã‚Œã¦ã„ã‚‹æ™‚ã€èµ·å‹•æ™‚ã«è‡ªå‹•çš„ã«ã‚³ãƒ¼ãƒ«ã•ã‚Œã‚‹
         /// </summary>
-        /// <param name="arg">ƒRƒ}ƒ“ƒhƒ‰ƒCƒ“  /s=aaa  ‚È‚çAaaa ‚ªŠi”[‚³‚ê‚é</param>
+        /// <param name="arg">ã‚³ãƒãƒ³ãƒ‰ãƒ©ã‚¤ãƒ³  /s=aaa  ãªã‚‰ã€aaa ãŒæ ¼ç´ã•ã‚Œã‚‹</param>
         public virtual void OnCommandParameter(string arg)
         {
         }
 
         /// <summary>
-        /// ƒRƒ}ƒ“ƒhƒpƒ‰ƒ[ƒ^—áŠO
+        /// ã‚³ãƒãƒ³ãƒ‰ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ä¾‹å¤–
         /// </summary>
         public class CommandParameterException : Exception
         {
@@ -260,7 +260,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒtƒ@ƒCƒ‹ƒZƒŒƒNƒ^
+        /// ãƒ•ã‚¡ã‚¤ãƒ«ã‚»ãƒ¬ã‚¯ã‚¿
         /// </summary>
         public FileSelectorAdapter FileSelector
         {
@@ -275,7 +275,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒpƒ‰ƒ[ƒ^•¶š—ñ‚ğ•Ô‚·
+        /// ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿æ–‡å­—åˆ—ã‚’è¿”ã™
         /// </summary>
         public string GetParamString()
         {
@@ -283,7 +283,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒtƒB[ƒ`ƒƒ[‚ğŸ‰ñ‚©‚çg—p‚·‚é‚©‚Ç‚¤‚©‚Ìƒtƒ‰ƒO
+        /// ãƒ•ã‚£ãƒ¼ãƒãƒ£ãƒ¼ã‚’æ¬¡å›ã‹ã‚‰ä½¿ç”¨ã™ã‚‹ã‹ã©ã†ã‹ã®ãƒ•ãƒ©ã‚°
         /// </summary>
         public virtual bool Enabled
         {
@@ -300,9 +300,9 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒtƒB[ƒ`ƒƒ[‚ÌƒfƒtƒHƒ‹ƒg‚Ì•¶š—ñ‚ğì¬‚·‚é
+        /// ãƒ•ã‚£ãƒ¼ãƒãƒ£ãƒ¼ã®ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã®æ–‡å­—åˆ—ã‚’ä½œæˆã™ã‚‹
         /// </summary>
-        /// <returns>ƒCƒ“ƒXƒ^ƒ“ƒX‚Ì•¶š—ñ</returns>
+        /// <returns>ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã®æ–‡å­—åˆ—</returns>
         public override string ToString()
         {
             return GetType().Name + "[" + _instanceID.ToString() + "]";
@@ -310,7 +310,7 @@ namespace Tono.GuiWinForm
 
 
         /// <summary>
-        /// ƒpƒ‰ƒ[ƒ^•¶š—ñ‚ğ‰ğÍ‚·‚é
+        /// ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿æ–‡å­—åˆ—ã‚’è§£æã™ã‚‹
         /// </summary>
         /// <param name="param"></param>
         public virtual void ParseParameter(string param)
@@ -318,22 +318,22 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒtƒB[ƒ`ƒƒ[‚ªŠJn‚Å‚«‚éó‘Ô‚©‚Ç‚¤‚©‚ğŠO•”‚É’Ê’m‚·‚éè’i
+        /// ãƒ•ã‚£ãƒ¼ãƒãƒ£ãƒ¼ãŒé–‹å§‹ã§ãã‚‹çŠ¶æ…‹ã‹ã©ã†ã‹ã‚’å¤–éƒ¨ã«é€šçŸ¥ã™ã‚‹æ‰‹æ®µ
         /// </summary>
         public virtual bool CanStart => Enabled;
 
         /// <summary>
-        /// ƒƒjƒ…[‚Ìƒ`ƒFƒbƒN‚É˜A“®‚³‚¹‚é
+        /// ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã®ãƒã‚§ãƒƒã‚¯ã«é€£å‹•ã•ã›ã‚‹
         /// </summary>
         public virtual bool Checked => false;
 
         /// <summary>
-        /// ƒƒbƒZ[ƒW‚ğæ“¾‚·‚é
+        /// ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’å–å¾—ã™ã‚‹
         /// </summary>
         protected Mes Mes => Mes.Current;
 
         /// <summary>
-        /// ©ƒtƒB[ƒ`ƒƒ[‚ÉƒY[ƒ€•ÏXƒCƒxƒ“ƒg‚ğ‘—o‚·‚é
+        /// è‡ªãƒ•ã‚£ãƒ¼ãƒãƒ£ãƒ¼ã«ã‚ºãƒ¼ãƒ å¤‰æ›´ã‚¤ãƒ™ãƒ³ãƒˆã‚’é€å‡ºã™ã‚‹
         /// </summary>
         protected void SendZoomChanged()
         {
@@ -347,7 +347,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ©ƒtƒB[ƒ`ƒƒ[‚ÉƒXƒNƒ[ƒ‹•ÏXƒCƒxƒ“ƒg‚ğ‘—o‚·‚é
+        /// è‡ªãƒ•ã‚£ãƒ¼ãƒãƒ£ãƒ¼ã«ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«å¤‰æ›´ã‚¤ãƒ™ãƒ³ãƒˆã‚’é€å‡ºã™ã‚‹
         /// </summary>
         protected void SendScrollChanged()
         {
@@ -361,8 +361,8 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ©ŒÈŒÄ‚Ño‚µ‚Ì—\–ñ
-        /// id‘g‚İF‰¼ƒg[ƒNƒ“‚ª©“®“I‚É”­s‚³‚ê‚Ä“®ì‚·‚éj
+        /// è‡ªå·±å‘¼ã³å‡ºã—ã®äºˆç´„
+        /// ï¼ˆä»•çµ„ã¿ï¼šä»®ãƒˆãƒ¼ã‚¯ãƒ³ãŒè‡ªå‹•çš„ã«ç™ºè¡Œã•ã‚Œã¦å‹•ä½œã™ã‚‹ï¼‰
         /// </summary>
         public void RequestStartup()
         {
@@ -370,10 +370,10 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ©ŒÈŒÄ‚Ño‚µ‚Ì—\–ñ
-        /// id‘g‚İFˆêƒg[ƒNƒ“‚ª©“®“I‚É”­s‚³‚ê‚Ä“®ì‚·‚éj
+        /// è‡ªå·±å‘¼ã³å‡ºã—ã®äºˆç´„
+        /// ï¼ˆä»•çµ„ã¿ï¼šä¸€æ™‚ãƒˆãƒ¼ã‚¯ãƒ³ãŒè‡ªå‹•çš„ã«ç™ºè¡Œã•ã‚Œã¦å‹•ä½œã™ã‚‹ï¼‰
         /// </summary>
-        /// <param name="id">ID‚ğ–¾¦‚·‚é‚±‚Æ‚ª‚Å‚«‚é</param>
+        /// <param name="id">IDã‚’æ˜ç¤ºã™ã‚‹ã“ã¨ãŒã§ãã‚‹</param>
         public void RequestStartup(Id id)
         {
             if (id.IsNothing())
@@ -391,17 +391,17 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ©•ªˆ¶‚Ä‚Ìƒg[ƒNƒ“Às‚µ‚ÄA©•ªˆ¶‚Ìƒg[ƒNƒ“‚ğÁ‹‚·‚é
+        /// è‡ªåˆ†å®›ã¦ã®ãƒˆãƒ¼ã‚¯ãƒ³å®Ÿè¡Œã—ã¦ã€è‡ªåˆ†å®›ã®ãƒˆãƒ¼ã‚¯ãƒ³ã‚’æ¶ˆå»ã™ã‚‹
         /// </summary>
         /// <returns>
-        /// Às‚µ‚½ƒg[ƒNƒ“ID
+        /// å®Ÿè¡Œã—ãŸãƒˆãƒ¼ã‚¯ãƒ³ID
         /// </returns>
         internal NamedId invokeToken()
         {
             var isNeedUrgentToken = false;
 
 
-            // ÀsŠm”F
+            // å®Ÿè¡Œç¢ºèª
             NamedId need = null;
 
 
@@ -425,7 +425,7 @@ namespace Tono.GuiWinForm
                 }
             }
 
-            if (_temporaryTokenListenerID != null) // —Õƒg[ƒNƒ“‚ÌŠm”Fi“à•”ƒg[ƒNƒ“‚Æ—¼•û‚ ‚Á‚½ê‡A‚±‚¿‚ç‚ªg—p‚³‚ê‚éj
+            if (_temporaryTokenListenerID != null) // è‡¨æ™‚ãƒˆãƒ¼ã‚¯ãƒ³ã®ç¢ºèªï¼ˆå†…éƒ¨ãƒˆãƒ¼ã‚¯ãƒ³ã¨ä¸¡æ–¹ã‚ã£ãŸå ´åˆã€ã“ã¡ã‚‰ãŒä½¿ç”¨ã•ã‚Œã‚‹ï¼‰
             {
                 if (Token.Contains(_temporaryTokenListenerID))
                 {
@@ -439,13 +439,13 @@ namespace Tono.GuiWinForm
                 {
                     var sw = new StopWatch();
 
-                    // ƒg[ƒNƒ“Às‚ğ’Ê’m‚·‚é‹Ù‹}—Õƒg[ƒNƒ“
+                    // ãƒˆãƒ¼ã‚¯ãƒ³å®Ÿè¡Œã‚’é€šçŸ¥ã™ã‚‹ç·Šæ€¥è‡¨æ™‚ãƒˆãƒ¼ã‚¯ãƒ³
                     if (isNeedUrgentToken)
                     {
                         GetRoot().SetUrgentToken(startToken, need, this);
                     }
 
-                    // ƒXƒ^[ƒg
+                    // ã‚¹ã‚¿ãƒ¼ãƒˆ
                     Start(need);
 
                     var sec = sw.Stop();
@@ -460,28 +460,28 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒf[ƒ^‚ğg—p‚µ‚½‰Šú‰»‚ª•K—v‚È‚ç‚±‚±‚ÉÀ‘•‚·‚é
+        /// ãƒ‡ãƒ¼ã‚¿ã‚’ä½¿ç”¨ã—ãŸåˆæœŸåŒ–ãŒå¿…è¦ãªã‚‰ã“ã“ã«å®Ÿè£…ã™ã‚‹
         /// </summary>
         public virtual void OnInitInstance()
         {
         }
 
         /// <summary>
-        /// ƒCƒxƒ“ƒg‹N“®
+        /// ã‚¤ãƒ™ãƒ³ãƒˆèµ·å‹•
         /// </summary>
         public virtual void Start(NamedId who)
         {
         }
 
         /// <summary>
-        /// ƒCƒxƒ“ƒg‹N“®
+        /// ã‚¤ãƒ™ãƒ³ãƒˆèµ·å‹•
         /// </summary>
         public virtual void Start(NamedId who, object arg)
         {
         }
 
         /// <summary>
-        /// ƒJ[ƒ\ƒ‹‚ğƒZƒbƒg‚·‚éiƒtƒ@ƒCƒiƒ‰ƒCƒYj
+        /// ã‚«ãƒ¼ã‚½ãƒ«ã‚’ã‚»ãƒƒãƒˆã™ã‚‹ï¼ˆãƒ•ã‚¡ã‚¤ãƒŠãƒ©ã‚¤ã‚ºï¼‰
         /// </summary>
         protected void onCursorSeFinalizert()
         {
@@ -493,7 +493,7 @@ namespace Tono.GuiWinForm
             }
         }
 
-        #region IID ƒƒ“ƒo
+        #region IID ãƒ¡ãƒ³ãƒ
 
         /// <summary>
         /// 

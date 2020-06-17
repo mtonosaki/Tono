@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System;
@@ -9,12 +9,12 @@ using System.Collections.Generic;
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// ƒp[ƒcƒ‚[ƒVƒ‡ƒ“AƒXƒNƒ[ƒ‹ƒ‚[ƒVƒ‡ƒ“‚ÌƒTƒ|[ƒg‚Å‚«‚éƒp[ƒcƒZƒbƒg
+    /// ãƒ‘ãƒ¼ãƒ„ãƒ¢ãƒ¼ã‚·ãƒ§ãƒ³ã€ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ãƒ¢ãƒ¼ã‚·ãƒ§ãƒ³ã®ã‚µãƒãƒ¼ãƒˆã§ãã‚‹ãƒ‘ãƒ¼ãƒ„ã‚»ãƒƒãƒˆ
     /// </summary>
     public class PartsCollectionMotion : PartsCollection
     {
         /// <summary>
-        /// ˆÚ“®æ‚Æc‚èƒ‚[ƒVƒ‡ƒ“ƒXƒeƒbƒv”
+        /// ç§»å‹•å…ˆã¨æ®‹ã‚Šãƒ¢ãƒ¼ã‚·ãƒ§ãƒ³ã‚¹ãƒ†ãƒƒãƒ—æ•°
         /// </summary>
         private class TargetPosition
         {
@@ -22,7 +22,7 @@ namespace Tono.GuiWinForm
             public int StepN = 20;
 
             /// <summary>
-            /// ‰Šú‰»ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+            /// åˆæœŸåŒ–ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
             /// </summary>
             /// <param name="pos"></param>
             /// <param name="stepN"></param>
@@ -34,7 +34,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒXƒNƒ[ƒ‹w¦
+        /// ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«æŒ‡ç¤º
         /// </summary>
         private class ScrollCommand : uCouple<ScreenPos, int/*curStepN*/>
         {
@@ -45,7 +45,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒY[ƒ€w¦
+        /// ã‚ºãƒ¼ãƒ æŒ‡ç¤º
         /// </summary>
         private class ZoomCommand : uCouple<XyBase, int/*curStepN*/>
         {
@@ -56,27 +56,27 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ˆÚ“®æî•ñ
+        /// ç§»å‹•å…ˆæƒ…å ±
         /// </summary>
         private readonly Dictionary<PartsBase, TargetPosition> _tarPos = new Dictionary<PartsBase, TargetPosition>();
 
         /// <summary>
-        /// ƒ‚[ƒVƒ‡ƒ“ƒXƒNƒ[ƒ‹‚ÌˆÊ’u
+        /// ãƒ¢ãƒ¼ã‚·ãƒ§ãƒ³ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ã®ä½ç½®
         /// </summary>
         private readonly Dictionary<IRichPane, ScrollCommand> _motionScroll = new Dictionary<IRichPane, ScrollCommand>();
 
         /// <summary>
-        /// ƒ‚[ƒVƒ‡ƒ“ƒXƒNƒ[ƒ‹‚ÌˆÊ’u
+        /// ãƒ¢ãƒ¼ã‚·ãƒ§ãƒ³ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ã®ä½ç½®
         /// </summary>
         private readonly Dictionary<IRichPane, ZoomCommand> _motionZoom = new Dictionary<IRichPane, ZoomCommand>();
 
         /// <summary>
-        /// ƒ‚[ƒVƒ‡ƒ“‘ÎÛ‚Ìƒy[ƒ“
+        /// ãƒ¢ãƒ¼ã‚·ãƒ§ãƒ³å¯¾è±¡ã®ãƒšãƒ¼ãƒ³
         /// </summary>
         private IRichPane _motionPane = null;
 
         /// <summary>
-        /// ƒ‚[ƒVƒ‡ƒ“‘ÎÛ‚Ìƒy[ƒ“‚ğw’è‚·‚é
+        /// ãƒ¢ãƒ¼ã‚·ãƒ§ãƒ³å¯¾è±¡ã®ãƒšãƒ¼ãƒ³ã‚’æŒ‡å®šã™ã‚‹
         /// </summary>
         /// <param name="tar"></param>
         public void SetMotionPane(IRichPane tar)
@@ -85,7 +85,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒ‚[ƒVƒ‡ƒ“‚µ‚ÄˆÚ“®‚·‚éæ‚ğw’è‚·‚é
+        /// ãƒ¢ãƒ¼ã‚·ãƒ§ãƒ³ã—ã¦ç§»å‹•ã™ã‚‹å…ˆã‚’æŒ‡å®šã™ã‚‹
         /// </summary>
         /// <param name="nStep"></param>
         /// <param name="pos"></param>
@@ -98,7 +98,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// •\¦ˆ—
+        /// è¡¨ç¤ºå‡¦ç†
         /// </summary>
         public override void ProvideDrawFunction()
         {
@@ -116,7 +116,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒY[ƒ€‚PƒXƒeƒbƒvÀs
+        /// ã‚ºãƒ¼ãƒ ï¼‘ã‚¹ãƒ†ãƒƒãƒ—å®Ÿè¡Œ
         /// </summary>
         /// <returns></returns>
         private bool zoom1step()
@@ -140,7 +140,7 @@ namespace Tono.GuiWinForm
                 else
                 {
                     var diff = tarZoom - nowPos;
-                    diff /= 4;    // ƒC[ƒYƒAƒEƒgƒ‚[ƒVƒ‡ƒ“iI‚í‚è‚ª‚¯‚ğ‚ä‚Á‚­‚èj
+                    diff /= 4;    // ã‚¤ãƒ¼ã‚ºã‚¢ã‚¦ãƒˆãƒ¢ãƒ¼ã‚·ãƒ§ãƒ³ï¼ˆçµ‚ã‚ã‚ŠãŒã‘ã‚’ã‚†ã£ãã‚Šï¼‰
                     pane.Zoom = nowPos + diff;
                 }
             }
@@ -156,7 +156,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒXƒNƒ[ƒ‹‚ğ‚PƒXƒeƒbƒvÀs
+        /// ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ã‚’ï¼‘ã‚¹ãƒ†ãƒƒãƒ—å®Ÿè¡Œ
         /// </summary>
         /// <returns></returns>
         private bool scroll1step()
@@ -182,7 +182,7 @@ namespace Tono.GuiWinForm
                     else
                     {
                         var diff = tarPos - nowPos;
-                        diff /= 4;    // ƒC[ƒYƒAƒEƒgƒ‚[ƒVƒ‡ƒ“iI‚í‚è‚ª‚¯‚ğ‚ä‚Á‚­‚èj
+                        diff /= 4;    // ã‚¤ãƒ¼ã‚ºã‚¢ã‚¦ãƒˆãƒ¢ãƒ¼ã‚·ãƒ§ãƒ³ï¼ˆçµ‚ã‚ã‚ŠãŒã‘ã‚’ã‚†ã£ãã‚Šï¼‰
                         pane.Scroll = nowPos + diff;
                     }
                 }
@@ -199,39 +199,39 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒ‚[ƒVƒ‡ƒ“ˆÚ“®ƒtƒ‰ƒO
+        /// ãƒ¢ãƒ¼ã‚·ãƒ§ãƒ³ç§»å‹•ãƒ•ãƒ©ã‚°
         /// </summary>
         [Flags]
         public enum Moving
         {
             /// <summary>
-            /// ˆÚ“®‚µ‚Ä‚¢‚È‚¢
+            /// ç§»å‹•ã—ã¦ã„ãªã„
             /// </summary>
             None = 0,
             /// <summary>
-            /// ƒp[ƒcˆÚ“®’†
+            /// ãƒ‘ãƒ¼ãƒ„ç§»å‹•ä¸­
             /// </summary>
             Parts = 0x01,
             /// <summary>
-            /// ƒ‚[ƒVƒ‡ƒ“ƒXƒNƒ[ƒ‹’†
+            /// ãƒ¢ãƒ¼ã‚·ãƒ§ãƒ³ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ä¸­
             /// </summary>
             Scroll = 0x02,
         }
 
         /// <summary>
-        /// ƒ‚[ƒVƒ‡ƒ“ˆÚ“®ƒtƒ‰ƒO
+        /// ãƒ¢ãƒ¼ã‚·ãƒ§ãƒ³ç§»å‹•ãƒ•ãƒ©ã‚°
         /// </summary>
         private static Moving _isMoving = Moving.None;
 
         /// <summary>
-        /// ˆÚ“®’†‚©‚Ç‚¤‚©‚ğ¦‚·ƒtƒ‰ƒO
+        /// ç§»å‹•ä¸­ã‹ã©ã†ã‹ã‚’ç¤ºã™ãƒ•ãƒ©ã‚°
         /// </summary>
         public static Moving IsMoving => _isMoving;
 
         /// <summary>
-        /// ƒ‚[ƒVƒ‡ƒ“ˆÚ“®‘ÎÛƒp[ƒc‚ğ‚Pƒ‚[ƒVƒ‡ƒ“ƒXƒeƒbƒv•ª i‚ß‚é
+        /// ãƒ¢ãƒ¼ã‚·ãƒ§ãƒ³ç§»å‹•å¯¾è±¡ãƒ‘ãƒ¼ãƒ„ã‚’ï¼‘ãƒ¢ãƒ¼ã‚·ãƒ§ãƒ³ã‚¹ãƒ†ãƒƒãƒ—åˆ† é€²ã‚ã‚‹
         /// </summary>
-        /// <returns>true=‚à‚¤ˆê“x©ŒÈInvalidate‚Åƒ‚[ƒVƒ‡ƒ“Œp‘±‚ª•K—v</returns>
+        /// <returns>true=ã‚‚ã†ä¸€åº¦è‡ªå·±Invalidateã§ãƒ¢ãƒ¼ã‚·ãƒ§ãƒ³ç¶™ç¶šãŒå¿…è¦</returns>
         private bool move1step()
         {
             var dels = new List<PartsBase>();
@@ -285,11 +285,11 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒ‚[ƒVƒ‡ƒ“ƒXƒNƒ[ƒ‹‚·‚éˆÊ’u‚ğİ’è‚·‚é
+        /// ãƒ¢ãƒ¼ã‚·ãƒ§ãƒ³ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ã™ã‚‹ä½ç½®ã‚’è¨­å®šã™ã‚‹
         /// </summary>
-        /// <param name="pane">ƒXƒNƒ[ƒ‹‚µ‚½‚¢ƒy[ƒ“</param>
-        /// <param name="pos">ƒXƒNƒ[ƒ‹–Ú“I’n</param>
-        /// <param name="step">ƒ‚[ƒVƒ‡ƒ“ƒXƒeƒbƒv” 20ˆÊ‚ğƒZƒbƒg‚·‚é‚Æ‚¿‚å‚¤‚Ç—Ç‚¢</param>
+        /// <param name="pane">ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ã—ãŸã„ãƒšãƒ¼ãƒ³</param>
+        /// <param name="pos">ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ç›®çš„åœ°</param>
+        /// <param name="step">ãƒ¢ãƒ¼ã‚·ãƒ§ãƒ³ã‚¹ãƒ†ãƒƒãƒ—æ•° 20ä½ã‚’ã‚»ãƒƒãƒˆã™ã‚‹ã¨ã¡ã‚‡ã†ã©è‰¯ã„</param>
         public void SetMotionScrollPosition(IRichPane pane, ScreenPos pos, int step)
         {
             lock (_motionScroll)
@@ -299,7 +299,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒ‚[ƒVƒ‡ƒ“ƒY[ƒ€‚·‚é’l‚ğİ’è‚·‚é
+        /// ãƒ¢ãƒ¼ã‚·ãƒ§ãƒ³ã‚ºãƒ¼ãƒ ã™ã‚‹å€¤ã‚’è¨­å®šã™ã‚‹
         /// </summary>
         /// <param name="pane"></param>
         /// <param name="zoom"></param>

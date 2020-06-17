@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System;
@@ -8,7 +8,7 @@ using System;
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// DB‚ÌƒXƒL[ƒ}‚Å‚ ‚é‚±‚Æ‚ğ–¾¦‚·‚éƒAƒgƒŠƒrƒ…[ƒg
+    /// DBã®ã‚¹ã‚­ãƒ¼ãƒã§ã‚ã‚‹ã“ã¨ã‚’æ˜ç¤ºã™ã‚‹ã‚¢ãƒˆãƒªãƒ“ãƒ¥ãƒ¼ãƒˆ
     /// </summary>
     [NoTestClass]
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = false)]
@@ -24,7 +24,7 @@ namespace Tono.GuiWinForm
     }
 
     /// <summary>
-    /// DB‚ÌƒXƒL[ƒ}‚Å‚ ‚é‚±‚Æ‚ğ–¾¦‚·‚éƒAƒgƒŠƒrƒ…[ƒg
+    /// DBã®ã‚¹ã‚­ãƒ¼ãƒã§ã‚ã‚‹ã“ã¨ã‚’æ˜ç¤ºã™ã‚‹ã‚¢ãƒˆãƒªãƒ“ãƒ¥ãƒ¼ãƒˆ
     /// </summary>
     [NoTestClass]
     [AttributeUsage(AttributeTargets.Field, AllowMultiple = false)]
@@ -40,7 +40,7 @@ namespace Tono.GuiWinForm
     }
 
     /// <summary>
-    /// DB‚ÌƒXƒL[ƒ}‚Å‚È‚¢‚±‚Æ‚ğ–¾¦‚·‚éƒAƒgƒŠƒrƒ…[ƒg
+    /// DBã®ã‚¹ã‚­ãƒ¼ãƒã§ãªã„ã“ã¨ã‚’æ˜ç¤ºã™ã‚‹ã‚¢ãƒˆãƒªãƒ“ãƒ¥ãƒ¼ãƒˆ
     /// </summary>
     [NoTestClass]
     [AttributeUsage(AttributeTargets.Field, AllowMultiple = false)]
@@ -52,7 +52,7 @@ namespace Tono.GuiWinForm
     }
 
     /// <summary>
-    /// DBŠÖ˜Aî•ñ‚ğw’è‚·‚éƒAƒgƒŠƒrƒ…[ƒg
+    /// DBé–¢é€£æƒ…å ±ã‚’æŒ‡å®šã™ã‚‹ã‚¢ãƒˆãƒªãƒ“ãƒ¥ãƒ¼ãƒˆ
     /// </summary>
     [NoTestClass]
     [AttributeUsage(AttributeTargets.Field, AllowMultiple = false)]
@@ -66,10 +66,10 @@ namespace Tono.GuiWinForm
 
 
         /// <summary>
-        /// ‘®«‚ğw’è‚·‚éƒRƒ“ƒXƒgƒ‰ƒNƒ^
+        /// å±æ€§ã‚’æŒ‡å®šã™ã‚‹ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
         /// </summary>
-        /// <param name="table">ƒe[ƒuƒ‹–¼</param>
-        /// <param name="col">‘®«–¼</param>
+        /// <param name="table">ãƒ†ãƒ¼ãƒ–ãƒ«å</param>
+        /// <param name="col">å±æ€§å</param>
         public DBRelationAttribute(string table, string col)
         {
             _table = table;

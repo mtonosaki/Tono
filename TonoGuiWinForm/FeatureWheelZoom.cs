@@ -1,30 +1,30 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// Ctrl+ƒ}ƒEƒXƒzƒC[ƒ‹‚ÅƒY[ƒ€‚ğƒTƒ|[ƒg‚·‚é‹@”\
+    /// Ctrl+ãƒã‚¦ã‚¹ãƒ›ã‚¤ãƒ¼ãƒ«ã§ã‚ºãƒ¼ãƒ ã‚’ã‚µãƒãƒ¼ãƒˆã™ã‚‹æ©Ÿèƒ½
     /// </summary>
     public class FeatureWheelZoom : Tono.GuiWinForm.FeatureBase, IMouseListener
     {
-        #region		‘®«(ƒVƒŠƒAƒ‰ƒCƒY‚·‚é)
-        /** <summary>ƒY[ƒ€‚ğŠJn‚·‚éƒgƒŠƒK</summary> */
+        #region		å±æ€§(ã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºã™ã‚‹)
+        /** <summary>ã‚ºãƒ¼ãƒ ã‚’é–‹å§‹ã™ã‚‹ãƒˆãƒªã‚¬</summary> */
         private MouseState.Buttons _trigger;
         #endregion
-        #region		‘®«(ƒVƒŠƒAƒ‰ƒCƒY‚µ‚È‚¢)
+        #region		å±æ€§(ã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºã—ãªã„)
         /// <summary>
-        /// ƒY[ƒ€ŒÀŠE‚È‚Ì‚Å©“®‹“_ˆÚ“®‚µ‚È‚¢
+        /// ã‚ºãƒ¼ãƒ é™ç•Œãªã®ã§è‡ªå‹•è¦–ç‚¹ç§»å‹•ã—ãªã„
         /// </summary>
         private DataSharingManager.Boolean _noscrollmove = null;
         #endregion
 
         /// <summary>
-        /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+        /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
         /// </summary>
         public FeatureWheelZoom()
         {
-            // ƒfƒtƒHƒ‹ƒg‚Åƒhƒ‰ƒbƒOƒXƒNƒ[ƒ‹‚·‚é‚½‚ß‚ÌƒL[‚ğİ’è‚·‚é
+            // ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã§ãƒ‰ãƒ©ãƒƒã‚°ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ã™ã‚‹ãŸã‚ã®ã‚­ãƒ¼ã‚’è¨­å®šã™ã‚‹
             _trigger = new MouseState.Buttons
             {
                 IsButton = false,
@@ -35,7 +35,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ‰Šú‰»
+        /// åˆæœŸåŒ–
         /// </summary>
         public override void OnInitInstance()
         {
@@ -44,16 +44,16 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒgƒŠƒKiÀs¯•ÊƒL[j‚ğ•ÏX‚·‚é
+        /// ãƒˆãƒªã‚¬ï¼ˆå®Ÿè¡Œè­˜åˆ¥ã‚­ãƒ¼ï¼‰ã‚’å¤‰æ›´ã™ã‚‹
         /// </summary>
-        /// <param name="value">V‚µ‚¢ƒgƒŠƒK[</param>
+        /// <param name="value">æ–°ã—ã„ãƒˆãƒªã‚¬ãƒ¼</param>
         public void SetTrigger(MouseState.Buttons value)
         {
             _trigger = value;
         }
 
         /// <summary>
-        /// •¶š‰ğÍ
+        /// æ–‡å­—è§£æ
         /// </summary>
         /// <param name="param"></param>
         public override void ParseParameter(string param)
@@ -76,44 +76,44 @@ namespace Tono.GuiWinForm
         private bool _isX = true;
         private bool _isY = true;
 
-        #region IMouseListener ƒƒ“ƒo
+        #region IMouseListener ãƒ¡ãƒ³ãƒ
 
         /// <summary>
-        /// ƒ}ƒEƒXMoveƒCƒxƒ“ƒg
+        /// ãƒã‚¦ã‚¹Moveã‚¤ãƒ™ãƒ³ãƒˆ
         /// </summary>
         /// <param name="e"></param>
         public void OnMouseMove(MouseState e)
         {
-            // –¢g—p
+            // æœªä½¿ç”¨
         }
 
         /// <summary>
-        /// ƒ{ƒ^ƒ“DownƒCƒxƒ“ƒg
+        /// ãƒœã‚¿ãƒ³Downã‚¤ãƒ™ãƒ³ãƒˆ
         /// </summary>
         /// <param name="e"></param>
         public void OnMouseDown(MouseState e)
         {
-            // –¢g—p
+            // æœªä½¿ç”¨
         }
 
         /// <summary>
-        /// ƒ{ƒ^ƒ“UpƒCƒxƒ“ƒg
+        /// ãƒœã‚¿ãƒ³Upã‚¤ãƒ™ãƒ³ãƒˆ
         /// </summary>
         /// <param name="e"></param>
         public void OnMouseUp(MouseState e)
         {
-            // –¢g—p
+            // æœªä½¿ç”¨
         }
 
         /// <summary>
-        /// ƒ}ƒEƒXWheelƒCƒxƒ“ƒg
+        /// ãƒã‚¦ã‚¹Wheelã‚¤ãƒ™ãƒ³ãƒˆ
         /// </summary>
         /// <param name="e"></param>
         public void OnMouseWheel(MouseState e)
         {
             if (e.Attr.Equals(_trigger))
             {
-                // ‘I‘ğƒy[ƒ“‚Ì•`‰æ—Ìˆæ‚Ì’†S‚ğƒY[ƒ€‚ÌƒZƒ“ƒ^[‚Ìİ’è
+                // é¸æŠãƒšãƒ¼ãƒ³ã®æç”»é ˜åŸŸã®ä¸­å¿ƒã‚’ã‚ºãƒ¼ãƒ ã®ã‚»ãƒ³ã‚¿ãƒ¼ã®è¨­å®š
                 var _posDown = new ScreenPos
                 {
                     X = e.Pane.GetPaneRect().LT.X + e.Pos.X - e.Pane.GetPaneRect().LT.X,
@@ -123,22 +123,22 @@ namespace Tono.GuiWinForm
                 var _zoomDown = (XyBase)Pane.Zoom.Clone();
                 var vol = (int)(GeoEu.Length(Pane.Zoom.X, Pane.Zoom.Y) / 1000 * e.Delta.Y * 0.1);
 
-                // ‰æ–Ê‚ÌŠg‘å/k¬
+                // ç”»é¢ã®æ‹¡å¤§/ç¸®å°
 
                 XyBase zoomNow;
                 if (_isX && !_isY)
                 {
-                    zoomNow = Pane.Zoom + XyBase.FromInt(vol, 0);          // ƒY[ƒ€’l‚ÌZo
+                    zoomNow = Pane.Zoom + XyBase.FromInt(vol, 0);          // ã‚ºãƒ¼ãƒ å€¤ã®ç®—å‡º
                 }
                 else if (!_isX && _isY)
                 {
-                    zoomNow = Pane.Zoom + XyBase.FromInt(0, vol);          // ƒY[ƒ€’l‚ÌZo
+                    zoomNow = Pane.Zoom + XyBase.FromInt(0, vol);          // ã‚ºãƒ¼ãƒ å€¤ã®ç®—å‡º
                 }
                 else
                 {
-                    zoomNow = Pane.Zoom + vol;                          // ƒY[ƒ€’l‚ÌZo
+                    zoomNow = Pane.Zoom + vol;                          // ã‚ºãƒ¼ãƒ å€¤ã®ç®—å‡º
                 }
-                // ƒY[ƒ€’l‚ğ‹K’è”ÍˆÍ“à‚Éû‚ß‚é
+                // ã‚ºãƒ¼ãƒ å€¤ã‚’è¦å®šç¯„å›²å†…ã«åã‚ã‚‹
                 if (zoomNow.X > 4000)
                 {
                     zoomNow.X = 4000;
@@ -159,11 +159,11 @@ namespace Tono.GuiWinForm
                     zoomNow.Y = 5;
                 }
 
-                Pane.Zoom = (XyBase)zoomNow.Clone();           // ƒY[ƒ€’l‚Ì”½‰f
+                Pane.Zoom = (XyBase)zoomNow.Clone();           // ã‚ºãƒ¼ãƒ å€¤ã®åæ˜ 
 
-                // ƒNƒŠƒbƒN‚µ‚½ˆÊ’u‚ğŠî€‚É‚µ‚ÄƒY[ƒ€‚·‚é‚æ‚¤‚É‰æ–Ê‚ğƒXƒNƒ[ƒ‹‚·‚éB
-                var ZoomRatioX = (double)zoomNow.X / _zoomDown.X;    // X•ûŒü‚ÌƒY[ƒ€—¦‚ÌZo
-                var ZoomRatioY = (double)zoomNow.Y / _zoomDown.Y;    // Y•ûŒü‚ÌƒY[ƒ€—¦‚ÌZo
+                // ã‚¯ãƒªãƒƒã‚¯ã—ãŸä½ç½®ã‚’åŸºæº–ã«ã—ã¦ã‚ºãƒ¼ãƒ ã™ã‚‹ã‚ˆã†ã«ç”»é¢ã‚’ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ã™ã‚‹ã€‚
+                var ZoomRatioX = (double)zoomNow.X / _zoomDown.X;    // Xæ–¹å‘ã®ã‚ºãƒ¼ãƒ ç‡ã®ç®—å‡º
+                var ZoomRatioY = (double)zoomNow.Y / _zoomDown.Y;    // Yæ–¹å‘ã®ã‚ºãƒ¼ãƒ ç‡ã®ç®—å‡º
 
                 var beforeDownPos = _posDown - _scrollDown - e.Pane.GetPaneRect().LT;    // 
                 var afterDownPos = ScreenPos.FromInt((int)(ZoomRatioX * beforeDownPos.X), (int)(ZoomRatioY * beforeDownPos.Y));

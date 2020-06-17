@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System;
@@ -18,7 +18,7 @@ namespace Tono.GuiWinForm
         private Image _orgImage = null;
 
         /// <summary>
-        /// ON‚ÌƒCƒ[ƒW
+        /// ONæ™‚ã®ã‚¤ãƒ¡ãƒ¼ã‚¸
         /// </summary>
 		public Image ImageON
         {

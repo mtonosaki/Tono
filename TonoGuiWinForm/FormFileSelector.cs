@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System;
@@ -14,14 +14,14 @@ using System.Windows.Forms;
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// FormFileSelector ‚ÌŠT—v‚Ìà–¾‚Å‚·B
+    /// FormFileSelector ã®æ¦‚è¦ã®èª¬æ˜ã§ã™ã€‚
     /// </summary>
     public class FormFileSelector : System.Windows.Forms.Form
     {
-        #region IconLoaderƒNƒ‰ƒX
+        #region IconLoaderã‚¯ãƒ©ã‚¹
         public class IconLoader
         {
-            #region DLLÀ‘•
+            #region DLLå®Ÿè£…
             [DllImport("Shell32.dll", CharSet = CharSet.Auto, SetLastError = true)]
             private static extern uint ExtractIconEx(
                 [MarshalAs(UnmanagedType.LPTStr)]string lpszFile,
@@ -34,14 +34,14 @@ namespace Tono.GuiWinForm
             private static extern bool DestroyIcon(IntPtr hIcon);
             #endregion
 
-            #region ‘®«iƒVƒŠƒAƒ‰ƒCƒY‚·‚éj
-            /// <summary>Šg’£q‚ÆƒAƒCƒRƒ“”Ô†‚Ì‘g‡‚¹</summary>
+            #region å±æ€§ï¼ˆã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºã™ã‚‹ï¼‰
+            /// <summary>æ‹¡å¼µå­ã¨ã‚¢ã‚¤ã‚³ãƒ³ç•ªå·ã®çµ„åˆã›</summary>
             private readonly IDictionary _dat = new Hashtable();
 
-            /// <summary>ƒ‰[ƒWƒAƒCƒRƒ“</summary>
+            /// <summary>ãƒ©ãƒ¼ã‚¸ã‚¢ã‚¤ã‚³ãƒ³</summary>
             private readonly ImageList _large = new ImageList();
 
-            /// <summary>ƒXƒ‚[ƒ‹ƒAƒCƒRƒ“</summary>
+            /// <summary>ã‚¹ãƒ¢ãƒ¼ãƒ«ã‚¢ã‚¤ã‚³ãƒ³</summary>
             private readonly ImageList _small = new ImageList();
 
             private readonly IDictionary _resid = new Hashtable();
@@ -49,7 +49,7 @@ namespace Tono.GuiWinForm
             #endregion
 
             /// <summary>
-            /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+            /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
             /// </summary>
             /// <param name="appIcons"></param>
             public IconLoader(ImageList appIcons)
@@ -67,33 +67,33 @@ namespace Tono.GuiWinForm
                 };
                 GetImageList(@"C:\WINNT\System32\shell32.dll", ref li, ref si);
 
-                // ‹óƒtƒ@ƒCƒ‹
+                // ç©ºãƒ•ã‚¡ã‚¤ãƒ«
                 _large.Images.Add(li.Images[0]);
                 _small.Images.Add(si.Images[0]);
                 _dat["E.."] = 0;
 
-                // ƒtƒHƒ‹ƒ_
+                // ãƒ•ã‚©ãƒ«ãƒ€
                 _large.Images.Add(li.Images[3]);
                 _small.Images.Add(si.Images[3]);
                 _dat["DC.."] = 1;
                 _dat["D.."] = 1;
 
-                // ƒtƒHƒ‹ƒ_iŠJ‚­j
+                // ãƒ•ã‚©ãƒ«ãƒ€ï¼ˆé–‹ãï¼‰
                 _large.Images.Add(li.Images[4]);
                 _small.Images.Add(si.Images[4]);
                 _dat["DO.."] = 2;
 
-                // –¢“o˜^ƒAƒvƒŠ
+                // æœªç™»éŒ²ã‚¢ãƒ—ãƒª
                 _large.Images.Add(li.Images[2]);
                 _small.Images.Add(si.Images[2]);
                 _dat[".exe"] = 3;
 
-                // eƒfƒBƒŒƒNƒgƒŠ
+                // è¦ªãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒª
                 _large.Images.Add(appIcons.Images[0]);
                 _small.Images.Add(appIcons.Images[0]);
                 _dat["DP.."] = 4;
 
-                // Shell32.dll‚ÌƒAƒCƒRƒ“ƒŠƒ\[ƒX”Ô†‚ÆƒAƒCƒRƒ“˜A”Ô‚Ì•ÏŠ·•\
+                // Shell32.dllã®ã‚¢ã‚¤ã‚³ãƒ³ãƒªã‚½ãƒ¼ã‚¹ç•ªå·ã¨ã‚¢ã‚¤ã‚³ãƒ³é€£ç•ªã®å¤‰æ›è¡¨
                 _resid[-33] = 32;
                 _resid[-137] = 57;
                 _resid[-138] = 58;
@@ -124,7 +124,7 @@ namespace Tono.GuiWinForm
                 var ext = Path.GetExtension(filename).ToLower();
                 if (ext == ".exe")
                 {
-                    // exeŠg’£q
+                    // exeæ‹¡å¼µå­
                     GetImageList(filename, ref li, ref si);
                     if (li.Images.Count > 0)
                     {
@@ -137,7 +137,7 @@ namespace Tono.GuiWinForm
                 }
                 else
                 {
-                    // ‚»‚Ì‘¼‚ÌŠg’£q
+                    // ãã®ä»–ã®æ‹¡å¼µå­
                     try
                     {
                         var key = Microsoft.Win32.Registry.ClassesRoot.OpenSubKey(ext);
@@ -172,10 +172,10 @@ namespace Tono.GuiWinForm
             }
 
             /// <summary>
-            /// w’èŠg’£q‚ÌƒCƒ[ƒW”Ô†‚ğæ“¾‚·‚é
+            /// æŒ‡å®šæ‹¡å¼µå­ã®ã‚¤ãƒ¡ãƒ¼ã‚¸ç•ªå·ã‚’å–å¾—ã™ã‚‹
             /// </summary>
-            /// <param name="ext">Šg’£qiÅŒã‚Ì.‚ÍŠÜ‚ß‚é —áF .exej</param>
-            /// <returns>ƒCƒ[ƒW”Ô†</returns>
+            /// <param name="ext">æ‹¡å¼µå­ï¼ˆæœ€å¾Œã®.ã¯å«ã‚ã‚‹ ä¾‹ï¼š .exeï¼‰</param>
+            /// <returns>ã‚¤ãƒ¡ãƒ¼ã‚¸ç•ªå·</returns>
             public int GetImageNo(string filename)
             {
                 string ext;
@@ -223,21 +223,21 @@ namespace Tono.GuiWinForm
             }
 
             /// <summary>
-            /// ƒ‰[ƒWƒAƒCƒRƒ“
+            /// ãƒ©ãƒ¼ã‚¸ã‚¢ã‚¤ã‚³ãƒ³
             /// </summary>
             public ImageList Large => _large;
 
             /// <summary>
-            /// ƒXƒ‚[ƒ‹ƒAƒCƒRƒ“
+            /// ã‚¹ãƒ¢ãƒ¼ãƒ«ã‚¢ã‚¤ã‚³ãƒ³
             /// </summary>
             public ImageList Small => _small;
 
             /// <summary>
-            /// w’èƒtƒ@ƒCƒ‹–¼‚ÌƒCƒ[ƒWƒŠƒXƒg‚ğæ“¾‚·‚é
+            /// æŒ‡å®šãƒ•ã‚¡ã‚¤ãƒ«åã®ã‚¤ãƒ¡ãƒ¼ã‚¸ãƒªã‚¹ãƒˆã‚’å–å¾—ã™ã‚‹
             /// </summary>
-            /// <param name="filename">ƒtƒ@ƒCƒ‹–¼</param>
-            /// <param name="large">ƒ‰[ƒWƒAƒCƒRƒ“</param>
-            /// <param name="small">ƒXƒ‚[ƒ‹ƒAƒCƒRƒ“</param>
+            /// <param name="filename">ãƒ•ã‚¡ã‚¤ãƒ«å</param>
+            /// <param name="large">ãƒ©ãƒ¼ã‚¸ã‚¢ã‚¤ã‚³ãƒ³</param>
+            /// <param name="small">ã‚¹ãƒ¢ãƒ¼ãƒ«ã‚¢ã‚¤ã‚³ãƒ³</param>
             public static void GetImageList(string fileName, ref ImageList large, ref ImageList small)
             {
                 var uIconCount = ExtractIconEx(fileName, -1, new IntPtr[] { IntPtr.Zero }, new IntPtr[] { IntPtr.Zero }, 0);
@@ -315,7 +315,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// •\¦ƒtƒ@ƒCƒ‹ƒtƒBƒ‹ƒ^  —áF  *.doc|*.rtf|*.txt
+        /// è¡¨ç¤ºãƒ•ã‚¡ã‚¤ãƒ«ãƒ•ã‚£ãƒ«ã‚¿  ä¾‹ï¼š  *.doc|*.rtf|*.txt
         /// </summary>
         public string Filter
         {
@@ -323,12 +323,12 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// I‚í‚Á‚½‚©H
+        /// çµ‚ã‚ã£ãŸã‹ï¼Ÿ
         /// </summary>
         public bool IsEnd => _isEnd;
 
         /// <summary>
-        /// ƒtƒ@ƒCƒ‹–¼‚ğæ“¾‚·‚é
+        /// ãƒ•ã‚¡ã‚¤ãƒ«åã‚’å–å¾—ã™ã‚‹
         /// </summary>
         public string FileName
         {
@@ -346,7 +346,7 @@ namespace Tono.GuiWinForm
 
 
         /// <summary>
-        /// ƒnƒCƒ‰ƒCƒg‚É‚·‚éŠg’£q‚ğ’Ç‰Á‚·‚é
+        /// ãƒã‚¤ãƒ©ã‚¤ãƒˆã«ã™ã‚‹æ‹¡å¼µå­ã‚’è¿½åŠ ã™ã‚‹
         /// </summary>
         /// <param name="ext"></param>
         public void AddHighlightExt(string ext)
@@ -355,37 +355,37 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+        /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
         /// </summary>
         private FormFileSelector()
         {
             //
-            // Windows ƒtƒH[ƒ€ ƒfƒUƒCƒi ƒTƒ|[ƒg‚É•K—v‚Å‚·B
+            // Windows ãƒ•ã‚©ãƒ¼ãƒ  ãƒ‡ã‚¶ã‚¤ãƒŠ ã‚µãƒãƒ¼ãƒˆã«å¿…è¦ã§ã™ã€‚
             //
             InitializeComponent();
         }
 
         /// <summary>
-        /// g—p‹Ö~
+        /// ä½¿ç”¨ç¦æ­¢
         /// </summary>
         public new void Show()
         {
         }
 
         /// <summary>
-        /// g—p‹Ö~
+        /// ä½¿ç”¨ç¦æ­¢
         /// </summary>
         public new DialogResult ShowDialog()
         {
-            System.Diagnostics.Debug.Assert(false, "ƒtƒB[ƒ`ƒƒ[‚ÌFileSelector.ShowDialog()‚ğg—p‚µ‚Ä‚­‚¾‚³‚¢");
+            System.Diagnostics.Debug.Assert(false, "ãƒ•ã‚£ãƒ¼ãƒãƒ£ãƒ¼ã®FileSelector.ShowDialog()ã‚’ä½¿ç”¨ã—ã¦ãã ã•ã„");
             return DialogResult.Cancel;
         }
         /// <summary>
-        /// g—p‹Ö~
+        /// ä½¿ç”¨ç¦æ­¢
         /// </summary>
         public new DialogResult ShowDialog(IWin32Window dummy)
         {
-            System.Diagnostics.Debug.Assert(false, "ƒtƒB[ƒ`ƒƒ[‚ÌFileSelector.ShowDialog()‚ğg—p‚µ‚Ä‚­‚¾‚³‚¢");
+            System.Diagnostics.Debug.Assert(false, "ãƒ•ã‚£ãƒ¼ãƒãƒ£ãƒ¼ã®FileSelector.ShowDialog()ã‚’ä½¿ç”¨ã—ã¦ãã ã•ã„");
             return DialogResult.Cancel;
         }
 
@@ -398,7 +398,7 @@ namespace Tono.GuiWinForm
 
 
         /// <summary>
-        /// g—p‚³‚ê‚Ä‚¢‚éƒŠƒ\[ƒX‚ÉŒãˆ—‚ğÀs‚µ‚Ü‚·B
+        /// ä½¿ç”¨ã•ã‚Œã¦ã„ã‚‹ãƒªã‚½ãƒ¼ã‚¹ã«å¾Œå‡¦ç†ã‚’å®Ÿè¡Œã—ã¾ã™ã€‚
         /// </summary>
         protected override void Dispose(bool disposing)
         {
@@ -412,10 +412,10 @@ namespace Tono.GuiWinForm
             base.Dispose(disposing);
         }
 
-        #region Windows ƒtƒH[ƒ€ ƒfƒUƒCƒi‚Å¶¬‚³‚ê‚½ƒR[ƒh 
+        #region Windows ãƒ•ã‚©ãƒ¼ãƒ  ãƒ‡ã‚¶ã‚¤ãƒŠã§ç”Ÿæˆã•ã‚ŒãŸã‚³ãƒ¼ãƒ‰ 
         /// <summary>
-        /// ƒfƒUƒCƒi ƒTƒ|[ƒg‚É•K—v‚Èƒƒ\ƒbƒh‚Å‚·B‚±‚Ìƒƒ\ƒbƒh‚Ì“à—e‚ğ
-        /// ƒR[ƒh ƒGƒfƒBƒ^‚Å•ÏX‚µ‚È‚¢‚Å‚­‚¾‚³‚¢B
+        /// ãƒ‡ã‚¶ã‚¤ãƒŠ ã‚µãƒãƒ¼ãƒˆã«å¿…è¦ãªãƒ¡ã‚½ãƒƒãƒ‰ã§ã™ã€‚ã“ã®ãƒ¡ã‚½ãƒƒãƒ‰ã®å†…å®¹ã‚’
+        /// ã‚³ãƒ¼ãƒ‰ ã‚¨ãƒ‡ã‚£ã‚¿ã§å¤‰æ›´ã—ãªã„ã§ãã ã•ã„ã€‚
         /// </summary>
         private void InitializeComponent()
         {
@@ -673,11 +673,11 @@ namespace Tono.GuiWinForm
         #endregion
 
         /// <summary>
-        /// ƒŠƒXƒgƒrƒ…[‚ğXV‚·‚é
+        /// ãƒªã‚¹ãƒˆãƒ“ãƒ¥ãƒ¼ã‚’æ›´æ–°ã™ã‚‹
         /// </summary>
         private void reset(bool isHistAdd)
         {
-            // —š—ğŠÇ—
+            // å±¥æ­´ç®¡ç†
             if (isHistAdd)
             {
                 for (var hi = 0; hi < _hist.Count - _histpos - 1; hi++)
@@ -692,10 +692,10 @@ namespace Tono.GuiWinForm
             textBoxFileSelectorPath.Text = _path;
             listViewFileSelect.Items.Clear();
 
-            // ƒpƒX•ÏX‚É‚æ‚éAOKƒ{ƒ^ƒ“‚Ì–³Œø‰»
+            // ãƒ‘ã‚¹å¤‰æ›´ã«ã‚ˆã‚‹ã€OKãƒœã‚¿ãƒ³ã®ç„¡åŠ¹åŒ–
             textBoxFileSelectorFilename_TextChanged(null, null);
 
-            // ƒRƒ“ƒ{ƒ{ƒbƒNƒX‚Ì•ÏX
+            // ã‚³ãƒ³ãƒœãƒœãƒƒã‚¯ã‚¹ã®å¤‰æ›´
             for (var coni = 0; coni < comboBoxDrive.Items.Count; coni++)
             {
                 var ci = comboBoxDrive.Items[coni];
@@ -710,7 +710,7 @@ namespace Tono.GuiWinForm
             {
                 comboBoxDrive.Items.Clear();
 
-                // ƒhƒ‰ƒCƒuˆê——ì¬
+                // ãƒ‰ãƒ©ã‚¤ãƒ–ä¸€è¦§ä½œæˆ
                 var drvs = Directory.GetLogicalDrives();
                 foreach (var drive in drvs)
                 {
@@ -733,7 +733,7 @@ namespace Tono.GuiWinForm
                 }
             }
 
-            // ƒhƒ‰ƒCƒu‚ªŒ©‚Â‚©‚ç‚È‚¢ê‡
+            // ãƒ‰ãƒ©ã‚¤ãƒ–ãŒè¦‹ã¤ã‹ã‚‰ãªã„å ´åˆ
             if (_path.EndsWith(":"))
             {
                 return;
@@ -742,14 +742,14 @@ namespace Tono.GuiWinForm
             Cursor = Cursors.WaitCursor;
             _driveCurrentPath[_path.Substring(0, 2)] = _path;
 
-            // “ÁêƒfƒBƒŒƒNƒgƒŠ
+            // ç‰¹æ®Šãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒª
             if (_path.EndsWith(@":\"))
             {
-                // ƒhƒ‰ƒCƒu
+                // ãƒ‰ãƒ©ã‚¤ãƒ–
             }
             else
             {
-                // eƒfƒBƒŒƒNƒgƒŠ
+                // è¦ªãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒª
                 var li = new ListViewItem(Mes.Current["fFileSelector.ParentDirectory"], _icons.GetImageNo("DP.."))
                 {
                     ForeColor = Color.FromArgb(0, 64, 128),
@@ -758,12 +758,12 @@ namespace Tono.GuiWinForm
                 listViewFileSelect.Items.Add(li);
             }
 
-            // ŠeƒfƒBƒŒƒNƒgƒŠ
+            // å„ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒª
             IList seldir = new ArrayList();
             var dirs = Directory.GetDirectories(_path);
             foreach (var dir in dirs)
             {
-                // •\¦•s•K—v‚È‚à‚Ì‚ğœ‹
+                // è¡¨ç¤ºä¸å¿…è¦ãªã‚‚ã®ã‚’é™¤å»
                 var di = new DirectoryInfo(dir);
                 if ((di.Attributes & FileAttributes.Hidden) != 0)
                 {
@@ -802,7 +802,7 @@ namespace Tono.GuiWinForm
             }
             listViewFileSelect.Items.AddRange(lisD);
 
-            // ƒtƒ@ƒCƒ‹
+            // ãƒ•ã‚¡ã‚¤ãƒ«
             seldir.Clear();
             var filters = _searchptn.Split(new char[] { '|' });
             for (var fili = 0; fili < filters.Length; fili++)
@@ -818,7 +818,7 @@ namespace Tono.GuiWinForm
                 }
                 foreach (var file in files)
                 {
-                    // •\¦•s•K—v‚È‚à‚Ì‚ğœ‹
+                    // è¡¨ç¤ºä¸å¿…è¦ãªã‚‚ã®ã‚’é™¤å»
                     var fi = new FileInfo(file);
                     if ((fi.Attributes & FileAttributes.Hidden) != 0)
                     {
@@ -854,7 +854,7 @@ namespace Tono.GuiWinForm
                     Tag = fi
                 };
 
-                // ƒTƒuƒAƒCƒeƒ€
+                // ã‚µãƒ–ã‚¢ã‚¤ãƒ†ãƒ 
                 filD[i].SubItems.Add(Const.Formatter.Size(fi.Length));
                 filD[i].SubItems.Add(fi.LastWriteTime.ToString("g"));
 
@@ -875,7 +875,7 @@ namespace Tono.GuiWinForm
             Cursor = Cursors.Arrow;
         }
 
-        // ƒhƒ‰ƒCƒuˆê——ì¬
+        // ãƒ‰ãƒ©ã‚¤ãƒ–ä¸€è¦§ä½œæˆ
         private void createDriveList()
         {
             comboBoxDrive.Items.Clear();
@@ -897,14 +897,14 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒtƒH[ƒ€‰Šú‰»
+        /// ãƒ•ã‚©ãƒ¼ãƒ åˆæœŸåŒ–
         /// </summary>
         /// <param name="e"></param>
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
 
-            // ƒpƒX‚Ì‰Šú’l‚ğì¬‚·‚é
+            // ãƒ‘ã‚¹ã®åˆæœŸå€¤ã‚’ä½œæˆã™ã‚‹
             if (Directory.Exists(_path) == false)
             {
                 _path = Directory.GetCurrentDirectory();
@@ -912,12 +912,12 @@ namespace Tono.GuiWinForm
 
             Cursor = Cursors.WaitCursor;
 
-            // ƒAƒCƒRƒ“‚ÌƒZƒbƒg
+            // ã‚¢ã‚¤ã‚³ãƒ³ã®ã‚»ãƒƒãƒˆ
             _icons = new IconLoader(imageListApp);
             listViewFileSelect.LargeImageList = _icons.Large;
             listViewFileSelect.SmallImageList = _icons.Small;
 
-            // “à—e‚ÌƒŠƒZƒbƒg
+            // å†…å®¹ã®ãƒªã‚»ãƒƒãƒˆ
             reset(true);
             Mes.Current.ResetText(this);
 
@@ -944,7 +944,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// OKƒ{ƒ^ƒ“
+        /// OKãƒœã‚¿ãƒ³
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -954,7 +954,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒLƒƒƒ“ƒZƒ‹ƒ{ƒ^ƒ“
+        /// ã‚­ãƒ£ãƒ³ã‚»ãƒ«ãƒœã‚¿ãƒ³
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -965,7 +965,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒAƒCƒeƒ€‚ğƒ_ƒuƒ‹ƒNƒŠƒbƒN
+        /// ã‚¢ã‚¤ãƒ†ãƒ ã‚’ãƒ€ãƒ–ãƒ«ã‚¯ãƒªãƒƒã‚¯
         /// </summary>
         private void listViewFileSelect_DoubleClick(object sender, System.EventArgs e)
         {
@@ -982,7 +982,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒtƒ@ƒCƒ‹ƒZƒŒƒNƒgˆ—
+        /// ãƒ•ã‚¡ã‚¤ãƒ«ã‚»ãƒ¬ã‚¯ãƒˆå‡¦ç†
         /// </summary>
         private bool select(string force)
         {
@@ -1007,7 +1007,7 @@ namespace Tono.GuiWinForm
                 s = force;
             }
 
-            // eƒfƒBƒŒƒNƒgƒŠ
+            // è¦ªãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒª
             if (s == "..")
             {
                 var id = _path.LastIndexOf('\\');
@@ -1024,7 +1024,7 @@ namespace Tono.GuiWinForm
                 return false;
             }
 
-            // ‰ºˆÊƒtƒHƒ‹ƒ_
+            // ä¸‹ä½ãƒ•ã‚©ãƒ«ãƒ€
             if (s.StartsWith("...."))
             {
                 s = s.Substring(4);
@@ -1033,12 +1033,12 @@ namespace Tono.GuiWinForm
                 return false;
             }
 
-            // ƒtƒ@ƒCƒ‹
+            // ãƒ•ã‚¡ã‚¤ãƒ«
             textBoxFileSelectorFilename.Text = Path.GetFileName(s);
             return true;
         }
 
-        // •’Ê‚É‘I‘ğ
+        // æ™®é€šã«é¸æŠ
         private void listViewFileSelect_SelectedIndexChanged(object sender, System.EventArgs e)
         {
             if (listViewFileSelect.SelectedItems.Count != 1)
@@ -1062,9 +1062,9 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒŠƒXƒgƒrƒ…[‚Ìí—Ş‚ğ•ÏX‚·‚é
+        /// ãƒªã‚¹ãƒˆãƒ“ãƒ¥ãƒ¼ã®ç¨®é¡ã‚’å¤‰æ›´ã™ã‚‹
         /// </summary>
-        /// <param name="sender">ƒNƒŠƒbƒN‚µ‚½ƒ`ƒFƒbƒNƒ{ƒ^ƒ“</param>
+        /// <param name="sender">ã‚¯ãƒªãƒƒã‚¯ã—ãŸãƒã‚§ãƒƒã‚¯ãƒœã‚¿ãƒ³</param>
         private void changeMode(object sender)
         {
             foreach (Control c in Controls)
@@ -1077,7 +1077,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒ‰[ƒWƒ‚[ƒh
+        /// ãƒ©ãƒ¼ã‚¸ãƒ¢ãƒ¼ãƒ‰
         /// </summary>
         private void checkBoxFileSelectorLarge_Click(object sender, System.EventArgs e)
         {
@@ -1086,7 +1086,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒXƒ‚[ƒ‹ƒ‚[ƒh
+        /// ã‚¹ãƒ¢ãƒ¼ãƒ«ãƒ¢ãƒ¼ãƒ‰
         /// </summary>
         private void checkBoxFileSelectorSmall_Click(object sender, System.EventArgs e)
         {
@@ -1095,7 +1095,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒŠƒXƒgƒ‚[ƒh
+        /// ãƒªã‚¹ãƒˆãƒ¢ãƒ¼ãƒ‰
         /// </summary>
         private void checkBoxFileSelectorList_Click(object sender, System.EventArgs e)
         {
@@ -1104,7 +1104,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// Ú×ƒ‚[ƒh
+        /// è©³ç´°ãƒ¢ãƒ¼ãƒ‰
         /// </summary>
         private void checkBoxFileSelectorDetail_Click(object sender, System.EventArgs e)
         {
@@ -1155,7 +1155,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒRƒ“ƒ{ƒ{ƒbƒNƒX‚Åƒhƒ‰ƒCƒu‚ğ•ÏX‚µ‚½‚Ìˆ—
+        /// ã‚³ãƒ³ãƒœãƒœãƒƒã‚¯ã‚¹ã§ãƒ‰ãƒ©ã‚¤ãƒ–ã‚’å¤‰æ›´ã—ãŸæ™‚ã®å‡¦ç†
         /// </summary>
         private void comboBoxDrive_SelectionChangeCommitted(object sender, System.EventArgs e)
         {

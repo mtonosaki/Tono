@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System;
@@ -10,21 +10,21 @@ using System.Threading;
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// ƒtƒB[ƒ`ƒƒ[‚ğƒXƒŒƒbƒh‰»‚·‚éŠî–{ƒNƒ‰ƒX
+    /// ãƒ•ã‚£ãƒ¼ãƒãƒ£ãƒ¼ã‚’ã‚¹ãƒ¬ãƒƒãƒ‰åŒ–ã™ã‚‹åŸºæœ¬ã‚¯ãƒ©ã‚¹
     /// </summary>
     public abstract class FeatureThreadBase : FeatureControlBridgeBase, System.IDisposable
     {
-        #region	‘®«(ƒVƒŠƒAƒ‰ƒCƒY‚·‚é)
+        #region	å±æ€§(ã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºã™ã‚‹)
         #endregion
-        #region	‘®«(ƒVƒŠƒAƒ‰ƒCƒY‚µ‚È‚¢)
-        /// <summary>ƒXƒŒƒbƒh‚Ìƒnƒ“ƒhƒ‹</summary>
+        #region	å±æ€§(ã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºã—ãªã„)
+        /// <summary>ã‚¹ãƒ¬ãƒƒãƒ‰ã®ãƒãƒ³ãƒ‰ãƒ«</summary>
         private Thread _trd = null;
-        /// <summary>ƒXƒŒƒbƒh‚Ì—Dæ“x(‰Šú’l‚Í•W€)</summary>
+        /// <summary>ã‚¹ãƒ¬ãƒƒãƒ‰ã®å„ªå…ˆåº¦(åˆæœŸå€¤ã¯æ¨™æº–)</summary>
         protected System.Threading.ThreadPriority _priority = System.Threading.ThreadPriority.Normal;
         #endregion
 
         /// <summary>
-        /// ƒg[ƒNƒ“‚É‚æ‚é‹N“®ƒCƒxƒ“ƒg
+        /// ãƒˆãƒ¼ã‚¯ãƒ³ã«ã‚ˆã‚‹èµ·å‹•ã‚¤ãƒ™ãƒ³ãƒˆ
         /// </summary>
         /// <param name="who"></param>
         public sealed override void Start(NamedId who)
@@ -33,12 +33,12 @@ namespace Tono.GuiWinForm
             {
                 _trd = null;
             }
-            System.Diagnostics.Debug.Assert(_trd == null, "ƒXƒŒƒbƒh‹N“®’†‚É•Ê‚ÌToken‚ª“Š“ü‚³‚ê‚Ü‚µ‚½B“ñd‹N“®‚ğ—LŒø‚É‚·‚é‚É‚ÍA_trd‚ğ”z—ñ‚É‚µ‚ÄŠÇ—‚µ‚Ä‚­‚¾‚³‚¢");
+            System.Diagnostics.Debug.Assert(_trd == null, "ã‚¹ãƒ¬ãƒƒãƒ‰èµ·å‹•ä¸­ã«åˆ¥ã®TokenãŒæŠ•å…¥ã•ã‚Œã¾ã—ãŸã€‚äºŒé‡èµ·å‹•ã‚’æœ‰åŠ¹ã«ã™ã‚‹ã«ã¯ã€_trdã‚’é…åˆ—ã«ã—ã¦ç®¡ç†ã—ã¦ãã ã•ã„");
 
             //base.Start (who);
             _trd = new Thread(new ThreadStart(Run))
             {
-                IsBackground = true,       // ‚±‚ê‚ÍTRUE‚¶‚á‚È‚¢‚ÆƒAƒvƒŠ‚ªI—¹‚µ‚È‚­‚È‚é‚Ì‚Å’ˆÓ
+                IsBackground = true,       // ã“ã‚Œã¯TRUEã˜ã‚ƒãªã„ã¨ã‚¢ãƒ—ãƒªãŒçµ‚äº†ã—ãªããªã‚‹ã®ã§æ³¨æ„
                 Name = GetType().Name,
                 Priority = _priority
             };
@@ -50,7 +50,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒXƒŒƒbƒh‚¾‚¯c‚ç‚È‚¢‚æ‚¤‚ÈH•v
+        /// ã‚¹ãƒ¬ãƒƒãƒ‰ã ã‘æ®‹ã‚‰ãªã„ã‚ˆã†ãªå·¥å¤«
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -73,53 +73,53 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒXƒŒƒbƒh‹N“®‚ÉÀs‚³‚ê‚éˆ—
-        /// (ƒXƒŒƒbƒh‚Ås‚¤ˆ—‚Í‚±‚ê‚ğƒI[ƒo[ƒ‰ƒCƒh‚µ‚Ä‹Lq‚µ‚Ä‚­‚¾‚³‚¢)
+        /// ã‚¹ãƒ¬ãƒƒãƒ‰èµ·å‹•æ™‚ã«å®Ÿè¡Œã•ã‚Œã‚‹å‡¦ç†
+        /// (ã‚¹ãƒ¬ãƒƒãƒ‰ã§è¡Œã†å‡¦ç†ã¯ã“ã‚Œã‚’ã‚ªãƒ¼ãƒãƒ¼ãƒ©ã‚¤ãƒ‰ã—ã¦è¨˜è¿°ã—ã¦ãã ã•ã„)
         /// </summary>
         protected abstract void Run();
 
         /// <summary>
-        /// ‹N“®’†‚ÌƒXƒŒƒbƒh‚ğ‹­§I—¹‚·‚é
+        /// èµ·å‹•ä¸­ã®ã‚¹ãƒ¬ãƒƒãƒ‰ã‚’å¼·åˆ¶çµ‚äº†ã™ã‚‹
         /// </summary>
         protected void Stop()
         {
             if (_trd != null)
             {
-                _trd.Abort();       // Às’†‚ÌƒXƒŒƒbƒh‚ğ‹­§I—¹
+                _trd.Abort();       // å®Ÿè¡Œä¸­ã®ã‚¹ãƒ¬ãƒƒãƒ‰ã‚’å¼·åˆ¶çµ‚äº†
             }
         }
 
         /// <summary>
-        /// ƒXƒŒƒbƒh‚ğw’èŠÔ(‡_•b)‚¾‚¯ƒXƒŠ[ƒv‚³‚¹‚é
+        /// ã‚¹ãƒ¬ãƒƒãƒ‰ã‚’æŒ‡å®šæ™‚é–“(ã‰ç§’)ã ã‘ã‚¹ãƒªãƒ¼ãƒ—ã•ã›ã‚‹
         /// </summary>
-        /// <param name="ms">ƒXƒŠ[ƒv‚·‚éŠÔ(‡_•b)</param>
+        /// <param name="ms">ã‚¹ãƒªãƒ¼ãƒ—ã™ã‚‹æ™‚é–“(ã‰ç§’)</param>
         protected void Sleep(int ms)
         {
             Thread.Sleep(ms);
         }
 
         /// <summary>
-        /// ƒXƒŒƒbƒh‚Ì—Dæ“x‚Ìæ“¾/İ’è
+        /// ã‚¹ãƒ¬ãƒƒãƒ‰ã®å„ªå…ˆåº¦ã®å–å¾—/è¨­å®š
         /// </summary>
-        /// ThreadPriority.Highest		Å‚
-        /// ThreadPriority.AboveNormal	‚
-        /// ThreadPriority.Normal		’†
-        /// ThreadPriority.BelowNormal	’á
-        /// ThreadPriority.Lowest		Å’á
+        /// ThreadPriority.Highest		æœ€é«˜
+        /// ThreadPriority.AboveNormal	é«˜
+        /// ThreadPriority.Normal		ä¸­
+        /// ThreadPriority.BelowNormal	ä½
+        /// ThreadPriority.Lowest		æœ€ä½
         protected ThreadPriority Priority
         {
             get => _priority;
             set => _priority = value;
         }
 
-        #region IDisposable ƒƒ“ƒo
+        #region IDisposable ãƒ¡ãƒ³ãƒ
         public new void Dispose()
         {
-            base.Dispose(); // I—¹ˆ—
+            base.Dispose(); // çµ‚äº†å‡¦ç†
             Stop();
             if (_trd != null)
             {
-                _trd.Join();    // ƒXƒŒƒbƒh‚ªI—¹‚·‚é‚Ü‚Å‘Ò‹@‚µ‚Ü‚·
+                _trd.Join();    // ã‚¹ãƒ¬ãƒƒãƒ‰ãŒçµ‚äº†ã™ã‚‹ã¾ã§å¾…æ©Ÿã—ã¾ã™
                 _trd = null;
             }
         }

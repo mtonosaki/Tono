@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System;
@@ -9,16 +9,16 @@ using System.Collections;
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// FeaturePartsSelect ‚ÌŠT—v‚Ìà–¾‚Å‚·B
+    /// FeaturePartsSelect ã®æ¦‚è¦ã®èª¬æ˜ã§ã™ã€‚
     /// </summary>
     public class FeaturePartsCrossMove : FeatureBase, IMouseListener
     {
-        #region ‘®«iƒVƒŠƒAƒ‰ƒCƒY‚µ‚È‚¢j
+        #region å±æ€§ï¼ˆã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºã—ãªã„ï¼‰
 
-        /// <summary>ƒp[ƒcˆÊ’uŠÇ—ƒIƒuƒWƒFƒNƒg</summary>
+        /// <summary>ãƒ‘ãƒ¼ãƒ„ä½ç½®ç®¡ç†ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ</summary>
         protected PartsPositionManager _pos;
         private ScreenPos _clickPos = ScreenPos.FromInt(0, 0);
-        private bool _isNoKey = false;  // ShiftƒL[‚ğ‰Ÿ‚³‚È‚­‚Ä‚à‹@”\‚³‚¹‚½‚¢ê‡‚ÍTrue
+        private bool _isNoKey = false;  // Shiftã‚­ãƒ¼ã‚’æŠ¼ã•ãªãã¦ã‚‚æ©Ÿèƒ½ã•ã›ãŸã„å ´åˆã¯True
 
         #endregion
 
@@ -27,7 +27,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒpƒ‰ƒ[ƒ^“Ç‚İ‚İ
+        /// ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿èª­ã¿è¾¼ã¿
         /// </summary>
         /// <param name="param"></param>
         public override void ParseParameter(string param)
@@ -40,18 +40,18 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ‰Šú‰»ˆ—
+        /// åˆæœŸåŒ–å‡¦ç†
         /// </summary>
         public override void OnInitInstance()
         {
             base.OnInitInstance();
 
-            // ƒXƒe[ƒ^ƒX“¯Šú
-            _pos = (PartsPositionManager)Share.Get("MovingParts", typeof(PartsPositionManager));    // ˆÚ“®’†‚Ìƒp[ƒcˆê——
+            // ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹åŒæœŸ
+            _pos = (PartsPositionManager)Share.Get("MovingParts", typeof(PartsPositionManager));    // ç§»å‹•ä¸­ã®ãƒ‘ãƒ¼ãƒ„ä¸€è¦§
         }
 
         /// <summary>
-        /// ƒp[ƒc‘I‘ğˆ—‚ğƒ}ƒEƒXƒ_ƒEƒ“ƒCƒxƒ“ƒg‚Ås‚¤
+        /// ãƒ‘ãƒ¼ãƒ„é¸æŠå‡¦ç†ã‚’ãƒã‚¦ã‚¹ãƒ€ã‚¦ãƒ³ã‚¤ãƒ™ãƒ³ãƒˆã§è¡Œã†
         /// </summary>
         public void OnMouseDown(MouseState e)
         {
@@ -59,7 +59,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒ}ƒEƒXˆÚ“®ƒCƒxƒ“ƒg‚Í•s—v
+        /// ãƒã‚¦ã‚¹ç§»å‹•ã‚¤ãƒ™ãƒ³ãƒˆã¯ä¸è¦
         /// </summary>
         public void OnMouseMove(MouseState e)
         {
@@ -91,7 +91,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒ}ƒEƒXƒAƒbƒvƒCƒxƒ“ƒg‚Í•s—v
+        /// ãƒã‚¦ã‚¹ã‚¢ãƒƒãƒ—ã‚¤ãƒ™ãƒ³ãƒˆã¯ä¸è¦
         /// </summary>
         public void OnMouseUp(MouseState e)
         {

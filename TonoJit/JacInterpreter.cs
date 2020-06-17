@@ -67,6 +67,8 @@ namespace Tono.Jit
         private readonly Dictionary<string/*variable name*/, object> varBuf = new Dictionary<string, object>();
         private readonly List<List<string>> Lines = new List<List<string>>();
         private readonly List<List<int>> Levels = new List<List<int>>();
+        private readonly List<string> removeRequestInstance = new List<string>();    // instanceBuf.Remove(...);
+        private readonly List<string> removeRequestVarBuf = new List<string>();      // varBuf.Remove(...);
         private int TargetLevel;
         private int instanceIdCounter = 0;
         private const int tabspace = 4;
@@ -80,6 +82,8 @@ namespace Tono.Jit
             opeStack.Clear();
             instanceBuf.Clear();
             varBuf.Clear();
+            removeRequestInstance.Clear();
+            removeRequestVarBuf.Clear();
             Lines.Clear();
             Levels.Clear();
             TargetLevel = 0;
@@ -113,51 +117,10 @@ namespace Tono.Jit
                     var isNextLine = iLine < Lines[iChunk].Count - 1;
                     var blocks = StrUtil.SplitConsideringQuatationContainsSeparator(line, new[] { '=', '-', '>', ':', ' ' }, true, true, false).ToList();
 
-                    // PASS-1
-                    for (var i = 0; i < blocks.Count - 1; i++)
-                    {
-                        if (blocks[i] == "=" && blocks[i + 1] == ">")
-                        {
-                            blocks[i] = "=>";
-                            blocks.RemoveAt(i + 1);
-                        }
-                        if (blocks[i] == "-")
-                        {
-                            blocks[i] = $"-{blocks[i + 1]}";
-                            blocks.RemoveAt(i + 1);
-                        }
-                    }
+                    ExecPass1(blocks);              // PASS-1
+                    ExecPass2(blocks);              // PASS-2
+                    ExecPushPhase(level, blocks);   // PUSH Phase
 
-                    // PASS-2
-                    var reg = new Regex(@"^[-+]?[0-9]+(\.[0-9]+)?[eE]$");
-                    for (var i = 0; i < blocks.Count - 1; i++)
-                    {
-                        if (reg.IsMatch(blocks[i]) && blocks[i + 1].StartsWith("-"))
-                        {
-                            blocks[i] = blocks[i] + blocks[i + 1];
-                            blocks.RemoveAt(i + 1);
-                        }
-                    }
-
-                    // PUSH PHASE =========================================
-                    for (var i = 0; i < blocks.Count; i++)
-                    {
-                        var com = blocks[i];
-                        switch (com)
-                        {
-                            case "=":
-                            case "->":
-                            case ":":
-                            case "new":
-                            case "add":
-                            case "remove":
-                                opeStack.Push((level, com));
-                                break;
-                            default:
-                                rpnStack.Push((level, com));
-                                break;
-                        }
-                    }
                     // POP PHASE =========================================
                     var isNextIndent = false;
                     var isSameIndent = false;
@@ -173,64 +136,131 @@ namespace Tono.Jit
                         var nextTrimmed = Lines[iChunk][iLine + 1].Trim();
                         isNextAddRemove = nextTrimmed.StartsWith("add") | nextTrimmed.StartsWith("remove");
                     }
-                    if (opeStack.Count > 0 && isNextIndent)
+                    ExecPopPhase(isNextLine, isNextIndent, isSameIndent, isBackIndent, isNextAddRemove, nextLineLevel);
+                }
+            }
+
+            foreach (var key in removeRequestInstance)
+            {
+                instanceBuf.Remove(key);
+            }
+            foreach (var key in removeRequestVarBuf)
+            {
+                varBuf.Remove(key);
+            }
+        }
+
+        private void ExecPopPhase(bool isNextLine, bool isNextIndent, bool isSameIndent, bool isBackIndent, bool isNextAddRemove, int nextLineLevel)
+        {
+            if (opeStack.Count > 0 && isNextIndent)
+            {
+                var ope = opeStack.Peek();
+                switch (ope.Com)
+                {
+                    case "new":
+                        opeStack.Pop();
+                        ProcNew(rpnStack);
+                        break;
+                }
+            }
+            if (opeStack.Count > 0 && (isBackIndent || isSameIndent || isNextLine == false))
+            {
+                TargetLevel = (nextLineLevel - 1) / tabspace * tabspace;
+                bool isStackComsuming;
+                do
+                {
+                    isStackComsuming = !isNextLine;
+                    var ope = opeStack.Peek();
+                    switch (ope.Com)
                     {
-                        var ope = opeStack.Peek();
-                        switch (ope.Com)
+                        case "=":
+                            opeStack.Pop();
+                            ProcSet(rpnStack);
+                            break;
+                        case "add":
+                            opeStack.Pop();
+                            ProcList(rpnStack, isNextAddRemove, true);
+                            break;
+                        case "remove":
+                            opeStack.Pop();
+                            ProcList(rpnStack, isNextAddRemove, false);
+                            break;
+                        case "new":
+                            opeStack.Pop();
+                            ProcNew(rpnStack);
+                            break;
+                        case "->":
+                        case "=>":
+                        case ":":
+                            opeStack.Pop();
+                            ProcPair(rpnStack, ope.Com);
+                            break;
+
+                    }
+                    if (isStackComsuming == false && opeStack.Count > 0)
+                    {
+                        var nextope = opeStack.Peek();
+                        if (nextope.Level > TargetLevel) // || nextope.Com == "=" && nextope.Level >= targetLevel)
                         {
-                            case "new":
-                                opeStack.Pop();
-                                ProcNew(rpnStack);
-                                break;
+                            isStackComsuming = true;
                         }
                     }
-                    if (opeStack.Count > 0 && (isBackIndent || isSameIndent || isNextLine == false))
-                    {
-                        TargetLevel = (nextLineLevel - 1) / tabspace * tabspace;
-                        bool isStackComsuming;
-                        do
-                        {
-                            isStackComsuming = !isNextLine;
-                            var ope = opeStack.Peek();
-                            switch (ope.Com)
-                            {
-                                case "=":
-                                    opeStack.Pop();
-                                    ProcSet(rpnStack);
-                                    break;
-                                case "add":
-                                    opeStack.Pop();
-                                    ProcList(rpnStack, isNextAddRemove, true);
-                                    break;
-                                case "remove":
-                                    opeStack.Pop();
-                                    ProcList(rpnStack, isNextAddRemove, false);
-                                    break;
-                                case "new":
-                                    opeStack.Pop();
-                                    ProcNew(rpnStack);
-                                    break;
-                                case "->":
-                                case "=>":
-                                case ":":
-                                    opeStack.Pop();
-                                    ProcPair(rpnStack, ope.Com);
-                                    break;
+                } while (isStackComsuming && opeStack.Count > 0);
+            }
+        }
 
-                            }
-                            if (isStackComsuming == false && opeStack.Count > 0)
-                            {
-                                var nextope = opeStack.Peek();
-                                if (nextope.Level > TargetLevel) // || nextope.Com == "=" && nextope.Level >= targetLevel)
-                                {
-                                    isStackComsuming = true;
-                                }
-                            }
-                        } while (isStackComsuming && opeStack.Count > 0);
-                    }
+        private static void ExecPass1(List<string> blocks)
+        {
+            for (var i = 0; i < blocks.Count - 1; i++)
+            {
+                if (blocks[i] == "=" && blocks[i + 1] == ">")
+                {
+                    blocks[i] = "=>";
+                    blocks.RemoveAt(i + 1);
+                }
+                if (blocks[i] == "-")
+                {
+                    blocks[i] = $"-{blocks[i + 1]}";
+                    blocks.RemoveAt(i + 1);
                 }
             }
         }
+
+        private static void ExecPass2(List<string> blocks)
+        {
+            var reg = new Regex(@"^[-+]?[0-9]+(\.[0-9]+)?[eE]$");
+            for (var i = 0; i < blocks.Count - 1; i++)
+            {
+                if (reg.IsMatch(blocks[i]) && blocks[i + 1].StartsWith("-"))
+                {
+                    blocks[i] = blocks[i] + blocks[i + 1];
+                    blocks.RemoveAt(i + 1);
+                }
+            }
+        }
+
+        private void ExecPushPhase(int level, List<string> blocks)
+        {
+            for (var i = 0; i < blocks.Count; i++)
+            {
+                var com = blocks[i];
+                switch (com)
+                {
+                    case "=":
+                    case "->":
+                    case ":":
+                    case "new":
+                    case "add":
+                    case "remove":
+                        opeStack.Push((level, com));
+                        break;
+                    default:
+                        rpnStack.Push((level, com));
+                        break;
+                }
+            }
+        }
+
 
         /// <summary>
         /// Parse command from JitTemplate
@@ -357,7 +387,7 @@ namespace Tono.Jit
                     From = ParseValue(left.Com),
                     To = ParseValue(right.Com),
                 };
-                varBuf[obj.Name] = obj;
+                SetVarBuf(obj.Name, obj);
                 rpnStack.Push((left.Level, obj.Name));
             }
             if (ope == ":")
@@ -374,7 +404,7 @@ namespace Tono.Jit
                 {
                     obj = new ValueTuple<object, object>(v1, v2);
                 }
-                varBuf[name] = obj;
+                SetVarBuf(name, obj);
                 rpnStack.Push((left.Level, name));
             }
         }
@@ -390,7 +420,6 @@ namespace Tono.Jit
             {
                 throw new JacException(JacException.Codes.SyntaxError, $"Cannot set '=' when no left value");
             }
-
 
             var val = rpnStack.Pop();           // value name
             var item = ParseValue(val.Com);     // value object
@@ -463,6 +492,7 @@ namespace Tono.Jit
                             {
                                 pi.SetValue(obj, JitVariable.FromObject(item));
                                 isSet = true;
+                                // TODO: varBufに IDをキーにインスタンスを保存
                             }
                             if (requestedTypeName == "String")
                             {
@@ -472,11 +502,11 @@ namespace Tono.Jit
                                 pi.SetValue(obj, item);
                                 if (variable.Com.Equals("ID", StringComparison.CurrentCultureIgnoreCase))
                                 {
-                                    varBuf[item?.ToString() ?? "null"] = obj;
+                                    SetVarBuf(item?.ToString() ?? "null", obj);
                                 }
                                 if (variable.Com.Equals("Name", StringComparison.CurrentCultureIgnoreCase))
                                 {
-                                    varBuf[item?.ToString() ?? "null"] = obj;
+                                    SetVarBuf(item?.ToString() ?? "null", obj);
                                 }
                             }
                         }
@@ -501,7 +531,7 @@ namespace Tono.Jit
                     }
                 }
             }
-            varBuf[variable.Com] = item;
+            SetVarBuf(variable.Com, item);
             rpnStack.Push(variable);
         }
 
@@ -529,17 +559,20 @@ namespace Tono.Jit
             //st = new Stage
             //    Procs
             //        add p1 = new Process
-
+            //=== EXSAMPLE ===
             //st
             //    ProcLinks
             //      add p1 -> p2
 
+            var isRemove = !isAdd;
             var attrType = isAdd ? typeof(JacListAddAttribute) : typeof(JacListRemoveAttribute);
             var itemName = rpnStack.Pop();                          // (8,"p1")                     | (8,"PushFromTo_1170D29C45C4AD4F9BCB6700EB1D4EFD") 
             var itemValue = ParseValue(itemName.Com);               // the process instance of p1   | the PushFromTo instance
             var collectionName = rpnStack.Pop();                    // (4,"Procs")                  | (4,"ProcLinks")
             var parentObjectName = rpnStack.Pop();                  // (0, "Stage ID of st")        | (0, "Stage ID of st") 
             var parentObject = ParseValue(parentObjectName.Com);    // the stage instance of st     | the stage instance of st
+
+            // call method that have JacList???Attribute
             var methods =                                           // to get MethodInfo named "Procs" in Stage Class
                 from method in parentObject.GetType().GetMethods()
                 from atobj in method.GetCustomAttributes(attrType, true)
@@ -554,13 +587,13 @@ namespace Tono.Jit
             tarMethod?.Invoke(parentObject, new[] { itemValue });
 
             // Remove cached object
-            if (isAdd == false)
+            if (isRemove)
             {
                 // from instanceBuf
-                var dels = instanceBuf.Where(a => ReferenceEquals(a.Value, itemValue)).Select(a => a.Key);
-                foreach (var delkey in dels.ToArray())
+                var dels = instanceBuf.Where(a => ReferenceEquals(a.Value, itemValue)).Select(a => a.Key).ToArray();
+                foreach (var delkey in dels)
                 {
-                    instanceBuf.Remove(delkey);
+                    removeRequestInstance.Add(delkey);
                 }
 
                 // from varBuf
@@ -568,7 +601,34 @@ namespace Tono.Jit
                 {
                     itemName.Com = itemName.Com.Substring(1, itemName.Com.Length - 2);
                 }
-                varBuf.Remove(itemName.Com);
+                removeRequestVarBuf.Add(itemName.Com);
+            }
+            if (isAdd)
+            {
+                if (itemValue is ValueTuple<object, object> tpl)
+                {
+                    foreach (var key in removeRequestVarBuf)
+                    {
+                        if (tpl.Item1 is IJitObjectID jid1)
+                        {
+                            if (key.Equals(jid1.ID))
+                            {
+                                removeRequestVarBuf.Remove(key);
+                                break;
+                            }
+                        }
+                        if (tpl.Item2 is IJitObjectID jid2)
+                        {
+                            if (key.Equals(jid2.ID))
+                            {
+                                removeRequestVarBuf.Remove(key);
+                                break;
+                            }
+                        }
+                    }
+                }
+                removeRequestInstance.Remove(itemName.Com);
+                removeRequestVarBuf.Remove(itemName.Com);
             }
 
             rpnStack.Push(parentObjectName);
@@ -596,15 +656,24 @@ namespace Tono.Jit
                 {
                     pi.SetValue(instance, instanceKey); // Set Name Property
                 }
-                instanceBuf[instanceKey] = instance;
+                SetInstanceBuf(instanceKey, instance);
                 rpnStack.Push((typeName.Level, instanceKey));
-
-
             }
             else
             {
                 throw new JacException(JacException.Codes.TypeNotFound, $"Type {typeName.Com} not found.");
             }
+        }
+        private void SetInstanceBuf(string instanceKey, object instance)
+        {
+            instanceBuf[instanceKey] = instance;
+            removeRequestInstance.Remove(instanceKey);
+        }
+
+        private void SetVarBuf(string name, object instance)
+        {
+            varBuf[name] = instance;
+            removeRequestVarBuf.Remove(name);
         }
 
         private static readonly Regex chkTimeSpan = new Regex(@"^-?[0-9]+(\.[0-9]*)?([eE][-+]?[0-9]+)?(MS|S|M|H|D|W)$");
@@ -726,6 +795,51 @@ namespace Tono.Jit
         }
 
         /// <summary>
+        /// Parse Date Time
+        /// </summary>
+        /// <param name="valuestr"></param>
+        /// <returns>the instance or JacException;DateTimeFormatError </returns>
+        public static DateTime ParseDateTime(string valuestr)
+        {
+            var ret = ParseDateTime(valuestr, DateTime.MinValue);
+            if (ret.Equals(DateTime.MinValue))
+            {
+                throw new JacException(JacException.Codes.DateTimeFormatError);
+            }
+            else
+            {
+                return ret;
+            }
+        }
+
+        /// <summary>
+        /// Parse DateTime
+        /// </summary>
+        /// <param name="valuestr"></param>
+        /// <param name="def">default value for parsing error</param>
+        /// <returns></returns>
+        public static DateTime ParseDateTime(string valuestr, DateTime def)
+        {
+            if (valuestr.StartsWith("datetime"))
+            {
+                var sl = StrUtil.MidSkip(valuestr, @"^datetime\s*\(\s*'");
+                valuestr = StrUtil.LeftBefore(sl, @"'\s*\)$");
+            }
+            else if (valuestr.StartsWith("'") && valuestr.EndsWith("'"))
+            {
+                valuestr = valuestr.Substring(1, valuestr.Length - 2).Trim();
+            }
+            try
+            {
+                return DateTime.Parse(valuestr);
+            }
+            catch
+            {
+                return def;
+            }
+        }
+
+        /// <summary>
         /// Parse to Distance instance
         /// </summary>
         /// <param name="valuestr"></param>
@@ -801,7 +915,7 @@ namespace Tono.Jit
         public object this[string varname]
         {
             get => ParseValue(varname);
-            set => varBuf[varname] = value;
+            set => SetVarBuf(varname, value);
         }
 
         /// <summary>
@@ -935,6 +1049,7 @@ namespace Tono.Jit
         public enum Codes
         {
             TypeMismatch,
+            DateTimeFormatError,
             SyntaxError,
             TypeNotFound,
             NotImplementedProperty,

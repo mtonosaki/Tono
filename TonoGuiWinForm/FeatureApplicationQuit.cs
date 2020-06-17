@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System.Windows.Forms;
@@ -6,12 +6,12 @@ using System.Windows.Forms;
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// FeatureApplicationQuit ‚ÌŠT—v‚Ìà–¾‚Å‚·B
+    /// FeatureApplicationQuit ã®æ¦‚è¦ã®èª¬æ˜ã§ã™ã€‚
     /// </summary>
     public class FeatureApplicationQuit : FeatureControlBridgeBase
     {
         /// <summary>
-        /// ‰Šú‰»
+        /// åˆæœŸåŒ–
         /// </summary>
         public override void OnInitInstance()
         {
@@ -24,13 +24,13 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// I—¹‚ğƒLƒƒƒ“ƒZƒ‹
+        /// çµ‚äº†ã‚’ã‚­ãƒ£ãƒ³ã‚»ãƒ«
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void parent_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (e.CloseReason != CloseReason.WindowsShutDown)   // ƒVƒƒƒbƒgƒ_ƒEƒ“‚ğ–W‚°‚È‚¢
+            if (e.CloseReason != CloseReason.WindowsShutDown)   // ã‚·ãƒ£ãƒƒãƒˆãƒ€ã‚¦ãƒ³ã‚’å¦¨ã’ãªã„
             {
                 if (Data.IsModified)
                 {
@@ -45,7 +45,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒAƒvƒŠI—¹
+        /// ã‚¢ãƒ—ãƒªçµ‚äº†
         /// </summary>
         /// <param name="who"></param>
         public override void Start(NamedId who)

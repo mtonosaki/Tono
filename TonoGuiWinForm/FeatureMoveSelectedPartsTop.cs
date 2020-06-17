@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 #pragma warning disable 1591, 1572, 1573
@@ -6,15 +6,15 @@
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// ‘I‘ğ‚µ‚½ƒp[ƒc‚ğ•\¦‡˜AÅæ“ª‚É‚·‚é
+    /// é¸æŠã—ãŸãƒ‘ãƒ¼ãƒ„ã‚’è¡¨ç¤ºé †åºã€æœ€å…ˆé ­ã«ã™ã‚‹
     /// </summary>
     public class FeatureMoveSelectedPartsTop : FeatureBase, IMouseListener
     {
-        #region ‘®«iƒVƒŠƒAƒ‰ƒCƒY‚µ‚È‚¢j
+        #region å±æ€§ï¼ˆã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºã—ãªã„ï¼‰
 
-        /// <summary>’P“ÆƒNƒŠƒbƒN‚Ìƒ{ƒ^ƒ“\¬</summary>
+        /// <summary>å˜ç‹¬ã‚¯ãƒªãƒƒã‚¯ã®ãƒœã‚¿ãƒ³æ§‹æˆ</summary>
         private readonly MouseState.Buttons _triggerSingle;
-        /// <summary>’Ç‰Áƒ{ƒ^ƒ“\¬</summary>
+        /// <summary>è¿½åŠ ãƒœã‚¿ãƒ³æ§‹æˆ</summary>
         private readonly MouseState.Buttons _triggerPlus;
 
         #endregion
@@ -26,7 +26,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ‰Šú‰»ˆ—
+        /// åˆæœŸåŒ–å‡¦ç†
         /// </summary>
         public override void OnInitInstance()
         {
@@ -34,7 +34,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒp[ƒc‘I‘ğˆ—‚ğƒ}ƒEƒXƒ_ƒEƒ“ƒCƒxƒ“ƒg‚Ås‚¤
+        /// ãƒ‘ãƒ¼ãƒ„é¸æŠå‡¦ç†ã‚’ãƒã‚¦ã‚¹ãƒ€ã‚¦ãƒ³ã‚¤ãƒ™ãƒ³ãƒˆã§è¡Œã†
         /// </summary>
         public void OnMouseDown(MouseState e)
         {
@@ -50,14 +50,14 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒ}ƒEƒXˆÚ“®ƒCƒxƒ“ƒg‚Í•s—v
+        /// ãƒã‚¦ã‚¹ç§»å‹•ã‚¤ãƒ™ãƒ³ãƒˆã¯ä¸è¦
         /// </summary>
         public void OnMouseMove(MouseState e)
         {
         }
 
         /// <summary>
-        /// ƒ}ƒEƒXƒAƒbƒvƒCƒxƒ“ƒg‚Í•s—v
+        /// ãƒã‚¦ã‚¹ã‚¢ãƒƒãƒ—ã‚¤ãƒ™ãƒ³ãƒˆã¯ä¸è¦
         /// </summary>
         public void OnMouseUp(MouseState e)
         {

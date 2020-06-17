@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System.Windows.Forms;
@@ -8,7 +8,7 @@ using System.Windows.Forms;
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// FeatureKeyZoom ‚ÌŠT—v‚Ìà–¾‚Å‚·B
+    /// FeatureKeyZoom ã®æ¦‚è¦ã®èª¬æ˜ã§ã™ã€‚
     /// </summary>
     public class FeatureKeyZoom : FeatureBase, IKeyListener, IMultiTokenListener
     {
@@ -16,7 +16,7 @@ namespace Tono.GuiWinForm
         private bool _isTokenOnly = false;
 
         /// <summary>
-        /// ‰Šú‰»
+        /// åˆæœŸåŒ–
         /// </summary>
         public override void OnInitInstance()
         {
@@ -25,7 +25,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ‹N“®ƒpƒ‰ƒ[ƒ^
+        /// èµ·å‹•ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿
         /// </summary>
         /// <param name="param"></param>
         public override void ParseParameter(string param)
@@ -41,7 +41,7 @@ namespace Tono.GuiWinForm
                         continue;
                     }
                     var ss = com.Split(new char[] { ',' });
-                    System.Diagnostics.Debug.Assert(ss.Length == 2, "FeatureKeyZoom‚Ìƒpƒ‰ƒ[ƒ^‚ÍA\"X‚Ì’l,Y‚Ì’l\"‚Æ‘‚¢‚Ä‚­‚¾‚³‚¢");
+                    System.Diagnostics.Debug.Assert(ss.Length == 2, "FeatureKeyZoomã®ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã¯ã€\"Xã®å€¤,Yã®å€¤\"ã¨æ›¸ã„ã¦ãã ã•ã„");
                     _x = int.Parse(ss[0]);
                     _y = int.Parse(ss[1]);
                 }
@@ -49,32 +49,32 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒY[ƒ€—ÊX
+        /// ã‚ºãƒ¼ãƒ é‡X
         /// </summary>
         private int _x = 100;
 
         /// <summary>
-        /// ƒY[ƒ€—ÊY
+        /// ã‚ºãƒ¼ãƒ é‡Y
         /// </summary>
         private int _y = 100;
 
         /// <summary>
-        /// XƒY[ƒ€‚·‚é‚©H
+        /// Xã‚ºãƒ¼ãƒ ã™ã‚‹ã‹ï¼Ÿ
         /// </summary>
         private bool _isX => _x != 0;
 
         /// <summary>
-        /// YƒY[ƒ€‚·‚é‚©H
+        /// Yã‚ºãƒ¼ãƒ ã™ã‚‹ã‹ï¼Ÿ
         /// </summary>
         private bool _isY => _y != 0;
 
         /// <summary>
-        /// w’è—Ê‚ÌƒY[ƒ€‚ğs‚¤
+        /// æŒ‡å®šé‡ã®ã‚ºãƒ¼ãƒ ã‚’è¡Œã†
         /// </summary>
         /// <param name="value"></param>
         private void zoom(int x, int y)
         {
-            // ‘I‘ğƒy[ƒ“‚Ì•`‰æ—Ìˆæ‚Ì’†S‚ğƒY[ƒ€‚ÌƒZƒ“ƒ^[‚Ìİ’è
+            // é¸æŠãƒšãƒ¼ãƒ³ã®æç”»é ˜åŸŸã®ä¸­å¿ƒã‚’ã‚ºãƒ¼ãƒ ã®ã‚»ãƒ³ã‚¿ãƒ¼ã®è¨­å®š
             var _posDown = new ScreenPos
             {
                 X = _tarPane.GetPaneRect().LT.X + _tarPane.GetPaneRect().Width / 2 - _tarPane.GetPaneRect().LT.X,
@@ -83,21 +83,21 @@ namespace Tono.GuiWinForm
             var _scrollDown = (ScreenPos)Pane.Scroll.Clone();
             var _zoomDown = (XyBase)Pane.Zoom.Clone();
 
-            // ‰æ–Ê‚ÌŠg‘å/k¬
+            // ç”»é¢ã®æ‹¡å¤§/ç¸®å°
             XyBase zoomNow;
             if (_isX && !_isY)
             {
-                zoomNow = Pane.Zoom + XyBase.FromInt(x, 0);            // ƒY[ƒ€’l‚ÌZo
+                zoomNow = Pane.Zoom + XyBase.FromInt(x, 0);            // ã‚ºãƒ¼ãƒ å€¤ã®ç®—å‡º
             }
             else if (!_isX && _isY)
             {
-                zoomNow = Pane.Zoom + XyBase.FromInt(0, y);            // ƒY[ƒ€’l‚ÌZo
+                zoomNow = Pane.Zoom + XyBase.FromInt(0, y);            // ã‚ºãƒ¼ãƒ å€¤ã®ç®—å‡º
             }
             else
             {
-                zoomNow = Pane.Zoom + x;                            // ƒY[ƒ€’l‚ÌZo
+                zoomNow = Pane.Zoom + x;                            // ã‚ºãƒ¼ãƒ å€¤ã®ç®—å‡º
             }
-            // ƒY[ƒ€’l‚ğ‹K’è”ÍˆÍ“à‚Éû‚ß‚é
+            // ã‚ºãƒ¼ãƒ å€¤ã‚’è¦å®šç¯„å›²å†…ã«åã‚ã‚‹
             if (zoomNow.X > 4000)
             {
                 zoomNow.X = 4000;
@@ -118,11 +118,11 @@ namespace Tono.GuiWinForm
                 zoomNow.Y = 5;
             }
 
-            Pane.Zoom = (XyBase)zoomNow.Clone();           // ƒY[ƒ€’l‚Ì”½‰f
+            Pane.Zoom = (XyBase)zoomNow.Clone();           // ã‚ºãƒ¼ãƒ å€¤ã®åæ˜ 
 
-            // ƒNƒŠƒbƒN‚µ‚½ˆÊ’u‚ğŠî€‚É‚µ‚ÄƒY[ƒ€‚·‚é‚æ‚¤‚É‰æ–Ê‚ğƒXƒNƒ[ƒ‹‚·‚éB
-            var ZoomRatioX = (double)zoomNow.X / _zoomDown.X;    // X•ûŒü‚ÌƒY[ƒ€—¦‚ÌZo
-            var ZoomRatioY = (double)zoomNow.Y / _zoomDown.Y;    // Y•ûŒü‚ÌƒY[ƒ€—¦‚ÌZo
+            // ã‚¯ãƒªãƒƒã‚¯ã—ãŸä½ç½®ã‚’åŸºæº–ã«ã—ã¦ã‚ºãƒ¼ãƒ ã™ã‚‹ã‚ˆã†ã«ç”»é¢ã‚’ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ã™ã‚‹ã€‚
+            var ZoomRatioX = (double)zoomNow.X / _zoomDown.X;    // Xæ–¹å‘ã®ã‚ºãƒ¼ãƒ ç‡ã®ç®—å‡º
+            var ZoomRatioY = (double)zoomNow.Y / _zoomDown.Y;    // Yæ–¹å‘ã®ã‚ºãƒ¼ãƒ ç‡ã®ç®—å‡º
 
             var beforeDownPos = _posDown - _scrollDown - _tarPane.GetPaneRect().LT;  // 
             var afterDownPos = ScreenPos.FromInt((int)(ZoomRatioX * beforeDownPos.X), (int)(ZoomRatioY * beforeDownPos.Y));
@@ -132,19 +132,19 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒL[ƒAƒbƒvƒCƒxƒ“ƒg‚Ìˆ—
+        /// ã‚­ãƒ¼ã‚¢ãƒƒãƒ—ã‚¤ãƒ™ãƒ³ãƒˆæ™‚ã®å‡¦ç†
         /// </summary>
         public void OnKeyUp(KeyState e)
         {
             if (_isTokenOnly == false)
             {
-                // ƒY[ƒ€ƒAƒbƒvƒL[
+                // ã‚ºãƒ¼ãƒ ã‚¢ãƒƒãƒ—ã‚­ãƒ¼
                 if (e.IsControl && e.Key == Keys.Add)
                 {
                     zoom(_x, _y);
                 }
 
-                // ƒY[ƒ€ƒ_ƒEƒ“ƒL[
+                // ã‚ºãƒ¼ãƒ ãƒ€ã‚¦ãƒ³ã‚­ãƒ¼
                 if (e.IsControl && e.Key == Keys.Subtract)
                 {
                     zoom(-_x, -_y);
@@ -153,14 +153,14 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒL[ƒ_ƒEƒ“ƒCƒxƒ“ƒg‚Ìˆ—
+        /// ã‚­ãƒ¼ãƒ€ã‚¦ãƒ³ã‚¤ãƒ™ãƒ³ãƒˆæ™‚ã®å‡¦ç†
         /// </summary>
         public void OnKeyDown(KeyState e)
         {
         }
 
         /// <summary>
-        /// ƒg[ƒNƒ“‹N“®‚ğƒTƒ|[ƒg
+        /// ãƒˆãƒ¼ã‚¯ãƒ³èµ·å‹•ã‚’ã‚µãƒãƒ¼ãƒˆ
         /// </summary>
         /// <param name="who"></param>
         public override void Start(NamedId who)
@@ -176,7 +176,7 @@ namespace Tono.GuiWinForm
             }
         }
 
-        #region IMultiTokenListener ƒƒ“ƒo
+        #region IMultiTokenListener ãƒ¡ãƒ³ãƒ
 
         public static readonly NamedId KeyZoomUp = NamedId.FromName("FeatureKeyZoom.Up");
         public static readonly NamedId KeyZoomDown = NamedId.FromName("FeatureKeyZoom.Down");

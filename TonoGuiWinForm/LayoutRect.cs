@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System;
@@ -8,7 +8,7 @@ using System;
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// uPtRect ‚ÌŠT—v‚Ìà–¾‚Å‚·B
+    /// uPtRect ã®æ¦‚è¦ã®èª¬æ˜ã§ã™ã€‚
     /// </summary>
     [Serializable]
     public class LayoutRect : Rect
@@ -37,12 +37,12 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ®”’l‚©‚çƒCƒ“ƒXƒ^ƒ“ƒX‚ğ\’z‚·‚é
+        /// æ•´æ•°å€¤ã‹ã‚‰ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’æ§‹ç¯‰ã™ã‚‹
         /// </summary>
-        /// <param name="x">¶ãÀ•WX</param>
-        /// <param name="y">¶ãÀ•WY</param>
-        /// <param name="width">•</param>
-        /// <param name="height">‚‚³</param>
+        /// <param name="x">å·¦ä¸Šåº§æ¨™X</param>
+        /// <param name="y">å·¦ä¸Šåº§æ¨™Y</param>
+        /// <param name="width">å¹…</param>
+        /// <param name="height">é«˜ã•</param>
         /// <returns></returns>
 
         public static new LayoutRect FromLTWH(int x, int y, int width, int height)
@@ -56,7 +56,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ’†S‚ğæ“¾‚·‚é
+        /// ä¸­å¿ƒã‚’å–å¾—ã™ã‚‹
         /// </summary>
         /// <returns></returns>
         public new LayoutPos GetCenter()
@@ -67,12 +67,12 @@ namespace Tono.GuiWinForm
 
 
         /// <summary>
-        /// ®”’l‚©‚çƒCƒ“ƒXƒ^ƒ“ƒX‚ğ\’z‚·‚é
+        /// æ•´æ•°å€¤ã‹ã‚‰ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’æ§‹ç¯‰ã™ã‚‹
         /// </summary>
-        /// <param name="x">¶ãÀ•WX</param>
-        /// <param name="y">¶ãÀ•WY</param>
-        /// <param name="width">•</param>
-        /// <param name="height">‚‚³</param>
+        /// <param name="x">å·¦ä¸Šåº§æ¨™X</param>
+        /// <param name="y">å·¦ä¸Šåº§æ¨™Y</param>
+        /// <param name="width">å¹…</param>
+        /// <param name="height">é«˜ã•</param>
         /// <returns></returns>
 
         public static new LayoutRect FromLTRB(int l, int t, int r, int b)
@@ -86,7 +86,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ‰‰ZqƒI[ƒo[ƒ[ƒh
+        /// æ¼”ç®—å­ã‚ªãƒ¼ãƒãƒ¼ãƒ­ãƒ¼ãƒ‰
         /// </summary>
         public static LayoutRect operator &(LayoutRect r1, Rect r2) { return (LayoutRect)((Rect)r1 & r2); }
         public static LayoutRect operator |(LayoutRect r1, Rect r2) { return (LayoutRect)((Rect)r1 | r2); }

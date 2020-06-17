@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System;
@@ -8,7 +8,7 @@ using System.Windows.Forms;
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// FormProgressBar ‚ÌŠT—v‚Ìà–¾‚Å‚·B
+    /// FormProgressBar ã®æ¦‚è¦ã®èª¬æ˜ã§ã™ã€‚
     /// </summary>
     public class FormProgressBar : Form
     {
@@ -22,12 +22,12 @@ namespace Tono.GuiWinForm
         private long _firstTick;
 
         /// <summary>
-        /// •K—v‚ÈƒfƒUƒCƒi•Ï”‚Å‚·B
+        /// å¿…è¦ãªãƒ‡ã‚¶ã‚¤ãƒŠå¤‰æ•°ã§ã™ã€‚
         /// </summary>
         private readonly System.ComponentModel.Container components = null;
 
         /// <summary>
-        /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+        /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
         /// </summary>
         /// <param name="parent"></param>
         public FormProgressBar(Control parent)
@@ -38,7 +38,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒ[ƒh
+        /// ãƒ­ãƒ¼ãƒ‰
         /// </summary>
         /// <param name="e"></param>
         protected override void OnLoad(EventArgs e)
@@ -63,7 +63,7 @@ namespace Tono.GuiWinForm
 
 
         /// <summary>
-        /// ƒo[‚ÌˆÊ’u‚ğƒZƒbƒg‚·‚é
+        /// ãƒãƒ¼ã®ä½ç½®ã‚’ã‚»ãƒƒãƒˆã™ã‚‹
         /// </summary>
         public int Pos
         {
@@ -91,7 +91,7 @@ namespace Tono.GuiWinForm
                     if (d > 9000000)
                     {
                         _progCount++;
-                        // N/•b
+                        // N/ç§’
                         var p = (value - _prePos) / ((double)d / 10000000);
                         _leftVal.Add(p);
                         if (_leftVal.Count > 24)
@@ -106,7 +106,7 @@ namespace Tono.GuiWinForm
                                 p += pp;
                             }
                             p /= _leftVal.Count;
-                            // c‚è‰½N
+                            // æ®‹ã‚Šä½•N
                             double leftN = Max - value;
                             var dd = leftN / p;
                             var s = _leftForm.Replace("@left@", ((int)Math.Floor(dd)).ToString());
@@ -123,7 +123,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒo[‚ÌˆÊ’u‚ğƒZƒbƒg‚·‚é
+        /// ãƒãƒ¼ã®ä½ç½®ã‚’ã‚»ãƒƒãƒˆã™ã‚‹
         /// </summary>
         public int Max
         {
@@ -136,7 +136,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒo[‚ÌˆÊ’u‚ğƒZƒbƒg‚·‚é
+        /// ãƒãƒ¼ã®ä½ç½®ã‚’ã‚»ãƒƒãƒˆã™ã‚‹
         /// </summary>
         public int Min
         {
@@ -149,7 +149,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// g—p‚³‚ê‚Ä‚¢‚éƒŠƒ\[ƒX‚ÉŒãˆ—‚ğÀs‚µ‚Ü‚·B
+        /// ä½¿ç”¨ã•ã‚Œã¦ã„ã‚‹ãƒªã‚½ãƒ¼ã‚¹ã«å¾Œå‡¦ç†ã‚’å®Ÿè¡Œã—ã¾ã™ã€‚
         /// </summary>
         protected override void Dispose(bool disposing)
         {
@@ -163,10 +163,10 @@ namespace Tono.GuiWinForm
             base.Dispose(disposing);
         }
 
-        #region Windows ƒtƒH[ƒ€ ƒfƒUƒCƒi‚Å¶¬‚³‚ê‚½ƒR[ƒh 
+        #region Windows ãƒ•ã‚©ãƒ¼ãƒ  ãƒ‡ã‚¶ã‚¤ãƒŠã§ç”Ÿæˆã•ã‚ŒãŸã‚³ãƒ¼ãƒ‰ 
         /// <summary>
-        /// ƒfƒUƒCƒi ƒTƒ|[ƒg‚É•K—v‚Èƒƒ\ƒbƒh‚Å‚·B‚±‚Ìƒƒ\ƒbƒh‚Ì“à—e‚ğ
-        /// ƒR[ƒh ƒGƒfƒBƒ^‚Å•ÏX‚µ‚È‚¢‚Å‚­‚¾‚³‚¢B
+        /// ãƒ‡ã‚¶ã‚¤ãƒŠ ã‚µãƒãƒ¼ãƒˆã«å¿…è¦ãªãƒ¡ã‚½ãƒƒãƒ‰ã§ã™ã€‚ã“ã®ãƒ¡ã‚½ãƒƒãƒ‰ã®å†…å®¹ã‚’
+        /// ã‚³ãƒ¼ãƒ‰ ã‚¨ãƒ‡ã‚£ã‚¿ã§å¤‰æ›´ã—ãªã„ã§ãã ã•ã„ã€‚
         /// </summary>
         private void InitializeComponent()
         {

@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System;
@@ -54,7 +54,7 @@ namespace Tono.GuiWinForm
 
 
         /// <summary>
-        /// Control.Dispose‚ğƒXƒŒƒbƒhƒZ[ƒt‚Ås‚¤
+        /// Control.Disposeã‚’ã‚¹ãƒ¬ãƒƒãƒ‰ã‚»ãƒ¼ãƒ•ã§è¡Œã†
         /// </summary>
         public void DisposeControl(Control c)
         {
@@ -70,7 +70,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// TextBox.SetSelectTextBox‚ğƒXƒŒƒbƒhƒZ[ƒt‚Ås‚¤
+        /// TextBox.SetSelectTextBoxã‚’ã‚¹ãƒ¬ãƒƒãƒ‰ã‚»ãƒ¼ãƒ•ã§è¡Œã†
         /// </summary>
         /// <param name="c"></param>
         /// <param name="s"></param>
@@ -89,7 +89,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒŠƒXƒgƒrƒ…[‚ÌSelectedIndices‚ğƒXƒŒƒbƒhƒZ[ƒt‚Ås‚¤
+        /// ãƒªã‚¹ãƒˆãƒ“ãƒ¥ãƒ¼ã®SelectedIndicesã‚’ã‚¹ãƒ¬ãƒƒãƒ‰ã‚»ãƒ¼ãƒ•ã§è¡Œã†
         /// </summary>
         /// <param name="lv"></param>
         /// <param name="ret"></param>
@@ -111,7 +111,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒŠƒXƒgƒrƒ…[‚ÌSelectedItem‚ğƒXƒŒƒbƒhƒZ[ƒt‚Ås‚¤
+        /// ãƒªã‚¹ãƒˆãƒ“ãƒ¥ãƒ¼ã®SelectedItemã‚’ã‚¹ãƒ¬ãƒƒãƒ‰ã‚»ãƒ¼ãƒ•ã§è¡Œã†
         /// </summary>
         /// <param name="lv"></param>
         /// <param name="ret"></param>
@@ -134,7 +134,7 @@ namespace Tono.GuiWinForm
 
 
         /// <summary>
-        /// ƒŠƒXƒgƒrƒ…[‚ÌItems‚ğƒXƒŒƒbƒhƒZ[ƒt‚Ås‚¤
+        /// ãƒªã‚¹ãƒˆãƒ“ãƒ¥ãƒ¼ã®Itemsã‚’ã‚¹ãƒ¬ãƒƒãƒ‰ã‚»ãƒ¼ãƒ•ã§è¡Œã†
         /// </summary>
         /// <param name="lv"></param>
         /// <param name="itemID"></param>
@@ -153,7 +153,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒŠƒXƒgƒrƒ…[‚ÌItems‚ğƒXƒŒƒbƒhƒZ[ƒt‚Ås‚¤
+        /// ãƒªã‚¹ãƒˆãƒ“ãƒ¥ãƒ¼ã®Itemsã‚’ã‚¹ãƒ¬ãƒƒãƒ‰ã‚»ãƒ¼ãƒ•ã§è¡Œã†
         /// </summary>
         /// <param name="lv"></param>
         /// <param name="itemID"></param>
@@ -171,7 +171,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒŠƒXƒgƒrƒ…[‚ÌItems‚ğƒXƒŒƒbƒhƒZ[ƒt‚Ås‚¤
+        /// ãƒªã‚¹ãƒˆãƒ“ãƒ¥ãƒ¼ã®Itemsã‚’ã‚¹ãƒ¬ãƒƒãƒ‰ã‚»ãƒ¼ãƒ•ã§è¡Œã†
         /// </summary>
         /// <param name="lv"></param>
         /// <param name="ret"></param>
@@ -193,9 +193,9 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒRƒ“ƒgƒ[ƒ‹‚ÌCursor‚ğƒXƒŒƒbƒhƒZ[ƒt‚Å•ÏX
+        /// ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã®Cursorã‚’ã‚¹ãƒ¬ãƒƒãƒ‰ã‚»ãƒ¼ãƒ•ã§å¤‰æ›´
         /// </summary>
-        /// <param name="c">ƒRƒ“ƒgƒ[ƒ‹</param>
+        /// <param name="c">ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«</param>
         public void FocusControl(Control c)
         {
             if (c.InvokeRequired)
@@ -210,10 +210,10 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒRƒ“ƒgƒ[ƒ‹‚ÉqƒRƒ“ƒgƒ[ƒ‹‚ğƒXƒŒƒbƒhƒZ[ƒt‚Åíœ
+        /// ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã«å­ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã‚’ã‚¹ãƒ¬ãƒƒãƒ‰ã‚»ãƒ¼ãƒ•ã§å‰Šé™¤
         /// </summary>
-        /// <param name="parent">ƒRƒ“ƒgƒ[ƒ‹</param>
-        /// <param name="oldControl">qƒRƒ“ƒgƒ[ƒ‹</param>
+        /// <param name="parent">ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«</param>
+        /// <param name="oldControl">å­ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«</param>
         public void RemoveControlFromControls(Control parent, Control oldControl)
         {
             if (parent.InvokeRequired)
@@ -228,10 +228,10 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒRƒ“ƒgƒ[ƒ‹‚ÉqƒRƒ“ƒgƒ[ƒ‹‚ğƒXƒŒƒbƒhƒZ[ƒt‚Å’Ç‰Á
+        /// ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã«å­ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã‚’ã‚¹ãƒ¬ãƒƒãƒ‰ã‚»ãƒ¼ãƒ•ã§è¿½åŠ 
         /// </summary>
-        /// <param name="parent">ƒRƒ“ƒgƒ[ƒ‹</param>
-        /// <param name="newControl">qƒRƒ“ƒgƒ[ƒ‹</param>
+        /// <param name="parent">ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«</param>
+        /// <param name="newControl">å­ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«</param>
         public void AddControlToControls(Control parent, Control newControl)
         {
             if (parent.InvokeRequired)
@@ -247,9 +247,9 @@ namespace Tono.GuiWinForm
 
 
         /// <summary>
-        /// ƒRƒ“ƒgƒ[ƒ‹‚ÌCursor‚ğƒXƒŒƒbƒhƒZ[ƒt‚Å•ÏX
+        /// ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã®Cursorã‚’ã‚¹ãƒ¬ãƒƒãƒ‰ã‚»ãƒ¼ãƒ•ã§å¤‰æ›´
         /// </summary>
-        /// <param name="c">ƒRƒ“ƒgƒ[ƒ‹</param>
+        /// <param name="c">ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«</param>
         /// <param name="cursor">Cursor</param>
         public void SetCursorControl(Control c, Cursor cursor)
         {
@@ -266,7 +266,7 @@ namespace Tono.GuiWinForm
 
 
         /// <summary>
-        /// Cursor‚ğæ“¾‚·‚é
+        /// Cursorã‚’å–å¾—ã™ã‚‹
         /// </summary>
         /// <param name="c"></param>
         /// <returns></returns>
@@ -284,7 +284,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// Handle‚ğæ“¾‚·‚é
+        /// Handleã‚’å–å¾—ã™ã‚‹
         /// </summary>
         /// <param name="c"></param>
         /// <returns></returns>
@@ -320,7 +320,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒ{ƒ^ƒ“‚Ì‰æ‘œ‚ğƒXƒŒƒbƒhƒZ[ƒt‚Å“ü‚ê‘Ö‚¦‚é
+        /// ãƒœã‚¿ãƒ³ã®ç”»åƒã‚’ã‚¹ãƒ¬ãƒƒãƒ‰ã‚»ãƒ¼ãƒ•ã§å…¥ã‚Œæ›¿ãˆã‚‹
         /// </summary>
         /// <param name="c"></param>
         /// <param name="img"></param>
@@ -338,7 +338,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// w’è‚µ‚½ƒŠƒXƒgƒrƒ…[ƒAƒCƒeƒ€‚ÌƒeƒLƒXƒg‚ğƒXƒŒƒbƒhƒZ[ƒt‚ÅXV‚·‚é
+        /// æŒ‡å®šã—ãŸãƒªã‚¹ãƒˆãƒ“ãƒ¥ãƒ¼ã‚¢ã‚¤ãƒ†ãƒ ã®ãƒ†ã‚­ã‚¹ãƒˆã‚’ã‚¹ãƒ¬ãƒƒãƒ‰ã‚»ãƒ¼ãƒ•ã§æ›´æ–°ã™ã‚‹
         /// </summary>
         /// <param name="li"></param>
         /// <param name="subitemid"></param>
@@ -375,10 +375,10 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒRƒ“ƒgƒ[ƒ‹‚Ì•‚ğƒXƒŒƒbƒhƒZ[ƒt‚Å•ÏX
+        /// ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã®å¹…ã‚’ã‚¹ãƒ¬ãƒƒãƒ‰ã‚»ãƒ¼ãƒ•ã§å¤‰æ›´
         /// </summary>
-        /// <param name="c">ƒRƒ“ƒgƒ[ƒ‹</param>
-        /// <param name="w">•</param>
+        /// <param name="c">ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«</param>
+        /// <param name="w">å¹…</param>
         public void SetWidthControl(Control c, int w)
         {
             if (c.InvokeRequired)
@@ -394,7 +394,7 @@ namespace Tono.GuiWinForm
 
 
         /// <summary>
-        /// •‚ğæ“¾‚·‚é
+        /// å¹…ã‚’å–å¾—ã™ã‚‹
         /// </summary>
         /// <param name="c"></param>
         /// <returns></returns>
@@ -412,7 +412,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒ|ƒCƒ“ƒg‚ğƒNƒ‰ƒCƒAƒ“ƒgÀ•W‚É•ÏŠ·‚·‚é
+        /// ãƒã‚¤ãƒ³ãƒˆã‚’ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆåº§æ¨™ã«å¤‰æ›ã™ã‚‹
         /// </summary>
         /// <param name="c"></param>
         /// <param name="scpos"></param>
@@ -431,7 +431,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// VisibleƒvƒƒpƒeƒB‚ğƒXƒŒƒbƒhƒZ[ƒt‚Åæ“¾‚·‚é
+        /// Visibleãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ã‚’ã‚¹ãƒ¬ãƒƒãƒ‰ã‚»ãƒ¼ãƒ•ã§å–å¾—ã™ã‚‹
         /// </summary>
         /// <param name="c"></param>
         /// <returns></returns>
@@ -449,10 +449,10 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒŠƒXƒgƒrƒ…[‚ÉƒAƒCƒeƒ€‚ğ’Ç‰Á‚·‚é
+        /// ãƒªã‚¹ãƒˆãƒ“ãƒ¥ãƒ¼ã«ã‚¢ã‚¤ãƒ†ãƒ ã‚’è¿½åŠ ã™ã‚‹
         /// </summary>
-        /// <param name="lv">ƒŠƒXƒgƒrƒ…[</param>
-        /// <param name="li">ƒAƒCƒeƒ€</param>
+        /// <param name="lv">ãƒªã‚¹ãƒˆãƒ“ãƒ¥ãƒ¼</param>
+        /// <param name="li">ã‚¢ã‚¤ãƒ†ãƒ </param>
         public void AddItemToListView(ListView lv, ListViewItem li)
         {
             if (lv.InvokeRequired)
@@ -467,10 +467,10 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒŠƒXƒgƒrƒ…[‚ÉƒAƒCƒeƒ€‚ğ’Ç‰Á‚·‚é
+        /// ãƒªã‚¹ãƒˆãƒ“ãƒ¥ãƒ¼ã«ã‚¢ã‚¤ãƒ†ãƒ ã‚’è¿½åŠ ã™ã‚‹
         /// </summary>
-        /// <param name="lv">ƒŠƒXƒgƒrƒ…[</param>
-		/// <param name="lis">ƒAƒCƒeƒ€</param>
+        /// <param name="lv">ãƒªã‚¹ãƒˆãƒ“ãƒ¥ãƒ¼</param>
+		/// <param name="lis">ã‚¢ã‚¤ãƒ†ãƒ </param>
         public void AddItemsToListView(ListView lv, ListViewItem[] lis)
         {
             if (lv.InvokeRequired)
@@ -485,10 +485,10 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒŠƒXƒgƒrƒ…[‚ÉƒAƒCƒeƒ€‚ğ’Ç‰Á‚·‚é
+        /// ãƒªã‚¹ãƒˆãƒ“ãƒ¥ãƒ¼ã«ã‚¢ã‚¤ãƒ†ãƒ ã‚’è¿½åŠ ã™ã‚‹
         /// </summary>
-        /// <param name="lv">ƒŠƒXƒgƒrƒ…[</param>
-        /// <param name="li">ƒAƒCƒeƒ€</param>
+        /// <param name="lv">ãƒªã‚¹ãƒˆãƒ“ãƒ¥ãƒ¼</param>
+        /// <param name="li">ã‚¢ã‚¤ãƒ†ãƒ </param>
         public void EnsureVisible(ListView lv, int li)
         {
             if (lv.InvokeRequired)
@@ -503,11 +503,11 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒAƒCƒeƒ€‚ğ’Ç‰Á‚µ‚Äƒ\[ƒg‚·‚é
+        /// ã‚¢ã‚¤ãƒ†ãƒ ã‚’è¿½åŠ ã—ã¦ã‚½ãƒ¼ãƒˆã™ã‚‹
         /// </summary>
-        /// <param name="lv">ƒŠƒXƒgƒrƒ…[</param>
-        /// <param name="items">’Ç‰Á‚·‚éƒAƒCƒeƒ€ŒQ</param>
-        /// <param name="defaultsorter">Œ»İ‚Ìƒ\[ƒ^‚ª–³‚¢ê‡‚Ég‚¤ƒ\[ƒ^</param>
+        /// <param name="lv">ãƒªã‚¹ãƒˆãƒ“ãƒ¥ãƒ¼</param>
+        /// <param name="items">è¿½åŠ ã™ã‚‹ã‚¢ã‚¤ãƒ†ãƒ ç¾¤</param>
+        /// <param name="defaultsorter">ç¾åœ¨ã®ã‚½ãƒ¼ã‚¿ãŒç„¡ã„å ´åˆã«ä½¿ã†ã‚½ãƒ¼ã‚¿</param>
         public void AddRangeAndSortListViewItem(ListView lv, ListViewItem[] items, IComparer defaultsorter)
         {
             if (lv.InvokeRequired)
@@ -526,7 +526,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒŠƒXƒgƒrƒ…[‚ÌƒAƒCƒeƒ€ƒNƒŠƒA
+        /// ãƒªã‚¹ãƒˆãƒ“ãƒ¥ãƒ¼ã®ã‚¢ã‚¤ãƒ†ãƒ ã‚¯ãƒªã‚¢
         /// </summary>
         /// <param name="lv"></param>
         public void ClearListViewItems(ListView lv)
@@ -543,7 +543,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒŠƒXƒgƒrƒ…[‚Ì‘I‘ğ‰ğœ
+        /// ãƒªã‚¹ãƒˆãƒ“ãƒ¥ãƒ¼ã®é¸æŠè§£é™¤
         /// </summary>
         /// <param name="lv"></param>
         public void ClearListViewSelectedItem(ListView lv)
@@ -583,7 +583,7 @@ namespace Tono.GuiWinForm
 
 
         /// <summary>
-        /// VisibleƒXƒCƒbƒ`‚ÌƒXƒŒƒbƒhƒZ[ƒt
+        /// Visibleã‚¹ã‚¤ãƒƒãƒã®ã‚¹ãƒ¬ãƒƒãƒ‰ã‚»ãƒ¼ãƒ•
         /// </summary>
         /// <param name="tar"></param>
         /// <param name="sw"></param>
@@ -601,7 +601,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// CheckedƒXƒCƒbƒ`‚ÌƒXƒŒƒbƒhƒZ[ƒt
+        /// Checkedã‚¹ã‚¤ãƒƒãƒã®ã‚¹ãƒ¬ãƒƒãƒ‰ã‚»ãƒ¼ãƒ•
         /// </summary>
         /// <param name="tar"></param>
         /// <param name="sw"></param>
@@ -619,7 +619,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// CheckedƒXƒCƒbƒ`‚ÌƒXƒŒƒbƒhƒZ[ƒt
+        /// Checkedã‚¹ã‚¤ãƒƒãƒã®ã‚¹ãƒ¬ãƒƒãƒ‰ã‚»ãƒ¼ãƒ•
         /// </summary>
         /// <param name="tar"></param>
         /// <param name="sw"></param>
@@ -637,7 +637,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// EnabledƒXƒCƒbƒ`‚ÌƒXƒŒƒbƒhƒZ[ƒt
+        /// Enabledã‚¹ã‚¤ãƒƒãƒã®ã‚¹ãƒ¬ãƒƒãƒ‰ã‚»ãƒ¼ãƒ•
         /// </summary>
         /// <param name="tar"></param>
         /// <param name="sw"></param>
@@ -655,7 +655,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒ^ƒu‚ğ‘I‘ğ‚·‚é
+        /// ã‚¿ãƒ–ã‚’é¸æŠã™ã‚‹
         /// </summary>
         /// <param name="tc"></param>
         /// <param name="tp"></param>

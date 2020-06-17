@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System;
@@ -10,7 +10,7 @@ using System.Windows.Forms;
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// fiKeyEnabler ‚ÌŠT—v‚Ìà–¾‚Å‚·B
+    /// fiKeyEnabler ã®æ¦‚è¦ã®èª¬æ˜ã§ã™ã€‚
     /// </summary>
     public class TKeyEnabler : System.Windows.Forms.UserControl
     {
@@ -19,7 +19,7 @@ namespace Tono.GuiWinForm
         private Control _parentForm = null;
 
         /// <summary>
-        /// ˆê“I‚É‹@”\‚Ì—LŒøE–³Œø•ÏX
+        /// ä¸€æ™‚çš„ã«æ©Ÿèƒ½ã®æœ‰åŠ¹ãƒ»ç„¡åŠ¹å¤‰æ›´
         /// </summary>
         public static bool Enable
         {
@@ -27,11 +27,11 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒfƒtƒHƒ‹ƒgƒRƒ“ƒXƒgƒ‰ƒNƒ^
+        /// ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
         /// </summary>
         public TKeyEnabler()
         {
-            // ‚±‚ÌŒÄ‚Ño‚µ‚ÍAWindows.Forms ƒtƒH[ƒ€ ƒfƒUƒCƒi‚Å•K—v‚Å‚·B
+            // ã“ã®å‘¼ã³å‡ºã—ã¯ã€Windows.Forms ãƒ•ã‚©ãƒ¼ãƒ  ãƒ‡ã‚¶ã‚¤ãƒŠã§å¿…è¦ã§ã™ã€‚
             InitializeComponent();
 
             if (DesignMode == false)
@@ -43,7 +43,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ‹N“®‚Ì‰Šú‰»
+        /// èµ·å‹•æ™‚ã®åˆæœŸåŒ–
         /// </summary>
         /// <param name="e"></param>
         protected override void OnLoad(EventArgs e)
@@ -56,14 +56,14 @@ namespace Tono.GuiWinForm
                 Size = new Size(1, 1);
             }
 
-            // ’S“–‚·‚éForm‚ğæ“¾‚·‚é
+            // æ‹…å½“ã™ã‚‹Formã‚’å–å¾—ã™ã‚‹
             var isTabControlFocusCatched = false;
 
             for (_parentForm = Parent; _parentForm != null && _parentForm is Form == false; _parentForm = _parentForm.Parent)
             {
                 if (isTabControlFocusCatched == false)
                 {
-                    if (_parentForm is TabControl)  // TabƒRƒ“ƒgƒ[ƒ‹‚ÍAŸè‚ÉKeyDown‚ğ’D‚Á‚ÄãˆÊ‚ÌUserControl‚É“n‚³‚È‚¢‚Ì‚ÅA‚±‚±‚Åæ“¾‚µ‚Ä‚¨‚­
+                    if (_parentForm is TabControl)  // Tabã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã¯ã€å‹æ‰‹ã«KeyDownã‚’å¥ªã£ã¦ä¸Šä½ã®UserControlã«æ¸¡ã•ãªã„ã®ã§ã€ã“ã“ã§å–å¾—ã—ã¦ãŠã
                     {
                         _parentForm.KeyDown += new KeyEventHandler(onKeyDown);
                         _parentForm.KeyUp += new KeyEventHandler(onKeyUp);
@@ -84,7 +84,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// g—p‚³‚ê‚Ä‚¢‚éƒŠƒ\[ƒX‚ÉŒãˆ—‚ğÀs‚µ‚Ü‚·B
+        /// ä½¿ç”¨ã•ã‚Œã¦ã„ã‚‹ãƒªã‚½ãƒ¼ã‚¹ã«å¾Œå‡¦ç†ã‚’å®Ÿè¡Œã—ã¾ã™ã€‚
         /// </summary>
         protected override void Dispose(bool disposing)
         {
@@ -98,10 +98,10 @@ namespace Tono.GuiWinForm
             base.Dispose(disposing);
         }
 
-        #region ƒRƒ“ƒ|[ƒlƒ“ƒg ƒfƒUƒCƒi‚Å¶¬‚³‚ê‚½ƒR[ƒh 
+        #region ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆ ãƒ‡ã‚¶ã‚¤ãƒŠã§ç”Ÿæˆã•ã‚ŒãŸã‚³ãƒ¼ãƒ‰ 
         /// <summary>
-        /// ƒfƒUƒCƒi ƒTƒ|[ƒg‚É•K—v‚Èƒƒ\ƒbƒh‚Å‚·B‚±‚Ìƒƒ\ƒbƒh‚Ì“à—e‚ğ
-        /// ƒR[ƒh ƒGƒfƒBƒ^‚Å•ÏX‚µ‚È‚¢‚Å‚­‚¾‚³‚¢B
+        /// ãƒ‡ã‚¶ã‚¤ãƒŠ ã‚µãƒãƒ¼ãƒˆã«å¿…è¦ãªãƒ¡ã‚½ãƒƒãƒ‰ã§ã™ã€‚ã“ã®ãƒ¡ã‚½ãƒƒãƒ‰ã®å†…å®¹ã‚’
+        /// ã‚³ãƒ¼ãƒ‰ ã‚¨ãƒ‡ã‚£ã‚¿ã§å¤‰æ›´ã—ãªã„ã§ãã ã•ã„ã€‚
         /// </summary>
         private void InitializeComponent()
         {
@@ -118,7 +118,7 @@ namespace Tono.GuiWinForm
         private KeyState _prevKeyState = new KeyState();
 
         /// <summary>
-        /// ƒL[ƒCƒxƒ“ƒg‚ğcFeatureRich‚É“]‘—‚·‚é
+        /// ã‚­ãƒ¼ã‚¤ãƒ™ãƒ³ãƒˆã‚’cFeatureRichã«è»¢é€ã™ã‚‹
         /// </summary>
         protected override void OnKeyDown(KeyEventArgs e)
         {
@@ -126,13 +126,13 @@ namespace Tono.GuiWinForm
             {
                 return;
             }
-            // TABƒL[‚ÌƒtƒBƒ‹ƒ^ƒŠƒ“ƒO
+            // TABã‚­ãƒ¼ã®ãƒ•ã‚£ãƒ«ã‚¿ãƒªãƒ³ã‚°
             if (e.KeyCode == Keys.Tab && e.Control == false && e.Shift == false)
             {
                 return;
             }
 
-            // ‚»‚Ì‘¼‚ÌƒL[‚Ì“]‘—
+            // ãã®ä»–ã®ã‚­ãƒ¼ã®è»¢é€
             if (Parent is TGuiView)
             {
                 var ke = KeyState.FromKeyEventArgs(e);
@@ -147,28 +147,28 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// w’è‚³‚ê‚½ƒL[‚ª’ÊíƒL[‚©‚Ç‚¤‚©‚ğ’²¸‚·‚é
+        /// æŒ‡å®šã•ã‚ŒãŸã‚­ãƒ¼ãŒé€šå¸¸ã‚­ãƒ¼ã‹ã©ã†ã‹ã‚’èª¿æŸ»ã™ã‚‹
         /// </summary>
-        /// <param name="keyData">’²¸‚·‚éƒL[ƒR[ƒh</param>
-        /// <returns>’²¸Œ‹‰Ê TRUE:’ÊíƒL[ / FALSE:“ÁêƒL[</returns>
+        /// <param name="keyData">èª¿æŸ»ã™ã‚‹ã‚­ãƒ¼ã‚³ãƒ¼ãƒ‰</param>
+        /// <returns>èª¿æŸ»çµæœ TRUE:é€šå¸¸ã‚­ãƒ¼ / FALSE:ç‰¹æ®Šã‚­ãƒ¼</returns>
         protected override bool IsInputKey(Keys keyData)
         {
             switch (keyData)
             {
-                case Keys.Up:           // ªƒL[
-                case Keys.Down:         // «ƒL[
-                case Keys.Left:         // ©ƒL[
-                case Keys.Right:        // ¨ƒL[
+                case Keys.Up:           // â†‘ã‚­ãƒ¼
+                case Keys.Down:         // â†“ã‚­ãƒ¼
+                case Keys.Left:         // â†ã‚­ãƒ¼
+                case Keys.Right:        // â†’ã‚­ãƒ¼
                     break;
                 default:
-                    return base.IsInputKey(keyData);    // ‚»‚Ì‘¼‚ÌƒL[
+                    return base.IsInputKey(keyData);    // ãã®ä»–ã®ã‚­ãƒ¼
             }
             return true;
         }
 
 
         /// <summary>
-        /// ƒL[ƒCƒxƒ“ƒg‚ğcFeatureRich‚É“]‘—‚·‚é
+        /// ã‚­ãƒ¼ã‚¤ãƒ™ãƒ³ãƒˆã‚’cFeatureRichã«è»¢é€ã™ã‚‹
         /// </summary>
         protected override void OnKeyUp(KeyEventArgs e)
         {
@@ -176,7 +176,7 @@ namespace Tono.GuiWinForm
             {
                 return;
             }
-            // ‚»‚Ì‘¼‚ÌƒL[‚Ì“]‘—
+            // ãã®ä»–ã®ã‚­ãƒ¼ã®è»¢é€
             if (Parent is TGuiView)
             {
                 _prevKeyState = null;
@@ -187,7 +187,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// lˆ×“I‚ÉƒL[ƒAƒbƒvƒCƒxƒ“ƒg‚ğ”­s‚·‚é
+        /// äººç‚ºçš„ã«ã‚­ãƒ¼ã‚¢ãƒƒãƒ—ã‚¤ãƒ™ãƒ³ãƒˆã‚’ç™ºè¡Œã™ã‚‹
         /// </summary>
         /// <param name="e"></param>
         public void KickKeyUp(KeyEventArgs e)
@@ -196,7 +196,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒyƒCƒ“ƒgˆ—‚ÌƒtƒBƒ‹ƒ^ƒŠƒ“ƒO
+        /// ãƒšã‚¤ãƒ³ãƒˆå‡¦ç†ã®ãƒ•ã‚£ãƒ«ã‚¿ãƒªãƒ³ã‚°
         /// </summary>
         protected override void OnPaint(PaintEventArgs e)
         {
@@ -217,7 +217,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ”wŒiƒyƒCƒ“ƒgˆ—‚ÌƒtƒBƒ‹ƒ^ƒŠƒ“ƒO
+        /// èƒŒæ™¯ãƒšã‚¤ãƒ³ãƒˆå‡¦ç†ã®ãƒ•ã‚£ãƒ«ã‚¿ãƒªãƒ³ã‚°
         /// </summary>
         protected override void OnPaintBackground(PaintEventArgs pevent)
         {
@@ -228,14 +228,14 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ©“®“I‚ÉƒtƒH[ƒJƒX‚ğON‚É‚·‚éˆ—
+        /// è‡ªå‹•çš„ã«ãƒ•ã‚©ãƒ¼ã‚«ã‚¹ã‚’ONã«ã™ã‚‹å‡¦ç†
         /// </summary>
         private void timerAutoFocus_Tick(object sender, System.EventArgs e)
         {
         }
 
         /// <summary>
-        /// ƒTƒCƒY•ÏX‚Ìˆ—
+        /// ã‚µã‚¤ã‚ºå¤‰æ›´æ™‚ã®å‡¦ç†
         /// </summary>
         protected override void OnSizeChanged(EventArgs e)
         {

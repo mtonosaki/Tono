@@ -8,55 +8,55 @@ namespace Tono.GuiWinForm
     /// </summary>
     public abstract class DataLinkManager
     {
-        #region ‘®«iƒVƒŠƒAƒ‰ƒCƒY‚·‚éj---------------------------------------------
+        #region å±æ€§ï¼ˆã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºã™ã‚‹ï¼‰---------------------------------------------
 
-        /// <summary>ƒf[ƒ^‚ÌQÆ</summary>
+        /// <summary>ãƒ‡ãƒ¼ã‚¿ã®å‚ç…§</summary>
         private PartsCollectionBase _partsData = null;
 
-        /// <summary>ƒAƒvƒŠƒP[ƒVƒ‡ƒ“ŒÅ—L‚Ìƒf[ƒ^</summary>
+        /// <summary>ã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³å›ºæœ‰ã®ãƒ‡ãƒ¼ã‚¿</summary>
         private DataHotBase _appData = null;
 
-        /// <summary>‹¤—L•Ï”ŠÇ—ƒIƒuƒWƒFƒNƒg</summary>
+        /// <summary>å…±æœ‰å¤‰æ•°ç®¡ç†ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ</summary>
         private DataSharingManager _share = null;
 
-        /// <summary>ƒp[ƒc‚ÆƒAƒvƒŠƒf[ƒ^‚ğŒ‹‚Ñ‚Â‚¯‚éƒIƒuƒWƒFƒNƒg</summary>
+        /// <summary>ãƒ‘ãƒ¼ãƒ„ã¨ã‚¢ãƒ—ãƒªãƒ‡ãƒ¼ã‚¿ã‚’çµã³ã¤ã‘ã‚‹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ</summary>
         private DataLinkBase _link = null;
 
-        /// <summary>eƒtƒB[ƒ`ƒƒ[ƒOƒ‹[ƒv</summary>
+        /// <summary>è¦ªãƒ•ã‚£ãƒ¼ãƒãƒ£ãƒ¼ã‚°ãƒ«ãƒ¼ãƒ—</summary>
         private DataLinkManager _parent = null;
 
-        /// <summary>ƒtƒ@ƒCƒiƒ‰ƒCƒUi‚·‚×‚Ä‚ÌƒtƒB[ƒ`ƒƒÀsŒã‚É“®ì‚·‚é—\–ñƒIƒuƒWƒFƒNƒgj</summary>
+        /// <summary>ãƒ•ã‚¡ã‚¤ãƒŠãƒ©ã‚¤ã‚¶ï¼ˆã™ã¹ã¦ã®ãƒ•ã‚£ãƒ¼ãƒãƒ£å®Ÿè¡Œå¾Œã«å‹•ä½œã™ã‚‹äºˆç´„ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆï¼‰</summary>
         private FinalizeManageBuffer _finalizers = null;
 
-        /// <summary>‰i‘±‰»ŠÇ—</summary>
+        /// <summary>æ°¸ç¶šåŒ–ç®¡ç†</summary>
         private PersistManager _persister = null;
 
         /// <summary>
-        /// ƒg[ƒNƒ“‚ğ“ü‚ê‚Ä‚¨‚­‚½‚ß‚Ì” 
+        /// ãƒˆãƒ¼ã‚¯ãƒ³ã‚’å…¥ã‚Œã¦ãŠããŸã‚ã®ç®±
         /// </summary>
         private TokenTray _tokenTray = null;
 
         #endregion
-        #region ‘®«iƒVƒŠƒAƒ‰ƒCƒY‚µ‚È‚¢j------------------------------------------
+        #region å±æ€§ï¼ˆã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºã—ãªã„ï¼‰------------------------------------------
 
-        /// <summary>ƒŠƒ“ƒN‚·‚éƒŠƒbƒ`ƒy[ƒ“</summary>
+        /// <summary>ãƒªãƒ³ã‚¯ã™ã‚‹ãƒªãƒƒãƒãƒšãƒ¼ãƒ³</summary>
         private TGuiView _pane = null;
 
-        /// <summary>ƒ^ƒCƒ}[§Œä</summary>
+        /// <summary>ã‚¿ã‚¤ãƒãƒ¼åˆ¶å¾¡</summary>
         private GuiTimer _timer = null;
 
-        /// <summary>ÅŒã‚ÉƒNƒŠƒbƒNiMouseDownj‚µ‚½Š‚Ìƒp[ƒc</summary>
+        /// <summary>æœ€å¾Œã«ã‚¯ãƒªãƒƒã‚¯ï¼ˆMouseDownï¼‰ã—ãŸæ‰€ã®ãƒ‘ãƒ¼ãƒ„</summary>
         private DataSharingManager.Object _clickParts = null;
 
         /// <summary>
-        /// _clickParts‚ğŒŸõ‚µ‚½‚Æ‚«‚Ìƒy[ƒ“iƒCƒŠƒ…[ƒWƒ‡ƒ“ƒy[ƒ“‚Å‚ ‚ê‚ÎABinderƒy[ƒ“ƒIƒuƒWƒFƒNƒg‚É‚È‚éj
+        /// _clickPartsã‚’æ¤œç´¢ã—ãŸã¨ãã®ãƒšãƒ¼ãƒ³ï¼ˆã‚¤ãƒªãƒ¥ãƒ¼ã‚¸ãƒ§ãƒ³ãƒšãƒ¼ãƒ³ã§ã‚ã‚Œã°ã€Binderãƒšãƒ¼ãƒ³ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã«ãªã‚‹ï¼‰
         /// </summary>
         private DataSharingManager.Object _clickPane = null;
 
         #endregion
 
         /// <summary>
-        /// ‰Šú‰»‚ª•K—v‚Å‚ ‚ê‚Î‰Šú‰»‚·‚éˆ—
+        /// åˆæœŸåŒ–ãŒå¿…è¦ã§ã‚ã‚Œã°åˆæœŸåŒ–ã™ã‚‹å‡¦ç†
         /// </summary>
         private void init()
         {
@@ -69,7 +69,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒ‹[ƒgƒOƒ‹[ƒv‚ªDispose‚·‚é
+        /// ãƒ«ãƒ¼ãƒˆã‚°ãƒ«ãƒ¼ãƒ—ãŒDisposeã™ã‚‹
         /// </summary>
         private void disposeByRootGroup()
         {
@@ -78,9 +78,9 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ŠÖ˜A•t‚¯‚ç‚ê‚éƒy[ƒ“‚ğw’è‚·‚é
+        /// é–¢é€£ä»˜ã‘ã‚‰ã‚Œã‚‹ãƒšãƒ¼ãƒ³ã‚’æŒ‡å®šã™ã‚‹
         /// </summary>
-        /// <param name="pane">ƒy[ƒ“</param>
+        /// <param name="pane">ãƒšãƒ¼ãƒ³</param>
         protected void setPane(TGuiView pane)
         {
             _pane = pane;
@@ -93,18 +93,18 @@ namespace Tono.GuiWinForm
         /// <param name="value"></param>
         protected void setAppData(DataHotBase value)
         {
-            System.Diagnostics.Debug.Assert(_appData == null, "setAppData‚Íƒ‹[ƒgƒOƒ‹[ƒvƒtƒB[ƒ`ƒƒ[‚Éˆê“x‚¾‚¯Às‚·‚é“Áê‚Èƒƒ\ƒbƒh‚Å‚·");
+            System.Diagnostics.Debug.Assert(_appData == null, "setAppDataã¯ãƒ«ãƒ¼ãƒˆã‚°ãƒ«ãƒ¼ãƒ—ãƒ•ã‚£ãƒ¼ãƒãƒ£ãƒ¼ã«ä¸€åº¦ã ã‘å®Ÿè¡Œã™ã‚‹ç‰¹æ®Šãªãƒ¡ã‚½ãƒƒãƒ‰ã§ã™");
             _appData = value;
             init();
         }
 
         /// <summary>
-        /// ŠÖ˜A•t‚¯‚ç‚ê‚éƒŠƒ“ƒNƒIƒuƒWƒFƒNƒg‚ğw’è‚·‚é
+        /// é–¢é€£ä»˜ã‘ã‚‰ã‚Œã‚‹ãƒªãƒ³ã‚¯ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’æŒ‡å®šã™ã‚‹
         /// </summary>
-        /// <param name="value">ƒŠƒ“ƒNƒIƒuƒWƒFƒNƒg</param>
+        /// <param name="value">ãƒªãƒ³ã‚¯ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ</param>
         protected void setLink(DataLinkBase value)
         {
-            System.Diagnostics.Debug.Assert(_link == null, "setLink‚Íƒ‹[ƒgƒOƒ‹[ƒvƒtƒB[ƒ`ƒƒ[‚Éˆê“x‚¾‚¯Às‚·‚é“Áê‚Èƒƒ\ƒbƒh‚Å‚·");
+            System.Diagnostics.Debug.Assert(_link == null, "setLinkã¯ãƒ«ãƒ¼ãƒˆã‚°ãƒ«ãƒ¼ãƒ—ãƒ•ã‚£ãƒ¼ãƒãƒ£ãƒ¼ã«ä¸€åº¦ã ã‘å®Ÿè¡Œã™ã‚‹ç‰¹æ®Šãªãƒ¡ã‚½ãƒƒãƒ‰ã§ã™");
             _link = value;
             init();
         }
@@ -115,79 +115,79 @@ namespace Tono.GuiWinForm
         /// <param name="value"></param>
         protected void setPartsData(PartsCollectionBase value)
         {
-            System.Diagnostics.Debug.Assert(_partsData == null, "setPartsData‚Íƒ‹[ƒgƒOƒ‹[ƒvƒtƒB[ƒ`ƒƒ[‚Éˆê“x‚¾‚¯Às‚·‚é“Áê‚Èƒƒ\ƒbƒh‚Å‚·");
+            System.Diagnostics.Debug.Assert(_partsData == null, "setPartsDataã¯ãƒ«ãƒ¼ãƒˆã‚°ãƒ«ãƒ¼ãƒ—ãƒ•ã‚£ãƒ¼ãƒãƒ£ãƒ¼ã«ä¸€åº¦ã ã‘å®Ÿè¡Œã™ã‚‹ç‰¹æ®Šãªãƒ¡ã‚½ãƒƒãƒ‰ã§ã™");
             _partsData = value;
             init();
         }
 
         /// <summary>
-        /// ‹¤—L•Ï”ŠÇ—ƒCƒ“ƒXƒ^ƒ“ƒX‚ğw’è‚·‚é
+        /// å…±æœ‰å¤‰æ•°ç®¡ç†ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’æŒ‡å®šã™ã‚‹
         /// </summary>
-        /// <param name="value">‹¤—L•Ï”ŠÇ—ƒCƒ“ƒXƒ^ƒ“ƒX</param>
+        /// <param name="value">å…±æœ‰å¤‰æ•°ç®¡ç†ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹</param>
         protected void setShare(DataSharingManager value)
         {
             if (_share != null)
             {
-                System.Diagnostics.Debug.Assert(_share.Count == 0, "Šù‚ÉShare‚ğ—˜—p‚µ‚½ŒãALinkShare‚Å‘¼‚ÌffShare‚ÆŒ‹‚Ñ‚Â‚­‚Ì‚Í•s‰Â”\‚Å‚·");
+                System.Diagnostics.Debug.Assert(_share.Count == 0, "æ—¢ã«Shareã‚’åˆ©ç”¨ã—ãŸå¾Œã€LinkShareã§ä»–ã®ffShareã¨çµã³ã¤ãã®ã¯ä¸å¯èƒ½ã§ã™");
             }
             _share = value;
             init();
         }
 
         /// <summary>
-        /// ƒ^ƒCƒ}[§ŒäƒIƒuƒWƒFƒNƒg
+        /// ã‚¿ã‚¤ãƒãƒ¼åˆ¶å¾¡ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
         /// </summary>
         protected GuiTimer Timer
         {
             get
             {
-                System.Diagnostics.Debug.Assert(_timer != null, "Dispose‚³‚ê‚½ƒtƒB[ƒ`ƒƒ[‚Å‚·BTimer‚Íg—p‚Å‚«‚Ü‚¹‚ñ");
+                System.Diagnostics.Debug.Assert(_timer != null, "Disposeã•ã‚ŒãŸãƒ•ã‚£ãƒ¼ãƒãƒ£ãƒ¼ã§ã™ã€‚Timerã¯ä½¿ç”¨ã§ãã¾ã›ã‚“");
                 return _timer;
             }
         }
 
         /// <summary>
-        /// ƒŠƒ“ƒN
+        /// ãƒªãƒ³ã‚¯
         /// </summary>
         protected DataLinkBase Link => _link;
 
         /// <summary>
-        /// ƒg[ƒNƒ“
+        /// ãƒˆãƒ¼ã‚¯ãƒ³
         /// </summary>
         protected TokenTray Token => _tokenTray;
 
         /// <summary>
-        /// ƒtƒ@ƒCƒiƒ‰ƒCƒU[ŠÇ—ƒIƒuƒWƒFƒNƒg
+        /// ãƒ•ã‚¡ã‚¤ãƒŠãƒ©ã‚¤ã‚¶ãƒ¼ç®¡ç†ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
         /// </summary>
         protected FinalizeManageBuffer Finalizers => _finalizers;
 
         /// <summary>
-        /// ‰i‘±‰»ŠÇ—ƒIƒuƒWƒFƒNƒg
+        /// æ°¸ç¶šåŒ–ç®¡ç†ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
         /// </summary>
         protected PersistManager Persister => _persister;
 
         /// <summary>
-        /// ƒAƒvƒŠƒP[ƒVƒ‡ƒ“ƒf[ƒ^
+        /// ã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³ãƒ‡ãƒ¼ã‚¿
         /// </summary>
         protected DataHotBase Data => _appData;
 
         /// <summary>
-        /// ƒp[ƒcƒf[ƒ^
+        /// ãƒ‘ãƒ¼ãƒ„ãƒ‡ãƒ¼ã‚¿
         /// </summary>
         protected PartsCollectionBase Parts => _partsData;
 
         /// <summary>
-        /// ‹¤—L•Ï”
+        /// å…±æœ‰å¤‰æ•°
         /// </summary>
         protected DataSharingManager Share => _share;
 
         /// <summary>
-        /// ƒ}ƒU[ƒy[ƒ“iŠî–{‚É‚È‚écFeatureRich)
+        /// ãƒã‚¶ãƒ¼ãƒšãƒ¼ãƒ³ï¼ˆåŸºæœ¬ã«ãªã‚‹cFeatureRich)
         /// </summary>
         protected IRichPane Pane => _pane;
 
         /// <summary>
-        /// ÅŒã‚ÉƒNƒŠƒbƒN‚µ‚½Š‚Ìƒp[ƒc
+        /// æœ€å¾Œã«ã‚¯ãƒªãƒƒã‚¯ã—ãŸæ‰€ã®ãƒ‘ãƒ¼ãƒ„
         /// </summary>
         protected PartsBase ClickParts
         {
@@ -196,7 +196,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ÅŒã‚ÉƒNƒŠƒbƒN‚µ‚½‚Æ‚±‚ë‚Ìƒy[ƒ“iƒCƒŠƒ…[ƒWƒ‡ƒ“‚È‚çBinderƒy[ƒ“‚ª•Ô‚éj
+        /// æœ€å¾Œã«ã‚¯ãƒªãƒƒã‚¯ã—ãŸã¨ã“ã‚ã®ãƒšãƒ¼ãƒ³ï¼ˆã‚¤ãƒªãƒ¥ãƒ¼ã‚¸ãƒ§ãƒ³ãªã‚‰Binderãƒšãƒ¼ãƒ³ãŒè¿”ã‚‹ï¼‰
         /// </summary>
         protected IRichPane ClickPane
         {
@@ -205,16 +205,16 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒCƒ“ƒXƒ^ƒ“ƒX‚ğ¶¬‚·‚é—Bˆê‚Ì•û–@Bƒ†[ƒU[‚Í©•ª‚ÅƒCƒ“ƒXƒ^ƒ“ƒX¶¬‹Ö~
+        /// ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ç”Ÿæˆã™ã‚‹å”¯ä¸€ã®æ–¹æ³•ã€‚ãƒ¦ãƒ¼ã‚¶ãƒ¼ã¯è‡ªåˆ†ã§ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ç”Ÿæˆç¦æ­¢
         /// </summary>
         protected DataLinkManager()
         {
         }
 
         /// <summary>
-        /// ƒtƒB[ƒ`ƒƒ[‚Å’Ê‚µ‚Äg—p‚·‚éƒf[ƒ^‚ğŠÖ˜A‚·‚é
+        /// ãƒ•ã‚£ãƒ¼ãƒãƒ£ãƒ¼ã§é€šã—ã¦ä½¿ç”¨ã™ã‚‹ãƒ‡ãƒ¼ã‚¿ã‚’é–¢é€£ã™ã‚‹
         /// </summary>
-        /// <param name="theInstanceWhoHasEmptyData">‚Ü‚¾ƒf[ƒ^Š—L‚µ‚Ä‚¢‚È‚¢fgBase/FeatureBase</param>
+        /// <param name="theInstanceWhoHasEmptyData">ã¾ã ãƒ‡ãƒ¼ã‚¿æ‰€æœ‰ã—ã¦ã„ãªã„fgBase/FeatureBase</param>
         protected void linkDataTo(DataLinkManager theInstanceWhoHasEmptyData)
         {
             theInstanceWhoHasEmptyData._appData = _appData;
@@ -232,9 +232,9 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒ‹[ƒgƒtƒB[ƒ`ƒƒ[ƒOƒ‹[ƒv‚ğ•Ô‚·
+        /// ãƒ«ãƒ¼ãƒˆãƒ•ã‚£ãƒ¼ãƒãƒ£ãƒ¼ã‚°ãƒ«ãƒ¼ãƒ—ã‚’è¿”ã™
         /// </summary>
-        /// <returns>ƒ‹[ƒgƒtƒB[ƒ`ƒƒ[ƒOƒ‹[ƒv</returns>
+        /// <returns>ãƒ«ãƒ¼ãƒˆãƒ•ã‚£ãƒ¼ãƒãƒ£ãƒ¼ã‚°ãƒ«ãƒ¼ãƒ—</returns>
         public FeatureGroupBase GetRoot()
         {
             DataLinkManager ret;
@@ -247,7 +247,7 @@ namespace Tono.GuiWinForm
             {
                 return (FeatureGroupBase)ret;
             }
-            System.Diagnostics.Debug.Assert(ret != null, "‚±‚ÌƒtƒB[ƒ`ƒƒ[ƒZƒbƒg‚ÍAƒ‹[ƒg‚ÉfgBase”h¶ƒNƒ‰ƒX‚ğg—p‚µ‚Ä‚¢‚Ü‚¹‚ñ");
+            System.Diagnostics.Debug.Assert(ret != null, "ã“ã®ãƒ•ã‚£ãƒ¼ãƒãƒ£ãƒ¼ã‚»ãƒƒãƒˆã¯ã€ãƒ«ãƒ¼ãƒˆã«fgBaseæ´¾ç”Ÿã‚¯ãƒ©ã‚¹ã‚’ä½¿ç”¨ã—ã¦ã„ã¾ã›ã‚“");
             return null;
         }
     }

@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 namespace Tono.GuiWinForm
@@ -9,7 +9,7 @@ namespace Tono.GuiWinForm
     public interface IRichPaneSync
     {
         /// <summary>
-        /// ©•ª‚¾‚¯ƒY[ƒ€‚·‚é
+        /// è‡ªåˆ†ã ã‘ã‚ºãƒ¼ãƒ ã™ã‚‹
         /// </summary>
         XyBase ZoomMute
         {
@@ -18,7 +18,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ©•ª‚¾‚¯ƒXƒNƒ[ƒ‹‚·‚é
+        /// è‡ªåˆ†ã ã‘ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ã™ã‚‹
         /// </summary>
         ScreenPos ScrollMute
         {

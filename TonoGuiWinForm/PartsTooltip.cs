@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System;
@@ -26,7 +26,7 @@ namespace Tono.GuiWinForm
 
         public override void Dispose()
         {
-            // dpTooltip‚ÍAƒƒ“ƒo•Ï”‚Æ‚µ‚Ä’·‚¢ŠÔ•Û‚·‚é‚Ì‚ÅAGDIŠJ•ú‚ğ‚µ‚Ä‚Í‚¢‚¯‚È‚¢
+            // dpTooltipã¯ã€ãƒ¡ãƒ³ãƒå¤‰æ•°ã¨ã—ã¦é•·ã„é–“ä¿æŒã™ã‚‹ã®ã§ã€GDIé–‹æ”¾ã‚’ã—ã¦ã¯ã„ã‘ãªã„
             //if (_bg != null){	_bg.Dispose(); _bg = null;	}
             //if (_bgs != null){	_bgs.Dispose(); _bgs = null; }
             //if ( _tc != null ){	_tc.Dispose(); _tc = null; }
@@ -36,7 +36,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ¶ã‚É•\¦‚·‚éƒAƒCƒRƒ“
+        /// å·¦ä¸Šã«è¡¨ç¤ºã™ã‚‹ã‚¢ã‚¤ã‚³ãƒ³
         /// </summary>
         public Image LtImage
         {
@@ -58,7 +58,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// lŠp‚¢ƒAƒCƒRƒ“‚ÌF
+        /// å››è§’ã„ã‚¢ã‚¤ã‚³ãƒ³ã®è‰²
         /// </summary>
         public Color SquareColor
         {
@@ -80,7 +80,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// –¾¦•\¦ˆÊ’u
+        /// æ˜ç¤ºè¡¨ç¤ºä½ç½®
         /// </summary>
         public ScreenPos Position
         {
@@ -88,7 +88,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒc[ƒ‹ƒ`ƒbƒv‚ÌF
+        /// ãƒ„ãƒ¼ãƒ«ãƒãƒƒãƒ—ã®è‰²
         /// </summary>
         public Color BackColor
         {
@@ -104,7 +104,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒc[ƒ‹ƒ`ƒbƒv“à‚Ì•¶š‚ÌF
+        /// ãƒ„ãƒ¼ãƒ«ãƒãƒƒãƒ—å†…ã®æ–‡å­—ã®è‰²
         /// </summary>
         public Color TextColor
         {
@@ -120,18 +120,18 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// •`‰æ
+        /// æç”»
         /// </summary>
         public override bool Draw(IRichPane rp)
         {
             var renderHint = rp.Graphics.TextRenderingHint;
             try
             {
-                const float LP = 1.2f;  // sŠÔ
+                const float LP = 1.2f;  // è¡Œé–“
 
                 rp.Graphics.TextRenderingHint = TextRenderingHint.SystemDefault;
 
-                // •¶š‚Ìs”‚âƒTƒCƒY‚È‚Ç‚ğ‹‚ß‚é
+                // æ–‡å­—ã®è¡Œæ•°ã‚„ã‚µã‚¤ã‚ºãªã©ã‚’æ±‚ã‚ã‚‹
                 Font font, fontTitle;
                 var isNeedFontDispose = false;
                 if (Mes.Current != null)
@@ -156,12 +156,12 @@ namespace Tono.GuiWinForm
                 fh = (float)Math.Floor(fh + 0.9);
                 var fh0 = fontTitle.GetHeight(rp.Graphics) * LP + 2;
 
-                // ƒƒP[ƒVƒ‡ƒ“‘ª’è
+                // ãƒ­ã‚±ãƒ¼ã‚·ãƒ§ãƒ³æ¸¬å®š
                 if (Rect.LT.X == int.MaxValue)
                 {
                     if (_pane == null)
                     {
-                        // PointToClientŠÖ”‚ğg—p‚µ‚½‚¢‚ªAcFeatureRich‚Å‚È‚¢‚Æ‹@”\‚µ‚È‚¢‚½‚ßAˆê“x‚¾‚¯æ“¾‚µ‚Ä‚¨‚­
+                        // PointToClienté–¢æ•°ã‚’ä½¿ç”¨ã—ãŸã„ãŒã€cFeatureRichã§ãªã„ã¨æ©Ÿèƒ½ã—ãªã„ãŸã‚ã€ä¸€åº¦ã ã‘å–å¾—ã—ã¦ãŠã
                         for (_pane = rp.Control; _pane is TGuiView == false; _pane = _pane.Parent)
                         {
                             ;
@@ -207,37 +207,37 @@ namespace Tono.GuiWinForm
                     return true;
                 }
 
-                // ƒoƒbƒN
+                // ãƒãƒƒã‚¯
                 rp.Graphics.FillRectangle(_bg, Rect.LT.X, Rect.LT.Y, Rect.Width, Rect.Height);
 
-                // ƒVƒƒƒhƒE
+                // ã‚·ãƒ£ãƒ‰ã‚¦
                 rp.Graphics.FillRectangle(_bgs, Rect.LT.X + Rect.Width, Rect.LT.Y + 2, 2, Rect.Height - 2);
                 rp.Graphics.FillRectangle(_bgs, Rect.LT.X + 2, Rect.LT.Y + Rect.Height, Rect.Width, 2);
 
-                // ƒnƒCƒ‰ƒCƒg
+                // ãƒã‚¤ãƒ©ã‚¤ãƒˆ
                 //			Point[] pts = new Point[]{new Point(Rect.LT.X, Rect.LT.Y + Rect.Height), new Point(Rect.LT.X, Rect.LT.Y), new Point(Rect.LT.X + Rect.Width, Rect.LT.Y)};
                 //			rp.Graphics.DrawLines(Pens.White, pts);
 
-                // lŠp‚¢ƒAƒCƒRƒ“
+                // å››è§’ã„ã‚¢ã‚¤ã‚³ãƒ³
                 if (_square != null)
                 {
                     rp.Graphics.FillRectangle(_square, Rect.LT.X + 3, Rect.LT.Y + 4, 7, 7);
                     rp.Graphics.DrawRectangle(Pens.Black, Rect.LT.X + 3, Rect.LT.Y + 4, 7, 7);
                 }
-                // ƒeƒLƒXƒg
+                // ãƒ†ã‚­ã‚¹ãƒˆ
                 var p = new PointF(Rect.LT.X + 3, Rect.LT.Y + 3);
                 for (var i = 0; i < ls.Length; i++)
                 {
                     rp.Graphics.DrawString(ls[i], (i == 0 ? fontTitle : font), _tc, p);
                     p.Y += (i == 0 ? fh0 : fh);
                 }
-                // ƒAƒCƒRƒ“
+                // ã‚¢ã‚¤ã‚³ãƒ³
                 if (_ltImage != null)
                 {
                     rp.Graphics.DrawImage(_ltImage, Rect.LT.X - 4, Rect.LT.Y - 4, _ltImage.Width, _ltImage.Height);
                 }
 
-                // GDIŠJ•ú
+                // GDIé–‹æ”¾
                 if (isNeedFontDispose)
                 {
                     font.Dispose();
@@ -252,7 +252,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒc[ƒ‹ƒ`ƒbƒv‚ÌêŠ‚ğÄŒvZ‚·‚é‚æ‚¤‚É—v‹‚·‚é
+        /// ãƒ„ãƒ¼ãƒ«ãƒãƒƒãƒ—ã®å ´æ‰€ã‚’å†è¨ˆç®—ã™ã‚‹ã‚ˆã†ã«è¦æ±‚ã™ã‚‹
         /// </summary>
         public void RequestPosition()
         {

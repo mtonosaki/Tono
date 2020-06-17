@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System;
@@ -10,7 +10,7 @@ using System.Windows.Forms;
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// ƒ}ƒEƒXƒCƒxƒ“ƒg‚Ì‘®«‚ğ•\Œ»‚·‚éƒNƒ‰ƒX
+    /// ãƒã‚¦ã‚¹ã‚¤ãƒ™ãƒ³ãƒˆã®å±æ€§ã‚’è¡¨ç¾ã™ã‚‹ã‚¯ãƒ©ã‚¹
     /// </summary>
     public class MouseState
     {
@@ -22,29 +22,29 @@ namespace Tono.GuiWinForm
             _contextSave.Attr.IsCtrl = (Form.ModifierKeys & Keys.Control) != 0;
         }
         /// <summary>
-        /// ƒRƒ“ƒeƒLƒXƒgƒƒjƒ…[‚ğ•\¦‚·‚é’¼‘O‚Ìó‘Ô
+        /// ã‚³ãƒ³ãƒ†ã‚­ã‚¹ãƒˆãƒ¡ãƒ‹ãƒ¥ãƒ¼ã‚’è¡¨ç¤ºã™ã‚‹ç›´å‰ã®çŠ¶æ…‹
         /// </summary>
         public static MouseState StateAtContext => _contextSave;
-        #region Buttons ƒNƒ‰ƒX
+        #region Buttons ã‚¯ãƒ©ã‚¹
         public class Buttons : ICloneable
         {
-            /// <summary>ƒ}ƒEƒXƒ{ƒ^ƒ“‚Ì‰Ÿ‰ºó‘Ô</summary>
+            /// <summary>ãƒã‚¦ã‚¹ãƒœã‚¿ãƒ³ã®æŠ¼ä¸‹çŠ¶æ…‹</summary>
             public bool IsButton;
 
-            /// <summary>ƒ}ƒEƒX’†Sƒ{ƒ^ƒ“‚Ì‰Ÿ‰ºó‘Ô</summary>
+            /// <summary>ãƒã‚¦ã‚¹ä¸­å¿ƒãƒœã‚¿ãƒ³ã®æŠ¼ä¸‹çŠ¶æ…‹</summary>
             public bool IsButtonMiddle;
 
-            /// <summary>ƒ_ƒuƒ‹ƒNƒŠƒbƒNó‘Ô</summary>
+            /// <summary>ãƒ€ãƒ–ãƒ«ã‚¯ãƒªãƒƒã‚¯çŠ¶æ…‹</summary>
             public bool IsDoubleClick;
 
-            /// <summary>CTRLƒL[‚Ì‰Ÿ‰ºó‘Ô</summary>
+            /// <summary>CTRLã‚­ãƒ¼ã®æŠ¼ä¸‹çŠ¶æ…‹</summary>
             public bool IsCtrl;
 
-            /// <summary>SHIFTƒL[‚Ì‰Ÿ‰ºó‘Ô</summary>
+            /// <summary>SHIFTã‚­ãƒ¼ã®æŠ¼ä¸‹çŠ¶æ…‹</summary>
             public bool IsShift;
 
             /// <summary>
-            /// ƒfƒtƒHƒ‹ƒgƒRƒ“ƒXƒgƒ‰ƒNƒ^
+            /// ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
             /// </summary>
             public Buttons()
             {
@@ -56,12 +56,12 @@ namespace Tono.GuiWinForm
             }
 
             /// <summary>
-            /// ‰Šú‰»ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+            /// åˆæœŸåŒ–ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
             /// </summary>
-            /// <param name="button">ƒ}ƒEƒXƒ{ƒ^ƒ“‚Ìó‘Ôu</param>
-            /// <param name="middle">ƒ}ƒEƒX’†‰›ƒ{ƒ^ƒ“‚Ìó‘Ô</param>
-            /// <param name="ctrl">CTRLƒL[‚Ìó‘Ô</param>
-            /// <param name="shift">SHIFTƒL[‚Ìó‘Ô</param>
+            /// <param name="button">ãƒã‚¦ã‚¹ãƒœã‚¿ãƒ³ã®çŠ¶æ…‹ã€Œ</param>
+            /// <param name="middle">ãƒã‚¦ã‚¹ä¸­å¤®ãƒœã‚¿ãƒ³ã®çŠ¶æ…‹</param>
+            /// <param name="ctrl">CTRLã‚­ãƒ¼ã®çŠ¶æ…‹</param>
+            /// <param name="shift">SHIFTã‚­ãƒ¼ã®çŠ¶æ…‹</param>
             public Buttons(bool button, bool middle, bool ctrl, bool shift, bool doubleclick)
             {
                 IsShift = shift;
@@ -108,9 +108,9 @@ namespace Tono.GuiWinForm
 
 
             /// <summary>
-            /// MouseEventArgs‚Å‚Í\’z‚µØ‚ê‚È‚©‚Á‚½ƒtƒ‰ƒO‚ğ–„‚ß‡‚í‚¹‚é
+            /// MouseEventArgsã§ã¯æ§‹ç¯‰ã—åˆ‡ã‚Œãªã‹ã£ãŸãƒ•ãƒ©ã‚°ã‚’åŸ‹ã‚åˆã‚ã›ã‚‹
             /// </summary>
-            /// <param name="value">–„‚ß‡‚í‚¹‚Ég‚¤î•ñiå‚ÉƒL[‚Ìó‘Ôj</param>
+            /// <param name="value">åŸ‹ã‚åˆã‚ã›ã«ä½¿ã†æƒ…å ±ï¼ˆä¸»ã«ã‚­ãƒ¼ã®çŠ¶æ…‹ï¼‰</param>
             public void SetKeyFrags(Buttons value)
             {
                 IsCtrl = value.IsCtrl;
@@ -118,9 +118,9 @@ namespace Tono.GuiWinForm
             }
 
             /// <summary>
-            /// MouseEventArgs‚Å‚Í\’z‚µØ‚ê‚È‚©‚Á‚½ƒtƒ‰ƒO‚ğ–„‚ß‡‚í‚¹‚é
+            /// MouseEventArgsã§ã¯æ§‹ç¯‰ã—åˆ‡ã‚Œãªã‹ã£ãŸãƒ•ãƒ©ã‚°ã‚’åŸ‹ã‚åˆã‚ã›ã‚‹
             /// </summary>
-            /// <param name="value">–„‚ß‡‚í‚¹‚Ég‚¤î•ñiå‚ÉƒL[‚Ìó‘Ôj</param>
+            /// <param name="value">åŸ‹ã‚åˆã‚ã›ã«ä½¿ã†æƒ…å ±ï¼ˆä¸»ã«ã‚­ãƒ¼ã®çŠ¶æ…‹ï¼‰</param>
             public void SetKeyFrags(KeyState value)
             {
                 IsCtrl = value.IsControl;
@@ -128,9 +128,9 @@ namespace Tono.GuiWinForm
             }
 
             /// <summary>
-            /// w’è‚µ‚½ƒrƒbƒg‚ªtrue‚Ì€–Ú‚ğ false‚É‚·‚éiUpƒCƒxƒ“ƒg‚Å‘ÎÛ‚ğfalse‚É‚·‚é‚Ég—p‚·‚éj
+            /// æŒ‡å®šã—ãŸãƒ“ãƒƒãƒˆãŒtrueã®é …ç›®ã‚’ falseã«ã™ã‚‹ï¼ˆUpã‚¤ãƒ™ãƒ³ãƒˆã§å¯¾è±¡ã‚’falseã«ã™ã‚‹æ™‚ã«ä½¿ç”¨ã™ã‚‹ï¼‰
             /// </summary>
-            /// <param name="value">false‚É‚µ‚½‚¢ƒrƒbƒg‚ğƒZƒbƒg‚µ‚Ä‚¨‚¢‚½Buttons</param>
+            /// <param name="value">falseã«ã—ãŸã„ãƒ“ãƒƒãƒˆã‚’ã‚»ãƒƒãƒˆã—ã¦ãŠã„ãŸButtons</param>
             public void ResetKeyFlags(Buttons value)
             {
                 if (value.IsButton)
@@ -160,10 +160,10 @@ namespace Tono.GuiWinForm
             }
 
             /// <summary>
-            /// w’è‚µ‚½ƒ{ƒ^ƒ“‚·‚×‚Ä‚ªˆê’v‚µ‚Ä‚¢‚é‚©‚Ç‚¤‚©‚ğ’²‚×‚é
+            /// æŒ‡å®šã—ãŸãƒœã‚¿ãƒ³ã™ã¹ã¦ãŒä¸€è‡´ã—ã¦ã„ã‚‹ã‹ã©ã†ã‹ã‚’èª¿ã¹ã‚‹
             /// </summary>
-            /// <param name="value">’²‚×‚éƒ{ƒ^ƒ“</param>
-            /// <returns>true = ˆê’v / false = •sˆê’v</returns>
+            /// <param name="value">èª¿ã¹ã‚‹ãƒœã‚¿ãƒ³</param>
+            /// <returns>true = ä¸€è‡´ / false = ä¸ä¸€è‡´</returns>
             public override bool Equals(object value)
             {
                 if (value is MouseState.Buttons)
@@ -174,9 +174,9 @@ namespace Tono.GuiWinForm
             }
 
             /// <summary>
-            /// ƒCƒ“ƒXƒ^ƒ“ƒX‚Ìó‘Ô‚ğ•\‚·ƒnƒbƒVƒ…ƒR[ƒh
+            /// ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã®çŠ¶æ…‹ã‚’è¡¨ã™ãƒãƒƒã‚·ãƒ¥ã‚³ãƒ¼ãƒ‰
             /// </summary>
-            /// <returns>ƒnƒbƒVƒ…ƒR[ƒh</returns>
+            /// <returns>ãƒãƒƒã‚·ãƒ¥ã‚³ãƒ¼ãƒ‰</returns>
             public override int GetHashCode()
             {
                 var ret = 0;
@@ -207,7 +207,7 @@ namespace Tono.GuiWinForm
 
                 return ret;
             }
-            #region ICloneable ƒƒ“ƒo
+            #region ICloneable ãƒ¡ãƒ³ãƒ
 
             public object Clone()
             {
@@ -218,15 +218,15 @@ namespace Tono.GuiWinForm
         }
         #endregion
 
-        #region ‘®«iƒVƒŠƒAƒ‰ƒCƒY‚ª•K—vj
+        #region å±æ€§ï¼ˆã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºãŒå¿…è¦ï¼‰
 
-        /// <summary>ƒ}ƒEƒXƒXƒNƒŠ[ƒ“À•W</summary>
+        /// <summary>ãƒã‚¦ã‚¹ã‚¹ã‚¯ãƒªãƒ¼ãƒ³åº§æ¨™</summary>
         public ScreenPos Pos = new ScreenPos();
-        /// <summary>ƒzƒC[ƒ‹‚ÌˆÚ“®—Ê</summary>
+        /// <summary>ãƒ›ã‚¤ãƒ¼ãƒ«ã®ç§»å‹•é‡</summary>
         public XyBase Delta = new XyBase();
-        /// <summary>ƒ{ƒ^ƒ“ó‹µ</summary>
+        /// <summary>ãƒœã‚¿ãƒ³çŠ¶æ³</summary>
         public Buttons Attr = new Buttons();
-        /// <summary>ƒNƒŠƒbƒN‚³‚ê‚½ƒy[ƒ“</summary>
+        /// <summary>ã‚¯ãƒªãƒƒã‚¯ã•ã‚ŒãŸãƒšãƒ¼ãƒ³</summary>
         protected IRichPane _paneAtPos = null;
 
         #endregion
@@ -241,7 +241,7 @@ namespace Tono.GuiWinForm
         private static Buttons _nowButtons = null;
 
         /// <summary>
-        /// ƒCƒ“ƒXƒ^ƒ“ƒX‚Ì•¡»
+        /// ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã®è¤‡è£½
         /// </summary>
         /// <returns></returns>
         public MouseState Clone()
@@ -257,7 +257,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// Œ»İ‚ÌˆÊ’u‚Æƒ{ƒ^ƒ“‚ğ”½‰f‚·‚éƒCƒ“ƒXƒ^ƒ“ƒXi
+        /// ç¾åœ¨ã®ä½ç½®ã¨ãƒœã‚¿ãƒ³ã‚’åæ˜ ã™ã‚‹ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ï¼ˆ
         /// </summary>
         public static MouseState Now
         {
@@ -274,7 +274,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// Œ»İ‚Ìó‘Ôiƒ{ƒ^ƒ“j
+        /// ç¾åœ¨ã®çŠ¶æ…‹ï¼ˆãƒœã‚¿ãƒ³ï¼‰
         /// </summary>
         public static Buttons NowButtons
         {
@@ -282,7 +282,7 @@ namespace Tono.GuiWinForm
             {
                 if (_nowButtons == null)
                 {
-                    for (; ; Thread.Sleep(0))   // .NET‚ªƒXƒŒƒbƒhƒZ[ƒt‚Å—áŠO‚ğo‚·A©“®“I‚ÉÄs‚·‚é
+                    for (; ; Thread.Sleep(0))   // .NETãŒã‚¹ãƒ¬ãƒƒãƒ‰ã‚»ãƒ¼ãƒ•ã§ä¾‹å¤–ã‚’å‡ºã™æ™‚ã€è‡ªå‹•çš„ã«å†è©¦è¡Œã™ã‚‹
                     {
                         try
                         {
@@ -301,18 +301,18 @@ namespace Tono.GuiWinForm
                         }
                     }
                 }
-                var ret = _nowButtons;  // Tono:NowButtons‚ªXV‚·‚é‚æ‚¤‚ÉC³iƒŒƒR[ƒ_Œn‚Å³‚µ‚­“®ì‚·‚é‚©‚Í–¢ŒŸØj
+                var ret = _nowButtons;  // Tono:NowButtonsãŒæ›´æ–°ã™ã‚‹ã‚ˆã†ã«ä¿®æ­£ï¼ˆãƒ¬ã‚³ãƒ¼ãƒ€ç³»ã§æ­£ã—ãå‹•ä½œã™ã‚‹ã‹ã¯æœªæ¤œè¨¼ï¼‰
                 _nowButtons = null;
                 return ret;
             }
         }
 
-        /// <summary>Œ»İ‚Ìó‘Ô</summary>
+        /// <summary>ç¾åœ¨ã®çŠ¶æ…‹</summary>
         public static ScreenPos NowPosition
         {
             get
             {
-                for (; ; Thread.Sleep(0))   // .NET‚ªƒXƒŒƒbƒhƒZ[ƒt‚Å—áŠO‚ğo‚·A©“®“I‚ÉÄs‚·‚é
+                for (; ; Thread.Sleep(0))   // .NETãŒã‚¹ãƒ¬ãƒƒãƒ‰ã‚»ãƒ¼ãƒ•ã§ä¾‹å¤–ã‚’å‡ºã™æ™‚ã€è‡ªå‹•çš„ã«å†è©¦è¡Œã™ã‚‹
                 {
                     try
                     {
@@ -334,9 +334,9 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒCƒ“ƒXƒ^ƒ“ƒX‚Ì•¶š—ñ‰»
+        /// ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã®æ–‡å­—åˆ—åŒ–
         /// </summary>
-        /// <returns>•¶š—ñ</returns>
+        /// <returns>æ–‡å­—åˆ—</returns>
         public override string ToString()
         {
             return Pos.ToString() + " " + "D" + Delta.ToString() + " " + Attr.ToString() + (_paneAtPos != null ? " at " + _paneAtPos.IdText : "");
@@ -344,7 +344,7 @@ namespace Tono.GuiWinForm
 
 
         /// <summary>
-        /// ƒNƒŠƒbƒN‚µ‚½‚Æ‚±‚ë‚Ìƒy[ƒ“
+        /// ã‚¯ãƒªãƒƒã‚¯ã—ãŸã¨ã“ã‚ã®ãƒšãƒ¼ãƒ³
         /// </summary>
         public IRichPane Pane
         {
@@ -353,7 +353,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒ}ƒEƒXÀ•W 0 / ƒ{ƒ^ƒ“ƒtƒŠ[ó‘Ô‚ÌƒIƒuƒWƒFƒNƒg / Pane = null
+        /// ãƒã‚¦ã‚¹åº§æ¨™ 0 / ãƒœã‚¿ãƒ³ãƒ•ãƒªãƒ¼çŠ¶æ…‹ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ / Pane = null
         /// </summary>
         public static MouseState FreeZero
         {
@@ -373,10 +373,10 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒ}ƒEƒXƒCƒxƒ“ƒg‘®«‚©‚çƒCƒ“ƒXƒ^ƒ“ƒX‚ğ¶¬‚·‚é
+        /// ãƒã‚¦ã‚¹ã‚¤ãƒ™ãƒ³ãƒˆå±æ€§ã‹ã‚‰ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ç”Ÿæˆã™ã‚‹
         /// </summary>
-        /// <param name="e">ƒ}ƒEƒXƒCƒxƒ“ƒg‘®«</param>
-        /// <returns>V‚µ‚¢ƒCƒ“ƒXƒ^ƒ“ƒX</returns>
+        /// <param name="e">ãƒã‚¦ã‚¹ã‚¤ãƒ™ãƒ³ãƒˆå±æ€§</param>
+        /// <returns>æ–°ã—ã„ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹</returns>
         public static MouseState FromMouseEventArgs(System.Windows.Forms.MouseEventArgs e, IRichPane posPane)
         {
             var ret = new MouseState();

@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System;
@@ -8,7 +8,7 @@ using System;
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// uXx ‚ÌŠT—v‚Ìà–¾‚Å‚·B
+    /// uXx ã®æ¦‚è¦ã®èª¬æ˜ã§ã™ã€‚
     /// </summary>
     [Serializable]
     public class RangeXx : ValueCouple, ISpace
@@ -23,16 +23,16 @@ namespace Tono.GuiWinForm
         public static RangeXx operator /(RangeXx v1, int v2) { return (RangeXx)((ValueCouple)v1 / v2); }
 
         /// <summary>
-        /// ’†S
+        /// ä¸­å¿ƒ
         /// </summary>
         public int Middle => (_v1 + _v2) / 2;
 
         /// <summary>
-        /// ’l‚ğw’è‚µ‚ÄƒCƒ“ƒXƒ^ƒ“ƒX‚ğì‚é
+        /// å€¤ã‚’æŒ‡å®šã—ã¦ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ä½œã‚‹
         /// </summary>
-        /// <param name="v1">’l‚P</param>
-        /// <param name="v2">’l‚Q</param>
-        /// <returns>ƒCƒ“ƒXƒ^ƒ“ƒX</returns>
+        /// <param name="v1">å€¤ï¼‘</param>
+        /// <param name="v2">å€¤ï¼’</param>
+        /// <returns>ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹</returns>
 
         public static new RangeXx FromInt(int v1, int v2)
         {
@@ -45,7 +45,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// X0 = int.Max / X1 = int.Min ‚ÅƒCƒ“ƒXƒ^ƒ“ƒX‚ğ¶¬‚·‚é
+        /// X0 = int.Max / X1 = int.Min ã§ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ç”Ÿæˆã™ã‚‹
         /// </summary>
         /// <returns></returns>
         public static RangeXx FromNegativeSpan()
@@ -54,10 +54,10 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ‹éŒ`‚©‚çXÀ•W‚Ì‚İ‚ğ’Šo‚µ‚ÄƒCƒ“ƒXƒ^ƒ“ƒX‚ğ¶¬‚·‚é
+        /// çŸ©å½¢ã‹ã‚‰Xåº§æ¨™ã®ã¿ã‚’æŠ½å‡ºã—ã¦ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ç”Ÿæˆã™ã‚‹
         /// </summary>
-        /// <param name="value">‹éŒ`</param>
-        /// <returns>V‚µ‚¢ƒCƒ“ƒXƒ^ƒ“ƒX</returns>
+        /// <param name="value">çŸ©å½¢</param>
+        /// <returns>æ–°ã—ã„ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹</returns>
 
         public static RangeXx FromRect(Rect value)
         {
@@ -70,7 +70,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// 1‚Â–Ú‚ÌXÀ•W
+        /// 1ã¤ç›®ã®Xåº§æ¨™
         /// </summary>
         public int X0
         {
@@ -81,7 +81,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ‚Q‚Â–Ú‚ÌXÀ•W
+        /// ï¼’ã¤ç›®ã®Xåº§æ¨™
         /// </summary>
         public int X1
         {
@@ -90,13 +90,13 @@ namespace Tono.GuiWinForm
 
             set => _v2 = value;
         }
-        #region ISpace ƒƒ“ƒo
+        #region ISpace ãƒ¡ãƒ³ãƒ
 
         /// <summary>
-        /// w’è‚µ‚½ƒ|ƒCƒ“ƒg‚ªƒIƒuƒWƒFƒNƒg—Ìˆæ“à‚É‚ ‚é‚©‚Ç‚¤‚©”»’è‚·‚é
+        /// æŒ‡å®šã—ãŸãƒã‚¤ãƒ³ãƒˆãŒã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆé ˜åŸŸå†…ã«ã‚ã‚‹ã‹ã©ã†ã‹åˆ¤å®šã™ã‚‹
         /// </summary>
-        /// <param name="value">uXxŒ^‚Ìw’èƒ|ƒCƒ“ƒg</param>
-        /// <returns>true:—Ìˆæ“à / false:—ÌˆæŠO</returns>
+        /// <param name="value">uXxå‹ã®æŒ‡å®šãƒã‚¤ãƒ³ãƒˆ</param>
+        /// <returns>true:é ˜åŸŸå†… / false:é ˜åŸŸå¤–</returns>
         // 
         public bool IsIn(object value)
         {
@@ -140,13 +140,13 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒIƒuƒWƒFƒNƒg‚ÌˆÚ“®
+        /// ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ç§»å‹•
         /// </summary>
-        /// <param name="value">uXxŒ^‚ÌˆÚ“®’l (X0,X1)</param>
+        /// <param name="value">uXxå‹ã®ç§»å‹•å€¤ (X0,X1)</param>
 
         public void Transfer(object value)
         {
-            System.Diagnostics.Debug.Assert(value is int, "Transfer‚ÍintŒ^‚¾‚¯ƒTƒ|[ƒg‚µ‚Ä‚¢‚Ü‚·");
+            System.Diagnostics.Debug.Assert(value is int, "Transferã¯intå‹ã ã‘ã‚µãƒãƒ¼ãƒˆã—ã¦ã„ã¾ã™");
             var pt = (int)value;
 
             X0 += pt;
@@ -154,9 +154,9 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒIƒuƒWƒFƒNƒg‚ÌŠg‘å
+        /// ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®æ‹¡å¤§
         /// </summary>
-        /// <param name="value">uXxŒ^‚ÌˆÚ“®’l (X0,X1)</param>
+        /// <param name="value">uXxå‹ã®ç§»å‹•å€¤ (X0,X1)</param>
 
         public void Inflate(object value)
         {
@@ -167,7 +167,7 @@ namespace Tono.GuiWinForm
             }
             else
             {
-                System.Diagnostics.Debug.Assert(value is RangeXx, "Inflate‚ÍuXxŒ^‚¾‚¯ƒTƒ|[ƒg‚µ‚Ä‚¢‚Ü‚·");
+                System.Diagnostics.Debug.Assert(value is RangeXx, "Inflateã¯uXxå‹ã ã‘ã‚µãƒãƒ¼ãƒˆã—ã¦ã„ã¾ã™");
                 var pt = (RangeXx)value;
 
                 X0 -= pt.X0;
@@ -176,9 +176,9 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒIƒuƒWƒFƒNƒg‚Ìk¬
+        /// ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ç¸®å°
         /// </summary>
-        /// <param name="value">uXxŒ^‚ÌˆÚ“®’l (X0,X1)</param>
+        /// <param name="value">uXxå‹ã®ç§»å‹•å€¤ (X0,X1)</param>
 
         public void Deflate(object value)
         {
@@ -189,7 +189,7 @@ namespace Tono.GuiWinForm
             }
             else
             {
-                System.Diagnostics.Debug.Assert(value is RangeXx, "Inflate‚ÍuXxŒ^‚¾‚¯ƒTƒ|[ƒg‚µ‚Ä‚¢‚Ü‚·");
+                System.Diagnostics.Debug.Assert(value is RangeXx, "Inflateã¯uXxå‹ã ã‘ã‚µãƒãƒ¼ãƒˆã—ã¦ã„ã¾ã™");
                 var pt = (RangeXx)value;
 
                 X0 += pt.X0;

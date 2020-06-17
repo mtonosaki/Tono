@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System;
@@ -11,12 +11,12 @@ using System.Reflection;
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// ƒŒƒR[ƒhŠî–{’ŠÛƒNƒ‰ƒXiƒp[ƒc‚É‘Î‚·‚éƒŠƒ“ƒN‚Ì‘ÎÛj
+    /// ãƒ¬ã‚³ãƒ¼ãƒ‰åŸºæœ¬æŠ½è±¡ã‚¯ãƒ©ã‚¹ï¼ˆãƒ‘ãƒ¼ãƒ„ã«å¯¾ã™ã‚‹ãƒªãƒ³ã‚¯ã®å¯¾è±¡ï¼‰
     /// </summary>
     [Serializable]
     public abstract class RecordBase : ICloneable
     {
-        #region ICloneable ƒƒ“ƒo
+        #region ICloneable ãƒ¡ãƒ³ãƒ
 
         public abstract object Clone();
 
@@ -24,32 +24,32 @@ namespace Tono.GuiWinForm
     }
 
     /// <summary>
-    /// ƒe[ƒuƒ‹‚ÌŠî–{ƒNƒ‰ƒX
+    /// ãƒ†ãƒ¼ãƒ–ãƒ«ã®åŸºæœ¬ã‚¯ãƒ©ã‚¹
     /// </summary>
     [Serializable]
     public abstract class RecordCommon : RecordBase
     {
-        #region ‘®«iƒVƒŠƒAƒ‰ƒCƒY‚·‚é)
+        #region å±æ€§ï¼ˆã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºã™ã‚‹)
         private static int _instanceIDCounter = 0;
 
-        /// <summary>ƒŒƒR[ƒh‚ğ¯•Ê‚·‚é‚½‚ß‚Ìƒ†ƒj[ƒN‚ÈID</summary>
+        /// <summary>ãƒ¬ã‚³ãƒ¼ãƒ‰ã‚’è­˜åˆ¥ã™ã‚‹ãŸã‚ã®ãƒ¦ãƒ‹ãƒ¼ã‚¯ãªID</summary>
         private readonly int _instanceID = _instanceIDCounter++;
 
         #endregion
 
         /// <summary>
-        /// ƒfƒoƒbƒO—p‚Ì’l
+        /// ãƒ‡ãƒãƒƒã‚°ç”¨ã®å€¤
         /// </summary>
         public string _ => ToString();
 
         /// <summary>
-        /// ƒf[ƒ^Ši”[Œã‚É•K—v‚È‰Šú‰»ˆ—“™‚ğÀs‚·‚éi‚Q‰ñŒÄ‚Î‚ê‚é‚±‚Æ‚ª‚ ‚éj
+        /// ãƒ‡ãƒ¼ã‚¿æ ¼ç´å¾Œã«å¿…è¦ãªåˆæœŸåŒ–å‡¦ç†ç­‰ã‚’å®Ÿè¡Œã™ã‚‹ï¼ˆï¼’å›å‘¼ã°ã‚Œã‚‹ã“ã¨ãŒã‚ã‚‹ï¼‰
         /// </summary>
         public virtual void Construct()
         {
         }
 
-        #region ICloneable ƒƒ“ƒo
+        #region ICloneable ãƒ¡ãƒ³ãƒ
         public override object Clone()
         {
             var ret = Activator.CreateInstance(GetType());
@@ -58,7 +58,7 @@ namespace Tono.GuiWinForm
         #endregion
 
         /// <summary>
-        /// ’l‚ğ³‹K‰»‚·‚é
+        /// å€¤ã‚’æ­£è¦åŒ–ã™ã‚‹
         /// </summary>
         /// <returns></returns>
         public virtual RecordCommon Normalize(LogUtil logger)
@@ -67,7 +67,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ’lƒZƒbƒg‚ª‹–‰Â‚³‚ê‚é‚©‚ğ’²¸‚·‚é
+        /// å€¤ã‚»ãƒƒãƒˆãŒè¨±å¯ã•ã‚Œã‚‹ã‹ã‚’èª¿æŸ»ã™ã‚‹
         /// </summary>
         protected void checkSettable()
         {
@@ -77,12 +77,12 @@ namespace Tono.GuiWinForm
             {
                 return;
             }
-            System.Diagnostics.Debug.Assert(col.IsReadonly == false, col.TableName + " ƒe[ƒuƒ‹‚Í“Ç‚İæ‚èê—p‚ÉƒZƒbƒg‚³‚ê‚Ä‚¢‚Ü‚·");
+            System.Diagnostics.Debug.Assert(col.IsReadonly == false, col.TableName + " ãƒ†ãƒ¼ãƒ–ãƒ«ã¯èª­ã¿å–ã‚Šå°‚ç”¨ã«ã‚»ãƒƒãƒˆã•ã‚Œã¦ã„ã¾ã™");
 #endif
         }
 
         /// <summary>
-        /// ƒŒƒR[ƒh‚Ì•¶š—ñ‚ğì¬‚·‚é
+        /// ãƒ¬ã‚³ãƒ¼ãƒ‰ã®æ–‡å­—åˆ—ã‚’ä½œæˆã™ã‚‹
         /// </summary>
         /// <returns></returns>
         public override string ToString()
@@ -101,12 +101,12 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒŒƒR[ƒhƒf[ƒ^ŒÅ—L‚ÌƒCƒ“ƒXƒ^ƒ“ƒXID
+        /// ãƒ¬ã‚³ãƒ¼ãƒ‰ãƒ‡ãƒ¼ã‚¿å›ºæœ‰ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ID
         /// </summary>
         public int InstanceID => _instanceID;
 
         /// <summary>
-        /// ƒtƒB[ƒ‹ƒh‚ğ•¶š—ñw’è‚Åæ“¾‚·‚é
+        /// ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ã‚’æ–‡å­—åˆ—æŒ‡å®šã§å–å¾—ã™ã‚‹
         /// </summary>
         public object this[FieldInfo fi]
         {
@@ -120,7 +120,7 @@ namespace Tono.GuiWinForm
             }
             set
             {
-                System.Diagnostics.Debug.Assert(fi != null, "tRecordBase[FieldInfo] = ?? ‚ğg—p‚µ‚Ü‚µ‚½‚ªAŠY“–ƒŒƒR[ƒh‚ÍˆêŒ‚à‚ ‚è‚Ü‚¹‚ñ‚Å‚µ‚½");
+                System.Diagnostics.Debug.Assert(fi != null, "tRecordBase[FieldInfo] = ?? ã‚’ä½¿ç”¨ã—ã¾ã—ãŸãŒã€è©²å½“ãƒ¬ã‚³ãƒ¼ãƒ‰ã¯ä¸€ä»¶ã‚‚ã‚ã‚Šã¾ã›ã‚“ã§ã—ãŸ");
                 fi.SetValue(this, value);
             }
         }
@@ -128,24 +128,24 @@ namespace Tono.GuiWinForm
         internal static IDictionary/*<Type,IDictionary<string key,FieldInfo>>*/ fInfos = new HybridDictionary();
 
         /// <summary>
-        /// ƒtƒB[ƒ‹ƒhî•ñ‚ğæ“¾‚·‚é
+        /// ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰æƒ…å ±ã‚’å–å¾—ã™ã‚‹
         /// </summary>
-        /// <param name="key">DB‚Ì‘®«–¼ (DBSchemaAttribute‚ÌName)</param>
-        /// <returns>.NET‚ÌƒtƒB[ƒ‹ƒhî•ñ</returns>
+        /// <param name="key">DBã®å±æ€§å (DBSchemaAttributeã®Name)</param>
+        /// <returns>.NETã®ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰æƒ…å ±</returns>
         public FieldInfo GetFieldInfo(string key)
         {
             return GetFieldInfo(key, GetType());
         }
 
         /// <summary>
-        /// ƒtƒB[ƒ‹ƒhî•ñ‚ğæ“¾‚·‚é
+        /// ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰æƒ…å ±ã‚’å–å¾—ã™ã‚‹
         /// </summary>
-        /// <param name="key">DB‚Ì‘®«–¼ (DBSchemaAttribute‚ÌName)</param>
-        /// <param name="type">tRecordBase‚Ìƒ^ƒCƒv</param>
-        /// <returns>.NET‚ÌƒtƒB[ƒ‹ƒhî•ñ</returns>
+        /// <param name="key">DBã®å±æ€§å (DBSchemaAttributeã®Name)</param>
+        /// <param name="type">tRecordBaseã®ã‚¿ã‚¤ãƒ—</param>
+        /// <returns>.NETã®ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰æƒ…å ±</returns>
         public static FieldInfo GetFieldInfo(string key, Type type)
         {
-            // ƒLƒƒƒbƒVƒ…
+            // ã‚­ãƒ£ãƒƒã‚·ãƒ¥
             var fs = (IDictionary)fInfos[type];
             if (fs != null)
             {
@@ -160,10 +160,10 @@ namespace Tono.GuiWinForm
                 fInfos[type] = (fs = new HybridDictionary());
             }
 
-            // ƒƒ“ƒo•Ï”‚ğƒXƒLƒƒƒ“‚·‚é
+            // ãƒ¡ãƒ³ãƒå¤‰æ•°ã‚’ã‚¹ã‚­ãƒ£ãƒ³ã™ã‚‹
             foreach (var fi in type.GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic))
             {
-                // ‘®«[DBSchema]‚ª‚Â‚¢‚Ä‚¢‚é‚à‚Ì‚¾‚¯‚ğ‘I‚Ô
+                // å±æ€§[DBSchema]ãŒã¤ã„ã¦ã„ã‚‹ã‚‚ã®ã ã‘ã‚’é¸ã¶
                 var ats = fi.GetCustomAttributes(typeof(DBSchemaAttribute), true);
                 if (ats.Length > 0)
                 {
@@ -179,7 +179,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒtƒB[ƒ‹ƒh‚ğ•¶š—ñw’è‚Åæ“¾‚·‚é
+        /// ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ã‚’æ–‡å­—åˆ—æŒ‡å®šã§å–å¾—ã™ã‚‹
         /// </summary>
         public object this[string key]
         {
@@ -199,10 +199,10 @@ namespace Tono.GuiWinForm
                 {
                     fi.SetValue(this, value);
                 }
-                // ƒƒ“ƒo•Ï”‚ğƒXƒLƒƒƒ“‚·‚é
+                // ãƒ¡ãƒ³ãƒå¤‰æ•°ã‚’ã‚¹ã‚­ãƒ£ãƒ³ã™ã‚‹
                 //foreach (FieldInfo fi in GetType().GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic))
                 //{
-                //    // ‘®«[DBSchema]‚ª‚Â‚¢‚Ä‚¢‚é‚à‚Ì‚¾‚¯‚ğ‘I‚Ô
+                //    // å±æ€§[DBSchema]ãŒã¤ã„ã¦ã„ã‚‹ã‚‚ã®ã ã‘ã‚’é¸ã¶
                 //    object[] ats = fi.GetCustomAttributes(typeof(DBSchemaAttribute), true);
                 //    if (ats.Length > 0)
                 //    {
@@ -218,20 +218,20 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// Šƒf[ƒ^‚Ì‘Sæ“¾
+        /// æ‰€æŒãƒ‡ãƒ¼ã‚¿ã®å…¨å–å¾—
         /// </summary>
         /// <returns></returns>
         public virtual string[] GetStrings()
         {
             IList buf = new ArrayList();
 
-            // ƒƒ“ƒo•Ï”‚ğƒXƒLƒƒƒ“‚·‚é
+            // ãƒ¡ãƒ³ãƒå¤‰æ•°ã‚’ã‚¹ã‚­ãƒ£ãƒ³ã™ã‚‹
             foreach (var fi in GetType().GetFields())
             {
-                // ‘®«[DBSchema]‚ª‚Â‚¢‚Ä‚¢‚é‚à‚Ì‚¾‚¯‚ğ‘I‚Ô
+                // å±æ€§[DBSchema]ãŒã¤ã„ã¦ã„ã‚‹ã‚‚ã®ã ã‘ã‚’é¸ã¶
                 if (fi.GetCustomAttributes(typeof(DBSchemaAttribute), true).Length > 0)
                 {
-                    // ƒCƒ“ƒXƒ^ƒ“ƒX‚Ì’l‚Ì ToString() ‚ğƒR[ƒ‹‚µ‚Ä –ß‚è’l‚ÉŠÜ‚ß‚é
+                    // ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã®å€¤ã® ToString() ã‚’ã‚³ãƒ¼ãƒ«ã—ã¦ æˆ»ã‚Šå€¤ã«å«ã‚ã‚‹
                     buf.Add(fi.GetValue(this).ToString());
                 }
             }
@@ -244,13 +244,13 @@ namespace Tono.GuiWinForm
         {
             IList buf = new ArrayList();
 
-            // ƒƒ“ƒo•Ï”‚ğƒXƒLƒƒƒ“‚·‚é
+            // ãƒ¡ãƒ³ãƒå¤‰æ•°ã‚’ã‚¹ã‚­ãƒ£ãƒ³ã™ã‚‹
             foreach (var fi in GetType().GetFields())
             {
-                // ‘®«[DBSchema]‚ª‚Â‚¢‚Ä‚¢‚é‚à‚Ì‚¾‚¯‚ğ‘I‚Ô
+                // å±æ€§[DBSchema]ãŒã¤ã„ã¦ã„ã‚‹ã‚‚ã®ã ã‘ã‚’é¸ã¶
                 if (fi.GetCustomAttributes(typeof(DBSchemaAttribute), true).Length > 0)
                 {
-                    // ƒCƒ“ƒXƒ^ƒ“ƒX‚Ì’l‚Ì ToString() ‚ğƒR[ƒ‹‚µ‚Ä –ß‚è’l‚ÉŠÜ‚ß‚é
+                    // ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã®å€¤ã® ToString() ã‚’ã‚³ãƒ¼ãƒ«ã—ã¦ æˆ»ã‚Šå€¤ã«å«ã‚ã‚‹
                     buf.Add(fi.GetValue(this));
                 }
             }
@@ -262,45 +262,45 @@ namespace Tono.GuiWinForm
 
 
         /// <summary>
-        /// Šƒf[ƒ^‚Ì‘Sæ“¾i•À‚Ñ‡‚ğw’è‚·‚éj
+        /// æ‰€æŒãƒ‡ãƒ¼ã‚¿ã®å…¨å–å¾—ï¼ˆä¸¦ã³é †ã‚’æŒ‡å®šã™ã‚‹ï¼‰
         /// </summary>
-        /// <param name="order">•À‚Ñ‡‚ªw’è‚Å‚«‚é</param>
-        /// <returns>ƒf[ƒ^</returns>
+        /// <param name="order">ä¸¦ã³é †ãŒæŒ‡å®šã§ãã‚‹</param>
+        /// <returns>ãƒ‡ãƒ¼ã‚¿</returns>
         public virtual string[] GetStrings(IList order)
         {
-            IList buf = new ArrayList();    // ƒf[ƒ^‚ğˆêŠi”[‚·‚éƒoƒbƒtƒ@
-            IList odr = new ArrayList();    // •\¦‡‚ğl‚¦‚éƒoƒbƒtƒ@
+            IList buf = new ArrayList();    // ãƒ‡ãƒ¼ã‚¿ã‚’ä¸€æ™‚æ ¼ç´ã™ã‚‹ãƒãƒƒãƒ•ã‚¡
+            IList odr = new ArrayList();    // è¡¨ç¤ºé †ã‚’è€ƒãˆã‚‹ãƒãƒƒãƒ•ã‚¡
 
-            // •\¦‡‚ğl‚¦‚éƒoƒbƒtƒ@‚ğ\’z‚·‚é
+            // è¡¨ç¤ºé †ã‚’è€ƒãˆã‚‹ãƒãƒƒãƒ•ã‚¡ã‚’æ§‹ç¯‰ã™ã‚‹
             for (var i = 0; i < order.Count; i++)
             {
                 var o = order[i];
-                if (o is System.Windows.Forms.ColumnHeader) // ColumnHeader‚È‚çATextƒvƒƒpƒeƒB‚ğ”½‰f
+                if (o is System.Windows.Forms.ColumnHeader) // ColumnHeaderãªã‚‰ã€Textãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ã‚’åæ˜ 
                 {
                     odr.Add(((System.Windows.Forms.ColumnHeader)o).Text.ToLower());
                 }
-                else                                            // ‚»‚¤‚Å‚È‚¯‚ê‚ÎAToString()‚ğ”½‰f
+                else                                            // ãã†ã§ãªã‘ã‚Œã°ã€ToString()ã‚’åæ˜ 
                 {
                     odr.Add(o.ToString().ToLower());
                 }
             }
 
-            // ƒƒ“ƒo•Ï”‚ğƒXƒLƒƒƒ“‚·‚é
+            // ãƒ¡ãƒ³ãƒå¤‰æ•°ã‚’ã‚¹ã‚­ãƒ£ãƒ³ã™ã‚‹
             foreach (var fi in GetType().GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic))
             {
-                // ‘®«[DBSchema]‚ª‚Â‚¢‚Ä‚¢‚é‚à‚Ì‚¾‚¯‚ğ‘I‚Ô
+                // å±æ€§[DBSchema]ãŒã¤ã„ã¦ã„ã‚‹ã‚‚ã®ã ã‘ã‚’é¸ã¶
                 if (fi.GetCustomAttributes(typeof(DBSchemaAttribute), true).Length > 0)
                 {
-                    var pos = buf.Count;    // •¶š—ñ‘}“üêŠib’èj
-                    var ii = odr.IndexOf(fi.Name.ToLower());    // odr ‚É‚æ‚é‚ÆA‡”Ô‚ÍH
+                    var pos = buf.Count;    // æ–‡å­—åˆ—æŒ¿å…¥å ´æ‰€ï¼ˆæš«å®šï¼‰
+                    var ii = odr.IndexOf(fi.Name.ToLower());    // odr ã«ã‚ˆã‚‹ã¨ã€é †ç•ªã¯ï¼Ÿ
                     if (ii >= 0)
                     {
                         if (ii < pos)
                         {
-                            pos = ii;   // ‡”Ô‚ğ®‚¦‚é
+                            pos = ii;   // é †ç•ªã‚’æ•´ãˆã‚‹
                         }
                     }
-                    // ƒCƒ“ƒXƒ^ƒ“ƒX‚Ì’l‚Ì ToString() ‚ğƒR[ƒ‹‚µ‚Ä –ß‚è’l‚ÉŠÜ‚ß‚é
+                    // ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã®å€¤ã® ToString() ã‚’ã‚³ãƒ¼ãƒ«ã—ã¦ æˆ»ã‚Šå€¤ã«å«ã‚ã‚‹
                     buf.Insert(pos, fi.GetValue(this).ToString());
                 }
             }
@@ -309,28 +309,28 @@ namespace Tono.GuiWinForm
                 return null;
             }
 
-            // –ß‚è’l—p‚Éƒoƒbƒtƒ@‚ğì‚é
+            // æˆ»ã‚Šå€¤ç”¨ã«ãƒãƒƒãƒ•ã‚¡ã‚’ä½œã‚‹
             var ret = new string[buf.Count];
             buf.CopyTo(ret, 0);
             return ret;
         }
 
         /// <summary>
-        /// Šƒf[ƒ^‚Ì‘Sæ“¾(Hashtable‚Åæ“¾)
+        /// æ‰€æŒãƒ‡ãƒ¼ã‚¿ã®å…¨å–å¾—(Hashtableã§å–å¾—)
         /// </summary>
-        /// <returns>ƒf[ƒ^</returns>
+        /// <returns>ãƒ‡ãƒ¼ã‚¿</returns>
         public virtual ICollection GetObjects()
         {
-            IDictionary buf = new Hashtable();  // ƒf[ƒ^‚ğˆêŠi”[‚·‚éƒoƒbƒtƒ@
+            IDictionary buf = new Hashtable();  // ãƒ‡ãƒ¼ã‚¿ã‚’ä¸€æ™‚æ ¼ç´ã™ã‚‹ãƒãƒƒãƒ•ã‚¡
 
-            // ƒƒ“ƒo•Ï”‚ğƒXƒLƒƒƒ“‚·‚é
+            // ãƒ¡ãƒ³ãƒå¤‰æ•°ã‚’ã‚¹ã‚­ãƒ£ãƒ³ã™ã‚‹
             foreach (var fi in GetType().GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic))
             {
-                // ‘®«[DBSchema]‚ª‚Â‚¢‚Ä‚¢‚é‚à‚Ì‚¾‚¯‚ğ‘I‚Ô
+                // å±æ€§[DBSchema]ãŒã¤ã„ã¦ã„ã‚‹ã‚‚ã®ã ã‘ã‚’é¸ã¶
                 var DBSchemaAttr = (DBSchemaAttribute[])fi.GetCustomAttributes(typeof(DBSchemaAttribute), true);
                 if (DBSchemaAttr.Length > 0)
                 {
-                    // ƒCƒ“ƒXƒ^ƒ“ƒX‚Ì’l‚Ì ToString() ‚ğƒR[ƒ‹‚µ‚Ä –ß‚è’l‚ÉŠÜ‚ß‚é
+                    // ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã®å€¤ã® ToString() ã‚’ã‚³ãƒ¼ãƒ«ã—ã¦ æˆ»ã‚Šå€¤ã«å«ã‚ã‚‹
                     var oo = fi.GetValue(this);
                     if (oo is int && (int)oo == int.MaxValue)
                     {
@@ -351,45 +351,45 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// Šƒf[ƒ^‚Ì‘Sæ“¾i•À‚Ñ‡‚ğw’è‚·‚éj
+        /// æ‰€æŒãƒ‡ãƒ¼ã‚¿ã®å…¨å–å¾—ï¼ˆä¸¦ã³é †ã‚’æŒ‡å®šã™ã‚‹ï¼‰
         /// </summary>
-        /// <param name="order">•À‚Ñ‡‚ªw’è‚Å‚«‚é</param>
-        /// <returns>ƒf[ƒ^</returns>
+        /// <param name="order">ä¸¦ã³é †ãŒæŒ‡å®šã§ãã‚‹</param>
+        /// <returns>ãƒ‡ãƒ¼ã‚¿</returns>
         public virtual DBRelationAttribute[] GetRelations(IList order)
         {
-            IList buf = new ArrayList();    // ƒf[ƒ^‚ğˆêŠi”[‚·‚éƒoƒbƒtƒ@
-            IList odr = new ArrayList();    // •\¦‡‚ğl‚¦‚éƒoƒbƒtƒ@
+            IList buf = new ArrayList();    // ãƒ‡ãƒ¼ã‚¿ã‚’ä¸€æ™‚æ ¼ç´ã™ã‚‹ãƒãƒƒãƒ•ã‚¡
+            IList odr = new ArrayList();    // è¡¨ç¤ºé †ã‚’è€ƒãˆã‚‹ãƒãƒƒãƒ•ã‚¡
 
-            // •\¦‡‚ğl‚¦‚éƒoƒbƒtƒ@‚ğ\’z‚·‚é
+            // è¡¨ç¤ºé †ã‚’è€ƒãˆã‚‹ãƒãƒƒãƒ•ã‚¡ã‚’æ§‹ç¯‰ã™ã‚‹
             for (var i = 0; i < order.Count; i++)
             {
                 var o = order[i];
-                if (o is System.Windows.Forms.ColumnHeader) // ColumnHeader‚È‚çATextƒvƒƒpƒeƒB‚ğ”½‰f
+                if (o is System.Windows.Forms.ColumnHeader) // ColumnHeaderãªã‚‰ã€Textãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ã‚’åæ˜ 
                 {
                     odr.Add(((System.Windows.Forms.ColumnHeader)o).Text.ToLower());
                 }
-                else                                            // ‚»‚¤‚Å‚È‚¯‚ê‚ÎAToString()‚ğ”½‰f
+                else                                            // ãã†ã§ãªã‘ã‚Œã°ã€ToString()ã‚’åæ˜ 
                 {
                     odr.Add(o.ToString().ToLower());
                 }
             }
 
-            // ƒƒ“ƒo•Ï”‚ğƒXƒLƒƒƒ“‚·‚é
+            // ãƒ¡ãƒ³ãƒå¤‰æ•°ã‚’ã‚¹ã‚­ãƒ£ãƒ³ã™ã‚‹
             foreach (var fi in GetType().GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic))
             {
-                // ‘®«[DBSchema]‚ª‚Â‚¢‚Ä‚¢‚é‚à‚Ì‚¾‚¯‚ğ‘I‚Ô
+                // å±æ€§[DBSchema]ãŒã¤ã„ã¦ã„ã‚‹ã‚‚ã®ã ã‘ã‚’é¸ã¶
                 if (fi.GetCustomAttributes(typeof(DBSchemaAttribute), true).Length > 0)
                 {
-                    var pos = buf.Count;    // •¶š—ñ‘}“üêŠib’èj
-                    var ii = odr.IndexOf(fi.Name.ToLower());    // odr ‚É‚æ‚é‚ÆA‡”Ô‚ÍH
+                    var pos = buf.Count;    // æ–‡å­—åˆ—æŒ¿å…¥å ´æ‰€ï¼ˆæš«å®šï¼‰
+                    var ii = odr.IndexOf(fi.Name.ToLower());    // odr ã«ã‚ˆã‚‹ã¨ã€é †ç•ªã¯ï¼Ÿ
                     if (ii >= 0)
                     {
                         if (ii < pos)
                         {
-                            pos = ii;   // ‡”Ô‚ğ®‚¦‚é
+                            pos = ii;   // é †ç•ªã‚’æ•´ãˆã‚‹
                         }
                     }
-                    // ƒCƒ“ƒXƒ^ƒ“ƒX‚Ì’l‚Ì ToString() ‚ğƒR[ƒ‹‚µ‚Ä –ß‚è’l‚ÉŠÜ‚ß‚é
+                    // ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã®å€¤ã® ToString() ã‚’ã‚³ãƒ¼ãƒ«ã—ã¦ æˆ»ã‚Šå€¤ã«å«ã‚ã‚‹
                     var ats = fi.GetCustomAttributes(typeof(DBRelationAttribute), true);
                     if (ats.Length > 0)
                     {
@@ -409,28 +409,28 @@ namespace Tono.GuiWinForm
                 return null;
             }
 
-            // –ß‚è’l—p‚Éƒoƒbƒtƒ@‚ğì‚é
+            // æˆ»ã‚Šå€¤ç”¨ã«ãƒãƒƒãƒ•ã‚¡ã‚’ä½œã‚‹
             var ret = new DBRelationAttribute[buf.Count];
             buf.CopyTo(ret, 0);
             return ret;
         }
 
         /// <summary>
-        /// Šƒf[ƒ^‚Ì‘Sæ“¾
+        /// æ‰€æŒãƒ‡ãƒ¼ã‚¿ã®å…¨å–å¾—
         /// </summary>
-        /// <returns>ƒf[ƒ^</returns>
+        /// <returns>ãƒ‡ãƒ¼ã‚¿</returns>
         public virtual ICollection GetRelations()
         {
-            IDictionary buf = new Hashtable();  // ƒf[ƒ^‚ğˆêŠi”[‚·‚éƒoƒbƒtƒ@
+            IDictionary buf = new Hashtable();  // ãƒ‡ãƒ¼ã‚¿ã‚’ä¸€æ™‚æ ¼ç´ã™ã‚‹ãƒãƒƒãƒ•ã‚¡
 
-            // ƒƒ“ƒo•Ï”‚ğƒXƒLƒƒƒ“‚·‚é
+            // ãƒ¡ãƒ³ãƒå¤‰æ•°ã‚’ã‚¹ã‚­ãƒ£ãƒ³ã™ã‚‹
             foreach (var fi in GetType().GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic))
             {
-                // ‘®«[DBSchema]‚ª‚Â‚¢‚Ä‚¢‚é‚à‚Ì‚¾‚¯‚ğ‘I‚Ô
+                // å±æ€§[DBSchema]ãŒã¤ã„ã¦ã„ã‚‹ã‚‚ã®ã ã‘ã‚’é¸ã¶
                 var DBSchemaAttr = (DBSchemaAttribute[])fi.GetCustomAttributes(typeof(DBSchemaAttribute), true);
                 if (DBSchemaAttr.Length > 0)
                 {
-                    // ƒCƒ“ƒXƒ^ƒ“ƒX‚Ì’l‚Ì ToString() ‚ğƒR[ƒ‹‚µ‚Ä –ß‚è’l‚ÉŠÜ‚ß‚é
+                    // ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã®å€¤ã® ToString() ã‚’ã‚³ãƒ¼ãƒ«ã—ã¦ æˆ»ã‚Šå€¤ã«å«ã‚ã‚‹
                     var ats = fi.GetCustomAttributes(typeof(DBRelationAttribute), true);
                     if (ats.Length > 0)
                     {
@@ -453,46 +453,46 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// Šƒf[ƒ^‚Ì‘Sæ“¾i•À‚Ñ‡‚ğw’è‚·‚éj
+        /// æ‰€æŒãƒ‡ãƒ¼ã‚¿ã®å…¨å–å¾—ï¼ˆä¸¦ã³é †ã‚’æŒ‡å®šã™ã‚‹ï¼‰
         /// </summary>
-        /// <param name="order">•À‚Ñ‡‚ªw’è‚Å‚«‚é</param>
-        /// <returns>ƒf[ƒ^</returns>
+        /// <param name="order">ä¸¦ã³é †ãŒæŒ‡å®šã§ãã‚‹</param>
+        /// <returns>ãƒ‡ãƒ¼ã‚¿</returns>
         public virtual Type[] GetTypes(IList order)
         {
-            IList buf = new ArrayList();    // ƒf[ƒ^‚ğˆêŠi”[‚·‚éƒoƒbƒtƒ@
-            IList odr = new ArrayList();    // •\¦‡‚ğl‚¦‚éƒoƒbƒtƒ@
+            IList buf = new ArrayList();    // ãƒ‡ãƒ¼ã‚¿ã‚’ä¸€æ™‚æ ¼ç´ã™ã‚‹ãƒãƒƒãƒ•ã‚¡
+            IList odr = new ArrayList();    // è¡¨ç¤ºé †ã‚’è€ƒãˆã‚‹ãƒãƒƒãƒ•ã‚¡
 
-            // •\¦‡‚ğl‚¦‚éƒoƒbƒtƒ@‚ğ\’z‚·‚é
+            // è¡¨ç¤ºé †ã‚’è€ƒãˆã‚‹ãƒãƒƒãƒ•ã‚¡ã‚’æ§‹ç¯‰ã™ã‚‹
             for (var i = 0; i < order.Count; i++)
             {
                 var o = order[i];
-                if (o is System.Windows.Forms.ColumnHeader) // ColumnHeader‚È‚çATextƒvƒƒpƒeƒB‚ğ”½‰f
+                if (o is System.Windows.Forms.ColumnHeader) // ColumnHeaderãªã‚‰ã€Textãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ã‚’åæ˜ 
                 {
                     odr.Add(((System.Windows.Forms.ColumnHeader)o).Text.ToLower());
                 }
-                else                                            // ‚»‚¤‚Å‚È‚¯‚ê‚ÎAToString()‚ğ”½‰f
+                else                                            // ãã†ã§ãªã‘ã‚Œã°ã€ToString()ã‚’åæ˜ 
                 {
                     odr.Add(o.ToString().ToLower());
                 }
             }
 
-            // ƒƒ“ƒo•Ï”‚ğƒXƒLƒƒƒ“‚·‚é
+            // ãƒ¡ãƒ³ãƒå¤‰æ•°ã‚’ã‚¹ã‚­ãƒ£ãƒ³ã™ã‚‹
             foreach (var fi in GetType().GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic))
             {
-                // ‘®«[DBSchema]‚ª‚Â‚¢‚Ä‚¢‚é‚à‚Ì‚¾‚¯‚ğ‘I‚Ô
+                // å±æ€§[DBSchema]ãŒã¤ã„ã¦ã„ã‚‹ã‚‚ã®ã ã‘ã‚’é¸ã¶
                 var DBSchemaAttr = (DBSchemaAttribute[])fi.GetCustomAttributes(typeof(DBSchemaAttribute), true);
                 if (DBSchemaAttr.Length > 0)
                 {
-                    var pos = buf.Count;    // •¶š—ñ‘}“üêŠib’èj
-                    var ii = odr.IndexOf(fi.Name.ToLower());    // odr ‚É‚æ‚é‚ÆA‡”Ô‚ÍH
+                    var pos = buf.Count;    // æ–‡å­—åˆ—æŒ¿å…¥å ´æ‰€ï¼ˆæš«å®šï¼‰
+                    var ii = odr.IndexOf(fi.Name.ToLower());    // odr ã«ã‚ˆã‚‹ã¨ã€é †ç•ªã¯ï¼Ÿ
                     if (ii >= 0)
                     {
                         if (ii < pos)
                         {
-                            pos = ii;   // ‡”Ô‚ğ®‚¦‚é
+                            pos = ii;   // é †ç•ªã‚’æ•´ãˆã‚‹
                         }
                     }
-                    // ƒCƒ“ƒXƒ^ƒ“ƒX‚Ì’l‚Ì ToString() ‚ğƒR[ƒ‹‚µ‚Ä –ß‚è’l‚ÉŠÜ‚ß‚é
+                    // ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã®å€¤ã® ToString() ã‚’ã‚³ãƒ¼ãƒ«ã—ã¦ æˆ»ã‚Šå€¤ã«å«ã‚ã‚‹
                     buf.Insert(pos, fi.FieldType);
                 }
             }
@@ -501,27 +501,27 @@ namespace Tono.GuiWinForm
                 return null;
             }
 
-            // –ß‚è’l—p‚Éƒoƒbƒtƒ@‚ğì‚é
+            // æˆ»ã‚Šå€¤ç”¨ã«ãƒãƒƒãƒ•ã‚¡ã‚’ä½œã‚‹
             var ret = new Type[buf.Count];
             buf.CopyTo(ret, 0);
             return ret;
         }
 
         /// <summary>
-        /// Šƒf[ƒ^‚Ì‘Sæ“¾
+        /// æ‰€æŒãƒ‡ãƒ¼ã‚¿ã®å…¨å–å¾—
         /// </summary>
-        /// <returns>ƒf[ƒ^</returns>
+        /// <returns>ãƒ‡ãƒ¼ã‚¿</returns>
         public virtual ICollection GetTypes()
         {
-            // ƒƒ“ƒo•Ï”‚ğƒXƒLƒƒƒ“‚·‚é
+            // ãƒ¡ãƒ³ãƒå¤‰æ•°ã‚’ã‚¹ã‚­ãƒ£ãƒ³ã™ã‚‹
             ICollection buf = new Hashtable();
             foreach (var fi in GetType().GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic))
             {
-                // ‘®«[DBSchema]‚ª‚Â‚¢‚Ä‚¢‚é‚à‚Ì‚¾‚¯‚ğ‘I‚Ô
+                // å±æ€§[DBSchema]ãŒã¤ã„ã¦ã„ã‚‹ã‚‚ã®ã ã‘ã‚’é¸ã¶
                 var DBSchemaAttr = (DBSchemaAttribute[])fi.GetCustomAttributes(typeof(DBSchemaAttribute), true);
                 if (DBSchemaAttr.Length > 0)
                 {
-                    // ƒCƒ“ƒXƒ^ƒ“ƒX‚Ì’l‚Ì ToString() ‚ğƒR[ƒ‹‚µ‚Ä –ß‚è’l‚ÉŠÜ‚ß‚é
+                    // ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã®å€¤ã® ToString() ã‚’ã‚³ãƒ¼ãƒ«ã—ã¦ æˆ»ã‚Šå€¤ã«å«ã‚ã‚‹
                     ((Hashtable)buf).Add(DBSchemaAttr[0].Name, fi.FieldType);
                 }
             }
@@ -534,16 +534,16 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// Šƒf[ƒ^‚ğ•Û‘¶‚·‚é
+        /// æ‰€æŒãƒ‡ãƒ¼ã‚¿ã‚’ä¿å­˜ã™ã‚‹
         /// </summary>
-        /// <param name="data">•Û‘¶‚·‚éƒf[ƒ^</param>
+        /// <param name="data">ä¿å­˜ã™ã‚‹ãƒ‡ãƒ¼ã‚¿</param>
         /// <returns></returns>
         public virtual void SetObjects(IDictionary data)
         {
-            // ƒƒ“ƒo•Ï”‚ğƒXƒLƒƒƒ“‚·‚é
+            // ãƒ¡ãƒ³ãƒå¤‰æ•°ã‚’ã‚¹ã‚­ãƒ£ãƒ³ã™ã‚‹
             foreach (var fi in GetType().GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic))
             {
-                // ‘®«[DBSchema]‚ª‚Â‚¢‚Ä‚¢‚é‚à‚Ì‚¾‚¯‚ğ‘I‚Ô
+                // å±æ€§[DBSchema]ãŒã¤ã„ã¦ã„ã‚‹ã‚‚ã®ã ã‘ã‚’é¸ã¶
                 var DBSchemaAttr = (DBSchemaAttribute[])fi.GetCustomAttributes(typeof(DBSchemaAttribute), true);
                 if (DBSchemaAttr.Length > 0)
                 {

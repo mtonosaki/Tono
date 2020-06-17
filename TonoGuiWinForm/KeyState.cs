@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System.Windows.Forms;
@@ -8,11 +8,11 @@ using System.Windows.Forms;
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// ƒL[ƒCƒxƒ“ƒg‚Ì‘®«‚ğ•\Œ»‚·‚éƒNƒ‰ƒX
+    /// ã‚­ãƒ¼ã‚¤ãƒ™ãƒ³ãƒˆã®å±æ€§ã‚’è¡¨ç¾ã™ã‚‹ã‚¯ãƒ©ã‚¹
     /// </summary>
     public class KeyState
     {
-        #region ‘®«iƒVƒŠƒAƒ‰ƒCƒY‚ª•K—vj
+        #region å±æ€§ï¼ˆã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºãŒå¿…è¦ï¼‰
         private Keys _key;
         private bool _isControl;
         private bool _isShift;
@@ -31,22 +31,22 @@ namespace Tono.GuiWinForm
 
 
         /// <summary>
-        /// ƒL[‚Ìó‘Ô
+        /// ã‚­ãƒ¼ã®çŠ¶æ…‹
         /// </summary>
         public Keys Key => _key;
 
         /// <summary>
-        /// ƒVƒtƒgƒL[‚Ìó‘Ô
+        /// ã‚·ãƒ•ãƒˆã‚­ãƒ¼ã®çŠ¶æ…‹
         /// </summary>
         public bool IsShift => _isShift;
 
         /// <summary>
-        /// ƒRƒ“ƒgƒ[ƒ‹ƒL[‚Ìó‘Ô
+        /// ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã‚­ãƒ¼ã®çŠ¶æ…‹
         /// </summary>
         public bool IsControl => _isControl;
 
         /// <summary>
-        /// ƒfƒtƒHƒ‹ƒgƒRƒ“ƒXƒgƒ‰ƒNƒ^
+        /// ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
         /// </summary>
 
         public KeyState()
@@ -55,7 +55,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ‰Šú‰»ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+        /// åˆæœŸåŒ–ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
         /// </summary>
 
         public KeyState(Keys value)
@@ -66,9 +66,9 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒL[ƒCƒxƒ“ƒg‘®«‚©‚çƒCƒ“ƒXƒ^ƒ“ƒX‚ğ¶¬‚·‚é
+        /// ã‚­ãƒ¼ã‚¤ãƒ™ãƒ³ãƒˆå±æ€§ã‹ã‚‰ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ç”Ÿæˆã™ã‚‹
         /// </summary>
-        /// <returns>V‚µ‚¢ƒCƒ“ƒXƒ^ƒ“ƒX</returns>
+        /// <returns>æ–°ã—ã„ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹</returns>
         // 
         public static KeyState FromKeyEventArgs(KeyEventArgs e)
         {
@@ -82,10 +82,10 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// uMouseState‚Ìˆê•”‚ğØ‚èæ‚èƒCƒ“ƒXƒ^ƒ“ƒX‚ğ¶¬‚·‚é
+        /// uMouseStateã®ä¸€éƒ¨ã‚’åˆ‡ã‚Šå–ã‚Šã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ç”Ÿæˆã™ã‚‹
         /// </summary>
-        /// <param name="value">ƒ}ƒEƒXó‘Ô</param>
-        /// <returns>V‚µ‚¢ƒCƒ“ƒXƒ^ƒ“ƒX</returns>
+        /// <param name="value">ãƒã‚¦ã‚¹çŠ¶æ…‹</param>
+        /// <returns>æ–°ã—ã„ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹</returns>
 
         public static KeyState FromMouseStateButtons(MouseState.Buttons value)
         {
@@ -99,10 +99,10 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒCƒ“ƒXƒ^ƒ“ƒX‚Ì“à—e‚ª“™‚µ‚¢‚©‚Ç‚¤‚©’²‚×‚é
+        /// ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã®å†…å®¹ãŒç­‰ã—ã„ã‹ã©ã†ã‹èª¿ã¹ã‚‹
         /// </summary>
-        /// <param name="obj">”äŠr‘ÎÆ</param>
-        /// <returns>true = ƒCƒ“ƒXƒ^ƒ“ƒX‚Ì“à—e‚ª“™‚µ‚¢</returns>
+        /// <param name="obj">æ¯”è¼ƒå¯¾ç…§</param>
+        /// <returns>true = ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã®å†…å®¹ãŒç­‰ã—ã„</returns>
 
         public override bool Equals(object obj)
         {
@@ -114,9 +114,9 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒCƒ“ƒXƒ^ƒ“ƒX‚Ì“à—e‚ğ”’l‰»‚·‚é
+        /// ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã®å†…å®¹ã‚’æ•°å€¤åŒ–ã™ã‚‹
         /// </summary>
-        /// <returns>ƒnƒbƒVƒ…ƒR[ƒh</returns>
+        /// <returns>ãƒãƒƒã‚·ãƒ¥ã‚³ãƒ¼ãƒ‰</returns>
 
         public override int GetHashCode()
         {

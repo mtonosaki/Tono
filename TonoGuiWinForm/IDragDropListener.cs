@@ -1,17 +1,17 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// ƒhƒ‰ƒbƒO•ƒhƒƒbƒv‚Å‚Ì“üo—Í‚ğƒTƒ|[ƒg‚·‚éƒCƒ“ƒ^[ƒtƒF[ƒX
+    /// ãƒ‰ãƒ©ãƒƒã‚°ï¼†ãƒ‰ãƒ­ãƒƒãƒ—ã§ã®å…¥å‡ºåŠ›ã‚’ã‚µãƒãƒ¼ãƒˆã™ã‚‹ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ãƒ¼ã‚¹
     /// </summary>
     public interface IDragDropListener
     {
         /// <summary>
-        /// ƒAƒCƒeƒ€‚ªƒhƒƒbƒv‚³‚ê‚½‚ÌƒCƒxƒ“ƒg‚ğ“]‘—‚µ‚Ü‚·
+        /// ã‚¢ã‚¤ãƒ†ãƒ ãŒãƒ‰ãƒ­ãƒƒãƒ—ã•ã‚ŒãŸæ™‚ã®ã‚¤ãƒ™ãƒ³ãƒˆã‚’è»¢é€ã—ã¾ã™
         /// </summary>
-        /// <param name="e">ƒhƒ‰ƒbƒO•ƒhƒƒbƒv‚Ìó‘Ô</param>
+        /// <param name="e">ãƒ‰ãƒ©ãƒƒã‚°ï¼†ãƒ‰ãƒ­ãƒƒãƒ—ã®çŠ¶æ…‹</param>
         void OnDragDrop(DragState e);
     }
 }

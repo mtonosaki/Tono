@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System;
@@ -9,16 +9,16 @@ using System.Collections;
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// FeatureSwitch ‚ÌŠT—v‚Ìà–¾‚Å‚·B
-    /// ƒpƒ‰ƒ[ƒ^‚Åw’è‚µ‚½ƒtƒB[ƒ`ƒƒ[‚ÌƒXƒCƒbƒ`‚ğØ‚è‘Ö‚¦‚é‚±‚Æ‚ª‚Å‚«‚Ü‚·B
-    /// w’è‚Å‚«‚é‚Ì‚ÍAƒtƒB[ƒ`ƒƒ[ƒNƒ‰ƒX–¼AƒtƒB[ƒ`ƒƒ[ƒCƒ“ƒXƒ^ƒ“ƒX–¼‚Å‚·B
-    /// —á‚PF	FeatureWheelScroll,FeatureWheelZoom	¨@—¼ƒtƒB[ƒ`ƒƒ[ƒNƒ‰ƒX–¼‚ÌƒXƒCƒbƒ`ƒ“ƒO
-    /// —á‚QF	FeatureWheelScroll,@ZoomZoom		¨@FeatureWheelScrollƒNƒ‰ƒX‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‘S•”‚Æ ZoomZoom‚Æ‚¢‚¤ƒCƒ“ƒXƒ^ƒ“ƒX–¼‚ÌƒtƒB[ƒ`ƒƒ[‚ÌƒXƒCƒbƒ`ƒ“ƒO
-    /// QljƒtƒB[ƒ`ƒƒ[‚ÌƒCƒ“ƒXƒ^ƒ“ƒX–¼‚ÍAXML ‚Ì name‘®«‚Åw’è‚Å‚«‚éAFeatureBase.NameƒvƒƒpƒeƒB‚Ì‚±‚Æ‚Å‚·B
+    /// FeatureSwitch ã®æ¦‚è¦ã®èª¬æ˜ã§ã™ã€‚
+    /// ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã§æŒ‡å®šã—ãŸãƒ•ã‚£ãƒ¼ãƒãƒ£ãƒ¼ã®ã‚¹ã‚¤ãƒƒãƒã‚’åˆ‡ã‚Šæ›¿ãˆã‚‹ã“ã¨ãŒã§ãã¾ã™ã€‚
+    /// æŒ‡å®šã§ãã‚‹ã®ã¯ã€ãƒ•ã‚£ãƒ¼ãƒãƒ£ãƒ¼ã‚¯ãƒ©ã‚¹åã€ãƒ•ã‚£ãƒ¼ãƒãƒ£ãƒ¼ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹åã§ã™ã€‚
+    /// ä¾‹ï¼‘ï¼š	FeatureWheelScroll,FeatureWheelZoom	â†’ã€€ä¸¡ãƒ•ã‚£ãƒ¼ãƒãƒ£ãƒ¼ã‚¯ãƒ©ã‚¹åã®ã‚¹ã‚¤ãƒƒãƒãƒ³ã‚°
+    /// ä¾‹ï¼’ï¼š	FeatureWheelScroll,@ZoomZoom		â†’ã€€FeatureWheelScrollã‚¯ãƒ©ã‚¹ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹å…¨éƒ¨ã¨ ZoomZoomã¨ã„ã†ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹åã®ãƒ•ã‚£ãƒ¼ãƒãƒ£ãƒ¼ã®ã‚¹ã‚¤ãƒƒãƒãƒ³ã‚°
+    /// å‚è€ƒï¼‰ãƒ•ã‚£ãƒ¼ãƒãƒ£ãƒ¼ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹åã¯ã€XML ã® nameå±æ€§ã§æŒ‡å®šã§ãã‚‹ã€FeatureBase.Nameãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ã®ã“ã¨ã§ã™ã€‚
     /// </summary>
     public class FeatureSwitch : FeatureControlBridgeBase, IMultiTokenListener, IAutoRemovable
     {
-        #region UNDO/REDOƒ^ƒO TagFeatureSwitch
+        #region UNDO/REDOã‚¿ã‚° TagFeatureSwitch
         public class TagFeatureSwitch
         {
             public Id switchingFeatureID;
@@ -46,20 +46,20 @@ namespace Tono.GuiWinForm
         private System.Windows.Forms.CheckBox _checkBox = null;
         private string _interlockGroup = "";
 
-        /// <summary>“Ç‚İ‚İŠ®—¹‚ğ¦‚·ƒg[ƒNƒ“ID</summary>
+        /// <summary>èª­ã¿è¾¼ã¿å®Œäº†ã‚’ç¤ºã™ãƒˆãƒ¼ã‚¯ãƒ³ID</summary>
         protected static readonly NamedId _tokenReadCompleted = NamedId.FromName("TokenReadCompleted");
-        /// <summary>‘I‘ğ’†‚Ìƒp[ƒc‚Æ‚¢‚¤ˆÓ–¡‚ÅƒVƒŠƒAƒ‰ƒCƒY‚·‚éID</summary>
+        /// <summary>é¸æŠä¸­ã®ãƒ‘ãƒ¼ãƒ„ã¨ã„ã†æ„å‘³ã§ã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºã™ã‚‹ID</summary>
         protected static readonly NamedId _featureDataID = NamedId.FromName("FeatureDataSerializeID");
-        /// <summary>ƒg[ƒNƒ“‚ÅØ‚è‘Ö‚¦‚é</summary>
+        /// <summary>ãƒˆãƒ¼ã‚¯ãƒ³ã§åˆ‡ã‚Šæ›¿ãˆã‚‹</summary>
         protected static readonly NamedId _tokenSwitch = NamedId.FromName("TokenChangeFeatureSwitches");
 
         private readonly NamedId[] _tokens = new NamedId[] { _tokenReadCompleted, _tokenSwitch };
 
-        /// <summary>‹¤—L•Ï”FƒCƒ“ƒ^[ƒƒbƒN–¼‚ÆƒXƒCƒbƒ`ƒIƒuƒWƒFƒNƒg</summary>
+        /// <summary>å…±æœ‰å¤‰æ•°ï¼šã‚¤ãƒ³ã‚¿ãƒ¼ãƒ­ãƒƒã‚¯åã¨ã‚¹ã‚¤ãƒƒãƒã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ</summary>
         private IDictionary _interlockGroups;
 
         /// <summary>
-        /// ‰Šú‰»
+        /// åˆæœŸåŒ–
         /// </summary>
         public override void OnInitInstance()
         {
@@ -68,7 +68,7 @@ namespace Tono.GuiWinForm
 
 
         /// <summary>
-        /// ƒpƒ‰ƒ[ƒ^‚ğæ“¾‚µAƒtƒB[ƒ`ƒƒ[‚âƒg[ƒNƒ“”­s‚È‚Ç‚ğs‚¤
+        /// ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã‚’å–å¾—ã—ã€ãƒ•ã‚£ãƒ¼ãƒãƒ£ãƒ¼ã‚„ãƒˆãƒ¼ã‚¯ãƒ³ç™ºè¡Œãªã©ã‚’è¡Œã†
         /// </summary>
         private void resetSwitch()
         {
@@ -78,11 +78,11 @@ namespace Tono.GuiWinForm
             foreach (var s in ss)
             {
                 var s2 = s.Trim();
-                if (s2.StartsWith("[")) // ƒ`ƒFƒbƒNƒ{ƒbƒNƒXŠÖ˜A‚ÍŠÖŒW‚È‚¢
+                if (s2.StartsWith("[")) // ãƒã‚§ãƒƒã‚¯ãƒœãƒƒã‚¯ã‚¹é–¢é€£ã¯é–¢ä¿‚ãªã„
                 {
                     continue;
                 }
-                // ƒg[ƒNƒ“AƒVƒFƒA‚ğİ’è‚·‚é
+                // ãƒˆãƒ¼ã‚¯ãƒ³ã€ã‚·ã‚§ã‚¢ã‚’è¨­å®šã™ã‚‹
                 var com = s2.Split(new char[] { '=' });
                 if (com.Length == 2)
                 {
@@ -112,7 +112,7 @@ namespace Tono.GuiWinForm
                 }
                 else
                 {
-                    // ƒtƒB[ƒ`ƒƒ[‚ÌEnabled‚ğİ’è‚·‚é
+                    // ãƒ•ã‚£ãƒ¼ãƒãƒ£ãƒ¼ã®Enabledã‚’è¨­å®šã™ã‚‹
                     foreach (FeatureBase fi in fis)
                     {
                         if (s2.StartsWith("@"))
@@ -132,7 +132,7 @@ namespace Tono.GuiWinForm
                     }
                 }
             }
-            // ƒg[ƒNƒ“‚ğ“Š‚°‚éiƒtƒB[ƒ`ƒƒ[‚ÌEnable‚ğİ’è‚µ‚½Œãj
+            // ãƒˆãƒ¼ã‚¯ãƒ³ã‚’æŠ•ã’ã‚‹ï¼ˆãƒ•ã‚£ãƒ¼ãƒãƒ£ãƒ¼ã®Enableã‚’è¨­å®šã—ãŸå¾Œï¼‰
             if (_isNoToken == false)
             {
                 if (string.IsNullOrEmpty(tokenLidName) == false)
@@ -147,7 +147,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// •¶š—ñ‚©‚çƒpƒ‰ƒ[ƒ^‚ğ‰ğÍEÀs‚·‚é
+        /// æ–‡å­—åˆ—ã‹ã‚‰ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã‚’è§£æãƒ»å®Ÿè¡Œã™ã‚‹
         /// </summary>
         /// <param name="param"></param>
         public override void ParseParameter(string param)
@@ -157,7 +157,7 @@ namespace Tono.GuiWinForm
             {
                 var s2 = s.Trim();
 
-                // ƒCƒ“ƒ^[ƒƒbƒNƒOƒ‹[ƒv
+                // ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ­ãƒƒã‚¯ã‚°ãƒ«ãƒ¼ãƒ—
                 var id = s2.IndexOf("(");
                 if (id >= 0)
                 {
@@ -172,7 +172,7 @@ namespace Tono.GuiWinForm
 
                     s2 = s2.Substring(0, id) + "]";
                 }
-                // ƒ`ƒFƒbƒNƒ{ƒ^ƒ“‚ÌƒCƒxƒ“ƒg“o˜^
+                // ãƒã‚§ãƒƒã‚¯ãƒœã‚¿ãƒ³ã®ã‚¤ãƒ™ãƒ³ãƒˆç™»éŒ²
                 if (s2.StartsWith("["))
                 {
                     var s3 = s2.Substring(1, s2.Length - 2);
@@ -206,11 +206,11 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒf[ƒ^Á‹‚³‚ê‚½‚Æ‚«‚ÌƒCƒxƒ“ƒg
+        /// ãƒ‡ãƒ¼ã‚¿æ¶ˆå»ã•ã‚ŒãŸã¨ãã®ã‚¤ãƒ™ãƒ³ãƒˆ
         /// </summary>
         protected virtual void OnDataCleared()
         {
-            _isOn = _initialState;  // ƒXƒCƒbƒ`‚ğƒŠƒZƒbƒg‚·‚é
+            _isOn = _initialState;  // ã‚¹ã‚¤ãƒƒãƒã‚’ãƒªã‚»ãƒƒãƒˆã™ã‚‹
             resetSwitch();
         }
 
@@ -220,7 +220,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// Ø‚è‘Ö‚¦
+        /// åˆ‡ã‚Šæ›¿ãˆ
         /// </summary>
         public override void Start(NamedId who)
         {
@@ -245,7 +245,7 @@ namespace Tono.GuiWinForm
             {
                 if (string.IsNullOrEmpty(_interlockGroup))
                 {
-                    // UNDO/REDO‚µ‚È‚ª‚çAƒXƒCƒbƒ`Ø‚è‘Ö‚¦
+                    // UNDO/REDOã—ãªãŒã‚‰ã€ã‚¹ã‚¤ãƒƒãƒåˆ‡ã‚Šæ›¿ãˆ
                     Persister[UNDO].StartChunk(GetType().Name + ".Start");
                     Persister[REDO].StartChunk(GetType().Name + ".Start");
 
@@ -260,7 +260,7 @@ namespace Tono.GuiWinForm
                 {
                     if (_isOn == false)
                     {
-                        // UNDO/REDO‚µ‚È‚ª‚çAƒOƒ‹[ƒv‚Ì‘Šè‚ğOFF‚É‚·‚éB
+                        // UNDO/REDOã—ãªãŒã‚‰ã€ã‚°ãƒ«ãƒ¼ãƒ—ã®ç›¸æ‰‹ã‚’OFFã«ã™ã‚‹ã€‚
                         Persister[UNDO].StartChunk(GetType().Name + ".Start");
                         Persister[REDO].StartChunk(GetType().Name + ".Start");
 
@@ -314,7 +314,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒXƒCƒbƒ`‚ğÀs‚·‚é
+        /// ã‚¹ã‚¤ãƒƒãƒã‚’å®Ÿè¡Œã™ã‚‹
         /// </summary>
         /// <param name="onoff"></param>
         public void Switch(bool onoff)
@@ -324,7 +324,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒXƒCƒbƒ`‚Ì“®ì‚ª‰Â”\‚©‚Ç‚¤‚©iFALSEj‚¾‚ÆAƒg[ƒNƒ“ˆ—‚à‚µ‚È‚¢
+        /// ã‚¹ã‚¤ãƒƒãƒã®å‹•ä½œãŒå¯èƒ½ã‹ã©ã†ã‹ï¼ˆFALSEï¼‰ã ã¨ã€ãƒˆãƒ¼ã‚¯ãƒ³å‡¦ç†ã‚‚ã—ãªã„
         /// </summary>
         public override bool Enabled
         {
@@ -341,14 +341,14 @@ namespace Tono.GuiWinForm
 
 
         /// <summary>
-        /// ƒƒjƒ…[ƒXƒ^[ƒg‚Å‚«‚é‚©‚Ç‚¤‚©‚Ìƒtƒ‰ƒOiƒg[ƒNƒ“ˆ—‚Í‚·‚éj
+        /// ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã‚¹ã‚¿ãƒ¼ãƒˆã§ãã‚‹ã‹ã©ã†ã‹ã®ãƒ•ãƒ©ã‚°ï¼ˆãƒˆãƒ¼ã‚¯ãƒ³å‡¦ç†ã¯ã™ã‚‹ï¼‰
         /// </summary>
         public override bool CanStart => _canStart;
 
-        #region –¢g—p
+        #region æœªä½¿ç”¨
 #if false
 		/// <summary>
-		/// ©•ª‚ğOFF‚É‚µ‚ÄA‘¼‚Ì’N‚©‚ğON‚É‚·‚é
+		/// è‡ªåˆ†ã‚’OFFã«ã—ã¦ã€ä»–ã®èª°ã‹ã‚’ONã«ã™ã‚‹
 		/// </summary>
 		private void setFalse()
 		{
@@ -367,9 +367,9 @@ namespace Tono.GuiWinForm
         #endregion
 
         /// <summary>
-        /// ƒƒjƒ…[ƒXƒ^[ƒg‰Â”ÛƒXƒCƒbƒ`‚ğ•ÏX‚·‚é
+        /// ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã‚¹ã‚¿ãƒ¼ãƒˆå¯å¦ã‚¹ã‚¤ãƒƒãƒã‚’å¤‰æ›´ã™ã‚‹
         /// </summary>
-        /// <param name="sw">ƒXƒ^[ƒg‰Â”Û</param>
+        /// <param name="sw">ã‚¹ã‚¿ãƒ¼ãƒˆå¯å¦</param>
         protected void setCanStart(bool sw)
         {
             _canStart = sw;
@@ -379,7 +379,7 @@ namespace Tono.GuiWinForm
             }
         }
 
-        #region IMultiTokenListener ƒƒ“ƒo
+        #region IMultiTokenListener ãƒ¡ãƒ³ãƒ
 
         public virtual NamedId[] MultiTokenTriggerID => _tokens;
 

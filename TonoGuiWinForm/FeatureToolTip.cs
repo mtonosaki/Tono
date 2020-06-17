@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System.Drawing;
@@ -8,19 +8,19 @@ using System.Drawing;
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// ƒc[ƒ‹ƒ`ƒbƒv‚ÌŠÇ—
+    /// ãƒ„ãƒ¼ãƒ«ãƒãƒƒãƒ—ã®ç®¡ç†
     /// </summary>
     public class FeatureToolTip : FeatureBase
     {
-        #region	‘®«(ƒVƒŠƒAƒ‰ƒCƒY‚·‚é)
-        /// <summary>ƒc[ƒ‹ƒ`ƒbƒv‚ğ•\¦‚·‚éƒgƒŠƒK</summary>
+        #region	å±æ€§(ã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºã™ã‚‹)
+        /// <summary>ãƒ„ãƒ¼ãƒ«ãƒãƒƒãƒ—ã‚’è¡¨ç¤ºã™ã‚‹ãƒˆãƒªã‚¬</summary>
         protected MouseState.Buttons _trigger;
 
         #endregion
 
-        #region	‘®«(ƒVƒŠƒAƒ‰ƒCƒY‚µ‚È‚¢)
+        #region	å±æ€§(ã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºã—ãªã„)
 
-        /// <summary>ƒc[ƒ‹ƒ`ƒbƒv‚É•\¦‚·‚é•¶š—ñ</summary>
+        /// <summary>ãƒ„ãƒ¼ãƒ«ãƒãƒƒãƒ—ã«è¡¨ç¤ºã™ã‚‹æ–‡å­—åˆ—</summary>
         private readonly PartsTooltip _tt = new PartsTooltip();
 
         private IRichPane _rp;
@@ -28,11 +28,11 @@ namespace Tono.GuiWinForm
         #endregion
 
         /// <summary>
-        /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+        /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
         /// </summary>
         public FeatureToolTip()
         {
-            // ƒfƒtƒHƒ‹ƒg‚Åƒhƒ‰ƒbƒOƒXƒNƒ[ƒ‹‚·‚é‚½‚ß‚ÌƒL[‚ğİ’è‚·‚é
+            // ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã§ãƒ‰ãƒ©ãƒƒã‚°ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ã™ã‚‹ãŸã‚ã®ã‚­ãƒ¼ã‚’è¨­å®šã™ã‚‹
             _trigger = new MouseState.Buttons
             {
                 IsButton = false,
@@ -43,7 +43,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ÅŒã‚ÌˆÊ’u
+        /// æœ€å¾Œã®ä½ç½®
         /// </summary>
         protected CodeRect LastRect
         {
@@ -58,7 +58,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ”wŒiF‚ªw’è‚Å‚«‚é
+        /// èƒŒæ™¯è‰²ãŒæŒ‡å®šã§ãã‚‹
         /// </summary>
         protected Color BackColor
         {
@@ -67,7 +67,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒeƒLƒXƒgF‚ªw’è‚Å‚«‚é
+        /// ãƒ†ã‚­ã‚¹ãƒˆè‰²ãŒæŒ‡å®šã§ãã‚‹
         /// </summary>
         protected Color TextColor
         {
@@ -76,7 +76,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ¬ƒAƒCƒRƒ“‚ÌF‚ğw’è‚·‚é
+        /// å°ã‚¢ã‚¤ã‚³ãƒ³ã®è‰²ã‚’æŒ‡å®šã™ã‚‹
         /// </summary>
         public Color SquareColor
         {
@@ -84,7 +84,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ¶ã‚ÌƒAƒCƒRƒ“
+        /// å·¦ä¸Šã®ã‚¢ã‚¤ã‚³ãƒ³
         /// </summary>
         public Image LtImage
         {
@@ -99,7 +99,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// •\¦ˆÊ’u‚ª–¾¦‚Å‚«‚é / null = ƒ}ƒEƒX‚ÌƒJ[ƒ\ƒ‹•t‹ß
+        /// è¡¨ç¤ºä½ç½®ãŒæ˜ç¤ºã§ãã‚‹ / null = ãƒã‚¦ã‚¹ã®ã‚«ãƒ¼ã‚½ãƒ«ä»˜è¿‘
         /// </summary>
         public ScreenPos Position
         {
@@ -107,12 +107,12 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒŒƒCƒ„[ID‚ÌƒI[ƒo[ƒ[ƒh
+        /// ãƒ¬ã‚¤ãƒ¤ãƒ¼IDã®ã‚ªãƒ¼ãƒãƒ¼ãƒ­ãƒ¼ãƒ‰
         /// </summary>
         protected virtual int LayerID => Const.Layer.Tooltip;
 
         /// <summary>
-        /// •\¦•¶š—ñ‚Ìæ“¾/İ’è
+        /// è¡¨ç¤ºæ–‡å­—åˆ—ã®å–å¾—/è¨­å®š
         /// </summary>
         public string Text
         {

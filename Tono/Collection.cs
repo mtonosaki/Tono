@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 
 namespace Tono
 {
@@ -154,6 +155,40 @@ namespace Tono
         /// Zero collection
         /// </summary>
         public static System.Collections.ICollection ZeroCollection => _zero;
+
+        /// <summary>
+        /// LINQ Extention : break by CancellationToken
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="collection"></param>
+        /// <param name="stoppingToken"></param>
+        /// <returns></returns>
+        public static IEnumerable<T> CancelBy<T>(this IEnumerable<T> collection, CancellationToken stoppingToken)
+        {
+            foreach (var item in collection)
+            {
+                if (stoppingToken.IsCancellationRequested) break;
+
+                yield return item;
+            }
+        }
+
+        /// <summary>
+        /// LINQ Extention : break by the lazy function
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="collection"></param>
+        /// <param name="conditionChecker"></param>
+        /// <returns></returns>
+        public static IEnumerable<T> When<T>(this IEnumerable<T> collection, Func<bool> conditionChecker)
+        {
+            foreach (var item in collection)
+            {
+                if (!conditionChecker.Invoke()) break;
+
+                yield return item;
+            }
+        }
 
         /// <summary>
         /// check any null object

@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System;
@@ -7,56 +7,56 @@ using System.Windows.Forms;
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// •\¦—p‚ÉƒeƒLƒXƒg‚ğƒ}ƒXƒN‚µ‚Ä
-    /// “Á’è‚ÌƒL[‚Ì“ü—Í‚ğó‚¯•t‚¯‚È‚¢ƒeƒLƒXƒgƒ{ƒbƒNƒX
+    /// æ™‚åˆ»è¡¨ç¤ºç”¨ã«ãƒ†ã‚­ã‚¹ãƒˆã‚’ãƒã‚¹ã‚¯ã—ã¦
+    /// ç‰¹å®šã®ã‚­ãƒ¼ã®å…¥åŠ›ã‚’å—ã‘ä»˜ã‘ãªã„ãƒ†ã‚­ã‚¹ãƒˆãƒœãƒƒã‚¯ã‚¹
     /// </summary>
     public class TTextBoxTimeMask : TextBox
     {
-        #region	‘®«(ƒVƒŠƒAƒ‰ƒCƒY‚·‚é)
+        #region	å±æ€§(ã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºã™ã‚‹)
         #endregion
-        #region	‘®«(ƒVƒŠƒAƒ‰ƒCƒY‚µ‚È‚¢)
-        /// <summary>•\¦‚·‚éŠÔ</summary>
+        #region	å±æ€§(ã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºã—ãªã„)
+        /// <summary>è¡¨ç¤ºã™ã‚‹æ™‚é–“</summary>
         private DateTimeEx _time = new DateTimeEx();
-        /// <summary>ƒRƒs[‚ğŠJn‚µ‚½ƒeƒLƒXƒgˆÊ’u</summary>
+        /// <summary>ã‚³ãƒ”ãƒ¼ã‚’é–‹å§‹ã—ãŸãƒ†ã‚­ã‚¹ãƒˆä½ç½®</summary>
         private static int _CopyStartIndex = int.MaxValue;
-        /// <summary>ƒRƒs[‚µ‚½•¶š—ñ</summary>
+        /// <summary>ã‚³ãƒ”ãƒ¼ã—ãŸæ–‡å­—åˆ—</summary>
         private static string _CopyText = "";
         #endregion
 
         /// <summary>
-        /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+        /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
         /// </summary>
         public TTextBoxTimeMask() : base()
         {
         }
 
         /// <summary>
-        /// ƒL[ƒ_ƒEƒ“‚ÌƒCƒxƒ“ƒg
+        /// ã‚­ãƒ¼ãƒ€ã‚¦ãƒ³ã®ã‚¤ãƒ™ãƒ³ãƒˆ
         /// </summary>
         /// <param name="e"></param>
         protected override void OnKeyDown(KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Back || e.KeyCode == Keys.Delete)
-            {   // BackSpace‚à‚µ‚­‚ÍDelete(Ctrl+BackSpace)‚Íˆ—‚µ‚È‚¢B
+            {   // BackSpaceã‚‚ã—ãã¯Delete(Ctrl+BackSpace)ã¯å‡¦ç†ã—ãªã„ã€‚
                 e.Handled = true;
             }
             base.OnKeyDown(e);
         }
 
         /// <summary>
-        /// ƒL[ƒvƒŒƒXƒCƒxƒ“ƒg(ƒL[ƒ_ƒEƒ“ƒCƒxƒ“ƒg‚æ‚èŒã‚É”­¶‚·‚é)
+        /// ã‚­ãƒ¼ãƒ—ãƒ¬ã‚¹ã‚¤ãƒ™ãƒ³ãƒˆ(ã‚­ãƒ¼ãƒ€ã‚¦ãƒ³ã‚¤ãƒ™ãƒ³ãƒˆã‚ˆã‚Šå¾Œã«ç™ºç”Ÿã™ã‚‹)
         /// </summary>
         /// <param name="e"></param>
         protected override void OnKeyPress(KeyPressEventArgs e)
         {
-            // BackSpace‚à‚µ‚­‚ÍDelete(Ctrl+BackSpace)‚Íˆ—‚µ‚È‚¢B
+            // BackSpaceã‚‚ã—ãã¯Delete(Ctrl+BackSpace)ã¯å‡¦ç†ã—ãªã„ã€‚
             if (e.KeyChar == 0x8 || e.KeyChar == 0x7f)
             {
                 e.Handled = true;
             }
 
             switch ((int)e.KeyChar)
-            {   // charŒ^‚ğintŒ^‚ÉƒLƒƒƒXƒg‚·‚é‚ÆASCII•¶šƒR[ƒh‚É•ÏŠ·‚Å‚«‚é
+            {   // charå‹ã‚’intå‹ã«ã‚­ãƒ£ã‚¹ãƒˆã™ã‚‹ã¨ASCIIæ–‡å­—ã‚³ãƒ¼ãƒ‰ã«å¤‰æ›ã§ãã‚‹
                 case 0x30:          // 0
                 case 0x31:          // 1
                 case 0x32:          // 2
@@ -67,7 +67,7 @@ namespace Tono.GuiWinForm
                 case 0x37:          // 7
                 case 0x38:          // 8
                 case 0x39:          // 9
-                                    // ‚à‚µA‘I‘ğ”ÍˆÍ‚É":"‚ªŠÜ‚Ü‚ê‚Ä‚¢‚½‚çA•¶š—ñ‚Í‘‚«Š·‚¦‚È‚¢B
+                                    // ã‚‚ã—ã€é¸æŠç¯„å›²ã«":"ãŒå«ã¾ã‚Œã¦ã„ãŸã‚‰ã€æ–‡å­—åˆ—ã¯æ›¸ãæ›ãˆãªã„ã€‚
                     if (SelectedText.IndexOf(":", 0, SelectedText.Length) >= 0)
                     {
                         e.Handled = true;
@@ -78,7 +78,7 @@ namespace Tono.GuiWinForm
                     var text = Text + ":";
                     var count = 0;
                     if (SelectionStart > 7)
-                    {   // ‘S‘Ì‚Å‚VŒ…ˆÈã‚Ì•\¦‚Í‚ ‚è‚¦‚È‚¢
+                    {   // å…¨ä½“ã§ï¼—æ¡ä»¥ä¸Šã®è¡¨ç¤ºã¯ã‚ã‚Šãˆãªã„
                         e.Handled = true;
                     }
                     else
@@ -92,12 +92,12 @@ namespace Tono.GuiWinForm
                                 if (SelectionLength == 0)
                                 {
                                     if (t.Length >= 2)
-                                    {   // Še’PˆÊ‚Å‚RŒ…ˆÈã‚Ì•\¦‚Í‚µ‚È‚¢
+                                    {   // å„å˜ä½ã§ï¼“æ¡ä»¥ä¸Šã®è¡¨ç¤ºã¯ã—ãªã„
                                         e.Handled = true;
                                     }
                                 }
                                 if (e.Handled == false)
-                                {   // “ü—Í’l‚ªŠe’PˆÊ‚ÌãŒÀ(:23 •ªA•b:59)‚ğ’´‚¦‚Ä‚¢‚½ê‡A“ü—Í‚ğ–³Œø‚É‚·‚é
+                                {   // å…¥åŠ›å€¤ãŒå„å˜ä½ã®ä¸Šé™(æ™‚:23 åˆ†ã€ç§’:59)ã‚’è¶…ãˆã¦ã„ãŸå ´åˆã€å…¥åŠ›ã‚’ç„¡åŠ¹ã«ã™ã‚‹
                                     var after = Text.Remove(SelectionStart, SelectionLength);
                                     after = after.Insert(SelectionStart, e.KeyChar.ToString());
                                     var tmp = after.Split(new char[] { ':' });
@@ -117,7 +117,7 @@ namespace Tono.GuiWinForm
                         }
                     }
                     break;
-                case 0x3:   // Ctrl + C ƒRƒs[‚Í‹–‰Â‚·‚é
+                case 0x3:   // Ctrl + C ã‚³ãƒ”ãƒ¼ã¯è¨±å¯ã™ã‚‹
                     if (SelectionLength == 0)
                     {
                         e.Handled = true;
@@ -128,22 +128,22 @@ namespace Tono.GuiWinForm
                     _CopyStartIndex = SelectionStart;
                     _CopyText = SelectedText;
                     break;
-                case 0x16:  // Ctrl + V ƒy[ƒXƒg‚Í‹–‰Â‚·‚é
+                case 0x16:  // Ctrl + V ãƒšãƒ¼ã‚¹ãƒˆã¯è¨±å¯ã™ã‚‹
                     var str = (string)System.Windows.Forms.Clipboard.GetDataObject().GetData(typeof(string));
                     if (SelectionLength == 0 ||
                         (SelectionStart != _CopyStartIndex || SelectionLength != _CopyText.Length || _CopyText != str))
-                    {   // ‘¼‚ÌƒAƒvƒŠ(ƒƒ‚’ ‚âƒGƒNƒZƒ‹)‚©‚ç‚ÌƒRƒs[‚Íó‚¯•t‚¯‚È‚¢‚æ‚¤‚É‚·‚é
+                    {   // ä»–ã®ã‚¢ãƒ—ãƒª(ãƒ¡ãƒ¢å¸³ã‚„ã‚¨ã‚¯ã‚»ãƒ«)ã‹ã‚‰ã®ã‚³ãƒ”ãƒ¼ã¯å—ã‘ä»˜ã‘ãªã„ã‚ˆã†ã«ã™ã‚‹
                         e.Handled = true;
                     }
                     break;
-                default: e.Handled = true; break;   // ‚»‚êˆÈŠO
+                default: e.Handled = true; break;   // ãã‚Œä»¥å¤–
             }
 
             base.OnKeyPress(e);
         }
 
         /// <summary>
-        /// ƒeƒLƒXƒg‚ª•ÏX‚³‚ê‚½‚ÉŒÄ‚Ño‚³‚ê‚Ü‚·
+        /// ãƒ†ã‚­ã‚¹ãƒˆãŒå¤‰æ›´ã•ã‚ŒãŸæ™‚ã«å‘¼ã³å‡ºã•ã‚Œã¾ã™
         /// </summary>
         /// <param name="e"></param>
         protected override void OnTextChanged(EventArgs e)
@@ -160,19 +160,19 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ŠÔ‚Ìæ“¾
+        /// æ™‚é–“ã®å–å¾—
         /// </summary>
         public DateTimeEx GetTime()
         {
             return DateTimeEx.FromDHMS(0, _time.Hour, _time.Minute, _time.Second);
         }
         /// <summary>
-        /// •\¦‚Ìİ’è
+        /// è¡¨ç¤ºæ™‚åˆ»ã®è¨­å®š
         /// </summary>
-        /// <param name="value">•\¦‚·‚é</param>
+        /// <param name="value">è¡¨ç¤ºã™ã‚‹æ™‚åˆ»</param>
         public void SetTime(DateTimeEx value)
         {
-            // “ú‚ÍØ‚èÌ‚Ä‚ÅA‚Ì‚İ‚ğŠ‚·‚é
+            // æ—¥ã¯åˆ‡ã‚Šæ¨ã¦ã§ã€æ™‚åˆ»ã®ã¿ã‚’æ‰€æŒã™ã‚‹
             _time = DateTimeEx.FromDHMS(0, value.Hour, value.Minute, value.Second);
             Text = _time.Hour.ToString("00") + ":" + _time.Minute.ToString("00") + ":" + _time.Second.ToString("00");
         }

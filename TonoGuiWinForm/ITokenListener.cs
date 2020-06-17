@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 #pragma warning disable 1591, 1572, 1573
@@ -6,12 +6,12 @@
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// ITokenListener ‚ÌŠT—v‚Ìà–¾‚Å‚·B
+    /// ITokenListener ã®æ¦‚è¦ã®èª¬æ˜ã§ã™ã€‚
     /// </summary>
     public interface ITokenListener
     {
         /// <summary>
-        /// ƒgƒŠƒK[‚Æ‚È‚éƒg[ƒNƒ“‚ÌID
+        /// ãƒˆãƒªã‚¬ãƒ¼ã¨ãªã‚‹ãƒˆãƒ¼ã‚¯ãƒ³ã®ID
         /// </summary>
         NamedId TokenTriggerID
         {
@@ -20,7 +20,7 @@ namespace Tono.GuiWinForm
     }
 
     /// <summary>
-    /// •¡”ƒg[ƒNƒ“‚ğƒTƒ|[ƒg‚·‚é
+    /// è¤‡æ•°ãƒˆãƒ¼ã‚¯ãƒ³ã‚’ã‚µãƒãƒ¼ãƒˆã™ã‚‹
     /// </summary>
     public interface IMultiTokenListener
     {

@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System.Collections;
@@ -8,72 +8,72 @@ using System.Collections;
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// ‘I‘ğ‚³‚ê‚Ä‚¢‚éƒp[ƒc‚ğˆÚ“®‚³‚¹‚é
+    /// é¸æŠã•ã‚Œã¦ã„ã‚‹ãƒ‘ãƒ¼ãƒ„ã‚’ç§»å‹•ã•ã›ã‚‹
     /// </summary>
     public class FeatureMoveSelectedParts : FeatureBase, IMouseListener, IMultiTokenListener
     {
-        #region	‘®«(ƒVƒŠƒAƒ‰ƒCƒY‚·‚é)
+        #region	å±æ€§(ã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºã™ã‚‹)
         #endregion
-        #region ‘®«iƒVƒŠƒAƒ‰ƒCƒY‚µ‚È‚¢j
+        #region å±æ€§ï¼ˆã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºã—ãªã„ï¼‰
 
-        /// <summary>ƒp[ƒcˆÚ“®‚ÌƒgƒŠƒKiƒ}ƒEƒX¶ƒ{ƒ^ƒ“j</summary>
+        /// <summary>ãƒ‘ãƒ¼ãƒ„ç§»å‹•ã®ãƒˆãƒªã‚¬ï¼ˆãƒã‚¦ã‚¹å·¦ãƒœã‚¿ãƒ³ï¼‰</summary>
         protected MouseState.Buttons _trigger;
-        /// <summary>ƒp[ƒc‚Ì˜AŒgˆÚ“®‚ÌƒgƒŠƒKiƒ}ƒEƒX¶ƒ{ƒ^ƒ“+ShiftƒL[j</summary>
+        /// <summary>ãƒ‘ãƒ¼ãƒ„ã®é€£æºç§»å‹•ã®ãƒˆãƒªã‚¬ï¼ˆãƒã‚¦ã‚¹å·¦ãƒœã‚¿ãƒ³+Shiftã‚­ãƒ¼ï¼‰</summary>
         protected MouseState.Buttons _FollowTrigger;
 
-        /// <summary>‘I‘ğ’†‚Ìƒp[ƒci‹¤—L•Ï”j</summary>
+        /// <summary>é¸æŠä¸­ã®ãƒ‘ãƒ¼ãƒ„ï¼ˆå…±æœ‰å¤‰æ•°ï¼‰</summary>
         protected PartsCollectionBase _selectedParts;
 
-        /// <summary>‘I‘ğ’†‚Ìƒp[ƒc‚Æ‚¢‚¤ˆÓ–¡‚ÅƒVƒŠƒAƒ‰ƒCƒY‚·‚éID</summary>
+        /// <summary>é¸æŠä¸­ã®ãƒ‘ãƒ¼ãƒ„ã¨ã„ã†æ„å‘³ã§ã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºã™ã‚‹ID</summary>
         protected NamedId _meansSelectedParts = NamedId.FromName("FeatureDataSerializeID");
 
-        /// <summary>ƒp[ƒcˆÊ’uŠÇ—ƒIƒuƒWƒFƒNƒg</summary>
+        /// <summary>ãƒ‘ãƒ¼ãƒ„ä½ç½®ç®¡ç†ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ</summary>
         protected PartsPositionManager _pos;
 
-        /// <summary>ƒ}ƒEƒXƒ_ƒEƒ“‚ÌˆÊ’u‚ğ‹L‰¯‚·‚éBnull = ‚Ü‚¾ƒhƒ‰ƒbƒOŠJn‚µ‚Ä‚¢‚È‚¢–‚ğ¦‚·</summary>
+        /// <summary>ãƒã‚¦ã‚¹ãƒ€ã‚¦ãƒ³æ™‚ã®ä½ç½®ã‚’è¨˜æ†¶ã™ã‚‹ã€‚null = ã¾ã ãƒ‰ãƒ©ãƒƒã‚°é–‹å§‹ã—ã¦ã„ãªã„äº‹ã‚’ç¤ºã™</summary>
         protected ScreenPos _mouseDownOriginal = null;
 
-        /// <summary>ƒp[ƒc‚É‘Î‚·‚é‘€ì‚Ìƒ‚[ƒh</summary>
+        /// <summary>ãƒ‘ãƒ¼ãƒ„ã«å¯¾ã™ã‚‹æ“ä½œã®ãƒ¢ãƒ¼ãƒ‰</summary>
         protected PartsPositionManager.DevelopType _developmentMode = PartsPositionManager.DevelopType.Move;
 
         /// <summary>
-        /// ƒNƒŠƒbƒN‚µ‚½êŠ‚Ì‹L‰¯
+        /// ã‚¯ãƒªãƒƒã‚¯ã—ãŸå ´æ‰€ã®è¨˜æ†¶
         /// </summary>
         protected MouseState _clickPos;
 
-        /// <summary>ƒ}ƒEƒXƒ{ƒ^ƒ“‚ğ‰Ÿ‚µ‚½Û‚É•K—v‚Èˆ—‚ğŠJn‚·‚éƒg[ƒNƒ“</summary>
+        /// <summary>ãƒã‚¦ã‚¹ãƒœã‚¿ãƒ³ã‚’æŠ¼ã—ãŸéš›ã«å¿…è¦ãªå‡¦ç†ã‚’é–‹å§‹ã™ã‚‹ãƒˆãƒ¼ã‚¯ãƒ³</summary>
         protected NamedId[] _tokens = new NamedId[] { NamedId.FromName("MouseDownJob"), NamedId.FromName("MouseMoveJob") };
 
-        /// <summary>ƒ}ƒEƒXƒAƒbƒv‚ğ‰Ÿ‚µ‚½Û‚É•K—v‚Èˆ—‚ğŠJn‚·‚éƒg[ƒNƒ“</summary>
+        /// <summary>ãƒã‚¦ã‚¹ã‚¢ãƒƒãƒ—ã‚’æŠ¼ã—ãŸéš›ã«å¿…è¦ãªå‡¦ç†ã‚’é–‹å§‹ã™ã‚‹ãƒˆãƒ¼ã‚¯ãƒ³</summary>
         protected NamedId _tokenMouseUpJob = NamedId.FromName("MoveMouseUpJob");
 
         #endregion
 
         /// <summary>
-        /// ƒfƒtƒHƒ‹ƒgƒRƒ“ƒXƒgƒ‰ƒNƒ^
+        /// ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
         /// </summary>
         public FeatureMoveSelectedParts()
         {
-            // ƒfƒtƒHƒ‹ƒg‚Åƒhƒ‰ƒbƒOƒXƒNƒ[ƒ‹‚·‚é‚½‚ß‚ÌƒL[‚ğİ’è‚·‚é
+            // ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã§ãƒ‰ãƒ©ãƒƒã‚°ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ã™ã‚‹ãŸã‚ã®ã‚­ãƒ¼ã‚’è¨­å®šã™ã‚‹
             _trigger = new MouseState.Buttons(true, false, false, false, false);
             _FollowTrigger = new MouseState.Buttons(true, false, false, true, false);
         }
 
         /// <summary>
-        /// ‰Šú‰»i‹¤—L•Ï”‚ÌŠ„“–‚È‚Çj
+        /// åˆæœŸåŒ–ï¼ˆå…±æœ‰å¤‰æ•°ã®å‰²å½“ãªã©ï¼‰
         /// </summary>
         public override void OnInitInstance()
         {
             base.OnInitInstance();
 
-            // ƒXƒe[ƒ^ƒX“¯Šú
-            _selectedParts = (PartsCollectionBase)Share.Get("SelectedParts", typeof(PartsCollection));   // ‘I‘ğÏ‚İ‚Ìƒp[ƒcˆê——
-            _pos = (PartsPositionManager)Share.Get("MovingParts", typeof(PartsPositionManager));    // ˆÚ“®’†‚Ìƒp[ƒcˆê——
-            _clickPos = (MouseState)Share.Get("ClickPosition", typeof(MouseState));       // ˆÚ“®’†‚Ìƒp[ƒcˆê——
+            // ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹åŒæœŸ
+            _selectedParts = (PartsCollectionBase)Share.Get("SelectedParts", typeof(PartsCollection));   // é¸æŠæ¸ˆã¿ã®ãƒ‘ãƒ¼ãƒ„ä¸€è¦§
+            _pos = (PartsPositionManager)Share.Get("MovingParts", typeof(PartsPositionManager));    // ç§»å‹•ä¸­ã®ãƒ‘ãƒ¼ãƒ„ä¸€è¦§
+            _clickPos = (MouseState)Share.Get("ClickPosition", typeof(MouseState));       // ç§»å‹•ä¸­ã®ãƒ‘ãƒ¼ãƒ„ä¸€è¦§
         }
 
         /// <summary>
-        /// ƒp[ƒcˆÚ“®
+        /// ãƒ‘ãƒ¼ãƒ„ç§»å‹•
         /// </summary>
         private void onFinalizeMoveParts()
         {
@@ -81,7 +81,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒ}ƒEƒXƒ_ƒEƒ“ˆ—‚ÌÅIŒˆ’è
+        /// ãƒã‚¦ã‚¹ãƒ€ã‚¦ãƒ³å‡¦ç†ã®æœ€çµ‚æ±ºå®š
         /// </summary>
         protected virtual void _finalMouseDownPart()
         {
@@ -105,17 +105,17 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒ}ƒEƒXƒ_ƒEƒ“‚Ì‰Šú‰»ˆ—
+        /// ãƒã‚¦ã‚¹ãƒ€ã‚¦ãƒ³æ™‚ã®åˆæœŸåŒ–å‡¦ç†
         /// </summary>
         /// <param name="who"></param>
         public override void Start(NamedId who)
         {
-            // MouseDownƒg[ƒNƒ“
+            // MouseDownãƒˆãƒ¼ã‚¯ãƒ³
             if (who.Equals(_tokens[0]))
             {
-                Finalizers.Add(new FinalizeManager.Finalize(_finalMouseDownPart));  // SezeSelectedEEE‚àŒp³‚µ‚Ä‚¢‚é‚Ì‚ÅAID•sw’è
+                Finalizers.Add(new FinalizeManager.Finalize(_finalMouseDownPart));  // SezeSelectedãƒ»ãƒ»ãƒ»ã‚‚ç¶™æ‰¿ã—ã¦ã„ã‚‹ã®ã§ã€IDä¸æŒ‡å®š
             }
-            // MouseMoveƒg[ƒNƒ“
+            // MouseMoveãƒˆãƒ¼ã‚¯ãƒ³
             if (who.Equals(_tokens[1]))
             {
                 OnMouseMove(null);
@@ -123,9 +123,9 @@ namespace Tono.GuiWinForm
         }
 
 
-        #region IMouseListener ƒƒ“ƒo
+        #region IMouseListener ãƒ¡ãƒ³ãƒ
         /// <summary>
-        /// ƒ}ƒEƒXƒ_ƒEƒ“ƒCƒxƒ“ƒg‚ğƒhƒ‰ƒbƒOŠJnƒgƒŠƒK‚Æ‚µ‚ÄÀ‘•‚·‚é
+        /// ãƒã‚¦ã‚¹ãƒ€ã‚¦ãƒ³ã‚¤ãƒ™ãƒ³ãƒˆã‚’ãƒ‰ãƒ©ãƒƒã‚°é–‹å§‹ãƒˆãƒªã‚¬ã¨ã—ã¦å®Ÿè£…ã™ã‚‹
         /// </summary>
         public virtual void OnMouseDown(MouseState e)
         {
@@ -136,13 +136,13 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒ}ƒEƒXˆÚ“®‚ğƒhƒ‰ƒbƒO’†‚Æ‚µ‚ÄÀ‘•‚·‚é
+        /// ãƒã‚¦ã‚¹ç§»å‹•ã‚’ãƒ‰ãƒ©ãƒƒã‚°ä¸­ã¨ã—ã¦å®Ÿè£…ã™ã‚‹
         /// </summary>
         public virtual void OnMouseMove(MouseState e)
         {
             if (_mouseDownOriginal != null)
             {
-                // UNDO—p‚Ìƒf[ƒ^‚ğ‹L˜^‚·‚é
+                // UNDOç”¨ã®ãƒ‡ãƒ¼ã‚¿ã‚’è¨˜éŒ²ã™ã‚‹
                 if (Persister[UNDO].IsStartedChunk == false)
                 {
                     Persister[REDO].StartChunk(GetType().Name + ".OnMouseMove");
@@ -153,10 +153,10 @@ namespace Tono.GuiWinForm
                     {
                         var parts = (PartsBase)de.Key;
 
-                        // ƒp[ƒc‚ÌUNDO•Û‘¶
-                        Persister[UNDO].Save(parts, _meansSelectedParts);   // parts‚ÌƒtƒŒƒ“ƒh•Û‘¶‚ÍAFeatureDposeCheckOverlapped‚Ås‚¤
+                        // ãƒ‘ãƒ¼ãƒ„ã®UNDOä¿å­˜
+                        Persister[UNDO].Save(parts, _meansSelectedParts);   // partsã®ãƒ•ãƒ¬ãƒ³ãƒ‰ä¿å­˜ã¯ã€FeatureDposeCheckOverlappedã§è¡Œã†
 
-                        // ƒŒƒR[ƒh‚ÌUNDO•Û‘¶
+                        // ãƒ¬ã‚³ãƒ¼ãƒ‰ã®UNDOä¿å­˜
                         foreach (RecordBase rec in Link.GetRecordset(parts))
                         {
                             Persister[UNDO].Save(rec, _meansSelectedParts);
@@ -164,19 +164,19 @@ namespace Tono.GuiWinForm
                     }
                 }
 
-                // ‚·‚×‚Ä‚Ì‘I‘ğƒp[ƒc‚ÌÀ•W•ÏX—\–ñ‚ğ“ü‚ê‚é
+                // ã™ã¹ã¦ã®é¸æŠãƒ‘ãƒ¼ãƒ„ã®åº§æ¨™å¤‰æ›´äºˆç´„ã‚’å…¥ã‚Œã‚‹
                 if (e != null)
                 {
                     _pos.Develop(_mouseDownOriginal, e.Pos, _developmentMode);
                 }
 
-                // ‚·‚×‚Ä‚ÌƒtƒB[ƒ`ƒƒ[ÀsŒã‚ÉˆÚ“®‚³‚¹‚é
+                // ã™ã¹ã¦ã®ãƒ•ã‚£ãƒ¼ãƒãƒ£ãƒ¼å®Ÿè¡Œå¾Œã«ç§»å‹•ã•ã›ã‚‹
                 Finalizers.Add(new FinalizeManager.Finalize(onFinalizeMoveParts));
             }
         }
 
         /// <summary>
-        /// ƒ}ƒEƒXƒAƒbƒvƒCƒxƒ“ƒg‚ğƒhƒ‰ƒbƒOI—¹ƒgƒŠƒK‚Æ‚µ‚ÄÀ‘•‚·‚é
+        /// ãƒã‚¦ã‚¹ã‚¢ãƒƒãƒ—ã‚¤ãƒ™ãƒ³ãƒˆã‚’ãƒ‰ãƒ©ãƒƒã‚°çµ‚äº†ãƒˆãƒªã‚¬ã¨ã—ã¦å®Ÿè£…ã™ã‚‹
         /// </summary>
         public virtual void OnMouseUp(MouseState e)
         {
@@ -184,7 +184,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒ}ƒEƒXƒAƒbƒv‚ÌÅIˆ—
+        /// ãƒã‚¦ã‚¹ã‚¢ãƒƒãƒ—ã®æœ€çµ‚å‡¦ç†
         /// </summary>
         protected virtual void OnFinalizeMouseUpJob()
         {
@@ -192,7 +192,7 @@ namespace Tono.GuiWinForm
             {
                 var movedCount = 0;
 
-                // ˆÚ“®ƒp[ƒc‚ğƒf[ƒ^‚É”½‰f‚³‚¹‚é
+                // ç§»å‹•ãƒ‘ãƒ¼ãƒ„ã‚’ãƒ‡ãƒ¼ã‚¿ã«åæ˜ ã•ã›ã‚‹
                 foreach (DictionaryEntry de in _pos)
                 {
                     var parts = (PartsBase)de.Key;
@@ -203,13 +203,13 @@ namespace Tono.GuiWinForm
                         {
                             Persister[REDO].Save(_selectedParts, _meansSelectedParts);
                         }
-                        // ƒf[ƒ^XV
-                        Link.Equalization(parts, false);    // Data`Parts‚Ìƒf[ƒ^˜A“®
+                        // ãƒ‡ãƒ¼ã‚¿æ›´æ–°
+                        Link.Equalization(parts, false);    // Dataï½Partsã®ãƒ‡ãƒ¼ã‚¿é€£å‹•
 
-                        // REDO‰i‘±‰»iƒp[ƒcj
+                        // REDOæ°¸ç¶šåŒ–ï¼ˆãƒ‘ãƒ¼ãƒ„ï¼‰
                         //savePartsWithFriend(Persister[REDO], parts, new Hashtable());
 
-                        // REDO‰i‘±‰»iƒŒƒR[ƒhj
+                        // REDOæ°¸ç¶šåŒ–ï¼ˆãƒ¬ã‚³ãƒ¼ãƒ‰ï¼‰
                         foreach (RecordBase rb in Link.GetRecordset(parts))
                         {
                             Persister[REDO].Save(rb, _meansSelectedParts);
@@ -218,11 +218,11 @@ namespace Tono.GuiWinForm
                     }
                 }
 
-                // ˆÚ“®I—¹
+                // ç§»å‹•çµ‚äº†
                 _mouseDownOriginal = null;
                 _pos.Clear();
 
-                Persister[REDO].EndChunk(); // REDO‚ğæ‚És‚¤‚±‚Æ‚Íd—v
+                Persister[REDO].EndChunk(); // REDOã‚’å…ˆã«è¡Œã†ã“ã¨ã¯é‡è¦
                 Persister[UNDO].EndChunk();
                 Pane.Invalidate(Pane.GetPaneRect());
             }
@@ -232,7 +232,7 @@ namespace Tono.GuiWinForm
         {
         }
         #endregion
-        #region IMultiTokenListener ƒƒ“ƒo
+        #region IMultiTokenListener ãƒ¡ãƒ³ãƒ
 
         public NamedId[] MultiTokenTriggerID => _tokens;
 

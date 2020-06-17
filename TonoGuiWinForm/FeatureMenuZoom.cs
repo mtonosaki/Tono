@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 #pragma warning disable 1591, 1572, 1573
@@ -6,25 +6,25 @@
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// FeatureMenuZoom ‚ÌŠT—v‚Ìà–¾‚Å‚·B
+    /// FeatureMenuZoom ã®æ¦‚è¦ã®èª¬æ˜ã§ã™ã€‚
     /// </summary>
     public class FeatureMenuZoom : FeatureBase
     {
-        #region ‘®«iƒVƒŠƒAƒ‰ƒCƒY‚·‚éj
+        #region å±æ€§ï¼ˆã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºã™ã‚‹ï¼‰
         #endregion
-        #region ‘®«iƒVƒŠƒAƒ‰ƒCƒY‚µ‚È‚¢
+        #region å±æ€§ï¼ˆã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºã—ãªã„
 
-        /// <summary>ƒY[ƒ€’l‚ğŠi”[‚·‚é</summary>
+        /// <summary>ã‚ºãƒ¼ãƒ å€¤ã‚’æ ¼ç´ã™ã‚‹</summary>
         private double zoom = 0.0;
 
-        /// <summary>ƒXƒNƒ[ƒ‹EƒY[ƒ€ƒCƒxƒ“ƒg‚ğóM‚·‚éƒy[ƒ“</summary>
+        /// <summary>ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ãƒ»ã‚ºãƒ¼ãƒ ã‚¤ãƒ™ãƒ³ãƒˆã‚’å—ä¿¡ã™ã‚‹ãƒšãƒ¼ãƒ³</summary>
         private IRichPane[] _tarRps = null;
 
 
         #endregion
 
         /// <summary>
-        /// ƒpƒ‰ƒ[ƒ^‚ğæ“¾‚·‚é
+        /// ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã‚’å–å¾—ã™ã‚‹
         /// </summary>
         public override void ParseParameter(string param)
         {
@@ -37,35 +37,35 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// w’è‚³‚ê‚½’l‚ÉƒY[ƒ€‚·‚é
+        /// æŒ‡å®šã•ã‚ŒãŸå€¤ã«ã‚ºãƒ¼ãƒ ã™ã‚‹
         /// </summary>
         /// <param name="who"></param>
         public override void Start(NamedId who)
         {
-            // ‘I‘ğƒy[ƒ“‚Ì•`‰æ—Ìˆæ‚Ì’†S‚ğƒY[ƒ€‚ÌƒZƒ“ƒ^[‚Ìİ’è
+            // é¸æŠãƒšãƒ¼ãƒ³ã®æç”»é ˜åŸŸã®ä¸­å¿ƒã‚’ã‚ºãƒ¼ãƒ ã®ã‚»ãƒ³ã‚¿ãƒ¼ã®è¨­å®š
             var _posDown = new ScreenPos
             {
-                X = _tarRps[0].GetPaneRect().LT.X + (_tarRps[0].GetPaneRect().RB.X - _tarRps[0].GetPaneRect().LT.X) / 2,       //ƒy[ƒ“‚ÌXÀ•W‚Ì’†S
-                Y = _tarRps[0].GetPaneRect().LT.Y + (_tarRps[0].GetPaneRect().RB.Y - _tarRps[0].GetPaneRect().LT.Y) / 2       //ƒy[ƒ“‚ÌYÀ•W‚Ì’†S
+                X = _tarRps[0].GetPaneRect().LT.X + (_tarRps[0].GetPaneRect().RB.X - _tarRps[0].GetPaneRect().LT.X) / 2,       //ãƒšãƒ¼ãƒ³ã®Xåº§æ¨™ã®ä¸­å¿ƒ
+                Y = _tarRps[0].GetPaneRect().LT.Y + (_tarRps[0].GetPaneRect().RB.Y - _tarRps[0].GetPaneRect().LT.Y) / 2       //ãƒšãƒ¼ãƒ³ã®Yåº§æ¨™ã®ä¸­å¿ƒ
             };
-            var _scrollDown = (ScreenPos)Pane.Scroll.Clone();       //ƒY[ƒ€‘O‚ÌƒXƒNƒ[ƒ‹’l
-            var _zoomDown = (XyBase)Pane.Zoom.Clone();                 //ƒY[ƒ€‘O‚ÌƒY[ƒ€’l
-                                                                       // ‰æ–Ê‚ÌŠg‘å/k¬
-            var intZ = (int)(zoom * 100);                           //ƒY[ƒ€’l‚Ìæ“¾
-            Pane.Zoom = XyBase.FromInt(1000, 1000);                    // ƒY[ƒ€’l‚Ì‰Šú‰»
+            var _scrollDown = (ScreenPos)Pane.Scroll.Clone();       //ã‚ºãƒ¼ãƒ å‰ã®ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«å€¤
+            var _zoomDown = (XyBase)Pane.Zoom.Clone();                 //ã‚ºãƒ¼ãƒ å‰ã®ã‚ºãƒ¼ãƒ å€¤
+                                                                       // ç”»é¢ã®æ‹¡å¤§/ç¸®å°
+            var intZ = (int)(zoom * 100);                           //ã‚ºãƒ¼ãƒ å€¤ã®å–å¾—
+            Pane.Zoom = XyBase.FromInt(1000, 1000);                    // ã‚ºãƒ¼ãƒ å€¤ã®åˆæœŸåŒ–
             var zoomX = Pane.Zoom.X * intZ / 100;
             var zoomY = Pane.Zoom.Y * intZ / 100;
-            var zoomNow = XyBase.FromInt(zoomX, zoomY);                // ƒY[ƒ€’l‚ÌZo
-            Pane.Zoom = zoomNow;                                    // ƒY[ƒ€’l‚Ì”½‰f
+            var zoomNow = XyBase.FromInt(zoomX, zoomY);                // ã‚ºãƒ¼ãƒ å€¤ã®ç®—å‡º
+            Pane.Zoom = zoomNow;                                    // ã‚ºãƒ¼ãƒ å€¤ã®åæ˜ 
 
-            // ƒNƒŠƒbƒN‚µ‚½ˆÊ’u‚ğŠî€‚É‚µ‚ÄƒY[ƒ€‚·‚é‚æ‚¤‚É‰æ–Ê‚ğƒXƒNƒ[ƒ‹‚·‚éB
-            var ZoomRatioX = (double)zoomNow.X / _zoomDown.X;    // X•ûŒü‚ÌƒY[ƒ€—¦‚ÌZo
-            var ZoomRatioY = (double)zoomNow.Y / _zoomDown.Y;    // Y•ûŒü‚ÌƒY[ƒ€—¦‚ÌZo
+            // ã‚¯ãƒªãƒƒã‚¯ã—ãŸä½ç½®ã‚’åŸºæº–ã«ã—ã¦ã‚ºãƒ¼ãƒ ã™ã‚‹ã‚ˆã†ã«ç”»é¢ã‚’ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ã™ã‚‹ã€‚
+            var ZoomRatioX = (double)zoomNow.X / _zoomDown.X;    // Xæ–¹å‘ã®ã‚ºãƒ¼ãƒ ç‡ã®ç®—å‡º
+            var ZoomRatioY = (double)zoomNow.Y / _zoomDown.Y;    // Yæ–¹å‘ã®ã‚ºãƒ¼ãƒ ç‡ã®ç®—å‡º
 
             var beforeDownPos = _posDown - _scrollDown - _tarRps[0].GetPaneRect().LT;    // 
             var afterDownPos = ScreenPos.FromInt((int)(ZoomRatioX * beforeDownPos.X), (int)(ZoomRatioY * beforeDownPos.Y));
 
-            Pane.Scroll = _scrollDown - (afterDownPos - beforeDownPos);     //ƒXƒNƒ[ƒ‹’l‚Ì”½‰f
+            Pane.Scroll = _scrollDown - (afterDownPos - beforeDownPos);     //ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«å€¤ã®åæ˜ 
 
             Pane.Invalidate(null);
         }

@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System;
@@ -9,7 +9,7 @@ using System.Collections;
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// vPeriod ‚ÌŠT—v‚Ìà–¾‚Å‚·B
+    /// vPeriod ã®æ¦‚è¦ã®èª¬æ˜ã§ã™ã€‚
     /// </summary>
     [Serializable]
     public class TimeSpanEx : ISpace, ITimeSpan
@@ -27,7 +27,7 @@ namespace Tono.GuiWinForm
         #endregion
 
         /// <summary>
-        /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+        /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
         /// </summary>
 
         public TimeSpanEx()
@@ -35,26 +35,26 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ’†S“_‚Ì
+        /// ä¸­å¿ƒç‚¹ã®æ™‚åˆ»
         /// </summary>
         public DateTimeEx Middle => (_start + _end) / 2;
 
         /// <summary>
-        /// ’†S“_‚Ì
+        /// ä¸­å¿ƒç‚¹ã®æ™‚åˆ»
         /// </summary>
-        /// <param name="ts">ŠÔ</param>
-        /// <returns>’†S“_‚Ì</returns>
+        /// <param name="ts">æ™‚é–“</param>
+        /// <returns>ä¸­å¿ƒç‚¹ã®æ™‚åˆ»</returns>
         public static DateTimeEx GetMiddle(ITimeSpan ts)
         {
             return (ts.Start + ts.End) / 2;
         }
 
         /// <summary>
-        /// “ñ‚Â‚Ì‚ğw’è‚µ‚ÄƒCƒ“ƒXƒ^ƒ“ƒX‚ğ¶¬‚·‚é
+        /// äºŒã¤ã®æ™‚åˆ»ã‚’æŒ‡å®šã—ã¦ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ç”Ÿæˆã™ã‚‹
         /// </summary>
-        /// <param name="start">ŠJn</param>
-        /// <param name="end">I—¹</param>
-        /// <returns>V‚µ‚¢ƒCƒ“ƒXƒ^ƒ“ƒX</returns>
+        /// <param name="start">é–‹å§‹æ™‚åˆ»</param>
+        /// <param name="end">çµ‚äº†æ™‚åˆ»</param>
+        /// <returns>æ–°ã—ã„ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹</returns>
 
         public static TimeSpanEx FromTime(DateTimeEx start, DateTimeEx end)
         {
@@ -89,13 +89,13 @@ namespace Tono.GuiWinForm
             return _start.ToString() + " - " + _end.ToString();
         }
 
-        #region ISpace ƒƒ“ƒo
+        #region ISpace ãƒ¡ãƒ³ãƒ
 
         /// <summary>
-        /// w’è‚ªŠÔ”ÍˆÍ‚É‚ ‚é‚©‚Ç‚¤‚©’²¸‚·‚é
+        /// æŒ‡å®šæ™‚åˆ»ãŒæ™‚é–“ç¯„å›²ã«ã‚ã‚‹ã‹ã©ã†ã‹èª¿æŸ»ã™ã‚‹
         /// </summary>
-        /// <param name="value">uTimeŒ^‚Ì</param>
-        /// <returns>true = ”ÍˆÍ“à / false = ”ÍˆÍŠO</returns>
+        /// <param name="value">uTimeå‹ã®æ™‚åˆ»</param>
+        /// <returns>true = ç¯„å›²å†… / false = ç¯„å›²å¤–</returns>
         public bool IsIn(object value)
         {
             if (value is DateTimeEx t)
@@ -115,9 +115,9 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// w’è•ªAŠÔ‚ğƒXƒ‰ƒCƒh‚·‚é
+        /// æŒ‡å®šæ™‚åˆ»åˆ†ã€æ™‚é–“ã‚’ã‚¹ãƒ©ã‚¤ãƒ‰ã™ã‚‹
         /// </summary>
-        /// <param name="value">uTimeŒ^‚ÌƒXƒ‰ƒCƒh</param>
+        /// <param name="value">uTimeå‹ã®ã‚¹ãƒ©ã‚¤ãƒ‰</param>
 
         public void Transfer(object value)
         {
@@ -129,9 +129,9 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// w’è•ªAŠÔ‚ğŠg‘å‚·‚éB
+        /// æŒ‡å®šæ™‚åˆ»åˆ†ã€æ™‚é–“ã‚’æ‹¡å¤§ã™ã‚‹ã€‚
         /// </summary>
-        /// <param name="value">uTimeŒ^‚ÌŠg‘å</param>
+        /// <param name="value">uTimeå‹ã®æ‹¡å¤§</param>
 
         public void Inflate(object value)
         {
@@ -143,9 +143,9 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// w’è•ªAŠÔ‚ğk¬‚·‚éB
+        /// æŒ‡å®šæ™‚åˆ»åˆ†ã€æ™‚é–“ã‚’ç¸®å°ã™ã‚‹ã€‚
         /// </summary>
-        /// <param name="value">uTimeŒ^‚Ìk¬</param>
+        /// <param name="value">uTimeå‹ã®ç¸®å°</param>
 
         public void Deflate(object value)
         {
@@ -157,7 +157,7 @@ namespace Tono.GuiWinForm
         }
 
         #endregion
-        #region ITimeSpan ƒƒ“ƒo
+        #region ITimeSpan ãƒ¡ãƒ³ãƒ
 
         public DateTimeEx Start
         {
@@ -180,10 +180,10 @@ namespace Tono.GuiWinForm
         #endregion
 
         /// <summary>
-        /// ITimeSpanŒ^‚ğ‚ÂƒRƒŒƒNƒVƒ‡ƒ“‚©‚çAÅ¬’l‚ğ‚ÂƒCƒ“ƒXƒ^ƒ“ƒX‚ğæ“¾‚·‚é
+        /// ITimeSpanå‹ã‚’æŒã¤ã‚³ãƒ¬ã‚¯ã‚·ãƒ§ãƒ³ã‹ã‚‰ã€æœ€å°å€¤ã‚’æŒã¤ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’å–å¾—ã™ã‚‹
         /// </summary>
-        /// <param name="recs">ƒRƒŒƒNƒVƒ‡ƒ“</param>
-        /// <returns>Å¬’l‚ğ‚ÂƒCƒ“ƒXƒ^ƒ“ƒX</returns>
+        /// <param name="recs">ã‚³ãƒ¬ã‚¯ã‚·ãƒ§ãƒ³</param>
+        /// <returns>æœ€å°å€¤ã‚’æŒã¤ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹</returns>
         public static object GetTimeMin(ICollection/*<ITimeSpan>*/ recs)
         {
             var tmin = DateTimeEx.MaxValue;
@@ -203,11 +203,11 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ITimeSpanŒ^‚ğ‚ÂƒRƒŒƒNƒVƒ‡ƒ“‚©‚çAÅ¬’l‚ğ‚ÂƒCƒ“ƒXƒ^ƒ“ƒX‚ğæ“¾‚·‚é
+        /// ITimeSpanå‹ã‚’æŒã¤ã‚³ãƒ¬ã‚¯ã‚·ãƒ§ãƒ³ã‹ã‚‰ã€æœ€å°å€¤ã‚’æŒã¤ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’å–å¾—ã™ã‚‹
         /// </summary>
-        /// <param name="s1">’l‚P</param>
-        /// <param name="s2">’l‚Q</param>
-        /// <returns>Å¬’l‚ğ‚ÂƒCƒ“ƒXƒ^ƒ“ƒX</returns>
+        /// <param name="s1">å€¤ï¼‘</param>
+        /// <param name="s2">å€¤ï¼’</param>
+        /// <returns>æœ€å°å€¤ã‚’æŒã¤ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹</returns>
         public static object GetTimeMin(ITimeSpan s1, ITimeSpan s2)
         {
             if (s2.Start < s1.Start)
@@ -221,10 +221,10 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ITimeSpanŒ^‚ğ‚ÂƒRƒŒƒNƒVƒ‡ƒ“‚©‚çAÅ‘å’l‚ğ‚ÂƒCƒ“ƒXƒ^ƒ“ƒX‚ğæ“¾‚·‚é
+        /// ITimeSpanå‹ã‚’æŒã¤ã‚³ãƒ¬ã‚¯ã‚·ãƒ§ãƒ³ã‹ã‚‰ã€æœ€å¤§å€¤ã‚’æŒã¤ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’å–å¾—ã™ã‚‹
         /// </summary>
-        /// <param name="recs">ƒRƒŒƒNƒVƒ‡ƒ“</param>
-        /// <returns>Å‘å’l‚ğ‚ÂƒCƒ“ƒXƒ^ƒ“ƒX</returns>
+        /// <param name="recs">ã‚³ãƒ¬ã‚¯ã‚·ãƒ§ãƒ³</param>
+        /// <returns>æœ€å¤§å€¤ã‚’æŒã¤ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹</returns>
         public static object GetTimeMax(ICollection/*<ITimeSpan>*/ recs)
         {
             var tmax = DateTimeEx.MinValue;
@@ -243,11 +243,11 @@ namespace Tono.GuiWinForm
             return ret;
         }
         /// <summary>
-        /// ITimeSpanŒ^‚ğ‚ÂƒRƒŒƒNƒVƒ‡ƒ“‚©‚çAÅ‘å’l‚ğ‚ÂƒCƒ“ƒXƒ^ƒ“ƒX‚ğæ“¾‚·‚é
+        /// ITimeSpanå‹ã‚’æŒã¤ã‚³ãƒ¬ã‚¯ã‚·ãƒ§ãƒ³ã‹ã‚‰ã€æœ€å¤§å€¤ã‚’æŒã¤ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’å–å¾—ã™ã‚‹
         /// </summary>
-        /// <param name="s1">’l‚P</param>
-        /// <param name="s2">’l‚Q</param>
-        /// <returns>Å¬’l‚ğ‚ÂƒCƒ“ƒXƒ^ƒ“ƒX</returns>
+        /// <param name="s1">å€¤ï¼‘</param>
+        /// <param name="s2">å€¤ï¼’</param>
+        /// <returns>æœ€å°å€¤ã‚’æŒã¤ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹</returns>
         public static object GetTimeMax(ITimeSpan s1, ITimeSpan s2)
         {
             if (s1.End > s2.End)

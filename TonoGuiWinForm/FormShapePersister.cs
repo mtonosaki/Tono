@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System;
@@ -12,17 +12,17 @@ using System.Windows.Forms;
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// FormShapePersister ‚ÌŠT—v‚Ìà–¾‚Å‚·B
-    /// ƒtƒH[ƒ€‚ÌŒ`ó‚ğƒŒƒWƒXƒgƒŠ‚É•Û‘¶‚·‚éd‘g‚İ
+    /// FormShapePersister ã®æ¦‚è¦ã®èª¬æ˜ã§ã™ã€‚
+    /// ãƒ•ã‚©ãƒ¼ãƒ ã®å½¢çŠ¶ã‚’ãƒ¬ã‚¸ã‚¹ãƒˆãƒªã«ä¿å­˜ã™ã‚‹ä»•çµ„ã¿
     /// </summary>
     public class FormShapePersister : IDisposable
     {
         /// <summary>
-        /// Œ^‚É‰‚¶‚½’l•Û‘¶
+        /// å‹ã«å¿œã˜ãŸå€¤ä¿å­˜
         /// </summary>
-        /// <param name="c">ƒRƒ“ƒgƒ[ƒ‹</param>
-        /// <param name="key">ƒL[</param>
-        /// <param name="isSave">true=•Û‘¶ / false=ƒ[ƒh</param>
+        /// <param name="c">ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«</param>
+        /// <param name="key">ã‚­ãƒ¼</param>
+        /// <param name="isSave">true=ä¿å­˜ / false=ãƒ­ãƒ¼ãƒ‰</param>
         private void persistControl(object c, string key, bool isSave)
         {
             if (c is CheckBox)
@@ -43,7 +43,7 @@ namespace Tono.GuiWinForm
             }
         }
 
-        #region “à•”ˆ—
+        #region å†…éƒ¨å‡¦ç†
         private Form _parent = null;
         private readonly EventHandler _ehl;
         private readonly CancelEventHandler _ehc;
@@ -51,12 +51,12 @@ namespace Tono.GuiWinForm
         private bool _isChild = true;
 
         /// <summary>
-        /// w’èƒRƒ“ƒgƒ[ƒ‹‚ª‘®‚·‚épropertyName–¼‚ğ‚ÂƒpƒuƒŠƒbƒNƒvƒƒpƒeƒB‚ğ‰i‘±‰»‚“
+        /// æŒ‡å®šã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ãŒå±ã™ã‚‹propertyNameåã‚’æŒã¤ãƒ‘ãƒ–ãƒªãƒƒã‚¯ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ã‚’æ°¸ç¶šåŒ–ï½“
         /// </summary>
-        /// <param name="control">ƒRƒ“ƒgƒ[ƒ‹</param>
-        /// <param name="propertyName">ƒvƒƒpƒeƒB–¼</param>
-        /// <param name="key">ƒRƒ“ƒgƒ[ƒ‹‚Ü‚Å‚ÌƒŒƒWƒXƒgƒŠƒL[</param>
-        /// <param name="isSave">true=•Û‘¶ / false=“Ç‚İ‚İ</param>
+        /// <param name="control">ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«</param>
+        /// <param name="propertyName">ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£å</param>
+        /// <param name="key">ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã¾ã§ã®ãƒ¬ã‚¸ã‚¹ãƒˆãƒªã‚­ãƒ¼</param>
+        /// <param name="isSave">true=ä¿å­˜ / false=èª­ã¿è¾¼ã¿</param>
         private void _persist(object control, string propertyName, string key, bool isSave)
         {
             var pi = control.GetType().GetProperty(propertyName);
@@ -81,7 +81,7 @@ namespace Tono.GuiWinForm
                         }
                         catch (ArgumentException)
                         {
-                            // EnumŒ^‚Åƒ`ƒƒƒŒƒ“ƒW
+                            // Enumå‹ã§ãƒãƒ£ãƒ¬ãƒ³ã‚¸
                             var eval = Enum.Parse(pi.PropertyType, regVal.ToString());
                             pi.SetValue(control, eval, Array.Empty<object>());
                         }
@@ -92,7 +92,7 @@ namespace Tono.GuiWinForm
                         if (_errMes.Contains(k) == false)
                         {
                             _errMes[k] = true;
-                            System.Diagnostics.Debug.WriteLine("uFormShapePersisterƒ[ƒh’l“K—pˆÙíG" + pi.PropertyType.Name + "Œ^‚Ì" + val.ToString() + "’l‚Í•œŒ³‚Å‚«‚È‚¢");
+                            System.Diagnostics.Debug.WriteLine("uFormShapePersisterãƒ­ãƒ¼ãƒ‰å€¤é©ç”¨ç•°å¸¸ï¼›" + pi.PropertyType.Name + "å‹ã®" + val.ToString() + "å€¤ã¯å¾©å…ƒã§ããªã„");
                         }
                     }
                 }
@@ -100,10 +100,10 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒŒƒWƒXƒgƒŠ‚ÌƒL[–¼Ì‚ğ¶¬‚·‚é
+        /// ãƒ¬ã‚¸ã‚¹ãƒˆãƒªã®ã‚­ãƒ¼åç§°ã‚’ç”Ÿæˆã™ã‚‹
         /// </summary>
-        /// <param name="name">–¼Ì•”</param>
-        /// <returns>ƒL[•¶š—ñ</returns>
+        /// <param name="name">åç§°éƒ¨</param>
+        /// <returns>ã‚­ãƒ¼æ–‡å­—åˆ—</returns>
         private string makeKey(string name)
         {
             System.Diagnostics.Debug.Assert(_parent != null);
@@ -111,9 +111,9 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// —Bˆê‚ÌƒRƒ“ƒXƒgƒ‰ƒNƒ^
+        /// å”¯ä¸€ã®ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
         /// </summary>
-        /// <param name="parent">‘ÎÛ‚Æ‚·‚éƒtƒH[ƒ€</param>
+        /// <param name="parent">å¯¾è±¡ã¨ã™ã‚‹ãƒ•ã‚©ãƒ¼ãƒ </param>
         public FormShapePersister(Form parent)
         {
             _parent = parent;
@@ -122,14 +122,14 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// qƒRƒ“ƒgƒ[ƒ‹‚ğ‰i‘±‰»‚·‚é‚©H
+        /// å­ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã‚’æ°¸ç¶šåŒ–ã™ã‚‹ã‹ï¼Ÿ
         /// </summary>
         public bool Children
         {
             set => _isChild = value;
         }
 
-        #region IDisposable ƒƒ“ƒo
+        #region IDisposable ãƒ¡ãƒ³ãƒ
 
         public void Dispose()
         {
@@ -144,7 +144,7 @@ namespace Tono.GuiWinForm
         #endregion
 
         /// <summary>
-        /// ƒXƒŒƒbƒh‚ÅƒtƒH[ƒ€•œŒ³‚ğs‚¤
+        /// ã‚¹ãƒ¬ãƒƒãƒ‰ã§ãƒ•ã‚©ãƒ¼ãƒ å¾©å…ƒã‚’è¡Œã†
         /// </summary>
         private void loading()
         {
@@ -176,7 +176,7 @@ namespace Tono.GuiWinForm
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine("uFormShapePersister¸”sG" + ex.Message);
+                System.Diagnostics.Debug.WriteLine("uFormShapePersisterå¤±æ•—ï¼›" + ex.Message);
             }
             finally
             {
@@ -185,7 +185,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// “Ç‚İ‚İŒã‚ÌAŒ`ó‹L‰¯
+        /// èª­ã¿è¾¼ã¿å¾Œã®ã€å½¢çŠ¶è¨˜æ†¶
         /// </summary>
         private void _parent_Load(object sender, EventArgs e)
         {
@@ -204,7 +204,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒtƒH[ƒ€‚ÌŒ`‚ª•Ï‚í‚Á‚½Œã‚ÉƒR[ƒ‹‚³‚ê‚é
+        /// ãƒ•ã‚©ãƒ¼ãƒ ã®å½¢ãŒå¤‰ã‚ã£ãŸå¾Œã«ã‚³ãƒ¼ãƒ«ã•ã‚Œã‚‹
         /// </summary>
         public event EventHandler Loaded;
 
@@ -217,7 +217,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// •Â‚¶‚é‚Æ‚«‚Ì•Û‘¶
+        /// é–‰ã˜ã‚‹ã¨ãã®ä¿å­˜
         /// </summary>
         private void _parent_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
@@ -246,12 +246,12 @@ namespace Tono.GuiWinForm
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine("uFormShapePersister¸”sG" + ex.Message);
+                System.Diagnostics.Debug.WriteLine("uFormShapePersisterå¤±æ•—ï¼›" + ex.Message);
             }
         }
 
         /// <summary>
-        /// ƒCƒ“ƒ^[ƒtƒF[ƒX‚ğŒŸõ‚·‚éŠÖ”
+        /// ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ãƒ¼ã‚¹ã‚’æ¤œç´¢ã™ã‚‹é–¢æ•°
         /// </summary>
         private bool _filter(Type t, object p)
         {
@@ -263,7 +263,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒRƒ“ƒgƒ[ƒ‹ŠK‘w‚ğÄ‹AƒXƒLƒƒƒ“‚µ‚È‚ª‚çˆ—‚·‚é
+        /// ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«éšå±¤ã‚’å†å¸°ã‚¹ã‚­ãƒ£ãƒ³ã—ãªãŒã‚‰å‡¦ç†ã™ã‚‹
         /// </summary>
         /// <param name="c"></param>
         /// <param name="builtKey"></param>
@@ -276,7 +276,7 @@ namespace Tono.GuiWinForm
                 return;
             }
 
-            // qƒRƒ“ƒgƒ[ƒ‹‚Ìƒ‹[ƒv
+            // å­ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã®ãƒ«ãƒ¼ãƒ—
             var pis = c.GetType().GetProperties();
             foreach (var pi in pis)
             {

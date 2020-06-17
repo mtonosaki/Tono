@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 #pragma warning disable 1591, 1572, 1573
@@ -6,13 +6,13 @@
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// •¶š—ñ‚ÅA•Ï”‚Æ’è”‚Ì—¼•û‚ª•\Œ»‚Å‚«‚éƒNƒ‰ƒX
-    /// •Ï”‚ÍAToString‚É•]‰¿‚³‚ê‚é
+    /// æ–‡å­—åˆ—ã§ã€å¤‰æ•°ã¨å®šæ•°ã®ä¸¡æ–¹ãŒè¡¨ç¾ã§ãã‚‹ã‚¯ãƒ©ã‚¹
+    /// å¤‰æ•°ã¯ã€ToStringæ™‚ã«è©•ä¾¡ã•ã‚Œã‚‹
     /// </summary>
     public class StringVariableFormat
     {
         /// <summary>
-        /// •Ï”‚Ìê‡‚Ì•¶š—ñ¶¬
+        /// å¤‰æ•°ã®å ´åˆã®æ–‡å­—åˆ—ç”Ÿæˆ
         /// </summary>
         /// <param name="key"></param>
         /// <returns></returns>
@@ -22,7 +22,7 @@ namespace Tono.GuiWinForm
         private readonly VariableText _val;
 
         /// <summary>
-        /// ’è”‚Å‰Šú‰»
+        /// å®šæ•°ã§åˆæœŸåŒ–
         /// </summary>
         /// <param name="fix"></param>
         public StringVariableFormat(string fix)
@@ -32,10 +32,10 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// •Ï”‚Å‰Šú‰»
+        /// å¤‰æ•°ã§åˆæœŸåŒ–
         /// </summary>
-        /// <param name="key">•Ï”‚ğ¶¬‚·‚é‚½‚ß‚ÌƒL[</param>
-        /// <param name="val">•Ï”•¶š—ñ¶¬—p‚ÌŠÖ”</param>
+        /// <param name="key">å¤‰æ•°ã‚’ç”Ÿæˆã™ã‚‹ãŸã‚ã®ã‚­ãƒ¼</param>
+        /// <param name="val">å¤‰æ•°æ–‡å­—åˆ—ç”Ÿæˆç”¨ã®é–¢æ•°</param>
         public StringVariableFormat(string key, VariableText val)
         {
             _key = key;
@@ -43,7 +43,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ’è”‚©•Ï”‚Å•¶š—ñ‚ğ•Ô‚·
+        /// å®šæ•°ã‹å¤‰æ•°ã§æ–‡å­—åˆ—ã‚’è¿”ã™
         /// </summary>
         /// <returns></returns>
         public override string ToString()

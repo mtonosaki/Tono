@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System;
@@ -8,7 +8,7 @@ using System;
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// tc—áŠO‘S”Ê
+    /// tcä¾‹å¤–å…¨èˆ¬
     /// </summary>
     public class CommandException : Exception
     {
@@ -23,7 +23,7 @@ namespace Tono.GuiWinForm
     }
 
     /// <summary>
-    /// Ä¶‚Ì—áŠO
+    /// å†ç”Ÿæ™‚ã®ä¾‹å¤–
     /// </summary>
     public class CommandPlayException : CommandException
     {

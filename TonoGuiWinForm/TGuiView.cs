@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System;
@@ -12,68 +12,68 @@ using System.Windows.Forms;
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// ƒtƒB[ƒ`ƒƒ[‹ì“®‚ÌŠî–{ƒRƒ“ƒgƒ[ƒ‹
-    /// ŠeíƒCƒxƒ“ƒg‚ğƒtƒB[ƒ`ƒƒ[ƒNƒ‰ƒX‚É“]‘—‚Å‚«‚éHMI
+    /// ãƒ•ã‚£ãƒ¼ãƒãƒ£ãƒ¼é§†å‹•ã®åŸºæœ¬ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«
+    /// å„ç¨®ã‚¤ãƒ™ãƒ³ãƒˆã‚’ãƒ•ã‚£ãƒ¼ãƒãƒ£ãƒ¼ã‚¯ãƒ©ã‚¹ã«è»¢é€ã§ãã‚‹HMI
     /// </summary>
     public partial class TGuiView : ContainerControl, IDisposable, IRichPane, IRichPaneSync, IKeyListener, IControlUI
     {
-        #region ‘®«iƒVƒŠƒAƒ‰ƒCƒY‚·‚éj
+        #region å±æ€§ï¼ˆã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºã™ã‚‹ï¼‰
 
-        /// <summary>ƒ‹[ƒgƒtƒB[ƒ`ƒƒ[ƒOƒ‹[ƒv</summary>
+        /// <summary>ãƒ«ãƒ¼ãƒˆãƒ•ã‚£ãƒ¼ãƒãƒ£ãƒ¼ã‚°ãƒ«ãƒ¼ãƒ—</summary>
         private FeatureGroupRoot _rootGroup = null;
 
-        /// <summary>ƒY[ƒ€”{—¦ * 1000[%]</summary>
+        /// <summary>ã‚ºãƒ¼ãƒ å€ç‡ * 1000[%]</summary>
         private XyBase _zoom = XyBase.FromInt(1000, 1000);
 
-        /// <summary>ƒXƒNƒ[ƒ‹—Ê</summary>
+        /// <summary>ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«é‡</summary>
         private ScreenPos _scroll = ScreenPos.FromInt(0, 0);
 
-        /// <summary>ƒp[ƒc‚ª“o˜^‚³‚ê‚Ä‚¢‚È‚¢ƒŠƒbƒ`ƒy[ƒ“‚Ì”wŒi‚ğ“h‚è‚Â‚Ô‚·‚©‚Ç‚¤‚©Btrue‚É‚·‚é‚Æƒ`ƒ‰ƒcƒL‚ÌŒ´ˆö‚É‚È‚é‚©‚à</summary>
+        /// <summary>ãƒ‘ãƒ¼ãƒ„ãŒç™»éŒ²ã•ã‚Œã¦ã„ãªã„ãƒªãƒƒãƒãƒšãƒ¼ãƒ³ã®èƒŒæ™¯ã‚’å¡—ã‚Šã¤ã¶ã™ã‹ã©ã†ã‹ã€‚trueã«ã™ã‚‹ã¨ãƒãƒ©ãƒ„ã‚­ã®åŸå› ã«ãªã‚‹ã‹ã‚‚</summary>
         private bool _isDrawEmptyBackground = true;
 
 
         #endregion
-        #region ‘®«iƒVƒŠƒAƒ‰ƒCƒY‚µ‚È‚¢j
+        #region å±æ€§ï¼ˆã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºã—ãªã„ï¼‰
 
-        /// <summary>PaintƒCƒxƒ“ƒgÅV‚ÌGraphicƒIƒuƒWƒFƒNƒg</summary>
+        /// <summary>Paintã‚¤ãƒ™ãƒ³ãƒˆæœ€æ–°ã®Graphicã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ</summary>
         private Graphics _currentGraphics;
-        /// <summary>PaintƒCƒxƒ“ƒgÅV‚ÌƒyƒCƒ“ƒg—Ìˆæ</summary>
+        /// <summary>Paintã‚¤ãƒ™ãƒ³ãƒˆæœ€æ–°ã®ãƒšã‚¤ãƒ³ãƒˆé ˜åŸŸ</summary>
         private ScreenRect _currentPaintClip;
-        /// <summary>’¼‘O‚ÌuMouseState.Buttons‚ğ‹L‰¯‚·‚é</summary>
+        /// <summary>ç›´å‰ã®uMouseState.Buttonsã‚’è¨˜æ†¶ã™ã‚‹</summary>
         private readonly MouseState.Buttons _mouseStateButtons = new MouseState.Buttons(false, false, false, false, false);
-        /// <summary>ƒhƒ‰ƒbƒO•ƒhƒƒbƒv‚Ìî•ñ</summary>
+        /// <summary>ãƒ‰ãƒ©ãƒƒã‚°ï¼†ãƒ‰ãƒ­ãƒƒãƒ—ã®æƒ…å ±</summary>
         private DragState _DragState = null;
 
-        /// <summary>ƒ}ƒEƒX‚Ì‹OÕ“™‚ğ•`‰æ‚·‚é‚½‚ß‚Ìƒrƒbƒgƒ}ƒbƒvƒŒƒCƒ„[</summary>
+        /// <summary>ãƒã‚¦ã‚¹ã®è»Œè·¡ç­‰ã‚’æç”»ã™ã‚‹ãŸã‚ã®ãƒ“ãƒƒãƒˆãƒãƒƒãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼</summary>
         private readonly ArrayList _freeLayers = new ArrayList();
 
-        /// <summary>ƒL[Enabler‚ğŠo‚¦‚Ä‚¨‚­</summary>
+        /// <summary>ã‚­ãƒ¼Enablerã‚’è¦šãˆã¦ãŠã</summary>
         private Tono.GuiWinForm.TKeyEnabler _KeyEnabler = null;
 
-        /// <summary>•`‰æ’†ƒtƒ‰ƒO</summary>
+        /// <summary>æç”»ä¸­ãƒ•ãƒ©ã‚°</summary>
         private bool _isDrawing = false;
         #endregion
 
         /// <summary>
-        /// \’z—pƒR[ƒh
+        /// æ§‹ç¯‰ç”¨ã‚³ãƒ¼ãƒ‰
         /// </summary>
         private void _constract()
         {
-            // ƒtƒB[ƒ`ƒƒ[ƒA[ƒLƒeƒNƒ`ƒƒ
+            // ãƒ•ã‚£ãƒ¼ãƒãƒ£ãƒ¼ã‚¢ãƒ¼ã‚­ãƒ†ã‚¯ãƒãƒ£
             _rootGroup = new FeatureGroupRoot(this);
 
-            // ‚±‚ÌŒÄ‚Ño‚µ‚ÍAWindows.Forms ƒtƒH[ƒ€ ƒfƒUƒCƒi‚Å•K—v‚Å‚·B
+            // ã“ã®å‘¼ã³å‡ºã—ã¯ã€Windows.Forms ãƒ•ã‚©ãƒ¼ãƒ  ãƒ‡ã‚¶ã‚¤ãƒŠã§å¿…è¦ã§ã™ã€‚
             InitializeComponent();
             var doubleBuffer = ControlStyles.UserPaint | ControlStyles.AllPaintingInWmPaint | ControlStyles.DoubleBuffer;
             var hmi = ControlStyles.UserMouse;
             var etc = ControlStyles.Selectable | ControlStyles.Opaque | ControlStyles.ResizeRedraw;
             SetStyle(doubleBuffer | hmi | etc, true);
 
-            AllowDrop = true;  // ƒRƒ“ƒgƒ[ƒ‹‚ªƒhƒ‰ƒbƒO•ƒhƒƒbƒv‚ğó‚¯•t‚¯‚é‚æ‚¤‚É‚·‚é
+            AllowDrop = true;  // ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ãŒãƒ‰ãƒ©ãƒƒã‚°ï¼†ãƒ‰ãƒ­ãƒƒãƒ—ã‚’å—ã‘ä»˜ã‘ã‚‹ã‚ˆã†ã«ã™ã‚‹
         }
 
         /// <summary>
-        /// ƒfƒtƒHƒ‹ƒgƒRƒ“ƒXƒgƒ‰ƒNƒ^
+        /// ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
         /// </summary>
         public TGuiView()
         {
@@ -81,7 +81,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒRƒ“ƒeƒi‚ğ•Ô‚·
+        /// ã‚³ãƒ³ãƒ†ãƒŠã‚’è¿”ã™
         /// </summary>
         /// <returns></returns>
         public IContainer GetContainer()
@@ -90,7 +90,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒRƒ“ƒeƒiw’è‚ÌƒRƒ“ƒXƒgƒ‰ƒNƒ^
+        /// ã‚³ãƒ³ãƒ†ãƒŠæŒ‡å®šã®ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
         /// </summary>
         /// <param name="container"></param>
         public TGuiView(IContainer container)
@@ -99,7 +99,7 @@ namespace Tono.GuiWinForm
             _constract();
         }
 
-        #region IDisposable ƒƒ“ƒo
+        #region IDisposable ãƒ¡ãƒ³ãƒ
 
         void IDisposable.Dispose()
         {
@@ -113,7 +113,7 @@ namespace Tono.GuiWinForm
         #endregion
 
         /// <summary>
-        /// ˆ—’†‚ÌGraphicsƒCƒ“ƒXƒ^ƒ“ƒX‚ğæ“¾‚·‚é
+        /// å‡¦ç†ä¸­ã®Graphicsã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’å–å¾—ã™ã‚‹
         /// </summary>
         /// <returns></returns>
 
@@ -123,11 +123,11 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒtƒŠ[ƒŒƒCƒ„[‚ğ•À‚Ñ‘Ö‚¦‚é”äŠrƒNƒ‰ƒX
+        /// ãƒ•ãƒªãƒ¼ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚’ä¸¦ã³æ›¿ãˆã‚‹æ¯”è¼ƒã‚¯ãƒ©ã‚¹
         /// </summary>
         private class FreeLayerComparer : IComparer
         {
-            #region IComparer ƒƒ“ƒo
+            #region IComparer ãƒ¡ãƒ³ãƒ
 
             public int Compare(object x, object y)
             {
@@ -138,10 +138,10 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ©•ª‚ªg‚¢‚½‚¢ƒtƒŠ[ƒŒƒCƒ„[‚ğ“o˜^‚·‚é
+        /// è‡ªåˆ†ãŒä½¿ã„ãŸã„ãƒ•ãƒªãƒ¼ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚’ç™»éŒ²ã™ã‚‹
         /// </summary>
-        /// <param name="layerLevel">ƒŒƒCƒ„[”Ô†B¬‚³‚¢‚Ù‚Ç‰º‘¤</param>
-        /// <returns>GraphicsƒIƒuƒWƒFƒNƒg</returns>
+        /// <param name="layerLevel">ãƒ¬ã‚¤ãƒ¤ãƒ¼ç•ªå·ã€‚å°ã•ã„ã»ã©ä¸‹å´</param>
+        /// <returns>Graphicsã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ</returns>
         public FreeDrawLayer AddFreeLayer(int layerLevel)
         {
             var fl = new FreeDrawLayer(this, layerLevel);
@@ -151,7 +151,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// •¶š—ñ¶¬
+        /// æ–‡å­—åˆ—ç”Ÿæˆ
         /// </summary>
         /// <returns></returns>
         public override string ToString()
@@ -160,10 +160,10 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒtƒH[ƒ€‚ÌOnLoad‚Å‚Ü‚¸Å‰‚É‚±‚Ìƒƒ\ƒbƒh‚ğƒR[ƒ‹‚µ‚È‚¯‚ê‚Î‚È‚ç‚È‚¢
-        /// Œ¾Œêİ’è‚æ‚è‘O‚ÉƒR[ƒ‹‚·‚é‚±‚Æ
+        /// ãƒ•ã‚©ãƒ¼ãƒ ã®OnLoadã§ã¾ãšæœ€åˆã«ã“ã®ãƒ¡ã‚½ãƒƒãƒ‰ã‚’ã‚³ãƒ¼ãƒ«ã—ãªã‘ã‚Œã°ãªã‚‰ãªã„
+        /// è¨€èªè¨­å®šã‚ˆã‚Šå‰ã«ã‚³ãƒ¼ãƒ«ã™ã‚‹ã“ã¨
         /// </summary>
-        /// <returns>ƒ‹[ƒgƒtƒB[ƒ`ƒƒ[ƒOƒ‹[ƒv‚ÌQÆ</returns>
+        /// <returns>ãƒ«ãƒ¼ãƒˆãƒ•ã‚£ãƒ¼ãƒãƒ£ãƒ¼ã‚°ãƒ«ãƒ¼ãƒ—ã®å‚ç…§</returns>
         // 
         public void Initialize(Type featureLoader)
         {
@@ -188,9 +188,9 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒtƒ@ƒCƒ‹–¼‚ğw’è‚µ‚ÄƒtƒH[ƒ€‚ÌOnLoad‚Å
-        /// ‚Ü‚¸Å‰‚É‚±‚Ìƒƒ\ƒbƒh‚ğƒR[ƒ‹‚µ‚È‚¯‚ê‚Î‚È‚ç‚È‚¢
-        /// Œ¾Œêİ’è‚æ‚è‘O‚ÉƒR[ƒ‹‚·‚é‚±‚Æ
+        /// ãƒ•ã‚¡ã‚¤ãƒ«åã‚’æŒ‡å®šã—ã¦ãƒ•ã‚©ãƒ¼ãƒ ã®OnLoadã§
+        /// ã¾ãšæœ€åˆã«ã“ã®ãƒ¡ã‚½ãƒƒãƒ‰ã‚’ã‚³ãƒ¼ãƒ«ã—ãªã‘ã‚Œã°ãªã‚‰ãªã„
+        /// è¨€èªè¨­å®šã‚ˆã‚Šå‰ã«ã‚³ãƒ¼ãƒ«ã™ã‚‹ã“ã¨
         /// </summary>
         // 
         public void Initialize(Type featureLoader, string file)
@@ -206,21 +206,21 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒ‹[ƒgƒOƒ‹[ƒv‚ğæ“¾‚·‚é
+        /// ãƒ«ãƒ¼ãƒˆã‚°ãƒ«ãƒ¼ãƒ—ã‚’å–å¾—ã™ã‚‹
         /// </summary>
-        /// <returns>ŠÖ˜A‚Ã‚¯‚ç‚ê‚Ä‚¢‚éƒ‹[ƒgƒOƒ‹[ƒv</returns>
+        /// <returns>é–¢é€£ã¥ã‘ã‚‰ã‚Œã¦ã„ã‚‹ãƒ«ãƒ¼ãƒˆã‚°ãƒ«ãƒ¼ãƒ—</returns>
         public FeatureGroupRoot GetFeatureRoot()
         {
             return _rootGroup;
         }
 
         /// <summary>
-        /// ƒp[ƒc‚ª–³‚­‚Ä‚à”wŒi‚ğ•`‰æ‚·‚é‚©‚Ç‚¤‚©‚Ìƒtƒ‰ƒO
-        /// ‚±‚ê‚ÍAfalse‚É‚µ‚Ä‚¨‚­‚ÆƒpƒtƒH[ƒ}ƒ“ƒX‚ªŒüã‚·‚é‚ªAƒp[ƒc‚ª”z’u‚³‚ê‚È‚¢ƒy[ƒ“‚Í^‚Á•‚É‚È‚é
-        /// true‚É‚µ‚Ä‚¨‚­‚ÆA”wŒiF‚ÅƒyƒCƒ“ƒg‚³‚ê‚éˆ—‚ª’Ç‰Á‚³‚ê‚é
+        /// ãƒ‘ãƒ¼ãƒ„ãŒç„¡ãã¦ã‚‚èƒŒæ™¯ã‚’æç”»ã™ã‚‹ã‹ã©ã†ã‹ã®ãƒ•ãƒ©ã‚°
+        /// ã“ã‚Œã¯ã€falseã«ã—ã¦ãŠãã¨ãƒ‘ãƒ•ã‚©ãƒ¼ãƒãƒ³ã‚¹ãŒå‘ä¸Šã™ã‚‹ãŒã€ãƒ‘ãƒ¼ãƒ„ãŒé…ç½®ã•ã‚Œãªã„ãƒšãƒ¼ãƒ³ã¯çœŸã£é»’ã«ãªã‚‹
+        /// trueã«ã—ã¦ãŠãã¨ã€èƒŒæ™¯è‰²ã§ãƒšã‚¤ãƒ³ãƒˆã•ã‚Œã‚‹å‡¦ç†ãŒè¿½åŠ ã•ã‚Œã‚‹
         /// </summary>
         [Category("Tono.GuiWinForm")]
-        [Description("ƒp[ƒc‚ª–³‚­‚Ä‚à”wŒi‚ğ•`‰æ‚·‚é‚©‚Ç‚¤‚©‚Ìƒtƒ‰ƒO")]
+        [Description("ãƒ‘ãƒ¼ãƒ„ãŒç„¡ãã¦ã‚‚èƒŒæ™¯ã‚’æç”»ã™ã‚‹ã‹ã©ã†ã‹ã®ãƒ•ãƒ©ã‚°")]
         public bool IsDrawEmptyBackground
         {
 
@@ -230,7 +230,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒ}ƒEƒXˆÚ“®ƒCƒxƒ“ƒg‚Ìˆ—
+        /// ãƒã‚¦ã‚¹ç§»å‹•ã‚¤ãƒ™ãƒ³ãƒˆã®å‡¦ç†
         /// </summary>
         protected override void OnMouseMove(System.Windows.Forms.MouseEventArgs e)
         {
@@ -244,7 +244,7 @@ namespace Tono.GuiWinForm
                 return;
             }
 
-            // ƒNƒŠƒbƒN‚µ‚½ƒy[ƒ“‚ğ‘{‚·
+            // ã‚¯ãƒªãƒƒã‚¯ã—ãŸãƒšãƒ¼ãƒ³ã‚’æœã™
             IRichPane pane = this;
             foreach (Control c in Controls)
             {
@@ -259,9 +259,9 @@ namespace Tono.GuiWinForm
             }
             if (_KeyEnabler != null)
             {
-                #region ƒ_ƒCƒAƒƒO•\¦‚É‚æ‚Á‚Ä‚¨‚©‚µ‚­‚È‚Á‚½ƒL[ƒXƒe[ƒ^ƒX‚ğŒ³‚É–ß‚·ˆ—(ƒ}ƒEƒXƒ€[ƒu‚ÌƒtƒB[ƒŠƒ“ƒO‚ª‘½­ˆ«‚­‚È‚é‚©‚à¥¥¥)
+                #region ãƒ€ã‚¤ã‚¢ãƒ­ã‚°è¡¨ç¤ºã«ã‚ˆã£ã¦ãŠã‹ã—ããªã£ãŸã‚­ãƒ¼ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚’å…ƒã«æˆ»ã™å‡¦ç†(ãƒã‚¦ã‚¹ãƒ ãƒ¼ãƒ–ã®ãƒ•ã‚£ãƒ¼ãƒªãƒ³ã‚°ãŒå¤šå°‘æ‚ªããªã‚‹ã‹ã‚‚ï½¥ï½¥ï½¥)
                 var ke = new KeyEventArgs(Keys.None);
-                // ‹L‰¯‚µ‚Ä‚ ‚éƒL[î•ñ‚ğŒ³‚ÉƒCƒxƒ“ƒgArgs‚ğ¶¬
+                // è¨˜æ†¶ã—ã¦ã‚ã‚‹ã‚­ãƒ¼æƒ…å ±ã‚’å…ƒã«ã‚¤ãƒ™ãƒ³ãƒˆArgsã‚’ç”Ÿæˆ
                 if (_mouseStateButtons.IsShift)
                 {
                     ke = new KeyEventArgs(ke.KeyData | Keys.Shift);
@@ -271,18 +271,18 @@ namespace Tono.GuiWinForm
                 {
                     ke = new KeyEventArgs(ke.KeyData | Keys.Control);
                 }
-                // ke‚ğƒfƒtƒHƒ‹ƒg‚Æ‚µ‚Ä‹L‰¯
+                // keã‚’ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã¨ã—ã¦è¨˜æ†¶
                 var defE = new KeyEventArgs(ke.KeyData);
-                // Œ»İ‚ÌƒL[‚Ìó‘Ô‚ğ’²¸
+                // ç¾åœ¨ã®ã‚­ãƒ¼ã®çŠ¶æ…‹ã‚’èª¿æŸ»
                 if (((System.Windows.Forms.Form.ModifierKeys & Keys.Shift) == Keys.Shift) != _mouseStateButtons.IsShift)
-                {   // Shift‚ª—£‚³‚ê‚Ä‚µ‚Ü‚Á‚Ä‚¢‚½ê‡
+                {   // ShiftãŒé›¢ã•ã‚Œã¦ã—ã¾ã£ã¦ã„ãŸå ´åˆ
                     ke = new KeyEventArgs(ke.KeyData ^ Keys.Shift);
                 }
                 if ((System.Windows.Forms.Form.ModifierKeys & Keys.Control) == Keys.Control != _mouseStateButtons.IsCtrl)
-                {   // Ctrl‚ª˜b‚³‚ê‚Ä‚µ‚Ü‚Á‚Ä‚¢‚½ê‡
+                {   // CtrlãŒè©±ã•ã‚Œã¦ã—ã¾ã£ã¦ã„ãŸå ´åˆ
                     ke = new KeyEventArgs(ke.KeyData ^ Keys.Control);
                 }
-                // ‹L‰¯‚µ‚Ä‚¢‚éƒL[î•ñ‚ÆŒ»ó‚ÌƒL[î•ñ‚ªˆá‚Á‚Ä‚¢‚½ê‡
+                // è¨˜æ†¶ã—ã¦ã„ã‚‹ã‚­ãƒ¼æƒ…å ±ã¨ç¾çŠ¶ã®ã‚­ãƒ¼æƒ…å ±ãŒé•ã£ã¦ã„ãŸå ´åˆ
                 if (ke.KeyData != defE.KeyData)
                 {
                     _KeyEnabler.KickKeyUp(ke);
@@ -290,7 +290,7 @@ namespace Tono.GuiWinForm
                 #endregion
             }
 
-            // ƒCƒxƒ“ƒg‚ğ”ò‚Î‚·
+            // ã‚¤ãƒ™ãƒ³ãƒˆã‚’é£›ã°ã™
             var ma = MouseState.FromMouseEventArgs(e, pane);
             ma.Attr.SetKeyFrags(_mouseStateButtons);
 
@@ -377,7 +377,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒ}ƒEƒXƒ{ƒ^ƒ“ƒ_ƒEƒ“ƒCƒxƒ“ƒg‚Ìˆ—
+        /// ãƒã‚¦ã‚¹ãƒœã‚¿ãƒ³ãƒ€ã‚¦ãƒ³ã‚¤ãƒ™ãƒ³ãƒˆã®å‡¦ç†
         /// </summary>
         protected override void OnMouseDown(System.Windows.Forms.MouseEventArgs e)
         {
@@ -391,7 +391,7 @@ namespace Tono.GuiWinForm
                 return;
             }
 
-            // ƒNƒŠƒbƒN‚µ‚½ƒy[ƒ“‚ğ‘{‚·
+            // ã‚¯ãƒªãƒƒã‚¯ã—ãŸãƒšãƒ¼ãƒ³ã‚’æœã™
             IRichPane pane = this;
             foreach (Control c in Controls)
             {
@@ -404,20 +404,20 @@ namespace Tono.GuiWinForm
                     }
                 }
             }
-            // ƒCƒxƒ“ƒg‚ğ”ò‚Î‚·
+            // ã‚¤ãƒ™ãƒ³ãƒˆã‚’é£›ã°ã™
             var ma = MouseState.FromMouseEventArgs(e, pane);
 
-            //ƒ}ƒEƒXƒ{ƒ^ƒ“‚Ìó‘Ô‚ğ‹L‰¯‚·‚é
+            //ãƒã‚¦ã‚¹ãƒœã‚¿ãƒ³ã®çŠ¶æ…‹ã‚’è¨˜æ†¶ã™ã‚‹
             _mouseStateButtons.IsButton = ma.Attr.IsButton;
             _mouseStateButtons.IsButtonMiddle = ma.Attr.IsButtonMiddle;
 
-            // uMouseState.FromMouseEventArgs‚Å‘Î‰‚Å‚«‚È‚©‚Á‚½‘¼‚Ì‘®«‚ğ”½‰f‚·‚é
+            // uMouseState.FromMouseEventArgsã§å¯¾å¿œã§ããªã‹ã£ãŸä»–ã®å±æ€§ã‚’åæ˜ ã™ã‚‹
             ma.Attr.SetKeyFrags(_mouseStateButtons);
             _rootGroup.OnMouseDown(ma);
         }
 
         /// <summary>
-        /// ƒ}ƒEƒXƒ{ƒ^ƒ“ƒAƒbƒvƒCƒxƒ“ƒg‚Ìˆ—
+        /// ãƒã‚¦ã‚¹ãƒœã‚¿ãƒ³ã‚¢ãƒƒãƒ—ã‚¤ãƒ™ãƒ³ãƒˆã®å‡¦ç†
         /// </summary>
         protected override void OnMouseUp(System.Windows.Forms.MouseEventArgs e)
         {
@@ -431,7 +431,7 @@ namespace Tono.GuiWinForm
                 return;
             }
 
-            // ƒNƒŠƒbƒN‚µ‚½ƒy[ƒ“‚ğ‘{‚·
+            // ã‚¯ãƒªãƒƒã‚¯ã—ãŸãƒšãƒ¼ãƒ³ã‚’æœã™
             IRichPane pane = this;
             foreach (Control c in Controls)
             {
@@ -444,12 +444,12 @@ namespace Tono.GuiWinForm
                     }
                 }
             }
-            // ƒCƒxƒ“ƒg‚ğ”ò‚Î‚·
+            // ã‚¤ãƒ™ãƒ³ãƒˆã‚’é£›ã°ã™
             var ma = MouseState.FromMouseEventArgs(e, pane);
             ma.Attr.SetKeyFrags(_mouseStateButtons);
             _rootGroup.OnMouseUp(ma);
 
-            //ƒ}ƒEƒXƒ{ƒ^ƒ“‚Ìó‘Ô‚ğ‹L‰¯‚·‚é
+            //ãƒã‚¦ã‚¹ãƒœã‚¿ãƒ³ã®çŠ¶æ…‹ã‚’è¨˜æ†¶ã™ã‚‹
             if (ma.Attr.IsButton)
             {
                 _mouseStateButtons.IsButton = false;
@@ -459,7 +459,7 @@ namespace Tono.GuiWinForm
                 _mouseStateButtons.IsButtonMiddle = false;
             }
 
-            // ƒRƒ“ƒeƒLƒXƒgƒƒjƒ…[‚ª“o˜^‚³‚ê‚Ä‚¢‚½‚ç•\¦‚³‚¹‚é
+            // ã‚³ãƒ³ãƒ†ã‚­ã‚¹ãƒˆãƒ¡ãƒ‹ãƒ¥ãƒ¼ãŒç™»éŒ²ã•ã‚Œã¦ã„ãŸã‚‰è¡¨ç¤ºã•ã›ã‚‹
             if (e.Button == MouseButtons.Right)
             {
                 if (pane.Control.ContextMenu != null)
@@ -476,7 +476,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒ}ƒEƒXƒzƒC[ƒ‹‚ÌƒCƒxƒ“ƒg
+        /// ãƒã‚¦ã‚¹ãƒ›ã‚¤ãƒ¼ãƒ«ã®ã‚¤ãƒ™ãƒ³ãƒˆ
         /// </summary>
         /// <param name="e"></param>
         protected override void OnMouseWheel(MouseEventArgs e)
@@ -491,7 +491,7 @@ namespace Tono.GuiWinForm
                 return;
             }
 
-            // ƒNƒŠƒbƒN‚µ‚½ƒy[ƒ“‚ğ‘{‚·
+            // ã‚¯ãƒªãƒƒã‚¯ã—ãŸãƒšãƒ¼ãƒ³ã‚’æœã™
             IRichPane pane = this;
             foreach (Control c in Controls)
             {
@@ -504,7 +504,7 @@ namespace Tono.GuiWinForm
                     }
                 }
             }
-            // ƒCƒxƒ“ƒg‚ğ”ò‚Î‚·
+            // ã‚¤ãƒ™ãƒ³ãƒˆã‚’é£›ã°ã™
             var ma = MouseState.FromMouseEventArgs(e, pane);
             ma.Attr.SetKeyFrags(_mouseStateButtons);
 
@@ -513,7 +513,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒAƒCƒeƒ€‚ªƒhƒ‰ƒbƒO‚³‚ê‚Ä‚«‚½‚ÌƒCƒxƒ“ƒg(“]‘—‚Í‚µ‚È‚¢)
+        /// ã‚¢ã‚¤ãƒ†ãƒ ãŒãƒ‰ãƒ©ãƒƒã‚°ã•ã‚Œã¦ããŸæ™‚ã®ã‚¤ãƒ™ãƒ³ãƒˆ(è»¢é€ã¯ã—ãªã„)
         /// </summary>
         /// <param name="drgevent"></param>
         protected override void OnDragEnter(DragEventArgs drgevent)
@@ -547,21 +547,21 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ˆ—•s‰Â‚È‚ç true
+        /// å‡¦ç†ä¸å¯ãªã‚‰ true
         /// </summary>
         /// <returns></returns>
         private bool _cannotEventProc()
         {
             if (_isDrawing)
             {
-                System.Diagnostics.Debug.WriteLine("IH@•`‰æ’†‚É•`‰æƒCƒxƒ“ƒg on " + GetType().Name);
+                System.Diagnostics.Debug.WriteLine("ï¼ï¼Ÿã€€æç”»ä¸­ã«æç”»ã‚¤ãƒ™ãƒ³ãƒˆ on " + GetType().Name);
                 return true;
             }
             return false;
         }
 
         /// <summary>
-        /// ƒAƒCƒeƒ€‚ªƒhƒƒbƒv‚³‚ê‚½‚ÌƒCƒxƒ“ƒg
+        /// ã‚¢ã‚¤ãƒ†ãƒ ãŒãƒ‰ãƒ­ãƒƒãƒ—ã•ã‚ŒãŸæ™‚ã®ã‚¤ãƒ™ãƒ³ãƒˆ
         /// </summary>
         /// <param name="drgevent"></param>
         protected override void OnDragDrop(DragEventArgs drgevent)
@@ -576,9 +576,9 @@ namespace Tono.GuiWinForm
                 return;
             }
 
-            // ƒ}ƒEƒXƒJ[ƒ\ƒ‹‚ÌƒXƒNƒŠ[ƒ“À•WËƒtƒH[ƒ€‚ÌƒNƒ‰ƒCƒAƒ“ƒgÀ•W‚ğZo
+            // ãƒã‚¦ã‚¹ã‚«ãƒ¼ã‚½ãƒ«ã®ã‚¹ã‚¯ãƒªãƒ¼ãƒ³åº§æ¨™â‡’ãƒ•ã‚©ãƒ¼ãƒ ã®ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆåº§æ¨™ã‚’ç®—å‡º
             var p = PointToClient(MouseState.NowPosition);
-            // ƒhƒƒbƒv‚³‚ê‚½ƒy[ƒ“‚ğ‘{‚·
+            // ãƒ‰ãƒ­ãƒƒãƒ—ã•ã‚ŒãŸãƒšãƒ¼ãƒ³ã‚’æœã™
             IRichPane pane = this;
             foreach (Control c in Controls)
             {
@@ -601,7 +601,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// •`‰æƒCƒxƒ“ƒgˆ—
+        /// æç”»ã‚¤ãƒ™ãƒ³ãƒˆå‡¦ç†
         /// </summary>
         protected override void OnPaint(System.Windows.Forms.PaintEventArgs e)
         {
@@ -623,7 +623,7 @@ namespace Tono.GuiWinForm
             // Thread safe check
             if (_isDrawing)
             {
-                System.Diagnostics.Debug.WriteLine("IH@•`‰æ’†‚É•`‰æƒCƒxƒ“ƒg on " + GetType().Name);
+                System.Diagnostics.Debug.WriteLine("ï¼ï¼Ÿã€€æç”»ä¸­ã«æç”»ã‚¤ãƒ™ãƒ³ãƒˆ on " + GetType().Name);
                 return;
             }
             _isDrawing = true;
@@ -632,7 +632,7 @@ namespace Tono.GuiWinForm
 
             if (_rootGroup != null)
             {
-                // •K—v‚Å‚ ‚ê‚Î”wŒi‚ğ•`‰æ
+                // å¿…è¦ã§ã‚ã‚Œã°èƒŒæ™¯ã‚’æç”»
                 if (IsDrawEmptyBackground)
                 {
                     using (var brush = new SolidBrush(BackColor))
@@ -640,14 +640,14 @@ namespace Tono.GuiWinForm
                         e.Graphics.FillRectangle(brush, e.ClipRectangle);
                     }
                 }
-                // ƒp[ƒc“™‚Ì•`‰æ
+                // ãƒ‘ãƒ¼ãƒ„ç­‰ã®æç”»
                 var pb = _rootGroup.GetPartsSet();
                 if (pb != null)
                 {
                     pb.CheckAndResetLocalized();
                     pb.ProvideDrawFunction();
 
-                    // ƒtƒŠ[ƒŒƒCƒ„[‚ğ•`‰æ
+                    // ãƒ•ãƒªãƒ¼ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚’æç”»
                     for (var i = 0; i < _freeLayers.Count; i++)
                     {
                         var fl = (FreeDrawLayer)_freeLayers[i];
@@ -664,7 +664,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒTƒCƒY•ÏX‚ÉƒŒƒCƒAƒEƒg‚ğ’²®‚·‚é
+        /// ã‚µã‚¤ã‚ºå¤‰æ›´æ™‚ã«ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆã‚’èª¿æ•´ã™ã‚‹
         /// </summary>
         protected override void OnSizeChanged(System.EventArgs e)
         {
@@ -684,7 +684,7 @@ namespace Tono.GuiWinForm
             }
         }
 
-        #region IRichPane ƒƒ“ƒo
+        #region IRichPane ãƒ¡ãƒ³ãƒ
 
 
         public IRichPane GetParent()
@@ -708,11 +708,11 @@ namespace Tono.GuiWinForm
         public Control Control => this;
 
         /// <summary>
-        /// –¼‘O‚Åƒy[ƒ“‚ğŒŸõ‚·‚é
+        /// åå‰ã§ãƒšãƒ¼ãƒ³ã‚’æ¤œç´¢ã™ã‚‹
         /// </summary>
-        /// <param name="tar">ŒŸõƒy[ƒ“‚ÌŠK‘wŒ»İˆÊ’u</param>
-        /// <param name="name">ŒŸõName</param>
-        /// <returns>Œ©‚Â‚©‚Á‚½ƒy[ƒ“ / null = ‚»‚ÌŠK‘w‚É‚ÍŒ©‚Â‚©‚ç‚È‚©‚Á‚½</returns>
+        /// <param name="tar">æ¤œç´¢ãƒšãƒ¼ãƒ³ã®éšå±¤ç¾åœ¨ä½ç½®</param>
+        /// <param name="name">æ¤œç´¢Name</param>
+        /// <returns>è¦‹ã¤ã‹ã£ãŸãƒšãƒ¼ãƒ³ / null = ãã®éšå±¤ã«ã¯è¦‹ã¤ã‹ã‚‰ãªã‹ã£ãŸ</returns>
         private IRichPane _findPaneByIdText(Control tar, string IdText)
         {
             foreach (Control c in tar.Controls)
@@ -780,7 +780,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒ}ƒXƒ^[ƒy[ƒ“‚Ì—Ìˆæ‚ğ•Ô‚·
+        /// ãƒã‚¹ã‚¿ãƒ¼ãƒšãƒ¼ãƒ³ã®é ˜åŸŸã‚’è¿”ã™
         /// </summary>
         /// <returns></returns>
 
@@ -790,9 +790,9 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// •`‰æ‚ª•K—v‚È—Ìˆæ‚ğ•Ô‚·ƒCƒ“ƒ^[ƒtƒF[ƒX
+        /// æç”»ãŒå¿…è¦ãªé ˜åŸŸã‚’è¿”ã™ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ãƒ¼ã‚¹
         /// </summary>
-        /// <returns>—Ìˆæ</returns>
+        /// <returns>é ˜åŸŸ</returns>
 
         public ScreenRect GetPaintClipRect()
         {
@@ -800,11 +800,11 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒXƒNƒ[ƒ‹—Ê
+        /// ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«é‡
         /// </summary>
         [Category("Tono.GuiWinForm")]
-        [Description("ƒXƒNƒ[ƒ‹—Ê")]
-        public new ScreenPos Scroll    // new ¯•Êq‚ÍA.NET2.0‚Å•K—v
+        [Description("ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«é‡")]
+        public new ScreenPos Scroll    // new è­˜åˆ¥å­ã¯ã€.NET2.0ã§å¿…è¦
         {
 
             get => _scroll;
@@ -833,10 +833,10 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒY[ƒ€”{—¦ * 10[%]
+        /// ã‚ºãƒ¼ãƒ å€ç‡ * 10[%]
         /// </summary>
         [Category("Tono.GuiWinForm")]
-        [Description("Œ»İ‚ÌƒY[ƒ€’l * 10[%]")]
+        [Description("ç¾åœ¨ã®ã‚ºãƒ¼ãƒ å€¤ * 10[%]")]
         public XyBase Zoom
         {
 
@@ -863,28 +863,28 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒY[ƒ€•ÏXƒCƒxƒ“ƒg‚ğ‘—M‚·‚é
+        /// ã‚ºãƒ¼ãƒ å¤‰æ›´ã‚¤ãƒ™ãƒ³ãƒˆã‚’é€ä¿¡ã™ã‚‹
         /// </summary>
-        /// <param name="rp">ƒY[ƒ€‚µ‚½ƒy[ƒ“iƒCƒxƒ“ƒg‘—‚èŒ³j</param>
+        /// <param name="rp">ã‚ºãƒ¼ãƒ ã—ãŸãƒšãƒ¼ãƒ³ï¼ˆã‚¤ãƒ™ãƒ³ãƒˆé€ã‚Šå…ƒï¼‰</param>
         public void SendZoomChangedEvent(IRichPane rp)
         {
             _rootGroup.ZoomChanged(rp);
         }
 
         /// <summary>
-        /// ƒXƒNƒ[ƒ‹•ÏXƒCƒxƒ“ƒg‚ğ‘—M‚·‚é
+        /// ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«å¤‰æ›´ã‚¤ãƒ™ãƒ³ãƒˆã‚’é€ä¿¡ã™ã‚‹
         /// </summary>
-        /// <param name="rp">ƒXƒNƒ[ƒ‹‚µ‚½ƒy[ƒ“iƒCƒxƒ“ƒg‘—‚èŒ³j</param>
+        /// <param name="rp">ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ã—ãŸãƒšãƒ¼ãƒ³ï¼ˆã‚¤ãƒ™ãƒ³ãƒˆé€ã‚Šå…ƒï¼‰</param>
         public void SendScrollChangedEvent(IRichPane rp)
         {
             _rootGroup.ScrollChanged(rp);
         }
 
         /// <summary>
-        /// ƒY[ƒ€‚Ì’l‚ğƒ`ƒFƒbƒN‚µ‚Ä•s³’l‚È‚ç’²®‚·‚é
+        /// ã‚ºãƒ¼ãƒ ã®å€¤ã‚’ãƒã‚§ãƒƒã‚¯ã—ã¦ä¸æ­£å€¤ãªã‚‰èª¿æ•´ã™ã‚‹
         /// </summary>
-        /// <param name="value">Šó–]‚·‚éƒY[ƒ€’l</param>
-        /// <returns>‚Ó‚³‚í‚µ‚­’²®‚³‚ê‚½ƒY[ƒ€’l</returns>
+        /// <param name="value">å¸Œæœ›ã™ã‚‹ã‚ºãƒ¼ãƒ å€¤</param>
+        /// <returns>ãµã•ã‚ã—ãèª¿æ•´ã•ã‚ŒãŸã‚ºãƒ¼ãƒ å€¤</returns>
         public XyBase ZoomCheck(XyBase value)
         {
             if (value.X < 8)
@@ -911,16 +911,16 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒOƒ‰ƒtƒBƒbƒNƒIƒuƒWƒFƒNƒg
+        /// ã‚°ãƒ©ãƒ•ã‚£ãƒƒã‚¯ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
         /// </summary>
         [Category("Tono.GuiWinForm")]
-        [Description("•`‰æ—p‚ÌGraphicƒIƒuƒWƒFƒNƒg")]
+        [Description("æç”»ç”¨ã®Graphicã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ")]
         public System.Drawing.Graphics Graphics => _currentGraphics;
 
         /// <summary>
-        /// ‰æ–Ê‚ğÄ•`‰æ‚·‚é
+        /// ç”»é¢ã‚’å†æç”»ã™ã‚‹
         /// </summary>
-        /// <param name="rect">Ä•`‰æ‚·‚é”ÍˆÍ</param>
+        /// <param name="rect">å†æç”»ã™ã‚‹ç¯„å›²</param>
         public void Invalidate(ScreenRect rect)
         {
             if (rect == null)
@@ -935,13 +935,13 @@ namespace Tono.GuiWinForm
 
         #endregion
 
-        #region IRichPaneSync ƒƒ“ƒo
+        #region IRichPaneSync ãƒ¡ãƒ³ãƒ
 
         /// <summary>
-        /// ƒY[ƒ€”{—¦ * 10[%]
+        /// ã‚ºãƒ¼ãƒ å€ç‡ * 10[%]
         /// </summary>
         [Category("Tono.GuiWinForm")]
-        [Description("Œ»İ‚ÌƒY[ƒ€’l * 10[%]")]
+        [Description("ç¾åœ¨ã®ã‚ºãƒ¼ãƒ å€¤ * 10[%]")]
         public XyBase ZoomMute
         {
             get => _zoom;
@@ -960,10 +960,10 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒXƒNƒ[ƒ‹—Ê
+        /// ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«é‡
         /// </summary>
         [Category("Tono.GuiWinForm")]
-        [Description("Œ»İ‚ÌƒXƒNƒ[ƒ‹—Ê")]
+        [Description("ç¾åœ¨ã®ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«é‡")]
         public ScreenPos ScrollMute
         {
             get => _scroll;
@@ -983,7 +983,7 @@ namespace Tono.GuiWinForm
 
         #endregion
 
-        #region IKeyListener ƒƒ“ƒoifiKeyEnablerƒRƒ“ƒ|[ƒlƒ“ƒg‚©‚çƒƒbƒZ[ƒW‚ğó‚¯‚éj
+        #region IKeyListener ãƒ¡ãƒ³ãƒï¼ˆfiKeyEnablerã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã‹ã‚‰ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’å—ã‘ã‚‹ï¼‰
 
         public void OnKeyDown(KeyState e)
         {
@@ -1010,7 +1010,7 @@ namespace Tono.GuiWinForm
         #endregion
 
         /// <summary>
-        /// ƒL[ƒCƒxƒ“ƒg‚ğÄ\’z‚µ‚ÄA•K—v‚Å‚ ‚ê‚ÎƒCƒxƒ“ƒg‚ğo—Í‚·‚é
+        /// ã‚­ãƒ¼ã‚¤ãƒ™ãƒ³ãƒˆã‚’å†æ§‹ç¯‰ã—ã¦ã€å¿…è¦ã§ã‚ã‚Œã°ã‚¤ãƒ™ãƒ³ãƒˆã‚’å‡ºåŠ›ã™ã‚‹
         /// </summary>
         public void ResetKeyEvents()
         {

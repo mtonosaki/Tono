@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System;
@@ -12,11 +12,11 @@ namespace Tono.GuiWinForm
     public class CodePos : XyBase
     {
         /// <summary>
-        /// ’l‚ğw’è‚µ‚ÄƒCƒ“ƒXƒ^ƒ“ƒX‚ğì‚é
+        /// å€¤ã‚’æŒ‡å®šã—ã¦ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ä½œã‚‹
         /// </summary>
-        /// <param name="v1">’l‚P</param>
-        /// <param name="v2">’l‚Q</param>
-        /// <returns>ƒCƒ“ƒXƒ^ƒ“ƒX</returns>
+        /// <param name="v1">å€¤ï¼‘</param>
+        /// <param name="v2">å€¤ï¼’</param>
+        /// <returns>ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹</returns>
 
         public static new CodePos FromInt(int v1, int v2)
         {
@@ -27,17 +27,17 @@ namespace Tono.GuiWinForm
             };
             return ret;
         }
-        /// <summary>‰‰Zq‚ÌƒI[ƒo[ƒ[ƒh</summary>
+        /// <summary>æ¼”ç®—å­ã®ã‚ªãƒ¼ãƒãƒ¼ãƒ­ãƒ¼ãƒ‰</summary>
         public static CodePos operator +(CodePos v1, ValueCouple v2) { return (CodePos)((ValueCouple)v1 + v2); }
-        /// <summary>‰‰Zq‚ÌƒI[ƒo[ƒ[ƒh</summary>
+        /// <summary>æ¼”ç®—å­ã®ã‚ªãƒ¼ãƒãƒ¼ãƒ­ãƒ¼ãƒ‰</summary>
         public static CodePos operator -(CodePos v1, ValueCouple v2) { return (CodePos)((ValueCouple)v1 - v2); }
-        /// <summary>‰‰Zq‚ÌƒI[ƒo[ƒ[ƒh</summary>
+        /// <summary>æ¼”ç®—å­ã®ã‚ªãƒ¼ãƒãƒ¼ãƒ­ãƒ¼ãƒ‰</summary>
         public static CodePos operator *(CodePos v1, ValueCouple v2) { return (CodePos)((ValueCouple)v1 * v2); }
-        /// <summary>‰‰Zq‚ÌƒI[ƒo[ƒ[ƒh</summary>
+        /// <summary>æ¼”ç®—å­ã®ã‚ªãƒ¼ãƒãƒ¼ãƒ­ãƒ¼ãƒ‰</summary>
         public static CodePos operator *(CodePos v1, int v2) { return (CodePos)((ValueCouple)v1 * v2); }
-        /// <summary>‰‰Zq‚ÌƒI[ƒo[ƒ[ƒh</summary>
+        /// <summary>æ¼”ç®—å­ã®ã‚ªãƒ¼ãƒãƒ¼ãƒ­ãƒ¼ãƒ‰</summary>
         public static CodePos operator /(CodePos v1, ValueCouple v2) { return (CodePos)((ValueCouple)v1 / v2); }
-        /// <summary>‰‰Zq‚ÌƒI[ƒo[ƒ[ƒh</summary>
+        /// <summary>æ¼”ç®—å­ã®ã‚ªãƒ¼ãƒãƒ¼ãƒ­ãƒ¼ãƒ‰</summary>
         public static CodePos operator /(CodePos v1, int v2) { return (CodePos)((ValueCouple)v1 / v2); }
     }
 }

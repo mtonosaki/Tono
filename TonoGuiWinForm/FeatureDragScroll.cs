@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 #pragma warning disable 1591, 1572, 1573
@@ -6,29 +6,29 @@
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// ƒ}ƒEƒX‚ğƒhƒ‰ƒbƒO‚µ‚Ä‰æ–ÊƒXƒNƒ[ƒ‹‚·‚é‹@”\
+    /// ãƒã‚¦ã‚¹ã‚’ãƒ‰ãƒ©ãƒƒã‚°ã—ã¦ç”»é¢ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ã™ã‚‹æ©Ÿèƒ½
     /// </summary>
     public class FeatureDragScroll : Tono.GuiWinForm.FeatureBase, IMouseListener
     {
-        #region ‘®«iƒVƒŠƒAƒ‰ƒCƒY‚·‚éj
-        /// <summary>ƒCƒxƒ“ƒg‚ğÀs‚·‚éƒL[‚Æ‚È‚éƒ}ƒEƒX‚Ìó‘Ô</summary>
+        #region å±æ€§ï¼ˆã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºã™ã‚‹ï¼‰
+        /// <summary>ã‚¤ãƒ™ãƒ³ãƒˆã‚’å®Ÿè¡Œã™ã‚‹ã‚­ãƒ¼ã¨ãªã‚‹ãƒã‚¦ã‚¹ã®çŠ¶æ…‹</summary>
         protected MouseState.Buttons _trigger;
         #endregion
-        #region ‘®«iƒVƒŠƒAƒ‰ƒCƒY‚µ‚È‚¢j
-        /// <summary>ƒ}ƒEƒX‚ğƒNƒŠƒbƒN‚µ‚½“_‚Å‚Ìƒ}ƒEƒXÀ•W</summary>
+        #region å±æ€§ï¼ˆã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºã—ãªã„ï¼‰
+        /// <summary>ãƒã‚¦ã‚¹ã‚’ã‚¯ãƒªãƒƒã‚¯ã—ãŸæ™‚ç‚¹ã§ã®ãƒã‚¦ã‚¹åº§æ¨™</summary>
         protected ScreenPos _posDown = null;
-        /// <summary>ƒ}ƒEƒX‚ğƒNƒŠƒbƒN‚µ‚½“_‚Å‚ÌƒXƒNƒ[ƒ‹—Ê</summary>
+        /// <summary>ãƒã‚¦ã‚¹ã‚’ã‚¯ãƒªãƒƒã‚¯ã—ãŸæ™‚ç‚¹ã§ã®ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«é‡</summary>
         protected ScreenPos _scrollDown;
-        /// <summary>’¼‘O‚ÆƒL[‚Ìó‘Ô‚ğ‹L‰¯</summary>
+        /// <summary>ç›´å‰ã¨ã‚­ãƒ¼ã®çŠ¶æ…‹ã‚’è¨˜æ†¶</summary>
         protected MouseState _prev = new MouseState();
         #endregion
 
         /// <summary>
-        /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+        /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
         /// </summary>
         public FeatureDragScroll()
         {
-            // ƒfƒtƒHƒ‹ƒg‚Åƒhƒ‰ƒbƒOƒXƒNƒ[ƒ‹‚·‚é‚½‚ß‚ÌƒL[‚ğİ’è‚·‚é
+            // ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã§ãƒ‰ãƒ©ãƒƒã‚°ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ã™ã‚‹ãŸã‚ã®ã‚­ãƒ¼ã‚’è¨­å®šã™ã‚‹
             _trigger = new MouseState.Buttons
             {
                 IsButton = false,
@@ -40,7 +40,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒpƒ‰ƒ[ƒ^[‚Ì‰Šú‰»
+        /// ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ãƒ¼ã®åˆæœŸåŒ–
         /// </summary>
         /// <param name="param"></param>
         public override void ParseParameter(string param)
@@ -82,18 +82,18 @@ namespace Tono.GuiWinForm
 
 
         /// <summary>
-        /// ƒgƒŠƒKiÀs¯•ÊƒL[j‚ğ•ÏX‚·‚é
+        /// ãƒˆãƒªã‚¬ï¼ˆå®Ÿè¡Œè­˜åˆ¥ã‚­ãƒ¼ï¼‰ã‚’å¤‰æ›´ã™ã‚‹
         /// </summary>
-        /// <param name="value">V‚µ‚¢ƒgƒŠƒK[</param>
+        /// <param name="value">æ–°ã—ã„ãƒˆãƒªã‚¬ãƒ¼</param>
         public void SetTrigger(MouseState.Buttons value)
         {
             _trigger = value;
         }
 
-        #region IMouseListener ƒƒ“ƒo
+        #region IMouseListener ãƒ¡ãƒ³ãƒ
 
         /// <summary>
-        /// ƒ}ƒEƒXˆÚ“®ƒCƒxƒ“ƒgˆ—
+        /// ãƒã‚¦ã‚¹ç§»å‹•ã‚¤ãƒ™ãƒ³ãƒˆå‡¦ç†
         /// </summary>
         public virtual void OnMouseMove(MouseState e)
         {
@@ -113,7 +113,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒ}ƒEƒXƒ_ƒEƒ“ƒCƒxƒ“ƒgˆ—
+        /// ãƒã‚¦ã‚¹ãƒ€ã‚¦ãƒ³ã‚¤ãƒ™ãƒ³ãƒˆå‡¦ç†
         /// </summary>
         /// <param name="e"></param>
         public virtual void OnMouseDown(MouseState e)
@@ -127,7 +127,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒ}ƒEƒXƒAƒbƒvƒCƒxƒ“ƒgˆ—
+        /// ãƒã‚¦ã‚¹ã‚¢ãƒƒãƒ—ã‚¤ãƒ™ãƒ³ãƒˆå‡¦ç†
         /// </summary>
         public virtual void OnMouseUp(MouseState e)
         {
@@ -137,7 +137,7 @@ namespace Tono.GuiWinForm
 
         public virtual void OnMouseWheel(MouseState e)
         {
-            // –¢g—p
+            // æœªä½¿ç”¨
         }
         #endregion
     }

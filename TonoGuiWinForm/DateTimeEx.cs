@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System;
@@ -8,24 +8,24 @@ using System;
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// uTime ‚ÌŠT—v‚Ìà–¾‚Å‚·B
+    /// uTime ã®æ¦‚è¦ã®èª¬æ˜ã§ã™ã€‚
     /// </summary>
     [Serializable]
     public class DateTimeEx : ITime, IComparable, ICloneable, IReadonlyable
     {
 
-        #region ‘®«(ƒVƒŠƒAƒ‰ƒCƒY‚·‚é)
-        ///<summary>•b•Ï”</summary>
+        #region å±æ€§(ã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºã™ã‚‹)
+        ///<summary>ç§’å¤‰æ•°</summary>
         private int _val;
         public bool _isReadonly = false;
         #endregion
 
-        #region	‘®«(ƒVƒŠƒAƒ‰ƒCƒY‚µ‚È‚¢)
-        /// <summary>T‚Ì•¶š—ñ</summary>
+        #region	å±æ€§(ã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºã—ãªã„)
+        /// <summary>é€±ã®æ–‡å­—åˆ—</summary>
         [NonSerialized] private static string[] _dayStrings = { "Mon", "Tue", "Wed", "Thu", "Fri", "Sta", "Sun" };
         #endregion
 
-        #region IReadonlyableƒCƒ“ƒ^[ƒtƒF[ƒX
+        #region IReadonlyableã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ãƒ¼ã‚¹
         public bool IsReadonly => _isReadonly;
 
         public void SetReadonly()
@@ -35,19 +35,19 @@ namespace Tono.GuiWinForm
 
         #endregion
 
-        #region ŒÅ’è’l
-        /// <summary>“Ç‚İæ‚èê—p‚ÌÅ¬’l</summary>
+        #region å›ºå®šå€¤
+        /// <summary>èª­ã¿å–ã‚Šå°‚ç”¨ã®æœ€å°å€¤</summary>
         public static readonly DateTimeEx MinValue = new DateTimeEx(int.MinValue, true);
-        /// <summary>“Ç‚İæ‚èê—p‚ÌÅ‘å’l</summary>
+        /// <summary>èª­ã¿å–ã‚Šå°‚ç”¨ã®æœ€å¤§å€¤</summary>
         public static readonly DateTimeEx MaxValue = new DateTimeEx(int.MaxValue, true);
         public enum Days { Mon, Tue, Wed, Thu, Fri, Sat, San }
         #endregion
 
         /// <summary>
-        /// •¶š—ñ‚©‚ç’l‚ğ“ü—Í‚·‚é
+        /// æ–‡å­—åˆ—ã‹ã‚‰å€¤ã‚’å…¥åŠ›ã™ã‚‹
         /// </summary>
         /// <param name="str"></param>
-        /// <returns>ƒCƒ“ƒXƒ^ƒ“ƒXFnull=ƒGƒ‰[</returns>
+        /// <returns>ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ï¼šnull=ã‚¨ãƒ©ãƒ¼</returns>
         public static DateTimeEx FromString(string str)
         {
             var cr1 = str.IndexOf(':');
@@ -82,25 +82,25 @@ namespace Tono.GuiWinForm
 
 
         /// <summary>
-        /// Å¬’l‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‚ğ¶¬‚·‚é
+        /// æœ€å°å€¤ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ç”Ÿæˆã™ã‚‹
         /// </summary>
-        /// <returns>Å¬’l‚ÌV‚µ‚¢ƒCƒ“ƒXƒ^ƒ“ƒX</returns>
+        /// <returns>æœ€å°å€¤ã®æ–°ã—ã„ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹</returns>
         public static DateTimeEx FromMinValue()
         {
             return new DateTimeEx(int.MinValue, false);
         }
 
         /// <summary>
-        /// Å‘å’l‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‚ğ¶¬‚·‚é
+        /// æœ€å¤§å€¤ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ç”Ÿæˆã™ã‚‹
         /// </summary>
-        /// <returns>Å‘å’l‚ÌV‚µ‚¢ƒCƒ“ƒXƒ^ƒ“ƒX</returns>
+        /// <returns>æœ€å¤§å€¤ã®æ–°ã—ã„ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹</returns>
         public static DateTimeEx FromMaxValue()
         {
             return new DateTimeEx(int.MaxValue, false);
         }
 
 
-        // _val‚Ì’l‚ğ’¼Úw’è‚µ‚Ä\’z‚·‚éƒRƒ“ƒXƒgƒ‰ƒNƒ^
+        // _valã®å€¤ã‚’ç›´æ¥æŒ‡å®šã—ã¦æ§‹ç¯‰ã™ã‚‹ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
         private DateTimeEx(int directValue, bool isReadonly)
         {
             _val = directValue;
@@ -108,7 +108,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// w’è•ª‚ğ‰ÁZ‚·‚é
+        /// æŒ‡å®šåˆ†ã‚’åŠ ç®—ã™ã‚‹
         /// </summary>
         /// <param name="v"></param>
         /// <returns></returns>
@@ -123,16 +123,16 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// T•¶š—ñ‚ğw’è‚·‚é
+        /// é€±æ–‡å­—åˆ—ã‚’æŒ‡å®šã™ã‚‹
         /// </summary>
-        /// <param name="strs">“Y‚¦š‚ªDay‚É‘Î‰‚·‚é•¶š—ñ</param>
+        /// <param name="strs">æ·»ãˆå­—ãŒDayã«å¯¾å¿œã™ã‚‹æ–‡å­—åˆ—</param>
         public static void SetDayStrings(string[] strs)
         {
             _dayStrings = strs;
         }
 
         /// <summary>
-        /// T•¶š—ñ‚ğæ“¾‚·‚é
+        /// é€±æ–‡å­—åˆ—ã‚’å–å¾—ã™ã‚‹
         /// </summary>
         /// <returns></returns>
         public static string[] GetDayStrings()
@@ -141,7 +141,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// w’èuMes‚É‚æ‚éŒ¾Œê‚ğİ’è‚·‚é
+        /// æŒ‡å®šuMesã«ã‚ˆã‚‹è¨€èªã‚’è¨­å®šã™ã‚‹
         /// </summary>
         /// <param name="mes"></param>
         public static void SetDayStrings(Mes mes)
@@ -155,17 +155,17 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// “ú‚Ì•¶š—ñ‚ğæ“¾‚·‚é
+        /// æ—¥ã®æ–‡å­—åˆ—ã‚’å–å¾—ã™ã‚‹
         /// </summary>
-        /// <param name="day">“ú‚Ì’l</param>
-        /// <returns>“ú‚Ì•¶š—ñ</returns>
+        /// <param name="day">æ—¥ã®å€¤</param>
+        /// <returns>æ—¥ã®æ–‡å­—åˆ—</returns>
         public static string GetDayString(int day)
         {
             return _dayStrings[day % _dayStrings.Length];
         }
 
         /// <summary>
-        /// ƒfƒtƒHƒ‹ƒgƒRƒ“ƒXƒgƒ‰ƒNƒ^
+        /// ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
         /// </summary>
         //
         public DateTimeEx()
@@ -180,11 +180,11 @@ namespace Tono.GuiWinForm
         #endregion
 
         /// <summary>
-        /// ŠÔ‚Ì”äŠryt1‚ªt2–¢–‚Ìê‡z
+        /// æ™‚é–“ã®æ¯”è¼ƒã€t1ãŒt2æœªæº€ã®å ´åˆã€‘
         /// </summary>
-        /// <param name="t1">uTimeŒ^</param>
-        /// <param name="t2">uTimeŒ^</param>
-        /// <returns>true:ğŒ‚ª‡‚Á‚Ä‚¢‚é/falseFğŒ‚ª‡‚Á‚Ä‚¢‚È‚¢</returns>
+        /// <param name="t1">uTimeå‹</param>
+        /// <param name="t2">uTimeå‹</param>
+        /// <returns>true:æ¡ä»¶ãŒåˆã£ã¦ã„ã‚‹/falseï¼šæ¡ä»¶ãŒåˆã£ã¦ã„ãªã„</returns>
         //
         public static bool operator <(DateTimeEx t1, DateTimeEx t2)
         {
@@ -202,11 +202,11 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ŠÔ‚Ì”äŠryt1‚ªt2‚æ‚è‘å‚«‚¢ê‡z
+        /// æ™‚é–“ã®æ¯”è¼ƒã€t1ãŒt2ã‚ˆã‚Šå¤§ãã„å ´åˆã€‘
         /// </summary>
-        /// <param name="t1">uTimeŒ^</param>
-        /// <param name="t2">uTimeŒ^</param>
-        /// <returns>true:ğŒ‚ª‡‚Á‚Ä‚¢‚é/falseFğŒ‚ª‡‚Á‚Ä‚¢‚È‚¢</returns>
+        /// <param name="t1">uTimeå‹</param>
+        /// <param name="t2">uTimeå‹</param>
+        /// <returns>true:æ¡ä»¶ãŒåˆã£ã¦ã„ã‚‹/falseï¼šæ¡ä»¶ãŒåˆã£ã¦ã„ãªã„</returns>
         //
         public static bool operator >(DateTimeEx t1, DateTimeEx t2)
         {
@@ -214,11 +214,11 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ŠÔ‚Ì”äŠryt1‚ªt2ˆÈ‰º‚Ìê‡z
+        /// æ™‚é–“ã®æ¯”è¼ƒã€t1ãŒt2ä»¥ä¸‹ã®å ´åˆã€‘
         /// </summary>
-        /// <param name="t1">uTimeŒ^</param>
-        /// <param name="t2">uTimeŒ^</param>
-        /// <returns>true:ğŒ‚ª‡‚Á‚Ä‚¢‚é/falseFğŒ‚ª‡‚Á‚Ä‚¢‚È‚¢</returns>
+        /// <param name="t1">uTimeå‹</param>
+        /// <param name="t2">uTimeå‹</param>
+        /// <returns>true:æ¡ä»¶ãŒåˆã£ã¦ã„ã‚‹/falseï¼šæ¡ä»¶ãŒåˆã£ã¦ã„ãªã„</returns>
         //
         public static bool operator <=(DateTimeEx t1, DateTimeEx t2)
         {
@@ -226,7 +226,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// •¶š—ñ‚©‚çƒCƒ“ƒXƒ^ƒ“ƒX‚ğ¶¬‚·‚éBH‚Í24ˆÈã‚Å‚à‰ğÍ‚Å‚«‚é
+        /// æ–‡å­—åˆ—ã‹ã‚‰ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ç”Ÿæˆã™ã‚‹ã€‚Hã¯24ä»¥ä¸Šã§ã‚‚è§£æã§ãã‚‹
         /// </summary>
         /// <param name="v0"></param>
         /// <returns></returns>
@@ -277,11 +277,11 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ŠÔ‚Ì”äŠryt1‚ªt2ˆÈã‚Ìê‡z
+        /// æ™‚é–“ã®æ¯”è¼ƒã€t1ãŒt2ä»¥ä¸Šã®å ´åˆã€‘
         /// </summary>
-        /// <param name="t1">uTimeŒ^</param>
-        /// <param name="t2">uTimeŒ^</param>
-        /// <returns>true:ğŒ‚ª‡‚Á‚Ä‚¢‚é/falseFğŒ‚ª‡‚Á‚Ä‚¢‚È‚¢</returns>
+        /// <param name="t1">uTimeå‹</param>
+        /// <param name="t2">uTimeå‹</param>
+        /// <returns>true:æ¡ä»¶ãŒåˆã£ã¦ã„ã‚‹/falseï¼šæ¡ä»¶ãŒåˆã£ã¦ã„ãªã„</returns>
         //
         public static bool operator >=(DateTimeEx t1, DateTimeEx t2)
         {
@@ -345,20 +345,20 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒtƒH[ƒ}ƒbƒg‚ÉŠî‚Ã‚¢‚Ä•¶š—ñ‚ğ¶¬‚·‚é
+        /// ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆã«åŸºã¥ã„ã¦æ–‡å­—åˆ—ã‚’ç”Ÿæˆã™ã‚‹
         /// </summary>
         /// <param name="format">
-        /// ƒtƒH[ƒ}ƒbƒg
-        /// %h 
-        /// %m •ª
-        /// %s •b
-        /// %d “ú
-        /// %w T‚Ì•¶ši—áFMonj
-        /// %S •b‚Ì’ÊZ
-        /// %M •ª‚Ì’ÊZ
-        /// %H ‚Ì’ÊZ
-        /// %D “ú‚Ì’ÊZ
-        /// %DI “ú‚Ì’ÊZi®”•”‚Ì‚İj
+        /// ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆ
+        /// %h æ™‚
+        /// %m åˆ†
+        /// %s ç§’
+        /// %d æ—¥
+        /// %w é€±ã®æ–‡å­—ï¼ˆä¾‹ï¼šMonï¼‰
+        /// %S ç§’ã®é€šç®—
+        /// %M åˆ†ã®é€šç®—
+        /// %H æ™‚ã®é€šç®—
+        /// %D æ—¥ã®é€šç®—
+        /// %DI æ—¥ã®é€šç®—ï¼ˆæ•´æ•°éƒ¨ã®ã¿ï¼‰
         /// </param>
         /// <returns></returns>
         //
@@ -377,13 +377,13 @@ namespace Tono.GuiWinForm
             format = format.Replace("%H", TotalHours.ToString());
             format = format.Replace("%S", TotalSeconds.ToString());
             format = format.Replace("%M", TotalMinutes.ToString());
-            format = format.Replace("%DI", ((int)TotalDays).ToString());    // “ú‚ğ®”‰»iØ‚èÌ‚Äj
+            format = format.Replace("%DI", ((int)TotalDays).ToString());    // æ—¥ã‚’æ•´æ•°åŒ–ï¼ˆåˆ‡ã‚Šæ¨ã¦ï¼‰
             format = format.Replace("%D", TotalDays.ToString());
             return format;
         }
 
         /// <summary>
-        /// ‚ª•‰‚Ì’l‚Ìê‡A‚PTŠÔüŠú‚Å³‹K‰»‚·‚é
+        /// æ™‚åˆ»ãŒè² ã®å€¤ã®å ´åˆã€ï¼‘é€±é–“å‘¨æœŸã§æ­£è¦åŒ–ã™ã‚‹
         /// </summary>
         /// <returns></returns>
         public DateTimeEx GetNormalizeWeeklyCycle()
@@ -399,10 +399,10 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// •ª’PˆÊ‚Ì’l‚©‚çƒCƒ“ƒXƒ^ƒ“ƒX‚ğ¶¬‚·‚é
+        /// åˆ†å˜ä½ã®å€¤ã‹ã‚‰ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ç”Ÿæˆã™ã‚‹
         /// </summary>
-        /// <param name="totalMinutes">—İŒv•ª</param>
-        /// <returns>V‚µ‚¢ƒCƒ“ƒXƒ^ƒ“ƒX</returns>
+        /// <param name="totalMinutes">ç´¯è¨ˆåˆ†</param>
+        /// <returns>æ–°ã—ã„ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹</returns>
         //
         public static DateTimeEx FromMinutes(int totalMinutes)
         {
@@ -418,10 +418,10 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// •b’PˆÊ‚Ì’l‚©‚çƒCƒ“ƒXƒ^ƒ“ƒX‚ğ¶¬‚·‚é
+        /// ç§’å˜ä½ã®å€¤ã‹ã‚‰ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ç”Ÿæˆã™ã‚‹
         /// </summary>
-        /// <param name="totalMinutes">—İŒv•ª</param>
-        /// <returns>V‚µ‚¢ƒCƒ“ƒXƒ^ƒ“ƒX</returns>
+        /// <param name="totalMinutes">ç´¯è¨ˆåˆ†</param>
+        /// <returns>æ–°ã—ã„ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹</returns>
         //
         public static DateTimeEx FromSeconds(int totalSeconds)
         {
@@ -433,10 +433,10 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// •b’PˆÊ‚Ì’l‚©‚çƒCƒ“ƒXƒ^ƒ“ƒX‚ğ¶¬‚·‚é
+        /// ç§’å˜ä½ã®å€¤ã‹ã‚‰ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ç”Ÿæˆã™ã‚‹
         /// </summary>
-        /// <param name="totalMinutes">—İŒv•ª</param>
-        /// <returns>V‚µ‚¢ƒCƒ“ƒXƒ^ƒ“ƒX</returns>
+        /// <param name="totalMinutes">ç´¯è¨ˆåˆ†</param>
+        /// <returns>æ–°ã—ã„ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹</returns>
         //
         public static DateTimeEx FromDays(double totalDays)
         {
@@ -448,11 +448,11 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ‰ÁZ‰‰Zq
+        /// åŠ ç®—æ¼”ç®—å­
         /// </summary>
         /// <param name="t1"></param>
         /// <param name="t2"></param>
-        /// <returns>‰ÁZŒã‚ÌV‚µ‚¢ƒCƒ“ƒXƒ^ƒ“ƒX</returns>
+        /// <returns>åŠ ç®—å¾Œã®æ–°ã—ã„ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹</returns>
         //
         public static DateTimeEx operator +(DateTimeEx t1, DateTimeEx t2)
         {
@@ -464,11 +464,11 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// Œ¸Z‰‰Zq
+        /// æ¸›ç®—æ¼”ç®—å­
         /// </summary>
         /// <param name="t1"></param>
         /// <param name="t2"></param>
-        /// <returns>Œ¸ZŒã‚ÌV‚µ‚¢ƒCƒ“ƒXƒ^ƒ“ƒX</returns>
+        /// <returns>æ¸›ç®—å¾Œã®æ–°ã—ã„ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹</returns>
         //
         public static DateTimeEx operator -(DateTimeEx t1, DateTimeEx t2)
         {
@@ -480,11 +480,11 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// æZ‰‰Zq
+        /// ä¹—ç®—æ¼”ç®—å­
         /// </summary>
         /// <param name="t1"></param>
         /// <param name="t2"></param>
-        /// <returns>æZŒã‚ÌV‚µ‚¢ƒCƒ“ƒXƒ^ƒ“ƒX</returns>
+        /// <returns>ä¹—ç®—å¾Œã®æ–°ã—ã„ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹</returns>
         //
         public static DateTimeEx operator *(DateTimeEx t1, int t2)
         {
@@ -496,11 +496,11 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// œZ‰‰Zq
+        /// é™¤ç®—æ¼”ç®—å­
         /// </summary>
         /// <param name="t1"></param>
         /// <param name="t2"></param>
-        /// <returns>œZŒã‚ÌV‚µ‚¢ƒCƒ“ƒXƒ^ƒ“ƒX</returns>
+        /// <returns>é™¤ç®—å¾Œã®æ–°ã—ã„ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹</returns>
         //
         public static DateTimeEx operator /(DateTimeEx t1, int t2)
         {
@@ -512,12 +512,12 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ®”’l‚©‚çƒCƒ“ƒXƒ^ƒ“ƒX‚ğ¶¬‚·‚é
+        /// æ•´æ•°å€¤ã‹ã‚‰ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ç”Ÿæˆã™ã‚‹
         /// </summary>
-        /// <param name="day">—j“úF0=Œ—j“ú</param>
-        /// <param name="hour"> 0-23</param>
-        /// <param name="minute">•ª 0-59</param>
-        /// <param name="second">•b 0-59</param>
+        /// <param name="day">æ›œæ—¥ï¼š0=æœˆæ›œæ—¥</param>
+        /// <param name="hour">æ™‚ 0-23</param>
+        /// <param name="minute">åˆ† 0-59</param>
+        /// <param name="second">ç§’ 0-59</param>
         /// <returns></returns>
         //
         public static DateTimeEx FromDHMS(int day, int hour, int minute, int second)
@@ -530,21 +530,21 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒ[ƒ’l‚ğƒZƒbƒg‚·‚é
+        /// ã‚¼ãƒ­å€¤ã‚’ã‚»ãƒƒãƒˆã™ã‚‹
         /// </summary>
         //
         public void SetZero()
         {
-            System.Diagnostics.Debug.Assert(_isReadonly == false, "“Ç‚İæ‚èê—p‚ÌuTime‚É’lƒZƒbƒg‚Å‚«‚È‚¢");
+            System.Diagnostics.Debug.Assert(_isReadonly == false, "èª­ã¿å–ã‚Šå°‚ç”¨ã®uTimeã«å€¤ã‚»ãƒƒãƒˆã§ããªã„");
             _val = 0;
         }
 
-        #region ITime ƒƒ“ƒo
+        #region ITime ãƒ¡ãƒ³ãƒ
 
         /// <summary>
-        ///@ŠÔ‚ğæ“¾‚·‚é
+        ///ã€€æ™‚é–“ã‚’å–å¾—ã™ã‚‹
         /// </summary>
-        /// <returns>ŠÔ</returns>
+        /// <returns>æ™‚é–“</returns>
         public int Hour
         {
             get
@@ -556,9 +556,9 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// •ª‚ğæ“¾‚·‚é
+        /// åˆ†ã‚’å–å¾—ã™ã‚‹
         /// </summary>
-        /// <returns>•ª</returns>
+        /// <returns>åˆ†</returns>
         public int Minute
         {
             // 
@@ -572,9 +572,9 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// •b‚ğæ“¾‚·‚é
+        /// ç§’ã‚’å–å¾—ã™ã‚‹
         /// </summary>
-        /// <returns>•b</returns>
+        /// <returns>ç§’</returns>
         public int Second
         {
             // 
@@ -589,9 +589,9 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// “ú”‚ğæ“¾‚·‚é
+        /// æ—¥æ•°ã‚’å–å¾—ã™ã‚‹
         /// </summary>
-        /// <returns>“ú”</returns>
+        /// <returns>æ—¥æ•°</returns>
         public int Day
         {
             // 
@@ -603,7 +603,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ‡Œv•b”‚ğæ“¾‚·‚é
+        /// åˆè¨ˆç§’æ•°ã‚’å–å¾—ã™ã‚‹
         /// </summary>
         /// <returns></returns>
         public int TotalSeconds
@@ -613,13 +613,13 @@ namespace Tono.GuiWinForm
             // 
             set
             {
-                System.Diagnostics.Debug.Assert(_isReadonly == false, "“Ç‚İæ‚èê—p‚ÌuTime‚É’lƒZƒbƒg‚Å‚«‚È‚¢");
+                System.Diagnostics.Debug.Assert(_isReadonly == false, "èª­ã¿å–ã‚Šå°‚ç”¨ã®uTimeã«å€¤ã‚»ãƒƒãƒˆã§ããªã„");
                 _val = value;
             }
         }
 
         /// <summary>
-        /// ‡Œv•ª”‚ğæ“¾‚·‚é
+        /// åˆè¨ˆåˆ†æ•°ã‚’å–å¾—ã™ã‚‹
         /// </summary>
         /// <returns></returns>
         public int TotalMinutes
@@ -629,13 +629,13 @@ namespace Tono.GuiWinForm
             // 
             set
             {
-                System.Diagnostics.Debug.Assert(_isReadonly == false, "“Ç‚İæ‚èê—p‚ÌuTime‚É’lƒZƒbƒg‚Å‚«‚È‚¢");
+                System.Diagnostics.Debug.Assert(_isReadonly == false, "èª­ã¿å–ã‚Šå°‚ç”¨ã®uTimeã«å€¤ã‚»ãƒƒãƒˆã§ããªã„");
                 _val = value * 60;
             }
         }
 
         /// <summary>
-        /// ‡Œv•b”‚ğæ“¾‚·‚é
+        /// åˆè¨ˆç§’æ•°ã‚’å–å¾—ã™ã‚‹
         /// </summary>
         /// <returns></returns>
         public int TotalHours
@@ -645,15 +645,15 @@ namespace Tono.GuiWinForm
             // 
             set
             {
-                System.Diagnostics.Debug.Assert(_isReadonly == false, "“Ç‚İæ‚èê—p‚ÌuTime‚É’lƒZƒbƒg‚Å‚«‚È‚¢");
+                System.Diagnostics.Debug.Assert(_isReadonly == false, "èª­ã¿å–ã‚Šå°‚ç”¨ã®uTimeã«å€¤ã‚»ãƒƒãƒˆã§ããªã„");
                 _val = value * 3600;
             }
         }
 
         /// <summary>
-        /// ‡Œv‚Ì“ú”‚ğæ“¾‚·‚é
+        /// åˆè¨ˆã®æ—¥æ•°ã‚’å–å¾—ã™ã‚‹
         /// </summary>
-        /// <returns>“ú”</returns>
+        /// <returns>æ—¥æ•°</returns>
         public double TotalDays
         {
             // 
@@ -661,13 +661,13 @@ namespace Tono.GuiWinForm
             // 
             set
             {
-                System.Diagnostics.Debug.Assert(_isReadonly == false, "“Ç‚İæ‚èê—p‚ÌuTime‚É’lƒZƒbƒg‚Å‚«‚È‚¢");
+                System.Diagnostics.Debug.Assert(_isReadonly == false, "èª­ã¿å–ã‚Šå°‚ç”¨ã®uTimeã«å€¤ã‚»ãƒƒãƒˆã§ããªã„");
                 _val = (int)(value * 86400);
             }
         }
 
         #endregion
-        #region IComparable ƒƒ“ƒo
+        #region IComparable ãƒ¡ãƒ³ãƒ
 
         public int CompareTo(object obj)
         {
@@ -675,7 +675,7 @@ namespace Tono.GuiWinForm
         }
 
         #endregion
-        #region ICloneable ƒƒ“ƒo
+        #region ICloneable ãƒ¡ãƒ³ãƒ
         public object Clone()
         {
             var ret = (DateTimeEx)Activator.CreateInstance(GetType());

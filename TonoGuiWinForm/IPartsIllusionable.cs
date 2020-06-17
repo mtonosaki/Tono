@@ -4,11 +4,11 @@
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// IPartsIllusionable ‚ÌŠT—v‚Ìà–¾‚Å‚·B
-    /// –³ğŒ‚ÅƒCƒŠƒ…[ƒWƒ‡ƒ“‚Æ‚È‚éƒp[ƒc
+    /// IPartsIllusionable ã®æ¦‚è¦ã®èª¬æ˜ã§ã™ã€‚
+    /// ç„¡æ¡ä»¶ã§ã‚¤ãƒªãƒ¥ãƒ¼ã‚¸ãƒ§ãƒ³ã¨ãªã‚‹ãƒ‘ãƒ¼ãƒ„
     /// </summary>
     /// <remarks>
-    /// “Á‹–ŒöŠJ”Ô†F2008-171229
+    /// ç‰¹è¨±å…¬é–‹ç•ªå·ï¼š2008-171229
     /// </remarks>
     public interface IPartsIllusionable
     {

@@ -1,31 +1,31 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// FeaturePartsSelect ‚ÌŠT—v‚Ìà–¾‚Å‚·B
-    /// ‘I‘ğE‰ğœ‚ÌğŒ‚ÍŸ‚Ì‚Æ‚¨‚è
-    /// ‚PD‰‚ß‚Ä‘I‘ğ¨‚»‚ê‚ğ‘I‘ğ
-    /// ‚QD‘I‘ğ’†‚ğ‘I‘ğ¨‚»‚Ì‚Ü‚Ü
-    /// ‚RD•Ê‚Ì‚ğ‘I‘ğ¨‘¼‚ğ‰ğœ‚µ‚Ä‚»‚ê‚ğ‘I‘ğ
-    /// ‚SDShift{‘I‘ğ¨’Ç‰Á‘I‘ğE‰ğœ
-    /// ‚TD‰½‚à–³‚¢Š‚ğƒNƒŠƒbƒN¨‚·‚×‚Ä‰ğœ
+    /// FeaturePartsSelect ã®æ¦‚è¦ã®èª¬æ˜ã§ã™ã€‚
+    /// é¸æŠãƒ»è§£é™¤ã®æ¡ä»¶ã¯æ¬¡ã®ã¨ãŠã‚Š
+    /// ï¼‘ï¼åˆã‚ã¦é¸æŠâ†’ãã‚Œã‚’é¸æŠ
+    /// ï¼’ï¼é¸æŠä¸­ã‚’é¸æŠâ†’ãã®ã¾ã¾
+    /// ï¼“ï¼åˆ¥ã®ã‚’é¸æŠâ†’ä»–ã‚’è§£é™¤ã—ã¦ãã‚Œã‚’é¸æŠ
+    /// ï¼”ï¼Shiftï¼‹é¸æŠâ†’è¿½åŠ é¸æŠãƒ»è§£é™¤
+    /// ï¼•ï¼ä½•ã‚‚ç„¡ã„æ‰€ã‚’ã‚¯ãƒªãƒƒã‚¯â†’ã™ã¹ã¦è§£é™¤
     /// </summary>
     public class FeaturePartsSelect : FeatureBase, IMouseListener
     {
-        #region ‘®«iƒVƒŠƒAƒ‰ƒCƒY‚µ‚È‚¢j
-        /// <summary>‘I‘ğ’†‚Ìƒp[ƒci‹¤—L•Ï”j</summary>
+        #region å±æ€§ï¼ˆã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºã—ãªã„ï¼‰
+        /// <summary>é¸æŠä¸­ã®ãƒ‘ãƒ¼ãƒ„ï¼ˆå…±æœ‰å¤‰æ•°ï¼‰</summary>
         private PartsCollectionBase _selectedParts;
 
-        /// <summary>’P“ÆƒNƒŠƒbƒN‚Ìƒ{ƒ^ƒ“\¬</summary>
+        /// <summary>å˜ç‹¬ã‚¯ãƒªãƒƒã‚¯ã®ãƒœã‚¿ãƒ³æ§‹æˆ</summary>
         private readonly MouseState.Buttons _triggerSingle;
-        /// <summary>’Ç‰Áƒ{ƒ^ƒ“\¬</summary>
+        /// <summary>è¿½åŠ ãƒœã‚¿ãƒ³æ§‹æˆ</summary>
         private readonly MouseState.Buttons _triggerPlus;
         #endregion
 
         /// <summary>
-        /// —Bˆê‚ÌƒRƒ“ƒXƒgƒ‰ƒNƒ^
+        /// å”¯ä¸€ã®ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
         /// </summary>
         public FeaturePartsSelect()
         {
@@ -34,20 +34,20 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ‰Šú‰»ˆ—
+        /// åˆæœŸåŒ–å‡¦ç†
         /// </summary>
         public override void OnInitInstance()
         {
             base.OnInitInstance();
 
-            // ƒXƒe[ƒ^ƒX“¯Šú
+            // ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹åŒæœŸ
             _selectedParts = (PartsCollectionBase)Share.Get("SelectedParts", typeof(PartsCollection));
             _selectedParts.SetTemporaryMode();
         }
 
-        #region IMouseListener ƒƒ“ƒo
+        #region IMouseListener ãƒ¡ãƒ³ãƒ
         /// <summary>
-        /// ƒp[ƒc‘I‘ğˆ—‚ğƒ}ƒEƒXƒ_ƒEƒ“ƒCƒxƒ“ƒg‚Ås‚¤
+        /// ãƒ‘ãƒ¼ãƒ„é¸æŠå‡¦ç†ã‚’ãƒã‚¦ã‚¹ãƒ€ã‚¦ãƒ³ã‚¤ãƒ™ãƒ³ãƒˆã§è¡Œã†
         /// </summary>
         public void OnMouseDown(MouseState e)
         {
@@ -72,7 +72,7 @@ namespace Tono.GuiWinForm
                 {
                     if (((IPartsSelectable)parts).IsSelected == false)
                     {
-                        // ‚·‚×‚Ä‚Ì‘I‘ğ‚ğ‰ğœiƒp[ƒcŠO‚ğƒNƒŠƒbƒNj
+                        // ã™ã¹ã¦ã®é¸æŠã‚’è§£é™¤ï¼ˆãƒ‘ãƒ¼ãƒ„å¤–ã‚’ã‚¯ãƒªãƒƒã‚¯ï¼‰
                         foreach (PartsCollectionBase.PartsEntry pe in _selectedParts)
                         {
                             ((IPartsSelectable)pe.Parts).IsSelected = false;
@@ -80,7 +80,7 @@ namespace Tono.GuiWinForm
                         }
                         _selectedParts.Clear();
 
-                        // w’èƒp[ƒc‚Ì‚İ‘I‘ğó‘Ô
+                        // æŒ‡å®šãƒ‘ãƒ¼ãƒ„ã®ã¿é¸æŠçŠ¶æ…‹
                         ((IPartsSelectable)parts).IsSelected = true;
                         _selectedParts.Add(tarPane, parts);
                         Parts.Invalidate(parts, tarPane);
@@ -91,7 +91,7 @@ namespace Tono.GuiWinForm
             {
                 if (e.Attr.Equals(_triggerSingle) || e.Attr.Equals(_triggerPlus))
                 {
-                    // ‚·‚×‚Ä‚Ì‘I‘ğ‚ğ‰ğœiƒp[ƒcŠO‚ğƒNƒŠƒbƒNj
+                    // ã™ã¹ã¦ã®é¸æŠã‚’è§£é™¤ï¼ˆãƒ‘ãƒ¼ãƒ„å¤–ã‚’ã‚¯ãƒªãƒƒã‚¯ï¼‰
                     foreach (PartsCollectionBase.PartsEntry pe in _selectedParts)
                     {
                         ((IPartsSelectable)pe.Parts).IsSelected = false;
@@ -103,28 +103,28 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒ}ƒEƒXˆÚ“®ƒCƒxƒ“ƒg
+        /// ãƒã‚¦ã‚¹ç§»å‹•ã‚¤ãƒ™ãƒ³ãƒˆ
         /// </summary>
         public void OnMouseMove(MouseState e)
         {
-            // ‰½‚à‚µ‚È‚¢
+            // ä½•ã‚‚ã—ãªã„
         }
 
         /// <summary>
-        /// ƒ}ƒEƒXƒAƒbƒvƒCƒxƒ“ƒg
+        /// ãƒã‚¦ã‚¹ã‚¢ãƒƒãƒ—ã‚¤ãƒ™ãƒ³ãƒˆ
         /// </summary>
         public void OnMouseUp(MouseState e)
         {
-            // ‰½‚à‚µ‚È‚¢
+            // ä½•ã‚‚ã—ãªã„
         }
 
         /// <summary>
-        /// ƒ}ƒEƒXƒzƒC[ƒ‹ƒCƒxƒ“ƒg
+        /// ãƒã‚¦ã‚¹ãƒ›ã‚¤ãƒ¼ãƒ«ã‚¤ãƒ™ãƒ³ãƒˆ
         /// </summary>
         /// <param name="e"></param>
         public void OnMouseWheel(MouseState e)
         {
-            // ‰½‚à‚µ‚È‚¢
+            // ä½•ã‚‚ã—ãªã„
         }
         #endregion
     }

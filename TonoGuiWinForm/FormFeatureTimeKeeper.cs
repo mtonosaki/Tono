@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System;
@@ -12,7 +12,7 @@ namespace Tono.GuiWinForm
     public partial class FormFeatureTimeKeeper : Form
     {
         /// <summary>
-        /// ƒ†ƒjƒbƒg‚ğ•\Œ»‚·‚éƒNƒ‰ƒX
+        /// ãƒ¦ãƒ‹ãƒƒãƒˆã‚’è¡¨ç¾ã™ã‚‹ã‚¯ãƒ©ã‚¹
         /// </summary>
         private class Unit
         {
@@ -46,7 +46,7 @@ namespace Tono.GuiWinForm
         private readonly FeatureGroupRoot _root = null;
 
         /// <summary>
-        /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+        /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
         /// </summary>
         public FormFeatureTimeKeeper(FeatureGroupRoot rootgroup)
         {
@@ -56,7 +56,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ‰Šú‰»
+        /// åˆæœŸåŒ–
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -66,7 +66,7 @@ namespace Tono.GuiWinForm
             comboBoxUnit.Items.Add(new Unit("per min", 60));
             comboBoxUnit.Items.Add(new Unit("per sec", 1));
             comboBoxUnit.Items.Add(new Unit("per msec", 0.001));
-            comboBoxUnit.Items.Add(new Unit("per ƒÊsec", 0.000001));
+            comboBoxUnit.Items.Add(new Unit("per Î¼sec", 0.000001));
 
             comboBoxUnit.SelectedIndex = 2;
             comboBoxUnit.SelectedIndexChanged += new EventHandler(comboBoxUnit_SelectedIndexChanged);
@@ -80,7 +80,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// I—¹
+        /// çµ‚äº†
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -135,7 +135,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ÄŒvZ
+        /// å†è¨ˆç®—
         /// </summary>
         private void recalc()
         {

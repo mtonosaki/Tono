@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System;
@@ -8,7 +8,7 @@ using System;
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// CoupleObject ‚ÌŠT—v‚Ìà–¾‚Å‚·B
+    /// CoupleObject ã®æ¦‚è¦ã®èª¬æ˜ã§ã™ã€‚
     /// </summary>
     [Serializable]
     public class CoupleObject
@@ -17,10 +17,10 @@ namespace Tono.GuiWinForm
         public object V2 = null;
 
         /// <summary>
-        /// ‰Šú‰»ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+        /// åˆæœŸåŒ–ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
         /// </summary>
-        /// <param name="value1">QÆ’l‚P</param>
-        /// <param name="value2">QÆ’l‚Q</param>
+        /// <param name="value1">å‚ç…§å€¤ï¼‘</param>
+        /// <param name="value2">å‚ç…§å€¤ï¼’</param>
         public CoupleObject(object value1, object value2)
         {
             V1 = value1;
@@ -28,11 +28,11 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒCƒ“ƒXƒ^ƒ“ƒX‚ğ\’z‚·‚é
+        /// ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’æ§‹ç¯‰ã™ã‚‹
         /// </summary>
-        /// <param name="value1">QÆ’l‚P</param>
-        /// <param name="value2">QÆ’l‚Q</param>
-        /// <returns>V‚µ‚¢ƒCƒ“ƒXƒ^ƒ“ƒX</returns>
+        /// <param name="value1">å‚ç…§å€¤ï¼‘</param>
+        /// <param name="value2">å‚ç…§å€¤ï¼’</param>
+        /// <returns>æ–°ã—ã„ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹</returns>
         public static CoupleObject FromObjects(object value1, object value2)
         {
             return new CoupleObject(value1, value2);
@@ -40,20 +40,20 @@ namespace Tono.GuiWinForm
     }
 
     /// <summary>
-    /// Œ^‚ğ“Á’è‚µ‚½‚Q’lƒOƒ‹[ƒsƒ“ƒO
+    /// å‹ã‚’ç‰¹å®šã—ãŸï¼’å€¤ã‚°ãƒ«ãƒ¼ãƒ”ãƒ³ã‚°
     /// </summary>
-    /// <typeparam name="T1">‚P”Ô–Ú‚Ì’l‚ÌŒ^</typeparam>
-    /// <typeparam name="T2">‚Q”Ô–Ú‚Ì’l‚ÌŒ^</typeparam>
+    /// <typeparam name="T1">ï¼‘ç•ªç›®ã®å€¤ã®å‹</typeparam>
+    /// <typeparam name="T2">ï¼’ç•ªç›®ã®å€¤ã®å‹</typeparam>
     public class uCouple<T1, T2>
     {
         public T1 V1;
         public T2 V2;
 
         /// <summary>
-        /// \’zq
+        /// æ§‹ç¯‰å­
         /// </summary>
-        /// <param name="value1">QÆ’l‚P</param>
-        /// <param name="value2">QÆ’l‚Q</param>
+        /// <param name="value1">å‚ç…§å€¤ï¼‘</param>
+        /// <param name="value2">å‚ç…§å€¤ï¼’</param>
         public uCouple(T1 value1, T2 value2)
         {
             V1 = value1;

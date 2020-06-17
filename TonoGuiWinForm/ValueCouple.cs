@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System;
@@ -6,15 +6,15 @@ using System;
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// u2 ‚ÌŠT—v‚Ìà–¾‚Å‚·B
+    /// u2 ã®æ¦‚è¦ã®èª¬æ˜ã§ã™ã€‚
     /// </summary>
     [Serializable]
     public class ValueCouple : ICloneable
     {
-        ///<summary>ˆê‚Â–Ú‚Ì’l</summary>
+        ///<summary>ä¸€ã¤ç›®ã®å€¤</summary>
         protected int _v1;
 
-        ///<summary>“ñ‚Â–Ú‚Ì’l</summary>
+        ///<summary>äºŒã¤ç›®ã®å€¤</summary>
         protected int _v2;
 
         #region Data tips for debugging
@@ -27,21 +27,21 @@ namespace Tono.GuiWinForm
         #endregion
 
         /// <summary>
-        /// ˆê‚Â–Ú‚Ì’l
+        /// ä¸€ã¤ç›®ã®å€¤
         /// </summary>
         public int Value1 => _v1;
 
         /// <summary>
-        /// “ñ‚Â–Ú‚Ì’l
+        /// äºŒã¤ç›®ã®å€¤
         /// </summary>
         public int Value2 => _v2;
 
         /// <summary>
-        /// ’l‚ğw’è‚µ‚ÄƒCƒ“ƒXƒ^ƒ“ƒX‚ğì‚é
+        /// å€¤ã‚’æŒ‡å®šã—ã¦ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ä½œã‚‹
         /// </summary>
-        /// <param name="v1">’l‚P</param>
-        /// <param name="v2">’l‚Q</param>
-        /// <returns>ƒCƒ“ƒXƒ^ƒ“ƒX</returns>
+        /// <param name="v1">å€¤ï¼‘</param>
+        /// <param name="v2">å€¤ï¼’</param>
+        /// <returns>ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹</returns>
 
         public static ValueCouple FromInt(int v1, int v2)
         {
@@ -69,7 +69,7 @@ namespace Tono.GuiWinForm
 
 
         /// <summary>
-        /// À•W‚ª(0,0)‚Ì”»’è‚ğs‚¤
+        /// åº§æ¨™ãŒ(0,0)ã®åˆ¤å®šã‚’è¡Œã†
         /// </summary>
         /// <returns></returns>
 
@@ -79,10 +79,10 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ‰ÁZ‰‰Zq(u2Œ^‚Æu2Œ^‚Ì‰ÁZ)
+        /// åŠ ç®—æ¼”ç®—å­(u2å‹ã¨u2å‹ã®åŠ ç®—)
         /// </summary>
-        /// <param name="v1">’l‚P</param>
-        /// <param name="v2">’l‚Q</param>
+        /// <param name="v1">å€¤ï¼‘</param>
+        /// <param name="v2">å€¤ï¼’</param>
         /// <returns></returns>
 
         public static ValueCouple operator +(ValueCouple v1, ValueCouple v2)
@@ -96,10 +96,10 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ‰ÁZ‰‰Zq(_v1‚Æ_v2‚Ì—¼•û‚É’l‚Q‚ğ‰ÁZ‚·‚é)
+        /// åŠ ç®—æ¼”ç®—å­(_v1ã¨_v2ã®ä¸¡æ–¹ã«å€¤ï¼’ã‚’åŠ ç®—ã™ã‚‹)
         /// </summary>
-        /// <param name="v1">’l‚P</param>
-        /// <param name="v2">’l‚Q</param>
+        /// <param name="v1">å€¤ï¼‘</param>
+        /// <param name="v2">å€¤ï¼’</param>
         /// <returns></returns>
 
         public static ValueCouple operator +(ValueCouple v1, int v2)
@@ -113,7 +113,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// Œ¸Z‰‰Zq
+        /// æ¸›ç®—æ¼”ç®—å­
         /// </summary>
         /// <param name="v1"></param>
         /// <param name="v2"></param>
@@ -130,7 +130,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// Œ¸Z‰‰Zq
+        /// æ¸›ç®—æ¼”ç®—å­
         /// </summary>
         /// <param name="v1"></param>
         /// <param name="v2"></param>
@@ -147,7 +147,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// æZ‰‰Zq
+        /// ä¹—ç®—æ¼”ç®—å­
         /// </summary>
         /// <param name="v1"></param>
         /// <param name="v2"></param>
@@ -164,7 +164,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// æZ‰‰Zq
+        /// ä¹—ç®—æ¼”ç®—å­
         /// </summary>
         /// <param name="v1"></param>
         /// <param name="v2"></param>
@@ -181,7 +181,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// æZ‰‰Zq
+        /// ä¹—ç®—æ¼”ç®—å­
         /// </summary>
         /// <param name="v1"></param>
         /// <param name="v2"></param>
@@ -198,7 +198,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// œZ‰‰Zq
+        /// é™¤ç®—æ¼”ç®—å­
         /// </summary>
         /// <param name="v1"></param>
         /// <param name="v2"></param>
@@ -215,7 +215,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// æZ‰‰Zq
+        /// ä¹—ç®—æ¼”ç®—å­
         /// </summary>
         /// <param name="v1"></param>
         /// <param name="v2"></param>
@@ -232,7 +232,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ”äŠr‰‰Zq
+        /// æ¯”è¼ƒæ¼”ç®—å­
         /// </summary>
         /// <param name="v1"></param>
         /// <param name="v2"></param>
@@ -249,7 +249,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ”äŠr‰‰Zq
+        /// æ¯”è¼ƒæ¼”ç®—å­
         /// </summary>
         /// <param name="v1"></param>
         /// <param name="v2"></param>
@@ -265,7 +265,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ”äŠr‰‰Zq
+        /// æ¯”è¼ƒæ¼”ç®—å­
         /// </summary>
         /// <param name="v1"></param>
         /// <param name="v2"></param>
@@ -281,7 +281,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ”äŠr‰‰Zq
+        /// æ¯”è¼ƒæ¼”ç®—å­
         /// </summary>
         /// <param name="v1"></param>
         /// <param name="v2"></param>
@@ -297,17 +297,17 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒnƒbƒVƒ…ƒR[ƒh‚ğ¶¬‚·‚é
+        /// ãƒãƒƒã‚·ãƒ¥ã‚³ãƒ¼ãƒ‰ã‚’ç”Ÿæˆã™ã‚‹
         /// </summary>
-        /// <returns>ƒnƒbƒVƒ…ƒR[ƒh</returns>
+        /// <returns>ãƒãƒƒã‚·ãƒ¥ã‚³ãƒ¼ãƒ‰</returns>
         public override int GetHashCode()
         {
-            // _v1 ‚É‘Î‚µA_v2 ‚ğ8bits’PˆÊ‚Å”½“]iƒGƒ“ƒfƒBƒAƒ“”½“]j‚µ‚½‚à‚Ì‚ğ XOR‚µ‚½’l‚ğƒnƒbƒVƒ…ƒR[ƒh‚Æ‚·‚é
+            // _v1 ã«å¯¾ã—ã€_v2 ã‚’8bitså˜ä½ã§åè»¢ï¼ˆã‚¨ãƒ³ãƒ‡ã‚£ã‚¢ãƒ³åè»¢ï¼‰ã—ãŸã‚‚ã®ã‚’ XORã—ãŸå€¤ã‚’ãƒãƒƒã‚·ãƒ¥ã‚³ãƒ¼ãƒ‰ã¨ã™ã‚‹
             unchecked
             {
                 var ret = (uint)_v1;
                 uint mask = 0x00000fff;
-                var speed = 12;     // mask‚Ìƒrƒbƒg”
+                var speed = 12;     // maskã®ãƒ“ãƒƒãƒˆæ•°
                 var s = 0;
                 var pp = 32 - speed;
 
@@ -327,7 +327,7 @@ namespace Tono.GuiWinForm
         }
 
 
-        #region ICloneable ƒƒ“ƒo
+        #region ICloneable ãƒ¡ãƒ³ãƒ
 
         /// <summary>
         /// 
@@ -345,9 +345,9 @@ namespace Tono.GuiWinForm
         #endregion
 
         /// <summary>
-        /// ƒCƒ“ƒXƒ^ƒ“ƒX‚ğ•\Œ»‚·‚é•¶š—ñ‚ğì¬‚·‚éi•\¦•û–@‚Í•Ï‚í‚é‚Ì‚ÅA‹Šo–Ú“I‚É‚Ì‚İg—p‚·‚é‚±‚Æj
+        /// ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’è¡¨ç¾ã™ã‚‹æ–‡å­—åˆ—ã‚’ä½œæˆã™ã‚‹ï¼ˆè¡¨ç¤ºæ–¹æ³•ã¯å¤‰ã‚ã‚‹ã®ã§ã€è¦–è¦šç›®çš„ã«ã®ã¿ä½¿ç”¨ã™ã‚‹ã“ã¨ï¼‰
         /// </summary>
-        /// <returns>•¶š—ñ</returns>
+        /// <returns>æ–‡å­—åˆ—</returns>
 
         public override string ToString()
         {

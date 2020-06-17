@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System;
@@ -8,22 +8,22 @@ using System.Windows.Forms;
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// TODO•\¦—pƒeƒLƒXƒg
+    /// TODOè¡¨ç¤ºç”¨ãƒ†ã‚­ã‚¹ãƒˆ
     /// </summary>
     public class TodoCaption
     {
         /// <summary>
-        /// ƒƒjƒ…[•\¦—p•¶š—ñ
+        /// ãƒ¡ãƒ‹ãƒ¥ãƒ¼è¡¨ç¤ºç”¨æ–‡å­—åˆ—
         /// </summary>
         public string Caption;
 
         /// <summary>
-        /// à–¾—p•¶š—ñ
+        /// èª¬æ˜ç”¨æ–‡å­—åˆ—
         /// </summary>
         public string Remarks;
 
         /// <summary>
-        /// ‰Šú‰»\’zq
+        /// åˆæœŸåŒ–æ§‹ç¯‰å­
         /// </summary>
         /// <param name="caption"></param>
         /// <param name="remarks"></param>
@@ -35,32 +35,32 @@ namespace Tono.GuiWinForm
     }
 
     /// <summary>
-    /// TODO‚ğÀ‘•‚·‚é‚à‚Ì
+    /// TODOã‚’å®Ÿè£…ã™ã‚‹ã‚‚ã®
     /// </summary>
     public interface ITodoIntent
     {
         /// <summary>
-        /// ƒƒjƒ…[•\¦—p•¶š—ñ‚ğİ’è‚·‚é
+        /// ãƒ¡ãƒ‹ãƒ¥ãƒ¼è¡¨ç¤ºç”¨æ–‡å­—åˆ—ã‚’è¨­å®šã™ã‚‹
         /// </summary>
-        /// <param name="key">¯•Êq</param>
-        /// <returns>•¶š—ñ</returns>
+        /// <param name="key">è­˜åˆ¥å­</param>
+        /// <returns>æ–‡å­—åˆ—</returns>
         TodoCaption GetTodoCaption(string key);
 
         /// <summary>
-        /// •â•‹@”\‚ğÀs‚·‚é
+        /// è£œåŠ©æ©Ÿèƒ½ã‚’å®Ÿè¡Œã™ã‚‹
         /// </summary>
-        /// <param name="key">¯•Êq</param>
-        /// <returns>true=ˆÓ}‚Ç‚¨‚èŠ®—¹ / false=¸”s</returns>
+        /// <param name="key">è­˜åˆ¥å­</param>
+        /// <returns>true=æ„å›³ã©ãŠã‚Šå®Œäº† / false=å¤±æ•—</returns>
         bool DoAssist(string key);
     }
 
     /// <summary>
-    /// TODOƒAƒCƒeƒ€‚ğŠÇ—‚·‚é
+    /// TODOã‚¢ã‚¤ãƒ†ãƒ ã‚’ç®¡ç†ã™ã‚‹
     /// </summary>
     public static class TODO
     {
         /// <summary>
-        /// ƒL[‚ÆƒCƒ“ƒeƒ“ƒg‚ÌƒyƒA
+        /// ã‚­ãƒ¼ã¨ã‚¤ãƒ³ãƒ†ãƒ³ãƒˆã®ãƒšã‚¢
         /// </summary>
         private class KeyIntentPair
         {
@@ -75,12 +75,12 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// TODO‚ğ•\¦E‘€ì‚·‚éƒRƒ“ƒgƒ[ƒ‹‚ğ•Û‘¶
+        /// TODOã‚’è¡¨ç¤ºãƒ»æ“ä½œã™ã‚‹ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã‚’ä¿å­˜
         /// </summary>
         private static ToolStripDropDownButton _tar = null;
 
         /// <summary>
-        /// TODOŠÇ—‚·‚éƒhƒƒbƒvƒ_ƒEƒ“ƒ{ƒ^ƒ“‚Ìe‚ğ“o˜^‚·‚é
+        /// TODOç®¡ç†ã™ã‚‹ãƒ‰ãƒ­ãƒƒãƒ—ãƒ€ã‚¦ãƒ³ãƒœã‚¿ãƒ³ã®è¦ªã‚’ç™»éŒ²ã™ã‚‹
         /// </summary>
         /// <param name="btn"></param>
         public static void SetTodoButton(ToolStripDropDownButton btn)
@@ -90,7 +90,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒƒjƒ…[‚ğŠJ‚¢‚½‚Æ‚«‚ÉATODOƒLƒƒƒvƒVƒ‡ƒ“‚ğŒğŠ·‚·‚é
+        /// ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã‚’é–‹ã„ãŸã¨ãã«ã€TODOã‚­ãƒ£ãƒ—ã‚·ãƒ§ãƒ³ã‚’äº¤æ›ã™ã‚‹
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -109,14 +109,14 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// TODO‚É‚Ğ‚Æ‚Â’Ç‰Á‚·‚é
+        /// TODOã«ã²ã¨ã¤è¿½åŠ ã™ã‚‹
         /// </summary>
         /// <param name="key"></param>
         /// <param name="intent"></param>
         /// <returns></returns>
         public static void Add(string key, ITodoIntent intent)
         {
-            // “¯‚¶¯•Êq‚ª•¡”“o˜^‚³‚ê‚½‚çAŒã‚Ì‚Ù‚¤‚ğƒLƒƒƒ“ƒZƒ‹‚·‚é
+            // åŒã˜è­˜åˆ¥å­ãŒè¤‡æ•°ç™»éŒ²ã•ã‚ŒãŸã‚‰ã€å¾Œã®ã»ã†ã‚’ã‚­ãƒ£ãƒ³ã‚»ãƒ«ã™ã‚‹
             foreach (ToolStripItem tsi in _tar.DropDownItems)
             {
                 if (tsi.Tag is KeyIntentPair ki)
@@ -150,7 +150,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// TODOƒAƒVƒXƒgƒ{ƒ^ƒ“‚ªƒNƒŠƒbƒN‚³‚ê‚½
+        /// TODOã‚¢ã‚·ã‚¹ãƒˆãƒœã‚¿ãƒ³ãŒã‚¯ãƒªãƒƒã‚¯ã•ã‚ŒãŸ
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -164,9 +164,9 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// I—¹‚µ‚ÄTODOƒŠƒXƒg‚©‚çÁ‚·
+        /// çµ‚äº†ã—ã¦TODOãƒªã‚¹ãƒˆã‹ã‚‰æ¶ˆã™
         /// </summary>
-        /// <param name="key">¯•Êq</param>
+        /// <param name="key">è­˜åˆ¥å­</param>
         /// <returns></returns>
         public static void Finish(string key)
         {

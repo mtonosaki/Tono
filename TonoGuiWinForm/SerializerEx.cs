@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System;
@@ -14,34 +14,34 @@ using System.Runtime.Serialization;
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// SerializerEx ‚ÌŠT—v‚Ìà–¾‚Å‚·B
+    /// SerializerEx ã®æ¦‚è¦ã®èª¬æ˜ã§ã™ã€‚
     /// </summary>
     public static class SerializerEx
     {
         private enum Tag : byte
         {
-            /*ƒ^ƒOŒn*/
+            /*ã‚¿ã‚°ç³»*/
             Null, ClassStart, SubClass, Field, ClassEnd,
-            /*ƒNƒ‰ƒXŒn*/
+            /*ã‚¯ãƒ©ã‚¹ç³»*/
             List, Dictionary,
-            /*’lŒn*/
+            /*å€¤ç³»*/
             vDouble, vSingle, vInt64, vUInt64, vInt32, vUInt32, vInt16, vUInt16, vIntPtr, vSByte, vByte, vBoolean, vString,
-            /*‚‘¬Œn*/
+            /*é«˜é€Ÿç³»*/
             vUTime, vId, Color
         }
 
-        /// <summary>Type‚ÆeTag‚ÌŠÖ˜A</summary>
+        /// <summary>Typeã¨eTagã®é–¢é€£</summary>
         [NonSerialized] private static readonly IDictionary/*<Type,eTag>*/ _typeToTag;
-        /// <summary>Type‚ÆeTag‚ÌŠÖ˜A</summary>
+        /// <summary>Typeã¨eTagã®é–¢é€£</summary>
         [NonSerialized] private static readonly IDictionary/*<eTag,Type>*/ _tagToType;
 
-        /// <summary>uTime‚ÌDirectŒnƒTƒ|[ƒg—pi‚‘¬‰»j</summary>
+        /// <summary>uTimeã®Directç³»ã‚µãƒãƒ¼ãƒˆç”¨ï¼ˆé«˜é€ŸåŒ–ï¼‰</summary>
         [NonSerialized] private static readonly FieldInfo uTimeFI = typeof(DateTimeEx).GetField("_val", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
 
 
-        #region ƒXƒ^ƒeƒBƒbƒN\’zq
+        #region ã‚¹ã‚¿ãƒ†ã‚£ãƒƒã‚¯æ§‹ç¯‰å­
         /// <summary>
-        /// ƒXƒ^ƒeƒBƒbƒN\’zq
+        /// ã‚¹ã‚¿ãƒ†ã‚£ãƒƒã‚¯æ§‹ç¯‰å­
         /// </summary>
         static SerializerEx()
         {
@@ -73,7 +73,7 @@ namespace Tono.GuiWinForm
         #endregion
 
         /// <summary>
-        /// “Ç‚İ‚İŠ®—¹Œã‚ÉAƒf[ƒ^‚ğ“K—p‚·‚éˆ—i•W€ˆ—FƒAƒvƒŠ“Á‰»‚ÍA•Ê‚Ì‚Æ‚±‚ë‚Ås‚Á‚Ä‚­‚¾‚³‚¢j
+        /// èª­ã¿è¾¼ã¿å®Œäº†å¾Œã«ã€ãƒ‡ãƒ¼ã‚¿ã‚’é©ç”¨ã™ã‚‹å‡¦ç†ï¼ˆæ¨™æº–å‡¦ç†ï¼šã‚¢ãƒ—ãƒªç‰¹åŒ–ã¯ã€åˆ¥ã®ã¨ã“ã‚ã§è¡Œã£ã¦ãã ã•ã„ï¼‰
         /// </summary>
         /// <param name="value"></param>
         private static void receiveFinalize(object value)
@@ -86,20 +86,20 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// w’èƒXƒgƒŠ[ƒ€‚©‚çƒIƒuƒWƒFƒNƒg‚ğ‚Ğ‚Æ‚ÂóM‚·‚é
+        /// æŒ‡å®šã‚¹ãƒˆãƒªãƒ¼ãƒ ã‹ã‚‰ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’ã²ã¨ã¤å—ä¿¡ã™ã‚‹
         /// </summary>
-        /// <param name="reader">ƒXƒgƒŠ[ƒ€</param>
-        /// <returns>ƒIƒuƒWƒFƒNƒg‚ÌƒCƒ“ƒXƒ^ƒ“ƒX</returns>
+        /// <param name="reader">ã‚¹ãƒˆãƒªãƒ¼ãƒ </param>
+        /// <returns>ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹</returns>
         public static object Receive(Stream reader)
         {
             return receiveLoop(reader);
         }
 
         /// <summary>
-        /// w’èƒXƒgƒŠ[ƒ€‚ÌŒ»İˆÊ’u‚©‚çóM‚·‚éÄ‹Aƒ‹[ƒv
+        /// æŒ‡å®šã‚¹ãƒˆãƒªãƒ¼ãƒ ã®ç¾åœ¨ä½ç½®ã‹ã‚‰å—ä¿¡ã™ã‚‹å†å¸°ãƒ«ãƒ¼ãƒ—
         /// </summary>
-        /// <param name="reader">ƒXƒgƒŠ[ƒ€</param>
-        /// <returns>ƒCƒ“ƒXƒ^ƒ“ƒX‰»‚³‚ê‚½ƒIƒuƒWƒFƒNƒg</returns>
+        /// <param name="reader">ã‚¹ãƒˆãƒªãƒ¼ãƒ </param>
+        /// <returns>ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹åŒ–ã•ã‚ŒãŸã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ</returns>
         private static object receiveLoop(Stream reader)
         {
             object ret = null;
@@ -113,14 +113,14 @@ namespace Tono.GuiWinForm
                 {
                     case Tag.ClassStart:
                         {
-                            // ƒNƒ‰ƒX‚ğ“Á’è‚·‚é = currentType = subClassType
-                            ReceiveDirect(reader, out int classid);     // ƒNƒ‰ƒX‚ğ“Á’è‚·‚é = currentType = subClassType
+                            // ã‚¯ãƒ©ã‚¹ã‚’ç‰¹å®šã™ã‚‹ = currentType = subClassType
+                            ReceiveDirect(reader, out int classid);     // ã‚¯ãƒ©ã‚¹ã‚’ç‰¹å®šã™ã‚‹ = currentType = subClassType
 
                             var keystr = NamedId.FromIDNoName(classid).Name;
                             var keys = keystr.Split(new char[] { '/' });
-                            System.Diagnostics.Debug.Assert(keys.Length == 4, "ƒVƒŠƒAƒ‰ƒCƒYClass ID‚ª•s³‚Å‚µ‚½");
+                            System.Diagnostics.Debug.Assert(keys.Length == 4, "ã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºClass IDãŒä¸æ­£ã§ã—ãŸ");
 
-                            // ƒNƒ‰ƒX‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‚ğ¶¬‚·‚é = ret
+                            // ã‚¯ãƒ©ã‚¹ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ç”Ÿæˆã™ã‚‹ = ret
                             currentType = Type.GetType(keys[2]);
                             if (currentType == null)
                             {
@@ -137,30 +137,30 @@ namespace Tono.GuiWinForm
                         }
                     case Tag.SubClass:
                         {
-                            // ƒTƒuƒNƒ‰ƒX‚ğ“Á’è‚·‚é = subClassType
-                            ReceiveDirect(reader, out                         // ƒTƒuƒNƒ‰ƒX‚ğ“Á’è‚·‚é = subClassType
+                            // ã‚µãƒ–ã‚¯ãƒ©ã‚¹ã‚’ç‰¹å®šã™ã‚‹ = subClassType
+                            ReceiveDirect(reader, out                         // ã‚µãƒ–ã‚¯ãƒ©ã‚¹ã‚’ç‰¹å®šã™ã‚‹ = subClassType
                             int classid);
                             var keystr = NamedId.FromIDNoName(classid).Name;
                             var keys = keystr.Split(new char[] { '/' });
-                            System.Diagnostics.Debug.Assert(keys.Length == 4, "ƒVƒŠƒAƒ‰ƒCƒYClass ID‚ª•s³‚Å‚µ‚½");
+                            System.Diagnostics.Debug.Assert(keys.Length == 4, "ã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºClass IDãŒä¸æ­£ã§ã—ãŸ");
 
                             subClassType = Type.GetType(keys[2] + ", " + keys[3]);
                             break;
                         }
                     case Tag.Field:
                         {
-                            // ƒtƒB[ƒ‹ƒh‚ğ“Á’è‚·‚é = fi
-                            ReceiveDirect(reader, out                         // ƒtƒB[ƒ‹ƒh‚ğ“Á’è‚·‚é = fi
+                            // ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ã‚’ç‰¹å®šã™ã‚‹ = fi
+                            ReceiveDirect(reader, out                         // ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ã‚’ç‰¹å®šã™ã‚‹ = fi
                             int fieldid);
                             var keystr = NamedId.FromIDNoName(fieldid).Name;
                             var keys = keystr.Split(new char[] { '/' });
-                            System.Diagnostics.Debug.Assert(keys.Length == 4, "ƒVƒŠƒAƒ‰ƒCƒYField ID‚ª•s³‚Å‚µ‚½");
-                            var fi = subClassType.GetField(keys[2/*field–¼*/], BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+                            System.Diagnostics.Debug.Assert(keys.Length == 4, "ã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºField IDãŒä¸æ­£ã§ã—ãŸ");
+                            var fi = subClassType.GetField(keys[2/*fieldå*/], BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
 
-                            // ƒtƒB[ƒ‹ƒh‚Ì’l‚ğæ“¾‚·‚éiÄ‹AƒR[ƒ‹j
+                            // ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ã®å€¤ã‚’å–å¾—ã™ã‚‹ï¼ˆå†å¸°ã‚³ãƒ¼ãƒ«ï¼‰
                             var fieldValue = receiveLoop(reader);
 
-                            // ƒtƒB[ƒ‹ƒh‚Ì’l‚ğƒCƒ“ƒXƒ^ƒ“ƒX‚Éİ’è‚·‚é
+                            // ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ã®å€¤ã‚’ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã«è¨­å®šã™ã‚‹
                             fi.SetValue(ret, fieldValue);
                             break;
                         }
@@ -173,9 +173,9 @@ namespace Tono.GuiWinForm
                             ReceiveDirect(reader, out int classid);
                             var keystr = NamedId.FromIDNoName(classid).Name;
                             var keys = keystr.Split(new char[] { '/' });
-                            System.Diagnostics.Debug.Assert(keys.Length == 4, "ƒVƒŠƒAƒ‰ƒCƒYClass ID‚ª•s³‚Å‚µ‚½");
+                            System.Diagnostics.Debug.Assert(keys.Length == 4, "ã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºClass IDãŒä¸æ­£ã§ã—ãŸ");
 
-                            // ƒNƒ‰ƒX‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‚ğ¶¬‚·‚é = ret
+                            // ã‚¯ãƒ©ã‚¹ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ç”Ÿæˆã™ã‚‹ = ret
                             currentType = Type.GetType(keys[2]);
                             if (currentType == null)
                             {
@@ -188,18 +188,18 @@ namespace Tono.GuiWinForm
                                 ret = Activator.CreateInstance(currentType, true);
                             }
 
-                            // ”z—ñ”‚ğæ“¾‚·
+                            // é…åˆ—æ•°ã‚’å–å¾—ã™
                             ReceiveDirect(reader, out
-                            // ”z—ñ”‚ğæ“¾‚·
+                            // é…åˆ—æ•°ã‚’å–å¾—ã™
                             int n);
 
                             for (var i = 0; i < n; i++)
                             {
-                                // Še—v‘f‚Ì’l‚ğæ“¾‚·‚éiÄ‹AƒR[ƒ‹j
+                                // å„è¦ç´ ã®å€¤ã‚’å–å¾—ã™ã‚‹ï¼ˆå†å¸°ã‚³ãƒ¼ãƒ«ï¼‰
                                 var val = receiveLoop(reader);
                                 ((IList)ret).Add(val);
                             }
-                            // ƒTƒuƒNƒ‰ƒX‚Ì‚½‚ß‚É€”õ‚·‚é
+                            // ã‚µãƒ–ã‚¯ãƒ©ã‚¹ã®ãŸã‚ã«æº–å‚™ã™ã‚‹
                             subClassType = currentType;
                             break;
                         }
@@ -208,9 +208,9 @@ namespace Tono.GuiWinForm
                             ReceiveDirect(reader, out int classid);
                             var keystr = NamedId.FromIDNoName(classid).Name;
                             var keys = keystr.Split(new char[] { '/' });
-                            System.Diagnostics.Debug.Assert(keys.Length == 4, "ƒVƒŠƒAƒ‰ƒCƒYClass ID‚ª•s³‚Å‚µ‚½");
+                            System.Diagnostics.Debug.Assert(keys.Length == 4, "ã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºClass IDãŒä¸æ­£ã§ã—ãŸ");
 
-                            // ƒNƒ‰ƒX‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‚ğ¶¬‚·‚é = ret
+                            // ã‚¯ãƒ©ã‚¹ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ç”Ÿæˆã™ã‚‹ = ret
                             currentType = Type.GetType(keys[2]);
                             if (currentType == null)
                             {
@@ -223,19 +223,19 @@ namespace Tono.GuiWinForm
                                 ret = Activator.CreateInstance(currentType, true);
                             }
 
-                            // ”z—ñ”‚ğæ“¾‚·
+                            // é…åˆ—æ•°ã‚’å–å¾—ã™
                             ReceiveDirect(reader, out
-                            // ”z—ñ”‚ğæ“¾‚·
+                            // é…åˆ—æ•°ã‚’å–å¾—ã™
                             int n);
 
                             for (var i = 0; i < n; i++)
                             {
-                                // Še—v‘f‚Ì’l‚ğæ“¾‚·‚éiÄ‹AƒR[ƒ‹j
+                                // å„è¦ç´ ã®å€¤ã‚’å–å¾—ã™ã‚‹ï¼ˆå†å¸°ã‚³ãƒ¼ãƒ«ï¼‰
                                 var key = receiveLoop(reader);
                                 var val = receiveLoop(reader);
                                 ((IDictionary)ret).Add(key, val);
                             }
-                            // ƒTƒuƒNƒ‰ƒX‚Ì‚½‚ß‚É€”õ‚·‚é
+                            // ã‚µãƒ–ã‚¯ãƒ©ã‚¹ã®ãŸã‚ã«æº–å‚™ã™ã‚‹
                             subClassType = currentType;
                             break;
                         }
@@ -269,23 +269,23 @@ namespace Tono.GuiWinForm
 
 
         /// <summary>
-        /// w’èƒXƒgƒŠ[ƒ€‚ÉƒIƒuƒWƒFƒNƒg‚ğ‘—M‚·‚é
+        /// æŒ‡å®šã‚¹ãƒˆãƒªãƒ¼ãƒ ã«ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’é€ä¿¡ã™ã‚‹
         /// </summary>
-        /// <param name="writer">ƒXƒgƒŠ[ƒ€</param>
-        /// <param name="value">ƒIƒuƒWƒFƒNƒg</param>
+        /// <param name="writer">ã‚¹ãƒˆãƒªãƒ¼ãƒ </param>
+        /// <param name="value">ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ</param>
         public static void Send(Stream writer, object value)
         {
             sendLoop(writer, value);
         }
 
         /// <summary>
-        /// w’èƒXƒgƒŠ[ƒ€‚ÉƒIƒuƒWƒFƒNƒg‚ğ‘—M‚·‚éAƒTƒCƒNƒŠƒbƒNƒ‹[ƒv
+        /// æŒ‡å®šã‚¹ãƒˆãƒªãƒ¼ãƒ ã«ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’é€ä¿¡ã™ã‚‹ã€ã‚µã‚¤ã‚¯ãƒªãƒƒã‚¯ãƒ«ãƒ¼ãƒ—
         /// </summary>
-        /// <param name="writer">ƒXƒgƒŠ[ƒ€</param>
-        /// <param name="value">ƒIƒuƒWƒFƒNƒg</param>
+        /// <param name="writer">ã‚¹ãƒˆãƒªãƒ¼ãƒ </param>
+        /// <param name="value">ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ</param>
         private static void sendLoop(Stream writer, object value)
         {
-            // ‘—M‚Å‚«‚È‚¢Œ^‚ğ•ÏŠ·‚·‚é
+            // é€ä¿¡ã§ããªã„å‹ã‚’å¤‰æ›ã™ã‚‹
             if (value != null)
             {
                 if (value is EventHandler)
@@ -306,7 +306,7 @@ namespace Tono.GuiWinForm
                     ((PartsBase)value).SetPartsPositionerName(true);
                 }
             }
-            // ƒkƒ‹’l‚Ìˆ—
+            // ãƒŒãƒ«å€¤ã®å‡¦ç†
             if (value == null)
             {
                 writer.WriteByte((byte)Tag.Null);
@@ -318,28 +318,28 @@ namespace Tono.GuiWinForm
             var ttag = _typeToTag[tarType];
             if (ttag != null)
             {
-                // ƒ^ƒO‚Ì–„‚ß‚İ
+                // ã‚¿ã‚°ã®åŸ‹ã‚è¾¼ã¿
                 writer.WriteByte((byte)ttag);
 
-                // ’l‚Ì–„‚ß‚İ
+                // å€¤ã®åŸ‹ã‚è¾¼ã¿
                 var mi = typeof(SerializerEx).GetMethod("SendDirect", new Type[] { typeof(Stream), tarType });
                 mi.Invoke(null, new object[] { writer, value });
                 return;
             }
 
 
-            // ƒNƒ‰ƒXID
+            // ã‚¯ãƒ©ã‚¹ID
             var cid = NamedId.FromName(tarType.FullName);
             var isClassProced = false;
             IDictionary dupchk = new HybridDictionary();
 
-            // ƒŠƒXƒg‚Ì“Á‰»ˆ—
+            // ãƒªã‚¹ãƒˆã®ç‰¹åŒ–å‡¦ç†
             if (value is IList)
             {
-                // ƒ^ƒO‚Ì–„‚ß‚İ
+                // ã‚¿ã‚°ã®åŸ‹ã‚è¾¼ã¿
                 writer.WriteByte((byte)Tag.List);
 
-                // ƒNƒ‰ƒXID
+                // ã‚¯ãƒ©ã‚¹ID
                 SendDirect(writer, cid);
 
                 SendDirect(writer, ((IList)value).Count);
@@ -350,14 +350,14 @@ namespace Tono.GuiWinForm
                 isClassProced = true;
             }
 
-            // ƒfƒBƒNƒVƒ‡ƒiƒŠ‚Ì“Á‰»ˆ—
+            // ãƒ‡ã‚£ã‚¯ã‚·ãƒ§ãƒŠãƒªã®ç‰¹åŒ–å‡¦ç†
             if (value is IDictionary)
             {
-                // ƒ^ƒO‚Ì–„‚ß‚İ
+                // ã‚¿ã‚°ã®åŸ‹ã‚è¾¼ã¿
 
                 writer.WriteByte((byte)Tag.Dictionary);
 
-                // ƒNƒ‰ƒXID
+                // ã‚¯ãƒ©ã‚¹ID
                 SendDirect(writer, cid.Id.Value);
 
                 SendDirect(writer, ((IDictionary)value).Count);
@@ -369,7 +369,7 @@ namespace Tono.GuiWinForm
                 isClassProced = true;
             }
 
-            // ƒNƒ‰ƒX‚Ìˆ—
+            // ã‚¯ãƒ©ã‚¹ã®å‡¦ç†
             if (isClassProced == false)
             {
                 writer.WriteByte((byte)Tag.ClassStart);
@@ -377,7 +377,7 @@ namespace Tono.GuiWinForm
             }
             else
             {
-                // ƒŠƒXƒgAƒfƒBƒNƒVƒ‡ƒiƒŠŒn‚ÅA”h¶ƒNƒ‰ƒX‚ÌƒtƒB[ƒ‹ƒh‚Í•Û‘¶•s—v‚Æ‹L‚µ•t‚¯‚é
+                // ãƒªã‚¹ãƒˆã€ãƒ‡ã‚£ã‚¯ã‚·ãƒ§ãƒŠãƒªç³»ã§ã€æ´¾ç”Ÿã‚¯ãƒ©ã‚¹ã®ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ã¯ä¿å­˜ä¸è¦ã¨è¨˜ã—ä»˜ã‘ã‚‹
                 for (var type = tarType; type != typeof(object); type = type.BaseType)
                 {
                     if (type.Namespace.StartsWith("System.") == false)
@@ -390,7 +390,7 @@ namespace Tono.GuiWinForm
                     {
                         if (fi.DeclaringType != fi.ReflectedType)
                         {
-                            continue;   // ”h¶ƒNƒ‰ƒX‚Ì•Û‘¶ƒtƒF[ƒY‚Ås‚¤
+                            continue;   // æ´¾ç”Ÿã‚¯ãƒ©ã‚¹ã®ä¿å­˜ãƒ•ã‚§ãƒ¼ã‚ºã§è¡Œã†
                         }
                         if ((fi.Attributes & FieldAttributes.NotSerialized) == 0)
                         {
@@ -400,7 +400,7 @@ namespace Tono.GuiWinForm
                 }
             }
 
-            // `ƒNƒ‰ƒXƒtƒB[ƒ‹ƒh‚Ìˆ—
+            // ï½ã‚¯ãƒ©ã‚¹ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ã®å‡¦ç†
             var inheritLevel = 0;
             for (var type = tarType; type != typeof(object); type = type.BaseType)
             {
@@ -411,7 +411,7 @@ namespace Tono.GuiWinForm
                 {
                     if (fi.DeclaringType != fi.ReflectedType)
                     {
-                        continue;   // ”h¶ƒNƒ‰ƒX‚Ì•Û‘¶ƒtƒF[ƒY‚Ås‚¤
+                        continue;   // æ´¾ç”Ÿã‚¯ãƒ©ã‚¹ã®ä¿å­˜ãƒ•ã‚§ãƒ¼ã‚ºã§è¡Œã†
                     }
                     if ((fi.Attributes & FieldAttributes.NotSerialized) == 0)
                     {
@@ -419,24 +419,24 @@ namespace Tono.GuiWinForm
                         {
                             dupchk.Add(fi.Name, true);
 
-                            if (fcnt == 0 && inheritLevel > 0)  // ƒx[ƒXƒNƒ‰ƒX‰‚ß‚Ä‚ÌƒtƒB[ƒ‹ƒh‚ÌB
+                            if (fcnt == 0 && inheritLevel > 0)  // ãƒ™ãƒ¼ã‚¹ã‚¯ãƒ©ã‚¹åˆã‚ã¦ã®ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ã®æ™‚ã€‚
                             {
-                                // ƒx[ƒXƒNƒ‰ƒXŠJnTAG‚ğ–„‚ß‚Ş
+                                // ãƒ™ãƒ¼ã‚¹ã‚¯ãƒ©ã‚¹é–‹å§‹TAGã‚’åŸ‹ã‚è¾¼ã‚€
                                 writer.WriteByte((byte)Tag.SubClass);
 
-                                // ƒNƒ‰ƒX”h¶æ¯•ÊID‚ğ–„‚ß‚Ş
+                                // ã‚¯ãƒ©ã‚¹æ´¾ç”Ÿå…ˆè­˜åˆ¥IDã‚’åŸ‹ã‚è¾¼ã‚€
                                 var bid = NamedId.FromName(type.FullName);
                                 SendDirect(writer, bid.Id.Value);
                             }
 
-                            // ƒ^ƒO‚Ì–„‚ß‚İ
+                            // ã‚¿ã‚°ã®åŸ‹ã‚è¾¼ã¿
                             writer.WriteByte((byte)Tag.Field);
 
-                            // ƒtƒB[ƒ‹ƒh–¼‚ğ–„‚ß‚Ş
+                            // ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰åã‚’åŸ‹ã‚è¾¼ã‚€
                             var fid = NamedId.FromName($"{type.FullName}...{fi.Name}"); //.FromField(fi);
                             SendDirect(writer, fid.Id.Value);
 
-                            // ƒtƒB[ƒ‹ƒh‚Ì’l‚ğ–„‚ß‚Ş
+                            // ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ã®å€¤ã‚’åŸ‹ã‚è¾¼ã‚€
                             sendLoop(writer, fi.GetValue(value));
                             fcnt++;
                         }
@@ -444,10 +444,10 @@ namespace Tono.GuiWinForm
                 }
                 inheritLevel++;
             }
-            // ƒNƒ‰ƒXI—¹TAG‚ğ–„‚ß‚Ş
+            // ã‚¯ãƒ©ã‚¹çµ‚äº†TAGã‚’åŸ‹ã‚è¾¼ã‚€
             writer.WriteByte((byte)Tag.ClassEnd);
 
-            // ƒVƒŠƒAƒ‰ƒCƒYI—¹‚ÌŠJ•úˆ—“™
+            // ã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºçµ‚äº†æ™‚ã®é–‹æ”¾å‡¦ç†ç­‰
             if (value is PartsBase)
             {
                 ((PartsBase)value).SetPartsPositionCorderName(false);
@@ -456,10 +456,10 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒVƒŠƒAƒ‰ƒCƒY‘ÎÛ‚Ìƒƒ“ƒo[‚ğdest©src‚ÉƒRƒs[‚·‚é
+        /// ã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºå¯¾è±¡ã®ãƒ¡ãƒ³ãƒãƒ¼ã‚’destâ†srcã«ã‚³ãƒ”ãƒ¼ã™ã‚‹
         /// </summary>
-        /// <param name="dest">ƒRƒs[æ</param>
-        /// <param name="src">ƒRƒs[Œ³</param>
+        /// <param name="dest">ã‚³ãƒ”ãƒ¼å…ˆ</param>
+        /// <param name="src">ã‚³ãƒ”ãƒ¼å…ƒ</param>
         public static void CopyObject(object dest, object src)
         {
             IDictionary dat = new HybridDictionary();
@@ -477,7 +477,7 @@ namespace Tono.GuiWinForm
                 {
                     if (fi.DeclaringType != fi.ReflectedType)
                     {
-                        continue;   // ”h¶ƒNƒ‰ƒX‚Ì•Û‘¶ƒtƒF[ƒY‚Ås‚¤
+                        continue;   // æ´¾ç”Ÿã‚¯ãƒ©ã‚¹ã®ä¿å­˜ãƒ•ã‚§ãƒ¼ã‚ºã§è¡Œã†
                     }
                     if ((fi.Attributes & FieldAttributes.NotSerialized) == 0)
                     {
@@ -490,10 +490,10 @@ namespace Tono.GuiWinForm
             }
         }
 
-        #region ŠeŒ^‚ÌƒoƒCƒgƒVƒŠƒAƒ‰ƒCƒY
+        #region å„å‹ã®ãƒã‚¤ãƒˆã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚º
 
         /// <summary>
-        /// IdŒ^‚Ì•Û‘¶
+        /// Idå‹ã®ä¿å­˜
         /// </summary>
         public static void SendDirect(Stream writer, Id value)
         {
@@ -501,7 +501,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// UInt64Œ^‚ÌóM
+        /// UInt64å‹ã®å—ä¿¡
         /// </summary>
         public static object ReceiveDirect(Stream reader, out Id value)
         {
@@ -511,7 +511,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// uTimeŒ^‚Ì•Û‘¶
+        /// uTimeå‹ã®ä¿å­˜
         /// </summary>
         public static void SendDirect(Stream writer, DateTimeEx value)
         {
@@ -520,7 +520,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// uTimeŒ^‚ÌóM
+        /// uTimeå‹ã®å—ä¿¡
         /// </summary>
         public static object ReceiveDirect(Stream reader, out DateTimeEx value)
         {
@@ -531,7 +531,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ColorŒ^‚Ì•Û‘¶
+        /// Colorå‹ã®ä¿å­˜
         /// </summary>
         public static void SendDirect(Stream writer, Color value)
         {
@@ -540,7 +540,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ColorŒ^‚ÌóM
+        /// Colorå‹ã®å—ä¿¡
         /// </summary>
         public static object ReceiveDirect(Stream reader, out Color value)
         {
@@ -550,7 +550,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// UInt64Œ^‚Ì•Û‘¶
+        /// UInt64å‹ã®ä¿å­˜
         /// </summary>
         public static void SendDirect(Stream writer, ulong value)
         {
@@ -569,7 +569,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// UInt64Œ^‚ÌóM
+        /// UInt64å‹ã®å—ä¿¡
         /// </summary>
         public static object ReceiveDirect(Stream reader, out ulong value)
         {
@@ -593,7 +593,7 @@ namespace Tono.GuiWinForm
 
 
         /// <summary>
-        /// DoubleŒ^‚Ì•Û‘¶
+        /// Doubleå‹ã®ä¿å­˜
         /// </summary>
         public static void SendDirect(Stream writer, double value)
         {
@@ -612,7 +612,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// DoubleŒ^‚ÌóM
+        /// Doubleå‹ã®å—ä¿¡
         /// </summary>
         public static object ReceiveDirect(Stream reader, out double value)
         {
@@ -635,7 +635,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// SingleŒ^‚Ì•Û‘¶
+        /// Singleå‹ã®ä¿å­˜
         /// </summary>
         public static void SendDirect(Stream writer, float value)
         {
@@ -650,7 +650,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// SingleŒ^‚ÌóM
+        /// Singleå‹ã®å—ä¿¡
         /// </summary>
         public static object ReceiveDirect(Stream reader, out float value)
         {
@@ -669,7 +669,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// Int64Œ^‚Ì•Û‘¶
+        /// Int64å‹ã®ä¿å­˜
         /// </summary>
         public static void SendDirect(Stream writer, long value)
         {
@@ -691,7 +691,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// Int64Œ^‚ÌóM
+        /// Int64å‹ã®å—ä¿¡
         /// </summary>
         public static object ReceiveDirect(Stream reader, out long value)
         {
@@ -714,7 +714,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// Int32Œ^‚Ì•Û‘¶
+        /// Int32å‹ã®ä¿å­˜
         /// </summary>
         public static void SendDirect(Stream writer, int value)
         {
@@ -729,7 +729,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// Int32Œ^‚ÌóM
+        /// Int32å‹ã®å—ä¿¡
         /// </summary>
         public static object ReceiveDirect(Stream reader, out int value)
         {
@@ -748,7 +748,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// UInt32Œ^‚Ì•Û‘¶
+        /// UInt32å‹ã®ä¿å­˜
         /// </summary>
         public static void SendDirect(Stream writer, uint value)
         {
@@ -763,7 +763,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// UInt32Œ^‚ÌóM
+        /// UInt32å‹ã®å—ä¿¡
         /// </summary>
         public static object ReceiveDirect(Stream reader, out uint value)
         {
@@ -782,25 +782,25 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// Int32Œ^‚Ì•Û‘¶
+        /// Int32å‹ã®ä¿å­˜
         /// </summary>
         public static void SendDirect(Stream writer, IntPtr value)
         {
-            // ‚È‚É‚à‚µ‚È‚¢
+            // ãªã«ã‚‚ã—ãªã„
         }
 
         /// <summary>
-        /// IntPtrŒ^‚ÌóM
+        /// IntPtrå‹ã®å—ä¿¡
         /// </summary>
         public static object ReceiveDirect(Stream reader, out IntPtr value)
         {
-            // ‚È‚É‚à‚µ‚È‚¢
+            // ãªã«ã‚‚ã—ãªã„
             value = IntPtr.Zero;
             return value;
         }
 
         /// <summary>
-        /// Int16Œ^‚Ì•Û‘¶
+        /// Int16å‹ã®ä¿å­˜
         /// </summary>
         public static void SendDirect(Stream writer, short value)
         {
@@ -813,7 +813,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// Int16Œ^‚ÌóM
+        /// Int16å‹ã®å—ä¿¡
         /// </summary>
         public static object ReceiveDirect(Stream reader, out short value)
         {
@@ -830,7 +830,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// Int16Œ^‚Ì•Û‘¶
+        /// Int16å‹ã®ä¿å­˜
         /// </summary>
         public static void SendDirect(Stream writer, ushort value)
         {
@@ -843,7 +843,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// UInt16Œ^‚ÌóM
+        /// UInt16å‹ã®å—ä¿¡
         /// </summary>
         public static object ReceiveDirect(Stream reader, out ushort value)
         {
@@ -860,7 +860,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// SByteŒ^‚Ì•Û‘¶
+        /// SByteå‹ã®ä¿å­˜
         /// </summary>
         public static void SendDirect(Stream writer, sbyte value)
         {
@@ -868,7 +868,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// SByteŒ^‚ÌóM
+        /// SByteå‹ã®å—ä¿¡
         /// </summary>
         public static object ReceiveDirect(Stream reader, out sbyte value)
         {
@@ -877,7 +877,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ByteŒ^‚Ì•Û‘¶
+        /// Byteå‹ã®ä¿å­˜
         /// </summary>
         public static void SendDirect(Stream writer, byte value)
         {
@@ -885,7 +885,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ByteŒ^‚ÌóM
+        /// Byteå‹ã®å—ä¿¡
         /// </summary>
         public static object ReceiveDirect(Stream reader, out byte value)
         {
@@ -894,7 +894,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// BooleanŒ^‚Ì•Û‘¶
+        /// Booleanå‹ã®ä¿å­˜
         /// </summary>
         public static void SendDirect(Stream writer, bool value)
         {
@@ -909,7 +909,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// BooleanŒ^‚ÌóM
+        /// Booleanå‹ã®å—ä¿¡
         /// </summary>
         public static object ReceiveDirect(Stream reader, out bool value)
         {
@@ -925,7 +925,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// •¶š—ñ‚Ì•Û‘¶
+        /// æ–‡å­—åˆ—ã®ä¿å­˜
         /// </summary>
         public static void SendDirect(Stream writer, string value)
         {
@@ -939,7 +939,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// •¶š—ñ‚ÌóM
+        /// æ–‡å­—åˆ—ã®å—ä¿¡
         /// </summary>
         public static object ReceiveDirect(Stream reader, out string value)
         {
@@ -961,15 +961,15 @@ namespace Tono.GuiWinForm
         #endregion
 
 
-        #region .NET‚ª•W€‚ÅƒTƒ|[ƒg‚·‚éƒVƒŠƒAƒ‰ƒCƒY‚ğŠÈ—ª‰»‚·‚é
+        #region .NETãŒæ¨™æº–ã§ã‚µãƒãƒ¼ãƒˆã™ã‚‹ã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºã‚’ç°¡ç•¥åŒ–ã™ã‚‹
         /// <summary>
-        /// .NET•W€‚ÌƒVƒŠƒAƒ‰ƒCƒY‚ğ©“®ƒCƒ“ƒvƒŠƒƒ“ƒg‚·‚é
+        /// .NETæ¨™æº–ã®ã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºã‚’è‡ªå‹•ã‚¤ãƒ³ãƒ—ãƒªãƒ¡ãƒ³ãƒˆã™ã‚‹
         /// </summary>
-        /// <param name="topType">ƒVƒŠƒAƒ‰ƒCƒY‚·‚éƒNƒ‰ƒX‚ÅA‚±‚Ìw’èƒNƒ‰ƒXˆÈ~‚ÌƒtƒB[ƒ‹ƒh‚ğƒVƒŠƒAƒ‰ƒCƒY‘ÎÛ‚Æ‚·‚é</param>
-        /// <param name="instance">ƒCƒ“ƒXƒ^ƒ“ƒX</param>
-        /// <param name="info">SerializationInfoî•ñ</param>
-        /// <param name="context">StreamingContextî•ñ</param>
-        /// <param name="isInherid">true = Šî–{ƒNƒ‰ƒX‚ÌƒtƒB[ƒ‹ƒhƒƒ“ƒo‚ğŠÜ‚ß‚é / false=ŠÜ‚ß‚È‚¢</param>
+        /// <param name="topType">ã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºã™ã‚‹ã‚¯ãƒ©ã‚¹ã§ã€ã“ã®æŒ‡å®šã‚¯ãƒ©ã‚¹ä»¥é™ã®ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ã‚’ã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºå¯¾è±¡ã¨ã™ã‚‹</param>
+        /// <param name="instance">ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹</param>
+        /// <param name="info">SerializationInfoæƒ…å ±</param>
+        /// <param name="context">StreamingContextæƒ…å ±</param>
+        /// <param name="isInherid">true = åŸºæœ¬ã‚¯ãƒ©ã‚¹ã®ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ãƒ¡ãƒ³ãƒã‚’å«ã‚ã‚‹ / false=å«ã‚ãªã„</param>
         public static void GetObjectData(Type topType, object instance, SerializationInfo info, StreamingContext context, bool isInherid)
         {
             var flags = BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic;
@@ -987,13 +987,13 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// .NET•W€‚Ì‹tƒVƒŠƒAƒ‰ƒCƒY‚ğ©“®ƒCƒ“ƒvƒŠƒƒ“ƒg‚·‚é
+        /// .NETæ¨™æº–ã®é€†ã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºã‚’è‡ªå‹•ã‚¤ãƒ³ãƒ—ãƒªãƒ¡ãƒ³ãƒˆã™ã‚‹
         /// </summary>
-        /// <param name="topType">ƒVƒŠƒAƒ‰ƒCƒY‚·‚éƒNƒ‰ƒX‚ÅA‚±‚Ìw’èƒNƒ‰ƒXˆÈ~‚ÌƒtƒB[ƒ‹ƒh‚ğƒVƒŠƒAƒ‰ƒCƒY‘ÎÛ‚Æ‚·‚é</param>
-        /// <param name="instance">ƒCƒ“ƒXƒ^ƒ“ƒX</param>
-        /// <param name="info">SerializationInfoî•ñ</param>
-        /// <param name="context">StreamingContextî•ñ</param>
-        /// <param name="isInherid">true = Šî–{ƒNƒ‰ƒX‚ÌƒtƒB[ƒ‹ƒhƒƒ“ƒo‚ğŠÜ‚ß‚é / false=ŠÜ‚ß‚È‚¢</param>
+        /// <param name="topType">ã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºã™ã‚‹ã‚¯ãƒ©ã‚¹ã§ã€ã“ã®æŒ‡å®šã‚¯ãƒ©ã‚¹ä»¥é™ã®ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ã‚’ã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºå¯¾è±¡ã¨ã™ã‚‹</param>
+        /// <param name="instance">ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹</param>
+        /// <param name="info">SerializationInfoæƒ…å ±</param>
+        /// <param name="context">StreamingContextæƒ…å ±</param>
+        /// <param name="isInherid">true = åŸºæœ¬ã‚¯ãƒ©ã‚¹ã®ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ãƒ¡ãƒ³ãƒã‚’å«ã‚ã‚‹ / false=å«ã‚ãªã„</param>
         public static void Instanciate(Type topType, object instance, SerializationInfo info, StreamingContext context, bool isInherid)
         {
             var flags = BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic;

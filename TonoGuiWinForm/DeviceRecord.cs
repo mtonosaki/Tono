@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+Ôªø// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System.Collections;
@@ -9,7 +9,7 @@ using System.Windows.Forms;
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// DeviceRecord ÇÃäTóvÇÃê‡ñæÇ≈Ç∑ÅB
+    /// DeviceRecord „ÅÆÊ¶ÇË¶Å„ÅÆË™¨Êòé„Åß„Åô„ÄÇ
     /// </summary>
     public static class DeviceRecord
     {
@@ -39,7 +39,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// É}ÉEÉXÉAÉbÉv
+        /// „Éû„Ç¶„Çπ„Ç¢„ÉÉ„Éó
         /// </summary>
         public class TagMouseUp
         {
@@ -58,7 +58,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// É}ÉEÉXÉ_ÉEÉì
+        /// „Éû„Ç¶„Çπ„ÉÄ„Ç¶„É≥
         /// </summary>
         public class TagMouseDown
         {
@@ -77,7 +77,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// É}ÉEÉXÉÄÅ[Éu
+        /// „Éû„Ç¶„Çπ„É†„Éº„Éñ
         /// </summary>
         public class TagMouseMove
         {
@@ -96,7 +96,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// É}ÉEÉXÉzÉCÅ[Éã
+        /// „Éû„Ç¶„Çπ„Éõ„Ç§„Éº„É´
         /// </summary>
         public class TagMouseWheel
         {
@@ -115,7 +115,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ÉLÅ[É_ÉEÉì
+        /// „Ç≠„Éº„ÉÄ„Ç¶„É≥
         /// </summary>
         public class TagKeyDown
         {
@@ -134,7 +134,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ÉLÅ[ÉAÉbÉv
+        /// „Ç≠„Éº„Ç¢„ÉÉ„Éó
         /// </summary>
         public class TagKeyUp
         {
@@ -153,7 +153,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ÉgÅ[ÉNÉì
+        /// „Éà„Éº„ÇØ„É≥
         /// </summary>
         public class TagToken
         {

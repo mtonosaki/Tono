@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System;
@@ -8,19 +8,19 @@ using System.Windows.Forms;
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// ƒNƒŠƒbƒNƒCƒxƒ“ƒg‚ğƒg[ƒNƒ“‚É•ÏŠ·‚·‚é
+    /// ã‚¯ãƒªãƒƒã‚¯ã‚¤ãƒ™ãƒ³ãƒˆã‚’ãƒˆãƒ¼ã‚¯ãƒ³ã«å¤‰æ›ã™ã‚‹
     /// </summary>
     /// <remarks>
-    /// ƒƒjƒ…[‚âƒ{ƒ^ƒ“‚ÌTAG‚É•¶š—ñ‚ª“ü‚Á‚Ä‚¢‚éê‡A‚»‚ê‚ğƒg[ƒNƒ“‚Å’Ê’m‚·‚é
-    /// Tag•¶š‚Ì—á1F@Token:AAA   ClickƒCƒxƒ“ƒg”­¶AAAA‚Æ‚¢‚¤–¼Ì‚ÌNamedId‚ªƒg[ƒNƒ“‚Æ‚µ‚Ä“Š‚°‚ç‚ê‚é
-    /// Tag•¶š‚Ì—á2F@Event=Disposed;Token:BBB   DisposeƒCƒxƒ“ƒg”­¶ABBB‚Æ‚¢‚¤–¼Ì‚ÌNamedId‚ªƒg[ƒNƒ“‚Æ‚µ‚Ä“Š‚°‚ç‚ê‚é
+    /// ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã‚„ãƒœã‚¿ãƒ³ã®TAGã«æ–‡å­—åˆ—ãŒå…¥ã£ã¦ã„ã‚‹å ´åˆã€ãã‚Œã‚’ãƒˆãƒ¼ã‚¯ãƒ³ã§é€šçŸ¥ã™ã‚‹
+    /// Tagæ–‡å­—ã®ä¾‹1ï¼šã€€Token:AAA   Clickã‚¤ãƒ™ãƒ³ãƒˆç™ºç”Ÿæ™‚ã€AAAã¨ã„ã†åç§°ã®NamedIdãŒãƒˆãƒ¼ã‚¯ãƒ³ã¨ã—ã¦æŠ•ã’ã‚‰ã‚Œã‚‹
+    /// Tagæ–‡å­—ã®ä¾‹2ï¼šã€€Event=Disposed;Token:BBB   Disposeã‚¤ãƒ™ãƒ³ãƒˆç™ºç”Ÿæ™‚ã€BBBã¨ã„ã†åç§°ã®NamedIdãŒãƒˆãƒ¼ã‚¯ãƒ³ã¨ã—ã¦æŠ•ã’ã‚‰ã‚Œã‚‹
     /// </remarks>
     public class FeatureClickEventBridge : FeatureControlBridgeBase
     {
         private readonly Dictionary<object, object> _dupCheck = new Dictionary<object, object>();
 
         /// <summary>
-        /// TAG‚ÉŠî‚Ã‚«ƒCƒxƒ“ƒg’Ç‰Á
+        /// TAGã«åŸºã¥ãã‚¤ãƒ™ãƒ³ãƒˆè¿½åŠ 
         /// </summary>
         /// <param name="tar"></param>
         private void addEvent(object tar)
@@ -54,7 +54,7 @@ namespace Tono.GuiWinForm
                 if (ei == null)
                 {
                     System.Diagnostics.Debug.WriteLine(
-                        string.Format("¡¡¡ ’ˆÓ ¡¡¡ ƒRƒ“ƒgƒ[ƒ‹ {0} ‚É‚Í Tag•¶š—ñ‚ªw’è‚³‚êA‚»‚ê‚ÍƒCƒxƒ“ƒg‚ğƒg[ƒNƒ“‚É•ÏŠ·‚µ‚æ‚¤‚Æ‚µ‚Ä‚¢‚Ü‚·B‚µ‚©‚µA‚»‚ÌƒRƒ“ƒgƒ[ƒ‹‚É‚Í{1}‚Æ‚¢‚¤ƒCƒxƒ“ƒg‚Í‘¶İ‚µ‚Ü‚¹‚ñB"
+                        string.Format("â– â– â–  æ³¨æ„ â– â– â–  ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ« {0} ã«ã¯ Tagæ–‡å­—åˆ—ãŒæŒ‡å®šã•ã‚Œã€ãã‚Œã¯ã‚¤ãƒ™ãƒ³ãƒˆã‚’ãƒˆãƒ¼ã‚¯ãƒ³ã«å¤‰æ›ã—ã‚ˆã†ã¨ã—ã¦ã„ã¾ã™ã€‚ã—ã‹ã—ã€ãã®ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã«ã¯{1}ã¨ã„ã†ã‚¤ãƒ™ãƒ³ãƒˆã¯å­˜åœ¨ã—ã¾ã›ã‚“ã€‚"
                             , (tar is Control ? ((Control)tar).Name : tar.GetType().Name)
                             , eventName
                     ));
@@ -71,7 +71,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ‘SƒRƒ“ƒgƒ[ƒ‹‚ğ‘ÎÛ‚Æ‚·‚é
+        /// å…¨ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã‚’å¯¾è±¡ã¨ã™ã‚‹
         /// </summary>
         /// <param name="c"></param>
         private void registerLoop(Control c)
@@ -105,7 +105,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ‘SMenuItem‘ÎÛ‚Æ‚·‚é
+        /// å…¨MenuItemå¯¾è±¡ã¨ã™ã‚‹
         /// </summary>
         /// <param name="c"></param>
         private void registerLoop(MenuItem c)
@@ -121,7 +121,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ‘SToolStripItem‘ÎÛ‚Æ‚·‚é
+        /// å…¨ToolStripItemå¯¾è±¡ã¨ã™ã‚‹
         /// </summary>
         /// <param name="c"></param>
         private void registerLoop(ToolStripItem c)
@@ -144,7 +144,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒRƒ“ƒgƒ[ƒ‹ƒCƒxƒ“ƒgæ“¾
+        /// ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã‚¤ãƒ™ãƒ³ãƒˆå–å¾—
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -171,7 +171,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ‰Šú‰»
+        /// åˆæœŸåŒ–
         /// </summary>
         public override void OnInitInstance()
         {

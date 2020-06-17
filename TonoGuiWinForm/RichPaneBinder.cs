@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System.Windows.Forms;
@@ -8,7 +8,7 @@ using System.Windows.Forms;
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// IRichPane‚ğÀ‘•‚·‚é‰¼‘zƒŠƒbƒ`ƒy[ƒ“
+    /// IRichPaneã‚’å®Ÿè£…ã™ã‚‹ä»®æƒ³ãƒªãƒƒãƒãƒšãƒ¼ãƒ³
     /// </summary>
     public class RichPaneBinder : IRichPane
     {
@@ -21,14 +21,14 @@ namespace Tono.GuiWinForm
 #endif
 
         /// <summary>
-        /// “à•”ˆ——p
+        /// å†…éƒ¨å‡¦ç†ç”¨
         /// </summary>
         protected RichPaneBinder()
         {
         }
 
         /// <summary>
-        /// QÆ—p‚ÉƒCƒ“ƒXƒ^ƒ“ƒX‚ğ¶¬‚·‚éiƒCƒŠƒ…[ƒWƒ‡ƒ“—pj
+        /// å‚ç…§ç”¨ã«ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ç”Ÿæˆã™ã‚‹ï¼ˆã‚¤ãƒªãƒ¥ãƒ¼ã‚¸ãƒ§ãƒ³ç”¨ï¼‰
         /// </summary>
         /// <param name="parent"></param>
         public RichPaneBinder(IRichPane parent)
@@ -37,10 +37,10 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒVƒŠƒAƒ‰ƒCƒY—p‚ÉÀ‘Ì‚Æ‚µ‚ÄƒCƒ“ƒXƒ^ƒ“ƒX‚ğ¶¬‚·‚é(_parent‚Íg—p‚µ‚È‚¢ƒ‚[ƒhj
+        /// ã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºç”¨ã«å®Ÿä½“ã¨ã—ã¦ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ç”Ÿæˆã™ã‚‹(_parentã¯ä½¿ç”¨ã—ãªã„ãƒ¢ãƒ¼ãƒ‰ï¼‰
         /// </summary>
-        /// <param name="value">Œ³‚É‚È‚éIRichPane</param>
-        /// <returns>V‚µ‚¢ƒCƒ“ƒXƒ^ƒ“ƒX</returns>
+        /// <param name="value">å…ƒã«ãªã‚‹IRichPane</param>
+        /// <returns>æ–°ã—ã„ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹</returns>
         public static RichPaneBinder CreateCopy(IRichPane value)
         {
             var ret = new RichPaneBinder
@@ -54,10 +54,10 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒVƒŠƒAƒ‰ƒCƒY—p‚ÉÀ‘Ì‚Æ‚µ‚ÄƒCƒ“ƒXƒ^ƒ“ƒX‚ğ¶¬‚·‚é(_parent‚ÌQÆ‚àƒRƒs[‚·‚éj
+        /// ã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºç”¨ã«å®Ÿä½“ã¨ã—ã¦ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ç”Ÿæˆã™ã‚‹(_parentã®å‚ç…§ã‚‚ã‚³ãƒ”ãƒ¼ã™ã‚‹ï¼‰
         /// </summary>
-        /// <param name="value">Œ³‚É‚È‚éIRichPane</param>
-        /// <returns>V‚µ‚¢ƒCƒ“ƒXƒ^ƒ“ƒX</returns>
+        /// <param name="value">å…ƒã«ãªã‚‹IRichPane</param>
+        /// <returns>æ–°ã—ã„ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹</returns>
         public static RichPaneBinder CreateCopyComplete(IRichPane value)
         {
             var ret = new RichPaneBinder
@@ -70,7 +70,7 @@ namespace Tono.GuiWinForm
             return ret;
         }
 
-        #region IRichPane ƒƒ“ƒo
+        #region IRichPane ãƒ¡ãƒ³ãƒ
 
         public string IdText
         {

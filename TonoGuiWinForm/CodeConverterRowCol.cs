@@ -1,36 +1,36 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// cŽ²A‰¡Ž²‚ÌÀ•W‚ð•ÏŠ·‚·‚éŽx‰‡‚ðs‚¤ƒNƒ‰ƒX
+    /// ç¸¦è»¸ã€æ¨ªè»¸ã®åº§æ¨™ã‚’å¤‰æ›ã™ã‚‹æ”¯æ´ã‚’è¡Œã†ã‚¯ãƒ©ã‚¹
     /// </summary>
     public class CodeConverterRowCol
     {
-        /// <summary>…•½•ûŒü •„†¨ƒp[ƒcÀ•W•ÏŠ·ƒfƒŠƒQ[ƒgŒ^</summary>
+        /// <summary>æ°´å¹³æ–¹å‘ ç¬¦å·â†’ãƒ‘ãƒ¼ãƒ„åº§æ¨™å¤‰æ›ãƒ‡ãƒªã‚²ãƒ¼ãƒˆåž‹</summary>
         public delegate int ColCodeToPtPosFunction(int x);
-        /// <summary>…•½•ûŒü ƒp[ƒcÀ•W¨•„†•ÏŠ·ƒfƒŠƒQ[ƒgŒ^</summary>
+        /// <summary>æ°´å¹³æ–¹å‘ ãƒ‘ãƒ¼ãƒ„åº§æ¨™â†’ç¬¦å·å¤‰æ›ãƒ‡ãƒªã‚²ãƒ¼ãƒˆåž‹</summary>
         public delegate int ColPtPosToCodeFunction(int x);
-        /// <summary>‚’¼•ûŒü •„†¨ƒp[ƒcÀ•W•ÏŠ·ƒfƒŠƒQ[ƒgŒ^</summary>
+        /// <summary>åž‚ç›´æ–¹å‘ ç¬¦å·â†’ãƒ‘ãƒ¼ãƒ„åº§æ¨™å¤‰æ›ãƒ‡ãƒªã‚²ãƒ¼ãƒˆåž‹</summary>
         public delegate int RowCodeToPtPosFunction(int y);
-        /// <summary>‚’¼•ûŒü ƒp[ƒcÀ•W¨•„†•ÏŠ·ƒfƒŠƒQ[ƒgŒ^</summary>
+        /// <summary>åž‚ç›´æ–¹å‘ ãƒ‘ãƒ¼ãƒ„åº§æ¨™â†’ç¬¦å·å¤‰æ›ãƒ‡ãƒªã‚²ãƒ¼ãƒˆåž‹</summary>
         public delegate int RowPtPosToCodeFunction(int y);
 
-        /// <summary>…•½•ûŒü •„†¨ƒp[ƒcÀ•W•ÏŠ·</summary>
+        /// <summary>æ°´å¹³æ–¹å‘ ç¬¦å·â†’ãƒ‘ãƒ¼ãƒ„åº§æ¨™å¤‰æ›</summary>
         public ColCodeToPtPosFunction ColCodeToPtPos = null;
-        /// <summary>…•½•ûŒü ƒp[ƒcÀ•W¨•„†•ÏŠ·</summary>
+        /// <summary>æ°´å¹³æ–¹å‘ ãƒ‘ãƒ¼ãƒ„åº§æ¨™â†’ç¬¦å·å¤‰æ›</summary>
         public ColPtPosToCodeFunction ColPtPosToCode = null;
-        /// <summary>‚’¼•ûŒü •„†¨ƒp[ƒcÀ•W•ÏŠ·</summary>
+        /// <summary>åž‚ç›´æ–¹å‘ ç¬¦å·â†’ãƒ‘ãƒ¼ãƒ„åº§æ¨™å¤‰æ›</summary>
         public RowCodeToPtPosFunction RowCodeToPtPos = null;
-        /// <summary>‚’¼•ûŒü ƒp[ƒcÀ•W¨•„†•ÏŠ·</summary>
+        /// <summary>åž‚ç›´æ–¹å‘ ãƒ‘ãƒ¼ãƒ„åº§æ¨™â†’ç¬¦å·å¤‰æ›</summary>
         public RowPtPosToCodeFunction RowPtPosToCode = null;
 
         /// <summary>
-        /// •„†‰»‚³‚ê‚½’l‚ðƒp[ƒcÀ•W‚É•ÏŠ·‚·‚é
+        /// ç¬¦å·åŒ–ã•ã‚ŒãŸå€¤ã‚’ãƒ‘ãƒ¼ãƒ„åº§æ¨™ã«å¤‰æ›ã™ã‚‹
         /// </summary>
-        /// <param name="codeX">•„†‰»‚³‚ê‚½X‚Ì’l</param>
-        /// <returns>ƒp[ƒcXÀ•W</returns>
+        /// <param name="codeX">ç¬¦å·åŒ–ã•ã‚ŒãŸXã®å€¤</param>
+        /// <returns>ãƒ‘ãƒ¼ãƒ„Xåº§æ¨™</returns>
         public int GetPtX(int codeX)
         {
             if (ColCodeToPtPos != null)
@@ -41,10 +41,10 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒp[ƒcÀ•W‚ð•„†‰»‚³‚ê‚½’l‚É•ÏŠ·‚·‚é
+        /// ãƒ‘ãƒ¼ãƒ„åº§æ¨™ã‚’ç¬¦å·åŒ–ã•ã‚ŒãŸå€¤ã«å¤‰æ›ã™ã‚‹
         /// </summary>
-        /// <param name="partsX">ƒp[ƒcXÀ•W</param>
-        /// <returns>•„†‰»‚³‚ê‚½X‚Ì’l</returns>
+        /// <param name="partsX">ãƒ‘ãƒ¼ãƒ„Xåº§æ¨™</param>
+        /// <returns>ç¬¦å·åŒ–ã•ã‚ŒãŸXã®å€¤</returns>
         public int GetCodeX(int partsX)
         {
             if (ColPtPosToCode != null)
@@ -55,10 +55,10 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// •„†‰»‚³‚ê‚½’l‚ðƒp[ƒcÀ•W‚É•ÏŠ·‚·‚é
+        /// ç¬¦å·åŒ–ã•ã‚ŒãŸå€¤ã‚’ãƒ‘ãƒ¼ãƒ„åº§æ¨™ã«å¤‰æ›ã™ã‚‹
         /// </summary>
-        /// <param name="codeY">•„†‰»‚³‚ê‚½Y‚Ì’l</param>
-        /// <returns>ƒp[ƒcYÀ•W</returns>
+        /// <param name="codeY">ç¬¦å·åŒ–ã•ã‚ŒãŸYã®å€¤</param>
+        /// <returns>ãƒ‘ãƒ¼ãƒ„Yåº§æ¨™</returns>
         public int GetPtY(int codeY)
         {
             if (RowCodeToPtPos != null)
@@ -69,10 +69,10 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒp[ƒcÀ•W‚ð•„†‰»‚³‚ê‚½’l‚É•ÏŠ·‚·‚é
+        /// ãƒ‘ãƒ¼ãƒ„åº§æ¨™ã‚’ç¬¦å·åŒ–ã•ã‚ŒãŸå€¤ã«å¤‰æ›ã™ã‚‹
         /// </summary>
-        /// <param name="partsY">ƒp[ƒcYÀ•W</param>
-        /// <returns>•„†‰»‚³‚ê‚½Y‚Ì’l</returns>
+        /// <param name="partsY">ãƒ‘ãƒ¼ãƒ„Yåº§æ¨™</param>
+        /// <returns>ç¬¦å·åŒ–ã•ã‚ŒãŸYã®å€¤</returns>
         public int GetCodeY(int partsY)
         {
             if (RowPtPosToCode != null)

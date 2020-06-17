@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System.Drawing;
@@ -9,22 +9,22 @@ using System.Windows.Forms;
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// FeatureRowColIndicator ‚ÌŠT—v‚Ìà–¾‚Å‚·B
+    /// FeatureRowColIndicator ã®æ¦‚è¦ã®èª¬æ˜ã§ã™ã€‚
     /// </summary>
     public class FeatureRowColIndicator : FeatureBase, IMouseListener
     {
-        #region ‘®«iƒVƒŠƒAƒ‰ƒCƒY‚·‚éj
+        #region å±æ€§ï¼ˆã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºã™ã‚‹ï¼‰
         private string _tarPaneIdText;
         private Control _vl;
         private Control _hl;
         #endregion
 
-        #region ‘®«iƒVƒŠƒAƒ‰ƒCƒY‚µ‚È‚¢j
+        #region å±æ€§ï¼ˆã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºã—ãªã„ï¼‰
         private IRichPane _tarPane = null;
         #endregion
 
         /// <summary>
-        /// ‘ÎÛ‚Æ‚È‚éƒy[ƒ“‚Ì–¼Ì‚ğƒZƒbƒg‚·‚é
+        /// å¯¾è±¡ã¨ãªã‚‹ãƒšãƒ¼ãƒ³ã®åç§°ã‚’ã‚»ãƒƒãƒˆã™ã‚‹
         /// </summary>
         public string TargetPaneIdText
         {
@@ -33,11 +33,11 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒ}ƒEƒXˆÚ“®‚ÌƒCƒxƒ“ƒg
+        /// ãƒã‚¦ã‚¹ç§»å‹•æ™‚ã®ã‚¤ãƒ™ãƒ³ãƒˆ
         /// </summary>
         public void OnMouseMove(MouseState e)
         {
-            // ‘ÎÛ‚Æ‚È‚èƒy[ƒ“‚ğæ“¾‚·‚é
+            // å¯¾è±¡ã¨ãªã‚Šãƒšãƒ¼ãƒ³ã‚’å–å¾—ã™ã‚‹
             if (_tarPane == null)
             {
                 _tarPane = Pane.GetPane(_tarPaneIdText);
@@ -58,7 +58,7 @@ namespace Tono.GuiWinForm
                     BackColor = System.Drawing.Color.Black,
                     Name = "GIdeVertLabel",
                     Size = new Size(8, 1),
-                    //‰Šú‚ÌÀ•Wİ’è
+                    //åˆæœŸã®åº§æ¨™è¨­å®š
                     Location = new Point(pr.LT.X, pr.LT.Y)
                 });
                 c.Controls.Add(_hl = new Control
@@ -66,33 +66,33 @@ namespace Tono.GuiWinForm
                     ForeColor = Color.Green,
                     BackColor = System.Drawing.Color.Black,
                     Name = "GIdeHorzLabel",
-                    //‰Šú‚ÌÀ•Wİ’è
+                    //åˆæœŸã®åº§æ¨™è¨­å®š
                     Location = new Point(pr.LT.X, pr.LT.Y),
                     Size = new Size(1, 8)
                 });
 
             }
-            // ƒ}ƒEƒXÀ•W‚É‰‚¶‚ÄAêŠ‚ğ¦‚·ƒAƒCƒeƒ€‚ğˆÚ“®‚·‚é
-            //e.PosFƒ}ƒEƒXÀ•W
-            //_vl.TopFYÀ•W(c‚Ì“®‚«)@_hlFXÀ•W(‰¡‚Ì“®‚«)
+            // ãƒã‚¦ã‚¹åº§æ¨™ã«å¿œã˜ã¦ã€å ´æ‰€ã‚’ç¤ºã™ã‚¢ã‚¤ãƒ†ãƒ ã‚’ç§»å‹•ã™ã‚‹
+            //e.Posï¼šãƒã‚¦ã‚¹åº§æ¨™
+            //_vl.Topï¼šYåº§æ¨™(ç¸¦ã®å‹•ã)ã€€_hlï¼šXåº§æ¨™(æ¨ªã®å‹•ã)
             _vl.Top = e.Pos.Y;
             _hl.Left = e.Pos.X;
         }
 
-        #region IMouseListener ƒƒ“ƒo
+        #region IMouseListener ãƒ¡ãƒ³ãƒ
         public void OnMouseDown(MouseState e)
         {
-            // –¢g—p
+            // æœªä½¿ç”¨
         }
 
         public void OnMouseUp(MouseState e)
         {
-            // –¢g—p
+            // æœªä½¿ç”¨
         }
 
         public void OnMouseWheel(MouseState e)
         {
-            // –¢g—p
+            // æœªä½¿ç”¨
         }
 
 

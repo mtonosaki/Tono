@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System.Drawing;
@@ -8,7 +8,7 @@ using System.Drawing;
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// FreeDrawLayer ‚ÌŠT—v‚Ìà–¾‚Å‚·B
+    /// FreeDrawLayer ã®æ¦‚è¦ã®èª¬æ˜ã§ã™ã€‚
     /// </summary>
     public class FreeDrawLayer
     {
@@ -18,9 +18,9 @@ namespace Tono.GuiWinForm
         private Graphics _gr = null;
 
         /// <summary>
-        /// ‰Šú‰»ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+        /// åˆæœŸåŒ–ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
         /// </summary>
-        /// <param name="layerLevel">ƒŒƒCƒ„[ƒŒƒxƒ‹</param>
+        /// <param name="layerLevel">ãƒ¬ã‚¤ãƒ¤ãƒ¼ãƒ¬ãƒ™ãƒ«</param>
         public FreeDrawLayer(IRichPane parent, int layerLevel)
         {
             _layerLevel = layerLevel;
@@ -28,12 +28,12 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ‰æ–Ê€”õ‚ª‚Å‚«‚½‚©‚Ç‚¤‚©‚ğ¯•Ê‚·‚é
+        /// ç”»é¢æº–å‚™ãŒã§ããŸã‹ã©ã†ã‹ã‚’è­˜åˆ¥ã™ã‚‹
         /// </summary>
         public bool IsReady => _parent.Graphics != null;
 
         /// <summary>
-        /// •`‰æ—p‚Ìƒnƒ“ƒhƒ‹
+        /// æç”»ç”¨ã®ãƒãƒ³ãƒ‰ãƒ«
         /// </summary>
         public Graphics Graphics
         {
@@ -41,7 +41,7 @@ namespace Tono.GuiWinForm
             {
                 if (_gr == null)
                 {
-                    System.Diagnostics.Debug.Assert(_parent.Graphics != null, "GraphicsƒIƒuƒWƒFƒNƒg‚ğQÆ‚·‚éƒ^ƒCƒ~ƒ“ƒO‚ÍAcFeatureRich‚ª•`‰æ‚³‚ê‚½Œã‚Å‚·");
+                    System.Diagnostics.Debug.Assert(_parent.Graphics != null, "Graphicsã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’å‚ç…§ã™ã‚‹ã‚¿ã‚¤ãƒŸãƒ³ã‚°ã¯ã€cFeatureRichãŒæç”»ã•ã‚ŒãŸå¾Œã§ã™");
                     var ts = new ThreadUtil();
                     var pH = ts.GetHandleControl(_parent.Control);
                     var g = Graphics.FromHwnd(pH);
@@ -54,22 +54,22 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ‚±‚ÌƒtƒŠ[ƒŒƒCƒ„[‚Éˆê“x‚Å‚à•`‰æ‚µ‚½‚©‚Ç‚¤‚©’²‚×‚é
+        /// ã“ã®ãƒ•ãƒªãƒ¼ãƒ¬ã‚¤ãƒ¤ãƒ¼ã«ä¸€åº¦ã§ã‚‚æç”»ã—ãŸã‹ã©ã†ã‹èª¿ã¹ã‚‹
         /// </summary>
         public bool IsUsing => _bmp != null;
 
         /// <summary>
-        /// i“à•”ˆ——pÀs‚µ‚È‚¢‚Å‚­‚¾‚³‚¢j•`‰æƒCƒ[ƒWƒCƒ“ƒXƒ^ƒ“ƒX
+        /// ï¼ˆå†…éƒ¨å‡¦ç†ç”¨å®Ÿè¡Œã—ãªã„ã§ãã ã•ã„ï¼‰æç”»ã‚¤ãƒ¡ãƒ¼ã‚¸ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹
         /// </summary>
         public Image Image => _bmp;
 
         /// <summary>
-        /// ƒŒƒxƒ‹
+        /// ãƒ¬ãƒ™ãƒ«
         /// </summary>
         public int Level => _layerLevel;
 
         /// <summary>
-        /// ƒnƒbƒVƒ…ƒR[ƒhƒŒƒCƒ„[ƒŒƒxƒ‹
+        /// ãƒãƒƒã‚·ãƒ¥ã‚³ãƒ¼ãƒ‰ï¼ãƒ¬ã‚¤ãƒ¤ãƒ¼ãƒ¬ãƒ™ãƒ«
         /// </summary>
         /// <returns></returns>
         public override int GetHashCode()

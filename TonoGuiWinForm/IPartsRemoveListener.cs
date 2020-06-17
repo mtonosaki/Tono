@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System.Collections;
@@ -6,14 +6,14 @@ using System.Collections;
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// IPartsRemoveListener ‚ÌŠT—v‚Ìà–¾‚Å‚·B
+    /// IPartsRemoveListener ã®æ¦‚è¦ã®èª¬æ˜ã§ã™ã€‚
     /// </summary>
     public interface IPartsRemoveListener
     {
         /// <summary>
-        /// ƒp[ƒcíœƒCƒxƒ“ƒg
+        /// ãƒ‘ãƒ¼ãƒ„å‰Šé™¤ã‚¤ãƒ™ãƒ³ãƒˆ
         /// </summary>
-        /// <param name="removedPartsSet">íœ‚³‚ê‚½ƒp[ƒc‚Ìˆê——</param>
+        /// <param name="removedPartsSet">å‰Šé™¤ã•ã‚ŒãŸãƒ‘ãƒ¼ãƒ„ã®ä¸€è¦§</param>
         void OnPartsRemoved(ICollection removedPartsSet);
     }
 }

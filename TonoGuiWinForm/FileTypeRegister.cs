@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using Microsoft.Win32;
@@ -11,7 +11,7 @@ using System.Reflection;
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// ƒtƒ@ƒCƒ‹ƒ^ƒCƒv‚ğ“o˜^‚·‚é
+    /// ãƒ•ã‚¡ã‚¤ãƒ«ã‚¿ã‚¤ãƒ—ã‚’ç™»éŒ²ã™ã‚‹
     /// </summary>
     public class FileUtilTypeRegister
     {
@@ -23,7 +23,7 @@ namespace Tono.GuiWinForm
             UTF8,
         }
         /// <summary>
-        /// “o˜^‚·‚é
+        /// ç™»éŒ²ã™ã‚‹
         /// </summary>
         /// <param name="tar"></param>
         /// <param name="ext"></param>
@@ -37,7 +37,7 @@ namespace Tono.GuiWinForm
             {
                 ext = "." + ext;
             }
-            // Šg’£q‚Æ‚Ì˜A—ƒL[
+            // æ‹¡å¼µå­ã¨ã®é€£çµ¡ã‚­ãƒ¼
             var key = Registry.ClassesRoot.CreateSubKey(ext);
             var ftname = tar.GetName().Name + ".Document";
             key.SetValue(null, ftname);
@@ -57,7 +57,7 @@ namespace Tono.GuiWinForm
             }
             key.Close();
 
-            // ƒtƒ@ƒCƒ‹ƒ^ƒCƒv‚É‘Î‚·‚é‹N“®î•ñ
+            // ãƒ•ã‚¡ã‚¤ãƒ«ã‚¿ã‚¤ãƒ—ã«å¯¾ã™ã‚‹èµ·å‹•æƒ…å ±
             var kft = Registry.ClassesRoot.CreateSubKey(ftname);
             string title = "", desc;
             var ats = tar.GetCustomAttributes(typeof(AssemblyTitleAttribute), true);
@@ -91,7 +91,7 @@ namespace Tono.GuiWinForm
             var open = shell.CreateSubKey("open");
             if (isJp)
             {
-                open.SetValue(null, tar.GetName().Name + "‚ÅŠJ‚­(&O)");
+                open.SetValue(null, tar.GetName().Name + "ã§é–‹ã(&O)");
             }
             else
             {

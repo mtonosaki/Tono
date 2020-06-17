@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System;
@@ -10,13 +10,13 @@ using System.Collections.Specialized;
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// •Ï”‚ğ‹¤—L‚·‚é
+    /// å¤‰æ•°ã‚’å…±æœ‰ã™ã‚‹
     /// </summary>
     public class DataSharingManager
     {
         /// <summary>
-        /// g—p‹Ö~
-        /// ‹¤—L‚Ég‚¦‚é•¶š—ñŒ^
+        /// ä½¿ç”¨ç¦æ­¢
+        /// å…±æœ‰ã«ä½¿ãˆã‚‹æ–‡å­—åˆ—å‹
         /// </summary>
         public class String
         {
@@ -24,7 +24,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ‹¤—L‚Ég‚¦‚é•¶š—ñŒ^
+        /// å…±æœ‰ã«ä½¿ãˆã‚‹æ–‡å­—åˆ—å‹
         /// </summary>
         public class Object
         {
@@ -32,7 +32,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ‹¤—L‚Ég‚¦‚éƒu[ƒŠƒAƒ“Œ^
+        /// å…±æœ‰ã«ä½¿ãˆã‚‹ãƒ–ãƒ¼ãƒªã‚¢ãƒ³å‹
         /// </summary>
         public class Boolean
         {
@@ -40,7 +40,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ‹¤—L‚Ég‚¦‚é®”Œ^
+        /// å…±æœ‰ã«ä½¿ãˆã‚‹æ•´æ•°å‹
         /// </summary>
         public class Int
         {
@@ -60,7 +60,7 @@ namespace Tono.GuiWinForm
             }
 
             /// <summary>
-            /// intŒ^‚Ö‚ÌƒLƒƒƒXƒgƒTƒ|[ƒg
+            /// intå‹ã¸ã®ã‚­ãƒ£ã‚¹ãƒˆã‚µãƒãƒ¼ãƒˆ
             /// </summary>
             public static implicit operator int(Int from)
             {
@@ -83,30 +83,30 @@ namespace Tono.GuiWinForm
             }
         }
 
-        #region ‘®«iƒVƒŠƒAƒ‰ƒCƒY‚·‚éj
+        #region å±æ€§ï¼ˆã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºã™ã‚‹ï¼‰
 
-        /// <summary>ƒCƒ“ƒXƒ^ƒ“ƒX‚ğ\¬‚·‚éƒf[ƒ^</summary>
+        /// <summary>ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’æ§‹æˆã™ã‚‹ãƒ‡ãƒ¼ã‚¿</summary>
         private readonly IDictionary _dat = new HybridDictionary();
 
         #endregion
 
         /// <summary>
-        /// “o˜^ƒL[‚ÌŒ”
+        /// ç™»éŒ²ã‚­ãƒ¼ã®ä»¶æ•°
         /// </summary>
         public int Count => _dat.Count;
 
         /// <summary>
-        /// ‹¤—L•Ï”‚ğæ“¾‚·‚é
+        /// å…±æœ‰å¤‰æ•°ã‚’å–å¾—ã™ã‚‹
         /// </summary>
-        /// <param name="name">‹¤—L•Ï”–¼</param>
-        /// <param name="valueType">‹¤—L•Ï”‚Ì’l‚ÌŒ^</param>
-        /// <returns>‹¤—L•Ï”‚ÌƒCƒ“ƒXƒ^ƒ“ƒX</returns>
+        /// <param name="name">å…±æœ‰å¤‰æ•°å</param>
+        /// <param name="valueType">å…±æœ‰å¤‰æ•°ã®å€¤ã®å‹</param>
+        /// <returns>å…±æœ‰å¤‰æ•°ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹</returns>
         public object Get(string name, Type valueType)
         {
             var ret = _dat[name];
             if (ret == null)
             {
-                System.Diagnostics.Debug.Assert(valueType.IsSubclassOf(typeof(System.ValueType)) == false, "‹¤—L•Ï”ffShare‚Ég—p‚Å‚«‚é‚Ì‚ÍQÆŒ^‚¾‚¯‚Å‚·B" + name + " ‚Æ‚¢‚¤–¼‘O‚Ì‹¤—L•Ï”‚Ég—p‚µ‚Ä‚¢‚éŒ^‚ğ•ÏX‚µ‚Ä‚­‚¾‚³‚¢");
+                System.Diagnostics.Debug.Assert(valueType.IsSubclassOf(typeof(System.ValueType)) == false, "å…±æœ‰å¤‰æ•°ffShareã«ä½¿ç”¨ã§ãã‚‹ã®ã¯å‚ç…§å‹ã ã‘ã§ã™ã€‚" + name + " ã¨ã„ã†åå‰ã®å…±æœ‰å¤‰æ•°ã«ä½¿ç”¨ã—ã¦ã„ã‚‹å‹ã‚’å¤‰æ›´ã—ã¦ãã ã•ã„");
                 if (valueType.Equals(typeof(string)))
                 {
                     ret = "";
@@ -121,7 +121,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ‹¤—L•Ï”‚ğæ“¾‚·‚é(‘¶İ‚µ‚È‚©‚Á‚½‚çAw’è‚µ‚½ƒCƒ“ƒXƒ^ƒ“ƒX‚ğŠ„‚è“–‚Ä‚é)
+        /// å…±æœ‰å¤‰æ•°ã‚’å–å¾—ã™ã‚‹(å­˜åœ¨ã—ãªã‹ã£ãŸã‚‰ã€æŒ‡å®šã—ãŸã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’å‰²ã‚Šå½“ã¦ã‚‹)
         /// </summary>
         /// <param name="name"></param>
         /// <param name="instance"></param>
@@ -131,7 +131,7 @@ namespace Tono.GuiWinForm
             var ret = _dat[name];
             if (ret == null)
             {
-                System.Diagnostics.Debug.Assert(instance.GetType().IsSubclassOf(typeof(System.ValueType)) == false, "‹¤—L•Ï”ffShare‚Ég—p‚Å‚«‚é‚Ì‚ÍQÆŒ^‚¾‚¯‚Å‚·B" + name + " ‚Æ‚¢‚¤–¼‘O‚Ì‹¤—L•Ï”‚Ég—p‚µ‚Ä‚¢‚éŒ^‚ğ•ÏX‚µ‚Ä‚­‚¾‚³‚¢");
+                System.Diagnostics.Debug.Assert(instance.GetType().IsSubclassOf(typeof(System.ValueType)) == false, "å…±æœ‰å¤‰æ•°ffShareã«ä½¿ç”¨ã§ãã‚‹ã®ã¯å‚ç…§å‹ã ã‘ã§ã™ã€‚" + name + " ã¨ã„ã†åå‰ã®å…±æœ‰å¤‰æ•°ã«ä½¿ç”¨ã—ã¦ã„ã‚‹å‹ã‚’å¤‰æ›´ã—ã¦ãã ã•ã„");
                 ret = instance;
                 _dat.Add(name, ret);
             }

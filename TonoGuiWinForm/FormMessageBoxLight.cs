@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System;
@@ -27,7 +27,7 @@ namespace Tono.GuiWinForm
         private string _message = "";
 
         /// <summary>
-        /// ƒƒbƒZ[ƒW‚É•\¦‚µ‚Ä‚¢‚éƒeƒLƒXƒg
+        /// ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã«è¡¨ç¤ºã—ã¦ã„ã‚‹ãƒ†ã‚­ã‚¹ãƒˆ
         /// </summary>
         public string Message
         {
@@ -40,7 +40,7 @@ namespace Tono.GuiWinForm
 
 
         /// <summary>
-        /// ƒ}ƒEƒX‚Ì‹ß‚­‚ÉƒƒbƒZ[ƒW‚ğ•\¦‚·‚é
+        /// ãƒã‚¦ã‚¹ã®è¿‘ãã«ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’è¡¨ç¤ºã™ã‚‹
         /// </summary>
         /// <param name="message"></param>
         /// <param name="title"></param>
@@ -53,7 +53,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒ}ƒEƒX‚Ì‹ß‚­‚ÉƒƒbƒZ[ƒW‚ğ•\¦‚·‚é
+        /// ãƒã‚¦ã‚¹ã®è¿‘ãã«ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’è¡¨ç¤ºã™ã‚‹
         /// </summary>
         /// <param name="message"></param>
         /// <param name="title"></param>
@@ -65,7 +65,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// w’èˆÊ’u‚ÉƒƒbƒZ[ƒW‚ğ•\¦‚·‚é
+        /// æŒ‡å®šä½ç½®ã«ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’è¡¨ç¤ºã™ã‚‹
         /// </summary>
         /// <param name="message"></param>
         /// <param name="title"></param>
@@ -100,7 +100,7 @@ namespace Tono.GuiWinForm
             }
             mes.Location = new Point(x, y);
 
-            // ƒEƒBƒ“ƒhƒE‚©‚ç‚Í‚İo‚È‚¢‚æ‚¤‚É‚·‚é
+            // ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‹ã‚‰ã¯ã¿å‡ºãªã„ã‚ˆã†ã«ã™ã‚‹
             var ovh = mes.Bottom - SystemInformation.WorkingArea.Bottom;
             if (ovh > 0)
             {
@@ -112,7 +112,7 @@ namespace Tono.GuiWinForm
                 mes.Location = new Point(mes.Location.X - ovw, mes.Location.Y);
             }
 
-            // •\¦
+            // è¡¨ç¤º
             mes.FormClosing += new FormClosingEventHandler(mes_FormClosing);
             _showing[key] = 1;
             mes.Show(Form.ActiveForm);
@@ -128,7 +128,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒL[‚ğ¶¬‚·‚éiMessage‚ÆTextƒvƒƒpƒeƒB‚ğŒ³‚Éì¬‚·‚éj
+        /// ã‚­ãƒ¼ã‚’ç”Ÿæˆã™ã‚‹ï¼ˆMessageã¨Textãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ã‚’å…ƒã«ä½œæˆã™ã‚‹ï¼‰
         /// </summary>
         /// <returns></returns>
         private string getKey()
@@ -154,7 +154,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// OKƒ{ƒ^ƒ“
+        /// OKãƒœã‚¿ãƒ³
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>

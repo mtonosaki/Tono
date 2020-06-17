@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System.Collections;
@@ -9,50 +9,50 @@ using System.Collections.Generic;
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// ƒIƒuƒWƒFƒNƒg‚Ì‰¡ˆÚ“®‚Ì§ŒÀ‚ğƒTƒ|[ƒg‚µ‚Ü‚·B
+    /// ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®æ¨ªç§»å‹•ã®åˆ¶é™ã‚’ã‚µãƒãƒ¼ãƒˆã—ã¾ã™ã€‚
     /// </summary>
     public class FeatureHorzNormalize : Tono.GuiWinForm.FeatureBase, IMouseListener, ITokenListener
     {
-        #region	‘®«(ƒVƒŠƒAƒ‰ƒCƒY‚·‚é)
-        /// <summary>ˆÚ“®§ŒÀ‚ğŠÄ‹‚·‚éƒgƒŠƒK</summary>
+        #region	å±æ€§(ã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºã™ã‚‹)
+        /// <summary>ç§»å‹•åˆ¶é™ã‚’ç›£è¦–ã™ã‚‹ãƒˆãƒªã‚¬</summary>
         protected MouseState _trigger = new MouseState();
         #endregion
-        #region	‘®«(ƒVƒŠƒAƒ‰ƒCƒY‚µ‚È‚¢)
-        /// <summary>‘I‘ğ’†‚Ìƒp[ƒc</summary>
+        #region	å±æ€§(ã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºã—ãªã„)
+        /// <summary>é¸æŠä¸­ã®ãƒ‘ãƒ¼ãƒ„</summary>
         protected PartsBase _SelectedParts = null;
-        /// <summary>P3ƒIƒuƒWƒFƒNƒgËƒp[ƒcƒŠƒXƒg‚ÌƒŠƒ“ƒN</summary>
+        /// <summary>P3ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆâ‡’ãƒ‘ãƒ¼ãƒ„ãƒªã‚¹ãƒˆã®ãƒªãƒ³ã‚¯</summary>
         protected Hashtable _P3toPartsList = new Hashtable();
-        /// <summary>ƒp[ƒcËP3ƒIƒuƒWƒFƒNƒg‚ÌƒŠƒ“ƒN</summary>
+        /// <summary>ãƒ‘ãƒ¼ãƒ„â‡’P3ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ãƒªãƒ³ã‚¯</summary>
         protected IDictionary<PartsBase, PartsPositionManager.Pos3> _PartsToP3 = new Dictionary<PartsBase, PartsPositionManager.Pos3>();
-        /// <summary>ƒp[ƒcˆÊ’uŠÇ—ƒIƒuƒWƒFƒNƒg</summary>
+        /// <summary>ãƒ‘ãƒ¼ãƒ„ä½ç½®ç®¡ç†ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ</summary>
         protected PartsPositionManager _pos;
-        /// <summary>˜AŒgˆÚ“®ƒ‚[ƒh‚ÌON(1)/OFF(0)</summary>
+        /// <summary>é€£æºç§»å‹•ãƒ¢ãƒ¼ãƒ‰ã®ON(1)/OFF(0)</summary>
         protected DataSharingManager.Int _FollowMoveMode = null;
-        /// <summary>ƒ}ƒEƒX‚Ìó‘Ô‚ğ‹¤—L•Ï”‚Æ“¯Šú</summary>
+        /// <summary>ãƒã‚¦ã‚¹ã®çŠ¶æ…‹ã‚’å…±æœ‰å¤‰æ•°ã¨åŒæœŸ</summary>
         protected MouseState _clickPos;
-        /// <summary>ƒ}ƒEƒXƒ{ƒ^ƒ“‚ğ‰Ÿ‚µ‚½Û‚É•K—v‚Èˆ—‚ğŠJn‚·‚éƒg[ƒNƒ“</summary>
+        /// <summary>ãƒã‚¦ã‚¹ãƒœã‚¿ãƒ³ã‚’æŠ¼ã—ãŸéš›ã«å¿…è¦ãªå‡¦ç†ã‚’é–‹å§‹ã™ã‚‹ãƒˆãƒ¼ã‚¯ãƒ³</summary>
         protected NamedId _tokenMouseDownJob = NamedId.FromName("MouseDownJob");
         #endregion
 
         /// <summary>
-        /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+        /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
         /// </summary>
         public FeatureHorzNormalize()
         {
         }
 
         /// <summary>
-        /// ‰Šú‰»
+        /// åˆæœŸåŒ–
         /// </summary>
         public override void OnInitInstance()
         {
-            // ƒXƒe[ƒ^ƒX“¯Šú
-            _pos = (PartsPositionManager)Share.Get("MovingParts", typeof(PartsPositionManager));    // ˆÚ“®’†‚Ìƒp[ƒcˆê——
-            _clickPos = (MouseState)Share.Get("ClickPosition", typeof(MouseState));  // ˆÚ“®’†‚Ìƒp[ƒcˆê——
+            // ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹åŒæœŸ
+            _pos = (PartsPositionManager)Share.Get("MovingParts", typeof(PartsPositionManager));    // ç§»å‹•ä¸­ã®ãƒ‘ãƒ¼ãƒ„ä¸€è¦§
+            _clickPos = (MouseState)Share.Get("ClickPosition", typeof(MouseState));  // ç§»å‹•ä¸­ã®ãƒ‘ãƒ¼ãƒ„ä¸€è¦§
         }
 
         /// <summary>
-        ///  ƒg[ƒNƒ“‚É‚æ‚é‹N“®ƒCƒxƒ“ƒg
+        ///  ãƒˆãƒ¼ã‚¯ãƒ³ã«ã‚ˆã‚‹èµ·å‹•ã‚¤ãƒ™ãƒ³ãƒˆ
         /// </summary>
         /// <param name="who"></param>
         public override void Start(NamedId who)
@@ -61,46 +61,46 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒ}ƒEƒXƒ_ƒEƒ“ˆ—‚ÌÅIŒˆ’è
+        /// ãƒã‚¦ã‚¹ãƒ€ã‚¦ãƒ³å‡¦ç†ã®æœ€çµ‚æ±ºå®š
         /// </summary>
         protected virtual void FinalMouseDownJob()
         {
         }
 
         /// <summary>
-        /// ƒ}ƒEƒXƒ_ƒEƒ“ˆ—‚ÌÅIŒˆ’è
+        /// ãƒã‚¦ã‚¹ãƒ€ã‚¦ãƒ³å‡¦ç†ã®æœ€çµ‚æ±ºå®š
         /// </summary>
         protected virtual void FinalMouseMoveJob()
         {
         }
 
-        #region IMouseListener ƒƒ“ƒo
+        #region IMouseListener ãƒ¡ãƒ³ãƒ
         /// <summary>
-        /// ƒ}ƒEƒXƒ€[ƒu
+        /// ãƒã‚¦ã‚¹ãƒ ãƒ¼ãƒ–
         /// </summary>
         public virtual void OnMouseMove(MouseState e)
         {
         }
         /// <summary>
-        /// ƒ}ƒEƒXƒ_ƒEƒ“
+        /// ãƒã‚¦ã‚¹ãƒ€ã‚¦ãƒ³
         /// </summary>
         public virtual void OnMouseDown(MouseState e)
         {
         }
         /// <summary>
-        /// ƒ}ƒEƒXƒAƒbƒv
+        /// ãƒã‚¦ã‚¹ã‚¢ãƒƒãƒ—
         /// </summary>
         public virtual void OnMouseUp(MouseState e)
         {
         }
         /// <summary>
-        /// ƒ}ƒEƒXƒzƒC[ƒ‹
+        /// ãƒã‚¦ã‚¹ãƒ›ã‚¤ãƒ¼ãƒ«
         /// </summary>
         public virtual void OnMouseWheel(MouseState e)
         {
         }
         #endregion
-        #region ITokenListener ƒƒ“ƒo
+        #region ITokenListener ãƒ¡ãƒ³ãƒ
         public virtual NamedId TokenTriggerID => TokenGeneral.TokenMouseDownNormalize;
         #endregion
     }

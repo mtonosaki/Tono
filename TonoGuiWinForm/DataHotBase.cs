@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System;
@@ -6,8 +6,8 @@ using System;
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// ƒf[ƒ^ƒfƒtƒHƒ‹ƒg
-    /// ƒf[ƒ^ƒIƒuƒWƒFƒNƒg‚ª•s—v‚Èê‡‚Ég—p‚µ‚Ä‚­‚¾‚³‚¢
+    /// ãƒ‡ãƒ¼ã‚¿ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆ
+    /// ãƒ‡ãƒ¼ã‚¿ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆãŒä¸è¦ãªå ´åˆã«ä½¿ç”¨ã—ã¦ãã ã•ã„
     /// </summary>
     public sealed class DataHotDefault : DataHotBase
     {
@@ -15,23 +15,23 @@ namespace Tono.GuiWinForm
 
 
     /// <summary>
-    /// ƒAƒvƒŠƒP[ƒVƒ‡ƒ“ŒÅ—L‚Ìƒf[ƒ^‚ğŠÇ—‚·‚éŠî–{ƒNƒ‰ƒX
+    /// ã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³å›ºæœ‰ã®ãƒ‡ãƒ¼ã‚¿ã‚’ç®¡ç†ã™ã‚‹åŸºæœ¬ã‚¯ãƒ©ã‚¹
     /// </summary>
     [Serializable]
     public abstract class DataHotBase
     {
-        #region ƒVƒŠƒAƒ‰ƒCƒY‚µ‚È‚¢ó‘Ô•Ï”
+        #region ã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºã—ãªã„çŠ¶æ…‹å¤‰æ•°
         [NonSerialized]
         private bool _isModified = false;
         /// <summary>
-        /// ƒ_[ƒeƒB[ƒtƒ‰ƒO‚ğ“ü‚ê‚é
+        /// ãƒ€ãƒ¼ãƒ†ã‚£ãƒ¼ãƒ•ãƒ©ã‚°ã‚’å…¥ã‚Œã‚‹
         /// </summary>
         public virtual void SetModified()
         {
             _isModified = true;
         }
         /// <summary>
-        /// ƒ_[ƒeƒB[ƒtƒ‰ƒO‚ğ•ÏX‚·‚é
+        /// ãƒ€ãƒ¼ãƒ†ã‚£ãƒ¼ãƒ•ãƒ©ã‚°ã‚’å¤‰æ›´ã™ã‚‹
         /// </summary>
         /// <param name="sw"></param>
         public virtual void SetModified(bool sw)
@@ -39,42 +39,42 @@ namespace Tono.GuiWinForm
             _isModified = sw;
         }
         /// <summary>
-        /// ƒ_[ƒeƒB[ƒtƒ‰ƒO
+        /// ãƒ€ãƒ¼ãƒ†ã‚£ãƒ¼ãƒ•ãƒ©ã‚°
         /// </summary>
         public virtual bool IsModified => _isModified;
         #endregion
-        #region ‘®«iƒVƒŠƒAƒ‰ƒCƒY‚µ‚È‚¢j
+        #region å±æ€§ï¼ˆã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºã—ãªã„ï¼‰
         [NonSerialized]
         private readonly object _mySingleton = new object();
         #endregion
 
         /// <summary>
-        /// “¯Šúƒ‹[ƒgiƒf[ƒ^‘S‘Ìj
+        /// åŒæœŸãƒ«ãƒ¼ãƒˆï¼ˆãƒ‡ãƒ¼ã‚¿å…¨ä½“ï¼‰
         /// </summary>
         public virtual object SyncRoot => _mySingleton;
 
         /// <summary>
-        /// ‘SƒAƒvƒŠƒP[ƒVƒ‡ƒ“ƒf[ƒ^‚ğÁ‹‚·‚é
+        /// å…¨ã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³ãƒ‡ãƒ¼ã‚¿ã‚’æ¶ˆå»ã™ã‚‹
         /// </summary>
         public virtual void Clear()
         {
         }
 
         /// <summary>
-        /// ƒŒƒR[ƒh‚ğíœ‚·‚é
+        /// ãƒ¬ã‚³ãƒ¼ãƒ‰ã‚’å‰Šé™¤ã™ã‚‹
         /// </summary>
-        /// <param name="table">ƒe[ƒuƒ‹</param>
-        /// <param name="rec">ƒŒƒR[ƒh</param>
+        /// <param name="table">ãƒ†ãƒ¼ãƒ–ãƒ«</param>
+        /// <param name="rec">ãƒ¬ã‚³ãƒ¼ãƒ‰</param>
         public virtual void Remove(TableCollection table, object rec)
         {
             table.DirectRemove(rec);
         }
 
         /// <summary>
-        /// ƒŒƒR[ƒh‚ğ’Ç‰Á‚·‚é
+        /// ãƒ¬ã‚³ãƒ¼ãƒ‰ã‚’è¿½åŠ ã™ã‚‹
         /// </summary>
-        /// <param name="table">ƒe[ƒuƒ‹</param>
-        /// <param name="rec">ƒŒƒR[ƒh</param>
+        /// <param name="table">ãƒ†ãƒ¼ãƒ–ãƒ«</param>
+        /// <param name="rec">ãƒ¬ã‚³ãƒ¼ãƒ‰</param>
         public virtual void Add(TableCollection table, object rec)
         {
             table.DirectAdd(rec);

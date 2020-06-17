@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 #pragma warning disable 1591, 1572, 1573
@@ -6,25 +6,25 @@
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// ƒŠƒXƒgƒrƒ…[‚ÌƒTƒuƒAƒCƒeƒ€‚ÌŠg’£ƒNƒ‰ƒX
+    /// ãƒªã‚¹ãƒˆãƒ“ãƒ¥ãƒ¼ã®ã‚µãƒ–ã‚¢ã‚¤ãƒ†ãƒ ã®æ‹¡å¼µã‚¯ãƒ©ã‚¹
     /// </summary>
     public class TListViewSubItem : System.Windows.Forms.ListViewItem.ListViewSubItem
     {
-        #region	‘®«iƒVƒŠƒAƒ‰ƒCƒY‚·‚éj
-        /// <summary>ƒeƒLƒXƒg‚Ìƒf[ƒ^</summary>
+        #region	å±æ€§ï¼ˆã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºã™ã‚‹ï¼‰
+        /// <summary>ãƒ†ã‚­ã‚¹ãƒˆã®ãƒ‡ãƒ¼ã‚¿</summary>
         private object _obj = null;
-        /// <summary>”’lŒ^‚Ìƒf[ƒ^‚ğŠ‚µ‚Ä‚¢‚é‚©</summary>
+        /// <summary>æ•°å€¤å‹ã®ãƒ‡ãƒ¼ã‚¿ã‚’æ‰€æŒã—ã¦ã„ã‚‹ã‹</summary>
         private bool _isInt = false;
-        /// <summary>ƒŠƒ“ƒNæ‚Ìƒe[ƒuƒ‹</summary>
+        /// <summary>ãƒªãƒ³ã‚¯å…ˆã®ãƒ†ãƒ¼ãƒ–ãƒ«</summary>
         private string _tableName = "";
-        /// <summary>ƒŠƒ“ƒNæ‚ÌƒJƒ‰ƒ€</summary>
+        /// <summary>ãƒªãƒ³ã‚¯å…ˆã®ã‚«ãƒ©ãƒ </summary>
         private string _columnName = "";
         #endregion
-        #region	‘®«iƒVƒŠƒAƒ‰ƒCƒY‚µ‚È‚¢j
+        #region	å±æ€§ï¼ˆã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºã—ãªã„ï¼‰
         #endregion
 
         /// <summary>
-        /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+        /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
         /// </summary>
         public TListViewSubItem()
         {
@@ -33,16 +33,16 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ‰Šú‰»ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+        /// åˆæœŸåŒ–ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
         /// </summary>
-        /// <param name="text">•\¦‚·‚éƒeƒLƒXƒg</param>
+        /// <param name="text">è¡¨ç¤ºã™ã‚‹ãƒ†ã‚­ã‚¹ãƒˆ</param>
         public TListViewSubItem(object value)
         {
             Text = value;
         }
 
         /// <summary>
-        /// intŒ^‚Ì’l‚ğæ“¾
+        /// intå‹ã®å€¤ã‚’å–å¾—
         /// </summary>
         public int intText
         {
@@ -58,12 +58,12 @@ namespace Tono.GuiWinForm
                     return (int)_obj;
                 }
 
-                return 0;   // IdŒ^‚Å‚àintŒ^‚Å‚à–³‚©‚Á‚½ê‡
+                return 0;   // Idå‹ã§ã‚‚intå‹ã§ã‚‚ç„¡ã‹ã£ãŸå ´åˆ
             }
         }
 
         /// <summary>
-        /// ”’lŒ^‚ğƒf[ƒ^‚ğŠ‚µ‚Ä‚¢‚é‚©’²¸‚·‚é
+        /// æ•°å€¤å‹ã‚’ãƒ‡ãƒ¼ã‚¿ã‚’æ‰€æŒã—ã¦ã„ã‚‹ã‹èª¿æŸ»ã™ã‚‹
         /// </summary>
         public bool IsInt
         {
@@ -72,7 +72,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒŠƒ“ƒNæ‚Ìƒe[ƒuƒ‹–¼‚ğæ“¾/İ’è
+        /// ãƒªãƒ³ã‚¯å…ˆã®ãƒ†ãƒ¼ãƒ–ãƒ«åã‚’å–å¾—/è¨­å®š
         /// </summary>
         public string TableName
         {
@@ -81,7 +81,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒŠƒ“ƒNæ‚Ì—ñ–¼‚ğæ“¾/İ’è
+        /// ãƒªãƒ³ã‚¯å…ˆã®åˆ—åã‚’å–å¾—/è¨­å®š
         /// </summary>
         public string ColumnName
         {
@@ -90,7 +90,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// •\¦ƒeƒLƒXƒg‚Ìæ“¾/İ’è
+        /// è¡¨ç¤ºãƒ†ã‚­ã‚¹ãƒˆã®å–å¾—/è¨­å®š
         /// </summary>
         public new object Text
         {

@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System;
@@ -10,13 +10,13 @@ using System.Windows.Forms;
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// •\¦E•ÒW‚Ì‚½‚ß‚ÌAƒeƒLƒXƒgŠî–{ƒNƒ‰ƒX
-    /// ”wŒi“h‚è‚Â‚Ô‚µ‚ÍA”h¶ƒNƒ‰ƒX‚Ås‚¤‚±‚ÆiƒfƒUƒCƒ“_“î«‚Ì‚½‚ßj
-    /// ‚±‚ÌƒNƒ‰ƒX‚ÍAƒeƒLƒXƒg•\¦‚µ‚©‚µ‚È‚¢B
+    /// è¡¨ç¤ºãƒ»ç·¨é›†ã®ãŸã‚ã®ã€ãƒ†ã‚­ã‚¹ãƒˆåŸºæœ¬ã‚¯ãƒ©ã‚¹
+    /// èƒŒæ™¯å¡—ã‚Šã¤ã¶ã—ã¯ã€æ´¾ç”Ÿã‚¯ãƒ©ã‚¹ã§è¡Œã†ã“ã¨ï¼ˆãƒ‡ã‚¶ã‚¤ãƒ³æŸ”è»Ÿæ€§ã®ãŸã‚ï¼‰
+    /// ã“ã®ã‚¯ãƒ©ã‚¹ã¯ã€ãƒ†ã‚­ã‚¹ãƒˆè¡¨ç¤ºã—ã‹ã—ãªã„ã€‚
     /// </summary>
     public abstract class PartsTextBase : PartsBase, IPartsSelectable
     {
-        #region ‘®«iƒVƒŠƒAƒ‰ƒCƒY‚·‚éj
+        #region å±æ€§ï¼ˆã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºã™ã‚‹ï¼‰
         private string _fontName;
         private float _fontSize;
         private Color _fontColor;
@@ -29,28 +29,28 @@ namespace Tono.GuiWinForm
         private ImeMode _imeMode;
         private bool _isMultiLine;
         #endregion
-        #region ‘®«iƒVƒŠƒAƒ‰ƒCƒY‚µ‚È‚¢j
+        #region å±æ€§ï¼ˆã‚·ãƒªã‚¢ãƒ©ã‚¤ã‚ºã—ãªã„ï¼‰
         [NonSerialized]
-        protected StringFormat _sf = new StringFormat(); // ƒeƒLƒXƒg‚ÌƒtƒH[ƒ}ƒbƒg‚ğì¬
+        protected StringFormat _sf = new StringFormat(); // ãƒ†ã‚­ã‚¹ãƒˆã®ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆã‚’ä½œæˆ
         [NonSerialized]
         private Font _lastFont = null;
 
         #endregion
 
-        #region ƒvƒƒpƒeƒB
+        #region ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£
 
         /// <summary>
-        /// ƒeƒLƒXƒgƒ}[ƒWƒ“iTopj
+        /// ãƒ†ã‚­ã‚¹ãƒˆãƒãƒ¼ã‚¸ãƒ³ï¼ˆTopï¼‰
         /// </summary>
         public int MarginTop { get; set; }
 
         /// <summary>
-        /// ƒeƒLƒXƒgƒ}[ƒWƒ“iLeftj
+        /// ãƒ†ã‚­ã‚¹ãƒˆãƒãƒ¼ã‚¸ãƒ³ï¼ˆLeftï¼‰
         /// </summary>
         public int MarginLeft { get; set; }
 
         /// <summary>
-        /// ƒtƒHƒ“ƒgƒTƒCƒY
+        /// ãƒ•ã‚©ãƒ³ãƒˆã‚µã‚¤ã‚º
         /// </summary>
         public float FontSize
         {
@@ -77,7 +77,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒtƒHƒ“ƒg–¼
+        /// ãƒ•ã‚©ãƒ³ãƒˆå
         /// </summary>
         public string FontName
         {
@@ -86,7 +86,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ÅŒã‚É•\¦‚µ‚½ƒtƒHƒ“ƒg‚ğ•Ô‚·
+        /// æœ€å¾Œã«è¡¨ç¤ºã—ãŸãƒ•ã‚©ãƒ³ãƒˆã‚’è¿”ã™
         /// </summary>
         public Font LastFont
         {
@@ -95,7 +95,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ”wŒiF
+        /// èƒŒæ™¯è‰²
         /// </summary>
         public Color BackColor
         {
@@ -104,7 +104,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ü‚ÌF
+        /// ç·šã®è‰²
         /// </summary>
         public Color LineColor
         {
@@ -113,7 +113,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒtƒHƒ“ƒg‚ÌF
+        /// ãƒ•ã‚©ãƒ³ãƒˆã®è‰²
         /// </summary>
         public Color FontColor
         {
@@ -122,7 +122,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ‰üs‚ğ‹–‰Â‚·‚é‚©H
+        /// æ”¹è¡Œã‚’è¨±å¯ã™ã‚‹ã‹ï¼Ÿ
         /// </summary>
         public bool IsMultiLine
         {
@@ -132,7 +132,7 @@ namespace Tono.GuiWinForm
         #endregion
 
         /// <summary>
-        /// Šî–{ƒNƒ‰ƒX‚ÌƒRƒ“ƒXƒgƒ‰ƒNƒ^
+        /// åŸºæœ¬ã‚¯ãƒ©ã‚¹ã®ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
         /// </summary>
         protected PartsTextBase()
         {
@@ -150,7 +150,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// GDIŠJ•ú
+        /// GDIé–‹æ”¾
         /// </summary>
         public override void Dispose()
         {
@@ -162,35 +162,35 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒeƒLƒXƒg‚Ì•\¦ˆÊ’ui…•½j
+        /// ãƒ†ã‚­ã‚¹ãƒˆã®è¡¨ç¤ºä½ç½®ï¼ˆæ°´å¹³ï¼‰
         /// </summary>
         public StringAlignment TextAlignHorz { get; set; }
 
         /// <summary>
-        /// ƒeƒLƒXƒg‚Ì•\¦ˆÊ’ui‚’¼j
+        /// ãƒ†ã‚­ã‚¹ãƒˆã®è¡¨ç¤ºä½ç½®ï¼ˆå‚ç›´ï¼‰
         /// </summary>
         public StringAlignment TextAlignVert { get; set; }
 
         /// <summary>
-        /// cŒü‚«‚É‰ñ“]H
+        /// ç¸¦å‘ãã«å›è»¢ï¼Ÿ
         /// </summary>
         public bool IsDirectionVertical { get; set; }
 
         /// <summary>
-        /// •`‰æƒI[ƒo[ƒ‰ƒCƒh
+        /// æç”»ã‚ªãƒ¼ãƒãƒ¼ãƒ©ã‚¤ãƒ‰
         /// </summary>
         /// <param name="rp"></param>
         /// <returns></returns>
         public override bool Draw(IRichPane rp)
         {
             var spos = GetScRect(rp);
-            if (isInClip(rp, spos) == false)    // •`‰æ•s—v‚Å‚ ‚ê‚ÎA‚È‚É‚à‚µ‚È‚¢
+            if (isInClip(rp, spos) == false)    // æç”»ä¸è¦ã§ã‚ã‚Œã°ã€ãªã«ã‚‚ã—ãªã„
             {
                 return false;
             }
 
 
-            // ƒeƒLƒXƒg•`‰æ
+            // ãƒ†ã‚­ã‚¹ãƒˆæç”»
             var fsize = GetPointFromPoint(_fontSize, rp);
             if (fsize > 3)
             {
@@ -215,34 +215,34 @@ namespace Tono.GuiWinForm
                 {
                     _lastFont.Dispose();
                 }
-                _lastFont = new Font(_fontName, fsize, style);  // ƒtƒHƒ“ƒg‚ğì¬
+                _lastFont = new Font(_fontName, fsize, style);  // ãƒ•ã‚©ãƒ³ãƒˆã‚’ä½œæˆ
                 var sr = (ScreenRect)spos.Clone();
                 sr.LT.X += MarginLeft;
                 sr.LT.Y += MarginTop;
                 using (var brush = new SolidBrush(_fontColor))
                 {
-                    rp.Graphics.DrawString(Text, _lastFont, brush, sr, _sf);   // ƒeƒLƒXƒg‚ğ•`‰æ
+                    rp.Graphics.DrawString(Text, _lastFont, brush, sr, _sf);   // ãƒ†ã‚­ã‚¹ãƒˆã‚’æç”»
                 }
             }
             return true;
         }
 
         /// <summary>
-        /// ƒY[ƒ€‚ğl—¶‚µ‚½ƒ|ƒCƒ“ƒg”‚ğŒvZ
+        /// ã‚ºãƒ¼ãƒ ã‚’è€ƒæ…®ã—ãŸãƒã‚¤ãƒ³ãƒˆæ•°ã‚’è¨ˆç®—
         /// </summary>
-        /// <param name="point">Šú‘Ò’l</param>
-        /// <param name="rp">ƒŠƒbƒ`ƒy[ƒ“</param>
-        /// <returns>ƒY[ƒ€‚ğl—¶‚µ‚½ƒ|ƒCƒ“ƒg”</returns>
+        /// <param name="point">æœŸå¾…å€¤</param>
+        /// <param name="rp">ãƒªãƒƒãƒãƒšãƒ¼ãƒ³</param>
+        /// <returns>ã‚ºãƒ¼ãƒ ã‚’è€ƒæ…®ã—ãŸãƒã‚¤ãƒ³ãƒˆæ•°</returns>
         public float GetPointFromPoint(float point, IRichPane rp)
         {
             return (float)(point * GeoEu.Length(rp.Zoom.X, rp.Zoom.Y) / 1000 / Math.Sqrt(2));
         }
 
         /// <summary>
-        /// ’PˆÊƒ|ƒCƒ“ƒg‚©‚çAƒXƒNƒŠ[ƒ“À•WŒn‚Ì’l‚ğæ“¾‚·‚é
+        /// å˜ä½ãƒã‚¤ãƒ³ãƒˆã‹ã‚‰ã€ã‚¹ã‚¯ãƒªãƒ¼ãƒ³åº§æ¨™ç³»ã®å€¤ã‚’å–å¾—ã™ã‚‹
         /// </summary>
-        /// <param name="point">ƒ|ƒCƒ“ƒg”</param>
-        /// <returns>ƒXƒNƒŠ[ƒ“À•WŒn‚ÉŠ·Z‚µ‚½’l</returns>
+        /// <param name="point">ãƒã‚¤ãƒ³ãƒˆæ•°</param>
+        /// <returns>ã‚¹ã‚¯ãƒªãƒ¼ãƒ³åº§æ¨™ç³»ã«æ›ç®—ã—ãŸå€¤</returns>
         public float GetScFromPoint(float point, IRichPane rp)
         {
             var p = CodeRect.FromLTRB((int)(GetMillimeterFromPoint(point) * 1000), 0, 0, 0);
@@ -251,17 +251,17 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒ|ƒCƒ“ƒg‚ğƒ~ƒŠƒ[ƒgƒ‹‚É•ÏŠ·‚·‚é
+        /// ãƒã‚¤ãƒ³ãƒˆã‚’ãƒŸãƒªãƒ¡ãƒ¼ãƒˆãƒ«ã«å¤‰æ›ã™ã‚‹
         /// </summary>
-        /// <param name="point">ƒ|ƒCƒ“ƒg</param>
-        /// <returns>ƒ~ƒŠƒ[ƒgƒ‹</returns>
+        /// <param name="point">ãƒã‚¤ãƒ³ãƒˆ</param>
+        /// <returns>ãƒŸãƒªãƒ¡ãƒ¼ãƒˆãƒ«</returns>
         public float GetMillimeterFromPoint(float point)
         {
             return 100f / 284.53f * point;
         }
 
         /// <summary>
-        /// c‘‚«ƒeƒLƒXƒg‚©‚Ç‚¤‚©‚Ìƒtƒ‰ƒO
+        /// ç¸¦æ›¸ããƒ†ã‚­ã‚¹ãƒˆã‹ã©ã†ã‹ã®ãƒ•ãƒ©ã‚°
         /// </summary>
         public bool IsVerticalText
         {
@@ -269,7 +269,7 @@ namespace Tono.GuiWinForm
             set => _isVertText = value;
         }
 
-        #region IPartsSelectable ƒƒ“ƒo
+        #region IPartsSelectable ãƒ¡ãƒ³ãƒ
 
         public bool IsSelected
         {

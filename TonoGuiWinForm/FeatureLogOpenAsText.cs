@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System.Diagnostics;
@@ -9,14 +9,14 @@ using System.IO;
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// ƒƒOƒeƒLƒXƒg‚ğƒm[ƒgƒpƒbƒh‚ÅŠJ‚­
+    /// ãƒ­ã‚°ãƒ†ã‚­ã‚¹ãƒˆã‚’ãƒãƒ¼ãƒˆãƒ‘ãƒƒãƒ‰ã§é–‹ã
     /// </summary>
     public class FeatureLogOpenAsText : FeatureBase, ITokenListener
     {
         private static readonly NamedId TOKEN = NamedId.FromName("OpenLogAsText");
 
         /// <summary>
-        /// ‹N“®
+        /// èµ·å‹•
         /// </summary>
         /// <param name="who"></param>
         public override void Start(NamedId who)
@@ -26,7 +26,7 @@ namespace Tono.GuiWinForm
             Process.Start("notepad.exe", fname);
         }
 
-        #region ITokenListener ƒƒ“ƒo
+        #region ITokenListener ãƒ¡ãƒ³ãƒ
 
         public NamedId TokenTriggerID => TOKEN;
 

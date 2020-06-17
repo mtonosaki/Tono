@@ -1,4 +1,4 @@
-// (c) 2019 Manabu Tonosaki
+ï»¿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
 
 using System.Collections.Generic;
@@ -12,12 +12,12 @@ using System.Windows.Forms;
 namespace Tono.GuiWinForm
 {
     /// <summary>
-    /// HTML‚ÌƒŒƒ|[ƒg‚ğ¶¬‚·‚é
+    /// HTMLã®ãƒ¬ãƒãƒ¼ãƒˆã‚’ç”Ÿæˆã™ã‚‹
     /// </summary>
     public class HtmlBulder
     {
         /// <summary>
-        /// ƒe[ƒuƒ‹ƒrƒ‹ƒ_
+        /// ãƒ†ãƒ¼ãƒ–ãƒ«ãƒ“ãƒ«ãƒ€
         /// </summary>
         public class Table
         {
@@ -25,7 +25,7 @@ namespace Tono.GuiWinForm
             private readonly Dictionary2d<int, int, HorizontalAlignment> _halign = new Dictionary2d<int, int, HorizontalAlignment>();
 
             /// <summary>
-            /// ƒeƒLƒXƒg‚Ì‰¡•ûŒü‚ÌˆÊ’u‚ğƒZƒbƒg
+            /// ãƒ†ã‚­ã‚¹ãƒˆã®æ¨ªæ–¹å‘ã®ä½ç½®ã‚’ã‚»ãƒƒãƒˆ
             /// </summary>
             /// <param name="col"></param>
             /// <param name="row"></param>
@@ -36,7 +36,7 @@ namespace Tono.GuiWinForm
             }
 
             /// <summary>
-            /// ƒZƒ‹‚Éƒf[ƒ^‚ğ‘‚«‚Ş
+            /// ã‚»ãƒ«ã«ãƒ‡ãƒ¼ã‚¿ã‚’æ›¸ãè¾¼ã‚€
             /// </summary>
             /// <param name="col"></param>
             /// <param name="row"></param>
@@ -51,7 +51,7 @@ namespace Tono.GuiWinForm
             }
 
             /// <summary>
-            /// ƒZƒ‹ƒf[ƒ^
+            /// ã‚»ãƒ«ãƒ‡ãƒ¼ã‚¿
             /// </summary>
             /// <param name="col"></param>
             /// <param name="row"></param>
@@ -74,7 +74,7 @@ namespace Tono.GuiWinForm
 
             private string _width = "";
             /// <summary>
-            /// • 20px / 100% ‚È‚Ç
+            /// å¹… 20px / 100% ãªã©
             /// </summary>
             public string Width
             {
@@ -82,7 +82,7 @@ namespace Tono.GuiWinForm
             }
 
             /// <summary>
-            /// •¶š—ñ‚ÅHTMLƒR[ƒh‚ğ•\¦
+            /// æ–‡å­—åˆ—ã§HTMLã‚³ãƒ¼ãƒ‰ã‚’è¡¨ç¤º
             /// </summary>
             /// <returns></returns>
             public override string ToString()
@@ -136,7 +136,7 @@ namespace Tono.GuiWinForm
         public abstract class TemplateBase
         {
             /// <summary>
-            /// Œ³‚É‚È‚éƒRƒ“ƒeƒ“ƒc
+            /// å…ƒã«ãªã‚‹ã‚³ãƒ³ãƒ†ãƒ³ãƒ„
             /// </summary>
             protected string _contents = null;
 
@@ -147,21 +147,21 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒeƒ“ƒvƒŒ[ƒg
+        /// ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆ
         /// </summary>
         public class Template : TemplateBase
         {
             /// <summary>
-            /// ƒx[ƒX‚É‚È‚éƒeƒ“ƒvƒŒ[ƒg
+            /// ãƒ™ãƒ¼ã‚¹ã«ãªã‚‹ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆ
             /// </summary>
             private readonly string _basePath = "HtmlBulder.base.htm";
             /// <summary>
-            /// ƒ^ƒCƒgƒ‹
+            /// ã‚¿ã‚¤ãƒˆãƒ«
             /// </summary>
             private string _title = "A HTML Report";
 
             /// <summary>
-            /// ƒ^ƒCƒgƒ‹
+            /// ã‚¿ã‚¤ãƒˆãƒ«
             /// </summary>
             public string Title
             {
@@ -170,7 +170,7 @@ namespace Tono.GuiWinForm
             }
 
             /// <summary>
-            /// •¶š—ñ
+            /// æ–‡å­—åˆ—
             /// </summary>
             /// <returns></returns>
             public override string ToString()
@@ -184,24 +184,24 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒRƒ“ƒeƒ“ƒc
+        /// ã‚³ãƒ³ãƒ†ãƒ³ãƒ„
         /// </summary>
         private readonly StringBuilder _contents = new StringBuilder();
 
         /// <summary>
-        /// g—p‚·‚éƒeƒ“ƒvƒŒ[ƒg
+        /// ä½¿ç”¨ã™ã‚‹ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆ
         /// </summary>
         private readonly TemplateBase _template = null;
 
         /// <summary>
-        /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+        /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
         /// </summary>
         public HtmlBulder()
         {
         }
 
         /// <summary>
-        /// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+        /// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
         /// </summary>
         public HtmlBulder(TemplateBase temp)
         {
@@ -209,7 +209,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒRƒ“ƒeƒ“ƒc‚ğ’Ç‰Á‚·‚é
+        /// ã‚³ãƒ³ãƒ†ãƒ³ãƒ„ã‚’è¿½åŠ ã™ã‚‹
         /// </summary>
         /// <param name="content"></param>
         public void Add(string content)
@@ -218,7 +218,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ’i—‚Å’Ç‰Á
+        /// æ®µè½ã§è¿½åŠ 
         /// </summary>
         /// <param name="content"></param>
         public void AddParagraph(string content)
@@ -229,7 +229,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// •Û‘¶‚·‚é
+        /// ä¿å­˜ã™ã‚‹
         /// </summary>
         /// <param name="sw"></param>
         public void Save(StreamWriter sw)
@@ -246,7 +246,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// ƒeƒLƒXƒg‚ğ•Ô‚·
+        /// ãƒ†ã‚­ã‚¹ãƒˆã‚’è¿”ã™
         /// </summary>
         /// <returns></returns>
         public override string ToString()
@@ -255,7 +255,7 @@ namespace Tono.GuiWinForm
         }
 
         /// <summary>
-        /// Œ©‚¹‚é
+        /// è¦‹ã›ã‚‹
         /// </summary>
         public void Show()
         {
