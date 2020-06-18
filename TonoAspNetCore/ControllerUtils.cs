@@ -89,7 +89,7 @@ namespace TonoAspNetCore
         /// <param name="propertyName">property name that contains in the model</param>
         /// <param name="model">model instance</param>
         /// <param name="def">Default value. When model value is same with this default, this method tries to get value from cookie.</param>
-        protected void PersistInput<TModel>(string propertyName, TModel model, string def)
+        public void PersistInput<TModel>(string propertyName, TModel model, string def)
         {
             var pp = model.GetType().GetProperty(propertyName);
             if (pp == null)
