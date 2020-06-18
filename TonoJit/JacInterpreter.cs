@@ -773,27 +773,6 @@ namespace Tono.Jit
             }
         }
 
-        public static DateTime ParseDateTime(string valuestr)
-        {
-            if (valuestr.StartsWith("datetime"))
-            {
-                var sl = StrUtil.MidSkip(valuestr, @"^datetime\s*\(\s*'");
-                valuestr = StrUtil.LeftBefore(sl, @"'\s*\)$");
-            }
-            else if (valuestr.StartsWith("'") && valuestr.EndsWith("'"))
-            {
-                valuestr = valuestr.Substring(1, valuestr.Length - 2).Trim();
-            }
-            try
-            {
-                return DateTime.Parse(valuestr);
-            }
-            catch
-            {
-                throw new JitException(JitException.IllegalFormat, $"ParseDateTime");
-            }
-        }
-
         /// <summary>
         /// Parse Date Time
         /// </summary>
@@ -811,7 +790,7 @@ namespace Tono.Jit
                 return ret;
             }
         }
-
+        
         /// <summary>
         /// Parse DateTime
         /// </summary>
