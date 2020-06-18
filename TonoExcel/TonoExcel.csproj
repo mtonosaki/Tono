@@ -37,8 +37,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="ClosedXML" Version="0.94.2" />
-    <PackageReference Include="Tono.Core" Version="1.0.14" />
+    <PackageReference Include="ClosedXML" Version="0.95.3" />
+    <PackageReference Include="Tono.Core" Version="1.0.17" />
   </ItemGroup>
 
 </Project>
