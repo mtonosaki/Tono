@@ -773,24 +773,27 @@ namespace Tono.Jit
             }
         }
 
-        /// <summary>
-        /// Parse Date Time
-        /// </summary>
-        /// <param name="valuestr"></param>
-        /// <returns>the instance or JacException;DateTimeFormatError </returns>
         public static DateTime ParseDateTime(string valuestr)
         {
-            var ret = ParseDateTime(valuestr, DateTime.MinValue);
-            if (ret.Equals(DateTime.MinValue))
+            if (valuestr.StartsWith("datetime"))
             {
-                throw new JacException(JacException.Codes.DateTimeFormatError);
+                var sl = StrUtil.MidSkip(valuestr, @"^datetime\s*\(\s*'");
+                valuestr = StrUtil.LeftBefore(sl, @"'\s*\)$");
             }
-            else
+            else if (valuestr.StartsWith("'") && valuestr.EndsWith("'"))
             {
-                return ret;
+                valuestr = valuestr.Substring(1, valuestr.Length - 2).Trim();
+            }
+            try
+            {
+                return DateTime.Parse(valuestr);
+            }
+            catch
+            {
+                throw new JitException(JitException.IllegalFormat, $"ParseDateTime");
             }
         }
-        
+
         /// <summary>
         /// Parse DateTime
         /// </summary>

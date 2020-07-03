@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.IO.Compression;
 using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 using System.Text;
@@ -27,6 +28,13 @@ namespace Tono
             KEY = "H4PY9eBxWAF4iK4K",
             MASK = "FBAEA0F4A1062D7AED6B7763D43D5492",
         };
+
+        public bool IsCompression
+        {
+            get => Enc.IsCompression;
+            set => Enc.IsCompression = value;
+        }
+
         public override string Encode(string planeText)
         {
             return Enc.Encode(planeText);
@@ -42,6 +50,11 @@ namespace Tono
     /// </summary>
     public class EncryptRijndael : EncryptionBase
     {
+        /// <summary>
+        /// ZIP Compression mode
+        /// </summary>
+        public bool IsCompression { get; set; }
+
         /// <summary>
         /// usable 64 character for output/input
         /// </summary>
@@ -127,6 +140,9 @@ namespace Tono
                             sw.Write(planeText);
                         }
                         buf = ms.ToArray();
+                        if (IsCompression)
+                        {
+                        }
                     }
                 }
                 return ($"{TEXTSET64[ivN]}{iv}{Convert.ToBase64String(buf)}");
