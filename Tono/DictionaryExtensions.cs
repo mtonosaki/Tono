@@ -11,6 +11,16 @@ namespace Tono
     /// </summary>
     public static class DictionaryExtensions
     {
+        public static Dictionary<TVAL,TKEY> ToSwapKeyValue<TKEY, TVAL>(this Dictionary<TKEY, TVAL> dic)
+        {
+            var ret = new Dictionary<TVAL, TKEY>();
+            foreach (var kv in dic)
+            {
+                ret[kv.Value] = kv.Key;
+            }
+            return ret;
+        }
+
         /// <summary>
         /// Get value from key
         /// </summary>

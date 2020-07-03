@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.IO.Compression;
 using System.Text;
 using Tono;
 
@@ -21,7 +22,10 @@ namespace TonoAspNetCore
         /// </summary>
         public Controller Controller { get; set; }
 
-        private readonly Encrypt encrypt = new Encrypt();
+        private readonly Encrypt encrypt = new Encrypt
+        {
+            //IsCompression = true,  // TODO: TONO
+        };
 
         /// <summary>
         /// create instance
