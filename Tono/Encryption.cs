@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 using System.Text;
@@ -15,6 +16,8 @@ namespace Tono
     {
         public virtual string Encode(string planeText) => planeText;
         public virtual string Decode(string secretText) => secretText;
+        public virtual byte[] Encode(byte[] planeData) => planeData;
+        public virtual byte[] Decode(byte[] secretData) => secretData;
     }
 
     /// <summary>
@@ -29,12 +32,6 @@ namespace Tono
             MASK = "FBAEA0F4A1062D7AED6B7763D43D5492",
         };
 
-        public bool IsCompression
-        {
-            get => Enc.IsCompression;
-            set => Enc.IsCompression = value;
-        }
-
         public override string Encode(string planeText)
         {
             return Enc.Encode(planeText);
@@ -43,6 +40,14 @@ namespace Tono
         {
             return Enc.Decode(secretText);
         }
+        public override byte[] Encode(byte[] planeData)
+        {
+            return Enc.Encode(planeData);
+        }
+        public override byte[] Decode(byte[] secretData)
+        {
+            return Enc.Decode(secretData);
+        }
     }
 
     /// <summary>
@@ -50,11 +55,6 @@ namespace Tono
     /// </summary>
     public class EncryptRijndael : EncryptionBase
     {
-        /// <summary>
-        /// ZIP Compression mode
-        /// </summary>
-        public bool IsCompression { get; set; }
-
         /// <summary>
         /// usable 64 character for output/input
         /// </summary>
@@ -140,12 +140,71 @@ namespace Tono
                             sw.Write(planeText);
                         }
                         buf = ms.ToArray();
-                        if (IsCompression)
-                        {
-                        }
                     }
                 }
                 return ($"{TEXTSET64[ivN]}{iv}{Convert.ToBase64String(buf)}");
+            }
+        }
+
+        public override byte[] Encode(byte[] planeData)
+        {
+            var iv = new StringBuilder();
+            int ivN = 0;
+            for (int ivi = 0; ivi < ivN + 16; ivi++)
+            {
+                iv.Append(TEXTSET64[RND.Next(TEXTSET64.Length - 1)]);
+            }
+            using (var ri = new RijndaelManaged
+            {
+                BlockSize = 128,
+                KeySize = 128,
+                Mode = CipherMode.CBC,
+                Padding = PaddingMode.PKCS7,
+                IV = Encoding.ASCII.GetBytes(iv.ToString()),
+                Key = Encoding.ASCII.GetBytes(FusionString(KEY, MASK)),
+            })
+            {
+                var enc = ri.CreateEncryptor(ri.Key, ri.IV);
+                var buf = new List<byte>();
+                buf.Add((byte)TEXTSET64[ivN]);
+                buf.AddRange(ri.IV);
+
+                using (var ms = new MemoryStream())
+                {
+                    using (var cs = new CryptoStream(ms, enc, CryptoStreamMode.Write))
+                    {
+                        ms.Write(planeData, 0, planeData.Length);
+                        buf.AddRange(ms.ToArray());
+                    }
+                }
+                return buf.ToArray();
+            }
+        }
+
+        public override byte[] Decode(byte[] secretData)
+        {
+            int ivN = TEXTSET64.IndexOf((char)secretData[0]);
+            var iv = secretData.Skip(1).Take(16).ToArray();
+            using (var rijndael = new RijndaelManaged
+            {
+                BlockSize = 128,
+                KeySize = 128,
+                Mode = CipherMode.CBC,
+                Padding = PaddingMode.PKCS7,
+                IV = iv,
+                Key = Encoding.ASCII.GetBytes(FusionString(KEY, MASK)),
+            })
+            {
+                var de = rijndael.CreateDecryptor(rijndael.Key, rijndael.IV);
+                using (var ms = new MemoryStream(secretData, 17, secretData.Length - 17, false))
+                {
+                    using (var cs = new CryptoStream(ms, de, CryptoStreamMode.Read))
+                    {
+                        var ret = new byte[secretData.Length - 17];
+                        ms.Read(ret, 0, ret.Length);
+                        return ret;
+                    }
+                }
             }
         }
 
