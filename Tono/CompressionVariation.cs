@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections;
+﻿// (c) 2020 Manabu Tonosaki
+// Licensed under the MIT license.
+
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Xml;
 
 namespace Tono
 {
@@ -34,7 +33,7 @@ namespace Tono
         protected override Dictionary<BitList, byte> Table => mytable;
         protected override ushort TableID => 0x8003;
     }
-    
+
     public class CompressionHuffmanCodingJapanese : CompressionHuffmanCodingPrepareTable
     {
         private static readonly Dictionary<BitList, byte> mytable = ReadTableBinary(new BitList(

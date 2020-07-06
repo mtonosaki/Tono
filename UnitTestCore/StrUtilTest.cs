@@ -2,8 +2,6 @@
 // Licensed under the MIT license.
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using Tono;
 
@@ -42,7 +40,7 @@ namespace UnitTestCore
         {
             var t1 = StrUtil.SplitConsideringQuatationContainsSeparator(" aaa=bbb : ccc = ddd =: eee  ", new[] { '=', ':', ' ' }, true, true);
             Assert.AreEqual(t1.Length, 10);
-            Assert.AreEqual(t1[0], "aaa"); 
+            Assert.AreEqual(t1[0], "aaa");
             Assert.AreEqual(t1[1], "=");
             Assert.AreEqual(t1[2], "bbb");
             Assert.AreEqual(t1[3], ":");
@@ -54,7 +52,7 @@ namespace UnitTestCore
             Assert.AreEqual(t1[9], "eee");
         }
         [TestMethod]
-        public void Test003()        
+        public void Test003()
         {
             var t1 = StrUtil.SplitConsideringQuatationContainsSeparator(" aaa=bbb : ccc = ddd =: eee  ", new[] { '=', ':', ' ' }, true, false);
             Assert.AreEqual(t1.Length, 19);

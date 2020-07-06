@@ -2,7 +2,6 @@
 // Licensed under the MIT license.
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 using System.Collections.Generic;
 using Tono;
 
@@ -32,9 +31,9 @@ namespace UnitTestCore
                 (-1000,false),
                 (941,true),
             };
-            foreach( var chk in checkers)
+            foreach (var chk in checkers)
             {
-                Assert.AreEqual(chk.Expected, MathUtil.IsPrimeNumber(chk.Number), $"IsPrimeNumber({chk.Number}) should be {chk.Expected}" );
+                Assert.AreEqual(chk.Expected, MathUtil.IsPrimeNumber(chk.Number), $"IsPrimeNumber({chk.Number}) should be {chk.Expected}");
             }
         }
 #if HEAVYTEST  // over 650ms with Intel i7-4720HQ
@@ -52,7 +51,7 @@ namespace UnitTestCore
         public void Test002()
         {
             //f(x) = 5x ^ 4 + 4x ^ 3 + 3x ^ 2 + 2x + 1
-            Assert.AreEqual( MathUtil.HornersRule(1, new[] { 1.0, 2.0, 3.0, 4.0, 5.0 }, 4), 15.0);
+            Assert.AreEqual(MathUtil.HornersRule(1, new[] { 1.0, 2.0, 3.0, 4.0, 5.0 }, 4), 15.0);
             Assert.AreEqual(MathUtil.HornersRule(2, new[] { 1.0, 2.0, 3.0, 4.0, 5.0 }, 4), 129.0);
             Assert.AreEqual(MathUtil.HornersRule(3, new[] { 1.0, 2.0, 3.0, 4.0, 5.0 }, 4), 547.0);
             Assert.AreEqual(MathUtil.HornersRule(4, new[] { 1.0, 2.0, 3.0, 4.0, 5.0 }, 4), 1593.0);

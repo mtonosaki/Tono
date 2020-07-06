@@ -2,11 +2,8 @@
 // Licensed under the MIT license.
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Text;
-using System.Threading.Tasks;
 using Tono;
 
 namespace UnitTestCore
@@ -217,11 +214,11 @@ namespace UnitTestCore
         {
             var data = new List<int>
             {
-                0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 
+                0, 10, 20, 30, 40, 50, 60, 70, 80, 90,
             };
             foreach (var item in LoopUtil<int>.From(data, out var cu))
             {
-                Assert.AreEqual(item / 10, cu.CurrentIndex );
+                Assert.AreEqual(item / 10, cu.CurrentIndex);
             }
         }
 
@@ -265,7 +262,7 @@ namespace UnitTestCore
             var c2 = 0;
             var c3 = 0;
             var c4 = 0;
-            foreach (var item in LoopUtil<KeyValuePair<int,string>>.From(dat, out var cu))
+            foreach (var item in LoopUtil<KeyValuePair<int, string>>.From(dat, out var cu))
             {
                 cu.DoFirstTime(() =>
                 {
@@ -278,7 +275,7 @@ namespace UnitTestCore
                 });
                 cu.DoSecondTimesAndSubsequent(() =>
                 {
-                    switch(c3++)
+                    switch (c3++)
                     {
                         case 0:
                             Assert.AreEqual($"S-20", item.Value);

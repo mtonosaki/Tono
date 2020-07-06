@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections;
+﻿// (c) 2020 Manabu Tonosaki
+// Licensed under the MIT license.
+
+using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Xml;
 
 namespace Tono
 {
@@ -70,7 +69,7 @@ namespace Tono
             {
                 com.LimitSize = limit;
                 var ret = com.Compress(buf);
-                if( ret != null)
+                if (ret != null)
                 {
                     if (ret.Length < limit)
                     {

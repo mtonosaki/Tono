@@ -2,7 +2,6 @@
 // Licensed under the MIT license.
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Diagnostics;
 using System.Linq;
 using Tono;
 
@@ -27,7 +26,7 @@ namespace UnitTestCore
         public void Test001()
         {
             var bits = Binary.GetBits(0x55555555).ToArray();
-            for( var i = 0; i < 32; i += 2) // 0=Upper / 31=Lower bits
+            for (var i = 0; i < 32; i += 2) // 0=Upper / 31=Lower bits
             {
                 Assert.IsFalse(bits[i]);
             }

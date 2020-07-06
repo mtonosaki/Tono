@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections;
+﻿// (c) 2020 Manabu Tonosaki
+// Licensed under the MIT license.
+
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Xml;
 
 namespace Tono
 {
@@ -35,7 +35,7 @@ namespace Tono
             foreach (var c in buf)
             {
                 ret.Add(table[c]);  // [DB] Huffman code
-                if( ret.ByteCount > LimitSize)
+                if (ret.ByteCount > LimitSize)
                 {
                     return null;
                 }
@@ -70,7 +70,7 @@ namespace Tono
             return outdat.ToArray();
         }
 
-        protected BitList MakeTableBinary(UInt16 tableID, Dictionary<BitList, byte> table, out Dictionary<byte, BitList> valbits )
+        protected BitList MakeTableBinary(UInt16 tableID, Dictionary<BitList, byte> table, out Dictionary<byte, BitList> valbits)
         {
             Debug.Assert(tableID > 32768);
 
@@ -88,7 +88,7 @@ namespace Tono
             {
                 nodemap[buf[i]].Count++;
             }
-            var htree = new HuffmanTree(nodemap.Values.Where( a => a.Count > 0))
+            var htree = new HuffmanTree(nodemap.Values.Where(a => a.Count > 0))
                         .Build();
 
             table = new Dictionary<byte, BitList>();

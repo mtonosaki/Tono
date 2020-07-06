@@ -5,8 +5,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.IO.Compression;
 using System.Text;
 using Tono;
 
@@ -48,15 +46,42 @@ namespace TonoAspNetCore
         /// <returns>value as plane text</returns>
         public string GetCookieSecure(string key, string def = "")
         {
-            var cipher = Controller.Request.Cookies[key];
-            if (string.IsNullOrEmpty(cipher))
+            var base64 = Controller.Request.Cookies[key];
+            if (string.IsNullOrEmpty(base64))
             {
                 return def;
             }
             else
             {
-                return encrypt.Decode(cipher);
+                var sec = Convert.FromBase64String(base64);
+                var buf = encrypt.Decode(sec);
+                buf = new Compression().Decompress(buf);
+                var cleanText = Encoding.UTF8.GetString(buf);
+                return cleanText;
             }
+        }
+
+
+        /// <summary>
+        /// Set scrabmled value to cookie
+        /// </summary>
+        /// <param name="key">Cookie key</param>
+        /// <param name="value">plane text</param>
+        /// <param name="expires">Cookie expires</param>
+        protected void SetCookieSecure(string key, string value, DateTimeOffset expires)
+        {
+            var buf = Encoding.UTF8.GetBytes(value);
+            buf = new Compression().Compress(buf);
+            var sec = encrypt.Encode(buf);
+            var base64 = Convert.ToBase64String(sec);
+
+            Controller.Response.Cookies.Append(key, base64, new CookieOptions
+            {
+                Secure = true,
+                HttpOnly = true,
+                SameSite = SameSiteMode.Strict,
+                Expires = expires,
+            });
         }
 
         /// <summary>
@@ -67,23 +92,6 @@ namespace TonoAspNetCore
         protected void SetCookieSecure(string key, string value)
         {
             SetCookieSecure(key, value, DateTimeOffset.UtcNow + TimeSpan.FromDays(14));
-        }
-
-        /// <summary>
-        /// Set scrabmled value to cookie
-        /// </summary>
-        /// <param name="key">Cookie key</param>
-        /// <param name="value">plane text</param>
-        /// <param name="expires">Cookie expires</param>
-        protected void SetCookieSecure(string key, string value, DateTimeOffset expires)
-        {
-            Controller.Response.Cookies.Append(key, encrypt.Encode(value), new CookieOptions
-            {
-                Secure = true,
-                HttpOnly = true,
-                SameSite = SameSiteMode.Strict,
-                Expires = expires,
-            });
         }
 
         /// <summary>

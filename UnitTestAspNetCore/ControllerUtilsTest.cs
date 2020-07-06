@@ -1,6 +1,4 @@
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using TonoAspNetCore;
 
 namespace UnitTestAspNetCore
 {

@@ -902,7 +902,7 @@ namespace Tono.Gui
         {
             return new ScreenSize
             {
-                Width =　ScreenX.From(size.Width.Lx * pane.ZoomX),
+                Width = ScreenX.From(size.Width.Lx * pane.ZoomX),
                 Height = ScreenY.From(size.Height.Ly * pane.ZoomY),
             };
         }

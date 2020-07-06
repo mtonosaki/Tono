@@ -42,7 +42,7 @@ namespace Tono
             {
                 var d = Deg;
                 d = d % 360.0;
-                if( d < 0)
+                if (d < 0)
                 {
                     d = 360.0 - d;
                 }

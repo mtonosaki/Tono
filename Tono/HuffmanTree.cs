@@ -1,8 +1,9 @@
-﻿using System;
+﻿// (c) 2020 Manabu Tonosaki
+// Licensed under the MIT license.
+
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace Tono
 {
@@ -115,7 +116,7 @@ namespace Tono
             for (var node = leaf; node != null; node = parent)
             {
                 parent = GetParent(node);
-                if( parent != null)
+                if (parent != null)
                 {
                     ret.Add(ReferenceEquals(node, parent.Right));
                 }

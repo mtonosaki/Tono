@@ -1,10 +1,11 @@
-﻿using System;
+﻿// (c) 2020 Manabu Tonosaki
+// Licensed under the MIT license.
+
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Linq;
-using System.Net.Http.Headers;
 using System.Text;
 
 namespace Tono
@@ -50,7 +51,7 @@ namespace Tono
         /// <param name="from"></param>
         public BitList(BitList from, int startBitIndex, int nBits)
         {
-            for( var i = startBitIndex; i < Math.Min(startBitIndex + nBits, from.Count); i++)
+            for (var i = startBitIndex; i < Math.Min(startBitIndex + nBits, from.Count); i++)
             {
                 Add(from[i]);
             }
@@ -234,7 +235,7 @@ namespace Tono
 
         public static UInt64 GetNumberFromVariableBits(BitList bits)
         {
-            return GetNumberFromVariableBits(bits, out var _ );
+            return GetNumberFromVariableBits(bits, out var _);
         }
         public static UInt64 GetNumberFromVariableBits(IEnumerable<bool> bits)
         {
@@ -427,7 +428,7 @@ namespace Tono
 
         public BitList SetMinimumSize(int nBit, bool padding = false)
         {
-            for( var i = Count; i < nBit; i++)
+            for (var i = Count; i < nBit; i++)
             {
                 Add(padding);
             }

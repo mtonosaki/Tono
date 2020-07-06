@@ -2,9 +2,7 @@
 // Licensed under the MIT license.
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 using System.Linq;
-using Tono;
 using Tono.Logic;
 
 namespace UnitTestLogic
@@ -18,7 +16,7 @@ namespace UnitTestLogic
             var ret = new IntegerDistributer(27, 8);
             Assert.AreEqual(ret.Count(), 8);
             Assert.AreEqual(ret.Sum(), 27);
-            foreach( var val in ret)
+            foreach (var val in ret)
             {
                 Assert.AreEqual(val?.GetType(), typeof(int));
             }

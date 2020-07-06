@@ -22,7 +22,7 @@ namespace Tono.Gui.Uwp
     {
         private readonly Dictionary<NamedId/*LayerNo*/, Dictionary<string/*name of IDrawArea*/, List<IPartsDraw>>> _dat = new Dictionary<NamedId, Dictionary<string, List<IPartsDraw>>>();
         private readonly Dictionary<IDrawArea, string/*name of IDrawArea*/> _danames = new Dictionary<IDrawArea, string>();
-        private readonly Queue<(IDrawArea pane, IPartsDraw parts, NamedId layer)> _delQueue  = new Queue<(IDrawArea pane, IPartsDraw parts, NamedId layer)>();
+        private readonly Queue<(IDrawArea pane, IPartsDraw parts, NamedId layer)> _delQueue = new Queue<(IDrawArea pane, IPartsDraw parts, NamedId layer)>();
 
         private static int _nonamecounter = 0;
 

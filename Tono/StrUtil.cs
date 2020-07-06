@@ -3,7 +3,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -179,7 +178,7 @@ namespace Tono
         /// <param name="value"></param>
         /// <param name="decimals"></param>
         /// <returns></returns>
-        public static string ToDoubleStrig(double value, int decimals)
+        public static string ToDoubleString(double value, int decimals)
         {
             if (Math.Abs(value) >= Math.Pow(10, decimals))
             {
