@@ -4,10 +4,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Runtime.Intrinsics.X86;
 using System.Text;
 using Tono;
 
@@ -357,7 +354,7 @@ namespace UnitTestCore
         {
             var b1 = new BitList(new[] { true, true, true, false, false, true });
             var b2 = new BitList(b1, 1, 12);
-            Assert.AreEqual( "000000010011", string.Join("", b2.Reverse().Select(a => a ? "1" : "0")));
+            Assert.AreEqual("000000010011", string.Join("", b2.Reverse().Select(a => a ? "1" : "0")));
         }
     }
 }

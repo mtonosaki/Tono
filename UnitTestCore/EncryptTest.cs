@@ -2,10 +2,6 @@
 // Licensed under the MIT license.
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
 using System.Text;
 using Tono;
 
@@ -34,7 +30,7 @@ namespace UnitTestCore
         public void Test003()
         {
             var enc = new Encrypt();
-            for( int cnt = 0; cnt < 100; cnt++)
+            for (int cnt = 0; cnt < 100; cnt++)
             {
                 var planeBuild = new StringBuilder();
                 for (var i = MathUtil.Rand(300, 500); i >= 0; i--)

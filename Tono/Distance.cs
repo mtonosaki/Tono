@@ -1,5 +1,6 @@
 ﻿// (c) 2019 Manabu Tonosaki
 // Licensed under the MIT license.
+
 using System;
 using System.Runtime.Serialization;
 using System.Text.RegularExpressions;

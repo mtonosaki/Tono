@@ -2,13 +2,6 @@
 // Licensed under the MIT license.
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Runtime.Intrinsics.X86;
-using System.Text;
 using Tono;
 
 namespace UnitTestCore
@@ -142,7 +135,7 @@ namespace UnitTestCore
                 new Leaf { Name = "j", Cost = 1 },
             }.Build();
             var cnts = new[] { 2, 2, 3, 3, 4, 4, 4, 5, 6, 6 };
-            for( var i = 0; i < t.Count; i++)
+            for (var i = 0; i < t.Count; i++)
             {
                 Assert.AreEqual(cnts[i], t.GetBitResult(t[i]).Count);
             }

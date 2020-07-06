@@ -61,7 +61,7 @@ namespace TonoAspNetCore
         /// <returns></returns>
         protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, ClientCertAuthentication requirement)
         {
-            if(Configs.Count == 0)  // Fail safe : No setting No access
+            if (Configs.Count == 0)  // Fail safe : No setting No access
             {
                 context.Fail();
                 return Task.CompletedTask;

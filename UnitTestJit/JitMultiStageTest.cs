@@ -7,7 +7,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Tono;
 using Tono.Jit;
-using static Tono.Jit.Utils;
 
 namespace UnitTestJit
 {

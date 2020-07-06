@@ -5,7 +5,6 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Tono;
 using Tono.Logic;
 
 namespace UnitTestLogic
@@ -62,7 +61,7 @@ namespace UnitTestLogic
             Assert.AreEqual(route, "ABDC"); // The minimum route is ABDCA (loop)
 
             var cost = 0.0;
-            for( var i = 0; i < tsp.List.Count; i++)
+            for (var i = 0; i < tsp.List.Count; i++)
             {
                 var nodeX = tsp.List[i % tsp.List.Count];
                 var nodeY = tsp.List[(i + 1) % tsp.List.Count];

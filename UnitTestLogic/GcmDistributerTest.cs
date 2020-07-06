@@ -2,9 +2,7 @@
 // Licensed under the MIT license.
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 using System.Linq;
-using Tono;
 using Tono.Logic;
 
 namespace UnitTestLogic

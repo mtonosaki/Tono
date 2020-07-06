@@ -5,7 +5,6 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Tono;
 using Tono.Jit;
 
 namespace UnitTestJit
@@ -665,10 +664,10 @@ namespace UnitTestJit
             Assert.IsNull(w1.Current);
             Assert.AreEqual(w1.Next.SubsetCache, st);
             Assert.AreEqual(w1.Next.Process, p1);
-            Assert.AreEqual(w2.Current.SubsetCache , w1.Next.SubsetCache );
-            Assert.AreEqual(w2.Current.SubsetCache , st);
+            Assert.AreEqual(w2.Current.SubsetCache, w1.Next.SubsetCache);
+            Assert.AreEqual(w2.Current.SubsetCache, st);
             Assert.AreEqual(w2.Current.Process, p1);
-            Assert.AreEqual(w3.Previous.SubsetCache , st);
+            Assert.AreEqual(w3.Previous.SubsetCache, st);
             Assert.AreEqual(w3.Previous.Process, p1);
             Assert.AreEqual(w4.Current, l1);
 

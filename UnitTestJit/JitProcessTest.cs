@@ -2588,7 +2588,7 @@ namespace UnitTestJit
                     Name = $"y{(i + 1):0}",
                 };
                 st.Events.Enqueue(TimeUtil.Set(today, hour: 9, minute: 0), EventTypes.Out, work);
-                if( y1 == null)
+                if (y1 == null)
                 {
                     y1 = work;
                 }
@@ -2970,7 +2970,7 @@ namespace UnitTestJit
             st.DoNext();
             dat = st.Events.Peeks(3).ToList();
             Assert.IsTrue(CMP(dat[0], "b", EventTypes.Out, "9:01"));
-            Assert.IsTrue(CMP(dat[1], "a", EventTypes.Out, "9:01", "X")); 
+            Assert.IsTrue(CMP(dat[1], "a", EventTypes.Out, "9:01", "X"));
             Assert.IsTrue(CMP(dat[2], "c", EventTypes.Out, "9:02"));
             Assert.IsTrue(st.GetWorks(JitLocation.CreateRoot(st, st.FindChildProcess("X"))).Count() == 1);
 

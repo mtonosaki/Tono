@@ -3,7 +3,6 @@
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using Tono;
 using Tono.Logic;
 
 namespace UnitTestLogic

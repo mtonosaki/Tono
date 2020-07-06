@@ -24,10 +24,10 @@ namespace Tono.GuiWinForm
             #region DLL実装
             [DllImport("Shell32.dll", CharSet = CharSet.Auto, SetLastError = true)]
             private static extern uint ExtractIconEx(
-                [MarshalAs(UnmanagedType.LPTStr)]string lpszFile,
+                [MarshalAs(UnmanagedType.LPTStr)] string lpszFile,
                 int nIconIndex,
-                [MarshalAs(UnmanagedType.LPArray)]IntPtr[] phiconLarge,
-                [MarshalAs(UnmanagedType.LPArray)]IntPtr[] phiconSmall,
+                [MarshalAs(UnmanagedType.LPArray)] IntPtr[] phiconLarge,
+                [MarshalAs(UnmanagedType.LPArray)] IntPtr[] phiconSmall,
                 uint nIcons);
 
             [DllImport("User32.dll", CharSet = CharSet.Auto, SetLastError = true)]

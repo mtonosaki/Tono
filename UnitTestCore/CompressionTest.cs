@@ -2,12 +2,9 @@
 // Licensed under the MIT license.
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.Text;
-using System.Text.Encodings.Web;
 using Tono;
 
 namespace UnitTestCore
@@ -122,7 +119,7 @@ namespace UnitTestCore
         public void Test009()
         {
             var co = new Compression();
-            foreach (var bufin in new[] 
+            foreach (var bufin in new[]
             {
                 Encoding.UTF8.GetBytes("123"),
                 Encoding.UTF8.GetBytes("Much of the South's infrastructure was destroyed, especially its railroads. The Confederacy collapsed, slavery was abolished, and four million black slaves were freed. The war is one of the most studied and written about episodes in U.S. history."),
@@ -136,7 +133,7 @@ namespace UnitTestCore
                 var bufin2 = co.Decompress(bufout);
                 Assert.IsTrue(bufout.Length - bufin.Length < 3, $"Size is not compressed");
                 Assert.AreEqual(bufin.Length, bufin2.Length);
-                for( var i = 0; i < bufin.Length; i++)
+                for (var i = 0; i < bufin.Length; i++)
                 {
                     Assert.AreEqual(bufin[i], bufin2[i]);
                 }
@@ -222,7 +219,7 @@ namespace UnitTestCore
         private static byte[] MakeTableBytes(string intext0)
         {
             var b = new StringBuilder();
-            for( var i = 0; i < 512; i++)
+            for (var i = 0; i < 512; i++)
             {
                 b.Append(intext0);
             }
