@@ -492,7 +492,7 @@ namespace Tono.Jit
                             {
                                 pi.SetValue(obj, JitVariable.FromObject(item));
                                 isSet = true;
-                                // TODO: varBufに IDをキーにインスタンスを保存
+                                // TODO: Save ID Instance to varBuf here.
                             }
                             if (requestedTypeName == "String")
                             {

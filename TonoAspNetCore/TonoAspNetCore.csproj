@@ -18,9 +18,9 @@
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>TonoAspNetCore.snk</AssemblyOriginatorKeyFile>
     <ApplicationIcon>TonoAspNetCore.ico</ApplicationIcon>
-    <Version>1.1.4</Version>
-    <PackageReleaseNotes>Add ControllerUtils (Bug Fix)</PackageReleaseNotes>
-    <AssemblyVersion>1.1.4.0</AssemblyVersion>
+    <Version>1.1.5</Version>
+    <PackageReleaseNotes>Continuous Kaizen</PackageReleaseNotes>
+    <AssemblyVersion>1.1.5.0</AssemblyVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -31,8 +31,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.AzureAD.UI" Version="3.1.5" />
-    <PackageReference Include="Tono.Core" Version="1.0.19" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.AzureAD.UI" Version="3.1.7" />
+    <PackageReference Include="Tono.Core" Version="1.0.20" />
   </ItemGroup>
 
 </Project>
