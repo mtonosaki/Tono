@@ -136,15 +136,19 @@ namespace UnitTestCore
         [TestMethod]
         public void Test006()
         {
-            var bs1 = new BitList();
-            bs1.Add(true);
-            bs1.Add(false);
-            bs1.Add(true);
+            var bs1 = new BitList
+            {
+                true,
+                false,
+                true
+            };
 
-            var bs2 = new BitList();
-            bs2.Add(true);
-            bs2.Add(false);
-            bs2.Add(true);
+            var bs2 = new BitList
+            {
+                true,
+                false,
+                true
+            };
 
             var bs3 = BitList.Join(bs1, bs2);
             Assert.AreEqual("101101", string.Join("", bs3.Reverse().Select(a => a ? "1" : "0")));
@@ -152,10 +156,12 @@ namespace UnitTestCore
         [TestMethod]
         public void Test007()
         {
-            var bs1 = new BitList();
-            bs1.Add(true);
-            bs1.Add(false);
-            bs1.Add(true);
+            var bs1 = new BitList
+            {
+                true,
+                false,
+                true
+            };
 
             var bs2 = new BitList();
 
@@ -165,10 +171,12 @@ namespace UnitTestCore
         [TestMethod]
         public void Test008()
         {
-            var bs1 = new BitList();
-            bs1.Add(true);
-            bs1.Add(false);
-            bs1.Add(true);
+            var bs1 = new BitList
+            {
+                true,
+                false,
+                true
+            };
 
             var bs3 = BitList.Join(bs1, new[] { true, false, true });
             Assert.AreEqual("101101", string.Join("", bs3.Reverse().Select(a => a ? "1" : "0")));
@@ -176,10 +184,12 @@ namespace UnitTestCore
         [TestMethod]
         public void Test009()
         {
-            var bs1 = new BitList();
-            bs1.Add(true);
-            bs1.Add(false);
-            bs1.Add(true);
+            var bs1 = new BitList
+            {
+                true,
+                false,
+                true
+            };
 
             var bs2 = new BitArray(new[] { true, false, true, true, });
             bs1.Add(bs2);
@@ -189,14 +199,16 @@ namespace UnitTestCore
         [TestMethod]
         public void Test010()
         {
-            var bs = new BitList();
-            bs.Add(BitList.From(BitConverter.GetBytes((UInt16)1)));
+            var bs = new BitList
+            {
+                BitList.From(BitConverter.GetBytes((ushort)1))
+            };
             Assert.AreEqual("0000000000000001", string.Join("", bs.Reverse().Select(a => a ? "1" : "0")));
         }
         [TestMethod]
         public void Test011()
         {
-            var dat = (UInt16)0b11110000_11110000;
+            var dat = (ushort)0b11110000_11110000;
             var bs = BitList.From(dat);
             Assert.AreEqual("1111000011110000", string.Join("", bs.Reverse().Select(a => a ? "1" : "0")));
         }
@@ -218,42 +230,42 @@ namespace UnitTestCore
         [TestMethod]
         public void Test013()
         {
-            var d = (Int16)32760;
+            var d = (short)32760;
             var bs = BitList.From(d);
             Assert.AreEqual(d, BitConverter.ToInt16(bs.ToByteArray()));
         }
         [TestMethod]
         public void Test013u()
         {
-            var d = (UInt16)65534;
+            var d = (ushort)65534;
             var bs = BitList.From(d);
             Assert.AreEqual(d, BitConverter.ToUInt16(bs.ToByteArray()));
         }
         [TestMethod]
         public void Test014()
         {
-            var d = (Int32)327603838;
+            var d = 327603838;
             var bs = BitList.From(d);
             Assert.AreEqual(d, BitConverter.ToInt32(bs.ToByteArray()));
         }
         [TestMethod]
         public void Test014u()
         {
-            var d = (UInt32)655342323;
+            var d = (uint)655342323;
             var bs = BitList.From(d);
             Assert.AreEqual(d, BitConverter.ToUInt32(bs.ToByteArray()));
         }
         [TestMethod]
         public void Test015()
         {
-            var d = (Int64)3276038382821;
+            var d = 3276038382821;
             var bs = BitList.From(d);
             Assert.AreEqual(d, BitConverter.ToInt64(bs.ToByteArray()));
         }
         [TestMethod]
         public void Test015u()
         {
-            var d = (UInt64)65534232338730;
+            var d = (ulong)65534232338730;
             var bs = BitList.From(d);
             Assert.AreEqual(d, BitConverter.ToUInt64(bs.ToByteArray()));
         }

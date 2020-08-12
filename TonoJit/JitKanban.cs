@@ -73,8 +73,16 @@ namespace Tono.Jit
         /// <returns></returns>
         public JitStage FindStage()
         {
-            if (PullFrom.Stage != null) return PullFrom.Stage;
-            if (PullTo.Stage != null) return PullTo.Stage;
+            if (PullFrom.Stage != null)
+            {
+                return PullFrom.Stage;
+            }
+
+            if (PullTo.Stage != null)
+            {
+                return PullTo.Stage;
+            }
+
             return null;
         }
 

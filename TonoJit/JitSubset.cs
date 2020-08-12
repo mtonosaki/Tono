@@ -39,7 +39,7 @@ namespace Tono.Jit
         /// <summary>
         /// Process Push Links
         /// </summary>
-        private Dictionary<ProcessKey, List<ProcessKeyPath>> _processKeyLinks = new Dictionary<ProcessKey, List<ProcessKeyPath>>();
+        private readonly Dictionary<ProcessKey, List<ProcessKeyPath>> _processKeyLinks = new Dictionary<ProcessKey, List<ProcessKeyPath>>();
 
         /// <summary>
         /// Child Processes
@@ -215,7 +215,14 @@ namespace Tono.Jit
         {
             if (procKey == null)
             {
-                if (isReturnNull) return null; else throw new JitException(JitException.NullProcKey);
+                if (isReturnNull)
+                {
+                    return null;
+                }
+                else
+                {
+                    throw new JitException(JitException.NullProcKey);
+                }
             }
             var ipkey = procKey.Split('@');
             if (ipkey.Length == 2)

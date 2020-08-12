@@ -1295,7 +1295,7 @@ namespace UnitTestJit
     [JacTarget(Name = "TestJitClass")]
     public class TestJitClass
     {
-        Dictionary<string, object> dic = new Dictionary<string, object>();
+        private readonly Dictionary<string, object> dic = new Dictionary<string, object>();
 
         [JacSetDotValue]
         public void SetDotValue(string name, object value)
@@ -1309,6 +1309,9 @@ namespace UnitTestJit
             set => dic[name] = value;
         }
 
-        public bool Contains(string name) => dic.ContainsKey(name);
+        public bool Contains(string name)
+        {
+            return dic.ContainsKey(name);
+        }
     }
 }

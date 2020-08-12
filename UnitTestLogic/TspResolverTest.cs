@@ -15,8 +15,16 @@ namespace UnitTestLogic
         public class Node
         {
             public string Name { get; set; }
-            public override int GetHashCode() => Name.GetHashCode();
-            public override string ToString() => Name;
+            public override int GetHashCode()
+            {
+                return Name.GetHashCode();
+            }
+
+            public override string ToString()
+            {
+                return Name;
+            }
+
             public override bool Equals(object obj)
             {
                 if (obj is Node tar)

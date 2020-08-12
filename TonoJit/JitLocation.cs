@@ -251,7 +251,7 @@ namespace Tono.Jit
         /// <returns></returns>
         public JitLocation FindSubsetProcess(ProcessKeyPath procKeyPath, bool isReturnNull = false)
         {
-            return Stage.FindSubsetProcess(this.ToEmptyProcess(), procKeyPath, isReturnNull);
+            return Stage.FindSubsetProcess(ToEmptyProcess(), procKeyPath, isReturnNull);
         }
 
         /// <summary>
@@ -269,7 +269,7 @@ namespace Tono.Jit
         /// <returns></returns>
         public IEnumerable<(JitWork Work, DateTime EnterTime)> GetWorks(JitProcess process)
         {
-            return Stage.GetWorks(this.ToChangeProcess(process));
+            return Stage.GetWorks(ToChangeProcess(process));
         }
     }
 }

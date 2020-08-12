@@ -290,8 +290,15 @@ namespace Tono.Gui
             return (short)val.Sy;
         }
 
-        public static bool operator ==(ScreenY left, ScreenY right) => left.Equals(right);
-        public static bool operator !=(ScreenY left, ScreenY right) => !left.Equals(right);
+        public static bool operator ==(ScreenY left, ScreenY right)
+        {
+            return left.Equals(right);
+        }
+
+        public static bool operator !=(ScreenY left, ScreenY right)
+        {
+            return !left.Equals(right);
+        }
 
         public override bool Equals(object obj)
         {
@@ -504,7 +511,10 @@ namespace Tono.Gui
         /// <param name="p0"></param>
         /// <param name="p"></param>
         /// <returns></returns>
-        public double LengthTo(ScreenPos p) => Math.Sqrt((p.X.Sx - X.Sx) * (p.X.Sx - X.Sx) + (p.Y.Sy - Y.Sy) * (p.Y.Sy - Y.Sy));
+        public double LengthTo(ScreenPos p)
+        {
+            return Math.Sqrt((p.X.Sx - X.Sx) * (p.X.Sx - X.Sx) + (p.Y.Sy - Y.Sy) * (p.Y.Sy - Y.Sy));
+        }
 
         /// <summary>
         /// IsOnline for Screen coodinate
@@ -513,7 +523,10 @@ namespace Tono.Gui
         /// <param name="line1"></param>
         /// <param name="width"></param>
         /// <returns></returns>
-        public bool IsOnline(ScreenPos line0, ScreenPos line1, double width = 1.0) => GeoEu.IsOnline(line0.X.Sx, line0.Y.Sy, line1.X.Sx, line1.Y.Sy, X.Sx, Y.Sy, width);
+        public bool IsOnline(ScreenPos line0, ScreenPos line1, double width = 1.0)
+        {
+            return GeoEu.IsOnline(line0.X.Sx, line0.Y.Sy, line1.X.Sx, line1.Y.Sy, X.Sx, Y.Sy, width);
+        }
 
         /// <summary>
         /// auto cast to Vestor2 for a lot of Graphics functions

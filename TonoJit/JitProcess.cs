@@ -343,11 +343,30 @@ namespace Tono.Jit
         public ProcessKey ProcessKey { get; set; } // Possible Name or ID
 
         public override string Name { get => throw new NotAllowErrorException(); set => throw new NotAllowErrorException(); }
-        public override void AddAndAdjustExitTiming(JitStage.WorkEventQueue events, JitWork work) => throw new NotAllowErrorException();
-        public override JitKanban AddKanban(JitKanban kanban, DateTime now) => throw new NotAllowErrorException();
-        public override void Enter(JitWork work, DateTime now) => throw new NotAllowErrorException();
-        public override void Exit(JitWork work) => throw new NotAllowErrorException();
-        public override JitWork ExitCollectedWork(JitLocation location, DateTime now) => throw new NotAllowErrorException();
+        public override void AddAndAdjustExitTiming(JitStage.WorkEventQueue events, JitWork work)
+        {
+            throw new NotAllowErrorException();
+        }
+
+        public override JitKanban AddKanban(JitKanban kanban, DateTime now)
+        {
+            throw new NotAllowErrorException();
+        }
+
+        public override void Enter(JitWork work, DateTime now)
+        {
+            throw new NotAllowErrorException();
+        }
+
+        public override void Exit(JitWork work)
+        {
+            throw new NotAllowErrorException();
+        }
+
+        public override JitWork ExitCollectedWork(JitLocation location, DateTime now)
+        {
+            throw new NotAllowErrorException();
+        }
     }
     #endregion
 

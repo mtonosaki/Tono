@@ -129,8 +129,11 @@ namespace UnitTestCore
             Assert.AreEqual(".0.2.4.5", ret.ToString());    // Order By 5,0,2,4 (Skip1, Take4)
         }
 
-        int loopCount = 0;
-        private bool LoopCondition() => ++loopCount > 3 ? false : true;
+        private int loopCount = 0;
+        private bool LoopCondition()
+        {
+            return ++loopCount > 3 ? false : true;
+        }
 
         [TestMethod]
         public void Test100()

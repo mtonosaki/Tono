@@ -69,7 +69,10 @@ namespace Tono.Logic
         /// </remarks>
         public double SectionTotal(int startPoint, int endPoint)
         {
-            if (startPoint >= endPoint) return 0;
+            if (startPoint >= endPoint)
+            {
+                return 0;
+            }
 
             return Get(endPoint) - Get(startPoint);
         }

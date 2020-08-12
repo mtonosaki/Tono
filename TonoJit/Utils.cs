@@ -39,7 +39,11 @@ namespace Tono.Jit
         /// <returns></returns>
         public static bool Equals((JitSubset Subset, JitProcess Process) left, (JitSubset Subset, JitProcess Process) right)
         {
-            if (left == default || right == default) return false;
+            if (left == default || right == default)
+            {
+                return false;
+            }
+
             if (left.Subset == right.Subset)
             {
                 return left.Process == right.Process;

@@ -108,19 +108,19 @@ namespace Tono.Gui
         {
             return new PointerState
             {
-                DeviceType = this.DeviceType,
-                PositionOrigin = this.PositionOrigin.Clone(),
-                Position = this.Position.Clone(),
-                FingerCount = this.FingerCount,
-                WheelDelta = this.WheelDelta,
-                Scale = this.Scale,
-                Rotation = Angle.FromDeg(this.Rotation.Deg),
-                Time = this.Time,
-                IsInContact = this.IsInContact,
-                IsKeyControl = this.IsKeyControl,
-                IsKeyMenu = this.IsKeyMenu,
-                IsKeyShift = this.IsKeyShift,
-                IsKeyWindows = this.IsKeyWindows,
+                DeviceType = DeviceType,
+                PositionOrigin = PositionOrigin.Clone(),
+                Position = Position.Clone(),
+                FingerCount = FingerCount,
+                WheelDelta = WheelDelta,
+                Scale = Scale,
+                Rotation = Angle.FromDeg(Rotation.Deg),
+                Time = Time,
+                IsInContact = IsInContact,
+                IsKeyControl = IsKeyControl,
+                IsKeyMenu = IsKeyMenu,
+                IsKeyShift = IsKeyShift,
+                IsKeyWindows = IsKeyWindows,
             };
         }
     }

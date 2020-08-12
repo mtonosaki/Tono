@@ -257,7 +257,10 @@ namespace Tono.Jit
         public void DoNext()
         {
             var ei = Events.Dequeue();
-            if (ei == null) return;
+            if (ei == null)
+            {
+                return;
+            }
 
             Now = ei.DT;
 
@@ -355,7 +358,7 @@ namespace Tono.Jit
             Events.Enqueue(time, EventTypes.KanbanIn, kanban);
         }
 
-        private Dictionary<string/*location path*/, Dictionary<CioBase, Dictionary<JitWork, bool/*dummy*/>>> _cioWorkCache = new Dictionary<string, Dictionary<CioBase, Dictionary<JitWork, bool>>>();
+        private readonly Dictionary<string/*location path*/, Dictionary<CioBase, Dictionary<JitWork, bool/*dummy*/>>> _cioWorkCache = new Dictionary<string, Dictionary<CioBase, Dictionary<JitWork, bool>>>();
 
         public void AddWorkInReserve(JitLocation location, CioBase cio, JitWork work)
         {
@@ -388,7 +391,7 @@ namespace Tono.Jit
             return works.Keys;
         }
 
-        private Dictionary<string/*location full Path*/, Dictionary<CioBase, DateTime>> _lastInTimesCio = new Dictionary<string, Dictionary<CioBase, DateTime>>();
+        private readonly Dictionary<string/*location full Path*/, Dictionary<CioBase, DateTime>> _lastInTimesCio = new Dictionary<string, Dictionary<CioBase, DateTime>>();
 
 
         /// <summary>
@@ -419,7 +422,7 @@ namespace Tono.Jit
             return dic.GetValueOrDefault(cio);
         }
 
-        private Dictionary<string/*location Full Path*/, Dictionary<JitWork, DateTime/*Enter-Time*/>> _worksInProcess = new Dictionary<ProcessKeyPath, Dictionary<JitWork, DateTime>>();
+        private readonly Dictionary<string/*location Full Path*/, Dictionary<JitWork, DateTime/*Enter-Time*/>> _worksInProcess = new Dictionary<ProcessKeyPath, Dictionary<JitWork, DateTime>>();
 
         /// <summary>
         /// Save Work enter time.
@@ -495,7 +498,11 @@ namespace Tono.Jit
                     {
                         links = loc.SubsetCache.GetProcessLinkPathes("\\" + checkPath);
                     }
-                    if (links?.Count == 0) links = null;
+                    if (links?.Count == 0)
+                    {
+                        links = null;
+                    }
+
                     if (links != null)
                     {
                         i = 0;

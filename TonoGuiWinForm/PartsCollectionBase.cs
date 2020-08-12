@@ -55,8 +55,16 @@ namespace Tono.GuiWinForm
                     return false;
                 }
             }
-            public static bool operator ==(PartsEntry a, PartsEntry b) => a.Equals(b);
-            public static bool operator !=(PartsEntry a, PartsEntry b) => !a.Equals(b);
+            public static bool operator ==(PartsEntry a, PartsEntry b)
+            {
+                return a.Equals(b);
+            }
+
+            public static bool operator !=(PartsEntry a, PartsEntry b)
+            {
+                return !a.Equals(b);
+            }
+
             public override int GetHashCode()
             {
                 return Parts.GetHashCode();

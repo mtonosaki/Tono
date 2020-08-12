@@ -76,10 +76,7 @@ namespace Tono.Logic
 
         public double this[object key]
         {
-            get
-            {
-                return _kn[key];
-            }
+            get => _kn[key];
             set
             {
                 _totalValue = _totalValue - _kn.GetValueOrDefault(key, 0) + value;
