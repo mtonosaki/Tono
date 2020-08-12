@@ -1,6 +1,8 @@
 ﻿// (c) 2020 Manabu Tonosaki
 // Licensed under the MIT license.
 
+using Microsoft.AspNetCore.StaticFiles;
+
 namespace TonoAspNetCore
 {
     public static class Mimes
@@ -51,5 +53,48 @@ namespace TonoAspNetCore
         public const string JS = "text/javascript";
         public const string XHTML = "application/xhtml+xml";
         public const string XML = "text/xml";
+
+        // For Windows Installer
+        public const string APPX = "application/appx";
+        public const string MSIX = "application/msix";
+        public const string APPXBUNDLE = "application/appxbundle";
+        public const string MSIXBUNDLE = "application/msixbundle";
+        public const string APPINSTALLER = "application/appinstaller";
+        public const string CER = "application/x-x509-ca-cert";
+
+        /// <summary>
+        /// Add (override) ContentTypes for MSIX Installer
+        /// </summary>
+        /// <param name="provider"></param>
+        /// <param name="isOverride">true=Override existing value</param>
+        /// <returns>the refference of "provider"</returns>
+        public static FileExtensionContentTypeProvider AddMsix(FileExtensionContentTypeProvider provider, bool isOverride = false)
+        {
+            var map = new (string Ext, string ContentType)[]
+            {
+                (".appx",APPX),
+                (".msix",MSIX),
+                (".appxbundle",APPXBUNDLE),
+                (".msixbundle",MSIXBUNDLE),
+                (".appinstaller",APPINSTALLER),
+                (".cer",CER),
+            };
+            foreach (var em in map)
+            {
+                if (provider.Mappings.ContainsKey(em.Ext))
+                {
+                    if (isOverride)
+                    {
+                        provider.Mappings.Remove(em.Ext);
+                    }
+                    else
+                    {
+                        continue;
+                    }
+                }
+                provider.Mappings[em.Ext] = em.ContentType;
+            }
+            return provider;
+        }
     }
 }
