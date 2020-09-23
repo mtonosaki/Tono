@@ -52,7 +52,7 @@ namespace Tono.GuiWinForm
             }
             else
             {
-                _root = @"Software\TOYOTA\" + rootkey;
+                _root = @"Software\Tono\" + rootkey;
             }
         }
 
