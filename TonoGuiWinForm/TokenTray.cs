@@ -10,11 +10,7 @@ namespace Tono.GuiWinForm
     /// </summary>
     public class TokenTray
     {
-        //		private IDictionary _dat = new HybridDictionary();	// TONO
         private readonly IDictionary _dat = new Hashtable();
-
-        /// <summary>InvokeStartの起動済みフラグ用変数</summary>
-        //		private /*friane fgBase*/IDictionary TokenInvokedChecker = new HybridDictionary();	// TONO
         private /*friane fgBase*/readonly IDictionary TokenInvokedChecker = new Hashtable();
 
         /// <summary>
@@ -60,26 +56,32 @@ namespace Tono.GuiWinForm
 
             // トークン処理中にトークン追加された場合、起動済みフィーチャーを解除して、そのフィーチャーをもう一度起動できるようにする
             IList dels = new ArrayList();
-            lock (dels.SyncRoot)
+            foreach (FeatureBase fo in TokenInvokedChecker.Keys) // fo = 起動済みフィーチャー
             {
-                foreach (FeatureBase fo in TokenInvokedChecker.Keys) // fo = 起動済みフィーチャー
+                if (ContainsTokenID(fo, id))
                 {
-                    if (ContainsTokenID(fo, id))
-                    {
-                        dels.Add(fo);
-                    }
+                    dels.Add(fo);
                 }
-                foreach (FeatureBase fo in dels)
-                {
-                    TokenInvokedChecker.Remove(fo);
-                }
+            }
+            foreach (FeatureBase fo in dels)
+            {
+                TokenInvokedChecker.Remove(fo);
             }
         }
 
         /// <summary>
         /// トークンに登録された全ID数
         /// </summary>
-        public int Count => _dat.Count;
+        public int Count
+        {
+            get
+            {
+                lock(_dat.SyncRoot)
+                {
+                    return _dat.Count;
+                }
+            }
+        }
 
         /// <summary>
         /// 指定IDが含まれているかどうかを調べる
@@ -92,7 +94,10 @@ namespace Tono.GuiWinForm
             {
                 return false;
             }
-            return _dat.Contains(value);
+            lock (_dat.SyncRoot)
+            {
+                return _dat.Contains(value);
+            }
         }
 
         /// <summary>
@@ -102,23 +107,26 @@ namespace Tono.GuiWinForm
         /// <returns>true = 含まれている / false = 含まれない</returns>
         public bool Contains(FeatureBase value)
         {
-            var ret = false;
-            if (value is ITokenListener)
+            lock (_dat.SyncRoot)
             {
-                ret = _dat.Contains(((ITokenListener)value).TokenTriggerID);
-            }
-            if (!ret && value is IMultiTokenListener)
-            {
-                foreach (var id in ((IMultiTokenListener)value).MultiTokenTriggerID)
+                var ret = false;
+                if (value is ITokenListener)
                 {
-                    ret = _dat.Contains(id);
-                    if (ret)
+                    ret = _dat.Contains(((ITokenListener)value).TokenTriggerID);
+                }
+                if (!ret && value is IMultiTokenListener)
+                {
+                    foreach (var id in ((IMultiTokenListener)value).MultiTokenTriggerID)
                     {
-                        break;
+                        ret = _dat.Contains(id);
+                        if (ret)
+                        {
+                            break;
+                        }
                     }
                 }
+                return ret;
             }
-            return ret;
         }
 
         /// <summary>
