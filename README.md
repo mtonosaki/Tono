@@ -43,11 +43,6 @@ Flow rule|Constraints|For example, MaxCount constraint describes like a transpot
 Flow control|Commands|Another constraint model like "Delay" time to simulate work through speed.
 JAC|JacInterpreter|JAC (Just-in-time model As a Code) helps you to implement Undo/Redo as a "Compensating Transaction Pattern"
 
-### Tono.Excel
-![](https://aqtono.com/tomarika/tono/TonoExcelIcon.png)  
-Convert from Excel file to DataSet object
-
-
 ## MVFP Architecture Frameworks
 Model - View - Feature - Parts Architecture is an original GUI framework considering team work, kaizen activity and agile style development.
 
@@ -81,6 +76,10 @@ A framework of MVFP architecture for WinForm developments with .NET Framework ve
 ![](https://aqtono.com/tomarika/tono/TonoAspNetCoreIcon.png)  
 Utility for Web application of ASP.NET Core   
 ex. Client Certificate Authentication.
+
+### Tono.Excel
+![](https://aqtono.com/tomarika/tono/TonoExcelIcon.png)  
+Convert from Excel file to DataSet object
 
 
 
