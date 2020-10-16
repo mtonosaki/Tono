@@ -40,7 +40,7 @@ To use this object, follow below steps.
 
 1. Startup.cs   
     Add **RequireClientCertificate** to your **AuthorizationPolicyBuilder()** like below.  
-```
+```c#
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddAuthentication(AzureADDefaults.AuthenticationScheme).AddAzureAD(options => Configuration.Bind("AzureAd", options));
@@ -59,7 +59,7 @@ To use this object, follow below steps.
 
 2. appsettings.Development.json
     Add client certificate settings for local debug environment.   
-```
+```json
   "ClientCertConfig": [
     {
       "CN": "mysite.azurewebsites.net",
@@ -75,7 +75,7 @@ To use this object, follow below steps.
 ```  
 Below style (Azure WebApp style) is also acceptable   
 
-```
+```json
   "ClientCert_1_CN": "mysite.azurewebsites.net",
   "ClientCert_1_O": "MY SAMPLE CORPORATION",
   "ClientCert_1_Thumbprint": "12345678901234567890AAAAABBBBBCCCCCDDDDD"
