@@ -3,6 +3,35 @@
 "Tools of new operation" library/framework is for agile SoE(SoI) style development.   
 Expected a lot of developer create original simulators quickly and find business core rule of improvement continuously. That is why this is named "tools of new operation".
 
+## MVFP Architecture Frameworks
+Model - View - Feature - Parts Architecture is an original GUI framework considering team work, kaizen activity and agile style development.
+
+### Tono.Gui
+![](https://aqtono.com/tomarika/tono/TonoGuiIcon.png)  
+Gui common library that is important to implement MVFP architecture.
+
+Function|Remarks
+-|-
+3-coodinates concept|Let your mind free from complicated screen pixel values especially debugging activity. You can just place parts with your logical value like clock-time.
+Event token  mechanism|Let your team free from complicated development activity between functions and functions. This is a function of message of object-oriented programming.
+
+### Tono.Gui.Uwp
+![](https://aqtono.com/tomarika/tono/TonoGuiUwpIcon.png)  
+A framework of MVFP architecture for Windows UWP developments
+
+Function|Remarks
+-|-
+Model|**M**VFP : You can implement application data with this class.
+View|M**V**FP : UWP control of this GUI architecture.
+Feature|MV**F**P : Feature base class like plug-in function mechanism. Feature is possible to be a function, constraint and design controls.
+Parts|MVF**P** : Parts base class to be the all graphical implementation of this architecture.
+Library|Color, Timer, Configulation, Some UWP controls having MVFP linkage.
+
+### Tono.GuiWinForm
+![](https://aqtono.com/tomarika/tono/TonoGuiWinFormIcon.png)  
+A framework of MVFP architecture for WinForm developments with .NET Framework version 4.7.1  
+(legacy library. not recommended to use it)
+
 ## Libraries
 
 ### Tono.Core
@@ -42,35 +71,6 @@ Flow|Process|Node of work flow for graph theory.
 Flow rule|Constraints|For example, MaxCount constraint describes like a transpotation road because road can have limited object at one time.
 Flow control|Commands|Another constraint model like "Delay" time to simulate work through speed.
 JAC|JacInterpreter|JAC (Just-in-time model As a Code) helps you to implement Undo/Redo as a "Compensating Transaction Pattern"
-
-## MVFP Architecture Frameworks
-Model - View - Feature - Parts Architecture is an original GUI framework considering team work, kaizen activity and agile style development.
-
-### Tono.Gui
-![](https://aqtono.com/tomarika/tono/TonoGuiIcon.png)  
-Gui common library that is important to implement MVFP architecture.
-
-Function|Remarks
--|-
-3-coodinates concept|Let your mind free from complicated screen pixel values especially debugging activity. You can just place parts with your logical value like clock-time.
-Event token  mechanism|Let your team free from complicated development activity between functions and functions. This is a function of message of object-oriented programming.
-
-### Tono.Gui.Uwp
-![](https://aqtono.com/tomarika/tono/TonoGuiUwpIcon.png)  
-A framework of MVFP architecture for Windows UWP developments
-
-Function|Remarks
--|-
-Model|**M**VFP : You can implement application data with this class.
-View|M**V**FP : UWP control of this GUI architecture.
-Feature|MV**F**P : Feature base class like plug-in function mechanism. Feature is possible to be a function, constraint and design controls.
-Parts|MVF**P** : Parts base class to be the all graphical implementation of this architecture.
-Library|Color, Timer, Configulation, Some UWP controls having MVFP linkage.
-
-### Tono.GuiWinForm
-![](https://aqtono.com/tomarika/tono/TonoGuiWinFormIcon.png)  
-A framework of MVFP architecture for WinForm developments with .NET Framework version 4.7.1  
-(legacy library. not recommended to use it)
 
 ### Tono.AspNetCore
 ![](https://aqtono.com/tomarika/tono/TonoAspNetCoreIcon.png)  
