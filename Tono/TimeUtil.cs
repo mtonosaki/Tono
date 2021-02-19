@@ -83,16 +83,16 @@ namespace Tono
         /// <summary>
         /// Adjust time with input string
         /// </summary>
-        /// <param name="origin"></param>
-        /// <param name="input"></param>
-        /// <returns></returns>
-        public static DateTime TimeHelper(DateTime origin, string input)
+        /// <param name="origin">Original date time</param>
+        /// <param name="inputsec">Input string in seconds precision</param>
+        /// <returns>result</returns>
+        public static DateTime TimeHelperS(DateTime origin, string inputsec)
         {
             try
             {
                 var tartime = origin;
                 var tardate = new DateTime(tartime.Year, tartime.Month, tartime.Day);
-                var cs = input.Split(':')
+                var cs = inputsec.Split(':')
                     .Select(a => a.Trim())
                     .Where(a => !string.IsNullOrEmpty(a))
                     .ToArray();
@@ -102,13 +102,13 @@ namespace Tono
                 switch (cs.Length)
                 {
                     case 1:
-                        settime = TimeHelperProc(cs[0], tartime);
+                        settime = TimeHelperSProc(cs[0], tartime);
                         break;
                     case 2:
-                        settime = TimeHelperProc(cs[0], cs[1], tartime);
+                        settime = TimeHelperSProc(cs[0], cs[1], tartime);
                         break;
                     case 3:
-                        settime = TimeHelperProc(cs[0], cs[1], cs[2], tartime);
+                        settime = TimeHelperSProc(cs[0], cs[1], cs[2], tartime);
                         break;
                     default:
                         settime = default;
@@ -122,7 +122,7 @@ namespace Tono
             }
         }
 
-        private static DateTime TimeHelperProc(string str, DateTime tartime)
+        private static DateTime TimeHelperSProc(string str, DateTime tartime)
         {
             var val = Math.Abs(int.Parse(str));
             var settime = tartime;
@@ -187,27 +187,159 @@ namespace Tono
             }
             return settime;
         }
-        private static DateTime TimeHelperProc(string str1, string str2, DateTime tartime)
+        private static DateTime TimeHelperSProc(string str1, string str2, DateTime tartime)
         {
             if (str1.StartsWith("+") || str1.StartsWith("-"))
             {
-                return TimeHelperProc($"{str1[0]}{Math.Abs(int.Parse(str1)):00}{int.Parse(str2):00}", tartime);
+                return TimeHelperSProc($"{str1[0]}{Math.Abs(int.Parse(str1)):00}{int.Parse(str2):00}", tartime);
             }
             else
             {
-                return TimeHelperProc($"{int.Parse(str1):00}{int.Parse(str2):00}", tartime);
+                return TimeHelperSProc($"{int.Parse(str1):00}{int.Parse(str2):00}", tartime);
             }
         }
-        private static DateTime TimeHelperProc(string str1, string str2, string str3, DateTime tartime)
+        private static DateTime TimeHelperSProc(string str1, string str2, string str3, DateTime tartime)
         {
             if (str1.StartsWith("+") || str1.StartsWith("-"))
             {
-                return TimeHelperProc($"{str1[0]}{Math.Abs(int.Parse(str1)):00}{int.Parse(str2):00}{int.Parse(str3):00}", tartime);
+                return TimeHelperSProc($"{str1[0]}{Math.Abs(int.Parse(str1)):00}{int.Parse(str2):00}{int.Parse(str3):00}", tartime);
             }
             else
             {
-                return TimeHelperProc($"{int.Parse(str1):00}{int.Parse(str2):00}{int.Parse(str3):00}", tartime);
+                return TimeHelperSProc($"{int.Parse(str1):00}{int.Parse(str2):00}{int.Parse(str3):00}", tartime);
             }
         }
+
+
+        /// <summary>
+        /// Adjust time with input string
+        /// </summary>
+        /// <param name="origin">Original date time</param>
+        /// <param name="inputminutes">Input string in minutes precision</param>
+        /// <returns>result</returns>
+        public static DateTime TimeHelperM(DateTime origin, string inputminutes)
+        {
+            try
+            {
+                var tartime = origin;
+                var tardate = new DateTime(tartime.Year, tartime.Month, tartime.Day);
+                var cs = inputminutes.Split(':')
+                    .Select(a => a.Trim())
+                    .Where(a => !string.IsNullOrEmpty(a))
+                    .ToArray();
+
+                // Set new time text
+                DateTime settime;
+                switch (cs.Length)
+                {
+                    case 1:
+                        settime = TimeHelperMProc(cs[0], tartime);
+                        break;
+                    case 2:
+                        settime = TimeHelperMProc(cs[0], cs[1], tartime);
+                        break;
+                    case 3:
+                        settime = TimeHelperMProc(cs[0], cs[1], cs[2], tartime);
+                        break;
+                    default:
+                        settime = default;
+                        break;
+                }
+                return settime;
+            }
+            catch
+            {
+                return origin;
+            }
+        }
+
+        private static DateTime TimeHelperMProc(string str, DateTime tartime)
+        {
+            var val = Math.Abs(int.Parse(str));
+            var settime = tartime;
+            var sgn = 0;
+            if (str.StartsWith("+"))
+            {
+                sgn = 1;
+            }
+            if (str.StartsWith("-"))
+            {
+                sgn = -1;
+            }
+
+            if (sgn == 0)
+            {
+                if (str.Length <= 3)  // Change second only
+                {
+                    settime = new DateTime(tartime.Year, tartime.Month, tartime.Day, tartime.Hour, 0, 0) + TimeSpan.FromMinutes(val);
+                }
+                else
+                if (str.Length == 4)
+                {
+                    var H = val / 100;
+                    var M = val % 100;
+                    settime = new DateTime(tartime.Year, tartime.Month, tartime.Day, 0, 0, 0) + TimeSpan.FromHours(H) + TimeSpan.FromMinutes(M);
+                }
+                else
+                {
+                    var D = val / 10000;
+                    var H = val / 100 % 100;
+                    var M = val % 100;
+                    settime = new DateTime(tartime.Year, tartime.Month, 1, 0, 0, 0) - TimeSpan.FromDays(1) + TimeSpan.FromDays(D)  + TimeSpan.FromHours(H) + TimeSpan.FromMinutes(M);
+                }
+            }
+            else
+            {
+                try
+                {
+                    if (str.Length <= 4)  // Change second only
+                    {
+                        settime = new DateTime(tartime.Year, tartime.Month, tartime.Day, tartime.Hour, tartime.Minute, tartime.Second) + TimeSpan.FromMinutes(val * sgn);
+                    }
+                    else
+                    if (str.Length == 5)
+                    {
+                        var H = val / 100 * sgn;
+                        var M = val % 100 * sgn;
+                        settime = new DateTime(tartime.Year, tartime.Month, tartime.Day, tartime.Hour, tartime.Minute, tartime.Second) + TimeSpan.FromMinutes(H * 60 + M);
+                    }
+                    else
+                    {
+                        var D = val / 10000 * sgn;
+                        var H = val / 100 % 100 * sgn;
+                        var M = val % 100 * sgn;
+                        settime = new DateTime(tartime.Year, tartime.Month, tartime.Day, tartime.Hour, tartime.Minute, tartime.Second) + TimeSpan.FromMinutes(D * 1440 + H * 60 + M);
+                    }
+                }
+                catch
+                {
+                    settime = tartime + TimeSpan.FromMinutes(val);
+                }
+            }
+            return settime;
+        }
+        private static DateTime TimeHelperMProc(string str1, string str2, DateTime tartime)
+        {
+            if (str1.StartsWith("+") || str1.StartsWith("-"))
+            {
+                return TimeHelperMProc($"{str1[0]}{Math.Abs(int.Parse(str1)):00}{int.Parse(str2):00}", tartime);
+            }
+            else
+            {
+                return TimeHelperMProc($"{int.Parse(str1):00}{int.Parse(str2):00}", tartime);
+            }
+        }
+        private static DateTime TimeHelperMProc(string str1, string str2, string str3, DateTime tartime)
+        {
+            if (str1.StartsWith("+") || str1.StartsWith("-"))
+            {
+                return TimeHelperMProc($"{str1[0]}{Math.Abs(int.Parse(str1)):00}{int.Parse(str2):00}{int.Parse(str3):00}", tartime);
+            }
+            else
+            {
+                return TimeHelperMProc($"{int.Parse(str1):00}{int.Parse(str2):00}{int.Parse(str3):00}", tartime);
+            }
+        }
+
     }
 }
