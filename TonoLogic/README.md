@@ -16,3 +16,4 @@ Integer Distributer|You can get integer values that total is same from distribut
 Interpolation|Ease-in / Ease-out / Ease-in-out curve function
 Least Squares N-Polynominal|Prospect values from some input data using least squares method.
 Route solver|To find a low-cost link connection with Dijekstra algorithm.
+TSP solver|Travelling Salesman Probrem to try to find a node sequence of minimum distance. There three modes : Minimumize, From-To and Loop.
